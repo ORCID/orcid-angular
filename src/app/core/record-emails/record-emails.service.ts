@@ -6,7 +6,7 @@ import {
   ValidationErrors,
 } from '@angular/forms'
 import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
+import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import {
   Assertion,
   AssertionVisibilityString,
@@ -57,7 +57,6 @@ export class RecordEmailsService {
         headers: this.headers,
       })
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ emails: [] })),
         map((value: EmailsEndpoint) => {
@@ -83,7 +82,6 @@ export class RecordEmailsService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this.getEmails({ forceReload: true }))
       )
@@ -99,7 +97,6 @@ export class RecordEmailsService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this.getEmails({ forceReload: true }))
       )
@@ -115,7 +112,6 @@ export class RecordEmailsService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this.getEmails())
       )
@@ -133,7 +129,6 @@ export class RecordEmailsService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this.getEmails({ forceReload: true }))
       )
@@ -147,10 +142,7 @@ export class RecordEmailsService {
         runtimeEnvironment.API_WEB + `account/validateEmail.json`,
         value
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   backendEmailValidate(

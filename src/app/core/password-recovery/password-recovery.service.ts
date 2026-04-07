@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { PasswordRecovery } from 'src/app/types'
-import { retry, catchError } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
 import {
   ResetPasswordEmailForm,
@@ -29,7 +29,6 @@ export class PasswordRecoveryService {
         { withCredentials: true }
       )
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(
             error,
@@ -49,7 +48,6 @@ export class PasswordRecoveryService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(
             error,
@@ -70,10 +68,7 @@ export class PasswordRecoveryService {
           withCredentials: true,
         }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
   resetPasswordEmailValidateToken(
     resetPassword: ResetPasswordEmailFormValidate
@@ -88,9 +83,6 @@ export class PasswordRecoveryService {
           withCredentials: true,
         }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 }

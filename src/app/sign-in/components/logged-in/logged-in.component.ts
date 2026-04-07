@@ -24,7 +24,7 @@ export class LoggedInComponent implements OnInit {
     if (val === '/signout' && runtimeEnvironment.proxyMode) {
       this.user.noRedirectLogout().subscribe()
     } else {
-      this.window.location.href = val
+      ;(this.window as any).outOfRouterNavigation(val)
     }
   }
 }

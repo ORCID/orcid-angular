@@ -38,7 +38,11 @@
     <div *ngFor="let account of accounts">
       <div class="mobile-elements-container">
         <div>
-          <button (click)="delete(account)" mat-icon-button>
+          <button
+            (click)="delete(account)"
+            [attr.aria-label]="labelDeleteButton + ' ' + account?.idpName"
+            mat-icon-button
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -96,7 +100,12 @@
       <ng-container matColumnDef="actions" stickyEnd>
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button (click)="delete(element)" mat-icon-button>
+          <button
+            [matTooltip]="labelDeleteButton"
+            [attr.aria-label]="labelDeleteButton + ' ' + element?.idpName"
+            (click)="delete(element)"
+            mat-icon-button
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>

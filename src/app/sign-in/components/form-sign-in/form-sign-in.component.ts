@@ -43,6 +43,8 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -113,7 +115,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
     private _snackBar: SnackbarService,
     private _togglzService: TogglzService,
     private _oauthUrlSessionManager: OauthURLSessionManagerService,
-    @Inject(WINDOW) private _window: any
+    private _observability: RumJourneyEventService
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -212,6 +214,10 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       $signIn.subscribe((data) => {
         this.printError = false
         if (data.success) {
+          this._observability.recordSimpleEvent(AppEventName.SignInSuccess, {
+            isOauth: !!isOauth,
+            signInType: this.signInLocal.type || 'regular',
+          })
           if (
             this.isOauthAuthorizationTogglzEnable &&
             this._oauthUrlSessionManager.get()
@@ -250,6 +256,17 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           } else {
             this.badCredentials = true
           }
+          this._observability.recordSimpleEvent(AppEventName.SignInFailure, {
+            isOauth: !!isOauth,
+            signInType: this.signInLocal.type || 'regular',
+            deprecated: !!data.deprecated,
+            disabled: !!data.disabled,
+            unclaimed: !!data.unclaimed,
+            badVerificationCode: !!data.badVerificationCode,
+            badRecoveryCode: !!data.badRecoveryCode,
+            invalidUserType: !!data.invalidUserType,
+            badCredentials: !!this.badCredentials,
+          })
           this.printError = true
         }
       })
@@ -348,6 +365,17 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       .subscribe((requestInfoForm: RequestInfoForm) => {
         // TODO the following error needds to be migrated to the new Oauth Server or removed
         if (requestInfoForm?.error === 'invalid_grant') {
+          this._observability.recordSimpleEvent(
+            AppEventName.SignInOauthInvalidGrantLegacy,
+            {
+              isOauth: !!this.signInLocal?.isOauth,
+              signInType: this.signInLocal?.type || 'regular',
+              oauth_error: requestInfoForm?.error,
+              oauth_error_description: String(
+                requestInfoForm?.errorDescription || ''
+              ).slice(0, 500),
+            }
+          )
           this.isOauthError.next(true)
           this.authorizationFormSubmitted = false
           this.loading.next(false)
@@ -367,7 +395,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       if (!urlRedirect.startsWith('https://')) {
         urlRedirect = `https://${urlRedirect}`
       }
-      this._window.outOfRouterNavigation(urlRedirect)
+      ;(this.window as any).outOfRouterNavigation(urlRedirect)
     } else {
       if (
         (this.platform.social || this.platform.institutional) &&
@@ -409,9 +437,9 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   navigateToClaim() {
-    this.window.location.href = `/resend-claim?email=${encodeURIComponent(
-      this.email
-    )}`
+    ;(this.window as any).outOfRouterNavigation(
+      `/resend-claim?email=${encodeURIComponent(this.email)}`
+    )
   }
 
   signInActiveAccount() {
@@ -466,10 +494,10 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(val: string): void {
-    if (val.indexOf('orcid.org/my-orcid')) {
+    if (val.indexOf('orcid.org/my-orcid') >= 0) {
       this._router.navigate(['/my-orcid'])
     } else {
-      this.window.location.href = val
+      ;(this.window as any).outOfRouterNavigation(val)
     }
   }
 

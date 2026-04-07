@@ -1,15 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, forkJoin, Observable, of, ReplaySubject } from 'rxjs'
-import {
-  catchError,
-  first,
-  map,
-  retry,
-  switchMap,
-  take,
-  tap,
-} from 'rxjs/operators'
+import { catchError, first, map, switchMap, take, tap } from 'rxjs/operators'
 import {
   PublicWorkSearchEndpoint,
   PublicWorkSearchResult,
@@ -48,6 +40,7 @@ import type {
 import { SortOrderType } from '../../types/sort'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { retryTransient } from '../http/retry-transient'
 
 @Injectable({
   providedIn: 'root',
@@ -154,7 +147,7 @@ export class RecordWorksService {
           options.pageSize
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ groups: [] } as WorksEndpoint)),
         map((data) => {
@@ -209,7 +202,7 @@ export class RecordWorksService {
         this._http
           .get<Work[]>(runtimeEnvironment.API_WEB + url)
           .pipe(
-            retry(3),
+            retryTransient(),
             catchError((error) => this._errorHandler.handleError(error)),
             tap((data) => {
               this._$loadingFeatured.next(false)
@@ -233,7 +226,7 @@ export class RecordWorksService {
           )}`
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         map((works: PublicWorkSearchEndpoint) => ({
           results: works.results.map(
@@ -276,7 +269,7 @@ export class RecordWorksService {
         featuredOrder
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => {
           this.getFeaturedWorks({ forceReload: true })
@@ -345,7 +338,7 @@ export class RecordWorksService {
           }getWorkInfo.json?workId=${putCode}`
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -356,7 +349,7 @@ export class RecordWorksService {
         runtimeEnvironment.API_WEB + `works/worksInfo/${putCodes.join(',')}`
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -375,7 +368,7 @@ export class RecordWorksService {
           }worksPage.json?offset=${offset}&sort=${sort}&sortAsc=${sortAsc}&pageSize=50`
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -388,7 +381,7 @@ export class RecordWorksService {
     return this._http
       .post<Work>(runtimeEnvironment.API_WEB + `works/work.json`, work)
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => {
           if (isLastWorkElement) {
@@ -405,7 +398,7 @@ export class RecordWorksService {
     return this._http
       .get<Work>(runtimeEnvironment.API_WEB + `works/work.json`)
       .pipe(
-        retry(3),
+        retryTransient(),
         map((x) => {
           x.workExternalIdentifiers = []
           return x
@@ -439,7 +432,7 @@ export class RecordWorksService {
           visibility
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(
           () =>
@@ -458,7 +451,7 @@ export class RecordWorksService {
           putCode
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() =>
           this.getWorks({ ...this.userRecordOptions, forceReload: true })
@@ -472,7 +465,7 @@ export class RecordWorksService {
         `${runtimeEnvironment.API_WEB}works/idTypes.json?query=`
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -486,7 +479,7 @@ export class RecordWorksService {
         `${runtimeEnvironment.API_WEB}works/id/${idType}?value=${workId}`
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -499,7 +492,7 @@ export class RecordWorksService {
           (Array.isArray(putCode) ? putCode.join(',') : putCode)
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => {
           this.getWorks({ forceReload: true })
@@ -521,7 +514,7 @@ export class RecordWorksService {
         {}
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getWorks({ forceReload: true }))
       )
@@ -540,7 +533,7 @@ export class RecordWorksService {
           visibility
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getWorks({ forceReload: true }))
       )

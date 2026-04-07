@@ -6,7 +6,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
-import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
+import { catchError, first, map, switchMap, tap } from 'rxjs/operators'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { TogglzService } from '../togglz/togglz.service'
 
@@ -45,7 +45,6 @@ export class RecordPeerReviewService {
           (options.sortAsc != null ? options.sortAsc : true)
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of([])),
         tap((data) => {
@@ -73,7 +72,6 @@ export class RecordPeerReviewService {
             encodeURIComponent(groupId)
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           catchError(() => of([]))
         )
@@ -87,7 +85,6 @@ export class RecordPeerReviewService {
             encodeURIComponent(groupId)
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           catchError(() => of([]))
         )
@@ -136,7 +133,6 @@ export class RecordPeerReviewService {
         null
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => {
           if (groupId) {
@@ -154,7 +150,6 @@ export class RecordPeerReviewService {
         headers: this.headers,
       })
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getPeerReviewGroups({ forceReload: true }))
       )
@@ -168,7 +163,6 @@ export class RecordPeerReviewService {
           putCode
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getPeerReviewGroups({ forceReload: true }))
       )

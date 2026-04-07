@@ -116,13 +116,17 @@ export class ResetPasswordComponent implements OnInit {
                 url: value.successRedirectLocation,
               })
             ) {
-              this._window.location.href = value.successRedirectLocation
+              ;(this._window as any).outOfRouterNavigation(
+                value.successRedirectLocation
+              )
             } else if (
               this.isOauthAuthorizationTogglzEnable &&
               oauthURLFromSessionManager
             ) {
               this._oauthURLSessionManagerService.clear()
-              this._window.location.href = oauthURLFromSessionManager
+              ;(this._window as any).outOfRouterNavigation(
+                oauthURLFromSessionManager
+              )
             } else {
               this._router.navigate([ApplicationRoutes.signin])
             }

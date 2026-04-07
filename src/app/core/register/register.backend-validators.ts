@@ -6,7 +6,7 @@ import {
   ValidationErrors,
 } from '@angular/forms'
 import { Observable, of } from 'rxjs'
-import { catchError, map, retry } from 'rxjs/operators'
+import { catchError, map } from 'rxjs/operators'
 import { Constructor } from 'src/app/types'
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -67,10 +67,7 @@ export function RegisterBackendValidatorMixin<
             `oauth/custom/register/${this.formInputs[controlName].validationEndpoint}.json`,
           value
         )
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     }
 
     validateAdditionalEmailsReactivation(
@@ -81,10 +78,7 @@ export function RegisterBackendValidatorMixin<
           `${runtimeEnvironment.API_WEB}reactivateAdditionalEmailsValidate.json`,
           value
         )
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     }
 
     backendValueValidate(
@@ -180,10 +174,7 @@ export function RegisterBackendValidatorMixin<
           `${runtimeEnvironment.API_WEB}register.json`,
           registerForm
         )
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     }
 
     public setFormGroupEmailErrors(

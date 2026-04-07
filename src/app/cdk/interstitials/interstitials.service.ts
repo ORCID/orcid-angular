@@ -1,15 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import {
-  catchError,
-  filter,
-  map,
-  retry,
-  switchMap,
-  take,
-  tap,
-} from 'rxjs/operators'
+import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { InterstitialType } from './interstitial.type'
@@ -85,7 +77,6 @@ export class InterstitialsService {
         `${runtimeEnvironment.API_WEB}account/hasInterstitialFlag/${interstitialName}`
       )
       .pipe(
-        retry(3),
         switchMap((hasFlag) => {
           if (hasFlag) {
             return this.setInterstitialsViewed(interstitialName, false).pipe(
@@ -104,10 +95,7 @@ export class InterstitialsService {
         `${runtimeEnvironment.API_WEB}account/addInterstitialFlag`,
         interstitialName
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   /**

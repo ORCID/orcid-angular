@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { SignInService } from '../../core/sign-in/sign-in.service'
 import { MatMenuModule } from '@angular/material/menu'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { InboxService } from '../../core/inbox/inbox.service'
 import { By } from '@angular/platform-browser'
 import { HarnessLoader } from '@angular/cdk/testing'
@@ -54,6 +55,7 @@ describe('UserMenuComponent', () => {
         HttpClientTestingModule,
         MatIconModule,
         MatMenuModule,
+        MatTooltipModule,
         NoopAnimationsModule,
         RouterTestingModule,
       ],

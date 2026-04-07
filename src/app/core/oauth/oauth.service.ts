@@ -13,7 +13,6 @@ import {
   first,
   last,
   map,
-  retry,
   shareReplay,
   switchMap,
   tap,
@@ -35,6 +34,10 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { objectToUrlParameters } from '../../constants'
 import { CookieService } from 'ngx-cookie-service'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/rum/app-event-names'
+import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
+import { retryTransient } from '../http/retry-transient'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
@@ -57,7 +60,8 @@ export class OauthService {
     private _router: Router,
     private _cookie: CookieService,
     @Inject(WINDOW) private window: Window,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _observability: RumJourneyEventService
   ) {
     this.headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -89,7 +93,7 @@ export class OauthService {
       .pipe(
         // Return null if the requestInfo is empty
         map((requestInfo) => (requestInfo.clientId ? requestInfo : undefined)),
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap((session) => this.handleSessionErrors(session))
       )
@@ -113,7 +117,7 @@ export class OauthService {
         { headers: this.headers, withCredentials: true }
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         ),
@@ -157,8 +161,20 @@ export class OauthService {
         switchMap((res: HttpResponse<any>) => {
           if (res.body && res.body['error']) {
             if (res.body['error'] === 'access_denied') {
+              // Not a server error per see, just a user denied the authorization
               return of(res.body['uri'])
             } else {
+              this._observability.recordSimpleEvent(
+                AppEventName.OauthAuthorizeAuthServerErrorBody,
+                {
+                  oauth_error: res.body['error'],
+                  oauth_error_description: String(
+                    res.body['error_description'] || ''
+                  ).slice(0, 500),
+                  oauth_authorize_approved: approved,
+                  client_id: data?.clientId,
+                }
+              )
               const errorMessage =
                 res.body['error_description'] ||
                 'Authorization failed on server'
@@ -174,7 +190,10 @@ export class OauthService {
           } else {
             return of(res.headers.get('location'))
           }
-        })
+        }),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
       )
   }
 
@@ -203,7 +222,7 @@ export class OauthService {
           { headers: this.headers }
         )
         .pipe(
-          retry(3),
+          retryTransient(),
           catchError((error) =>
             this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
           ),
@@ -231,12 +250,42 @@ export class OauthService {
         (x) => x === session.error
       )
     ) {
+      this._observability.recordSimpleEvent(
+        AppEventName.OauthSessionClientHandledErrorRedirectLegacy,
+        {
+          oauth_error: session.error,
+          oauth_error_code: session.errorCode,
+          oauth_error_description: String(session.errorDescription || '').slice(
+            0,
+            500
+          ),
+          client_id: queryParameters?.client_id,
+          redirect_uri: session.redirectUrl || queryParameters?.redirect_uri,
+          oauth_query_string: serializeQueryParamsForRum(queryParameters),
+        }
+      )
       // Redirect error that is handle by the client application
       ;(this.window as any).outOfRouterNavigation(
         `${session.redirectUrl}#error=${session.error}`
       )
       return NEVER
     } else if (session.error || (session.errors && session.errors.length)) {
+      this._observability.recordSimpleEvent(
+        AppEventName.OauthSessionNavigateAuthorizeErrorLegacy,
+        {
+          oauth_error: session.error,
+          oauth_error_description: String(session.errorDescription || '').slice(
+            0,
+            500
+          ),
+          oauth_errors: Array.isArray(session.errors)
+            ? session.errors.slice(0, 10).join('|')
+            : undefined,
+          client_id: queryParameters?.client_id,
+          redirect_uri: queryParameters?.redirect_uri,
+          oauth_query_string: serializeQueryParamsForRum(queryParameters),
+        }
+      )
       // Send the user to the oauth page to see the error
       this._router
         .navigate([ApplicationRoutes.authorize], {
@@ -269,7 +318,7 @@ export class OauthService {
         }
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -282,7 +331,7 @@ export class OauthService {
         headers: this.headers,
       })
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )

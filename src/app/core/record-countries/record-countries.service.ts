@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { forkJoin, merge, Observable, of, ReplaySubject } from 'rxjs'
-import { retry, catchError, tap, map, take } from 'rxjs/operators'
+import { catchError, tap, map, take } from 'rxjs/operators'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
 import {
   SideBarPublicUserRecord,
@@ -337,7 +337,6 @@ export class RecordCountriesService {
       this.getCountryCodes().pipe(take(1)),
     ])
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ addresses: [] } as CountriesEndpoint)),
         tap((value) => {
@@ -370,7 +369,6 @@ export class RecordCountriesService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAddresses({ forceReload: true }))
       )

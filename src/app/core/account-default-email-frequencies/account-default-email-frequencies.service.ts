@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, retry } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { AccountDefaultEmailFrequenciesEndpoint } from 'src/app/types/account-default-visibility.endpoint'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -24,10 +24,7 @@ export class AccountDefaultEmailFrequenciesService {
         runtimeEnvironment.API_WEB + `notifications/frequencies/view`,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   updateAmendNotifications(frequency: number): Observable<void> {
@@ -38,10 +35,7 @@ export class AccountDefaultEmailFrequenciesService {
         frequency,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
   updateAdminNotifications(frequency: string): Observable<void> {
     return this._http
@@ -51,10 +45,7 @@ export class AccountDefaultEmailFrequenciesService {
         frequency,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
   updateMemberNotifications(frequency: string): Observable<void> {
     return this._http
@@ -64,10 +55,7 @@ export class AccountDefaultEmailFrequenciesService {
         frequency,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   updateMemberTipsUpdates(tips: boolean): Observable<void> {
@@ -78,9 +66,6 @@ export class AccountDefaultEmailFrequenciesService {
         tips,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 }

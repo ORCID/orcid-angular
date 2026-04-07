@@ -5,42 +5,42 @@
         <source>Verify your ORCID account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb" datatype="html" resname="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb">
         <source>Enter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e65c0a651252b987d33f5e244972055e71e88742" datatype="html" resname="e65c0a651252b987d33f5e244972055e71e88742">
         <source>your ORCID account password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dce4fb53bd401f2ded36a8c45cb471eff6b529d4" datatype="html" resname="dce4fb53bd401f2ded36a8c45cb471eff6b529d4">
         <source>and</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4b7984f50afed5b65ccf49d51bcb43cf35f49a25" datatype="html" resname="4b7984f50afed5b65ccf49d51bcb43cf35f49a25">
         <source>a two-factor authentication code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.password" datatype="html" resname="register.password">
         <source>Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -55,7 +55,7 @@
         <source>Password cannot be empty</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">68,70</context>
+          <context context-type="linenumber">72,74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
@@ -66,14 +66,14 @@
         <source>The password does not match our records</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">72,74</context>
+          <context context-type="linenumber">76,78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.twoPassword" datatype="html" resname="account.twoPassword">
         <source>Two-factor authentication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security/settings-security.component.ts</context>
@@ -88,7 +88,7 @@
         <source>Enter the code from your two-factor authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">116,118</context>
+          <context context-type="linenumber">120,122</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -99,7 +99,7 @@
         <source>Invalid authentication code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">121,123</context>
+          <context context-type="linenumber">125,127</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -118,7 +118,7 @@
         <source>Authentication code is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">128,130</context>
+          <context context-type="linenumber">132,134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -137,7 +137,7 @@
         <source>Invalid authentication code length</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">136,138</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -156,7 +156,7 @@
         <source>Recovery code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">165,167</context>
+          <context context-type="linenumber">169,171</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -171,7 +171,7 @@
         <source>Enter a recovery code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">198</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -186,7 +186,7 @@
         <source>Invalid recovery code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">198,200</context>
+          <context context-type="linenumber">202,204</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -201,7 +201,7 @@
         <source>Recovery code is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">205,207</context>
+          <context context-type="linenumber">209,211</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -216,7 +216,7 @@
         <source>Invalid recovery code length</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">213,215</context>
+          <context context-type="linenumber">217,219</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -231,7 +231,7 @@
         <source>Don't have your device?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">233,235</context>
+          <context context-type="linenumber">237,239</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -246,7 +246,7 @@
         <source>Use a recovery code instead</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">242,244</context>
+          <context context-type="linenumber">246,248</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -257,7 +257,7 @@
         <source>Don't have your recovery codes?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">248,250</context>
+          <context context-type="linenumber">252,254</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -268,7 +268,7 @@
         <source>Use your authentication app instead</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">257,259</context>
+          <context context-type="linenumber">261,263</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -279,7 +279,7 @@
         <source>Don't have your device or recovery code?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">263,265</context>
+          <context context-type="linenumber">267,269</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -294,7 +294,7 @@
         <source>ORCID help centre</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">272,274</context>
+          <context context-type="linenumber">276,278</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -309,14 +309,14 @@
         <source>Verify my account and continue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">288,290</context>
+          <context context-type="linenumber">292,294</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5" datatype="html" resname="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5">
         <source>Cancel account verification</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">298,300</context>
+          <context context-type="linenumber">302,304</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.deleteDuplicatedAccount" datatype="html" resname="account.deleteDuplicatedAccount">
@@ -383,7 +383,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/account-trusted-individuals/account-trusted-individuals.service.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
@@ -1126,33 +1126,33 @@
         <source>Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">68,70</context>
+          <context context-type="linenumber">72,74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.alternateSignInID" datatype="html" resname="account.alternateSignInID">
         <source>Alternate sign in ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">81,83</context>
+          <context context-type="linenumber">85,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.accessGranted" datatype="html" resname="account.accessGranted">
         <source>Access granted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
@@ -1175,7 +1175,7 @@
         <source>You haven't added any alternate sign in accounts yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">111,113</context>
+          <context context-type="linenumber">120,122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
@@ -1183,6 +1183,25 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared.delete" datatype="html" resname="shared.delete">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/panel/panel-source/panel-source.component.ts</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-external-identifiers-view-only/work-external-identifiers-view-only.component.html</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba" datatype="html" resname="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba">
@@ -1686,7 +1705,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.addAccessTrustedIndividuals" datatype="html" resname="account.addAccessTrustedIndividuals">
@@ -2150,25 +2169,25 @@
         <source>Authorize access for</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.dashOrcid" datatype="html" resname="authorize.dashOrcid">
         <source>- ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.authenticate" datatype="html" resname="authorize.authenticate">
         <source>Get your ORCID iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">295</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">299</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2179,7 +2198,7 @@
         <source>Add/update information about you (country, keywords, etc.)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">222</context>
+          <context context-type="linenumber">303</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2190,25 +2209,25 @@
         <source>Add/update your research activities (works, affiliations, etc.)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">307</context>
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.readInfomationVisibilityTrustedParties" datatype="html" resname="authorize.readInfomationVisibilityTrustedParties">
         <source>Read your information with visibility set to Trusted parties</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">311</context>
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.authenticateLongDescription" datatype="html" resname="authorize.authenticateLongDescription">
         <source>Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">241</context>
+          <context context-type="linenumber">322</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">245</context>
+          <context context-type="linenumber">326</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2219,7 +2238,7 @@
         <source>Allow this organization or application to add information about you (for example, your country, key words, other identifiers - but not your biography) that is stored in their system(s) to the lefthand section of your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">250</context>
+          <context context-type="linenumber">331</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2230,7 +2249,7 @@
         <source>Allow this organization or application to add information about your research activities (for example, works, affiliations) that is stored in their system(s) to your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">255</context>
+          <context context-type="linenumber">336</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2241,7 +2260,7 @@
         <source>Allow this organization or application to read any information from your record you have marked as limited access. They cannot read information you have marked as private.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">260</context>
+          <context context-type="linenumber">341</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -3404,21 +3423,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="shared.delete" datatype="html" resname="shared.delete">
-        <source>Delete</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/panel/panel-source/panel-source.component.ts</context>
-          <context context-type="linenumber">102</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/work-external-identifiers-view-only/work-external-identifiers-view-only.component.html</context>
-          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.edit" datatype="html" resname="shared.edit">
@@ -5906,7 +5910,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="layout.oneTrustFocusAnnouncement" datatype="html" resname="layout.oneTrustFocusAnnouncement">
-        <source>Cookie settings dialog opened. Focus moved to this dialog. Please review the options and make a choice to continue.</source>
+        <source>Cookie consent dialog opened</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/announcer/announcer.service.ts</context>
           <context context-type="linenumber">15</context>
@@ -7753,49 +7757,49 @@
         <source>Import your works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">600</context>
+          <context context-type="linenumber">593</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.importIntroText" datatype="html" resname="works.importIntroText">
         <source>These services can help you update your ORCID record quickly by searching for your research outputs from various databases. Connect to a service to grant permission and add selected research outputs to your ORCID record.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">601</context>
+          <context context-type="linenumber">594</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.importSupportLinkLabel" datatype="html" resname="works.importSupportLinkLabel">
         <source>Find out more about importing works into your ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">604</context>
+          <context context-type="linenumber">597</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.certifiedSectionHeading" datatype="html" resname="works.certifiedSectionHeading">
         <source>ORCID Certified Services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">606</context>
+          <context context-type="linenumber">599</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.moreServicesHeading" datatype="html" resname="works.moreServicesHeading">
         <source>More Services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">607</context>
+          <context context-type="linenumber">600</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectNow" datatype="html" resname="works.connectNow">
         <source>Connect now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">608</context>
+          <context context-type="linenumber">601</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connected" datatype="html" resname="works.connected">
         <source>Connected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">609</context>
+          <context context-type="linenumber">602</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/search-link-wizard/search-link-wizard.component.html</context>
@@ -7806,35 +7810,35 @@
         <source>Close Import your works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">610</context>
+          <context context-type="linenumber">603</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.showMoreServices" datatype="html" resname="works.showMoreServices">
         <source>Show more services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">611</context>
+          <context context-type="linenumber">604</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.hideMoreServices" datatype="html" resname="works.hideMoreServices">
         <source>Hide more services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">612</context>
+          <context context-type="linenumber">605</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectWithCspNow" datatype="html" resname="works.connectWithCspNow">
         <source>Connect with {{name}} now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">613</context>
+          <context context-type="linenumber">606</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectedWithCsp" datatype="html" resname="works.connectedWithCsp">
         <source>Connected with {{name}}</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">614</context>
+          <context context-type="linenumber">607</context>
         </context-group>
       </trans-unit>
       <trans-unit id="developerTools.generateNewClientSecret" datatype="html" resname="developerTools.generateNewClientSecret">
@@ -11155,7 +11159,7 @@
         <source>Added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -11194,7 +11198,7 @@
         <source>Last modified</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">117,119</context>
+          <context context-type="linenumber">121,123</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -15180,7 +15184,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">435</context>
+          <context context-type="linenumber">463</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -15199,7 +15203,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">437</context>
+          <context context-type="linenumber">465</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.contactSupport" datatype="html" resname="shared.contactSupport">
@@ -15210,11 +15214,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">438</context>
+          <context context-type="linenumber">466</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">459</context>
+          <context context-type="linenumber">487</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -16845,21 +16849,21 @@
         <source>Email or 16-digit ORCID iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.claiming" datatype="html" resname="ngOrcid.signin.claiming">
         <source>Claiming your account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">456</context>
+          <context context-type="linenumber">484</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.verify.claimSent" datatype="html" resname="ngOrcid.signin.verify.claimSent">
         <source>Thank you for claiming your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">458</context>
+          <context context-type="linenumber">486</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.currentlySign" datatype="html" resname="ngOrcid.signin.currentlySign">
