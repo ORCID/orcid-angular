@@ -190,90 +190,88 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     const signinUrl = queryParams ? `/signin?${queryParams}` : '/signin'
     ;(this.window as any).outOfRouterNavigation(signinUrl)
   }
-
+  
   authorize(value = true) {
-    this.loadingAuthorizeEndpoint = true
+    this.loadingAuthorizeEndpoint = true;
 
     this._togglz
       .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(
         take(1),
         tap((useAuthServerFlag) => {
+          // 1. New logic: Update journey context right away
           this._observability.updateJourneyContext('oauth_authorization', {
             OAUTH_AUTHORIZATION: useAuthServerFlag,
-          })
+          });
+        }),
+        switchMap((useAuthServerFlag) => {
           if (useAuthServerFlag === true) {
-            this._oauth
-              .authorizeOnAuthServer(this.oauthRequest, value)
-              .pipe(
-                tap(() => {
-                  this._observability.recordEvent(
-                    'oauth_authorization',
-                    value
-                      ? AppEventName.OauthAuthorizationSuccess
-                      : AppEventName.OauthAuthorizationDenied,
-                    {
-                      OAUTH_AUTHORIZATION: true,
-                    }
+            return this._oauth.authorizeOnAuthServer(this.oauthRequest, value).pipe(
+              // 2. Auth Server Telemetry
+              tap(() => {
+                this._observability.recordEvent(
+                  'oauth_authorization',
+                  value
+                    ? AppEventName.OauthAuthorizationSuccess
+                    : AppEventName.OauthAuthorizationDenied,
+                  { OAUTH_AUTHORIZATION: true }
+                );
+              }),
+              catchError((error) => {
+                this._observability.recordEvent(
+                  'oauth_authorization',
+                  AppEventName.OauthAuthorizationError,
+                  oauthAuthorizeHttpFailureEventAttrs(
+                    error,
+                    'auth_server',
+                    value,
+                    true
                   )
-                }),
-                catchError((error) => {
-                  this._observability.recordEvent(
-                    'oauth_authorization',
-                    AppEventName.OauthAuthorizationError,
-                    oauthAuthorizeHttpFailureEventAttrs(
-                      error,
-                      'auth_server',
-                      value,
-                      true
-                    )
-                  )
-                  return throwError(() => error)
-                }),
-                take(1),
-                finalize(() => (this.loadingAuthorizeEndpoint = false))
-              )
-              .subscribe((redirectUrl) => {
-                this.redirectUrl.next(redirectUrl)
+                );
+                // Throw the error down to the final subscribe block
+                return throwError(() => error);
               })
+            );
           } else {
-            this._oauth
-              .authorize(value)
-              .pipe(
-                tap(() => {
-                  this._observability.recordEvent(
-                    'oauth_authorization',
-                    value
-                      ? AppEventName.OauthAuthorizationSuccess
-                      : AppEventName.OauthAuthorizationDenied,
-                    {
-                      OAUTH_AUTHORIZATION: false,
-                    }
+            return this._oauth.authorize(value).pipe(
+              // 3. Legacy Telemetry
+              tap(() => {
+                this._observability.recordEvent(
+                  'oauth_authorization',
+                  value
+                    ? AppEventName.OauthAuthorizationSuccess
+                    : AppEventName.OauthAuthorizationDenied,
+                  { OAUTH_AUTHORIZATION: false }
+                );
+              }),
+              catchError((error) => {
+                this._observability.recordEvent(
+                  'oauth_authorization',
+                  AppEventName.OauthAuthorizationError,
+                  oauthAuthorizeHttpFailureEventAttrs(
+                    error,
+                    'legacy',
+                    value,
+                    false
                   )
-                }),
-                catchError((error) => {
-                  this._observability.recordEvent(
-                    'oauth_authorization',
-                    AppEventName.OauthAuthorizationError,
-                    oauthAuthorizeHttpFailureEventAttrs(
-                      error,
-                      'legacy',
-                      value,
-                      false
-                    )
-                  )
-                  return throwError(() => error)
-                }),
-                take(1),
-                finalize(() => (this.loadingAuthorizeEndpoint = false))
-              )
-              .subscribe((data) => {
-                this.redirectUrl.next(data.redirectUrl)
+                );
+                // Throw the error down to the final subscribe block
+                return throwError(() => error);
               })
+            );
           }
         })
       )
-      .subscribe()
+      .subscribe({
+        next: (redirectUrl: string) => {
+          console.log('Redirecting to:', redirectUrl)
+          this.redirectUrl.next(redirectUrl)
+        },
+        error: (err) => {
+          console.error('Authorization error:', err)
+          this.loadingAuthorizeEndpoint = false
+        },
+      })
   }
 
   getIconName(ScopeObject: Scope): string {
