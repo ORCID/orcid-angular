@@ -11,9 +11,10 @@
   class="row h-end search-box middle"
   (submit)="search(whereToSearchSelected, whatToSearch)"
   *ngIf="!hideForm"
+  aria-describedby="cy-search"
 >
-  <mat-label class="orc-ui-font-small-print text-right mr-4 w-30"
-    >Search the ORCID registry</mat-label
+  <label i18n class="orc-ui-font-small-print text-right mr-4 w-25"
+    >Search the ORCID registry</label
   >
   <div id="ariaLabelWhere" hidden>Search on</div>
   <div class="input-box-new-info">
@@ -21,7 +22,6 @@
       autocomplete="off"
       name="whatToSearch"
       [(ngModel)]="whatToSearch"
-      [placeholder]="searchPlaceHolder"
       type="text"
       [attr.aria-label]="labelSearchBy"
       id="cy-search"

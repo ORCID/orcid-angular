@@ -37,9 +37,6 @@ export class SearchComponent implements OnInit {
   whereToSearchSelected = this.firstLetterUppercase(
     $localize`:@@layout.public-layout.registry:registry`
   )
-  searchPlaceHolder = this.firstLetterUppercase(
-    $localize`:@@layout.ariaLabelSearchRegistry:Search the ORCID registry...`
-  )
   whatToSearch: string
   @Input() hideForm: boolean = false
   constructor(
