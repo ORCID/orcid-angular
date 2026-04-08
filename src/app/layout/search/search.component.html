@@ -11,9 +11,11 @@
   class="row h-end search-box middle"
   (submit)="search(whereToSearchSelected, whatToSearch)"
   *ngIf="!hideForm"
-  aria-describedby="cy-search"
 >
-  <label i18n class="orc-ui-font-small-print text-right mr-4 w-25"
+  <label
+    i18n
+    aria-describedby="cy-search"
+    class="orc-ui-font-small-print text-right mr-4 w-25"
     >Search the ORCID registry</label
   >
   <div id="ariaLabelWhere" hidden>Search on</div>
