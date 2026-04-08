@@ -14,7 +14,7 @@
 >
   <label
     i18n
-    aria-describedby="cy-search"
+    id="searchLabel"
     class="orc-ui-font-small-print text-right mr-4 w-25"
     >Search the ORCID registry</label
   >
@@ -25,7 +25,7 @@
       name="whatToSearch"
       [(ngModel)]="whatToSearch"
       type="text"
-      [attr.aria-label]="labelSearch"
+      aria-labelledby="searchLabel"
       id="cy-search"
       class="orc-font-body"
     />

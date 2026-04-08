@@ -21,7 +21,6 @@ import { ApplicationRoutes } from '../../constants'
   standalone: false,
 })
 export class SearchComponent implements OnInit {
-  labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`
   form: UntypedFormGroup
   platform: PlatformInfo
   signinRegisterButton = true
