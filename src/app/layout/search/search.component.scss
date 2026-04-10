@@ -55,7 +55,8 @@
   }
 
   .input-box-new-info {
-    width: 334px;
+    flex-grow: 1;
+    max-width: 334px;
     input {
       border-radius: 3px;
       margin-left: 2px;
@@ -98,7 +99,7 @@
       flex-wrap: wrap !important;
     }
 
-    mat-label {
+    label {
       width: 100%;
       text-align: left;
       margin-bottom: 8px;
