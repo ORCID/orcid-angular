@@ -41,7 +41,7 @@ export class AuthChallengePageComponent implements OnInit {
   showPasswordField = true
   showTwoFactorField = true
   actionDescription = 'perform this action on'
-  memberName = 'Example Account'
+  boldText = 'Example Account'
   form: UntypedFormGroup
 
   constructor(private _fb: UntypedFormBuilder, private _dialog: MatDialog) {}
@@ -62,7 +62,7 @@ export class AuthChallengePageComponent implements OnInit {
       data: {
         parentForm: this.form,
         actionDescription: this.actionDescription,
-        memberName: this.memberName,
+        boldText: this.boldText,
         showPasswordField: this.showPasswordField,
         showTwoFactorField: this.showTwoFactorField,
       },
