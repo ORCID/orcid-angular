@@ -9827,7 +9827,7 @@
         <source>Search the ORCID registry</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.ariaLabelSearch" datatype="html" resname="layout.ariaLabelSearch">
@@ -9841,26 +9841,19 @@
           <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="layout.ariaLabelSearchBy" datatype="html" resname="layout.ariaLabelSearchBy">
-        <source>Search by name, affiliation or ORCID iD</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="layout.public-layout.registry" datatype="html" resname="layout.public-layout.registry">
         <source>registry</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -9871,7 +9864,7 @@
         <source>website</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
