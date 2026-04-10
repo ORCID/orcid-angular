@@ -20,8 +20,8 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Member name (trailing bold text)</mat-label>
-        <input matInput [(ngModel)]="memberName" />
+        <mat-label>Bold text</mat-label>
+        <input matInput [(ngModel)]="boldText" />
       </mat-form-field>
 
       <div>
@@ -87,7 +87,7 @@
       data: &#123;
         parentForm: this.form,
         actionDescription: 'unlink the alternate sign in account',
-        memberName: 'Google',
+        boldText: 'Google',
         showTwoFactorField: this.twoFactorState, // true or false
       &#125; as AuthChallengeFormData,
     &#125;
@@ -152,7 +152,8 @@ export interface AuthChallengeFormData &#123;
   recoveryControlName?: string;
   passwordControlName?: string;
   parentForm?: UntypedFormGroup;
-  memberName?: string;
+  boldText?: string;
+  trailingText?: string;
 &#125;</code></pre>
 
     <h4>4. Backend Implementation</h4>
