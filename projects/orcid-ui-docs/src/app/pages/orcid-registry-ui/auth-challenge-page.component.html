@@ -1,9 +1,9 @@
 <app-documentation-page
   title="Auth Challenge Component"
-  description="The AuthChallengeComponent is a Dialog that validates user credentials (password) and manages 2FA/recovery code inputs before allowing sensitive actions."
+  description="The AuthChallengeComponent validates user credentials (password) and manages 2FA/recovery code inputs before allowing sensitive actions. It can be used as a Dialog, dynamically attached via CdkPortalOutlet, or embedded directly in HTML."
 >
   <div controls>
-    <p>Customize the dialog to preview different configurations:</p>
+    <p>Customize the component to preview different configurations:</p>
 
     <div style="display: grid; gap: 16px; margin-bottom: 24px">
       <mat-checkbox [(ngModel)]="showPasswordField">
@@ -22,6 +22,11 @@
       <mat-form-field appearance="outline">
         <mat-label>Bold text</mat-label>
         <input matInput [(ngModel)]="boldText" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Trailing text</mat-label>
+        <input matInput [(ngModel)]="trailingText" />
       </mat-form-field>
 
       <div>
@@ -52,19 +57,26 @@
 
   <div usage style="font-size: 14px">
     <p>
-      This component is a <strong>MatDialog</strong>. It manages the UI
-      switching and validation logic between the password field, 2FA code, and
-      recovery code inputs. You must pass a parent <code>[formGroup]</code> into
-      it via the dialog data so it can attach its controls.
+      This component manages the UI switching and validation logic between the
+      password field, 2FA code, and recovery code inputs. You must pass a parent
+      <code>[formGroup]</code> into it so it can attach its controls.
     </p>
 
-    <p>To implement this component, use the code highlighted in yellow.</p>
+    <p>
+      It can be rendered as a <strong>MatDialog</strong>, injected dynamically
+      via <strong>CdkPortalOutlet</strong>, or used as a standard HTML tag.
+      <em
+        >Note: When using MatDialog, pass configuration properties inside the
+        <code>data</code> object. Otherwise, bind them as standard
+        <code>&#64;Input()</code> properties.</em
+      >
+    </p>
 
     <h4>1. Form Configuration</h4>
     <p>
       Initialize the controls in your parent component. Note that
       <code>Validators.required</code> for the 2FA fields is managed
-      automatically by the dialog component based on the fields being shown.
+      automatically by the component based on the fields currently being shown.
     </p>
     <pre><code class="language-typescript">this.form = this.fb.group(&#123;
   // ... other controls like 'id'
@@ -73,12 +85,7 @@
   <span style="background-color: #fff59d; color: #000;">twoFactorRecoveryCode: [null, [Validators.minLength(10), Validators.maxLength(10)]],</span>
 &#125;);</code></pre>
 
-    <h4>2. Opening and Handling the Dialog</h4>
-    <p>
-      Use the following method to open the dialog, listen for the verify button
-      click, trigger your backend request, and handle the final success/cancel
-      state. You can copy and paste this directly into your component.
-    </p>
+    <h4>2A. Usage via MatDialog</h4>
     <pre><code class="language-typescript">openAuthChallenge() &#123;
   // 1. Open the dialog
   const dialogRef = this._matDialog.open&lt;AuthChallengeComponent&gt;(
@@ -88,6 +95,7 @@
         parentForm: this.form,
         actionDescription: 'unlink the alternate sign in account',
         boldText: 'Google',
+        trailingText: 'to continue.',
         showTwoFactorField: this.twoFactorState, // true or false
       &#125; as AuthChallengeFormData,
     &#125;
@@ -102,37 +110,53 @@
     .subscribe(&#123;
       next: (response: any) => &#123;
         if (response.success) &#123;
-          // Close the dialog and pass true for success
           dialogRef.close(true);
         &#125; else &#123;
-          // Pass backend response back to the dialog to display errors
-          dialogRef.componentInstance.loading = false;
           dialogRef.componentInstance.processBackendResponse(response);
         &#125;
       &#125;,
     &#125;);
 
-  // 3. Listen for when the dialog actually closes
+  // 3. Listen for cancel or close
   dialogRef.afterClosed().subscribe((success) => &#123;
     this.form.reset();
-    
-    if (success) &#123;
-      // Action completed successfully
-      this.success = true;
-    &#125; else &#123;
-      // User canceled or closed the dialog
-      this.cancel = true;
-    &#125;
+  &#125;);
+&#125;</code></pre>
+
+    <h4>2B. Usage via CdkPortalOutlet</h4>
+    <p>
+      First, add the outlet container to your HTML and query it in your TS file.
+    </p>
+    <pre><code class="language-html">&lt;!-- In your parent HTML --&gt;
+&lt;ng-container #authChallengeOutlet cdkPortalOutlet&gt;&lt;/ng-container&gt;</code></pre>
+
+    <pre><code class="language-typescript">// In your parent TS file
+&#64;ViewChild('authChallengeOutlet', &#123; static: false, read: CdkPortalOutlet &#125;) outlet!: CdkPortalOutlet;
+
+showAuthenticationChallenge(): void &#123;
+  const portal = new ComponentPortal&lt;AuthChallengeComponent&gt;(AuthChallengeComponent);
+  const componentRef = this.outlet.attachComponentPortal(portal);
+
+  // Bind inputs directly to the instance
+  componentRef.instance.parentForm = this.form;
+  componentRef.instance.actionDescription = 'complete your password reset';
+  componentRef.instance.showPasswordField = false;
+
+  componentRef.instance.submitAttempt.subscribe(() => &#123;
+    // Handle submission and call componentRef.instance.processBackendResponse(res) on error.
+    // On success, navigate away.
+    this.router.navigate(['/success']);
+  &#125;);
+
+  componentRef.instance.cancelAttempt.subscribe(() => &#123;
+    this.form.reset();
+    // TIP: If staying on the same page, use this.outlet.detach() to close the view.
+    // If routing away, DO NOT detach it manually to avoid a UI flash. Angular will clean it up!
+    this.router.navigate(['/signin']); 
   &#125;);
 &#125;</code></pre>
 
     <h4>3. Interface Definitions</h4>
-    <p>
-      The endpoint payload/response object needs to extend the
-      <strong><code>AuthChallenge</code></strong> interface. The dialog
-      configuration uses the
-      <strong><code>AuthChallengeFormData</code></strong> interface.
-    </p>
     <pre><code class="language-typescript">export interface AuthChallenge &#123;
   success?: boolean;
   invalidPassword?: boolean;
@@ -146,14 +170,14 @@
 
 export interface AuthChallengeFormData &#123;
   actionDescription?: string;
+  boldText?: string;
+  trailingText?: string;
   showPasswordField?: boolean;
   showTwoFactorField?: boolean;
   codeControlName?: string;
   recoveryControlName?: string;
   passwordControlName?: string;
   parentForm?: UntypedFormGroup;
-  boldText?: string;
-  trailingText?: string;
 &#125;</code></pre>
 
     <h4>4. Backend Implementation</h4>
@@ -193,8 +217,13 @@ return form;</code></pre>
         (e.g. <code>'unlink the alternate sign in account'</code>).
       </li>
       <li>
-        <code style="font-weight: bold">memberName</code>: <code>string</code>.
+        <code style="font-weight: bold">boldText</code>: <code>string</code>.
         The target of the action to be bolded (e.g. <code>'Google'</code>).
+      </li>
+      <li>
+        <code style="font-weight: bold">trailingText</code>:
+        <code>string</code>. Optional text that appears after the bolded text
+        (e.g. <code>'to complete your password reset'</code>).
       </li>
       <li>
         <code style="font-weight: bold">showPasswordField</code>:
