@@ -42,6 +42,7 @@ export class AuthChallengePageComponent implements OnInit {
   showTwoFactorField = true
   actionDescription = 'perform this action on'
   boldText = 'Example Account'
+  trailingText = 'to continue.'
   form: UntypedFormGroup
 
   constructor(private _fb: UntypedFormBuilder, private _dialog: MatDialog) {}
@@ -63,6 +64,7 @@ export class AuthChallengePageComponent implements OnInit {
         parentForm: this.form,
         actionDescription: this.actionDescription,
         boldText: this.boldText,
+        trailingText: this.trailingText,
         showPasswordField: this.showPasswordField,
         showTwoFactorField: this.showTwoFactorField,
       },
@@ -81,6 +83,12 @@ export class AuthChallengePageComponent implements OnInit {
             invalidTwoFactorCode: false,
           })
         }, 1000)
+      })
+
+    dialogRef.componentInstance.cancelAttempt
+      .pipe(takeUntil(dialogRef.afterClosed()))
+      .subscribe(() => {
+        dialogRef.close()
       })
 
     dialogRef.afterClosed().subscribe(() => {
