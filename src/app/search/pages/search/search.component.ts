@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, Optional } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SearchService } from '../../../core/search/search.service'
-import { tap, switchMap, retry, catchError } from 'rxjs/operators'
+import { tap, switchMap, catchError } from 'rxjs/operators'
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { SearchResults } from 'src/app/types'
 import { SearchParameters } from 'src/app/types'
@@ -48,10 +48,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         }),
         // Call the backend to get search results
         switchMap((value) =>
-          _searchService.search(value).pipe(
-            retry(3),
-            catchError((err) => EMPTY)
-          )
+          _searchService.search(value).pipe(catchError((err) => EMPTY))
         )
       )
       .subscribe((data) => {

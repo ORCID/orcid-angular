@@ -5,7 +5,7 @@ import {
   HttpParams,
 } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { catchError, map, retry, switchMap, first, take } from 'rxjs/operators'
+import { catchError, map, switchMap, first, take } from 'rxjs/operators'
 
 import { getOrcidNumber, isValidOrcidFormat } from '../../constants'
 import { Claim } from '../../types/claim.endpoint'
@@ -23,6 +23,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
+import { retryTransient } from '../http/retry-transient'
 
 @Injectable({
   providedIn: 'root',
@@ -106,7 +107,7 @@ export class SignInService {
             withCredentials: true,
           })
           .pipe(
-            retry(3),
+            retryTransient(),
             catchError((error) => {
               this.recordSignInHttpError(error, signInLocal, usingOauthServer)
               return this._errorHandler.handleError(error)
@@ -188,7 +189,7 @@ export class SignInService {
         }
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(
             error,
@@ -215,7 +216,7 @@ export class SignInService {
         withCredentials: true,
       })
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(
             error,
@@ -235,7 +236,7 @@ export class SignInService {
         }
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this._userService.refreshUserSession())
       )

@@ -13,7 +13,6 @@ import {
   first,
   last,
   map,
-  retry,
   shareReplay,
   switchMap,
   tap,
@@ -38,6 +37,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
+import { retryTransient } from '../http/retry-transient'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
@@ -93,13 +93,13 @@ export class OauthService {
       .pipe(
         // Return null if the requestInfo is empty
         map((requestInfo) => (requestInfo.clientId ? requestInfo : undefined)),
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap((session) => this.handleSessionErrors(session))
       )
   }
 
-  authorize(approved: boolean): Observable<RequestInfoForm> {
+  authorize(approved: boolean): Observable<string> {
     const value: OauthAuthorize = {
       // tslint:disable-next-line: max-line-length
       // TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
@@ -117,13 +117,14 @@ export class OauthService {
         { headers: this.headers, withCredentials: true }
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         ),
         tap((requestInfo) => {
           this.requestInfoSubject.next(requestInfo)
-        })
+        }),
+        map((requestInfo) => requestInfo.redirectUrl)
       )
   }
 
@@ -157,12 +158,11 @@ export class OauthService {
         observe: 'response',
       })
       .pipe(
-        map((res: HttpResponse<any>) => {
+        switchMap((res: HttpResponse<any>) => {
           if (res.body && res.body['error']) {
-            if (res.body['error'] == 'access_denied') {
+            if (res.body['error'] === 'access_denied') {
               // Not a server error per see, just a user denied the authorization
-
-              return res.body['uri']
+              return of(res.body['uri'])
             } else {
               this._observability.recordSimpleEvent(
                 AppEventName.OauthAuthorizeAuthServerErrorBody,
@@ -175,13 +175,20 @@ export class OauthService {
                   client_id: data?.clientId,
                 }
               )
-              this._errorHandler.handleError(
-                res.body,
+              const errorMessage =
+                res.body['error_description'] ||
+                'Authorization failed on server'
+              const authError = new Error(errorMessage)
+
+              authError.name = res.body['error'] || 'AuthError'
+
+              return this._errorHandler.handleError(
+                authError,
                 ERROR_REPORT.STANDARD_VERBOSE
               )
             }
           } else {
-            return res.headers.get('location')
+            return of(res.headers.get('location'))
           }
         }),
         catchError((error) =>
@@ -215,7 +222,7 @@ export class OauthService {
           { headers: this.headers }
         )
         .pipe(
-          retry(3),
+          retryTransient(),
           catchError((error) =>
             this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
           ),
@@ -311,7 +318,7 @@ export class OauthService {
         }
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -324,7 +331,7 @@ export class OauthService {
         headers: this.headers,
       })
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, map, retry, switchMap } from 'rxjs/operators'
+import { catchError, map, switchMap } from 'rxjs/operators'
 import { EMAIL_REGEXP } from 'src/app/constants'
 import {
   SocialAccount,
@@ -44,7 +44,6 @@ export class AccountSecurityAlternateSignInService {
             })
           )
         }),
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -74,10 +73,7 @@ export class AccountSecurityAlternateSignInService {
           headers: this.headers,
         }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   populateIdPNames({

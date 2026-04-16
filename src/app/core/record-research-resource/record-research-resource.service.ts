@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { catchError, map, tap } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 import {
@@ -62,7 +62,6 @@ export class RecordResearchResourceService {
           options.pageSize
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
         map((data) => {
@@ -116,7 +115,6 @@ export class RecordResearchResourceService {
           visibility
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getResearchResourcePage({ forceReload: true }))
       )
@@ -128,7 +126,6 @@ export class RecordResearchResourceService {
         headers: this.headers,
       })
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getResearchResourcePage({ forceReload: true }))
       )
@@ -142,7 +139,6 @@ export class RecordResearchResourceService {
           putCode
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getResearchResourcePage({ forceReload: true }))
       )

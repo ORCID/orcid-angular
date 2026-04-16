@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, retry } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -23,10 +23,7 @@ export class AccountTrustedOrganizationsService {
         runtimeEnvironment.API_WEB + `account/get-trusted-orgs.json`,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   delete(
@@ -40,9 +37,6 @@ export class AccountTrustedOrganizationsService {
         undefined,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 }

@@ -87,6 +87,7 @@ export class FormPasswordComponent
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Input() personalData: RegisterForm
   nextButtonWasClicked: boolean
+  registration = false
 
   currentValidate8orMoreCharactersStatus: boolean
   ccurentValidateAtLeastALetterOrSymbolStatus: boolean
@@ -115,6 +116,7 @@ export class FormPasswordComponent
       .getNextButtonClickFor('a')
       .pipe(takeUntil(this.destroy))
       .subscribe((value) => {
+        this.registration = true
         this.form.get('password')?.updateValueAndValidity()
       })
     this.form = new UntypedFormGroup(

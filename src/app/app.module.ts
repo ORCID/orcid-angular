@@ -13,6 +13,7 @@ import { TitleService } from './core/title-service/title.service'
 import { HttpContentTypeHeaderInterceptor } from './core/http-content-type-header-interceptor/http-content-type-header-interceptor'
 import { XsrfFallbackInterceptor } from './core/xsrf/xsrf-fallback.interceptor'
 import { FirefoxXsrfPreloadInterceptor } from './core/lang-preload/firefox-xsrf-preload.interceptor'
+import { RetryTransientInterceptor } from './core/http/retry-transient.interceptor'
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
@@ -50,6 +51,11 @@ import { FormsModule } from '@angular/forms'
     {
       provide: HTTP_INTERCEPTORS,
       useClass: FirefoxXsrfPreloadInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RetryTransientInterceptor,
       multi: true,
     },
     {

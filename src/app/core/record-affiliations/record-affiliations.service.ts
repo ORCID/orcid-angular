@@ -1,14 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
-import {
-  catchError,
-  finalize,
-  map,
-  retry,
-  switchMap,
-  tap,
-} from 'rxjs/operators'
+import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
   AffiliationsEndpoint,
@@ -66,7 +59,6 @@ export class RecordAffiliationService {
     this._$loading.next(true)
     this.getGroupAndSortAffiliations(options)
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of([])),
         tap((value) => {
@@ -125,10 +117,7 @@ export class RecordAffiliationService {
               : 'affiliations/'
           }affiliationDetails.json?id=${putCode}&type=${type}`
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   private getGroupAndSortAffiliations(
@@ -141,7 +130,6 @@ export class RecordAffiliationService {
             `${options.publicRecordId}/affiliationGroups.json`
         )
         .pipe(
-          retry(3),
           map((data) => this._affiliationsGroupingService.transform(data)),
           map((data) => this._affiliationsSortService.transform(data)),
           catchError((error) => this._errorHandler.handleError(error))
@@ -152,7 +140,6 @@ export class RecordAffiliationService {
           runtimeEnvironment.API_WEB + `affiliations/affiliationGroups.json`
         )
         .pipe(
-          retry(3),
           map((data) => this._affiliationsGroupingService.transform(data)),
           map((data) => this._affiliationsSortService.transform(data)),
           catchError((error) => this._errorHandler.handleError(error))
@@ -201,7 +188,6 @@ export class RecordAffiliationService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAffiliations({ forceReload: true }))
       )
@@ -219,10 +205,7 @@ export class RecordAffiliationService {
             headers: this.headers,
           }
         )
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     } else {
       return of([])
     }
@@ -238,10 +221,7 @@ export class RecordAffiliationService {
           headers: this.headers,
         }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   updateVisibility(
@@ -257,7 +237,6 @@ export class RecordAffiliationService {
           visibility
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAffiliations({ forceReload: true }))
       )
@@ -272,7 +251,6 @@ export class RecordAffiliationService {
           encodeURIComponent(putCode)
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAffiliations({ forceReload: true }))
       )
@@ -286,7 +264,6 @@ export class RecordAffiliationService {
           putCode
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAffiliations({ forceReload: true }))
       )
@@ -328,7 +305,6 @@ export class RecordAffiliationService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => {
           // Revert optimistic update on failure
           if (previousState && this.$affiliations) {
@@ -350,9 +326,6 @@ export class RecordAffiliationService {
           headers: this.headers,
         }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 }

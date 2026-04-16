@@ -4,6 +4,8 @@
  * force Origin/Referer to https://qa.orcid.org
  * ──────────────────────────────────────────────────────────────────────────────
  */
+const ORCID_PATH_REGEX = /^\/(\d{4}-\d{4}-\d{4}-\d{3}[\dX])\/print\/?$/i
+
 function proxyReqOverrideHeaders(proxyReq /* http.ClientRequest */, req, res) {
   proxyReq.setHeader('Origin', 'https://qa.orcid.org')
   proxyReq.setHeader('Referer', 'https://qa.orcid.org')
@@ -80,6 +82,7 @@ const shouldProxyRootApi = (pathname, req) => {
   if (accept.includes('text/html')) return false
   if (
     pathname.startsWith('/assets') ||
+    pathname.startsWith('/print-view') ||
     pathname.startsWith('/favicon.ico') ||
     pathname.startsWith('/ng-cli-ws') ||
     pathname.startsWith('/sockjs-node') ||
@@ -94,6 +97,21 @@ const shouldProxyRootApi = (pathname, req) => {
 }
 
 export default [
+  {
+    // Simulate nginx rewrite: /:orcid/print → /print-view/index.html?orcid=:orcid
+    context: (pathname, req) => ORCID_PATH_REGEX.test(pathname),
+    target: 'https://qa.orcid.org', // unused when bypass returns a path
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    bypass: (req) => {
+      const path = (req.url || '').split('?')[0] || ''
+      const match = path.match(ORCID_PATH_REGEX)
+      if (!match) return
+      const orcid = match[1]
+      return `/print-view/index.html?orcid=${encodeURIComponent(orcid)}`
+    },
+  },
   {
     context: ['/v3.0'],
     target: 'https://pub.qa.orcid.org',

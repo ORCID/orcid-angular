@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
-import { catchError, retry, tap } from 'rxjs/operators'
+import { catchError, tap } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -44,7 +44,6 @@ export class AccountActionsDownloadService {
           link.click()
           this._window.document.body.removeChild(link)
         }),
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }

@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MdePopoverModule } from '../cdk/popover'
 import { FormPasswordComponent } from '../register/components/form-password/form-password.component'
 import { RegisterModule } from '../register/register.module'
+import { PortalModule } from '@angular/cdk/portal'
 
 @NgModule({
   declarations: [ResetPasswordComponent],
@@ -30,6 +31,7 @@ import { RegisterModule } from '../register/register.module'
     MatButtonModule,
     MdePopoverModule,
     FormPasswordComponent,
+    PortalModule,
   ],
 })
 export class ResetPasswordModule {}

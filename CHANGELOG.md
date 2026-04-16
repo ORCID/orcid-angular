@@ -1,3 +1,80 @@
+## v2.132.16 - 2026-04-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.15...v2.132.16)
+
+- [#2812](https://github.com/ORCID/orcid-angular/pull/2812): PD-5328, PD-5403
+
+## v2.132.15 - 2026-04-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.14...v2.132.15)
+
+## v2.132.14 - 2026-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.13...v2.132.14)
+
+## v2.132.13 - 2026-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.12...v2.132.13)
+
+## v2.132.12 - 2026-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.11...v2.132.12)
+
+## v2.132.11 - 2026-04-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.10...v2.132.11)
+
+- [#2805](https://github.com/ORCID/orcid-angular/pull/2805): PD-5329 add label to global search
+- [#2790](https://github.com/ORCID/orcid-angular/pull/2790): PD-5144 improve disable authorize access button logic
+
+## v2.132.10 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.9...v2.132.10)
+
+## v2.132.9 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.8...v2.132.9)
+
+## v2.132.8 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.7...v2.132.8)
+
+## v2.132.7 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.6...v2.132.7)
+
+## v2.132.6 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.5...v2.132.6)
+
+## v2.132.5 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.4...v2.132.5)
+
+## v2.132.4 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.3...v2.132.4)
+
+## v2.132.3 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.2...v2.132.3)
+
+## v2.132.2 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.1...v2.132.2)
+
+## v2.132.1 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.0...v2.132.1)
+
+## v2.132.0 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.25...v2.132.0)
+
+## v2.131.25 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.24...v2.131.25)
+
 ## v2.131.24 - 2026-03-26
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.23...v2.131.24)

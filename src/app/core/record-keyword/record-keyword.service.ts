@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { catchError, map, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { KeywordEndPoint } from '../../types/record-keyword.endpoint'
 
@@ -51,7 +51,6 @@ export class RecordKeywordService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ keywords: [] } as KeywordEndPoint)),
         tap((value) => {
@@ -71,7 +70,6 @@ export class RecordKeywordService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getKeywords({ forceReload: true }))
       )
