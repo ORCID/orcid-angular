@@ -9,11 +9,21 @@ import { LOCALE_ID } from '@angular/core'
 describe('WordpressService', () => {
   let service: WordpressService
   let httpMock: HttpTestingController
+  let originalRuntimeEnvironment: unknown
 
-  const primaryIndexUrl = `${runtimeEnvironment.WORDPRESS_S3}/index.html`
-  const fallbackIndexUrl = `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/index.html`
+  const WORDPRESS_S3 = 'https://homepage-qa.orcid.org'
+  const WORDPRESS_S3_FALLBACK = 'https://homepage-fallback.orcid.org'
+  const primaryIndexUrl = `${WORDPRESS_S3}/index.html`
+  const fallbackIndexUrl = `${WORDPRESS_S3_FALLBACK}/index.html`
 
   beforeEach(() => {
+    originalRuntimeEnvironment = (globalThis as any).runtimeEnvironment
+    ;(globalThis as any).runtimeEnvironment = {
+      ...(originalRuntimeEnvironment as Record<string, unknown> | undefined),
+      WORDPRESS_S3,
+      WORDPRESS_S3_FALLBACK,
+    }
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [{ provide: LOCALE_ID, useValue: 'en' }],
@@ -24,6 +34,7 @@ describe('WordpressService', () => {
 
   afterEach(() => {
     httpMock.verify()
+    ;(globalThis as any).runtimeEnvironment = originalRuntimeEnvironment
   })
 
   it('should be created', () => {
@@ -35,7 +46,7 @@ describe('WordpressService', () => {
       '<html><head></head><body><img src="./assets/image.png"></body></html>'
 
     service.getHomePagePost().subscribe((html) => {
-      expect(html).toContain(`${runtimeEnvironment.WORDPRESS_S3}/assets/image.png`)
+      expect(html).toContain(`${WORDPRESS_S3}/assets/image.png`)
     })
 
     const req = httpMock.expectOne(primaryIndexUrl)
@@ -64,13 +75,13 @@ describe('WordpressService', () => {
     const mockCss = '.hero{background:url("assets/bg.png")}'
 
     service.getHomePageCSS().subscribe((css) => {
-      expect(css).toContain(`${runtimeEnvironment.WORDPRESS_S3}/assets/bg.png`)
+      expect(css).toContain(`${WORDPRESS_S3}/assets/bg.png`)
     })
 
     const indexReq = httpMock.expectOne(primaryIndexUrl)
     indexReq.flush(mockIndex)
     const cssReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage-d4235c1c61.css`
+      `${WORDPRESS_S3}/wordpress-homepage-d4235c1c61.css`
     )
     cssReq.flush(mockCss)
   })
@@ -86,7 +97,7 @@ describe('WordpressService', () => {
     const indexReq = httpMock.expectOne(primaryIndexUrl)
     indexReq.flush(mockIndex)
     const cssReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.css`
+      `${WORDPRESS_S3}/wordpress-homepage.css`
     )
     cssReq.flush(mockCss)
   })
@@ -98,14 +109,14 @@ describe('WordpressService', () => {
 
     service.getHomePageJS().subscribe((js) => {
       expect(js).toContain(
-        `const image = "${runtimeEnvironment.WORDPRESS_S3}/assets/test.png"`
+        `const image = "${WORDPRESS_S3}/assets/test.png"`
       )
     })
 
     const indexReq = httpMock.expectOne(primaryIndexUrl)
     indexReq.flush(mockIndex)
     const jsReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage-64bd37a0a7.js`
+      `${WORDPRESS_S3}/wordpress-homepage-64bd37a0a7.js`
     )
     jsReq.flush(mockJs)
   })
@@ -117,14 +128,14 @@ describe('WordpressService', () => {
 
     service.getHomePageModulesJS().subscribe((js) => {
       expect(js).toContain(
-        `const icon = "${runtimeEnvironment.WORDPRESS_S3}/assets/icon.svg"`
+        `const icon = "${WORDPRESS_S3}/assets/icon.svg"`
       )
     })
 
     const indexReq = httpMock.expectOne(primaryIndexUrl)
     indexReq.flush(mockIndex)
     const jsReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage-modules-34238353bb.js`
+      `${WORDPRESS_S3}/wordpress-homepage-modules-34238353bb.js`
     )
     jsReq.flush(mockJs)
   })
