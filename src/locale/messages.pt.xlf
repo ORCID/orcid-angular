@@ -299,7 +299,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDeviceOrRecovery" datatype="html" resname="ngOrcid.signin.2fa.noDeviceOrRecovery">
         <source>Don&apos;t have your device or recovery code?</source>
-        <target>Não tem seu dispositivo o o código de recuperação?</target>
+        <target>Não tem seu dispositivo nem o código de recuperação?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">263,265</context>
@@ -315,7 +315,7 @@
       </trans-unit>
       <trans-unit id="topBar.knowledge" datatype="html" resname="topBar.knowledge">
         <source>ORCID help centre</source>
-        <target>centro de ajuda do ORCID</target>
+        <target>central de ajuda do ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">272,274</context>
@@ -5470,7 +5470,7 @@
       </trans-unit>
       <trans-unit id="side-bar.knowledge" datatype="html" resname="side-bar.knowledge">
         <source>ORCID help centre</source>
-        <target>centro de ajuda do ORCID</target>
+        <target>central de ajuda do ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/top-bar-verification-email.component.html</context>
           <context context-type="linenumber">63,64</context>
@@ -6074,7 +6074,7 @@
       </trans-unit>
       <trans-unit id="shared.orcidHelpCenter" datatype="html" resname="shared.orcidHelpCenter">
         <source>ORCID Help Center</source>
-        <target>Centro de Ajuda da Orcid</target>
+        <target>Central de Ajuda da Orcid</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">112,113</context>
@@ -11210,7 +11210,7 @@
       </trans-unit>
       <trans-unit id="linking.knowledgebase" datatype="html" resname="linking.knowledgebase">
         <source>please visit the ORCID help centre</source>
-        <target>visite o centro de ajuda do ORCID</target>
+        <target>visite o central de ajuda do ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">69,71</context>
