@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core'
 import { Observable, timer } from 'rxjs'
 import { retry } from 'rxjs/operators'
 
-const RETRYABLE_HTTP_STATUSES = new Set([408, 502, 503, 504])
+const RETRYABLE_HTTP_STATUSES = new Set([0, 408, 502, 503, 504])
 const MAX_RETRIES = 2
 
 @Injectable()
