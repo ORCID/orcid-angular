@@ -21,7 +21,7 @@ import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import * as _ from 'lodash'
 import { Subject } from 'rxjs'
-import { first, takeUntil } from 'rxjs/operators'
+import { finalize, first, takeUntil } from 'rxjs/operators'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 import { URL_REGEXP } from '../../../../constants'
@@ -65,6 +65,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   screenDirection = 'ltr'
   addedWebsiteCount = 0
   loadingWebsites = true
+  isSavingWebsites = false
   urlMaxLength = 1999
   urlTitleMaxLength = 354
 
@@ -177,18 +178,27 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
+    if (this.isSavingWebsites) {
+      return
+    }
+
     this.websitesForm.markAllAsTouched()
     this.websitesForm.updateValueAndValidity()
 
     if (this.websitesForm.valid) {
-      this.loadingWebsites = true
+      this.isSavingWebsites = true
       this._recordWebsitesService
         .postWebsites(this.formToBackend(this.websitesForm))
+        .pipe(
+          finalize(() => {
+            this.isSavingWebsites = false
+          })
+        )
         .subscribe(
           () => {
             this.closeEvent()
           },
-          (error) => {}
+          () => {}
         )
     } else {
       this._snackBar.showValidationError()
