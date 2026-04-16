@@ -82,6 +82,11 @@ Flow charts live in each flow-specific doc:
 - Keep dashboards scoped to prefixed journey fields:
   - `journeyContext_*`
   - `eventAttribute_*`
+- Global HTTP errors (`actionName = 'http_error'`) now include request/page context:
+  - `requestPath`, `requestHost`, `requestOriginType`, `currentPath`, `currentHost`, `referrerHost`, `isOnline`, `statusZeroCause`, `errorBody`, `errorBodyType`
+  - XSRF cookie diagnostics: `xsrfCookiePresent`, `authXsrfCookiePresent`, `csrfCookieState`
+  - Example for high-volume status 0 triage:
+    - `FROM PageAction SELECT count(*) WHERE actionName = 'http_error' AND status = 0 FACET statusZeroCause, requestPath, currentPath`
 
 ## Troubleshooting / gotchas
 
