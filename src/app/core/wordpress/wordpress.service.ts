@@ -9,7 +9,8 @@ type HomePageAssetType = 'css' | 'classicScript' | 'moduleScript'
   providedIn: 'root',
 })
 export class WordpressService {
-  private homePageIndex$: Observable<{ html: string; url: string }> | null = null
+  private homePageIndex$: Observable<{ html: string; url: string }> | null =
+    null
 
   constructor(
     private httpClient: HttpClient,
@@ -63,9 +64,10 @@ export class WordpressService {
         runtimeEnvironment.WORDPRESS_S3_FALLBACK
       }/index${this.getWordpressLocalizationCode()}.html`
 
-      this.homePageIndex$ = this.fetchWithFallback(primaryUrl, fallbackUrl).pipe(
-        shareReplay(1)
-      )
+      this.homePageIndex$ = this.fetchWithFallback(
+        primaryUrl,
+        fallbackUrl
+      ).pipe(shareReplay(1))
     }
 
     return this.homePageIndex$
@@ -88,7 +90,9 @@ export class WordpressService {
 
         return this.httpClient.get(assetUrl, { responseType: 'text' }).pipe(
           map((html: string) => ({ html, url: assetUrl })),
-          catchError(() => this.fetchWithFallback(fallbackPrimary, fallbackSecondary))
+          catchError(() =>
+            this.fetchWithFallback(fallbackPrimary, fallbackSecondary)
+          )
         )
       })
     )
