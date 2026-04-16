@@ -42,7 +42,7 @@ export class SettingsSecurityAlternateSignInComponent
   $destroy = new Subject<void>()
   isMobile: any
   refreshAccounts$ = new BehaviorSubject<void>(undefined)
-  authChallengeLabel = $localize`:@@accountSettings.security.unlinkTheAlternateSignInAccount:unlink the alternate sign in account`
+  authChallengeLabel = $localize`:@@accountSettings.security.unlinkTheAlternateSignInAccount:to unlink the alternate sign in account`
   labelDeleteButton = $localize`:@@shared.delete:Delete`
 
   constructor(

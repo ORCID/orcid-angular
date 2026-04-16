@@ -28,11 +28,10 @@
     >&nbsp;}<ng-container
       i18n="
         auth challenge action clause|Clause in the verification sentence before
-        a dynamic action fragment. actionDescription is a translated verb phrase
-        like 'disable 2FA', 'unlink the alternate sign in account', or 'complete
-        your password reset'. Keep the sentence natural in your
-        language.@@authChallenge.toActionDescription"
-      >to {{ actionDescription }}</ng-container
+        a dynamic action fragment. actionDescription is a translated clause like
+        'to disable 2FA', 'to unlink the alternate sign in account', or 'for'.
+        Keep the sentence natural in your language.@@authChallenge.actionDescriptionClause"
+      >{{ actionDescription }}</ng-container
     >@if (boldText) {&nbsp;<b>{{ boldText }}</b
     >}@if (trailingText) {&nbsp;{{ trailingText }}}
   </p>
