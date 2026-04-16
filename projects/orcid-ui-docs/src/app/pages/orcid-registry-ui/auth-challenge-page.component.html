@@ -93,7 +93,7 @@
     &#123;
       data: &#123;
         parentForm: this.form,
-        actionDescription: 'unlink the alternate sign in account',
+        actionDescription: 'to unlink the alternate sign in account',
         boldText: 'Google',
         trailingText: 'to continue.',
         showTwoFactorField: this.twoFactorState, // true or false
@@ -139,7 +139,7 @@ showAuthenticationChallenge(): void &#123;
 
   // Bind inputs directly to the instance
   componentRef.instance.parentForm = this.form;
-  componentRef.instance.actionDescription = 'complete your password reset';
+  componentRef.instance.actionDescription = 'to complete your password reset';
   componentRef.instance.showPasswordField = false;
 
   componentRef.instance.submitAttempt.subscribe(() => &#123;
@@ -214,7 +214,7 @@ return form;</code></pre>
       <li>
         <code style="font-weight: bold">actionDescription</code>:
         <code>string</code>. The contextual text for what the user is doing
-        (e.g. <code>'unlink the alternate sign in account'</code>).
+        (e.g. <code>'to unlink the alternate sign in account'</code>).
       </li>
       <li>
         <code style="font-weight: bold">boldText</code>: <code>string</code>.

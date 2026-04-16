@@ -25,14 +25,7 @@
       >and</ng-container
     >&nbsp;}@if (showTwoFactorField) {<ng-container i18n
       >a two-factor authentication code</ng-container
-    >&nbsp;}<ng-container
-      i18n="
-        auth challenge action clause|Clause in the verification sentence before
-        a dynamic action fragment. actionDescription is a translated verb phrase
-        like 'disable 2FA', 'unlink the alternate sign in account', or 'complete
-        your password reset'. Keep the sentence natural in your
-        language.@@authChallenge.toActionDescription"
-      >to {{ actionDescription }}</ng-container
+    >&nbsp;}<ng-container>{{ actionDescription }}</ng-container
     >@if (boldText) {&nbsp;<b>{{ boldText }}</b
     >}@if (trailingText) {&nbsp;{{ trailingText }}}
   </p>
