@@ -19,13 +19,18 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     togglzState$ = new Subject<boolean>()
-    wordpressService = jasmine.createSpyObj<WordpressService>('WordpressService', [
-      'getHomePageCSS',
-      'getHomePagePost',
-      'getHomePageJS',
-      'getHomePageModulesJS',
-    ])
-    wordpressService.getHomePageCSS.and.returnValue(of('body { color: black; }'))
+    wordpressService = jasmine.createSpyObj<WordpressService>(
+      'WordpressService',
+      [
+        'getHomePageCSS',
+        'getHomePagePost',
+        'getHomePageJS',
+        'getHomePageModulesJS',
+      ]
+    )
+    wordpressService.getHomePageCSS.and.returnValue(
+      of('body { color: black; }')
+    )
     wordpressService.getHomePagePost.and.returnValue(
       of('<html><body><div>Homepage</div></body></html>')
     )
@@ -43,7 +48,10 @@ describe('HomeComponent', () => {
           provide: PlatformInfoService,
           useValue: { get: () => of({ columns12: true }) },
         },
-        { provide: TogglzService, useValue: { getStateOf: () => togglzState$ } },
+        {
+          provide: TogglzService,
+          useValue: { getStateOf: () => togglzState$ },
+        },
         { provide: WordpressService, useValue: wordpressService },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

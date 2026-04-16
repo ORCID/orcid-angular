@@ -96,9 +96,7 @@ describe('WordpressService', () => {
 
     const indexReq = httpMock.expectOne(primaryIndexUrl)
     indexReq.flush(mockIndex)
-    const cssReq = httpMock.expectOne(
-      `${WORDPRESS_S3}/wordpress-homepage.css`
-    )
+    const cssReq = httpMock.expectOne(`${WORDPRESS_S3}/wordpress-homepage.css`)
     cssReq.flush(mockCss)
   })
 
@@ -108,9 +106,7 @@ describe('WordpressService', () => {
     const mockJs = 'const image = "./assets/test.png"'
 
     service.getHomePageJS().subscribe((js) => {
-      expect(js).toContain(
-        `const image = "${WORDPRESS_S3}/assets/test.png"`
-      )
+      expect(js).toContain(`const image = "${WORDPRESS_S3}/assets/test.png"`)
     })
 
     const indexReq = httpMock.expectOne(primaryIndexUrl)
@@ -127,9 +123,7 @@ describe('WordpressService', () => {
     const mockJs = 'const icon = "./assets/icon.svg"'
 
     service.getHomePageModulesJS().subscribe((js) => {
-      expect(js).toContain(
-        `const icon = "${WORDPRESS_S3}/assets/icon.svg"`
-      )
+      expect(js).toContain(`const icon = "${WORDPRESS_S3}/assets/icon.svg"`)
     })
 
     const indexReq = httpMock.expectOne(primaryIndexUrl)
