@@ -4,25 +4,29 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing'
-import { RouterTestingModule } from '@angular/router/testing'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { LOCALE_ID } from '@angular/core'
-
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 describe('WordpressService', () => {
   let service: WordpressService
   let httpMock: HttpTestingController
+  let originalRuntimeEnvironment: unknown
+
+  const WORDPRESS_S3 = 'https://homepage-qa.orcid.org'
+  const WORDPRESS_S3_FALLBACK = 'https://homepage-fallback.orcid.org'
+  const primaryIndexUrl = `${WORDPRESS_S3}/index.html`
+  const fallbackIndexUrl = `${WORDPRESS_S3_FALLBACK}/index.html`
 
   beforeEach(() => {
+    originalRuntimeEnvironment = (globalThis as any).runtimeEnvironment
+    ;(globalThis as any).runtimeEnvironment = {
+      ...(originalRuntimeEnvironment as Record<string, unknown> | undefined),
+      WORDPRESS_S3,
+      WORDPRESS_S3_FALLBACK,
+    }
+
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [
-        WINDOW_PROVIDERS,
-        PlatformInfoService,
-        { provide: LOCALE_ID, useValue: 'en' },
-      ],
+      imports: [HttpClientTestingModule],
+      providers: [{ provide: LOCALE_ID, useValue: 'en' }],
     })
     service = TestBed.inject(WordpressService)
     httpMock = TestBed.inject(HttpTestingController)
@@ -30,139 +34,109 @@ describe('WordpressService', () => {
 
   afterEach(() => {
     httpMock.verify()
+    ;(globalThis as any).runtimeEnvironment = originalRuntimeEnvironment
   })
 
   it('should be created', () => {
     expect(service).toBeTruthy()
   })
 
-  it('should fetch home page post from primary URL', () => {
-    const mockHtml = '<html></html>'
+  it('fetches home page post from primary URL', () => {
+    const mockHtml =
+      '<html><head></head><body><img src="./assets/image.png"></body></html>'
+
     service.getHomePagePost().subscribe((html) => {
-      expect(html).toContain(mockHtml)
+      expect(html).toContain(`${WORDPRESS_S3}/assets/image.png`)
     })
 
-    const req = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/index.html`
-    )
+    const req = httpMock.expectOne(primaryIndexUrl)
     expect(req.request.method).toBe('GET')
     req.flush(mockHtml)
   })
 
-  it('should fetch home page post from fallback URL when primary fails', () => {
+  it('fetches home page post from fallback URL when primary fails', () => {
     const mockHtml = '<html></html>'
+
     service.getHomePagePost().subscribe((html) => {
       expect(html).toContain(mockHtml)
     })
 
-    const primaryReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/index.html`
-    )
+    const primaryReq = httpMock.expectOne(primaryIndexUrl)
     primaryReq.flush(null, { status: 500, statusText: 'Server Error' })
 
-    const fallbackReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/index.html`
-    )
+    const fallbackReq = httpMock.expectOne(fallbackIndexUrl)
     expect(fallbackReq.request.method).toBe('GET')
     fallbackReq.flush(mockHtml)
   })
 
-  it('should fetch home page CSS from primary URL', () => {
-    const mockCss = 'body { margin: 0; }'
+  it('fetches home page CSS from the stylesheet declared in index.html', () => {
+    const mockIndex =
+      '<html><head><link href="./wordpress-homepage-d4235c1c61.css" rel="stylesheet" /></head><body></body></html>'
+    const mockCss = '.hero{background:url("assets/bg.png")}'
+
+    service.getHomePageCSS().subscribe((css) => {
+      expect(css).toContain(`${WORDPRESS_S3}/assets/bg.png`)
+    })
+
+    const indexReq = httpMock.expectOne(primaryIndexUrl)
+    indexReq.flush(mockIndex)
+    const cssReq = httpMock.expectOne(
+      `${WORDPRESS_S3}/wordpress-homepage-d4235c1c61.css`
+    )
+    cssReq.flush(mockCss)
+  })
+
+  it('falls back to legacy CSS path if index.html has no stylesheet', () => {
+    const mockIndex = '<html><head></head><body></body></html>'
+    const mockCss = 'body{margin:0}'
+
     service.getHomePageCSS().subscribe((css) => {
       expect(css).toContain(mockCss)
     })
 
-    const req = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.css`
+    const indexReq = httpMock.expectOne(primaryIndexUrl)
+    indexReq.flush(mockIndex)
+    const cssReq = httpMock.expectOne(
+      `${WORDPRESS_S3}/wordpress-homepage.css`
     )
-    expect(req.request.method).toBe('GET')
-    req.flush(mockCss)
+    cssReq.flush(mockCss)
   })
 
-  it('should fetch home page CSS from fallback URL when primary fails', () => {
-    const mockCss = 'body { margin: 0; }'
-    service.getHomePageCSS().subscribe((css) => {
-      expect(css).toContain(mockCss)
-    })
+  it('fetches home page JS from script declared in index.html', () => {
+    const mockIndex =
+      '<html><head><script defer src="./wordpress-homepage-64bd37a0a7.js"></script></head><body></body></html>'
+    const mockJs = 'const image = "./assets/test.png"'
 
-    const primaryReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.css`
-    )
-    primaryReq.flush(null, { status: 500, statusText: 'Server Error' })
-
-    const fallbackReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.css`
-    )
-    expect(fallbackReq.request.method).toBe('GET')
-    fallbackReq.flush(mockCss)
-  })
-
-  it('should fetch home page JS from primary URL', () => {
-    const mockJs = 'console.log("Hello, World!");'
     service.getHomePageJS().subscribe((js) => {
-      expect(js).toContain(mockJs)
+      expect(js).toContain(
+        `const image = "${WORDPRESS_S3}/assets/test.png"`
+      )
     })
 
-    const req = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.js`
+    const indexReq = httpMock.expectOne(primaryIndexUrl)
+    indexReq.flush(mockIndex)
+    const jsReq = httpMock.expectOne(
+      `${WORDPRESS_S3}/wordpress-homepage-64bd37a0a7.js`
     )
-    expect(req.request.method).toBe('GET')
-    req.flush(mockJs)
+    jsReq.flush(mockJs)
   })
 
-  it('should fetch home page JS from fallback URL when primary fails', () => {
-    const mockJs = 'console.log("Hello, World!");'
-    service.getHomePageJS().subscribe((js) => {
-      expect(js).toContain(mockJs)
+  it('fetches module JS from script declared in index.html', () => {
+    const mockIndex =
+      '<html><head><script type="module" src="./wordpress-homepage-modules-34238353bb.js"></script></head><body></body></html>'
+    const mockJs = 'const icon = "./assets/icon.svg"'
+
+    service.getHomePageModulesJS().subscribe((js) => {
+      expect(js).toContain(
+        `const icon = "${WORDPRESS_S3}/assets/icon.svg"`
+      )
     })
 
-    const primaryReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.js`
+    const indexReq = httpMock.expectOne(primaryIndexUrl)
+    indexReq.flush(mockIndex)
+    const jsReq = httpMock.expectOne(
+      `${WORDPRESS_S3}/wordpress-homepage-modules-34238353bb.js`
     )
-    primaryReq.flush(null, { status: 500, statusText: 'Server Error' })
-
-    const fallbackReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.js`
-    )
-    expect(fallbackReq.request.method).toBe('GET')
-    fallbackReq.flush(mockJs)
-  })
-
-  it('should fetch home page post from primary URL and update asset paths', () => {
-    const mockHtml =
-      '<html><head></head><body><img src="./assets/image.png"></body></html>'
-    const expectedHtml = `<html><head></head><body><img src="${runtimeEnvironment.WORDPRESS_S3}/assets/image.png"></body></html>`
-
-    service.getHomePagePost().subscribe((html) => {
-      expect(html).toBe(expectedHtml)
-    })
-
-    const req = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/index.html`
-    )
-    expect(req.request.method).toBe('GET')
-    req.flush(mockHtml)
-  })
-
-  it('should fetch home page post from fallback URL and update asset paths when primary fails', () => {
-    const mockHtml =
-      '<html><head></head><body><img src="./assets/image.png"></body></html>'
-    const expectedHtml = `<html><head></head><body><img src="${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/assets/image.png"></body></html>`
-
-    service.getHomePagePost().subscribe((html) => {
-      expect(html).toBe(expectedHtml)
-    })
-
-    const primaryReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3}/index.html`
-    )
-    primaryReq.flush(null, { status: 500, statusText: 'Server Error' })
-
-    const fallbackReq = httpMock.expectOne(
-      `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/index.html`
-    )
-    expect(fallbackReq.request.method).toBe('GET')
-    fallbackReq.flush(mockHtml)
+    jsReq.flush(mockJs)
   })
 })
