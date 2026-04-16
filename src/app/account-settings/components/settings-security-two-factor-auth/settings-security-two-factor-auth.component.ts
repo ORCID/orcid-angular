@@ -28,7 +28,7 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
   form: UntypedFormGroup
   success = false
   cancel = false
-  authChallengeLabel = $localize`:@@accountSettings.security.disable2FA:to disable 2FA`
+  authChallengeLabel = $localize`:@@accountSettings.security.disable2FA:disable 2FA`
 
   constructor(
     private _router: Router,
