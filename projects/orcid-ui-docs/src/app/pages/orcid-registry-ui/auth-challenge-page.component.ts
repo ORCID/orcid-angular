@@ -40,7 +40,7 @@ import { takeUntil } from 'rxjs/operators'
 export class AuthChallengePageComponent implements OnInit {
   showPasswordField = true
   showTwoFactorField = true
-  actionDescription = 'perform this action on'
+  actionDescription = 'to perform this action on'
   boldText = 'Example Account'
   trailingText = 'to continue.'
   form: UntypedFormGroup

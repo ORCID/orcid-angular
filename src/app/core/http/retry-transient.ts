@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http'
 import { MonoTypeOperatorFunction, timer } from 'rxjs'
 import { retry } from 'rxjs/operators'
 
-export const RETRYABLE_HTTP_STATUSES = new Set([408, 502, 503, 504])
+export const RETRYABLE_HTTP_STATUSES = new Set([0, 408, 502, 503, 504])
 
 export function retryTransient<T>(
   maxRetries = 2,
