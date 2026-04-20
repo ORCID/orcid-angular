@@ -1317,6 +1317,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
         <source>to unlink the alternate sign in account</source>
+        <target>대체 로그인 계정 연결 해제</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -1556,6 +1557,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeLabel" datatype="html" resname="accountSettings.security.password.authChallengeLabel">
         <source>to complete your password reset</source>
+        <target>비밀번호 초기화 완료</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -1651,6 +1653,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.disable2FA" datatype="html" resname="accountSettings.security.disable2FA">
         <source>to disable 2FA</source>
+        <target>2FA 비활성화</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.ts</context>
           <context context-type="linenumber">31</context>
@@ -16391,6 +16394,7 @@
       </trans-unit>
       <trans-unit id="70b08b6478ed096f3e32c4898b9147ed86dedbf3" datatype="html" resname="70b08b6478ed096f3e32c4898b9147ed86dedbf3">
         <source>Your new password</source>
+        <target>새 비밀번호</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">3</context>
@@ -17414,6 +17418,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeTrailingText" datatype="html" resname="accountSettings.security.password.authChallengeTrailingText">
         <source>to complete your password reset</source>
+        <target>비밀번호 초기화 완료</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
           <context context-type="linenumber">43</context>
