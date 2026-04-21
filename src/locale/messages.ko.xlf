@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="4b7984f50afed5b65ccf49d51bcb43cf35f49a25" datatype="html" resname="4b7984f50afed5b65ccf49d51bcb43cf35f49a25">
         <source>a two-factor authentication code</source>
-        <target>2단계 인증 코드</target>
+        <target>2단계 인증 코드,</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">27</context>
@@ -1317,7 +1317,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
         <source>to unlink the alternate sign in account</source>
-        <target>대체 로그인 계정 연결 해제</target>
+        <target>대체 로그인 계정이 연결 해제됩니다</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -1557,7 +1557,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeLabel" datatype="html" resname="accountSettings.security.password.authChallengeLabel">
         <source>to complete your password reset</source>
-        <target>비밀번호 초기화 완료</target>
+        <target>비밀번호 초기화가 완료됩니다</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -1653,7 +1653,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.disable2FA" datatype="html" resname="accountSettings.security.disable2FA">
         <source>to disable 2FA</source>
-        <target>2FA 비활성화</target>
+        <target>2FA가 비활성화됩니다</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.ts</context>
           <context context-type="linenumber">31</context>
