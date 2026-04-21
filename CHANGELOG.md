@@ -1,3 +1,15 @@
+## v2.132.20 - 2026-04-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.19...v2.132.20)
+
+- [#2820](https://github.com/ORCID/orcid-angular/pull/2820): PD-5449
+
+## v2.132.19 - 2026-04-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.18...v2.132.19)
+
+- [#2819](https://github.com/ORCID/orcid-angular/pull/2819): PD-0000 fix-format
+
 ## v2.132.18 - 2026-04-16
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.17...v2.132.18)
