@@ -9,6 +9,7 @@
       mat-raised-button
       color="primary"
       (click)="saveEvent()"
+      [disabled]="loadingWebsites || isSavingWebsites || websitesForm?.invalid"
       i18n="@@shared.saveChanges"
       id="save-websites-button"
       [attr.aria-label]="ariaLabelSave"
