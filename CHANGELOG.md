@@ -1,3 +1,9 @@
+## v2.133.1 - 2026-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.133.0...v2.133.1)
+
+- [#2823](https://github.com/ORCID/orcid-angular/pull/2823): PD-5489 hot-fix-switch-user-issues
+
 ## v2.133.0 - 2026-04-22
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.21...v2.133.0)
