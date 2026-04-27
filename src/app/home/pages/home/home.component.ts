@@ -10,6 +10,7 @@ import { WordpressService } from 'src/app/core/wordpress/wordpress.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 import { EMPTY } from 'rxjs'
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-home',
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
     this.togglzService
       .getStateOf(TogglzFlag.WORDPRESS_HOME_PAGE)
       .pipe(
+        take(1),
         switchMap((state) => {
           this.notWordpressDisplay = !state
           if (state) {

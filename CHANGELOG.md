@@ -1,3 +1,85 @@
+## v2.133.1 - 2026-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.133.0...v2.133.1)
+
+- [#2823](https://github.com/ORCID/orcid-angular/pull/2823): PD-5489 hot-fix-switch-user-issues
+
+## v2.133.0 - 2026-04-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.21...v2.133.0)
+
+## v2.132.21 - 2026-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.20...v2.132.21)
+
+- [#2804](https://github.com/ORCID/orcid-angular/pull/2804): Transifex: update translations
+- [#2822](https://github.com/ORCID/orcid-angular/pull/2822): Ci/actions sec
+
+## v2.132.20 - 2026-04-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.19...v2.132.20)
+
+- [#2820](https://github.com/ORCID/orcid-angular/pull/2820): PD-5449
+
+## v2.132.19 - 2026-04-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.18...v2.132.19)
+
+- [#2819](https://github.com/ORCID/orcid-angular/pull/2819): PD-0000 fix-format
+
+## v2.132.18 - 2026-04-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.17...v2.132.18)
+
+- [#2815](https://github.com/ORCID/orcid-angular/pull/2815): PD-5332
+
+## v2.132.17 - 2026-04-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.16...v2.132.17)
+
+- [#2817](https://github.com/ORCID/orcid-angular/pull/2817): PD-5445
+
+## v2.132.16 - 2026-04-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.15...v2.132.16)
+
+- [#2812](https://github.com/ORCID/orcid-angular/pull/2812): PD-5328, PD-5403
+
+## v2.132.15 - 2026-04-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.14...v2.132.15)
+
+## v2.132.14 - 2026-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.13...v2.132.14)
+
+## v2.132.13 - 2026-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.12...v2.132.13)
+
+## v2.132.12 - 2026-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.11...v2.132.12)
+
+## v2.132.11 - 2026-04-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.10...v2.132.11)
+
+- [#2805](https://github.com/ORCID/orcid-angular/pull/2805): PD-5329 add label to global search
+- [#2790](https://github.com/ORCID/orcid-angular/pull/2790): PD-5144 improve disable authorize access button logic
+
+## v2.132.10 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.9...v2.132.10)
+
+## v2.132.9 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.8...v2.132.9)
+
+## v2.132.8 - 2026-04-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.7...v2.132.8)
+
 ## v2.132.7 - 2026-04-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.6...v2.132.7)

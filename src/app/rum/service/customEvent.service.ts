@@ -17,6 +17,14 @@ const BLOCKED_RUM_KEY_PATTERN = /(orcid|email|pid|delegator)/i
 const ORCID_VALUE_PATTERN = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
 const EMAIL_VALUE_PATTERN = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
 const PID_HINT_PREFIX = '[PID_HINT:'
+const SAFE_RUM_KEYS = new Set([
+  'oauth_query_string',
+  'redirect_uri',
+  'client_id',
+  'journeycontext_oauth_query_string',
+  'journeycontext_redirect_uri',
+  'journeycontext_client_id',
+])
 
 function sensitiveHint(kind: string, details: string): string {
   return `${PID_HINT_PREFIX}${kind};${details}]`
@@ -68,6 +76,10 @@ function sanitizeRumValue(value: unknown): unknown {
     const input = value as Record<string, unknown>
     const output: Record<string, unknown> = {}
     for (const [key, rawValue] of Object.entries(input)) {
+      if (SAFE_RUM_KEYS.has(key.toLowerCase())) {
+        output[key] = rawValue
+        continue
+      }
       if (BLOCKED_RUM_KEY_PATTERN.test(key)) {
         output[key] = sanitizeSensitiveValue(rawValue, key)
         continue

@@ -2,10 +2,10 @@
   <app-alert-message
     [type]="invalidVerifyUrl ? 'warning' : 'success'"
     role="alert"
-    aria-labelledby="dialogTitle"
-    aria-describedby="dialogDescription"
+    aria-labelledby="almostDoneTitle"
+    aria-describedby="almostDoneDescription"
   >
-    <h3 title id="dialogTitle" i18n="@@ngOrcid.signin.almostDone">
+    <h3 title id="almostDoneTitle" i18n="@@ngOrcid.signin.almostDone">
       Almost done!
     </h3>
     <div content i18n="@@ngOrcid.signin.signInToComplete" *ngIf="emailVerified">
@@ -13,6 +13,7 @@
     </div>
     <div
       content
+      id="almostDoneDescription"
       i18n="@@myOrcidAlerts.invalidVerifyUrl"
       *ngIf="invalidVerifyUrl"
     >

@@ -40,8 +40,9 @@ import { takeUntil } from 'rxjs/operators'
 export class AuthChallengePageComponent implements OnInit {
   showPasswordField = true
   showTwoFactorField = true
-  actionDescription = 'perform this action on'
-  memberName = 'Example Account'
+  actionDescription = 'to perform this action on'
+  boldText = 'Example Account'
+  trailingText = 'to continue.'
   form: UntypedFormGroup
 
   constructor(private _fb: UntypedFormBuilder, private _dialog: MatDialog) {}
@@ -62,7 +63,8 @@ export class AuthChallengePageComponent implements OnInit {
       data: {
         parentForm: this.form,
         actionDescription: this.actionDescription,
-        memberName: this.memberName,
+        boldText: this.boldText,
+        trailingText: this.trailingText,
         showPasswordField: this.showPasswordField,
         showTwoFactorField: this.showTwoFactorField,
       },
@@ -81,6 +83,12 @@ export class AuthChallengePageComponent implements OnInit {
             invalidTwoFactorCode: false,
           })
         }, 1000)
+      })
+
+    dialogRef.componentInstance.cancelAttempt
+      .pipe(takeUntil(dialogRef.afterClosed()))
+      .subscribe(() => {
+        dialogRef.close()
       })
 
     dialogRef.afterClosed().subscribe(() => {

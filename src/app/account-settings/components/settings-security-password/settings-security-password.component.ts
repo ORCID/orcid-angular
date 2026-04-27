@@ -48,7 +48,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   currentValidateAtLeastALetterOrSymbolStatus: boolean
   currentValidateAtLeastANumber: boolean
   confirmPasswordPlaceholder = $localize`:@@accountSettings.security.password.confirmPasswordPlaceholder:Confirm your new password`
-  authChallengeLabel = $localize`:@@accountSettings.security.password.authChallengeLabel:complete your password reset`
+  authChallengeLabel = $localize`:@@accountSettings.security.password.authChallengeLabel:to complete your password reset`
   errorMatcher = new ErrorStateMatcherForTwoFactorFields()
 
   constructor(
