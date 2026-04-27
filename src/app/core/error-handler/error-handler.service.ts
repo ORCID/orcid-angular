@@ -1,14 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import { of, throwError } from 'rxjs'
 import { catchError, switchMap, take } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { WINDOW } from 'src/app/cdk/window'
 import { ErrorReport } from 'src/app/types'
 import { ERROR_REPORT } from 'src/app/errors'
 import { CookieService } from 'ngx-cookie-service'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
+import { httpErrorEventAttrs } from 'src/app/rum/http-error-event-attrs'
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +21,8 @@ export class ErrorHandlerService {
     private _cookie: CookieService,
     private _platform: PlatformInfoService,
     private _snackBar: SnackbarService,
-    private _observability: RumJourneyEventService
+    private _observability: RumJourneyEventService,
+    @Inject(WINDOW) private _window: Window
   ) {
     this.checkBrowser()
   }
@@ -33,7 +36,7 @@ export class ErrorHandlerService {
           const platformDetails = this.browserSupport + this.checkCSRF()
 
           if (error instanceof HttpErrorResponse) {
-            const split = error.url.split('/')
+            const split = (error.url || '').split('/')
             const url = split[split.length - 1]
 
             return throwError({
@@ -62,14 +65,21 @@ export class ErrorHandlerService {
           if (httpLike) {
             const http = processedError as HttpErrorResponse
             try {
-              this._observability.recordSimpleEvent(AppEventName.HttpError, {
-                status: http.status,
-                statusText: http.statusText,
-                url: http.url,
-                name: http.name,
-                browserSupport: this.browserSupport,
-                csrf: this.checkCSRF(),
-              })
+              this._observability.recordSimpleEvent(
+                AppEventName.HttpError,
+                httpErrorEventAttrs(http, {
+                  browserSupport: this.browserSupport,
+                  csrf: this.checkCSRF(),
+                  xsrfCookiePresent: this.hasXsrfCookie(),
+                  authXsrfCookiePresent: this.hasAuthXsrfCookie(),
+                  csrfCookieState: this.csrfCookieState(),
+                  currentOrigin: this._window?.location?.origin,
+                  currentHost: this._window?.location?.host,
+                  currentPath: this._window?.location?.pathname,
+                  referrerHost: this.referrerHost(),
+                  isOnline: this._window?.navigator?.onLine,
+                })
+              )
             } catch (_) {}
             console.error(
               `
@@ -120,10 +130,41 @@ stack: "${processedError.stack}"
   }
 
   private checkCSRF() {
-    if (!this._cookie.get('XSRF-TOKEN')) {
-      return 'no-XSRF'
-    } else {
-      return ''
+    return this.csrfCookieState() === 'none' ? 'no-XSRF' : ''
+  }
+
+  private hasXsrfCookie(): boolean {
+    return !!this._cookie.get('XSRF-TOKEN')
+  }
+
+  private hasAuthXsrfCookie(): boolean {
+    return !!this._cookie.get('AUTH-XSRF-TOKEN')
+  }
+
+  private csrfCookieState(): 'both' | 'xsrf_only' | 'auth_only' | 'none' {
+    const hasXsrf = this.hasXsrfCookie()
+    const hasAuthXsrf = this.hasAuthXsrfCookie()
+    if (hasXsrf && hasAuthXsrf) {
+      return 'both'
+    }
+    if (hasXsrf) {
+      return 'xsrf_only'
+    }
+    if (hasAuthXsrf) {
+      return 'auth_only'
+    }
+    return 'none'
+  }
+
+  private referrerHost(): string | undefined {
+    const referrer = this._window?.document?.referrer
+    if (!referrer) {
+      return undefined
+    }
+    try {
+      return new URL(referrer).host
+    } catch {
+      return undefined
     }
   }
 }

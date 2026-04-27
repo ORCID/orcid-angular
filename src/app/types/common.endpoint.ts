@@ -277,7 +277,8 @@ export interface AuthChallengeFormData {
   recoveryControlName?: string
   passwordControlName?: string
   parentForm?: UntypedFormGroup
-  memberName?: string
+  boldText?: string
+  trailingText?: string
 }
 
 export type TokenStatus = 'VALID' | 'INVALID' | 'EXPIRED'

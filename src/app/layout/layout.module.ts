@@ -23,6 +23,7 @@ import { MatDividerModule } from '@angular/material/divider'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { RecordHeaderComponent } from '../record/components/record-header/record-header.component'
+import { MatFormFieldModule } from '@angular/material/form-field'
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { RecordHeaderComponent } from '../record/components/record-header/record
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
     MatRippleModule,
     MatIconModule,
     BannerModule,

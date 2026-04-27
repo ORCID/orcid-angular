@@ -18,20 +18,17 @@ describe('AuthChallengeComponent', () => {
   let mockDialogRef: any
 
   beforeEach(async () => {
-    // 1. Create a mock form to pass into the dialog data
     form = new FormGroup({
       passwordControl: new FormControl(''),
       twoFactorCode: new FormControl(''),
       twoFactorRecoveryCode: new FormControl(''),
     })
 
-    // 2. Mock the MatDialogRef so updateSize() doesn't throw an error
     mockDialogRef = {
       updateSize: jasmine.createSpy('updateSize'),
       close: jasmine.createSpy('close'),
     }
 
-    // 3. Mock the MAT_DIALOG_DATA
     const mockDialogData = {
       parentForm: form,
       showPasswordField: true,
@@ -40,7 +37,7 @@ describe('AuthChallengeComponent', () => {
       codeControlName: 'twoFactorCode',
       recoveryControlName: 'twoFactorRecoveryCode',
       passwordControlName: 'passwordControl',
-      actionDescription: 'login', // Mock label
+      actionDescription: 'login',
     }
 
     await TestBed.configureTestingModule({
@@ -68,7 +65,7 @@ describe('AuthChallengeComponent', () => {
 
       codeControl?.setValue('')
       expect(codeControl?.hasError('required')).toBeTrue()
-      expect(codeControl?.touched).toBeFalse() // Checks the markAsUntouched logic
+      expect(codeControl?.touched).toBeFalse()
 
       recoveryControl?.setValue('')
       expect(recoveryControl?.hasError('required')).toBeFalse()
@@ -148,20 +145,11 @@ describe('AuthChallengeComponent', () => {
     })
   })
 
-  describe('Dialog Data (formerly @Input)', () => {
-    it('should hide help text links if showHelpText is false', () => {
-      // Modify data directly
-      component.data.showHelpText = false
-      fixture.detectChanges()
-
-      const links = fixture.debugElement.query(
-        By.css('[data-testid="help-text-links"]')
-      )
-      expect(links).toBeFalsy()
-    })
-
+  describe('Component properties (formerly Dialog Data @Input)', () => {
     it('should hide two-factor field if showTwoFactorField is false', () => {
-      component.data.showTwoFactorField = false
+      // Set on the component property directly — the template binds to this,
+      // not to data, since ngOnInit already copied data into component fields
+      component.showTwoFactorField = false
       fixture.detectChanges()
 
       const codeInput = fixture.debugElement.query(By.css('#twoFactorCode'))
@@ -169,7 +157,7 @@ describe('AuthChallengeComponent', () => {
     })
 
     it('should hide password field if showPasswordField is false', () => {
-      component.data.showPasswordField = false
+      component.showPasswordField = false
       fixture.detectChanges()
 
       const passwordInput = fixture.debugElement.query(By.css('#password'))

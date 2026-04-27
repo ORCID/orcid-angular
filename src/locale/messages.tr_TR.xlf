@@ -6,7 +6,7 @@
         <target>ORCID hesabınızı doğrulayın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">18,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb" datatype="html" resname="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb">
@@ -14,7 +14,7 @@
         <target>ORCID hesabınızın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e65c0a651252b987d33f5e244972055e71e88742" datatype="html" resname="e65c0a651252b987d33f5e244972055e71e88742">
@@ -22,7 +22,7 @@
         <target>parolasını girin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dce4fb53bd401f2ded36a8c45cb471eff6b529d4" datatype="html" resname="dce4fb53bd401f2ded36a8c45cb471eff6b529d4">
@@ -30,7 +30,7 @@
         <target>ile</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4b7984f50afed5b65ccf49d51bcb43cf35f49a25" datatype="html" resname="4b7984f50afed5b65ccf49d51bcb43cf35f49a25">
@@ -38,7 +38,7 @@
         <target>iki faktörlü kimlik doğrulama kodunu girin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.password" datatype="html" resname="register.password">
@@ -46,7 +46,7 @@
         <target>Parola</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -54,7 +54,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.passwordCannotBeEmpty" datatype="html" resname="account.passwordCannotBeEmpty">
@@ -62,7 +62,7 @@
         <target>Parola boş bırakılamaz</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">68,70</context>
+          <context context-type="linenumber">69,71</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
@@ -74,7 +74,7 @@
         <target>Parola, kayıtlarımızla eşleşmiyor</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">72,74</context>
+          <context context-type="linenumber">73,75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.twoPassword" datatype="html" resname="account.twoPassword">
@@ -98,7 +98,7 @@
         <target>İki faktörlü kimlik doğrulama uygulamanızdaki kodu girin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">116,118</context>
+          <context context-type="linenumber">115,117</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -110,7 +110,7 @@
         <target>Geçersiz kimlik doğrulama kodu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">121,123</context>
+          <context context-type="linenumber">120,122</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -130,7 +130,7 @@
         <target>Kimlik doğrulama kodu gereklidir</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">128,130</context>
+          <context context-type="linenumber">127,129</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -150,7 +150,7 @@
         <target>Geçersiz kimlik doğrulama kodu uzunluğu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">136,138</context>
+          <context context-type="linenumber">135,137</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -170,7 +170,7 @@
         <target>Kurtarma kodu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">165,167</context>
+          <context context-type="linenumber">163,165</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -186,7 +186,7 @@
         <target>Kurtarma kodu girin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">192</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -202,7 +202,7 @@
         <target>Geçersiz kurtarma kodu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">198,200</context>
+          <context context-type="linenumber">196,198</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -218,7 +218,7 @@
         <target>Kurtarma kodu gereklidir</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">205,207</context>
+          <context context-type="linenumber">203,205</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -234,7 +234,7 @@
         <target>Geçersiz kurtarma kodu uzunluğu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">213,215</context>
+          <context context-type="linenumber">211,213</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -250,7 +250,7 @@
         <target>Cihazınız yok mu?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">233,235</context>
+          <context context-type="linenumber">231,233</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -266,7 +266,7 @@
         <target>Onun yerine bir kurtarma kodu kullanın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">242,244</context>
+          <context context-type="linenumber">240,242</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -278,7 +278,7 @@
         <target>Kurtarma kodlarınız sizde değil mi?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">248,250</context>
+          <context context-type="linenumber">246,248</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -290,7 +290,7 @@
         <target>Onun yerine kimlik doğrulama uygulamanızı kullanın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">257,259</context>
+          <context context-type="linenumber">255,257</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -302,7 +302,7 @@
         <target>Cihazınız veya kurtarma kodunuz yok mu?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">263,265</context>
+          <context context-type="linenumber">261,263</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -318,7 +318,7 @@
         <target>ORCID yardım merkezi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">272,274</context>
+          <context context-type="linenumber">270,272</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -334,7 +334,7 @@
         <target>Hesabımı doğrula ve devam et</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">288,290</context>
+          <context context-type="linenumber">286,288</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5" datatype="html" resname="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5">
@@ -342,7 +342,7 @@
         <target>Hesap doğrulamasını iptal et</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">298,300</context>
+          <context context-type="linenumber">296,298</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.deleteDuplicatedAccount" datatype="html" resname="account.deleteDuplicatedAccount">
@@ -418,7 +418,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/account-trusted-individuals/account-trusted-individuals.service.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
@@ -1260,11 +1260,11 @@
         <target>Hesap</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">68,70</context>
+          <context context-type="linenumber">72,74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.alternateSignInID" datatype="html" resname="account.alternateSignInID">
@@ -1272,11 +1272,11 @@
         <target>Alternatif oturum açma kimliği</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">81,83</context>
+          <context context-type="linenumber">85,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.accessGranted" datatype="html" resname="account.accessGranted">
@@ -1284,11 +1284,11 @@
         <target>Erişim izni verildi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
@@ -1312,15 +1312,35 @@
         <target>Henüz alternatif bir oturum açma hesabı eklemediniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">111,113</context>
+          <context context-type="linenumber">120,122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
-        <source>unlink the alternate sign in account</source>
-        <target>alternatif giriş hesabının bağlantısını kesin</target>
+        <source>to unlink the alternate sign in account</source>
+        <target>alternatif giriş hesabının bağlantısını kesmek için</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared.delete" datatype="html" resname="shared.delete">
+        <source>Delete</source>
+        <target>Sil</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/panel/panel-source/panel-source.component.ts</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-external-identifiers-view-only/work-external-identifiers-view-only.component.html</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba" datatype="html" resname="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba">
@@ -1388,7 +1408,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">109,111</context>
+          <context context-type="linenumber">114,116</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -1412,7 +1432,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">100,102</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordConfirmationMatchV2" datatype="html" resname="register.passwordConfirmationMatchV2">
@@ -1432,7 +1452,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordLength" datatype="html" resname="register.passwordLength">
@@ -1444,7 +1464,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.atLeastALetterOrSymbol" datatype="html" resname="register.atLeastALetterOrSymbol">
@@ -1456,7 +1476,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">135,137</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.atLeastANumber" datatype="html" resname="register.atLeastANumber">
@@ -1468,7 +1488,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.saveChanges" datatype="html" resname="shared.saveChanges">
@@ -1536,8 +1556,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeLabel" datatype="html" resname="accountSettings.security.password.authChallengeLabel">
-        <source>complete your password reset</source>
-        <target>parola sıfırlama işlemini tamamlayın</target>
+        <source>to complete your password reset</source>
+        <target>parola sıfırlama işleminizi tamamlamak için</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -1632,8 +1652,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="accountSettings.security.disable2FA" datatype="html" resname="accountSettings.security.disable2FA">
-        <source>disable 2FA</source>
-        <target>iki faktörlü kimlik doğrulama özelliğini devre dışı bırakın</target>
+        <source>to disable 2FA</source>
+        <target>iki faktörlü kimlik doğrulama özelliğini devre dışı bırakmak için</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.ts</context>
           <context context-type="linenumber">31</context>
@@ -1784,7 +1804,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/my-orcid-alerts/my-orcid-alerts.component.html</context>
-          <context context-type="linenumber">33,35</context>
+          <context context-type="linenumber">34,36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.pleaseCheckYourDetails" datatype="html" resname="ngOrcid.signin.pleaseCheckYourDetails">
@@ -1796,7 +1816,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/my-orcid-alerts/my-orcid-alerts.component.html</context>
-          <context context-type="linenumber">39,41</context>
+          <context context-type="linenumber">40,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordRequired" datatype="html" resname="register.passwordRequired">
@@ -3468,7 +3488,7 @@
         <target>E-postanız doğrulanamadı, lütfen doğrulamak için kullandığınız bağlantıyı kontrol edin.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/my-orcid-alerts/my-orcid-alerts.component.html</context>
-          <context context-type="linenumber">18,21</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.partOf" datatype="html" resname="shared.partOf">
@@ -3737,22 +3757,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="shared.delete" datatype="html" resname="shared.delete">
-        <source>Delete</source>
-        <target>Sil</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/panel/panel-source/panel-source.component.ts</context>
-          <context context-type="linenumber">102</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/work-external-identifiers-view-only/work-external-identifiers-view-only.component.html</context>
-          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.edit" datatype="html" resname="shared.edit">
@@ -5537,7 +5541,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -5553,7 +5557,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -8657,7 +8661,7 @@
         <target>Çalışmalarınızı aktarın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">600</context>
+          <context context-type="linenumber">593</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.importIntroText" datatype="html" resname="works.importIntroText">
@@ -8665,7 +8669,7 @@
         <target>Bu hizmetler araştırma çıktılarınızı çeşitli veri tabanlarında arayarak ORCID kaydınızı hızlı bir biçimde güncellemenize yardımcı olabilir. İzin vermek ve seçtiğiniz araştırma çıktılarını ORCID kaydınıza eklemek için bir hizmete bağlanın.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">601</context>
+          <context context-type="linenumber">594</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.importSupportLinkLabel" datatype="html" resname="works.importSupportLinkLabel">
@@ -8673,7 +8677,7 @@
         <target>Çalışmaları ORCID kaydınıza eklemekle ilgili daha fazla bilgi edinin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">604</context>
+          <context context-type="linenumber">597</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.certifiedSectionHeading" datatype="html" resname="works.certifiedSectionHeading">
@@ -8681,7 +8685,7 @@
         <target>ORCID Sertifikalı Hizmetler</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">606</context>
+          <context context-type="linenumber">599</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.moreServicesHeading" datatype="html" resname="works.moreServicesHeading">
@@ -8689,7 +8693,7 @@
         <target>Daha Fazla Hizmet</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">607</context>
+          <context context-type="linenumber">600</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectNow" datatype="html" resname="works.connectNow">
@@ -8697,7 +8701,7 @@
         <target>Şimdi bağlan</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">608</context>
+          <context context-type="linenumber">601</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connected" datatype="html" resname="works.connected">
@@ -8705,7 +8709,7 @@
         <target>Bağlandı</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">609</context>
+          <context context-type="linenumber">602</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/search-link-wizard/search-link-wizard.component.html</context>
@@ -8717,7 +8721,7 @@
         <target>Çalışmalarınızı aktarmayı kapatın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">610</context>
+          <context context-type="linenumber">603</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.showMoreServices" datatype="html" resname="works.showMoreServices">
@@ -8725,7 +8729,7 @@
         <target>Daha fazla hizmet göster</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">611</context>
+          <context context-type="linenumber">604</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.hideMoreServices" datatype="html" resname="works.hideMoreServices">
@@ -8733,7 +8737,7 @@
         <target>Daha fazla hizmeti gizle</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">612</context>
+          <context context-type="linenumber">605</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectWithCspNow" datatype="html" resname="works.connectWithCspNow">
@@ -8741,7 +8745,7 @@
         <target>{{name}} ile hemen bağlan</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">613</context>
+          <context context-type="linenumber">606</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectedWithCsp" datatype="html" resname="works.connectedWithCsp">
@@ -8749,7 +8753,7 @@
         <target>{{name}} ile bağlandı</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">614</context>
+          <context context-type="linenumber">607</context>
         </context-group>
       </trans-unit>
       <trans-unit id="developerTools.generateNewClientSecret" datatype="html" resname="developerTools.generateNewClientSecret">
@@ -10960,6 +10964,14 @@
           <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="a7fd4c364cafce9e37e29c2a429f6f1e8fe89de8" datatype="html" resname="a7fd4c364cafce9e37e29c2a429f6f1e8fe89de8">
+        <source>Search the ORCID registry</source>
+        <target>ORCID kaydında arama yap</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/search/search.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="layout.ariaLabelSearch" datatype="html" resname="layout.ariaLabelSearch">
         <source>Search the ORCID registry</source>
         <target>ORCID kaydında arama yap</target>
@@ -10972,28 +10984,20 @@
           <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="layout.ariaLabelSearchBy" datatype="html" resname="layout.ariaLabelSearchBy">
-        <source>Search by name, affiliation or ORCID iD</source>
-        <target>Ad, bağlı kuruluş veya ORCID iD&apos;ye göre arama yapın</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="layout.public-layout.registry" datatype="html" resname="layout.public-layout.registry">
         <source>registry</source>
         <target>kayıt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11005,19 +11009,11 @@
         <target>web sitesi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">66</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="layout.ariaLabelSearchRegistry" datatype="html" resname="layout.ariaLabelSearchRegistry">
-        <source>Search the ORCID registry...</source>
-        <target>ORCID kaydında arama yapın...</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.howManyPeopleAreUsingORCID" datatype="html" resname="layout.howManyPeopleAreUsingORCID">
@@ -11393,11 +11389,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.lostAccessToYourEmailAddresses" datatype="html" resname="recovery.lostAccessToYourEmailAddresses">
@@ -12161,7 +12157,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -12381,7 +12377,7 @@
         <target>Daha fazla ayrıntı göster</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -12409,7 +12405,7 @@
         <target>Daha az ayrıntı göster</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -12437,7 +12433,7 @@
         <target>Eklendi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">114</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -12477,7 +12473,7 @@
         <target>Son değiştirilme tarihi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">117,119</context>
+          <context context-type="linenumber">122,124</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -16396,12 +16392,20 @@
           <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="70b08b6478ed096f3e32c4898b9147ed86dedbf3" datatype="html" resname="70b08b6478ed096f3e32c4898b9147ed86dedbf3">
+        <source>Your new password</source>
+        <target>Yeni parolanız</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="register.yourPasswords" datatype="html" resname="register.yourPasswords">
         <source>Your password</source>
         <target>Parolanız</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">2,4</context>
+          <context context-type="linenumber">5,7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordNotEmail" datatype="html" resname="register.passwordNotEmail">
@@ -16409,7 +16413,7 @@
         <target>Parola, e-posta adresinizle aynı olmamalıdır</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">47,49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordIsToLongV22" datatype="html" resname="register.passwordIsToLongV22">
@@ -16417,7 +16421,7 @@
         <target>Şifre 8 ila 256 karakter arasında olmalıdır</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">59,61</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordConfirmationMatch2" datatype="html" resname="register.passwordConfirmationMatch2">
@@ -16425,7 +16429,7 @@
         <target>Parolalar eşleşmiyor</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">118,120</context>
+          <context context-type="linenumber">123,125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.ariaLabelInfoPassword" datatype="html" resname="register.ariaLabelInfoPassword">
@@ -16437,7 +16441,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -16525,7 +16529,7 @@
         <target>Tüm parola şartları karşılandı</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">256</context>
+          <context context-type="linenumber">258</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordAreValid" datatype="html" resname="register.passwordAreValid">
@@ -16533,7 +16537,7 @@
         <target>Parolalarınız eşleşiyor</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">289</context>
+          <context context-type="linenumber">291</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordAreNotValid" datatype="html" resname="register.passwordAreNotValid">
@@ -16541,7 +16545,7 @@
         <target>Parolalarınız eşleşmiyor</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">293</context>
+          <context context-type="linenumber">295</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.additionalEmails" datatype="html" resname="register.additionalEmails">
@@ -17353,7 +17357,7 @@
         <target>Parolanızı sıfırlayın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">25,27</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset.afterResetting" datatype="html" resname="reset.afterResetting">
@@ -17361,7 +17365,7 @@
         <target>Parolanızı sıfırladıktan sonra e-posta adresinizi veya ORCID Kimliğinizi ve yeni parolanızı kullanarak oturum açmanız istenecektir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">33,36</context>
+          <context context-type="linenumber">34,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset.saveYourNewPassword" datatype="html" resname="reset.saveYourNewPassword">
@@ -17369,7 +17373,7 @@
         <target>Yeni parolanızı kaydedin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">56,58</context>
+          <context context-type="linenumber">57,59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset.cancelPasswordReset" datatype="html" resname="reset.cancelPasswordReset">
@@ -17377,7 +17381,7 @@
         <target>Parola sıfırlamasını iptal edin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">64,65</context>
+          <context context-type="linenumber">65,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset.hasExpired" datatype="html" resname="reset.hasExpired">
@@ -17385,7 +17389,7 @@
         <target>Parola sıfırlama bağlantınızın süresi doldu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset.invalidLink" datatype="html" resname="reset.invalidLink">
@@ -17393,7 +17397,7 @@
         <target>Parola sıfırlama bağlantınızla ilgili bir sorun var</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset.youCanRequestANewLink" datatype="html" resname="reset.youCanRequestANewLink">
@@ -17401,7 +17405,7 @@
         <target>Şuradan yeni bir bağlantı talep edebilirsiniz:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset.pleaseTryTheLinkAgain" datatype="html" resname="reset.pleaseTryTheLinkAgain">
@@ -17409,7 +17413,23 @@
         <target>Lütfen bağlantıyı tekrar deneyin. Bağlantı çalışmazsa şuradan yeni bir parola sıfırlama bağlantısı talep edebilirsiniz:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">108,109</context>
+          <context context-type="linenumber">109,110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.password.authChallengeTrailingText" datatype="html" resname="accountSettings.security.password.authChallengeTrailingText">
+        <source>to complete your password reset</source>
+        <target>parola sıfırlama işleminizi tamamlamak için</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.password.authChallengeLeadingText" datatype="html" resname="accountSettings.security.password.authChallengeLeadingText">
+        <source>for</source>
+        <target>için</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.searchTitle" datatype="html" resname="layout.searchTitle">

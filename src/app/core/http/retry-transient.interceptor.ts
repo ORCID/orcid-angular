@@ -8,8 +8,9 @@ import {
 import { Injectable } from '@angular/core'
 import { Observable, timer } from 'rxjs'
 import { retry } from 'rxjs/operators'
+import { SKIP_TRANSIENT_RETRY } from './retry-transient'
 
-const RETRYABLE_HTTP_STATUSES = new Set([408, 502, 503, 504])
+const RETRYABLE_HTTP_STATUSES = new Set([0, 408, 502, 503, 504])
 const MAX_RETRIES = 2
 
 @Injectable()
@@ -18,6 +19,11 @@ export class RetryTransientInterceptor implements HttpInterceptor {
     req: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    // Allow request-level opt out for known special flows.
+    if (req.context.get(SKIP_TRANSIENT_RETRY)) {
+      return next.handle(req)
+    }
+
     return next.handle(req).pipe(
       retry({
         count: MAX_RETRIES,

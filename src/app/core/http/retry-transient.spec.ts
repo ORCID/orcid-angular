@@ -3,6 +3,32 @@ import { defer, of, throwError } from 'rxjs'
 import { retryTransient } from './retry-transient'
 
 describe('retryTransient', () => {
+  it('retries up to the max retries for HTTP status 0', (done) => {
+    let attempts = 0
+    const source$ = defer(() => {
+      attempts++
+      if (attempts <= 2) {
+        return throwError(
+          () =>
+            new HttpErrorResponse({
+              status: 0,
+              statusText: 'Network error',
+            })
+        )
+      }
+      return of('ok')
+    })
+
+    source$.pipe(retryTransient(2)).subscribe({
+      next: (value) => {
+        expect(value).toBe('ok')
+        expect(attempts).toBe(3)
+        done()
+      },
+      error: done.fail,
+    })
+  })
+
   it('retries up to the max retries for retryable HTTP statuses', (done) => {
     let attempts = 0
     const source$ = defer(() => {

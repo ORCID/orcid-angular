@@ -55,7 +55,8 @@
   }
 
   .input-box-new-info {
-    width: 334px;
+    flex-grow: 1;
+    max-width: 334px;
     input {
       border-radius: 3px;
       margin-left: 2px;
@@ -94,6 +95,16 @@
 .columns-8,
 .columns-4 {
   :host {
+    form {
+      flex-wrap: wrap !important;
+    }
+
+    label {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 8px;
+    }
+
     .search-box {
       padding: 12px 0px;
       justify-content: center;

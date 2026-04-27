@@ -121,6 +121,11 @@
                 "output": "/assets/"
               },
               {
+                "glob": "**/*",
+                "input": "src/assets/print-view/",
+                "output": "/print-view/"
+              },
+              {
                 "glob": "src/favicon.ico",
                 "input": "src/",
                 "output": "/assets/"

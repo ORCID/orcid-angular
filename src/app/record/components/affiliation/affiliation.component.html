@@ -3,7 +3,8 @@
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
 <app-panel-data
   class="default-data-loaded orc-font-body-small"
-  [borderBottom]="false"
+  [borderBottom]="panelDetailsState?.state && true"
+  [deprecatedPadding]="true"
 >
   <div>
     <div class="general-data">
@@ -99,7 +100,7 @@
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 <app-panel-data
-  class="mt-4"
+  [deprecatedPadding]="true"
   [borderBottom]="false"
   *ngIf="panelDetailsState?.state"
 >
