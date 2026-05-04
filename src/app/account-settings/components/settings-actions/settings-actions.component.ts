@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { set } from 'lodash'
 import { WINDOW } from 'src/app/cdk/window'
+import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
+import { first } from 'rxjs'
 
 @Component({
   selector: 'app-settings-actions',
@@ -14,6 +16,7 @@ export class SettingsActionsComponent implements OnInit {
   titleDuplicatedRecord = $localize`:@@account.removeDuplicate:Remove a duplicate record`
   titleDeactivate = $localize`:@@account.deactivateYourOrcidAccount:Deactivate your ORCID account`
 
+  twoFactorState = false
   settingDownload = false
   settingDuplicatedRecord = false
   settingDeactivate = false

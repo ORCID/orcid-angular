@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -6,14 +6,15 @@ import {
 } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { of, throwError } from 'rxjs'
-import { switchMap, take } from 'rxjs/operators'
+import { switchMap, take, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { AccountActionsDuplicatedService } from 'src/app/core/account-actions-duplicated/account-actions-duplicated.service'
 import { UserSession } from 'src/app/types/session.local'
 
-import { DialogActionsDuplicatedMergedConfirmedComponent } from '../dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component'
-import { DialogActionsDuplicatedTwoFactorAuthComponent } from '../dialog-actions-duplicated-two-factor-auth/dialog-actions-duplicated-two-factor-auth.component'
-import { DialogActionsDuplicatedComponent } from '../dialog-actions-duplicated/dialog-actions-duplicated.component'
+import { AuthChallengeComponent } from '@orcid/registry-ui'
+import { AuthChallengeFormData } from '../../../types/common.endpoint'
+import { DuplicateRemoveEndpoint } from '../../../types/account-actions-duplicated'
+import { ErrorStateMatcherForTwoFactorFields } from '../../../sign-in/ErrorStateMatcherForTwoFactorFields'
 
 @Component({
   selector: 'app-settings-actions-duplicated',
@@ -23,6 +24,7 @@ import { DialogActionsDuplicatedComponent } from '../dialog-actions-duplicated/d
   standalone: false,
 })
 export class SettingsActionsDuplicatedComponent implements OnInit {
+  errorMatcher = new ErrorStateMatcherForTwoFactorFields()
   userSession: UserSession
   constructor(
     private _duplicateService: AccountActionsDuplicatedService,
@@ -33,79 +35,125 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()
   @Output() close = new EventEmitter<void>()
 
+  authChallengeLeadingText = $localize`:@@accountSettings.security.password.authChallengeLeadingText:for`
+  authChallengeTrailingText = $localize`:@@accountSettings.security.password.authChallengeDuplicationTrailingText:to continue removing a duplicate account`
+
   form: UntypedFormGroup
   errors: any[]
   showBadRecoveryCode = false
   showBadVerificationCode = false
   show2FA = true
+  authenticated = false
+  cancelAuthentication = false
+  success = false
+  orcid = ''
+  data: DuplicateRemoveEndpoint
 
   ngOnInit(): void {
     this.form = this._form.group({
       deprecatingOrcidOrEmail: ['', Validators.required],
-      deprecatingPassword: ['', Validators.required],
+      password: ['', Validators.required],
+      twoFactorCode: [null, [Validators.minLength(6), Validators.maxLength(6)]],
+      twoFactorRecoveryCode: [
+        null,
+        [Validators.minLength(10), Validators.maxLength(10)],
+      ],
     })
     this._user
       .getUserSession()
       .pipe(take(1))
       .subscribe((userSession) => {
         this.userSession = userSession
+        this.orcid = userSession.userInfo.EFFECTIVE_USER_ORCID
       })
+  }
+
+  openAuthChallenge(orcid: string) {
+    const dialogRef = this._dialog.open<AuthChallengeComponent>(
+      AuthChallengeComponent,
+      {
+        data: {
+          parentForm: this.form,
+          showPasswordField: false,
+          actionDescription: this.authChallengeLeadingText,
+          boldText: orcid,
+          trailingText: this.authChallengeTrailingText,
+        } as AuthChallengeFormData,
+      }
+    )
+
+    dialogRef.componentInstance.submitAttempt
+      .pipe(takeUntil(dialogRef.afterClosed()))
+      .subscribe(() => {
+        this._duplicateService.validateDeprecation(this.form.value).subscribe({
+          next: (response: any) => {
+            if (response.success) {
+              this.data = response
+              dialogRef.close(true)
+            } else {
+              dialogRef.componentInstance.loading = false
+              dialogRef.componentInstance.processBackendResponse(response)
+            }
+          },
+        })
+      })
+
+    dialogRef.afterClosed().subscribe((success) => {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
+      this.form.reset()
+      if (success) {
+        this.authenticated = true
+      } else {
+        this.cancelAuthentication = true
+      }
+    })
+  }
+
+  submitVerify() {
+    if (this.form.valid) {
+      this._duplicateService.validateDeprecation(this.form.value).subscribe({
+        next: (response: any) => {
+          this.errors = []
+          this.loading.next(false)
+          if (response.success) {
+            this.data = response
+            this.authenticated = true
+          } else {
+            if (response.errors?.length) {
+              this.errors = response.errors
+            } else if (response.twoFactorEnabled) {
+              this.openAuthChallenge(response.deprecatingOrcid)
+            }
+          }
+        },
+      })
+    }
   }
 
   onSubmit() {
     this.loading.next(true)
-    this._duplicateService
-      .deprecate(this.form.value)
-      .pipe(
-        switchMap((data) => {
+    this._duplicateService.confirmDeprecate(this.data).subscribe({
+      next: (data: DuplicateRemoveEndpoint) => {
+        this.loading.next(false)
+        this.authenticated = false
+
+        if (data.success) {
           this.errors = []
-          this.loading.next(false)
-          if (data.errors?.length) {
-            this.errors = data.errors
-            return throwError('error-backend-errors')
-          }
-          if (data.verificationCodeRequired) {
-            return this._dialog
-              .open(DialogActionsDuplicatedTwoFactorAuthComponent, { data })
-              .afterClosed()
-          } else {
-            return of(data)
-          }
-        }),
-        switchMap((data) => {
-          if (data) {
-            return this._dialog
-              .open(DialogActionsDuplicatedComponent, { data })
-              .afterClosed()
-          } else {
-            return throwError('error-2FA-fail')
-          }
-        }),
-        switchMap((data) => {
-          if (data) {
-            this.loading.next(true)
-            return this._duplicateService.confirmDeprecate(data)
-          } else {
-            return throwError('error-user-cancelled')
-          }
-        }),
-        switchMap((data) => {
-          this.loading.next(false)
-          return this._dialog
-            .open(DialogActionsDuplicatedMergedConfirmedComponent, {
-              data,
-            })
-            .afterClosed()
-        })
-      )
-      .subscribe(
-        (value) => {
-          this.loading.next(false)
-          this.close.next()
-        },
-        (error) => {
-          this.loading.next(false)
+          this.form.reset()
+          this.success = true
         }
-      )
+        if (data.errors?.length) {
+          this.errors = data.errors
+          this.cancelAuthentication = true
+        }
+      },
+      error: () => {
+        this.cancelAuthentication = true
+        this.form.reset()
+        this.loading.next(false)
+      },
+    })
   }
 }
