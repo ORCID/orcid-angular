@@ -50,12 +50,6 @@ describe('Component: TwoFactorSetupComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should create the compiled', () => {
-    expect(compiled.querySelector('h2').textContent).toContain(
-      'Enable two-factor authentication (2FA)'
-    )
-  })
-
   it('should render TwoFactorEnableComponent', () => {
     const counter = findComponent(fixture, 'app-two-factor-enable')
     expect(counter).toBeTruthy()

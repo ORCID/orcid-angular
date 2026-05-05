@@ -1,23 +1,29 @@
-div {
-  p {
-    margin-top: 4px;
-    margin-bottom: 24px;
-  }
-}
-
-div.knowledge-base {
-  margin-bottom: 24px;
-}
-
 textarea.text-code {
-  width: 100%;
-  line-height: 8px;
-  padding: 16px 8px 8px;
-  margin-bottom: 16px;
+  flex: 1;
+  line-height: 21px;
+  padding: 8px;
+  margin-bottom: 0;
+  resize: none;
 }
 
-.row .col {
+.text-code-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: var(--orcid-space-s, 8px);
+  margin-bottom: var(--orcid-space-m, 24px);
+}
+
+.textarea-copy-action {
+  flex: 0 0 40px;
+  border: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  border-radius: 2px;
+  background: #fff;
   padding: 0;
+  color: var(--orcid-color-brand-secondary-dark, #085c77);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 mat-error {
@@ -46,4 +52,71 @@ mat-error {
   display: flex;
   align-items: flex-start;
   margin-top: 16px;
+}
+
+.step-copy {
+  margin: 0;
+  font-size: var(--orcid-font-size-body-small, 14px);
+  line-height: 21px;
+  letter-spacing: 0.25px;
+}
+
+.qr-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 220px;
+  margin: var(--orcid-space-m, 24px) auto;
+  overflow: hidden;
+}
+
+.qr-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.3);
+  transform-origin: center;
+}
+
+.text-code-trigger {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  color: var(--orcid-color-brand-secondary-dark, #085c77);
+}
+
+.setup-code-row {
+  margin-bottom: var(--orcid-space-l, 32px);
+}
+
+.verification-section {
+  border-top: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  padding-top: var(--orcid-space-l, 32px);
+}
+
+.verification-section .step-copy {
+  margin-bottom: var(--orcid-space-base, 16px);
+}
+
+.mat-form-field-min {
+  width: 100%;
+}
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+mat-error,
+mat-error .mat-icon {
+  color: var(--orcid-color-state-warning-darkest, #b71c1c) !important;
+  font-size: 12px;
+}
+
+.error-message,
+.error-length {
+  font-size: 12px;
 }
