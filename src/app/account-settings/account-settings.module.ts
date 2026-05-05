@@ -24,9 +24,6 @@ import { TwoFactorAuthenticationFormModule } from '../cdk/two-factor-authenticat
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { SharedModule } from '../shared/shared.module'
 import { AccountSettingsRoutingModule } from './account-settings-routing.module'
-import { DialogActionsDuplicatedMergedConfirmedComponent } from './components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component'
-import { DialogActionsDuplicatedTwoFactorAuthComponent } from './components/dialog-actions-duplicated-two-factor-auth/dialog-actions-duplicated-two-factor-auth.component'
-import { DialogActionsDuplicatedComponent } from './components/dialog-actions-duplicated/dialog-actions-duplicated.component'
 import { DialogSecurityAlternateAccountDeleteComponent } from './components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component'
 import { SettingsActionsDeactivateComponent } from './components/settings-actions-deactivate/settings-actions-deactivate.component'
 import { SettingsActionsDownloadComponent } from './components/settings-actions-download/settings-actions-download.component'
@@ -68,9 +65,6 @@ import { ConfirmDeactivateAccountComponent } from './pages/confirm-deactivate-ac
     SettingsActionsDownloadComponent,
     SettingsActionsDeactivateComponent,
     SettingsActionsDuplicatedComponent,
-    DialogActionsDuplicatedComponent,
-    DialogActionsDuplicatedMergedConfirmedComponent,
-    DialogActionsDuplicatedTwoFactorAuthComponent,
     SettingsSharingComponent,
     SettingsSharingQrCodeComponent,
     SettingsSharingHtmlCodeComponent,
