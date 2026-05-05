@@ -15,6 +15,7 @@ import { RumJourneyEventService } from '../../../rum/service/customEvent.service
 import { AppEventName } from '../../../rum/app-event-names'
 
 declare const runtimeEnvironment: any
+declare const $localize: any
 
 export const clipboardTooltip: MatTooltipDefaultOptions = {
   showDelay: 500,
@@ -44,7 +45,8 @@ export class TwoFactorEnableComponent implements OnInit {
   twoFactorForm: UntypedFormGroup
   showTextCode = false
   loading = false
-  textCodeCopiedTooltip = 'Setup code has been copied to the clipboard'
+  textCodeCopiedTooltip =
+    $localize`:@@account.setupCodeClipboard:Setup code has been copied to the clipboard`
 
   constructor(
     private _twoFactorService: TwoFactorAuthenticationService,

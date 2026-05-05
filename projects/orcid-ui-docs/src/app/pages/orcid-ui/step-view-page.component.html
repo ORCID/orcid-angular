@@ -1,6 +1,8 @@
 <app-documentation-page
+  i18n-title="@@orcidUiDocs.stepView.title"
+  i18n-description="@@orcidUiDocs.stepView.description"
   title="Step View"
-  description="A reusable step shell for guided flows with title/subtitle, projected body content, optional footer projection, and primary/secondary action outputs."
+  description="A reusable step shell for guided flows with title/subtitle, projected body content, optional footer projection, and a primary action output."
 >
   <div controls>
     <p>Change these values to preview `orcid-step-view` behavior:</p>
@@ -20,11 +22,6 @@
         <input matInput [(ngModel)]="config.primaryLabel" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Secondary action label</mat-label>
-        <input matInput [(ngModel)]="config.secondaryLabel" />
-      </mat-form-field>
-
       <mat-checkbox [(ngModel)]="config.primaryDisabled">
         Disable primary action
       </mat-checkbox>
@@ -41,7 +38,6 @@
         [title]="config.title"
         [subtitle]="config.subtitle"
         [primaryLabel]="config.primaryLabel"
-        [secondaryLabel]="config.secondaryLabel"
         [primaryDisabled]="config.primaryDisabled"
         [fullWidthActions]="config.fullWidthActions"
       >
@@ -64,10 +60,8 @@
   [title]="title"
   [subtitle]="subtitle"
   [primaryLabel]="primaryLabel"
-  [secondaryLabel]="secondaryLabel"
   [primaryDisabled]="isPrimaryDisabled"
   (primaryAction)="onPrimary()"
-  (secondaryAction)="onSecondary()"
 &gt;
   &lt;div&gt;Step content goes here&lt;/div&gt;
 
@@ -85,7 +79,6 @@
         <code>subtitle</code>: Optional secondary line (for step count copy).
       </li>
       <li><code>primaryLabel</code>: Optional primary button label.</li>
-      <li><code>secondaryLabel</code>: Optional secondary button label.</li>
       <li><code>primaryDisabled</code>: Disables primary action.</li>
       <li>
         <code>fullWidthActions</code>: Makes action buttons stretch to width.
@@ -96,9 +89,6 @@
     <ul>
       <li>
         <code>primaryAction</code>: Emitted when primary action is clicked.
-      </li>
-      <li>
-        <code>secondaryAction</code>: Emitted when secondary action is clicked.
       </li>
     </ul>
 

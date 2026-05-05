@@ -28,9 +28,6 @@ export class OrcidStepViewComponent {
   /** Optional text for the primary action button. */
   @Input() primaryLabel = ''
 
-  /** Optional text for the secondary action button. */
-  @Input() secondaryLabel = ''
-
   /** Disables the primary action button when true. */
   @Input() primaryDisabled = false
 
@@ -38,5 +35,4 @@ export class OrcidStepViewComponent {
   @Input() fullWidthActions = true
 
   @Output() primaryAction = new EventEmitter<void>()
-  @Output() secondaryAction = new EventEmitter<void>()
 }

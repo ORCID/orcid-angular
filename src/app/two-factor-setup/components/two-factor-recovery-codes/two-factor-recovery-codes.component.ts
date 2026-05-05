@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, inject } from '@angular/core'
 import { ApplicationRoutes } from '../../../constants'
 import { WINDOW } from '../../../cdk/window'
 import {
@@ -9,6 +9,8 @@ import {
 import { Router } from '@angular/router'
 import { RumJourneyEventService } from '../../../rum/service/customEvent.service'
 import { AppEventName } from '../../../rum/app-event-names'
+
+declare const $localize: any
 
 @Component({
   selector: 'app-two-factor-recovery-codes',
@@ -27,9 +29,9 @@ export class TwoFactorRecoveryCodesComponent implements OnInit {
   hasDownloadedOrCopied = false
 
   tooltipClipboard = $localize`:@@account.clipboard:Backup codes have been copied to the clipboard`
+  private window = inject<Window>(WINDOW)
 
   constructor(
-    @Inject(WINDOW) private window: Window,
     private router: Router,
     private _observability: RumJourneyEventService
   ) {}

@@ -22,15 +22,6 @@
       [class.orcid-step-view__actions--full]="fullWidthActions"
     >
       <button
-        *ngIf="secondaryLabel"
-        mat-stroked-button
-        type="button"
-        (click)="secondaryAction.emit()"
-      >
-        {{ secondaryLabel }}
-      </button>
-
-      <button
         *ngIf="primaryLabel"
         mat-flat-button
         class="orcid-step-view__primary-action"
