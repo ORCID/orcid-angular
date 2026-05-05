@@ -17,6 +17,10 @@ export enum AppEventName {
   SignInFailure = 'sign_in_failure',
   /** HTTP/network failure on sign-in POST (distinct from application-level sign_in_failure). */
   SignInHttpError = 'sign_in_http_error',
+  TwoFactorSetupStep1Loaded = 'two_factor_setup_step1_loaded',
+  TwoFactorSetupStep2Loaded = 'two_factor_setup_step2_loaded',
+  TwoFactorSetupFinalButtonClicked = 'two_factor_setup_final_button_clicked',
+  TwoFactorSetupFinalCompleted = 'two_factor_setup_final_completed',
 
   // ─── Orcid registration journey events ─────────────────────────────────────
   StepASignInButtonClicked = 'step-a-sign-in-button-clicked',

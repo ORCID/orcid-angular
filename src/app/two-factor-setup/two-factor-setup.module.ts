@@ -19,12 +19,13 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { TwoFactorRecoveryCodesComponent } from './components/two-factor-recovery-codes/two-factor-recovery-codes.component'
 import { TwoFactorEnableComponent } from './components/two-factor-enable/two-factor-enable.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { OrcidStepViewComponent } from '@orcid/ui'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 @NgModule({
   declarations: [
     TwoFactorSetupComponent,
     TwoFactorRecoveryCodesComponent,
-    TwoFactorEnableComponent,
     TwoFactorEnableComponent,
   ],
   imports: [
@@ -45,6 +46,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     ClipboardModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule,
+    OrcidStepViewComponent,
   ],
 })
 export class TwoFactorSetupModule {}

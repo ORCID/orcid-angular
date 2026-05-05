@@ -1,71 +1,85 @@
 <form [formGroup]="twoFactorForm">
-  <div>
-    <b i18n="@@account.save2FACodes"> Save your 2FA recovery codes! </b>
-    <p i18n="@@account.recoveryCodes">
-      Recovery codes can be used to access your account when you can’t receive
-      2FA codes (for example, if you lose your device). Each code can only be
-      used once.
-    </p>
-    <a
-      class="underline"
-      i18n="@@account.learnMoreAbout2FA"
-      rel="noopener noreferrer"
-      target="_blank"
-      href="https://support.orcid.org/hc/en-us/articles/360006971673"
-    >
-      Learn more about 2FA recovery codes
-    </a>
-  </div>
-  <div class="row">
-    <textarea
-      class="backup-codes orc-font-body-small"
-      formControlName="backupCodes"
-      rows="14"
-    >
-    </textarea>
-  </div>
-  <div>
-    <p>
+  <orcid-step-view
+    i18n-title="@@account.enableTwoFactorAuth"
+    i18n-subtitle="@@account.step2RecoveryCodes"
+    i18n-primaryLabel="@@account.enableTwoFactorAuth"
+    title="Enable two-factor authentication"
+    subtitle="Step 2 of 2 - 2FA recovery codes"
+    primaryLabel="Enable two-factor authentication"
+    [primaryDisabled]="!canCompleteSetup"
+    (primaryAction)="completeSetup()"
+  >
+    <div class="copy-block">
+      <div class="copy-block__intro">
+        <h4 i18n="@@account.yourRecoveryCodesTitle">Your 2FA recovery codes</h4>
+        <p i18n="@@account.recoveryCodes">
+          Recovery codes can be used to access your account when you can’t
+          receive 2FA codes (for example, if you lose your device). Each code
+          can only be used once.
+        </p>
+      </div>
       <a
-        class="underline"
-        i18n="@@account.download2FARecovery"
+        class="learn-more-link"
+        i18n="@@account.learnMoreAbout2FA"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/360006971673"
+      >
+        Learn more about 2FA recovery codes
+        <mat-icon inline="true" aria-hidden="true">open_in_new</mat-icon>
+      </a>
+    </div>
+
+    <div class="backup-codes-wrapper">
+      <textarea
+        class="backup-codes orc-font-body-small"
+        formControlName="backupCodes"
+        rows="10"
+        readonly
+      >
+      </textarea>
+    </div>
+
+    <div class="actions-row">
+      <button
+        type="button"
+        class="link-action"
         (click)="downloadRecoveryCodes()"
       >
-        Download 2FA recovery codes
-      </a>
-      |
-      <a (click)="tooltip.toggle()" [cdkCopyToClipboard]="backupCodesClipboard">
-        <button
-          type="button"
-          i18n="@@account.copy2FARecovery"
-          matTooltip="{{ tooltipClipboard }}"
-          (mouseenter)="$event.stopImmediatePropagation()"
-          (mouseleave)="$event.stopImmediatePropagation()"
-          #tooltip="matTooltip"
-        >
+        <mat-icon inline="true" aria-hidden="true">file_download</mat-icon>
+        <span class="underline" i18n="@@account.download2FARecovery">
+          Download 2FA recovery codes
+        </span>
+      </button>
+      <div class="actions-divider" aria-hidden="true"></div>
+      <button
+        type="button"
+        class="link-action"
+        (click)="markCodesCopied(); tooltip.toggle()"
+        [cdkCopyToClipboard]="backupCodesClipboard"
+        matTooltip="{{ tooltipClipboard }}"
+        (mouseenter)="$event.stopImmediatePropagation()"
+        (mouseleave)="$event.stopImmediatePropagation()"
+        #tooltip="matTooltip"
+      >
+        <mat-icon inline="true" aria-hidden="true">content_copy</mat-icon>
+        <span class="underline" i18n="@@account.copy2FARecovery">
           Copy 2FA recovery codes
-        </button>
-      </a>
-    </p>
-    <p i18n="@@account.downloadOrCopy">
-      Download or copy these codes and store them in a safe spot, such as a
-      password manager.
-    </p>
-    <p i18n="@@account.onlyTimeDownload">
-      This is the only time that you can download or copy these codes and ORCID
-      does not store a backup. If you lose access to both your device and these
-      codes, you will need to contact us to restore your account access.
-    </p>
-  </div>
-  <div class="button-container">
-    <button
-      mat-raised-button
-      color="primary"
-      i18n="@@account.iGotMyRecovery"
-      id="two-factor"
-      [routerLink]="['/' + applicationRoutes.account]"
-    >
-      I’ve got my recovery codes - go back to account settings
-    </button>
-  </div>
+        </span>
+      </button>
+    </div>
+
+    <div class="confirm-block">
+      <h4 i18n="@@account.confirmRecoveryCodesTitle">
+        Confirm 2FA recovery codes
+      </h4>
+      <mat-checkbox
+        formControlName="confirmCodes"
+        i18n="@@account.confirmRecoveryCodesCheckbox"
+      >
+        I have downloaded or copied my 2FA recovery codes and stored them
+        somewhere safe
+      </mat-checkbox>
+    </div>
+  </orcid-step-view>
 </form>

@@ -15,3 +15,4 @@ export * from './lib/components/action-surface-container/action-surface-containe
 export * from './lib/components/panel/panel.component'
 export * from './lib/components/skeleton-placeholder/skeleton-placeholder.component'
 export * from './lib/components/modal/modal.component'
+export * from './lib/components/step-view/step-view.component'

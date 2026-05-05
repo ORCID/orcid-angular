@@ -121,7 +121,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">163,165</context>
+          <context context-type="linenumber">119,121</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -141,7 +141,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">136,138</context>
+          <context context-type="linenumber">88,90</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -161,7 +161,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">153,155</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -501,7 +501,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">25,27</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/client-secret-modal/client-secret-modal.component.html</context>
@@ -1495,7 +1495,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">16,18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
@@ -1563,71 +1563,119 @@
         <source>Add extra security to your ORCID account by enabling two-factor authentication (2FA).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">16,19</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">3,6</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.eachTimeYouSignIn" datatype="html" resname="account.eachTimeYouSignIn">
-        <source>Each time you sign in to ORCID you’ll be prompted to enter a six-digit code we send to your preferred 2FA authentication application.</source>
+      <trans-unit id="account.learnMoreAbout2FA" datatype="html" resname="account.learnMoreAbout2FA">
+        <source>
+           Learn more about two-factor authentication open_in_new
+          <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;>"/>
+          <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/>
+        </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">21,24</context>
+          <context context-type="linenumber">29,31</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">7,10</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.twoFactorIsCurrently" datatype="html" resname="account.twoFactorIsCurrently">
-        <source>Two-factor authentication is currently:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">27,29</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.on" datatype="html" resname="account.on">
-        <source>ON</source>
+      <trans-unit id="account.enableTwoFactorAuth" datatype="html" resname="account.enableTwoFactorAuth">
+        <source>Enable two-factor authentication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">39,41</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.off" datatype="html" resname="account.off">
-        <source>OFF</source>
+      <trans-unit id="account.signInWith2FA" datatype="html" resname="account.signInWith2FA">
+        <source>Sign in with 2FA</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.turnOnTwoFactor" datatype="html" resname="account.turnOnTwoFactor">
-        <source>Turn on two-factor authentication</source>
+      <trans-unit id="account.signInWith2FADescription" datatype="html" resname="account.signInWith2FADescription">
+        <source>Use your authentication app to generate a verification code whenever you sign in to ORCID.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">50,53</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.turnOffTwoFactor" datatype="html" resname="account.turnOffTwoFactor">
-        <source>Turn off two-factor authentication</source>
+      <trans-unit id="72c57d7e885637f487505d650acdcba80de094fe" datatype="html" resname="72c57d7e885637f487505d650acdcba80de094fe">
+        <source>Authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">45,47</context>
+          <context context-type="linenumber">63,65</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.accountRecovery" datatype="html" resname="account.accountRecovery">
+        <source>Account recovery</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.accountRecoveryDescription" datatype="html" resname="account.accountRecoveryDescription">
+        <source>Recover access to your ORCID account if you can't use your authentication app.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">75,78</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="3a89bdc837beba5deb23158e7d2963827735cd91" datatype="html" resname="3a89bdc837beba5deb23158e7d2963827735cd91">
+        <source>2FA recovery codes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">88,90</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.disable2FAWarning" datatype="html" resname="account.disable2FAWarning">
+        <source>You can disable two-factor authentication at any time. Turning 2FA off will reset any account recovery options you have set up.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">95,98</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.findOutMoreDisabling2FA" datatype="html" resname="account.findOutMoreDisabling2FA">
+        <source>
+           Find out more about disabling two-factor authentication open_in_new
+          <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;>"/>
+          <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">105,107</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.disableTwoFactorAuth" datatype="html" resname="account.disableTwoFactorAuth">
+        <source>Disable two-factor authentication</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">115,117</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -2672,6 +2720,22 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">227</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.on" datatype="html" resname="account.on">
+        <source>ON</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.off" datatype="html" resname="account.off">
+        <source>OFF</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -4987,7 +5051,7 @@
         <source>Add links to personal websites, department profiles, Wikipedia pages or social media accounts.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">38,41</context>
+          <context context-type="linenumber">39,42</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -4995,7 +5059,7 @@
         <source>My links</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">44,46</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -5003,11 +5067,11 @@
         <source>Must be less than 355 characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">104,106</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">208,210</context>
+          <context context-type="linenumber">209,211</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -5015,11 +5079,11 @@
         <source>An URL is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">132,134</context>
+          <context context-type="linenumber">133,135</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">236,238</context>
+          <context context-type="linenumber">237,239</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -5027,11 +5091,11 @@
         <source>Must be less than 2000 characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">143,145</context>
+          <context context-type="linenumber">144,146</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">247,249</context>
+          <context context-type="linenumber">248,250</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
@@ -5055,11 +5119,11 @@
         <source>Invalid URL</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">154,156</context>
+          <context context-type="linenumber">155,157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">258,260</context>
+          <context context-type="linenumber">259,261</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -5067,11 +5131,11 @@
         <source>URL can not be duplicated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">164,166</context>
+          <context context-type="linenumber">165,167</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">268,270</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -5079,7 +5143,7 @@
         <source>Add a link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">326,328</context>
+          <context context-type="linenumber">327,329</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -5087,7 +5151,7 @@
         <source>Add another link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">332,334</context>
+          <context context-type="linenumber">333,335</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -5143,7 +5207,7 @@
         <source>Link Title</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -5155,7 +5219,7 @@
         <source>Link URL</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -18754,10 +18818,6 @@
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
         <target>RL</target>
       </trans-unit>
       <trans-unit id="account.orcidID" datatype="html" resname="account.orcidID">
@@ -18924,115 +18984,91 @@
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.knowledgeBaseEnabling" datatype="html" resname="account.knowledgeBaseEnabling">
-        <source>See the Knowledge Base for step-by-step instructions on enabling 2FA</source>
+      <trans-unit id="account.step1AuthenticationApp" datatype="html" resname="account.step1AuthenticationApp">
+        <source>Step 1 of 2 - Authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.installTwoFactor" datatype="html" resname="account.installTwoFactor">
-        <source>1. Install a two-factor authentication app</source>
+      <trans-unit id="account.nextStepRecoveryCodes" datatype="html" resname="account.nextStepRecoveryCodes">
+        <source>Next step - 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">25,27</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.app2FARequired" datatype="html" resname="account.app2FARequired">
-        <source>A 2FA app is required to create the six-digit code you need to access your account each time you sign in. Most apps are for mobile devices; some are also available as desktop or web-based apps.</source>
+      <trans-unit id="account.scanQrCodeWithAuthApp" datatype="html" resname="account.scanQrCodeWithAuthApp">
+        <source>Scan the QR code with your authentication app.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">28,32</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.downloadAndInstall" datatype="html" resname="account.downloadAndInstall">
-        <source>Download and install a 2FA app, such as</source>
+      <trans-unit id="account.qrCodeAltText" datatype="html" resname="account.qrCodeAltText">
+        <source>qr code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.cantScanQrCodePrefix" datatype="html" resname="account.cantScanQrCodePrefix">
+        <source>Can't scan the QR code?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.getSetupCodeInstead" datatype="html" resname="account.getSetupCodeInstead">
+        <source>Get a setup code instead</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">34,36</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.knowledgeBaseForList" datatype="html" resname="account.knowledgeBaseForList">
-        <source>See the Knowledge Base for a list of apps we've tested ourselves</source>
+      <trans-unit id="account.copySetupCode" datatype="html" resname="account.copySetupCode">
+        <source>Copy setup code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.scantQr" datatype="html" resname="account.scantQr">
-        <source>2. Scan the QR code with your device</source>
+      <trans-unit id="account.enterVerificationCodeFromAuthApp" datatype="html" resname="account.enterVerificationCodeFromAuthApp">
+        <source>Enter the 6-digit verification code from your authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">62,64</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.openYour2FA" datatype="html" resname="account.openYour2FA">
-        <source>Open your 2FA app and scan the QR code image below.</source>
+      <trans-unit id="account.setupCodeClipboard" datatype="html" resname="account.setupCodeClipboard">
+        <source>Setup code has been copied to the clipboard</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">74,76</context>
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.ts</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.cantScan" datatype="html" resname="account.cantScan">
-        <source>Can't scan the barcode?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">79,81</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.getTextCode" datatype="html" resname="account.getTextCode">
-        <source>Get a text code</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.enterIntoYour" datatype="html" resname="account.enterIntoYour">
-        <source>and enter it into your 2FA app instead.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">89,91</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.enterSixDigit" datatype="html" resname="account.enterSixDigit">
-        <source>3. Enter the six-digit code from your authentication app</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">104,106</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.afterScanning" datatype="html" resname="account.afterScanning">
-        <source>After scanning the QR code or entering the text code your 2FA app will generate a six-digit code. Enter the code below.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">107,110</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.continue" datatype="html" resname="account.continue">
-        <source>Continue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">176,178</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.save2FACodes" datatype="html" resname="account.save2FACodes">
-        <source>Save your 2FA recovery codes!</source>
+      <trans-unit id="account.step2RecoveryCodes" datatype="html" resname="account.step2RecoveryCodes">
+        <source>Step 2 of 2 - 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.yourRecoveryCodesTitle" datatype="html" resname="account.yourRecoveryCodesTitle">
+        <source>Your 2FA recovery codes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19040,15 +19076,7 @@
         <source>Recovery codes can be used to access your account when you can’t receive 2FA codes (for example, if you lose your device). Each code can only be used once.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">4,8</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.learnMoreAbout2FA" datatype="html" resname="account.learnMoreAbout2FA">
-        <source>Learn more about 2FA recovery codes</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">15,19</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19056,7 +19084,7 @@
         <source>Download 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">33,35</context>
+          <context context-type="linenumber">50,52</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19064,31 +19092,23 @@
         <source>Copy 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">45,47</context>
+          <context context-type="linenumber">66,68</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.downloadOrCopy" datatype="html" resname="account.downloadOrCopy">
-        <source>Download or copy these codes and store them in a safe spot, such as a password manager.</source>
+      <trans-unit id="account.confirmRecoveryCodesTitle" datatype="html" resname="account.confirmRecoveryCodesTitle">
+        <source>Confirm 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">50,53</context>
+          <context context-type="linenumber">73,75</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="account.onlyTimeDownload" datatype="html" resname="account.onlyTimeDownload">
-        <source>This is the only time that you can download or copy these codes and ORCID does not store a backup. If you lose access to both your device and these codes, you will need to contact us to restore your account access.</source>
+      <trans-unit id="account.confirmRecoveryCodesCheckbox" datatype="html" resname="account.confirmRecoveryCodesCheckbox">
+        <source>I have downloaded or copied my 2FA recovery codes and stored them somewhere safe</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">54,58</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.iGotMyRecovery" datatype="html" resname="account.iGotMyRecovery">
-        <source>I’ve got my recovery codes - go back to account settings</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">67,69</context>
+          <context context-type="linenumber">79,82</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19096,15 +19116,7 @@
         <source>Backup codes have been copied to the clipboard</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.ts</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.enableTwoFactor" datatype="html" resname="account.enableTwoFactor">
-        <source>Enable two-factor authentication (2FA)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.html</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target>RL</target>
       </trans-unit>

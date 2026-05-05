@@ -1,0 +1,19 @@
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.example-container {
+  max-width: 680px;
+}
+
+.body-copy {
+  margin: 0;
+}
+
+.preview-footer {
+  display: flex;
+  justify-content: flex-end;
+}
