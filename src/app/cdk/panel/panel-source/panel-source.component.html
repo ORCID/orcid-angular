@@ -3,7 +3,7 @@
   [ngClass]="{
     'margin-top-2': !displayTheStack,
     'no-padding': disablePadding,
-    'max-height-31': disablePadding
+    'max-height-31': disablePadding && stackLength > 1 && !displayTheStack
   }"
   [deprecatedPadding]="!disablePadding"
 >
