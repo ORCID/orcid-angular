@@ -94,6 +94,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'step-view',
+    loadComponent: () =>
+      import('./pages/orcid-ui/step-view-page.component').then(
+        (m) => m.StepViewPageComponent
+      ),
+  },
+  {
     path: 'auth-challenge',
     loadComponent: () =>
       import('./pages/orcid-registry-ui/auth-challenge-page.component').then(
