@@ -345,124 +345,40 @@
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.deleteDuplicatedAccount" datatype="html" resname="account.deleteDuplicatedAccount">
-        <source>Duplicate record removed!</source>
+      <trans-unit id="account.deleteAlternateAccounts" datatype="html" resname="account.deleteAlternateAccounts">
+        <source>Delete alternate account</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component.html</context>
+          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.orcidRecord" datatype="html" resname="account.orcidRecord">
-        <source>ORCID record</source>
+      <trans-unit id="account.afterYou" datatype="html" resname="account.afterYou">
+        <source>After your</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.hasBeenRemovedDuplicated" datatype="html" resname="account.hasBeenRemovedDuplicated">
-        <source>has been removed and now refers to your current record,</source>
+      <trans-unit id="account.accountIsUnlinked" datatype="html" resname="account.accountIsUnlinked">
+        <source>account is unlinked, you will no longer be able to use it to access your ORCID record.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component.html</context>
-          <context context-type="linenumber">16,18</context>
+          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
+          <context context-type="linenumber">8,10</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="shared.ok" datatype="html" resname="shared.ok">
-        <source>Ok</source>
+      <trans-unit id="account.unlink" datatype="html" resname="account.unlink">
+        <source>Unlink account</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component.html</context>
-          <context context-type="linenumber">39,41</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.twoFactor" datatype="html" resname="account.twoFactor">
-        <source>Two factor authentication</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-two-factor-auth/dialog-actions-duplicated-two-factor-auth.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.removeDuplicateRecord" datatype="html" resname="account.removeDuplicateRecord">
-        <source>Remove duplicate record</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">3,4</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.warningDuplicated" datatype="html" resname="account.warningDuplicated">
-        <source>Warning! All information will be deleted from the duplicate record. Only the email addresses will be transferred to your main ORCID record. Removing a duplicate record cannot be undone.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">7,11</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.removeThisRecord" datatype="html" resname="account.removeThisRecord">
-        <source>Remove this record</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.nameIsPri" datatype="html" resname="account.nameIsPri">
-        <source>Name is private</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/account-trusted-individuals/account-trusted-individuals.service.ts</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/trusted-individuals/trusted-individuals.service.ts</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">136</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.ts</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.keepThisRecord" datatype="html" resname="account.keepThisRecord">
-        <source>Keep this record</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.removeDuplicatedRecord" datatype="html" resname="account.removeDuplicatedRecord">
-        <source>Remove duplicate record</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">87,89</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">105,107</context>
+          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
+          <context context-type="linenumber">20,22</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
       <trans-unit id="shared.cancel" datatype="html" resname="shared.cancel">
         <source>Cancel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">96,98</context>
-        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
           <context context-type="linenumber">29,31</context>
@@ -566,38 +482,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.html</context>
           <context context-type="linenumber">23,25</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.deleteAlternateAccounts" datatype="html" resname="account.deleteAlternateAccounts">
-        <source>Delete alternate account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.afterYou" datatype="html" resname="account.afterYou">
-        <source>After your</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.accountIsUnlinked" datatype="html" resname="account.accountIsUnlinked">
-        <source>account is unlinked, you will no longer be able to use it to access your ORCID record.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.unlink" datatype="html" resname="account.unlink">
-        <source>Unlink account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
-          <context context-type="linenumber">20,22</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -753,35 +637,57 @@
         </context-group>
         <target>LR</target>
       </trans-unit>
+      <trans-unit id="6a13547840017f52f0885c470e2dc356db5564c0" datatype="html" resname="6a13547840017f52f0885c470e2dc356db5564c0">
+        <source>Duplicate account removed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="8bfa3c64382dd44d98d3f6dc00ea04a03cc05029" datatype="html" resname="8bfa3c64382dd44d98d3f6dc00ea04a03cc05029">
+        <source>
+          
+      The record  has been deprecated.
+    
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/>
+          <x id="INTERPOLATION" equiv-text="{{ orcidToDeprecate }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&#xA;      >"/>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">12,15</context>
+        </context-group>
+        <note priority="1" from="description">orcidToDeprecate=accound id that was
+        deprecated</note>
+        <note priority="1" from="meaning">successful deprecation message</note>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="16d46754dfa10a96ec22e838b24111b5749d2a1f" datatype="html" resname="16d46754dfa10a96ec22e838b24111b5749d2a1f">
+        <source>Duplicate account not removed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="dac9c5e0353dd66c34f1cc389f2219f6e54a960e" datatype="html" resname="dac9c5e0353dd66c34f1cc389f2219f6e54a960e">
+        <source>We could not verify your ORCID account details. The duplicate record has not been deprecated.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">20,23</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
       <trans-unit id="account.ifYouHaveTwoorMore" datatype="html" resname="account.ifYouHaveTwoorMore">
         <source>If you have two or more ORCID records you can easily remove any unwanted duplicates.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">3,6</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.whatHappensWhenIRemove" datatype="html" resname="account.whatHappensWhenIRemove">
-        <source>What happens when I remove a duplicate record?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">9,11</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.deprecate1" datatype="html" resname="account.deprecate1">
-        <source>- The email addresses associated with the duplicate record are added to this record</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">16,18</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="account.deprecate2" datatype="html" resname="account.deprecate2">
-        <source>- All other information is deleted from the duplicate record</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">26,29</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -789,55 +695,160 @@
         <source>Learn more about removing duplicate records</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.ifYouHaveDuplicated" datatype="html" resname="account.ifYouHaveDuplicated">
-        <source>If you have more than one duplicate record repeat the process for each record.</source>
+      <trans-unit id="4339a3b297b1ef0a19216c832934cb714c0f7f0a" datatype="html" resname="4339a3b297b1ef0a19216c832934cb714c0f7f0a">
+        <source>What happens when you remove a duplicate ORCID account?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">40,43</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.removeADuplicatedRecord" datatype="html" resname="account.removeADuplicatedRecord">
-        <source>Remove a duplicate record</source>
+      <trans-unit id="33f78af23bb9b4e05ade04593540842237302a53" datatype="html" resname="33f78af23bb9b4e05ade04593540842237302a53">
+        <source>
+          
+      
+        The email addresses are transferred from the duplicate account to
+        
+      
+      
+        All information on the duplicate account is permanently deleted
+      
+    
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li class=&quot;list-disc!&quot;>"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/>
+          <x id="INTERPOLATION" equiv-text="{{ orcid }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong>"/>
+          <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li class=&quot;list-disc!&quot;>"/>
+          <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+        </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">45,53</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.duplicateRecordEmail" datatype="html" resname="account.duplicateRecordEmail">
-        <source>Duplicate record email or iD</source>
+      <trans-unit id="4f0ccc63d9a64b5a12398cfee2f6a404c043952e" datatype="html" resname="4f0ccc63d9a64b5a12398cfee2f6a404c043952e">
+        <source>You are removing this duplicate account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">53,54</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.duplicatedEmailHint" datatype="html" resname="account.duplicatedEmailHint">
-        <source>The email or iD of the record to be removed</source>
+      <trans-unit id="account.nameIsPri" datatype="html" resname="account.nameIsPri">
+        <source>Name is private</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">69,70</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/account-trusted-individuals/account-trusted-individuals.service.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/trusted-individuals/trusted-individuals.service.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.ts</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.duplicatedRecordPassword" datatype="html" resname="account.duplicatedRecordPassword">
-        <source>Duplicate record password</source>
+      <trans-unit id="5ffa0e663bebd1d604e2a1f4fa2355435936ce68" datatype="html" resname="5ffa0e663bebd1d604e2a1f4fa2355435936ce68">
+        <source>Email addresses to be transferred to this account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">75,76</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.duplicatedPasswordHint" datatype="html" resname="account.duplicatedPasswordHint">
-        <source>The password for the record to be removed</source>
+      <trans-unit id="3fcbccbeb1ee93d3b9449c2597cf6498c263f049" datatype="html" resname="3fcbccbeb1ee93d3b9449c2597cf6498c263f049">
+        <source>All other information on this account will be permanently deleted.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">91,92</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="5ddc00664985d268315dbfdfd02014d05b985ebe" datatype="html" resname="5ddc00664985d268315dbfdfd02014d05b985ebe">
+        <source>Remove duplicate account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">80,82</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="47d8609c2d3aab525bc42a5c49e0dcecfd812f95" datatype="html" resname="47d8609c2d3aab525bc42a5c49e0dcecfd812f95">
+        <source>Which account do you want to remove?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="4da41fce49dc133ad845d6451a435a605cd98b9d" datatype="html" resname="4da41fce49dc133ad845d6451a435a605cd98b9d">
+        <source>You will need to verify your sign in details for the duplicate account before it can be removed.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">87,90</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="175a805eff9105e2d7f0e7279c154cf4c52a4a3e" datatype="html" resname="175a805eff9105e2d7f0e7279c154cf4c52a4a3e">
+        <source>Duplicate account email address or ORCID iD</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="4a449584eb7e978a847967904e7e3dd35433144c" datatype="html" resname="4a449584eb7e978a847967904e7e3dd35433144c">
+        <source>Duplicate account password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="5cea26310a919b870979342686010aeed0848be0" datatype="html" resname="5cea26310a919b870979342686010aeed0848be0">
+        <source>Verify duplicate account details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">152,154</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.password.authChallengeLeadingText" datatype="html" resname="accountSettings.security.password.authChallengeLeadingText">
+        <source>for</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.password.authChallengeDuplicationTrailingText" datatype="html" resname="accountSettings.security.password.authChallengeDuplicationTrailingText">
+        <source>to continue removing a duplicate account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -853,7 +864,7 @@
         <source>Download your ORCID data</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions/settings-actions.component.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -861,7 +872,7 @@
         <source>Remove a duplicate record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions/settings-actions.component.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -869,7 +880,7 @@
         <source>Deactivate your ORCID account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions/settings-actions.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -17465,14 +17476,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
           <context context-type="linenumber">43</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="accountSettings.security.password.authChallengeLeadingText" datatype="html" resname="accountSettings.security.password.authChallengeLeadingText">
-        <source>for</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
-          <context context-type="linenumber">44</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
