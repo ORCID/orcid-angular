@@ -11,14 +11,6 @@
           'col l5 m6 s4': !platform.columns12
         }"
       >
-        <img
-          src="assets/vectors/orcid.logo.icon.svg"
-          class="orcid"
-          alt="orcid logo"
-        />
-        <h2 i18n="@@account.enableTwoFactor">
-          Enable two-factor authentication (2FA)
-        </h2>
         <app-two-factor-enable
           *ngIf="!showBackupCodes"
           (twoFactorEnabled)="twoFactorEnabled($event)"

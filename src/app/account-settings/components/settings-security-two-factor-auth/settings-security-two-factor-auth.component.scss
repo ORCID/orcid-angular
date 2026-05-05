@@ -1,0 +1,80 @@
+.two-factor-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.two-factor-panel--enabled {
+  gap: 24px;
+}
+
+.two-factor-panel__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.two-factor-panel__section h4 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.two-factor-panel__section p {
+  margin: 0;
+}
+
+.two-factor-panel__copy {
+  margin: 0;
+}
+
+.two-factor-panel__copy--intro {
+  margin-top: var(--orcid-space-l, 32px);
+}
+
+.two-factor-panel__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  text-decoration: underline;
+}
+
+.two-factor-panel__link--disable-info {
+  margin-top: calc(var(--orcid-space-s, 8px) - var(--orcid-space-m, 24px));
+  margin-bottom: calc(var(--orcid-space-l, 32px) - var(--orcid-space-m, 24px));
+}
+
+.two-factor-panel__section-description {
+  margin-bottom: var(--orcid-space-m, 24px) !important;
+}
+
+.two-factor-panel__requirement {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border-top: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  padding-top: 16px;
+}
+
+.two-factor-panel__requirement-title {
+  margin: 0;
+  font-weight: 700;
+}
+
+.two-factor-panel__requirement-icon {
+  color: var(--orcid-color-brand-primary-dark, #7faa26);
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+
+.two-factor-panel__disable-button {
+  align-self: flex-start;
+  background: var(--orcid-color-state-warning-dark, #d32f2f) !important;
+  border-color: var(--orcid-color-state-warning-dark, #d32f2f) !important;
+  color: #fff !important;
+}
