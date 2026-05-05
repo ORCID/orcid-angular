@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import {
+  FormGroupDirective,
+  NgForm,
   UntypedFormBuilder,
+  UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
@@ -15,16 +18,27 @@ import { AuthChallengeComponent } from '@orcid/registry-ui'
 import { AuthChallengeFormData } from '../../../types/common.endpoint'
 import { DuplicateRemoveEndpoint } from '../../../types/account-actions-duplicated'
 import { ErrorStateMatcherForTwoFactorFields } from '../../../sign-in/ErrorStateMatcherForTwoFactorFields'
-
+import { ErrorStateMatcher } from '@angular/material/core'
+export class NeverShowErrorMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: UntypedFormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    return false
+  }
+}
 @Component({
   selector: 'app-settings-actions-duplicated',
   templateUrl: './settings-actions-duplicated.component.html',
-  styleUrls: ['./settings-actions-duplicated.component.scss'],
+  styleUrls: [
+    './settings-actions-duplicated.component.scss',
+    './settings-actions-duplicated.component.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
   standalone: false,
 })
 export class SettingsActionsDuplicatedComponent implements OnInit {
-  errorMatcher = new ErrorStateMatcherForTwoFactorFields()
+  errorMatcher = new NeverShowErrorMatcher()
   userSession: UserSession
   constructor(
     private _duplicateService: AccountActionsDuplicatedService,
@@ -44,10 +58,13 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
   showBadVerificationCode = false
   show2FA = true
   authenticated = false
+  loadingVerify = false
   cancelAuthentication = false
   success = false
+  orcidToDeprecate = ''
   orcid = ''
   data: DuplicateRemoveEndpoint
+  baseUrl = runtimeEnvironment.BASE_URL
 
   ngOnInit(): void {
     this.form = this._form.group({
@@ -68,7 +85,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
       })
   }
 
-  openAuthChallenge(orcid: string) {
+  openAuthChallenge(orcidOrEmail: string) {
     const dialogRef = this._dialog.open<AuthChallengeComponent>(
       AuthChallengeComponent,
       {
@@ -76,7 +93,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
           parentForm: this.form,
           showPasswordField: false,
           actionDescription: this.authChallengeLeadingText,
-          boldText: orcid,
+          boldText: orcidOrEmail,
           trailingText: this.authChallengeTrailingText,
         } as AuthChallengeFormData,
       }
@@ -88,6 +105,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
         this._duplicateService.validateDeprecation(this.form.value).subscribe({
           next: (response: any) => {
             if (response.success) {
+              this.orcidToDeprecate = response.deprecatingOrcid
               this.data = response
               dialogRef.close(true)
             } else {
@@ -102,6 +120,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur()
       }
+      this.loadingVerify = false
       this.form.reset()
       if (success) {
         this.authenticated = true
@@ -113,20 +132,29 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
 
   submitVerify() {
     if (this.form.valid) {
+      this.cancelAuthentication = false
+      this.success = false
+      this.loadingVerify = true
       this._duplicateService.validateDeprecation(this.form.value).subscribe({
         next: (response: any) => {
           this.errors = []
           this.loading.next(false)
           if (response.success) {
+            this.loadingVerify = false
+            this.orcidToDeprecate = response.deprecatingOrcid
             this.data = response
             this.authenticated = true
           } else {
             if (response.errors?.length) {
+              this.loadingVerify = false
               this.errors = response.errors
             } else if (response.twoFactorEnabled) {
-              this.openAuthChallenge(response.deprecatingOrcid)
+              this.openAuthChallenge(response.deprecatingOrcidOrEmail)
             }
           }
+        },
+        error: () => {
+          this.loadingVerify = false
         },
       })
     }
@@ -144,7 +172,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
           this.form.reset()
           this.success = true
         }
-        if (data.errors?.length) {
+        if (data.errors?.length || !data.twoFactorToken) {
           this.errors = data.errors
           this.cancelAuthentication = true
         }

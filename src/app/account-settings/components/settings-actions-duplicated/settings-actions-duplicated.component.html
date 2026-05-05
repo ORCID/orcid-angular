@@ -1,4 +1,28 @@
 <app-settings-panels-data>
+  @if (success) {
+  <app-alert-message type="success" class="mb-4.5">
+    <h4 title i18n>Duplicate account removed</h4>
+    <p
+      content
+      class="mt-0.5"
+      i18n="
+        successful deprecation message|orcidToDeprecate=accound id that was
+        deprecated
+      "
+    >
+      <span>The record</span>&nbsp;<strong>{{ orcidToDeprecate }}</strong
+      >&nbsp;<span>has been deprecated.</span>
+    </p>
+  </app-alert-message>
+  } @if (cancelAuthentication) {
+  <app-alert-message type="warning" class="mb-4.5">
+    <h4 title i18n>Duplicate account not removed</h4>
+    <p content class="mt-0.5" i18n>
+      We could not verify your ORCID account details. The duplicate record has
+      not been deprecated.
+    </p>
+  </app-alert-message>
+  }
   <p i18n="@@account.ifYouHaveTwoorMore" class="mb-0 leading-5.25">
     If you have two or more ORCID records you can easily remove any unwanted
     duplicates.
@@ -16,97 +40,45 @@
   </p>
 
   <app-alert-message class="row mb-8">
-    <h3 title i18n>What happens when you remove a duplicate ORCID account?</h3>
+    <h4 title i18n>What happens when you remove a duplicate ORCID account?</h4>
 
     <ul content i18n>
-      <li class="list-disc">
+      <li class="list-disc!">
         The email addresses are transferred from the duplicate account to
         <strong>{{ orcid }}</strong>
       </li>
-      <li class="list-disc">
+      <li class="list-disc!">
         All information on the duplicate account is permanently deleted
       </li>
     </ul>
   </app-alert-message>
   @if (authenticated) {
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <ng-container *ngIf="data.deprecatingAccountName">
-      <strong
-        >{{ data.deprecatingAccountName }}
-        <a
-          id="cy-deprecating-orcid"
-          class="underline"
-          routerLink="/"
-          +
-          data.deprecatingOrcid
-          rel="noopener noreferrer"
-          target="_blank"
-          >({{ data.deprecatingOrcid }})</a
-        ></strong
-      >
-    </ng-container>
-    <ng-container *ngIf="!data.deprecatingAccountName">
-      <strong
-        ><ng-container i18n="@@account.nameIsPri">Name is private</ng-container>
-        <a
-          id="cy-deprecating-orcid"
-          class="underline"
-          routerLink="/"
-          +
-          data.deprecatingOrcid
-          rel="noopener noreferrer"
-          target="_blank"
-          >{{ data.deprecatingOrcid }}</a
-        ></strong
-      >
-    </ng-container>
-    <div *ngFor="let email of data.deprecatingEmails">{{ email }}</div>
+    <h3 i18n class="mb-2 mt-0">You are removing this duplicate account</h3>
+    @if (data.deprecatingAccountName) {
+    <p class="leading-5.25">{{ data.deprecatingAccountName }}</p>
+    } @else {
+    <p class="leading-5.25" i18n="@@account.nameIsPri">Name is private</p>
+    }
+    <p class="mb-6! leading-5.25">
+      https:{{ baseUrl + data.deprecatingOrcid }}
+    </p>
 
-    <h2 class="keep">
-      <strong class="orc-font-body-large" i18n="@@account.keepThisRecord"
-        >Keep this record</strong
-      >
-    </h2>
-
-    <ng-container *ngIf="data.primaryAccountName">
-      <strong
-        >{{ data.primaryAccountName }}
-        <a
-          id="cy-primary-orcid"
-          class="underline"
-          routerLink="/"
-          +
-          data.primaryOrcid
-          rel="noopener noreferrer"
-          target="_blank"
-          >({{ data.primaryOrcid }})</a
-        ></strong
-      >
-    </ng-container>
-    <ng-container *ngIf="!data.primaryAccountName">
-      <strong>
-        <a
-          id="cy-primary-orcid"
-          class="underline"
-          routerLink="/"
-          +
-          data.primaryOrcid
-          rel="noopener noreferrer"
-          target="_blank"
-          >{{ data.primaryOrcid }}</a
-        ></strong
-      >
-    </ng-container>
-    <div *ngFor="let email of data.primaryEmails">{{ email }}</div>
-
+    <strong i18n class="leading-5.25"
+      >Email addresses to be transferred to this account</strong
+    >&nbsp;<strong>({{ orcid }})</strong>
+    <div class="mb-6!">{{ data.deprecatingEmails?.join(', ') }}</div>
+    <em class="block mb-8!" i18n
+      >All other information on this account will be permanently deleted.</em
+    >
     <button
       mat-raised-button
       color="warn"
-      (click)="onSubmit()"
-      i18n="@@account.removeDuplicatedRecord"
+      type="submit"
+      i18n
       id="cy-remove-duplicate-record"
     >
-      Remove duplicate record
+      Remove duplicate account
     </button>
   </form>
   } @else {
@@ -129,7 +101,8 @@
     </label>
     <mat-form-field
       appearance="outline"
-      class="mat-form-field-min input-container"
+      subscriptSizing="dynamic"
+      class="mat-form-field-min input-container mb-6!"
     >
       <input
         formControlName="deprecatingOrcidOrEmail"
@@ -152,7 +125,8 @@
     </label>
     <mat-form-field
       appearance="outline"
-      class="mat-form-field-min input-container mb-8"
+      subscriptSizing="dynamic"
+      class="mat-form-field-min input-container mb-8!"
     >
       <input
         formControlName="password"
@@ -164,14 +138,16 @@
       />
     </mat-form-field>
 
-    <mat-error *ngFor="let error of errors">{{ error }}</mat-error>
+    <mat-error class="mb-4! -mt-2!" *ngFor="let error of errors">{{
+      error
+    }}</mat-error>
 
     <div class="button-container">
       <button
         mat-raised-button
         i18n
         type="submit"
-        [disabled]="form.invalid"
+        [disabled]="form.invalid || loadingVerify"
         class="cy-remove-duplicated-record"
       >
         Verify duplicate account details

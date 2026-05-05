@@ -10,5 +10,6 @@ export interface DuplicateRemoveEndpoint extends AuthChallenge {
   primaryEmails?: string[]
   primaryOrcid?: string
   primaryAccountName?: string
+  twoFactorToken?: string
   verificationCodeRequired?: boolean
 }
