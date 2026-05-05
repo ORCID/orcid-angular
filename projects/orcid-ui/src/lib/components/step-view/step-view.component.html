@@ -1,0 +1,45 @@
+<section class="orcid-step-view">
+  <header class="orcid-step-view__header">
+    <img
+      *ngIf="showHeaderIcon"
+      class="orcid-step-view__icon"
+      [src]="headerIconSrc"
+      [alt]="headerIconAlt"
+    />
+    <h2 class="orcid-step-view__title">{{ title }}</h2>
+    <p *ngIf="subtitle" class="orcid-step-view__subtitle">{{ subtitle }}</p>
+  </header>
+
+  <div class="orcid-step-view__body">
+    <ng-content></ng-content>
+  </div>
+
+  <footer class="orcid-step-view__footer">
+    <ng-content select="[orcidStepViewFooter]"></ng-content>
+    <div class="orcid-step-view__footer-divider"></div>
+    <div
+      class="orcid-step-view__actions"
+      [class.orcid-step-view__actions--full]="fullWidthActions"
+    >
+      <button
+        *ngIf="secondaryLabel"
+        mat-stroked-button
+        type="button"
+        (click)="secondaryAction.emit()"
+      >
+        {{ secondaryLabel }}
+      </button>
+
+      <button
+        *ngIf="primaryLabel"
+        mat-flat-button
+        class="orcid-step-view__primary-action"
+        type="button"
+        [disabled]="primaryDisabled"
+        (click)="primaryAction.emit()"
+      >
+        {{ primaryLabel }}
+      </button>
+    </div>
+  </footer>
+</section>

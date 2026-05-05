@@ -1,0 +1,113 @@
+<app-documentation-page
+  title="Step View"
+  description="A reusable step shell for guided flows with title/subtitle, projected body content, optional footer projection, and primary/secondary action outputs."
+>
+  <div controls>
+    <p>Change these values to preview `orcid-step-view` behavior:</p>
+    <div class="controls-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="config.title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Subtitle</mat-label>
+        <input matInput [(ngModel)]="config.subtitle" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Primary action label</mat-label>
+        <input matInput [(ngModel)]="config.primaryLabel" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Secondary action label</mat-label>
+        <input matInput [(ngModel)]="config.secondaryLabel" />
+      </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="config.primaryDisabled">
+        Disable primary action
+      </mat-checkbox>
+
+      <mat-checkbox [(ngModel)]="config.fullWidthActions">
+        Full width actions
+      </mat-checkbox>
+    </div>
+  </div>
+
+  <div examples>
+    <div class="example-container">
+      <orcid-step-view
+        [title]="config.title"
+        [subtitle]="config.subtitle"
+        [primaryLabel]="config.primaryLabel"
+        [secondaryLabel]="config.secondaryLabel"
+        [primaryDisabled]="config.primaryDisabled"
+        [fullWidthActions]="config.fullWidthActions"
+      >
+        <p class="orc-ui-font-body body-copy">
+          Use this projected body region for form controls and explanatory text.
+        </p>
+        <p class="orc-ui-font-body-small body-copy">
+          The parent flow controls step transitions and handles output events.
+        </p>
+
+        <div orcidStepViewFooter class="preview-footer">
+          <button mat-button type="button">Projected footer action</button>
+        </div>
+      </orcid-step-view>
+    </div>
+  </div>
+
+  <div usage>
+    <pre><code class="language-html">&lt;orcid-step-view
+  [title]="title"
+  [subtitle]="subtitle"
+  [primaryLabel]="primaryLabel"
+  [secondaryLabel]="secondaryLabel"
+  [primaryDisabled]="isPrimaryDisabled"
+  (primaryAction)="onPrimary()"
+  (secondaryAction)="onSecondary()"
+&gt;
+  &lt;div&gt;Step content goes here&lt;/div&gt;
+
+  &lt;div orcidStepViewFooter&gt;
+    &lt;button mat-button type="button"&gt;Extra footer control&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/orcid-step-view&gt;</code></pre>
+  </div>
+
+  <div inputs>
+    <h4>Inputs</h4>
+    <ul>
+      <li><code>title</code>: Main step title.</li>
+      <li>
+        <code>subtitle</code>: Optional secondary line (for step count copy).
+      </li>
+      <li><code>primaryLabel</code>: Optional primary button label.</li>
+      <li><code>secondaryLabel</code>: Optional secondary button label.</li>
+      <li><code>primaryDisabled</code>: Disables primary action.</li>
+      <li>
+        <code>fullWidthActions</code>: Makes action buttons stretch to width.
+      </li>
+    </ul>
+
+    <h4>Outputs</h4>
+    <ul>
+      <li>
+        <code>primaryAction</code>: Emitted when primary action is clicked.
+      </li>
+      <li>
+        <code>secondaryAction</code>: Emitted when secondary action is clicked.
+      </li>
+    </ul>
+
+    <h4>Slots</h4>
+    <ul>
+      <li>Default slot: Main step body content.</li>
+      <li>
+        <code>[orcidStepViewFooter]</code>: Optional projected footer area.
+      </li>
+    </ul>
+  </div>
+</app-documentation-page>
