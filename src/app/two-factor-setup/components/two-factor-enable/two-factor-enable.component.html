@@ -48,9 +48,7 @@
         type="button"
         class="textarea-copy-action"
         [cdkCopyToClipboard]="textCodeClipboard"
-        matTooltip="{{ textCodeCopiedTooltip }}"
-        #textCodeTooltip="matTooltip"
-        (click)="textCodeTooltip.toggle()"
+        matTooltip="{{ textCodeTooltip }}"
         i18n-aria-label="@@account.copySetupCode"
         aria-label="Copy setup code"
       >

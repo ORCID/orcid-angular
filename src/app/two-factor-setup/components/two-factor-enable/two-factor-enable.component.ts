@@ -45,7 +45,7 @@ export class TwoFactorEnableComponent implements OnInit {
   twoFactorForm: UntypedFormGroup
   showTextCode = false
   loading = false
-  textCodeCopiedTooltip = $localize`:@@account.setupCodeClipboard:Setup code has been copied to the clipboard`
+  textCodeTooltip = $localize`:@@account.copySetupCodeToClipboard:Copy setup code to clipboard`
 
   constructor(
     private _twoFactorService: TwoFactorAuthenticationService,

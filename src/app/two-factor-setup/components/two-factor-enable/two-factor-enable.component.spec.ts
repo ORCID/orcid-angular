@@ -118,7 +118,7 @@ describe('TwoFactorEnableComponent', () => {
   })
 
   it('should call register method when input is filled and submit is triggered', async () => {
-    component.twoFactorForm.get('verificationCode').setValue('123456')
+    component.twoFactorForm.get('verificationCode')?.setValue('123456')
 
     fixture.detectChanges()
     await fixture.whenStable()
@@ -131,5 +131,9 @@ describe('TwoFactorEnableComponent', () => {
     expect(
       component.twoFactorForm.get('verificationCode')?.hasError('invalidCode')
     ).toBeFalse()
+  })
+
+  it('should expose static setup code tooltip text', () => {
+    expect(component.textCodeTooltip).toBe('Copy setup code to clipboard')
   })
 })
