@@ -19076,7 +19076,7 @@
         <target>RL</target>
       </trans-unit>
       <trans-unit id="account.recoveryCodes" datatype="html" resname="account.recoveryCodes">
-        <source>Recovery codes can be used to access your account when you can’t receive 2FA codes (for example, if you lose your device). Each code can only be used once.</source>
+        <source>Recovery codes can be used to access your ORCID account when you aren’t able to use your authentication app. Each recovery code can only be used once.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">15,19</context>
