@@ -205,10 +205,12 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       this.loading.next(true)
 
       const isOauth = this.signInLocal.isOauth
-      const willNotNavigateOutOrcidAngular = isOauth
+      const shouldUpdateUserSessionAfterSignIn = !(
+        isOauth && this.isOauthAuthorizationTogglzEnable
+      )
       const $signIn = this._signIn.signIn(
         this.signInLocal,
-        willNotNavigateOutOrcidAngular,
+        shouldUpdateUserSessionAfterSignIn,
         true
       )
       this.authorizationFormSubmitted = true
