@@ -68,17 +68,19 @@ describe('TwoFactorRecoveryCodesComponent', () => {
 
   it('should only allow complete when copy/download and checkbox are done', () => {
     expect(component.canCompleteSetup).toBeFalse()
+    expect(component.twoFactorForm.get('confirmCodes')?.disabled).toBeTrue()
 
     component.markCodesCopied()
+    expect(component.twoFactorForm.get('confirmCodes')?.enabled).toBeTrue()
     expect(component.canCompleteSetup).toBeFalse()
 
-    component.twoFactorForm.get('confirmCodes').setValue(true)
+    component.twoFactorForm.get('confirmCodes')?.setValue(true)
     expect(component.canCompleteSetup).toBeTrue()
   })
 
   it('should record click and completion events when setup is completed', async () => {
     component.markCodesCopied()
-    component.twoFactorForm.get('confirmCodes').setValue(true)
+    component.twoFactorForm.get('confirmCodes')?.setValue(true)
 
     component.completeSetup()
     await fixture.whenStable()
@@ -90,5 +92,11 @@ describe('TwoFactorRecoveryCodesComponent', () => {
       AppEventName.TwoFactorSetupFinalCompleted
     )
     expect(router.navigate).toHaveBeenCalled()
+  })
+
+  it('should enable confirm checkbox after downloading recovery codes', () => {
+    expect(component.twoFactorForm.get('confirmCodes')?.disabled).toBeTrue()
+    component.downloadRecoveryCodes()
+    expect(component.twoFactorForm.get('confirmCodes')?.enabled).toBeTrue()
   })
 })
