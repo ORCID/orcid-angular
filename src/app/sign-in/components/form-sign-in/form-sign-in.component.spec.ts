@@ -94,10 +94,6 @@ describe('FormSignInComponent', () => {
 
     component.onSubmit()
 
-    expect(signInSpy).toHaveBeenCalledWith(
-      jasmine.anything(),
-      false,
-      true
-    )
+    expect(signInSpy).toHaveBeenCalledWith(jasmine.anything(), false, true)
   })
 })
