@@ -43,10 +43,9 @@ export class TwoFactorRecoveryCodesComponent implements OnInit {
 
     this.twoFactorForm = new UntypedFormGroup({
       backupCodes: new UntypedFormControl(this.backupCodes, []),
-      confirmCodes: new UntypedFormControl(
-        { value: false, disabled: true },
-        [Validators.requiredTrue]
-      ),
+      confirmCodes: new UntypedFormControl({ value: false, disabled: true }, [
+        Validators.requiredTrue,
+      ]),
     })
   }
 
