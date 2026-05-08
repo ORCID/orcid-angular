@@ -15,6 +15,10 @@
   .on {
     color: map-get($foreground, 'brand-primary-darkest');
   }
+
+  small {
+    color: mat.m2-get-contrast-color-from-palette($primary, 200);
+  }
 }
 
 @include settings-security-two-factor-auth-theme($orcid-app-theme);

@@ -11,7 +11,7 @@
       Two-factor authentication was not disabled
     </div>
   </app-alert-message>
-  } @if (!twoFactorState) {
+  } @if (!twoFactorInfo?.enabled) {
   <div class="two-factor-panel">
     <p
       class="two-factor-panel__copy two-factor-panel__copy--intro"
@@ -61,9 +61,14 @@
           check_circle
         </mat-icon>
         <div>
-          <p class="two-factor-panel__requirement-title" i18n>
+          <p class="two-factor-panel__requirement-title leading-5.25" i18n>
             Authentication app
           </p>
+          <small>
+            {{
+              twoFactorInfo?.twoFactorCreationDate | monthDayYearDateToString
+            }}
+          </small>
         </div>
       </div>
     </section>
@@ -86,9 +91,14 @@
           check_circle
         </mat-icon>
         <div>
-          <p class="two-factor-panel__requirement-title" i18n>
+          <p class="two-factor-panel__requirement-title leading-5.25" i18n>
             2FA recovery codes
           </p>
+          <small class="leading-4.5">
+            {{
+              twoFactorInfo?.recoveryCodeCreationDate | monthDayYearDateToString
+            }}
+          </small>
         </div>
       </div>
     </section>
