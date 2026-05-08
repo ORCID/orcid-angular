@@ -152,7 +152,6 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       websites: [],
       visibility: this.originalBackendWebsites.visibility,
     }
-    this._changeDetectorRef.detach()
     this.websites.reverse()
     this.websites
       .map((value) => value.putCode)
@@ -178,15 +177,15 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
-    if (this.isSavingWebsites) {
+    if (this.loadingWebsites || this.isSavingWebsites) {
       return
     }
 
+    this.isSavingWebsites = true
     this.websitesForm.markAllAsTouched()
     this.websitesForm.updateValueAndValidity()
 
     if (this.websitesForm.valid) {
-      this.isSavingWebsites = true
       this._recordWebsitesService
         .postWebsites(this.formToBackend(this.websitesForm))
         .pipe(
@@ -201,6 +200,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           () => {}
         )
     } else {
+      this.isSavingWebsites = false
       this._snackBar.showValidationError()
     }
   }
