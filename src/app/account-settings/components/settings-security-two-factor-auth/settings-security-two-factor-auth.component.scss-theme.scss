@@ -15,6 +15,16 @@
   .on {
     color: map-get($foreground, 'brand-primary-darkest');
   }
+
+  .two-factor-panel__enable-button {
+    color: $orcid-light-primary-text !important;
+    background: $brand-secondary-dark !important;
+  }
+
+  .two-factor-panel__disable-button {
+    background-color: $state-warning-darkest !important;
+    color: white !important;
+  }
 }
 
 @include settings-security-two-factor-auth-theme($orcid-app-theme);
