@@ -48,9 +48,7 @@
         type="button"
         class="textarea-copy-action"
         [cdkCopyToClipboard]="textCodeClipboard"
-        matTooltip="{{ textCodeCopiedTooltip }}"
-        #textCodeTooltip="matTooltip"
-        (click)="textCodeTooltip.toggle()"
+        matTooltip="{{ textCodeTooltip }}"
         i18n-aria-label="@@account.copySetupCode"
         aria-label="Copy setup code"
       >
@@ -86,7 +84,7 @@
             i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
             class="error-message"
           >
-            Authentication code is required
+            A verification code is required
           </p>
           <p class="error-length">
             {{ inputVerificationCode.value?.length || 0 }}/6
@@ -103,7 +101,7 @@
             i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
             class="error-message"
           >
-            Invalid authentication code length
+            Invalid verification code length
           </p>
           <p class="error-length">
             {{ inputVerificationCode.value?.length || 0 }}/6
@@ -117,7 +115,7 @@
             i18n="@@ngOrcid.signin.2fa.badVerificationCode"
             class="error-message"
           >
-            Invalid authentication code
+            Invalid verification code
           </p>
           <p class="error-length">
             {{ inputVerificationCode.value?.length || 0 }}/6

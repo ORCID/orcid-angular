@@ -1,3 +1,8 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
 .two-factor-panel {
   display: flex;
   flex-direction: column;
@@ -77,4 +82,9 @@
   background: var(--orcid-color-state-warning-dark, #d32f2f) !important;
   border-color: var(--orcid-color-state-warning-dark, #d32f2f) !important;
   color: #fff !important;
+}
+
+.two-factor-panel__enable-button {
+  align-self: flex-start;
+  width: auto;
 }

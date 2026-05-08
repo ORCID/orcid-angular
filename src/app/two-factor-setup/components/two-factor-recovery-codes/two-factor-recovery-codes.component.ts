@@ -43,7 +43,9 @@ export class TwoFactorRecoveryCodesComponent implements OnInit {
 
     this.twoFactorForm = new UntypedFormGroup({
       backupCodes: new UntypedFormControl(this.backupCodes, []),
-      confirmCodes: new UntypedFormControl(false, [Validators.requiredTrue]),
+      confirmCodes: new UntypedFormControl({ value: false, disabled: true }, [
+        Validators.requiredTrue,
+      ]),
     })
   }
 
@@ -55,11 +57,11 @@ export class TwoFactorRecoveryCodesComponent implements OnInit {
     this.window.document.body.appendChild(link)
     link.click()
     this.window.document.body.removeChild(link)
-    this.hasDownloadedOrCopied = true
+    this.enableConfirmation()
   }
 
   markCodesCopied() {
-    this.hasDownloadedOrCopied = true
+    this.enableConfirmation()
   }
 
   get canCompleteSetup() {
@@ -85,5 +87,10 @@ export class TwoFactorRecoveryCodesComponent implements OnInit {
         )
       }
     })
+  }
+
+  private enableConfirmation() {
+    this.hasDownloadedOrCopied = true
+    this.twoFactorForm.get('confirmCodes')?.enable({ emitEvent: false })
   }
 }

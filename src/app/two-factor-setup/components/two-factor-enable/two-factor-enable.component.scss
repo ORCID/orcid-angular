@@ -27,6 +27,9 @@ textarea.text-code {
 }
 
 mat-error {
+  display: block;
+  margin-top: var(--orcid-space-s, 8px);
+
   p {
     margin: 0 !important;
   }
