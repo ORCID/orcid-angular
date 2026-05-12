@@ -639,6 +639,7 @@
       </trans-unit>
       <trans-unit id="6a13547840017f52f0885c470e2dc356db5564c0" datatype="html" resname="6a13547840017f52f0885c470e2dc356db5564c0">
         <source>Duplicate account removed</source>
+        <target>Kopya hesap kaldırıldı</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">4</context>
@@ -657,6 +658,19 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </source>
+        <target>
+          
+      Kayıt  kullanımdan kaldırıldı.
+    
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="INTERPOLATION" equiv-text="{{ orcidToDeprecate }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong
+      &gt;"/>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">12,15</context>
@@ -667,6 +681,7 @@
       </trans-unit>
       <trans-unit id="16d46754dfa10a96ec22e838b24111b5749d2a1f" datatype="html" resname="16d46754dfa10a96ec22e838b24111b5749d2a1f">
         <source>Duplicate account not removed</source>
+        <target>Kopya hesap kaldırılmadı</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">19</context>
@@ -674,6 +689,7 @@
       </trans-unit>
       <trans-unit id="dac9c5e0353dd66c34f1cc389f2219f6e54a960e" datatype="html" resname="dac9c5e0353dd66c34f1cc389f2219f6e54a960e">
         <source>We could not verify your ORCID account details. The duplicate record has not been deprecated.</source>
+        <target>ORCID hesap ayrıntılarınızı doğrulayamadık. Kopya kayıt, kullanımdan kaldırılmadı.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">20,23</context>
@@ -697,6 +713,7 @@
       </trans-unit>
       <trans-unit id="4339a3b297b1ef0a19216c832934cb714c0f7f0a" datatype="html" resname="4339a3b297b1ef0a19216c832934cb714c0f7f0a">
         <source>What happens when you remove a duplicate ORCID account?</source>
+        <target>Kopya bir ORCID hesabını kaldırdığınızda ne olur?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">43</context>
@@ -721,6 +738,24 @@
           <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li class=&quot;list-disc!&quot;&gt;"/>
           <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/>
         </source>
+        <target>
+          
+      
+        Bu e-posta adresleri, kopya hesaptan şuraya aktarılır:
+        
+      
+      
+        Kopya hesaptaki tüm bilgiler kalıcı olarak silinir
+      
+    
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li class=&quot;list-disc!&quot;&gt;"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="INTERPOLATION" equiv-text="{{ orcid }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+          <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li class=&quot;list-disc!&quot;&gt;"/>
+          <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">45,53</context>
@@ -728,6 +763,7 @@
       </trans-unit>
       <trans-unit id="4f0ccc63d9a64b5a12398cfee2f6a404c043952e" datatype="html" resname="4f0ccc63d9a64b5a12398cfee2f6a404c043952e">
         <source>You are removing this duplicate account</source>
+        <target>Bu kopya hesabı kaldırıyorsunuz</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">57</context>
@@ -763,6 +799,7 @@
       </trans-unit>
       <trans-unit id="5ffa0e663bebd1d604e2a1f4fa2355435936ce68" datatype="html" resname="5ffa0e663bebd1d604e2a1f4fa2355435936ce68">
         <source>Email addresses to be transferred to this account</source>
+        <target>Bu hesaba aktarılacak e-posta adresleri</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">68</context>
@@ -770,6 +807,7 @@
       </trans-unit>
       <trans-unit id="3fcbccbeb1ee93d3b9449c2597cf6498c263f049" datatype="html" resname="3fcbccbeb1ee93d3b9449c2597cf6498c263f049">
         <source>All other information on this account will be permanently deleted.</source>
+        <target>Bu hesaptaki diğer tüm bilgiler kalıcı olarak silinecektir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">72</context>
@@ -777,6 +815,7 @@
       </trans-unit>
       <trans-unit id="5ddc00664985d268315dbfdfd02014d05b985ebe" datatype="html" resname="5ddc00664985d268315dbfdfd02014d05b985ebe">
         <source>Remove duplicate account</source>
+        <target>Kopya hesabı kaldır</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">80,82</context>
@@ -784,6 +823,7 @@
       </trans-unit>
       <trans-unit id="47d8609c2d3aab525bc42a5c49e0dcecfd812f95" datatype="html" resname="47d8609c2d3aab525bc42a5c49e0dcecfd812f95">
         <source>Which account do you want to remove?</source>
+        <target>Hangi hesabı kaldırmak istiyorsunuz?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">86</context>
@@ -791,6 +831,7 @@
       </trans-unit>
       <trans-unit id="4da41fce49dc133ad845d6451a435a605cd98b9d" datatype="html" resname="4da41fce49dc133ad845d6451a435a605cd98b9d">
         <source>You will need to verify your sign in details for the duplicate account before it can be removed.</source>
+        <target>Kopya hesabın kaldırılabilmesi için önce hesap için kullanılan oturum açma ayrıntılarınızı doğrulamanız gerekecek.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">87,90</context>
@@ -798,6 +839,7 @@
       </trans-unit>
       <trans-unit id="175a805eff9105e2d7f0e7279c154cf4c52a4a3e" datatype="html" resname="175a805eff9105e2d7f0e7279c154cf4c52a4a3e">
         <source>Duplicate account email address or ORCID iD</source>
+        <target>Kopya hesap e-posta adresi veya ORCID Kimliği</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">100</context>
@@ -805,6 +847,7 @@
       </trans-unit>
       <trans-unit id="4a449584eb7e978a847967904e7e3dd35433144c" datatype="html" resname="4a449584eb7e978a847967904e7e3dd35433144c">
         <source>Duplicate account password</source>
+        <target>Kopya hesap parolası</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">124</context>
@@ -812,6 +855,7 @@
       </trans-unit>
       <trans-unit id="5cea26310a919b870979342686010aeed0848be0" datatype="html" resname="5cea26310a919b870979342686010aeed0848be0">
         <source>Verify duplicate account details</source>
+        <target>Kopya hesap ayrıntılarını doğrulayın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">152,154</context>
@@ -831,6 +875,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeDuplicationTrailingText" datatype="html" resname="accountSettings.security.password.authChallengeDuplicationTrailingText">
         <source>to continue removing a duplicate account</source>
+        <target>ve kopya hesabı kaldırma işlemine devam edin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
           <context context-type="linenumber">53</context>
@@ -1588,6 +1633,11 @@
           <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
           <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
         </source>
+        <target>
+           İki faktörlü kimlik doğrulama hakkında daha fazla bilgi edinin open_in_new
+          <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
+          <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">29,31</context>
@@ -1599,6 +1649,7 @@
       </trans-unit>
       <trans-unit id="account.enableTwoFactorAuth" datatype="html" resname="account.enableTwoFactorAuth">
         <source>Enable two-factor authentication</source>
+        <target>İki faktörlü kimlik doğrulamayı etkinleştirin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">39,41</context>
@@ -1618,6 +1669,7 @@
       </trans-unit>
       <trans-unit id="account.signInWith2FA" datatype="html" resname="account.signInWith2FA">
         <source>Sign in with 2FA</source>
+        <target>İki faktörlü kimlik doğrulamayla oturum açın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">46</context>
@@ -1625,6 +1677,7 @@
       </trans-unit>
       <trans-unit id="account.signInWith2FADescription" datatype="html" resname="account.signInWith2FADescription">
         <source>Use your authentication app to generate a verification code whenever you sign in to ORCID.</source>
+        <target>ORCID&apos;de her oturum açtığınızda kimlik doğrulama uygulamanızı kullanarak bir doğrulama kodu oluşturun.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">50,53</context>
@@ -1632,6 +1685,7 @@
       </trans-unit>
       <trans-unit id="72c57d7e885637f487505d650acdcba80de094fe" datatype="html" resname="72c57d7e885637f487505d650acdcba80de094fe">
         <source>Authentication app</source>
+        <target>Kimlik doğrulama uygulaması</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">63,65</context>
@@ -1639,6 +1693,7 @@
       </trans-unit>
       <trans-unit id="account.accountRecovery" datatype="html" resname="account.accountRecovery">
         <source>Account recovery</source>
+        <target>Hesap kurtarma</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">71</context>
@@ -1646,6 +1701,7 @@
       </trans-unit>
       <trans-unit id="account.accountRecoveryDescription" datatype="html" resname="account.accountRecoveryDescription">
         <source>Recover access to your ORCID account if you can&apos;t use your authentication app.</source>
+        <target>Kimlik doğrulama uygulamanızı kullanamıyorsanız ORCID hesabınıza erişiminizi geri alın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">75,78</context>
@@ -1653,6 +1709,7 @@
       </trans-unit>
       <trans-unit id="3a89bdc837beba5deb23158e7d2963827735cd91" datatype="html" resname="3a89bdc837beba5deb23158e7d2963827735cd91">
         <source>2FA recovery codes</source>
+        <target>İki faktörlü kimlik doğrulama kurtarma kodları</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">88,90</context>
@@ -1660,6 +1717,7 @@
       </trans-unit>
       <trans-unit id="account.disable2FAWarning" datatype="html" resname="account.disable2FAWarning">
         <source>You can disable two-factor authentication at any time. Turning 2FA off will reset any account recovery options you have set up.</source>
+        <target>İki faktörlü kimlik doğrulamayı istediğiniz zaman devre dışı bırakabilirsiniz. İki faktörlü doğrulamayı devre dışı bırakmak, ayarladığınız tüm hesap kurtarma seçeneklerini sıfırlayacaktır.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">95,98</context>
@@ -1671,6 +1729,11 @@
           <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
           <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
         </source>
+        <target>
+           İki faktörlü kimlik doğrulamayı devre dışı bırakmak hakkında daha fazla bilgi edinin open_in_new
+          <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
+          <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">105,107</context>
@@ -1678,6 +1741,7 @@
       </trans-unit>
       <trans-unit id="account.disableTwoFactorAuth" datatype="html" resname="account.disableTwoFactorAuth">
         <source>Disable two-factor authentication</source>
+        <target>İki faktörlü kimlik doğrulamayı devre dışı bırakın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">115,117</context>
@@ -18982,6 +19046,7 @@
       </trans-unit>
       <trans-unit id="account.step1AuthenticationApp" datatype="html" resname="account.step1AuthenticationApp">
         <source>Step 1 of 2 - Authentication app</source>
+        <target>Adım 1/2 - Kimlik doğrulama uygulaması</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">7</context>
@@ -18989,6 +19054,7 @@
       </trans-unit>
       <trans-unit id="account.nextStepRecoveryCodes" datatype="html" resname="account.nextStepRecoveryCodes">
         <source>Next step - 2FA recovery codes</source>
+        <target>Sonraki adım - İki faktörlü kimlik doğrulama kurtarma kodları</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">8</context>
@@ -18996,6 +19062,7 @@
       </trans-unit>
       <trans-unit id="account.scanQrCodeWithAuthApp" datatype="html" resname="account.scanQrCodeWithAuthApp">
         <source>Scan the QR code with your authentication app.</source>
+        <target>QR kodunu kimlik doğrulama uygulamanızla tarayın.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">12,14</context>
@@ -19003,6 +19070,7 @@
       </trans-unit>
       <trans-unit id="account.qrCodeAltText" datatype="html" resname="account.qrCodeAltText">
         <source>qr code</source>
+        <target>qr kodu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">19</context>
@@ -19010,6 +19078,7 @@
       </trans-unit>
       <trans-unit id="account.cantScanQrCodePrefix" datatype="html" resname="account.cantScanQrCodePrefix">
         <source>Can&apos;t scan the QR code?</source>
+        <target>QR kodunu tarayamıyor musunuz?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">26,27</context>
@@ -19017,6 +19086,7 @@
       </trans-unit>
       <trans-unit id="account.getSetupCodeInstead" datatype="html" resname="account.getSetupCodeInstead">
         <source>Get a setup code instead</source>
+        <target>Onun yerine bir kurulum kodu alın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">34,36</context>
@@ -19024,6 +19094,7 @@
       </trans-unit>
       <trans-unit id="account.copySetupCode" datatype="html" resname="account.copySetupCode">
         <source>Copy setup code</source>
+        <target>Kurulum kodunu kopyalayın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">55</context>
@@ -19031,6 +19102,7 @@
       </trans-unit>
       <trans-unit id="account.enterVerificationCodeFromAuthApp" datatype="html" resname="account.enterVerificationCodeFromAuthApp">
         <source>Enter the 6-digit verification code from your authentication app</source>
+        <target>Kimlik doğrulama uygulamanızdan alacağınız 6 haneli doğrulama kodunu girin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">62,64</context>
@@ -19038,6 +19110,7 @@
       </trans-unit>
       <trans-unit id="account.setupCodeClipboard" datatype="html" resname="account.setupCodeClipboard">
         <source>Setup code has been copied to the clipboard</source>
+        <target>Kurulum kodu, panoya kopyalandı</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.ts</context>
           <context context-type="linenumber">48</context>
@@ -19045,6 +19118,7 @@
       </trans-unit>
       <trans-unit id="account.step2RecoveryCodes" datatype="html" resname="account.step2RecoveryCodes">
         <source>Step 2 of 2 - 2FA recovery codes</source>
+        <target>Adım 2/2 - İki faktörlü kimlik doğrulama kurtarma kodları</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">7</context>
@@ -19052,6 +19126,7 @@
       </trans-unit>
       <trans-unit id="account.yourRecoveryCodesTitle" datatype="html" resname="account.yourRecoveryCodesTitle">
         <source>Your 2FA recovery codes</source>
+        <target>İki faktörlü kimlik doğrulama kurtarma kodlarınız</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">14</context>
@@ -19083,6 +19158,7 @@
       </trans-unit>
       <trans-unit id="account.confirmRecoveryCodesTitle" datatype="html" resname="account.confirmRecoveryCodesTitle">
         <source>Confirm 2FA recovery codes</source>
+        <target>İki faktörlü kimlik doğrulama kurtarma kodlarını onaylayın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">73,75</context>
@@ -19090,6 +19166,7 @@
       </trans-unit>
       <trans-unit id="account.confirmRecoveryCodesCheckbox" datatype="html" resname="account.confirmRecoveryCodesCheckbox">
         <source>I have downloaded or copied my 2FA recovery codes and stored them somewhere safe</source>
+        <target>İki faktörlü kimlik doğrulama kurtarma kodlarımı indirdim veya kopyaladım, güvenli bir yere sakladım</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">79,82</context>
