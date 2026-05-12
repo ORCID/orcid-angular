@@ -1,0 +1,105 @@
+:host {
+  display: block;
+}
+
+.orcid-step-view {
+  background: var(--orcid-surface, #ffffff);
+  border: 1px solid var(--orcid-ui-background, #bdbdbd);
+  border-radius: var(--orcid-space-2, 8px);
+  padding: var(--orcid-space-xl, 64px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--orcid-space-8, 32px);
+}
+
+.orcid-step-view__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--orcid-space-2, 8px);
+  text-align: center;
+}
+
+.orcid-step-view__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  margin-bottom: var(--orcid-space-m, 24px);
+}
+
+.orcid-step-view__title {
+  margin: 0;
+  color: var(--orcid-color-text-dark-high, #000000);
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+  font-size: var(--orcid-font-size-heading-small, 24px);
+  font-weight: var(--orcid-font-weight-medium, 500);
+  line-height: 1.5;
+}
+
+.orcid-step-view__subtitle {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+  font-size: var(--orcid-font-size-body-small, 14px);
+  font-weight: var(--orcid-font-weight-regular, 400);
+  line-height: 1.5;
+}
+
+.orcid-step-view__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.orcid-step-view__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--orcid-space-8, 32px);
+}
+
+.orcid-step-view__footer-divider {
+  width: 100%;
+  border-top: 1px solid var(--orcid-color-border-subtle, #dddddd);
+}
+
+.orcid-step-view__actions {
+  display: flex;
+  gap: var(--orcid-space-4, 16px);
+  justify-content: center;
+}
+
+.orcid-step-view__actions--full {
+  width: 100%;
+}
+
+.orcid-step-view__actions--full button {
+  flex: 1 1 auto;
+}
+
+.orcid-step-view__primary-action {
+  background-color: var(--orcid-color-brand-secondary-dark, #085c77) !important;
+  color: var(--orcid-color-text-light-high, #ffffff) !important;
+}
+
+.orcid-step-view__primary-action[disabled] {
+  opacity: 0.6;
+}
+
+@media (max-width: 767px) {
+  .orcid-step-view {
+    padding: var(--orcid-space-4, 16px);
+    border: 0;
+    border-radius: 0;
+  }
+
+  .orcid-step-view__icon {
+    margin-bottom: var(--orcid-space-s, 8px);
+  }
+
+  .orcid-step-view__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .orcid-step-view__actions button {
+    width: 100%;
+  }
+}

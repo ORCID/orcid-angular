@@ -35,7 +35,7 @@ export class AccountActionsDuplicatedService {
       )
   }
 
-  deprecate(
+  validateDeprecation(
     account: DuplicateRemoveEndpoint
   ): Observable<DuplicateRemoveEndpoint> {
     return this._http

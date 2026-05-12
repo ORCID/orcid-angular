@@ -5,6 +5,7 @@ import {
   HttpParams,
 } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { of } from 'rxjs'
 import { catchError, map, switchMap, first, take } from 'rxjs/operators'
 
 import { getOrcidNumber, isValidOrcidFormat } from '../../constants'
@@ -113,6 +114,9 @@ export class SignInService {
               return this._errorHandler.handleError(error)
             }),
             switchMap((response) => {
+              if (!updateUserSession) {
+                return of(response)
+              }
               // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
               return this._userService
                 .refreshUserSession(forceSessionUpdate, true)

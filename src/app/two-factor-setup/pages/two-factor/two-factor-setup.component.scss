@@ -7,7 +7,6 @@
 main#main {
   flex-direction: column;
   margin-bottom: $spacing-large;
-  padding-inline-start: 16px;
 }
 
 .container {
@@ -15,9 +14,9 @@ main#main {
   padding: 0 !important;
 }
 
-.container,
-.mobile {
-  padding: 0 12px !important;
+app-two-factor-enable {
+  display: block;
+  margin-top: var(--orcid-space-l, 32px);
 }
 
 h2 {
@@ -30,4 +29,10 @@ img.orcid {
   height: 64px;
   width: 64px;
   margin: 64px auto 33px;
+}
+
+@media (max-width: 767px) {
+  app-two-factor-enable {
+    margin-top: 0;
+  }
 }

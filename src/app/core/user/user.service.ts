@@ -1,4 +1,9 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
+import {
+  HttpClient,
+  HttpContext,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import {
   BehaviorSubject,
@@ -56,7 +61,7 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { LOCAL_SESSION_UID } from 'src/app/constants'
 import { Params } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
-import { retryTransient } from '../http/retry-transient'
+import { retryTransient, SKIP_TRANSIENT_RETRY } from '../http/retry-transient'
 
 @Injectable({
   providedIn: 'root',
@@ -568,6 +573,7 @@ export class UserService {
       .post(`${runtimeEnvironment.API_WEB}switch-user`, '', {
         headers: this.headers,
         params: params,
+        context: new HttpContext().set(SKIP_TRANSIENT_RETRY, true),
       })
       .pipe(
         catchError((error) => {

@@ -155,7 +155,16 @@ export class RecordService {
         .getFeaturedWorks(options)
         .pipe(startWith(<Object>undefined)),
       this.getLastModifiedTime(options).pipe(startWith(<Object>undefined)),
-      this._userInfo.getUserInfo(options).pipe(startWith(<Object>undefined)),
+      this._userInfo.getUserInfo(options).pipe(
+        catchError((error) => {
+          // For public records, a failing auth userInfo request must not block page rendering.
+          if (options?.publicRecordId) {
+            return of(null)
+          }
+          return this._errorHandler.handleError(error)
+        }),
+        startWith(<Object>undefined)
+      ),
     ])
       .pipe(
         tap(

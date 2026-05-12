@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin settings-actions-duplicated($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .cy-remove-duplicated-record {
+    background: $brand-secondary-dark !important;
+    color: white !important;
+  }
+
+  .cy-remove-duplicated-record[disabled] {
+    opacity: 30%;
+  }
+
+  #cy-remove-duplicate-record {
+    background-color: $state-warning-darkest !important;
+    color: white !important;
+  }
+}
+
+@include settings-actions-duplicated($orcid-app-theme);

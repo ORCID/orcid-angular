@@ -86,6 +86,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   backendErrorsMatcher = new ErrorStateMatcherForPasswordField()
   emailVerified: boolean
   invalidVerifyUrl: boolean
+  private oauthRedirectTriggered = false
 
   placeholderUsername = $localize`:@@ngOrcid.signin.username:Email or 16-digit ORCID iD`
   placeholderPassword = $localize`:@@ngOrcid.signin.yourOrcidPassword:Your ORCID password`
@@ -204,10 +205,12 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       this.loading.next(true)
 
       const isOauth = this.signInLocal.isOauth
-      const willNotNavigateOutOrcidAngular = isOauth
+      const shouldUpdateUserSessionAfterSignIn = !(
+        isOauth && this.isOauthAuthorizationTogglzEnable
+      )
       const $signIn = this._signIn.signIn(
         this.signInLocal,
-        willNotNavigateOutOrcidAngular,
+        shouldUpdateUserSessionAfterSignIn,
         true
       )
       this.authorizationFormSubmitted = true
@@ -386,9 +389,15 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   oauthAuthorize(urlRedirect) {
+    if (this.oauthRedirectTriggered) {
+      return
+    }
+    this.oauthRedirectTriggered = true
+
     if (this.isOauthAuthorizationTogglzEnable) {
-      if (this._oauthUrlSessionManager.get()) {
-        urlRedirect = this._oauthUrlSessionManager.get()
+      const storedOauthRedirectUrl = this._oauthUrlSessionManager.get()
+      if (storedOauthRedirectUrl) {
+        urlRedirect = storedOauthRedirectUrl
         this._oauthUrlSessionManager.clear()
       }
       //add http if not present
