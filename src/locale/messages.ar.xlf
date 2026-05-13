@@ -1728,6 +1728,11 @@
           <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
           <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
         </source>
+        <target>
+           تعرف على المزيد حول تعطيل المصادقة الثنائية open_in_new
+          <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
+          <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">105,107</context>
@@ -19040,6 +19045,7 @@
       </trans-unit>
       <trans-unit id="account.step1AuthenticationApp" datatype="html" resname="account.step1AuthenticationApp">
         <source>Step 1 of 2 - Authentication app</source>
+        <target>الخطوة 1 من 2 - تطبيق المصادقة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">7</context>
@@ -19047,6 +19053,7 @@
       </trans-unit>
       <trans-unit id="account.nextStepRecoveryCodes" datatype="html" resname="account.nextStepRecoveryCodes">
         <source>Next step - 2FA recovery codes</source>
+        <target>الخطوة التالية - رموز استرداد المصادقة الثنائية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">8</context>
@@ -19054,6 +19061,7 @@
       </trans-unit>
       <trans-unit id="account.scanQrCodeWithAuthApp" datatype="html" resname="account.scanQrCodeWithAuthApp">
         <source>Scan the QR code with your authentication app.</source>
+        <target>امسح رمز الاستجابة السريعة ضوئيًا باستخدام تطبيق المصادقة الخاص بك.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">12,14</context>
@@ -19061,6 +19069,7 @@
       </trans-unit>
       <trans-unit id="account.qrCodeAltText" datatype="html" resname="account.qrCodeAltText">
         <source>qr code</source>
+        <target>رمز الاستجابة السريعة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">19</context>
@@ -19068,6 +19077,7 @@
       </trans-unit>
       <trans-unit id="account.cantScanQrCodePrefix" datatype="html" resname="account.cantScanQrCodePrefix">
         <source>Can&apos;t scan the QR code?</source>
+        <target>هل يتعذر عليك مسح رمز الاستجابة السريعة ضوئيًا؟</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">26,27</context>
@@ -19075,6 +19085,7 @@
       </trans-unit>
       <trans-unit id="account.getSetupCodeInstead" datatype="html" resname="account.getSetupCodeInstead">
         <source>Get a setup code instead</source>
+        <target>الحصول على رمز إعداد بدلاً من ذلك</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">34,36</context>
@@ -19090,6 +19101,7 @@
       </trans-unit>
       <trans-unit id="account.enterVerificationCodeFromAuthApp" datatype="html" resname="account.enterVerificationCodeFromAuthApp">
         <source>Enter the 6-digit verification code from your authentication app</source>
+        <target>أدخل رمز التحقق المكون من 6 أرقام من تطبيق المصادقة الخاص بك</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">62,64</context>
@@ -19097,6 +19109,7 @@
       </trans-unit>
       <trans-unit id="account.setupCodeClipboard" datatype="html" resname="account.setupCodeClipboard">
         <source>Setup code has been copied to the clipboard</source>
+        <target>تم نسخ رمز الإعداد إلى الحافظة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.ts</context>
           <context context-type="linenumber">48</context>
@@ -19112,6 +19125,7 @@
       </trans-unit>
       <trans-unit id="account.yourRecoveryCodesTitle" datatype="html" resname="account.yourRecoveryCodesTitle">
         <source>Your 2FA recovery codes</source>
+        <target>رموز استرداد المصادقة الثنائية الخاصة بك</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">14</context>
@@ -19151,6 +19165,7 @@
       </trans-unit>
       <trans-unit id="account.confirmRecoveryCodesCheckbox" datatype="html" resname="account.confirmRecoveryCodesCheckbox">
         <source>I have downloaded or copied my 2FA recovery codes and stored them somewhere safe</source>
+        <target>لقد قمت بتنزيل رموز استرداد المصادقة الثنائية أو نسخها، وحفظها في مكان آمن.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">79,82</context>
