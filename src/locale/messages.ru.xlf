@@ -855,7 +855,7 @@
       </trans-unit>
       <trans-unit id="5cea26310a919b870979342686010aeed0848be0" datatype="html" resname="5cea26310a919b870979342686010aeed0848be0">
         <source>Verify duplicate account details</source>
-        <target>Подтвердите данные повторной учетной записи,</target>
+        <target>Подтвердить данные повторной учетной записи</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">152,154</context>
@@ -875,7 +875,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeDuplicationTrailingText" datatype="html" resname="accountSettings.security.password.authChallengeDuplicationTrailingText">
         <source>to continue removing a duplicate account</source>
-        <target>чтобы продолжить ее удаление</target>
+        <target>чтобы продолжить удаление повторной учетной записи</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
           <context context-type="linenumber">53</context>
