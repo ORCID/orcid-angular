@@ -855,7 +855,7 @@
       </trans-unit>
       <trans-unit id="5cea26310a919b870979342686010aeed0848be0" datatype="html" resname="5cea26310a919b870979342686010aeed0848be0">
         <source>Verify duplicate account details</source>
-        <target>Verifique los datos de la cuenta duplicada</target>
+        <target>Verificar datos de cuenta duplicada</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
           <context context-type="linenumber">152,154</context>
@@ -1634,7 +1634,7 @@
           <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
         </source>
         <target>
-           Más información sobre la autenticación de dos factores (abrir en nueva ventana)
+           Más información sobre la autenticación de dos factores open_in_new
           <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
           <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
         </target>
@@ -1730,7 +1730,7 @@
           <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
         </source>
         <target>
-           Más información sobre cómo deshabilitar la autenticación de dos factores (abrir en nueva ventana)
+           Más información sobre cómo deshabilitar la autenticación de dos factores open_in_new
           <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
           <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
         </target>
