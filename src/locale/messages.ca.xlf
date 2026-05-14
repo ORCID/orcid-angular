@@ -117,7 +117,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">163,165</context>
+          <context context-type="linenumber">119,121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.verificationCodeRequired" datatype="html" resname="ngOrcid.signin.2fa.verificationCodeRequired">
@@ -137,7 +137,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">136,138</context>
+          <context context-type="linenumber">88,90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.badVerificationCodeLength" datatype="html" resname="ngOrcid.signin.2fa.badVerificationCodeLength">
@@ -157,7 +157,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">153,155</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryCode" datatype="html" resname="ngOrcid.signin.2fa.recoveryCode">
@@ -338,125 +338,41 @@
           <context context-type="linenumber">296,298</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.deleteDuplicatedAccount" datatype="html" resname="account.deleteDuplicatedAccount">
-        <source>Duplicate record removed!</source>
-        <target>Duplicate record removed!</target>
+      <trans-unit id="account.deleteAlternateAccounts" datatype="html" resname="account.deleteAlternateAccounts">
+        <source>Delete alternate account</source>
+        <target>Delete alternate account</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component.html</context>
+          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.orcidRecord" datatype="html" resname="account.orcidRecord">
-        <source>ORCID record</source>
-        <target>ORCID record</target>
+      <trans-unit id="account.afterYou" datatype="html" resname="account.afterYou">
+        <source>After your</source>
+        <target>After your</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.hasBeenRemovedDuplicated" datatype="html" resname="account.hasBeenRemovedDuplicated">
-        <source>has been removed and now refers to your current record,</source>
-        <target>has been removed and now refers to your current record,</target>
+      <trans-unit id="account.accountIsUnlinked" datatype="html" resname="account.accountIsUnlinked">
+        <source>account is unlinked, you will no longer be able to use it to access your ORCID record.</source>
+        <target>account is unlinked, you will no longer be able to use it to access your ORCID record.</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component.html</context>
-          <context context-type="linenumber">16,18</context>
+          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
+          <context context-type="linenumber">8,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="shared.ok" datatype="html" resname="shared.ok">
-        <source>Ok</source>
-        <target>Ok</target>
+      <trans-unit id="account.unlink" datatype="html" resname="account.unlink">
+        <source>Unlink account</source>
+        <target>Unlink account</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component.html</context>
-          <context context-type="linenumber">39,41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.twoFactor" datatype="html" resname="account.twoFactor">
-        <source>Two factor authentication</source>
-        <target>Two factor authentication</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated-two-factor-auth/dialog-actions-duplicated-two-factor-auth.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.removeDuplicateRecord" datatype="html" resname="account.removeDuplicateRecord">
-        <source>Remove duplicate record</source>
-        <target>Remove duplicate record</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">3,4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.warningDuplicated" datatype="html" resname="account.warningDuplicated">
-        <source>Warning! All information will be deleted from the duplicate record. Only the email addresses will be transferred to your main ORCID record. Removing a duplicate record cannot be undone.</source>
-        <target>Warning! All information will be deleted from the duplicate record. Only the email addresses will be transferred to your main ORCID record. Removing a duplicate record cannot be undone.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">7,11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.removeThisRecord" datatype="html" resname="account.removeThisRecord">
-        <source>Remove this record</source>
-        <target>Remove this record</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.nameIsPri" datatype="html" resname="account.nameIsPri">
-        <source>Name is private</source>
-        <target>Name is private</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/account-trusted-individuals/account-trusted-individuals.service.ts</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/trusted-individuals/trusted-individuals.service.ts</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">136</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.ts</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.keepThisRecord" datatype="html" resname="account.keepThisRecord">
-        <source>Keep this record</source>
-        <target>Keep this record</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.removeDuplicatedRecord" datatype="html" resname="account.removeDuplicatedRecord">
-        <source>Remove duplicate record</source>
-        <target>Remove duplicate record</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">87,89</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">105,107</context>
+          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
+          <context context-type="linenumber">20,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.cancel" datatype="html" resname="shared.cancel">
         <source>Cancel</source>
         <target>Cancel</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-actions-duplicated/dialog-actions-duplicated.component.html</context>
-          <context context-type="linenumber">96,98</context>
-        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
           <context context-type="linenumber">29,31</context>
@@ -495,7 +411,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">25,27</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/client-secret-modal/client-secret-modal.component.html</context>
@@ -560,38 +476,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.html</context>
           <context context-type="linenumber">23,25</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.deleteAlternateAccounts" datatype="html" resname="account.deleteAlternateAccounts">
-        <source>Delete alternate account</source>
-        <target>Delete alternate account</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.afterYou" datatype="html" resname="account.afterYou">
-        <source>After your</source>
-        <target>After your</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.accountIsUnlinked" datatype="html" resname="account.accountIsUnlinked">
-        <source>account is unlinked, you will no longer be able to use it to access your ORCID record.</source>
-        <target>account is unlinked, you will no longer be able to use it to access your ORCID record.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.unlink" datatype="html" resname="account.unlink">
-        <source>Unlink account</source>
-        <target>Unlink account</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component.html</context>
-          <context context-type="linenumber">20,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.ifYouNoLonger" datatype="html" resname="account.ifYouNoLonger">
@@ -746,36 +630,54 @@
           <context context-type="linenumber">31,33</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6a13547840017f52f0885c470e2dc356db5564c0" datatype="html" resname="6a13547840017f52f0885c470e2dc356db5564c0">
+        <source>Duplicate account removed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8bfa3c64382dd44d98d3f6dc00ea04a03cc05029" datatype="html" resname="8bfa3c64382dd44d98d3f6dc00ea04a03cc05029">
+        <source>
+          
+      The record  has been deprecated.
+    
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="INTERPOLATION" equiv-text="{{ orcidToDeprecate }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&#xA;      &gt;"/>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">12,15</context>
+        </context-group>
+        <note priority="1" from="description">orcidToDeprecate=accound id that was
+        deprecated</note>
+        <note priority="1" from="meaning">successful deprecation message</note>
+      </trans-unit>
+      <trans-unit id="16d46754dfa10a96ec22e838b24111b5749d2a1f" datatype="html" resname="16d46754dfa10a96ec22e838b24111b5749d2a1f">
+        <source>Duplicate account not removed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dac9c5e0353dd66c34f1cc389f2219f6e54a960e" datatype="html" resname="dac9c5e0353dd66c34f1cc389f2219f6e54a960e">
+        <source>We could not verify your ORCID account details. The duplicate record has not been deprecated.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">20,23</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="account.ifYouHaveTwoorMore" datatype="html" resname="account.ifYouHaveTwoorMore">
         <source>If you have two or more ORCID records you can easily remove any unwanted duplicates.</source>
         <target>If you have two or more ORCID records you can easily remove any unwanted duplicates.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">3,6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.whatHappensWhenIRemove" datatype="html" resname="account.whatHappensWhenIRemove">
-        <source>What happens when I remove a duplicate record?</source>
-        <target>What happens when I remove a duplicate record?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">9,11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.deprecate1" datatype="html" resname="account.deprecate1">
-        <source>- The email addresses associated with the duplicate record are added to this record</source>
-        <target>- The email addresses associated with the duplicate record are added to this record</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">16,18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.deprecate2" datatype="html" resname="account.deprecate2">
-        <source>- All other information is deleted from the duplicate record</source>
-        <target>- All other information is deleted from the duplicate record</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">26,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.learnMoreAboutRemovingDuplicates" datatype="html" resname="account.learnMoreAboutRemovingDuplicates">
@@ -783,55 +685,148 @@
         <target>Learn more about removing duplicate records</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.ifYouHaveDuplicated" datatype="html" resname="account.ifYouHaveDuplicated">
-        <source>If you have more than one duplicate record repeat the process for each record.</source>
-        <target>If you have more than one duplicate record repeat the process for each record.</target>
+      <trans-unit id="4339a3b297b1ef0a19216c832934cb714c0f7f0a" datatype="html" resname="4339a3b297b1ef0a19216c832934cb714c0f7f0a">
+        <source>What happens when you remove a duplicate ORCID account?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">40,43</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.removeADuplicatedRecord" datatype="html" resname="account.removeADuplicatedRecord">
-        <source>Remove a duplicate record</source>
-        <target>Remove a duplicate record</target>
+      <trans-unit id="33f78af23bb9b4e05ade04593540842237302a53" datatype="html" resname="33f78af23bb9b4e05ade04593540842237302a53">
+        <source>
+          
+      
+        The email addresses are transferred from the duplicate account to
+        
+      
+      
+        All information on the duplicate account is permanently deleted
+      
+    
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li class=&quot;list-disc!&quot;&gt;"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="INTERPOLATION" equiv-text="{{ orcid }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+          <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li class=&quot;list-disc!&quot;&gt;"/>
+          <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/>
+        </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">45,53</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.duplicateRecordEmail" datatype="html" resname="account.duplicateRecordEmail">
-        <source>Duplicate record email or iD</source>
-        <target>Duplicate record email or iD</target>
+      <trans-unit id="4f0ccc63d9a64b5a12398cfee2f6a404c043952e" datatype="html" resname="4f0ccc63d9a64b5a12398cfee2f6a404c043952e">
+        <source>You are removing this duplicate account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">53,54</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.duplicatedEmailHint" datatype="html" resname="account.duplicatedEmailHint">
-        <source>The email or iD of the record to be removed</source>
-        <target>The email or iD of the record to be removed</target>
+      <trans-unit id="account.nameIsPri" datatype="html" resname="account.nameIsPri">
+        <source>Name is private</source>
+        <target>Name is private</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">69,70</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/account-trusted-individuals/account-trusted-individuals.service.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/trusted-individuals/trusted-individuals.service.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.ts</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.duplicatedRecordPassword" datatype="html" resname="account.duplicatedRecordPassword">
-        <source>Duplicate record password</source>
-        <target>Duplicate record password</target>
+      <trans-unit id="5ffa0e663bebd1d604e2a1f4fa2355435936ce68" datatype="html" resname="5ffa0e663bebd1d604e2a1f4fa2355435936ce68">
+        <source>Email addresses to be transferred to this account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">75,76</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.duplicatedPasswordHint" datatype="html" resname="account.duplicatedPasswordHint">
-        <source>The password for the record to be removed</source>
-        <target>The password for the record to be removed</target>
+      <trans-unit id="3fcbccbeb1ee93d3b9449c2597cf6498c263f049" datatype="html" resname="3fcbccbeb1ee93d3b9449c2597cf6498c263f049">
+        <source>All other information on this account will be permanently deleted.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
-          <context context-type="linenumber">91,92</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5ddc00664985d268315dbfdfd02014d05b985ebe" datatype="html" resname="5ddc00664985d268315dbfdfd02014d05b985ebe">
+        <source>Remove duplicate account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">80,82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="47d8609c2d3aab525bc42a5c49e0dcecfd812f95" datatype="html" resname="47d8609c2d3aab525bc42a5c49e0dcecfd812f95">
+        <source>Which account do you want to remove?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4da41fce49dc133ad845d6451a435a605cd98b9d" datatype="html" resname="4da41fce49dc133ad845d6451a435a605cd98b9d">
+        <source>You will need to verify your sign in details for the duplicate account before it can be removed.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">87,90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="175a805eff9105e2d7f0e7279c154cf4c52a4a3e" datatype="html" resname="175a805eff9105e2d7f0e7279c154cf4c52a4a3e">
+        <source>Duplicate account email address or ORCID iD</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a449584eb7e978a847967904e7e3dd35433144c" datatype="html" resname="4a449584eb7e978a847967904e7e3dd35433144c">
+        <source>Duplicate account password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5cea26310a919b870979342686010aeed0848be0" datatype="html" resname="5cea26310a919b870979342686010aeed0848be0">
+        <source>Verify duplicate account details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.html</context>
+          <context context-type="linenumber">152,154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.password.authChallengeLeadingText" datatype="html" resname="accountSettings.security.password.authChallengeLeadingText">
+        <source>for</source>
+        <target>for</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.password.authChallengeDuplicationTrailingText" datatype="html" resname="accountSettings.security.password.authChallengeDuplicationTrailingText">
+        <source>to continue removing a duplicate account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.accountActions" datatype="html" resname="account.accountActions">
@@ -847,7 +842,7 @@
         <target>Download your ORCID data</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions/settings-actions.component.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.removeDuplicate" datatype="html" resname="account.removeDuplicate">
@@ -855,7 +850,7 @@
         <target>Remove a duplicate record</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions/settings-actions.component.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.deactivateYourOrcidAccount" datatype="html" resname="account.deactivateYourOrcidAccount">
@@ -863,7 +858,7 @@
         <target>Deactivate your ORCID account</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions/settings-actions.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -1484,7 +1479,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">16,18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
@@ -1548,71 +1543,108 @@
         <target>Add extra security to your ORCID account by enabling two-factor authentication (2FA).</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">16,19</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">3,6</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.eachTimeYouSignIn" datatype="html" resname="account.eachTimeYouSignIn">
-        <source>Each time you sign in to ORCID you’ll be prompted to enter a six-digit code we send to your preferred 2FA authentication application.</source>
-        <target>Each time you sign in to ORCID you’ll be prompted to enter a six-digit code we send to your preferred 2FA authentication application.</target>
+      <trans-unit id="account.learnMoreAbout2FA" datatype="html" resname="account.learnMoreAbout2FA">
+        <source>
+           Learn more about two-factor authentication open_in_new
+          <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
+          <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
+        </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">21,24</context>
+          <context context-type="linenumber">29,31</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">7,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.twoFactorIsCurrently" datatype="html" resname="account.twoFactorIsCurrently">
-        <source>Two-factor authentication is currently:</source>
-        <target>Two-factor authentication is currently:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">27,29</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.on" datatype="html" resname="account.on">
-        <source>ON</source>
-        <target>ON</target>
+      <trans-unit id="account.enableTwoFactorAuth" datatype="html" resname="account.enableTwoFactorAuth">
+        <source>Enable two-factor authentication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">39,41</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.off" datatype="html" resname="account.off">
-        <source>OFF</source>
-        <target>OFF</target>
+      <trans-unit id="account.signInWith2FA" datatype="html" resname="account.signInWith2FA">
+        <source>Sign in with 2FA</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.turnOnTwoFactor" datatype="html" resname="account.turnOnTwoFactor">
-        <source>Turn on two-factor authentication</source>
-        <target>Turn on two-factor authentication</target>
+      <trans-unit id="account.signInWith2FADescription" datatype="html" resname="account.signInWith2FADescription">
+        <source>Use your authentication app to generate a verification code whenever you sign in to ORCID.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">50,53</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.turnOffTwoFactor" datatype="html" resname="account.turnOffTwoFactor">
-        <source>Turn off two-factor authentication</source>
-        <target>Turn off two-factor authentication</target>
+      <trans-unit id="72c57d7e885637f487505d650acdcba80de094fe" datatype="html" resname="72c57d7e885637f487505d650acdcba80de094fe">
+        <source>Authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">45,47</context>
+          <context context-type="linenumber">63,65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.accountRecovery" datatype="html" resname="account.accountRecovery">
+        <source>Account recovery</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.accountRecoveryDescription" datatype="html" resname="account.accountRecoveryDescription">
+        <source>Recover access to your ORCID account if you can&apos;t use your authentication app.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">75,78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3a89bdc837beba5deb23158e7d2963827735cd91" datatype="html" resname="3a89bdc837beba5deb23158e7d2963827735cd91">
+        <source>2FA recovery codes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">88,90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.disable2FAWarning" datatype="html" resname="account.disable2FAWarning">
+        <source>You can disable two-factor authentication at any time. Turning 2FA off will reset any account recovery options you have set up.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">95,98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.findOutMoreDisabling2FA" datatype="html" resname="account.findOutMoreDisabling2FA">
+        <source>
+           Find out more about disabling two-factor authentication open_in_new
+          <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon inline=&quot;true&quot; aria-hidden=&quot;true&quot;&gt;"/>
+          <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">105,107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.disableTwoFactorAuth" datatype="html" resname="account.disableTwoFactorAuth">
+        <source>Disable two-factor authentication</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">115,117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="accountSettings.security.disable2FA" datatype="html" resname="accountSettings.security.disable2FA">
@@ -2656,6 +2688,22 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">227</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.on" datatype="html" resname="account.on">
+        <source>ON</source>
+        <target>ON</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.off" datatype="html" resname="account.off">
+        <source>OFF</source>
+        <target>OFF</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.accessGrantedDate" datatype="html" resname="account.accessGrantedDate">
@@ -4971,7 +5019,7 @@
         <target>Add links to personal websites, department profiles, Wikipedia pages or social media accounts.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">38,41</context>
+          <context context-type="linenumber">39,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.myLinks" datatype="html" resname="topBar.myLinks">
@@ -4979,7 +5027,7 @@
         <target>My links</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">44,46</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.urlMaxLength" datatype="html" resname="topBar.urlMaxLength">
@@ -4987,11 +5035,11 @@
         <target>Must be less than 355 characters</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">104,106</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">208,210</context>
+          <context context-type="linenumber">209,211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.requiredURL" datatype="html" resname="topBar.requiredURL">
@@ -4999,11 +5047,11 @@
         <target>An URL is required</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">132,134</context>
+          <context context-type="linenumber">133,135</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">236,238</context>
+          <context context-type="linenumber">237,239</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.maxLength.less_than_two_thousand" datatype="html" resname="shared.maxLength.less_than_two_thousand">
@@ -5011,11 +5059,11 @@
         <target>Must be less than 2000 characters</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">143,145</context>
+          <context context-type="linenumber">144,146</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">247,249</context>
+          <context context-type="linenumber">248,250</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
@@ -5039,11 +5087,11 @@
         <target>Invalid URL</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">154,156</context>
+          <context context-type="linenumber">155,157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">258,260</context>
+          <context context-type="linenumber">259,261</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.urlDuplicated" datatype="html" resname="topBar.urlDuplicated">
@@ -5051,11 +5099,11 @@
         <target>URL can not be duplicated</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">164,166</context>
+          <context context-type="linenumber">165,167</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">268,270</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.addLink" datatype="html" resname="topBar.addLink">
@@ -5063,7 +5111,7 @@
         <target>Add a link</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">326,328</context>
+          <context context-type="linenumber">327,329</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.addAnotherLink" datatype="html" resname="topBar.addAnotherLink">
@@ -5071,7 +5119,7 @@
         <target>Add another link</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
-          <context context-type="linenumber">332,334</context>
+          <context context-type="linenumber">333,335</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelWebsiteSave" datatype="html" resname="side-bar.ariaLabelWebsiteSave">
@@ -5127,7 +5175,7 @@
         <target>Link Title</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -5139,7 +5187,7 @@
         <target>Link URL</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -17333,14 +17381,6 @@
           <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="accountSettings.security.password.authChallengeLeadingText" datatype="html" resname="accountSettings.security.password.authChallengeLeadingText">
-        <source>for</source>
-        <target>for</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="layout.searchTitle" datatype="html" resname="layout.searchTitle">
         <source>Search</source>
         <target>Search</target>
@@ -18684,10 +18724,6 @@
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="account.orcidID" datatype="html" resname="account.orcidID">
         <source>ORCID iD</source>
@@ -18853,116 +18889,81 @@
           <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.knowledgeBaseEnabling" datatype="html" resname="account.knowledgeBaseEnabling">
-        <source>See the Knowledge Base for step-by-step instructions on enabling 2FA</source>
-        <target>See the Knowledge Base for step-by-step instructions on enabling 2FA</target>
+      <trans-unit id="account.step1AuthenticationApp" datatype="html" resname="account.step1AuthenticationApp">
+        <source>Step 1 of 2 - Authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.installTwoFactor" datatype="html" resname="account.installTwoFactor">
-        <source>1. Install a two-factor authentication app</source>
-        <target>1. Install a two-factor authentication app</target>
+      <trans-unit id="account.nextStepRecoveryCodes" datatype="html" resname="account.nextStepRecoveryCodes">
+        <source>Next step - 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">25,27</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.app2FARequired" datatype="html" resname="account.app2FARequired">
-        <source>A 2FA app is required to create the six-digit code you need to access your account each time you sign in. Most apps are for mobile devices; some are also available as desktop or web-based apps.</source>
-        <target>A 2FA app is required to create the six-digit code you need to access your account each time you sign in. Most apps are for mobile devices; some are also available as desktop or web-based apps.</target>
+      <trans-unit id="account.scanQrCodeWithAuthApp" datatype="html" resname="account.scanQrCodeWithAuthApp">
+        <source>Scan the QR code with your authentication app.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">28,32</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.downloadAndInstall" datatype="html" resname="account.downloadAndInstall">
-        <source>Download and install a 2FA app, such as</source>
-        <target>Download and install a 2FA app, such as</target>
+      <trans-unit id="account.qrCodeAltText" datatype="html" resname="account.qrCodeAltText">
+        <source>qr code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.cantScanQrCodePrefix" datatype="html" resname="account.cantScanQrCodePrefix">
+        <source>Can&apos;t scan the QR code?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.getSetupCodeInstead" datatype="html" resname="account.getSetupCodeInstead">
+        <source>Get a setup code instead</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">34,36</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.knowledgeBaseForList" datatype="html" resname="account.knowledgeBaseForList">
-        <source>See the Knowledge Base for a list of apps we&apos;ve tested ourselves</source>
-        <target>See the Knowledge Base for a list of apps we&apos;ve tested ourselves</target>
+      <trans-unit id="account.copySetupCode" datatype="html" resname="account.copySetupCode">
+        <source>Copy setup code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.scantQr" datatype="html" resname="account.scantQr">
-        <source>2. Scan the QR code with your device</source>
-        <target>2. Scan the QR code with your device</target>
+      <trans-unit id="account.enterVerificationCodeFromAuthApp" datatype="html" resname="account.enterVerificationCodeFromAuthApp">
+        <source>Enter the 6-digit verification code from your authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">62,64</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.openYour2FA" datatype="html" resname="account.openYour2FA">
-        <source>Open your 2FA app and scan the QR code image below.</source>
-        <target>Open your 2FA app and scan the QR code image below.</target>
+      <trans-unit id="account.setupCodeClipboard" datatype="html" resname="account.setupCodeClipboard">
+        <source>Setup code has been copied to the clipboard</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">74,76</context>
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.ts</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.cantScan" datatype="html" resname="account.cantScan">
-        <source>Can&apos;t scan the barcode?</source>
-        <target>Can&apos;t scan the barcode?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">79,81</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.getTextCode" datatype="html" resname="account.getTextCode">
-        <source>Get a text code</source>
-        <target>Get a text code</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.enterIntoYour" datatype="html" resname="account.enterIntoYour">
-        <source>and enter it into your 2FA app instead.</source>
-        <target>and enter it into your 2FA app instead.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">89,91</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.enterSixDigit" datatype="html" resname="account.enterSixDigit">
-        <source>3. Enter the six-digit code from your authentication app</source>
-        <target>3. Enter the six-digit code from your authentication app</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">104,106</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.afterScanning" datatype="html" resname="account.afterScanning">
-        <source>After scanning the QR code or entering the text code your 2FA app will generate a six-digit code. Enter the code below.</source>
-        <target>After scanning the QR code or entering the text code your 2FA app will generate a six-digit code. Enter the code below.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">107,110</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.continue" datatype="html" resname="account.continue">
-        <source>Continue</source>
-        <target>Continue</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">176,178</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.save2FACodes" datatype="html" resname="account.save2FACodes">
-        <source>Save your 2FA recovery codes!</source>
-        <target>Save your 2FA recovery codes!</target>
+      <trans-unit id="account.step2RecoveryCodes" datatype="html" resname="account.step2RecoveryCodes">
+        <source>Step 2 of 2 - 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.yourRecoveryCodesTitle" datatype="html" resname="account.yourRecoveryCodesTitle">
+        <source>Your 2FA recovery codes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.recoveryCodes" datatype="html" resname="account.recoveryCodes">
@@ -18970,15 +18971,7 @@
         <target>Recovery codes can be used to access your account when you can’t receive 2FA codes (for example, if you lose your device). Each code can only be used once.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">4,8</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.learnMoreAbout2FA" datatype="html" resname="account.learnMoreAbout2FA">
-        <source>Learn more about 2FA recovery codes</source>
-        <target>Learn more about 2FA recovery codes</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">15,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.download2FARecovery" datatype="html" resname="account.download2FARecovery">
@@ -18986,7 +18979,7 @@
         <target>Download 2FA recovery codes</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">33,35</context>
+          <context context-type="linenumber">50,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.copy2FARecovery" datatype="html" resname="account.copy2FARecovery">
@@ -18994,31 +18987,21 @@
         <target>Copy 2FA recovery codes</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">45,47</context>
+          <context context-type="linenumber">66,68</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.downloadOrCopy" datatype="html" resname="account.downloadOrCopy">
-        <source>Download or copy these codes and store them in a safe spot, such as a password manager.</source>
-        <target>Download or copy these codes and store them in a safe spot, such as a password manager.</target>
+      <trans-unit id="account.confirmRecoveryCodesTitle" datatype="html" resname="account.confirmRecoveryCodesTitle">
+        <source>Confirm 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">50,53</context>
+          <context context-type="linenumber">73,75</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.onlyTimeDownload" datatype="html" resname="account.onlyTimeDownload">
-        <source>This is the only time that you can download or copy these codes and ORCID does not store a backup. If you lose access to both your device and these codes, you will need to contact us to restore your account access.</source>
-        <target>This is the only time that you can download or copy these codes and ORCID does not store a backup. If you lose access to both your device and these codes, you will need to contact us to restore your account access.</target>
+      <trans-unit id="account.confirmRecoveryCodesCheckbox" datatype="html" resname="account.confirmRecoveryCodesCheckbox">
+        <source>I have downloaded or copied my 2FA recovery codes and stored them somewhere safe</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">54,58</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.iGotMyRecovery" datatype="html" resname="account.iGotMyRecovery">
-        <source>I’ve got my recovery codes - go back to account settings</source>
-        <target>I’ve got my recovery codes - go back to account settings</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">67,69</context>
+          <context context-type="linenumber">79,82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.clipboard" datatype="html" resname="account.clipboard">
@@ -19026,15 +19009,7 @@
         <target>Backup codes have been copied to the clipboard</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.ts</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.enableTwoFactor" datatype="html" resname="account.enableTwoFactor">
-        <source>Enable two-factor authentication (2FA)</source>
-        <target>Enable two-factor authentication (2FA)</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.html</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="twoFactor.title" datatype="html" resname="twoFactor.title">
