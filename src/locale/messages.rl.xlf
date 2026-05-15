@@ -121,7 +121,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">117,119</context>
+          <context context-type="linenumber">121,123</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -141,7 +141,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">86,88</context>
+          <context context-type="linenumber">90,92</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -161,7 +161,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">103,105</context>
+          <context context-type="linenumber">107,109</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1574,7 +1574,7 @@
         <source>Add extra security to your ORCID account by enabling two-factor authentication (2FA).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">19,22</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1586,11 +1586,11 @@
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">29,31</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">27,29</context>
+          <context context-type="linenumber">29,31</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1598,7 +1598,7 @@
         <source>Enable two-factor authentication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">40,42</context>
+          <context context-type="linenumber">37,39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
@@ -1618,7 +1618,7 @@
         <source>Sign in with 2FA</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1626,7 +1626,7 @@
         <source>Use your authentication app to generate a verification code whenever you sign in to ORCID.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">51,54</context>
+          <context context-type="linenumber">48,51</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1634,7 +1634,7 @@
         <source>Authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">61,63</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1642,7 +1642,7 @@
         <source>Account recovery</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1650,7 +1650,7 @@
         <source>Recover access to your ORCID account if you can't use your authentication app.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">76,79</context>
+          <context context-type="linenumber">73,76</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1658,7 +1658,7 @@
         <source>2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">89,91</context>
+          <context context-type="linenumber">86,88</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1666,7 +1666,7 @@
         <source>You can disable two-factor authentication at any time. Turning 2FA off will reset any account recovery options you have set up.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">96,99</context>
+          <context context-type="linenumber">93,96</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1678,7 +1678,7 @@
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">106,108</context>
+          <context context-type="linenumber">103,105</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1686,7 +1686,7 @@
         <source>Disable two-factor authentication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">116,118</context>
+          <context context-type="linenumber">113,115</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19047,7 +19047,7 @@
         <source>Enter the 6-digit verification code from your authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">60,62</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19071,7 +19071,7 @@
         <source>Your 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">14,16</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19079,7 +19079,7 @@
         <source>Recovery codes can be used to access your ORCID account when you aren’t able to use your authentication app. Each recovery code can only be used once.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">15,19</context>
+          <context context-type="linenumber">17,21</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19087,7 +19087,7 @@
         <source>Download 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">50,52</context>
+          <context context-type="linenumber">53,55</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19095,7 +19095,7 @@
         <source>Copy 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">66,68</context>
+          <context context-type="linenumber">69,71</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19103,7 +19103,7 @@
         <source>Confirm 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">73,75</context>
+          <context context-type="linenumber">76,78</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -19111,7 +19111,7 @@
         <source>I have downloaded or copied my 2FA recovery codes and stored them somewhere safe</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
-          <context context-type="linenumber">79,82</context>
+          <context context-type="linenumber">82,85</context>
         </context-group>
         <target>RL</target>
       </trans-unit>

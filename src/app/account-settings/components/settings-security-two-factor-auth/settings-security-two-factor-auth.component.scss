@@ -6,7 +6,7 @@
 .two-factor-panel {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }
 
 .two-factor-panel--enabled {
@@ -33,10 +33,6 @@
 
 .two-factor-panel__copy {
   margin: 0;
-}
-
-.two-factor-panel__copy--intro {
-  margin-top: var(--orcid-space-l, 32px);
 }
 
 .two-factor-panel__link {

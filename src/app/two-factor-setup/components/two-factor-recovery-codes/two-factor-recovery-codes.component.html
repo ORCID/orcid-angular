@@ -11,7 +11,9 @@
   >
     <div class="copy-block">
       <div class="copy-block__intro">
-        <h4 i18n="@@account.yourRecoveryCodesTitle">Your 2FA recovery codes</h4>
+        <h4 id="backup-codes-label" i18n="@@account.yourRecoveryCodesTitle">
+          Your 2FA recovery codes
+        </h4>
         <p i18n="@@account.recoveryCodes">
           Recovery codes can be used to access your ORCID account when you
           aren’t able to use your authentication app. Each recovery code can
@@ -36,6 +38,7 @@
         formControlName="backupCodes"
         rows="10"
         readonly
+        aria-labelledby="backup-codes-label"
       >
       </textarea>
     </div>
