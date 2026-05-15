@@ -16,6 +16,10 @@
     color: map-get($foreground, 'brand-primary-darkest');
   }
 
+  small {
+    color: mat.m2-get-contrast-color-from-palette($primary, 200);
+  }
+  
   .two-factor-panel__enable-button {
     color: $orcid-light-primary-text !important;
     background: $brand-secondary-dark !important;
