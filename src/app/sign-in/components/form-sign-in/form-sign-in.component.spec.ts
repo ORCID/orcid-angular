@@ -16,10 +16,13 @@ import { OauthService } from '../../../core/oauth/oauth.service'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
+import { Router } from '@angular/router'
+import { of } from 'rxjs'
 
 describe('FormSignInComponent', () => {
   let component: FormSignInComponent
   let fixture: ComponentFixture<FormSignInComponent>
+  let router: Router
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -48,10 +51,49 @@ describe('FormSignInComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FormSignInComponent)
     component = fixture.componentInstance
+    router = TestBed.inject(Router)
     fixture.detectChanges()
   })
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('only triggers oauth redirect once per successful flow', () => {
+    component.isOauthAuthorizationTogglzEnable = false
+    component.platform = { social: false, institutional: false } as any
+    component.signInLocal = { params: {} } as any
+    const routerNavigateSpy = spyOn(router, 'navigate').and.returnValue(
+      Promise.resolve(true)
+    )
+
+    component.oauthAuthorize('https://qa.orcid.org/oauth/authorize')
+    component.oauthAuthorize('https://qa.orcid.org/oauth/authorize')
+
+    expect(routerNavigateSpy).toHaveBeenCalledTimes(1)
+  })
+
+  it('skips post-login session refresh in oauth2 signin flow', () => {
+    component.isOauthAuthorizationTogglzEnable = true
+    component.signInLocal = { isOauth: true, type: 'regular' as any } as any
+    component.authorizationForm.patchValue({
+      username: 'test@example.org',
+      password: 'secret',
+    })
+    spyOn(component as any, 'handleOauthLogin').and.stub()
+
+    const signInSpy = spyOn(
+      (component as any)._signIn,
+      'signIn'
+    ).and.returnValue(
+      of({
+        success: true,
+        url: 'https://qa.orcid.org/oauth/authorize',
+      } as any)
+    )
+
+    component.onSubmit()
+
+    expect(signInSpy).toHaveBeenCalledWith(jasmine.anything(), false, true)
   })
 })

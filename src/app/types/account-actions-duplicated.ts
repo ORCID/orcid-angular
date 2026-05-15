@@ -1,4 +1,6 @@
-export interface DuplicateRemoveEndpoint {
+import { AuthChallenge } from './common.endpoint'
+
+export interface DuplicateRemoveEndpoint extends AuthChallenge {
   deprecatingEmails?: string[]
   deprecatingPassword: string
   errors?: any[]
@@ -8,5 +10,6 @@ export interface DuplicateRemoveEndpoint {
   primaryEmails?: string[]
   primaryOrcid?: string
   primaryAccountName?: string
+  twoFactorToken?: string
   verificationCodeRequired?: boolean
 }

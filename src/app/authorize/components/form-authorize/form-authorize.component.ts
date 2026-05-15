@@ -345,12 +345,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   }
 
   changeAccount(delegator: Delegator) {
-    this._observability.recordSimpleEvent(
-      AppEventName.OauthAuthorizeSwitchDelegatedAccount,
-      {
-        approval_date: delegator?.approvalDate,
-      }
-    )
     this.loadingTrustedIndividuals = true
     this.loadingUserInfo = true
 

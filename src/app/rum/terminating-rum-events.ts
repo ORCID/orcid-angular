@@ -27,6 +27,7 @@ export const TERMINATING_SIMPLE_EVENT_NAMES: ReadonlySet<string> = new Set([
   AppEventName.SignInGuardRedirectToRegister,
   AppEventName.SignInOauthInvalidGrantLegacy,
   AppEventName.TwoFactorSignInGuardRedirectToMyOrcid,
+  AppEventName.TwoFactorSetupFinalCompleted,
   AppEventName.RegisterGuardRedirectToAuthorize,
   AppEventName.RegisterPipelineError,
   AppEventName.OauthAuthorizationValidationFailed,

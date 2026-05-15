@@ -11,40 +11,118 @@
       Two-factor authentication was not disabled
     </div>
   </app-alert-message>
-  }
-  <p>
-    <ng-container i18n="@@account.addExtraSecurity">
+  } @if (!twoFactorInfo?.enabled) {
+  <div class="two-factor-panel">
+    <p class="two-factor-panel__copy" i18n="@@account.addExtraSecurity">
       Add extra security to your ORCID account by enabling two-factor
       authentication (2FA).
-    </ng-container>
-    <br />
-    <ng-container i18n="@@account.eachTimeYouSignIn">
-      Each time you sign in to ORCID you’ll be prompted to enter a six-digit
-      code we send to your preferred 2FA authentication application.
-    </ng-container>
-  </p>
-  <p>
-    <b class="orc-font-body" i18n="@@account.twoFactorIsCurrently">
-      Two-factor authentication is currently:
-    </b>
-  </p>
-  <p class="orc-font-heading-small">
-    <b *ngIf="twoFactorState" class="on" i18n="@@account.on">ON</b>
-    <b *ngIf="!twoFactorState" class="off" i18n="@@account.off">OFF</b>
-  </p>
-  <div class="button-container">
+    </p>
+    <a
+      class="two-factor-panel__link mb-6"
+      href="https://support.orcid.org/hc/en-us/articles/360006971673"
+      rel="noopener noreferrer"
+      target="_blank"
+      i18n="@@account.learnMoreAbout2FA"
+    >
+      Learn more about two-factor authentication
+      <mat-icon inline="true" aria-hidden="true">open_in_new</mat-icon>
+    </a>
     <button
       mat-raised-button
       color="primary"
-      id="cy-two-factor-switch"
+      id="cy-two-factor-enable"
+      class="two-factor-panel__enable-button"
       (click)="twoFactor()"
+      i18n="@@account.enableTwoFactorAuth"
     >
-      <ng-container *ngIf="!twoFactorState" i18n="@@account.turnOnTwoFactor">
-        Turn on two-factor authentication
-      </ng-container>
-      <ng-container *ngIf="twoFactorState" i18n="@@account.turnOffTwoFactor">
-        Turn off two-factor authentication
-      </ng-container>
+      Enable two-factor authentication
     </button>
   </div>
+  } @else {
+  <div class="two-factor-panel two-factor-panel--enabled">
+    <section class="two-factor-panel__section">
+      <h4 i18n="@@account.signInWith2FA">Sign in with 2FA</h4>
+      <p
+        class="two-factor-panel__section-description"
+        i18n="@@account.signInWith2FADescription"
+      >
+        Use your authentication app to generate a verification code whenever you
+        sign in to ORCID.
+      </p>
+      <div class="two-factor-panel__requirement">
+        <mat-icon
+          inline="true"
+          aria-hidden="true"
+          class="two-factor-panel__requirement-icon"
+        >
+          check_circle
+        </mat-icon>
+        <div>
+          <p class="two-factor-panel__requirement-title leading-5.25" i18n>
+            Authentication app
+          </p>
+          <small>
+            {{
+              twoFactorInfo?.twoFactorCreationDate | monthDayYearDateToString
+            }}
+          </small>
+        </div>
+      </div>
+    </section>
+
+    <section class="two-factor-panel__section">
+      <h4 i18n="@@account.accountRecovery">Account recovery</h4>
+      <p
+        class="two-factor-panel__section-description"
+        i18n="@@account.accountRecoveryDescription"
+      >
+        Recover access to your ORCID account if you can't use your
+        authentication app.
+      </p>
+      <div class="two-factor-panel__requirement">
+        <mat-icon
+          inline="true"
+          aria-hidden="true"
+          class="two-factor-panel__requirement-icon"
+        >
+          check_circle
+        </mat-icon>
+        <div>
+          <p class="two-factor-panel__requirement-title leading-5.25" i18n>
+            2FA recovery codes
+          </p>
+          <small class="leading-4.5">
+            {{
+              twoFactorInfo?.recoveryCodeCreationDate | monthDayYearDateToString
+            }}
+          </small>
+        </div>
+      </div>
+    </section>
+
+    <p class="two-factor-panel__copy" i18n="@@account.disable2FAWarning">
+      You can disable two-factor authentication at any time. Turning 2FA off
+      will reset any account recovery options you have set up.
+    </p>
+    <a
+      class="two-factor-panel__link two-factor-panel__link--disable-info"
+      href="https://support.orcid.org/hc/en-us/articles/360006971673"
+      rel="noopener noreferrer"
+      target="_blank"
+      i18n="@@account.findOutMoreDisabling2FA"
+    >
+      Find out more about disabling two-factor authentication
+      <mat-icon inline="true" aria-hidden="true">open_in_new</mat-icon>
+    </a>
+    <button
+      mat-raised-button
+      id="cy-two-factor-disable"
+      class="two-factor-panel__disable-button"
+      (click)="twoFactor()"
+      i18n="@@account.disableTwoFactorAuth"
+    >
+      Disable two-factor authentication
+    </button>
+  </div>
+  }
 </app-settings-panels-data>

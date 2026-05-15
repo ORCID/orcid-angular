@@ -17,11 +17,20 @@ import { MatInputModule } from '@angular/material/input'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { of } from 'rxjs'
 import { TwoFactorSetup } from 'src/app/types/two-factor.endpoint'
+import { OrcidStepViewComponent } from '@orcid/ui'
+import { MatIconModule } from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { RumJourneyEventService } from '../../../rum/service/customEvent.service'
+import { AppEventName } from '../../../rum/app-event-names'
+import { MatTooltipModule } from '@angular/material/tooltip'
+import { ClipboardModule } from '@angular/cdk/clipboard'
 
 describe('TwoFactorEnableComponent', () => {
   let component: TwoFactorEnableComponent
   let fixture: ComponentFixture<TwoFactorEnableComponent>
   let fakeTwoFactorAuthenticationService: TwoFactorAuthenticationService
+  let fakeObservability: jasmine.SpyObj<RumJourneyEventService>
   let debugElement: DebugElement
 
   beforeEach(async () => {
@@ -33,6 +42,10 @@ describe('TwoFactorEnableComponent', () => {
           register: of({ valid: true } as TwoFactorSetup),
         }
       )
+    fakeObservability = jasmine.createSpyObj<RumJourneyEventService>(
+      'RumJourneyEventService',
+      ['recordSimpleEvent']
+    )
 
     await TestBed.configureTestingModule({
       imports: [
@@ -42,6 +55,12 @@ describe('TwoFactorEnableComponent', () => {
         MatFormFieldModule,
         ReactiveFormsModule,
         RouterTestingModule,
+        OrcidStepViewComponent,
+        MatIconModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatTooltipModule,
+        ClipboardModule,
       ],
       declarations: [TwoFactorEnableComponent],
       providers: [
@@ -49,6 +68,10 @@ describe('TwoFactorEnableComponent', () => {
         {
           provide: TwoFactorAuthenticationService,
           useValue: fakeTwoFactorAuthenticationService,
+        },
+        {
+          provide: RumJourneyEventService,
+          useValue: fakeObservability,
         },
         PlatformInfoService,
         ErrorHandlerService,
@@ -68,6 +91,9 @@ describe('TwoFactorEnableComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+    expect(fakeObservability.recordSimpleEvent).toHaveBeenCalledWith(
+      AppEventName.TwoFactorSetupStep1Loaded
+    )
   })
 
   it('should include a qr code image', () => {
@@ -91,18 +117,23 @@ describe('TwoFactorEnableComponent', () => {
     ).not.toBeNull()
   })
 
-  it('should call register method when input is filled button has been press', async () => {
-    component.twoFactorForm.get('verificationCode').setValue('123456')
+  it('should call register method when input is filled and submit is triggered', async () => {
+    component.twoFactorForm.get('verificationCode')?.setValue('123456')
 
     fixture.detectChanges()
     await fixture.whenStable()
 
-    const twoFactorButton = debugElement.query(By.css('#cy-continue'))
-    twoFactorButton.nativeElement.click()
+    component.onSubmit()
 
     fixture.detectChanges()
 
     expect(fakeTwoFactorAuthenticationService.register).toHaveBeenCalled()
-    expect(component.showBadVerificationCode).toBeFalse()
+    expect(
+      component.twoFactorForm.get('verificationCode')?.hasError('invalidCode')
+    ).toBeFalse()
+  })
+
+  it('should expose static setup code tooltip text', () => {
+    expect(component.textCodeTooltip).toBe('Copy setup code to clipboard')
   })
 })

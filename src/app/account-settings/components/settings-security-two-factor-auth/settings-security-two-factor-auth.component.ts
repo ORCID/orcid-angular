@@ -11,6 +11,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
+import { Status } from '../../../types/two-factor.endpoint'
 
 @Component({
   selector: 'app-settings-security-two-factor-auth',
@@ -22,7 +23,7 @@ import {
   standalone: false,
 })
 export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
-  @Input() twoFactorState: boolean
+  @Input() twoFactorInfo: Status | undefined
   @Output() twoFactorStateOutput = new EventEmitter<any>()
 
   form: UntypedFormGroup
@@ -68,7 +69,9 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
           .subscribe({
             next: (response: any) => {
               if (response.success) {
-                this.twoFactorState = response.enabled
+                if (this.twoFactorInfo) {
+                  this.twoFactorInfo.enabled = response.enabled
+                }
                 this.twoFactorStateOutput.emit(false)
                 dialogRef.close(true)
               } else {
@@ -89,7 +92,7 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
   }
 
   twoFactor() {
-    if (!this.twoFactorState) {
+    if (!this.twoFactorInfo?.enabled) {
       this._router.navigate([ApplicationRoutes.twoFactorSetup])
     } else {
       this.cancel = false

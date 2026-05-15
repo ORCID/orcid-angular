@@ -39,6 +39,11 @@
       strong {
         margin-inline-end: 3px;
       }
+
+      .on,
+      .off {
+        font-weight: 400;
+      }
     }
     .actions-container {
       display: flex;
