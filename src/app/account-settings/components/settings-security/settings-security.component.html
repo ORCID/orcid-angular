@@ -9,7 +9,7 @@
   [loading]="settingSecurityPasswordLoading"
 >
   <app-settings-security-password
-    [twoFactorState]="twoFactorState"
+    [twoFactorState]="twoFactorEnabled"
     *ngIf="settingSecurityPasswordOpen"
     (loading)="settingSecurityPasswordLoading = $event"
   >
@@ -21,11 +21,11 @@
   class="row"
   id="cy-2FA-panel"
   [title]="titleTwoFactor"
-  [type]="{ value: 'two-factor', enabled: twoFactorState }"
+  [type]="{ value: 'two-factor', enabled: twoFactorEnabled }"
   [loading]="settingSecurityTwoFactorLoading"
 >
   <app-settings-security-two-factor-auth
-    [twoFactorState]="twoFactorState"
+    [twoFactorInfo]="twoFactorInfo"
     (twoFactorStateOutput)="twoFactorStateChanges($event)"
   >
   </app-settings-security-two-factor-auth>
@@ -39,7 +39,7 @@
   [loading]="settingSecurityAlternateAccountsLoading"
 >
   <app-settings-security-alternate-sign-in
-    [twoFactorState]="twoFactorState"
+    [twoFactorState]="twoFactorEnabled"
     (loading)="settingSecurityAlternateAccountsLoading = $event"
     *ngIf="settingSecurityAlternateAccounts"
   ></app-settings-security-alternate-sign-in>

@@ -85,7 +85,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security/settings-security.component.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -1642,7 +1642,7 @@
         <source>Account recovery</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1650,7 +1650,7 @@
         <source>Recover access to your ORCID account if you can't use your authentication app.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">73,76</context>
+          <context context-type="linenumber">78,81</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1658,7 +1658,7 @@
         <source>2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">86,88</context>
+          <context context-type="linenumber">91,93</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1666,7 +1666,7 @@
         <source>You can disable two-factor authentication at any time. Turning 2FA off will reset any account recovery options you have set up.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">93,96</context>
+          <context context-type="linenumber">103,106</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1678,7 +1678,7 @@
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">103,105</context>
+          <context context-type="linenumber">113,115</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1686,7 +1686,7 @@
         <source>Disable two-factor authentication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">113,115</context>
+          <context context-type="linenumber">123,125</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1694,7 +1694,7 @@
         <source>to disable 2FA</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1710,7 +1710,7 @@
         <source>Account password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security/settings-security.component.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1718,7 +1718,7 @@
         <source>Alternate sign in accounts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security/settings-security.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target>RL</target>
       </trans-unit>

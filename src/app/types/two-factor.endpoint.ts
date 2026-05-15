@@ -1,3 +1,5 @@
+import { AuthChallenge, ExtendedDate } from './common.endpoint'
+
 export interface TwoFactor {
   orcid?: string
   recoveryCode?: string
@@ -16,6 +18,8 @@ export interface QrCode {
   url: string
 }
 
-export interface Status {
+export interface Status extends AuthChallenge {
   enabled: boolean
+  twoFactorCreationDate: ExtendedDate
+  recoveryCodeCreationDate: ExtendedDate
 }
