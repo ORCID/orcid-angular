@@ -307,7 +307,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
       return $localize`:@@authorize.addUpdateReseachActivities:Add/update your research activities (works, affiliations, etc.)`
     }
 
-    if (scope === '/read-limited') {
+    if (scope === '/read-limited' || scope === '/orcid-profile/read-limited') {
       return $localize`:@@authorize.readInfomationVisibilityTrustedParties:Read your information with visibility set to Trusted parties`
     }
 
