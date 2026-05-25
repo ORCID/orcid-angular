@@ -4,6 +4,7 @@ import {
   Inject,
   Input,
   OnInit,
+  OnDestroy,
   HostListener,
   ViewChild,
   ElementRef,
@@ -35,10 +36,13 @@ import { RecordHeaderStateService } from 'src/app/core/record-header-state/recor
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
   standalone: false,
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   hideMainMenu = false
   _currentRoute: string
   notWordpressDisplay: boolean
+  /** Shown as .active immediately after click until navigation completes. */
+  activeMenuItemId: string | null = null
+  private _bodyOverflowBeforeLock: string | null = null
   @Input() set currentRoute(value) {
     this._currentRoute = value
     this.setChildOfCurrentRouteAsSecondaryMenu()
@@ -72,6 +76,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   hasCreditOrOtherNames$: Observable<boolean> =
     this._recordHeaderState.hasCreditOrOtherNames$
 
+  @ViewChild('mobileMenuContainer')
+  private mobileMenuContainer?: ElementRef<HTMLElement>
+
   constructor(
     private _router: Router,
     _platform: PlatformInfoService,
@@ -87,6 +94,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       .pipe(filter((event: any) => event instanceof NavigationStart))
       .subscribe((val: NavigationStart) => {
         this.currentRoute = _router.url
+        this.activeMenuItemId = null
         this.setChildOfCurrentRouteAsSecondaryMenu()
       })
 
@@ -124,6 +132,60 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {}
 
+  ngOnDestroy() {
+    this.unlockBodyScroll()
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapeKey() {
+    if (this.platform && !this.platform.columns12 && this.mobileMenuState) {
+      this.setMobileMenuOpen(false)
+    }
+  }
+
+  toggleMobileMenu() {
+    this.setMobileMenuOpen(!this.mobileMenuState)
+  }
+
+  setMobileMenuOpen(open: boolean) {
+    this.mobileMenuState = open
+    if (open) {
+      this.lockBodyScroll()
+      if (this.platform && !this.platform.columns12) {
+        setTimeout(() => this.mobileMenuContainer?.nativeElement.focus())
+      }
+    } else {
+      this.unlockBodyScroll()
+      this.activeMenuItemId = null
+    }
+  }
+
+  isMenuItemActive(item: ApplicationMenuItem): boolean {
+    const routeMatch =
+      !!(item.activeRoute || item.route) &&
+      '/' + (item.activeRoute || item.route) === this.currentRoute
+    return routeMatch || this.activeMenuItemId === item.id
+  }
+
+  onNavClick(route: string, menuItemId: string) {
+    this.activeMenuItemId = menuItemId
+    this.goto(route)
+  }
+
+  private lockBodyScroll() {
+    if (this._bodyOverflowBeforeLock === null) {
+      this._bodyOverflowBeforeLock = this.window.document.body.style.overflow
+      this.window.document.body.style.overflow = 'hidden'
+    }
+  }
+
+  private unlockBodyScroll() {
+    if (this._bodyOverflowBeforeLock !== null) {
+      this.window.document.body.style.overflow = this._bodyOverflowBeforeLock
+      this._bodyOverflowBeforeLock = null
+    }
+  }
+
   mouseLeave() {
     if (this.platform.columns12) {
       this.setChildOfCurrentRouteAsSecondaryMenu()
@@ -149,11 +211,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         button.route !== undefined &&
         (!button.buttons || !button.buttons.length)
       ) {
+        this.activeMenuItemId = button.id
         this.goto(button.route)
       } else {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route !== undefined) {
+      this.activeMenuItemId = button.id
       this.goto(button.route)
     }
   }
@@ -306,7 +370,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   goto(route: string) {
     if (route === 'signin') {
       this._router.navigate([ApplicationRoutes.signin])
-      this.mobileMenuState = false
+      this.setMobileMenuOpen(false)
     } else if (route === 'signout') {
       if (runtimeEnvironment.proxyMode) {
         this._user.noRedirectLogout().subscribe()
