@@ -41,7 +41,7 @@
           </div>
 
           <app-menu-icon
-            (click)="mobileMenuState = !mobileMenuState"
+            (click)="toggleMobileMenu()"
             [isOpen]="mobileMenuState"
           ></app-menu-icon>
         </div>
@@ -73,7 +73,7 @@
 
 <div
   class="col l5 offset-l3 m8 s4 middle"
-  *ngIf="!platform.columns12 && !isCompactActive"
+  *ngIf="!platform.columns12 && !isCompactActive && !mobileMenuState"
 >
   <app-search></app-search>
 </div>
@@ -82,12 +82,63 @@
 <nav
   (mouseleave)="mouseLeave()"
   *ngIf="(mobileMenuState || platform.columns12) && !hideMainMenu"
-  [ngClass]="{ 'not-wordpress-display': notWordpressDisplay }"
+  [ngClass]="{
+    'not-wordpress-display': notWordpressDisplay,
+    'mobile-nav-overlay': !platform.columns12 && mobileMenuState
+  }"
   [attr.aria-label]="labelMenu"
+  [attr.aria-modal]="!platform.columns12 && mobileMenuState ? true : null"
+  [attr.aria-hidden]="!platform.columns12 && !mobileMenuState ? true : null"
+  [cdkTrapFocus]="!platform.columns12 && mobileMenuState"
+  [cdkTrapFocusAutoCapture]="false"
 >
   <!-- TODO @leomendoza123 Once the new info site is stable, remove this togglz hidden to save render time -->
   <div class="top-bar-new-info">
-    <div class="menu-container" [ngClass]="{ container: platform.columns12 }">
+    <div
+      #mobileMenuContainer
+      class="menu-container"
+      [ngClass]="{ container: platform.columns12 }"
+      tabindex="-1"
+    >
+      <ul
+        class="row mobile-auth-menu"
+        *ngIf="checkMenuItemRequirements({ desktop: false })"
+      >
+        <li
+          class="col no-gutters"
+          *ngIf="
+            checkMenuItemRequirements({ logging: false }) &&
+            signinRegisterButton
+          "
+        >
+          <button
+            mat-button
+            class="top-menu-button sign-in-button"
+            [ngClass]="{ active: activeMenuItemId === 'header-signin' }"
+            (click)="onNavClick('signin', 'header-signin')"
+          >
+            <ng-container i18n="@@header.signin">Sign in</ng-container
+            >&nbsp;/&nbsp;<ng-container i18n="@@header.register"
+              >Register</ng-container
+            >
+          </button>
+        </li>
+        <li
+          class="col no-gutters"
+          *ngIf="checkMenuItemRequirements({ logging: true })"
+        >
+          <button
+            mat-button
+            class="top-menu-button sign-in-button"
+            [ngClass]="{ active: activeMenuItemId === 'header-signout' }"
+            (click)="onNavClick('signout', 'header-signout')"
+          >
+            <ng-container i18n="#upperCase@@public-layout.sign_out"
+              >SIGN OUT</ng-container
+            >
+          </button>
+        </li>
+      </ul>
       <ng-template #recursiveList let-list let-parents="parents">
         <ul class="row" *ngIf="!isDesktopThirdLevelMenu(parents)">
           <ng-container *ngFor="let item of list">
@@ -96,9 +147,7 @@
               *ngIf="checkMenuItemRequirements(item.requirements) === true"
             >
               <button
-                [ngClass]="{
-                  active: item.activeRoute === currentRoute
-                }"
+                [ngClass]="{ active: isMenuItemActive(item) }"
                 class="top-menu-button"
                 mat-button
                 [color]="menuButtonColor(parents)"
@@ -139,40 +188,6 @@
           context: { $implicit: menu, parents: [] }
         "
       ></ng-container>
-      <ul class="row" *ngIf="checkMenuItemRequirements({ desktop: false })">
-        <li
-          class="col no-gutters"
-          *ngIf="
-            checkMenuItemRequirements({ logging: false }) &&
-            signinRegisterButton
-          "
-        >
-          <button
-            mat-stroked-button
-            class="sign-in-button"
-            (click)="goto('signin')"
-          >
-            <ng-container i18n="@@header.signin">Sign in</ng-container
-            >&nbsp;/&nbsp;<ng-container i18n="@@header.register"
-              >Register</ng-container
-            >
-          </button>
-        </li>
-        <li
-          class="col no-gutters"
-          *ngIf="checkMenuItemRequirements({ logging: true })"
-        >
-          <button
-            mat-stroked-button
-            class="sign-in-button"
-            (click)="goto('signout')"
-          >
-            <ng-container i18n="#upperCase@@public-layout.sign_out"
-              >SIGN OUT</ng-container
-            >
-          </button>
-        </li>
-      </ul>
     </div>
     <mat-divider class="row"></mat-divider>
   </div>
