@@ -246,10 +246,7 @@ nav {
           align-items: stretch;
           gap: 0;
           padding: 0;
-          background-color: var(
-            --orcid-color-brand-secondary-darkest,
-            #003449
-          );
+          background-color: var(--orcid-color-brand-secondary-darkest, #003449);
           .row {
             flex-direction: column;
             gap: 0;
@@ -301,7 +298,8 @@ nav {
                 &:focus-visible {
                   color: var(--orcid-color-brand-white, #ffffff);
                   background-color: transparent;
-                  box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
+                  box-shadow: inset 0 0 0 2px
+                    var(--orcid-color-ui-focus, #1098ff);
                   outline: none;
                 }
 
@@ -449,4 +447,3 @@ app-user-menu {
     border-radius: 0;
   }
 }
-
