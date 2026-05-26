@@ -15,17 +15,25 @@ import { getUserRecord } from 'src/app/core/record/record.service.spec'
 import { getUserSession } from 'src/app/core/user/user.service.spec'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 
 describe('RecordHeaderComponent', () => {
   let component: RecordHeaderComponent
   let fixture: ComponentFixture<RecordHeaderComponent>
   let state: RecordHeaderStateService
   let recordService: jasmine.SpyObj<RecordService>
+  let togglzService: { getStateOf: jasmine.Spy }
 
   beforeEach(async () => {
     recordService = jasmine.createSpyObj<RecordService>('RecordService', [
       'getRecord',
     ])
+    togglzService = {
+      getStateOf: jasmine.createSpy('getStateOf').and.callFake((flag: string) =>
+        of(flag === TogglzFlag.FEATURED_AFFILIATIONS)
+      ),
+    }
 
     await TestBed.configureTestingModule({
       imports: [
@@ -48,7 +56,7 @@ describe('RecordHeaderComponent', () => {
         },
         {
           provide: TogglzService,
-          useValue: { getStateOf: () => of(false) },
+          useValue: togglzService,
         },
         {
           provide: UserService,
@@ -111,5 +119,25 @@ describe('RecordHeaderComponent', () => {
     expect(component.loadingUserRecord).toBeFalse()
     expect(component.bannerTitle).toBe('Published Name')
     expect(component.bannerCaption).toBe('')
+  })
+
+  it('should render the featured employment caption from shared state', () => {
+    const userRecord = getUserRecord()
+    const featuredAffiliation =
+      userRecord.affiliations[0].affiliationGroup[0].affiliations[0]
+
+    featuredAffiliation.featured = true
+    featuredAffiliation.affiliationType = { value: AffiliationType.employment }
+    featuredAffiliation.roleTitle = { value: 'Engineer' }
+    featuredAffiliation.departmentName = { value: 'Platform' }
+
+    state.setIsPublicRecord(userRecord.userInfo.REAL_USER_ORCID)
+    state.setLoadingRecordHeader(false)
+    state.setUserRecord(userRecord)
+    fixture.detectChanges()
+
+    expect(component.bannerCaption).toBe(
+      'ORCID: city, region, country - Engineer, Platform'
+    )
   })
 })
