@@ -10,6 +10,8 @@ export enum AppEventName {
   // ─── Simple events (recordSimpleEvent) ─────────────────────────────────────
   RecordExpandFeaturedWorkClicked = 'record_expand_featured_work_clicked',
   RecordSummaryToggleClicked = 'record_summary_toggle_clicked',
+  RecordHeaderPublicReady = 'record_header_public_ready',
+  RecordHeaderFeaturedEmploymentCaptionLoaded = 'record_header_featured_employment_caption_loaded',
   HttpError = 'http_error',
   ClientError = 'client_error',
   XsrfMissingAfterPreload = 'xsrf_missing_after_preload',

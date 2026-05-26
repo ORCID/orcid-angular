@@ -39,6 +39,10 @@ import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitia
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/rum/app-event-names'
+import { getFeaturedEmploymentCaption } from '../../components/record-header/featured-employment-caption.util'
 
 @Component({
   selector: 'app-my-orcid',
@@ -51,6 +55,9 @@ import { RecordHeaderStateService } from 'src/app/core/record-header-state/recor
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
   private readonly $destroy = new Subject()
+  private headerRumStartTime = 0
+  private headerReadyReported = false
+  private featuredEmploymentCaptionReported = false
   recordSummaryOpen = false
 
   platform: PlatformInfo
@@ -93,6 +100,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   newAddedAffiliation: string
 
   featuredWorksTogglz = false
+  featuredAffiliationsEnabled = false
 
   constructor(
     _userInfoService: UserInfoService,
@@ -111,7 +119,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private location: Location,
     private _LoginMainInterstitialsManagerService: LoginMainInterstitialsManagerService,
     private _compactService: HeaderCompactService,
-    private _recordHeaderState: RecordHeaderStateService
+    private _recordHeaderState: RecordHeaderStateService,
+    private _rumEvents: RumJourneyEventService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -137,9 +146,14 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIfThisIsAPublicOrcid()
     this.affiliations = 0
+    this.headerRumStartTime = performance.now()
+    this.headerReadyReported = false
+    this.featuredEmploymentCaptionReported = false
     // initialize shared record header state
     this._recordHeaderState.setIsPublicRecord(this.publicOrcid || null)
     this._recordHeaderState.setLoadingUserRecord(true)
+    this._recordHeaderState.setLoadingRecordHeader(true)
+    this._recordHeaderState.setUserRecord(null)
     this._recordHeaderState.setAffiliations(0)
     this._recordHeaderState.setDisplayBiography(false)
     this._recordHeaderState.setDisplaySideBar(false)
@@ -158,6 +172,13 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     })
 
     this._platform.get().subscribe((value) => (this.platform = value))
+    this._togglz
+      .getStateOf(TogglzFlag.FEATURED_AFFILIATIONS)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((enabled) => {
+        this.featuredAffiliationsEnabled = !!enabled
+        this.checkFeaturedEmploymentCaptionState(this.userRecord)
+      })
     this._compactService.compactActive$
       .pipe(takeUntil(this.$destroy))
       .subscribe((active) => {
@@ -184,6 +205,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         takeUntil(this.$destroy),
         tap((userRecord) => {
           this.userInfo = userRecord?.userInfo
+          this._recordHeaderState.setUserRecord(userRecord || null)
+          this.checkRecordHeaderLoadingState(userRecord)
+          this.checkFeaturedEmploymentCaptionState(userRecord)
           this.checkLoadingState(userRecord)
           this._recordHeaderState.setLoadingUserRecord(this.loadingUserRecord)
           this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
@@ -410,6 +434,60 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     })
     this.loadingUserRecord = !!missingValues.length
     this._recordHeaderState.setLoadingUserRecord(this.loadingUserRecord)
+  }
+
+  checkRecordHeaderLoadingState(userRecord: UserRecord) {
+    const hasRecordId = !!(
+      this.publicOrcid || userRecord?.userInfo?.REAL_USER_ORCID
+    )
+    const headerReady =
+      hasRecordId &&
+      userRecord?.names !== undefined &&
+      userRecord?.userInfo !== undefined
+
+    this._recordHeaderState.setLoadingRecordHeader(!headerReady)
+
+    if (this.publicOrcid && headerReady && !this.headerReadyReported) {
+      this._rumEvents.recordSimpleEvent(AppEventName.RecordHeaderPublicReady, {
+        elapsed_ms: this.getHeaderRumElapsedMs(),
+        has_record_issues: !!userRecord?.userInfo?.RECORD_WITH_ISSUES,
+        header_variant: 'public',
+        is_desktop: this.platform?.columns12,
+      })
+      this.headerReadyReported = true
+    }
+  }
+
+  private checkFeaturedEmploymentCaptionState(userRecord?: UserRecord) {
+    if (
+      !this.publicOrcid ||
+      !userRecord ||
+      !this.featuredAffiliationsEnabled ||
+      this.featuredEmploymentCaptionReported
+    ) {
+      return
+    }
+
+    const caption = getFeaturedEmploymentCaption(userRecord.affiliations)
+    if (!caption) {
+      return
+    }
+
+    this._rumEvents.recordSimpleEvent(
+      AppEventName.RecordHeaderFeaturedEmploymentCaptionLoaded,
+      {
+        caption_type: 'featured_employment',
+        elapsed_ms: this.getHeaderRumElapsedMs(),
+        has_record_issues: !!userRecord?.userInfo?.RECORD_WITH_ISSUES,
+        header_variant: 'public',
+        is_desktop: this.platform?.columns12,
+      }
+    )
+    this.featuredEmploymentCaptionReported = true
+  }
+
+  private getHeaderRumElapsedMs(): number {
+    return Math.round(performance.now() - this.headerRumStartTime)
   }
 
   onRecordSummaryOpenChange(open: boolean) {
