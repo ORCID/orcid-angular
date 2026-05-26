@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core'
@@ -12,13 +13,12 @@ import { RecordHeaderStateService } from 'src/app/core/record-header-state/recor
 import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { takeUntil, switchMap } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
-import { RecordService } from 'src/app/core/record/record.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
-import { Assertion, UserInfo } from 'src/app/types'
+import { UserInfo } from 'src/app/types'
 import { RecordEditButtonComponent } from '../record-edit-button/record-edit-button.component'
 import { UserRecord } from 'src/app/types/record.local'
 import { HeaderBannerComponent, AccentButtonDirective } from '@orcid/ui'
@@ -27,7 +27,6 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatButtonModule } from '@angular/material/button'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
-import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import {
   AffiliationUIGroup,
   Affiliation,
@@ -54,7 +53,7 @@ import { AppEventName } from 'src/app/rum/app-event-names'
     AccentButtonDirective,
   ],
 })
-export class RecordHeaderComponent implements OnInit {
+export class RecordHeaderComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   loadingUserRecord = true
   isPublicRecord: string
@@ -72,8 +71,8 @@ export class RecordHeaderComponent implements OnInit {
 
   platform: PlatformInfo
   recordWithIssues: boolean
-  userRecord: UserRecord
-  userInfo: UserInfo
+  userRecord: UserRecord | null
+  userInfo: UserInfo | null
   environment = runtimeEnvironment
   givenNames = ''
   familyName = ''
@@ -148,12 +147,10 @@ export class RecordHeaderComponent implements OnInit {
     @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,
     private _user: UserService,
-    private _record: RecordService,
     private _state: RecordHeaderStateService,
     private _compact: HeaderCompactService,
     private _togglz: TogglzService,
     private _router: Router,
-    private _affiliations: RecordAffiliationService,
     private _rumEvents: RumJourneyEventService
   ) {}
 
@@ -175,8 +172,7 @@ export class RecordHeaderComponent implements OnInit {
         if (!enabled) {
           this.bannerCaption = ''
         } else {
-          // Reload featured employment if flag is enabled
-          this.loadFeaturedEmployment(this.isPublicRecord)
+          this.refreshCaptionFromRecord()
         }
       })
 
@@ -190,21 +186,32 @@ export class RecordHeaderComponent implements OnInit {
       )
 
     // Subscribe to shared state for inputs
-    this._state.loadingUserRecord$
+    this._state.loadingRecordHeader$
       .pipe(takeUntil(this.$destroy))
       .subscribe((v) => (this.loadingUserRecord = !!v))
-    this._state.affiliations$
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((v) => (this.affiliations = v))
+    this._state.affiliations$.pipe(takeUntil(this.$destroy)).subscribe((v) => {
+      this.affiliations = v
+      this.refreshHeaderFromRecord()
+    })
     this._state.displaySideBar$
       .pipe(takeUntil(this.$destroy))
-      .subscribe((v) => (this.displaySideBar = !!v))
+      .subscribe((v) => {
+        this.displaySideBar = !!v
+        this.refreshHeaderFromRecord()
+      })
     this._state.displayBiography$
       .pipe(takeUntil(this.$destroy))
-      .subscribe((v) => (this.displayBiography = !!v))
+      .subscribe((v) => {
+        this.displayBiography = !!v
+        this.refreshHeaderFromRecord()
+      })
     this._state.recordSummaryOpen$
       .pipe(takeUntil(this.$destroy))
       .subscribe((v) => (this._recordSummaryOpen = !!v))
+
+    this._state.userRecord$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => this.refreshHeaderFromRecord(userRecord))
 
     // When public ORCID changes, update id and load record
     this._state.isPublicRecord$
@@ -216,11 +223,7 @@ export class RecordHeaderComponent implements OnInit {
         this.bannerPrimaryIdText = this.isPublicRecord || ''
         this.bannerSecondaryIdText = this.orcidId || ''
         this.computeMainActionState()
-        if (this.isPublicRecord) {
-          this.loadRecord(this.isPublicRecord)
-        }
-        // Load affiliations (for public record or current user)
-        this.loadFeaturedEmployment(this.isPublicRecord)
+        this.refreshHeaderFromRecord()
       })
 
     this._user
@@ -239,6 +242,11 @@ export class RecordHeaderComponent implements OnInit {
       .subscribe((data) => {
         this.platform = data
       })
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next(true)
+    this.$destroy.complete()
   }
 
   clipboard() {
@@ -292,107 +300,94 @@ export class RecordHeaderComponent implements OnInit {
     this._router.navigate(['my-orcid'])
   }
 
-  private loadRecord(publicRecordId: string) {
-    this._record
-      .getRecord({
-        publicRecordId,
-      })
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((userRecord) => {
-        this.userRecord = userRecord
-        this.userInfo = userRecord?.userInfo
+  private refreshHeaderFromRecord(
+    userRecord: UserRecord | null = this.userRecord
+  ) {
+    this.userRecord = userRecord
+    this.userInfo = userRecord?.userInfo
+    this.resetNameFields()
 
-        if (!!this.userInfo?.PRIMARY_RECORD) {
-          // If this record is deprecated and has a primary record,
-          // do not expose any of the primary names in the header.
-          this.givenNames = ''
-          this.familyName = ''
-          this.creditName = ''
-          this.otherNames = ''
-          this.ariaLabelName = ''
+    if (!userRecord) {
+      this._state.setHasCreditOrOtherNames(false)
+      this.refreshCaptionFromRecord()
+      return
+    }
 
-          // Compose UI-only title/subtitle that the header banner consumes
-          this.bannerTitle = ''
-          this.bannerSubtitle = ''
-        } else {
-          if (!isEmpty(this.userRecord?.names)) {
-            this.givenNames = RecordUtil.getGivenNames(this.userRecord)
-            this.familyName = RecordUtil.getFamilyName(this.userRecord)
-            this.creditName = RecordUtil.getCreditName(this.userRecord)
-            this.ariaLabelName = RecordUtil.getAriaLabelName(
-              this.userRecord,
-              this.ariaLabelName
-            )
-          } else {
-            const hasAnyOtherPublicInfo =
-              this.affiliations > 0 ||
-              this.displaySideBar ||
-              this.displayBiography
+    if (!!this.userInfo?.PRIMARY_RECORD) {
+      // Deprecated records must not expose any primary names in the header.
+      this.bannerTitle = ''
+      this.bannerSubtitle = ''
+    } else {
+      if (!isEmpty(this.userRecord?.names)) {
+        this.givenNames = RecordUtil.getGivenNames(userRecord)
+        this.familyName = RecordUtil.getFamilyName(userRecord)
+        this.creditName = RecordUtil.getCreditName(userRecord)
+        this.ariaLabelName = RecordUtil.getAriaLabelName(
+          userRecord,
+          this.ariaLabelName
+        )
+      } else {
+        const hasAnyOtherPublicInfo =
+          this.affiliations > 0 || this.displaySideBar || this.displayBiography
 
-            // Scenario 1: there is other public information on the record
-            if (
-              hasAnyOtherPublicInfo ||
-              // Scenario 2: no public information is available anywhere,
-              // matching the "no displayable data for this record" banner
-              (!hasAnyOtherPublicInfo && !this.userInfo?.RECORD_WITH_ISSUES)
-            ) {
-              this.creditName = this.privateName
-            }
-          }
-
-          let fullName = this.givenNames
-          if (!isEmpty(this.familyName)) {
-            fullName += ` ${this.familyName}`
-          }
-
-          if (!isEmpty(this.userRecord.otherNames?.otherNames)) {
-            this.otherNames = RecordUtil.getOtherNamesUnique(
-              userRecord.otherNames?.otherNames
-            )
-
-            if (!isEmpty(this.creditName)) {
-              if (!isEmpty(fullName)) {
-                this.otherNames = `${fullName}; ${this.otherNames}`
-              }
-            }
-          } else {
-            if (!isEmpty(this.creditName) && !isEmpty(fullName)) {
-              this.otherNames = `${fullName}`
-            }
-          }
-
-          // Compose UI-only title/subtitle that the header banner consumes
-          this.bannerTitle = this.creditName || fullName || ''
-          this.bannerSubtitle = this.otherNames || ''
+        if (
+          hasAnyOtherPublicInfo ||
+          (!hasAnyOtherPublicInfo && !this.userInfo?.RECORD_WITH_ISSUES)
+        ) {
+          this.creditName = this.privateName
         }
+      }
 
-        const hasCreditName = !!this.userRecord?.names?.creditName?.value
-        const hasOtherNames = !isEmpty(this.userRecord?.otherNames?.otherNames)
-        this._state.setHasCreditOrOtherNames(hasCreditName || hasOtherNames)
-      })
+      let fullName = this.givenNames
+      if (!isEmpty(this.familyName)) {
+        fullName += ` ${this.familyName}`
+      }
+
+      if (!isEmpty(userRecord.otherNames?.otherNames)) {
+        this.otherNames = RecordUtil.getOtherNamesUnique(
+          userRecord.otherNames?.otherNames
+        )
+
+        if (!isEmpty(this.creditName) && !isEmpty(fullName)) {
+          this.otherNames = `${fullName}; ${this.otherNames}`
+        }
+      } else if (!isEmpty(this.creditName) && !isEmpty(fullName)) {
+        this.otherNames = `${fullName}`
+      }
+
+      this.bannerTitle = this.creditName || fullName || ''
+      this.bannerSubtitle = this.otherNames || ''
+    }
+
+    const hasCreditName = !!this.userRecord?.names?.creditName?.value
+    const hasOtherNames = !isEmpty(this.userRecord?.otherNames?.otherNames)
+    this._state.setHasCreditOrOtherNames(hasCreditName || hasOtherNames)
+    this.refreshCaptionFromRecord(userRecord)
   }
 
-  private loadFeaturedEmployment(publicRecordId?: string): void {
+  private resetNameFields(): void {
+    this.givenNames = ''
+    this.familyName = ''
+    this.creditName = ''
+    this.otherNames = ''
+    this.ariaLabelName = ''
+    this.bannerTitle = ''
+    this.bannerSubtitle = ''
+  }
+
+  private refreshCaptionFromRecord(
+    userRecord: UserRecord | null = this.userRecord
+  ): void {
     if (!this.bannerCaptionEnabled) {
       this.bannerCaption = ''
       return
     }
-    this._affiliations
-      .getAffiliations({
-        publicRecordId: publicRecordId || undefined,
-        forceReload: false,
-      })
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((affiliations) => {
-        if (affiliations) {
-          this.bannerCaption = this.formatFeaturedEmployment(affiliations)
-        } else {
-          this.bannerCaption = ''
-        }
-      })
+    this.bannerCaption = this.formatFeaturedEmployment(userRecord?.affiliations)
   }
 
-  private formatFeaturedEmployment(affiliations: AffiliationUIGroup[]): string {
+  private formatFeaturedEmployment(
+    affiliations?: AffiliationUIGroup[]
+  ): string {
     if (!affiliations || affiliations.length === 0) {
       return ''
     }

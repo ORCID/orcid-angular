@@ -140,6 +140,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     // initialize shared record header state
     this._recordHeaderState.setIsPublicRecord(this.publicOrcid || null)
     this._recordHeaderState.setLoadingUserRecord(true)
+    this._recordHeaderState.setLoadingRecordHeader(true)
+    this._recordHeaderState.setUserRecord(null)
     this._recordHeaderState.setAffiliations(0)
     this._recordHeaderState.setDisplayBiography(false)
     this._recordHeaderState.setDisplaySideBar(false)
@@ -184,6 +186,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         takeUntil(this.$destroy),
         tap((userRecord) => {
           this.userInfo = userRecord?.userInfo
+          this._recordHeaderState.setUserRecord(userRecord || null)
+          this.checkRecordHeaderLoadingState(userRecord)
           this.checkLoadingState(userRecord)
           this._recordHeaderState.setLoadingUserRecord(this.loadingUserRecord)
           this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
@@ -410,6 +414,18 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     })
     this.loadingUserRecord = !!missingValues.length
     this._recordHeaderState.setLoadingUserRecord(this.loadingUserRecord)
+  }
+
+  checkRecordHeaderLoadingState(userRecord: UserRecord) {
+    const hasRecordId = !!(
+      this.publicOrcid || userRecord?.userInfo?.REAL_USER_ORCID
+    )
+    const headerReady =
+      hasRecordId &&
+      userRecord?.names !== undefined &&
+      userRecord?.userInfo !== undefined
+
+    this._recordHeaderState.setLoadingRecordHeader(!headerReady)
   }
 
   onRecordSummaryOpenChange(open: boolean) {

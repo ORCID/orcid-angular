@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
+import { UserRecord } from 'src/app/types/record.local'
 
 /**
  * Shares state required by the Record Header between My ORCID and the Header.
@@ -8,7 +9,9 @@ import { BehaviorSubject } from 'rxjs'
 @Injectable({ providedIn: 'root' })
 export class RecordHeaderStateService {
   private readonly _loadingUserRecord = new BehaviorSubject<boolean>(true)
+  private readonly _loadingRecordHeader = new BehaviorSubject<boolean>(true)
   private readonly _isPublicRecord = new BehaviorSubject<string | null>(null)
+  private readonly _userRecord = new BehaviorSubject<UserRecord | null>(null)
   private readonly _affiliations = new BehaviorSubject<number>(0)
   private readonly _displaySideBar = new BehaviorSubject<boolean>(false)
   private readonly _displayBiography = new BehaviorSubject<boolean>(false)
@@ -17,7 +20,9 @@ export class RecordHeaderStateService {
   private readonly _hasCreditOrOtherNames = new BehaviorSubject<boolean>(false)
 
   readonly loadingUserRecord$ = this._loadingUserRecord.asObservable()
+  readonly loadingRecordHeader$ = this._loadingRecordHeader.asObservable()
   readonly isPublicRecord$ = this._isPublicRecord.asObservable()
+  readonly userRecord$ = this._userRecord.asObservable()
   readonly affiliations$ = this._affiliations.asObservable()
   readonly displaySideBar$ = this._displaySideBar.asObservable()
   readonly displayBiography$ = this._displayBiography.asObservable()
@@ -29,8 +34,14 @@ export class RecordHeaderStateService {
   setLoadingUserRecord(val: boolean) {
     this._loadingUserRecord.next(val)
   }
+  setLoadingRecordHeader(val: boolean) {
+    this._loadingRecordHeader.next(val)
+  }
   setIsPublicRecord(val: string | null) {
     this._isPublicRecord.next(val)
+  }
+  setUserRecord(val: UserRecord | null) {
+    this._userRecord.next(val)
   }
   setAffiliations(val: number) {
     this._affiliations.next(val)
@@ -53,7 +64,9 @@ export class RecordHeaderStateService {
 
   reset() {
     this._loadingUserRecord.next(true)
+    this._loadingRecordHeader.next(true)
     this._isPublicRecord.next(null)
+    this._userRecord.next(null)
     this._affiliations.next(0)
     this._displaySideBar.next(false)
     this._displayBiography.next(false)
