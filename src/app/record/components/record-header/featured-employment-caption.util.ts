@@ -10,7 +10,9 @@ export function getFeaturedEmploymentCaption(
     return ''
   }
 
-  const employmentGroup = affiliations.find((group) => group.type === 'EMPLOYMENT')
+  const employmentGroup = affiliations.find(
+    (group) => group.type === 'EMPLOYMENT'
+  )
 
   if (!employmentGroup || !employmentGroup.affiliationGroup) {
     return ''
