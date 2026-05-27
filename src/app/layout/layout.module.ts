@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
@@ -27,6 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 
 @NgModule({
   imports: [
+    A11yModule,
     CommonModule,
     CoreModule,
     MatMenuModule,

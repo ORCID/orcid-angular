@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { first } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
+import { Status } from '../../../types/two-factor.endpoint'
 
 @Component({
   selector: 'app-settings-security',
@@ -22,7 +23,8 @@ export class SettingsSecurityComponent implements OnInit {
   settingSecurityTwoFactorLoading = false
   settingSecurityAlternateAccountsLoading = false
 
-  twoFactorState = false
+  twoFactorEnabled = false
+  twoFactorInfo: Status | undefined
 
   constructor(
     private twoFactorAuthenticationService: TwoFactorAuthenticationService,
@@ -34,7 +36,8 @@ export class SettingsSecurityComponent implements OnInit {
       .checkState()
       .pipe(first())
       .subscribe((result) => {
-        this.twoFactorState = result.enabled
+        this.twoFactorInfo = result
+        this.twoFactorEnabled = result.enabled
       })
     const hash = this._window.location.hash.substr(1)
     switch (hash) {
@@ -51,6 +54,6 @@ export class SettingsSecurityComponent implements OnInit {
   }
 
   twoFactorStateChanges($event) {
-    this.twoFactorState = $event
+    this.twoFactorEnabled = $event
   }
 }

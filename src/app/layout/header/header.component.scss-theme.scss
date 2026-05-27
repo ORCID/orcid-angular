@@ -43,36 +43,6 @@
       }
     }
   }
-  .top-bar-new-info {
-    button {
-      color: mat.m2-get-color-from-palette($primary);
-    }
-
-    .menu-container {
-      .row {
-        button {
-          &.active {
-            color: mat.m2-get-color-from-palette($accent);
-          }
-          &.sign-in-button {
-            border-color: mat.m2-get-color-from-palette(
-              $background,
-              background
-            );
-            color: mat.m2-get-color-from-palette($primary, '500-contrast');
-          }
-        }
-        button:hover,
-        button:focus {
-          color: mat.m2-get-color-from-palette($accent);
-        }
-        .row {
-          color: mat.m2-get-color-from-palette($primary, 500);
-        }
-      }
-    }
-  }
-
   .columns-8 :host,
   .columns-4 :host {
     header.container.fixed-header-mode {
@@ -109,52 +79,6 @@
         }
       }
     }
-    .top-bar-new-info {
-      background-color: mat.m2-get-color-from-palette($primary, 900);
-      color: mat.m2-get-color-from-palette($primary, '500-contrast');
-
-      .menu-container {
-        .row {
-          button:hover,
-          button:focus {
-            background-color: mat.m2-get-color-from-palette($accent, 200);
-            color: $orcid-dark-primary-text;
-          }
-
-          .row {
-            background-color: mat.m2-get-color-from-palette($primary, 600);
-            button {
-              color: mat.m2-get-color-from-palette($primary, '500-contrast');
-            }
-            button:hover,
-            button:focus {
-              background-color: mat.m2-get-color-from-palette($accent, 200);
-              color: $orcid-dark-primary-text;
-            }
-            .row {
-              button {
-                color: mat.m2-get-color-from-palette($primary, 500);
-              }
-              button:hover,
-              button:focus {
-                background-color: mat.m2-get-color-from-palette($accent, 200);
-                color: $orcid-dark-primary-text;
-              }
-              background-color: mat.m2-get-color-from-palette(
-                $background,
-                'light-grey'
-              );
-              .row {
-                background-color: mat.m2-get-color-from-palette(
-                  $background,
-                  'card'
-                );
-              }
-            }
-          }
-        }
-      }
-    }
   }
 }
 
@@ -162,8 +86,7 @@
   $orcid-material-typography,
   $orcid-custom-typography
 ) {
-  .top-bar,
-  .top-bar-new-info {
+  .top-bar {
     .menu-container > .row > .col > button {
       @include mat.m2-typography-level($orcid-custom-typography, title-alt);
       &.sign-in-button {

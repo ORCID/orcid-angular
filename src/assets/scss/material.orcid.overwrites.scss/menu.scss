@@ -48,7 +48,7 @@
   .mat-mdc-menu-item.orcid-language-menu-item.cdk-program-focused,
   .mat-mdc-menu-item.orcid-language-menu-item.cdk-keyboard-focused {
     background-color: rgba(16, 152, 255, 0.05);
-    box-shadow: inset 0 0 0 2px #1098ff;
+    box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
   }
 }
 
