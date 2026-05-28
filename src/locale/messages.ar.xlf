@@ -19109,6 +19109,7 @@
       </trans-unit>
       <trans-unit id="account.copySetupCodeToClipboard" datatype="html" resname="account.copySetupCodeToClipboard">
         <source>Copy setup code to clipboard</source>
+        <target>انسخ رمز الإعداد إلى الحافظة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.ts</context>
           <context context-type="linenumber">48</context>
@@ -19132,6 +19133,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryCodes" datatype="html" resname="account.recoveryCodes">
         <source>Recovery codes can be used to access your ORCID account when you aren’t able to use your authentication app. Each recovery code can only be used once.</source>
+        <target>يمكن استخدام رموز الاستعادة للوصول إلى حساب ORCID الخاص بك عندما لا تتمكن من استخدام تطبيق المصادقة. لا يمكن استخدام كل رمز استعادة سوى مرة واحدة.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">17,21</context>
