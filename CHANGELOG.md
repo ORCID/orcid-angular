@@ -1,3 +1,9 @@
+## v2.134.6 - 2026-05-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.134.5...v2.134.6)
+
+- [#2843](https://github.com/ORCID/orcid-angular/pull/2843): PD-5506 (2)
+
 ## v2.134.5 - 2026-05-26
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.134.4...v2.134.5)
