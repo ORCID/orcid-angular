@@ -86,9 +86,7 @@ describe('HeaderComponent', () => {
     )
 
     expect(buttonLabels[0]).toBe('ABOUT')
-    expect(
-      buttonLabels.some((label) => label?.includes('Sign in'))
-    ).toBe(false)
+    expect(buttonLabels.some((label) => label?.includes('Sign in'))).toBe(false)
   })
 
   it('sets active menu item id when a navigable item is clicked', () => {
