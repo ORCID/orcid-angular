@@ -125,7 +125,6 @@ nav {
   .top-bar-new-info {
     height: 54px;
     background-color: var(--orcid-surface, #ffffff);
-    border-top: 1px solid var(--orcid-color-ui-background-light, #eeeeee);
     border-bottom: 1px solid var(--orcid-color-ui-background-light, #eeeeee);
 
     .menu-container {
@@ -303,18 +302,36 @@ nav {
                   outline: none;
                 }
 
-                &.sign-in-button {
-                  width: 100%;
-                  margin-top: 0;
-                  left: 0;
-                  font-weight: var(--orcid-font-weight-bold, 700);
-                  border-bottom: 1px solid
-                    var(--orcid-color-brand-secondary-dark, #085c77);
-                  [dir='rtl'] & {
-                    left: 0;
-                    right: 0;
+                &.mat-mdc-button:not(:disabled),
+                &.mat-button:not(:disabled) {
+                  --mat-button-text-label-text-color: var(
+                    --orcid-color-brand-white,
+                    #ffffff
+                  );
+                  color: var(--orcid-color-brand-white, #ffffff);
+
+                  .mdc-button__label {
+                    color: inherit;
+                  }
+
+                  &:hover:not(.active) {
+                    --mat-button-text-label-text-color: var(
+                      --orcid-color-brand-secondary-darkest,
+                      #003449
+                    );
+                    color: var(--orcid-color-brand-secondary-darkest, #003449);
+                  }
+
+                  &.active,
+                  &.active:hover {
+                    --mat-button-text-label-text-color: var(
+                      --orcid-color-brand-secondary-darkest,
+                      #003449
+                    );
+                    color: var(--orcid-color-brand-secondary-darkest, #003449);
                   }
                 }
+
                 .button-box {
                   display: flex;
                   justify-content: space-between;
@@ -414,19 +431,21 @@ app-user-menu {
   text-align: center;
   color: var(--orcid-color-brand-secondary-dark, #085c77);
   background-color: var(--orcid-surface, #ffffff);
-  border-bottom-color: var(--orcid-surface, #ffffff);
+  border-bottom-color: transparent;
 
-  &:hover:not(.active),
-  &.cdk-keyboard-focused:not(.active),
-  &.cdk-program-focused:not(.active) {
+  &:hover:not(.active) {
     color: var(--orcid-color-brand-secondary-darkest, #003449);
     border-bottom-color: var(--orcid-color-brand-secondary-darkest, #003449);
   }
 
+  &.cdk-keyboard-focused:not(.active):not(:hover),
+  &.cdk-program-focused:not(.active):not(:hover) {
+    color: var(--orcid-color-brand-secondary-dark, #085c77);
+    border-bottom-color: transparent;
+  }
+
   &.active,
-  &.active:hover,
-  &.active.cdk-keyboard-focused,
-  &.active.cdk-program-focused {
+  &.active:hover {
     color: var(--orcid-color-brand-secondary-darkest, #003449);
     border-bottom-color: var(--orcid-color-brand-primary, #a6ce39);
   }
@@ -438,12 +457,51 @@ app-user-menu {
     outline: none;
   }
 
-  &.sign-in-button {
-    font-weight: var(--orcid-font-weight-bold, 700);
-  }
-
-  &.mat-mdc-button,
-  &.mat-button {
+  &.mat-mdc-button:not(:disabled),
+  &.mat-button:not(:disabled) {
     border-radius: 0;
+    --mat-button-text-label-text-color: var(
+      --orcid-color-brand-secondary-dark,
+      #085c77
+    );
+    color: var(--orcid-color-brand-secondary-dark, #085c77);
+
+    .mdc-button__label {
+      color: inherit;
+    }
+
+    &:hover:not(.active) {
+      --mat-button-text-label-text-color: var(
+        --orcid-color-brand-secondary-darkest,
+        #003449
+      );
+      color: var(--orcid-color-brand-secondary-darkest, #003449);
+    }
+
+    &.active,
+    &.active:hover {
+      --mat-button-text-label-text-color: var(
+        --orcid-color-brand-secondary-darkest,
+        #003449
+      );
+      color: var(--orcid-color-brand-secondary-darkest, #003449);
+    }
+
+    &.cdk-keyboard-focused:not(.active):not(:hover),
+    &.cdk-program-focused:not(.active):not(:hover) {
+      --mat-button-text-label-text-color: var(
+        --orcid-color-brand-secondary-dark,
+        #085c77
+      );
+      color: var(--orcid-color-brand-secondary-dark, #085c77);
+    }
+
+    &:focus-visible {
+      --mat-button-text-label-text-color: var(
+        --orcid-color-brand-secondary-dark,
+        #085c77
+      );
+      color: var(--orcid-color-brand-secondary-dark, #085c77);
+    }
   }
 }
