@@ -71,10 +71,9 @@ describe('HeaderComponent', () => {
     expect(fixture.nativeElement.querySelector('app-search')).toBeFalsy()
   })
 
-  it('renders the mobile sign-in/register action before public nav items', () => {
+  it('renders public nav items without a sign-in/register action', () => {
     component.platform = mobilePlatform
     component.mobileMenuState = true
-    component.signinRegisterButton = true
     component.user = undefined
     fixture.detectChanges()
 
@@ -86,8 +85,10 @@ describe('HeaderComponent', () => {
         button.textContent?.replace(/\s+/g, ' ').trim()
     )
 
-    expect(buttonLabels[0]).toBe('Sign in / Register')
-    expect(buttonLabels[1]).toBe('ABOUT')
+    expect(buttonLabels[0]).toBe('ABOUT')
+    expect(
+      buttonLabels.some((label) => label?.includes('Sign in'))
+    ).toBe(false)
   })
 
   it('sets active menu item id when a navigable item is clicked', () => {

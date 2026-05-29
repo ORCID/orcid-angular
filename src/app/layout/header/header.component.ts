@@ -55,7 +55,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   menu: ApplicationMenuItem[] = this.createMenuList(menu)
   user: UserInfo
   togglz: Config
-  signinRegisterButton = true
   labelLogo = $localize`:@@layout.ariaLabelConnectingResearchers:Connecting research and researchers`
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
@@ -121,9 +120,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     _router.events.subscribe(() => {
       const path = location.path()
-      this.signinRegisterButton =
-        path !== `/${ApplicationRoutes.signin}` &&
-        path !== `/${ApplicationRoutes.register}`
       this.hideMainMenu = path.indexOf(`/${ApplicationRoutes.home}`) !== -1
     })
   }
@@ -165,11 +161,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       !!(item.activeRoute || item.route) &&
       '/' + (item.activeRoute || item.route) === this.currentRoute
     return routeMatch || this.activeMenuItemId === item.id
-  }
-
-  onNavClick(route: string, menuItemId: string) {
-    this.activeMenuItemId = menuItemId
-    this.goto(route)
   }
 
   private lockBodyScroll() {
