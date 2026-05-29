@@ -14,9 +14,10 @@ describe('MyOrcidComponent header loading state', () => {
 
   beforeEach(() => {
     recordHeaderState = new RecordHeaderStateService()
-    rumEvents = jasmine.createSpyObj<RumJourneyEventService>('RumJourneyEventService', [
-      'recordSimpleEvent',
-    ])
+    rumEvents = jasmine.createSpyObj<RumJourneyEventService>(
+      'RumJourneyEventService',
+      ['recordSimpleEvent']
+    )
     component = new MyOrcidComponent(
       {} as any,
       {} as any,
@@ -104,14 +105,14 @@ describe('MyOrcidComponent header loading state', () => {
   it('should record the featured employment caption event once when enabled', () => {
     const record = getUserRecord()
     record.affiliations[0].affiliationGroup[0].affiliations[0].featured = true
-    record.affiliations[0].affiliationGroup[0].affiliations[0].affiliationType = {
-      value: AffiliationType.employment,
-    }
+    record.affiliations[0].affiliationGroup[0].affiliations[0].affiliationType =
+      {
+        value: AffiliationType.employment,
+      }
 
     component.publicOrcid = record.userInfo.REAL_USER_ORCID
     ;(component as any).featuredAffiliationsEnabled = true
     spyOn(performance, 'now').and.returnValue(275)
-
     ;(component as any).checkFeaturedEmploymentCaptionState(record)
     ;(component as any).checkFeaturedEmploymentCaptionState(record)
 
@@ -134,7 +135,6 @@ describe('MyOrcidComponent header loading state', () => {
 
     component.publicOrcid = record.userInfo.REAL_USER_ORCID
     ;(component as any).featuredAffiliationsEnabled = false
-
     ;(component as any).checkFeaturedEmploymentCaptionState(record)
 
     expect(rumEvents.recordSimpleEvent).not.toHaveBeenCalledWith(

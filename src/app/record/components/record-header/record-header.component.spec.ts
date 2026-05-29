@@ -30,9 +30,11 @@ describe('RecordHeaderComponent', () => {
       'getRecord',
     ])
     togglzService = {
-      getStateOf: jasmine.createSpy('getStateOf').and.callFake((flag: string) =>
-        of(flag === TogglzFlag.FEATURED_AFFILIATIONS)
-      ),
+      getStateOf: jasmine
+        .createSpy('getStateOf')
+        .and.callFake((flag: string) =>
+          of(flag === TogglzFlag.FEATURED_AFFILIATIONS)
+        ),
     }
 
     await TestBed.configureTestingModule({
