@@ -70,11 +70,12 @@
       *ngIf="work?.numberOfContributors > maxNumberContributorsWorkDetails"
     >
       <p>
-        <span i18n="@@works.showing">Showing the first</span>
-        <b>{{ maxNumberContributorsWorkDetails }}</b>
-        <span class="lowercase" i18n="@@works.contributors">
-          contributors
-        </span>
+        <span i18n="@@works.showing">Showing the first</span>&nbsp;<b>{{
+          maxNumberContributorsWorkDetails
+        }}</b
+        >&nbsp;<span class="lowercase" i18n="@@works.contributors"
+          >contributors</span
+        >
       </p>
       <p>----</p>
     </ng-container>
