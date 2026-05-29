@@ -19110,6 +19110,7 @@
       </trans-unit>
       <trans-unit id="account.copySetupCodeToClipboard" datatype="html" resname="account.copySetupCodeToClipboard">
         <source>Copy setup code to clipboard</source>
+        <target>Copiar o código de configuração para a área de transferência</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.ts</context>
           <context context-type="linenumber">48</context>
@@ -19133,6 +19134,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryCodes" datatype="html" resname="account.recoveryCodes">
         <source>Recovery codes can be used to access your ORCID account when you aren’t able to use your authentication app. Each recovery code can only be used once.</source>
+        <target>Os códigos de recuperação podem ser utilizados para aceder à sua conta ORCID quando não for possível utilizar a sua aplicação de autenticação. Cada código de recuperação só pode ser utilizado uma vez. </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
           <context context-type="linenumber">17,21</context>
