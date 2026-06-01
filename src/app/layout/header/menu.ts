@@ -31,23 +31,4 @@ export const menu: ApplicationMenuItemBasic[] = [
     label: $localize`:@@public-layout.newsEvents:News & Events`,
     route: '',
   },
-
-  {
-    id: 'public-layout.sign_in',
-    label: $localize`:@@public-layout.sign_in:SIGN IN`,
-    requirements: {
-      desktop: true,
-      logging: false,
-    },
-    route: 'signin',
-  },
-  {
-    id: 'public-layout.sign_out',
-    label: $localize`:@@public-layout.sign_out:SIGN OUT`,
-    requirements: {
-      desktop: true,
-      logging: true,
-    },
-    route: 'signout',
-  },
 ]

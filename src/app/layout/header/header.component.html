@@ -100,45 +100,6 @@
       [ngClass]="{ container: platform.columns12 }"
       tabindex="-1"
     >
-      <ul
-        class="row mobile-auth-menu"
-        *ngIf="checkMenuItemRequirements({ desktop: false })"
-      >
-        <li
-          class="col no-gutters"
-          *ngIf="
-            checkMenuItemRequirements({ logging: false }) &&
-            signinRegisterButton
-          "
-        >
-          <button
-            mat-button
-            class="top-menu-button sign-in-button"
-            [ngClass]="{ active: activeMenuItemId === 'header-signin' }"
-            (click)="onNavClick('signin', 'header-signin')"
-          >
-            <ng-container i18n="@@header.signin">Sign in</ng-container
-            >&nbsp;/&nbsp;<ng-container i18n="@@header.register"
-              >Register</ng-container
-            >
-          </button>
-        </li>
-        <li
-          class="col no-gutters"
-          *ngIf="checkMenuItemRequirements({ logging: true })"
-        >
-          <button
-            mat-button
-            class="top-menu-button sign-in-button"
-            [ngClass]="{ active: activeMenuItemId === 'header-signout' }"
-            (click)="onNavClick('signout', 'header-signout')"
-          >
-            <ng-container i18n="#upperCase@@public-layout.sign_out"
-              >SIGN OUT</ng-container
-            >
-          </button>
-        </li>
-      </ul>
       <ng-template #recursiveList let-list let-parents="parents">
         <ul class="row" *ngIf="!isDesktopThirdLevelMenu(parents)">
           <ng-container *ngFor="let item of list">
