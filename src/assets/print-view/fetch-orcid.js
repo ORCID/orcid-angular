@@ -333,6 +333,26 @@ function renderPersonalInfoFromJson(recordJson, container) {
     blocks.push(block)
   }
 
+  const countries = jsonList(person?.addresses?.address)
+    .map((a) => {
+      console.log('xxxxxxxxxxxxxxxxxxx')
+      console.log(a.country)
+      console.log('xxxxxxxxxxxxxxxxxxx')
+      return jsonText(a?.country)
+    })
+    .filter(Boolean)
+
+  console.log(JSON.stringify(countries))
+
+  if (countries.length) {
+    const block = document.createElement('div')
+    const title = document.createElement('h3')
+    title.textContent = 'Countries'
+    block.appendChild(title)
+    appendList(block, [textLineNode('', countries.join(', '))])
+    blocks.push(block)
+  }
+
   const keywords = jsonList(person?.keywords?.keywords)
     .map((k) => jsonText(k?.content))
     .filter(Boolean)
@@ -655,6 +675,9 @@ async function loadRecord(orcidId) {
 
   try {
     const { recordJson } = await fetchOrcidRecord(orcidId)
+    console.log('==========================================')
+    console.log(JSON.stringify(recordJson))
+    console.log('==========================================')
     renderRecord(recordJson)
     clearStatus()
     cvRoot.setAttribute('aria-busy', 'false')
