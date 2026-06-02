@@ -243,7 +243,7 @@ function renderIdentityFromJson(recordJson) {
     orcidRow.className = 'orcid-id'
 
     const icon = document.createElement('img')
-    icon.src = 'https://orcid.org/sites/default/files/images/orcid_16x16.png'
+    icon.src = 'https://orcid.org/assets/vectors/orcid.logo.black.icon.svg'
     icon.alt = 'ORCID iD'
     orcidRow.appendChild(icon)
 
@@ -259,6 +259,27 @@ function renderIdentityFromJson(recordJson) {
 
   container.appendChild(header)
   return container
+}
+
+function renderBiographyFromJson(recordJson, container) {
+  const person = recordJson?.person
+  
+  if (!person) return
+  
+  const bioElement = person?.biography
+  
+  if (!bioElement) return
+  
+  const biography = jsonText(bioElement?.content)
+  
+  if (typeof myVar === 'string' && myVar.length === 0) return     
+
+  const bioSection = makeSection('Biography')
+  const bioLine = document.createElement('p')
+  bioLine.className = 'other-names'
+  bioLine.textContent = biography
+  bioSection.appendChild(bioLine)
+  container.appendChild(bioSection)
 }
 
 function renderPersonalInfoFromJson(recordJson, container) {
@@ -582,6 +603,7 @@ function renderRecord(recordJson) {
   }
   clearNode(cvRoot)
   const container = renderIdentityFromJson(recordJson)
+  renderBiographyFromJson(recordJson, container)
   renderPersonalInfoFromJson(recordJson, container)
   renderActivitiesFromJson(recordJson, container)
   cvRoot.appendChild(container)
