@@ -169,6 +169,12 @@ const routes: Routes = [
       ),
   },
   {
+    path: ApplicationRoutes.smsPoc,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./sms-poc/sms-poc.module').then((m) => m.SmsPocModule),
+  },
+  {
     path: '404',
     loadChildren: () =>
       import('./page-not-found-404/page-not-found-404.module').then(
