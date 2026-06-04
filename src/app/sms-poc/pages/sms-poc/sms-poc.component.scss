@@ -1,0 +1,90 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(6, 136, 219, 0.08), transparent 38%),
+    radial-gradient(circle at 100% 100%, rgba(255, 183, 77, 0.1), transparent 36%);
+}
+
+.sms-poc-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 12px 28px -20px rgba(0, 0, 0, 0.45);
+}
+
+.sms-poc-description {
+  color: #334155;
+}
+
+.provider-selection {
+  padding: 0.25rem 0.5rem 0.75rem;
+  border-radius: 10px;
+  border: 1px dashed rgba(6, 136, 219, 0.28);
+  background: linear-gradient(180deg, rgba(6, 136, 219, 0.06), rgba(6, 136, 219, 0.02));
+}
+
+.provider-group {
+  flex-wrap: wrap;
+}
+
+.phone-input-shell {
+  padding: 0.35rem;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #fff;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.phone-input-shell:focus-within {
+  border-color: #0688db;
+  box-shadow: 0 0 0 3px rgba(6, 136, 219, 0.18);
+}
+
+intl-tel-input {
+  display: block;
+}
+
+:host ::ng-deep intl-tel-input .iti {
+  width: 100%;
+}
+
+:host ::ng-deep intl-tel-input .iti__selected-country-primary {
+  padding: 0.5rem 0.45rem;
+  border-radius: 8px;
+}
+
+:host ::ng-deep intl-tel-input input[type='tel'] {
+  width: 100%;
+  min-height: 3rem;
+  border: 0;
+  border-radius: 9px;
+  background: #fff;
+  font-size: 0.95rem;
+  padding: 0.65rem 0.75rem;
+  color: #0f172a;
+  outline: none;
+}
+
+:host ::ng-deep .provider-group .mat-mdc-radio-button {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+}
+
+@media (max-width: 640px) {
+  :host {
+    align-items: flex-start;
+    min-height: auto;
+    padding: 0.75rem;
+  }
+
+  .provider-group {
+    gap: 0.5rem;
+  }
+}

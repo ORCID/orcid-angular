@@ -138,6 +138,7 @@
               "projects/orcid-tokens/tokens.css",
               "src/assets/scss/orcid-ui-theme.scss",
               "src/assets/scss/orcid.scss",
+              "node_modules/intl-tel-input/dist/css/intlTelInput.css",
               "src/styles.scss",
               "src/assets/scss/grid.scss"
             ],
