@@ -1,3 +1,9 @@
+## v2.135.2 - 2026-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.1...v2.135.2)
+
+- [#2846](https://github.com/ORCID/orcid-angular/pull/2846): PD-5541
+
 ## v2.135.1 - 2026-06-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.0...v2.135.1)
