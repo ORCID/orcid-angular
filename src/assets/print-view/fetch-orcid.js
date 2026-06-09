@@ -178,7 +178,7 @@ function appendList(section, entries) {
   section.appendChild(list)
 }
 
-function jsonText(value) {
+function jsonText(value) {  
   if (value === null || value === undefined) return ''
   if (typeof value === 'string') return value.trim()
   if (typeof value === 'number' || typeof value === 'boolean')
@@ -212,9 +212,9 @@ function jsonOrcidUri(orcidIdentifier) {
 function renderIdentityFromJson(recordJson) {
   const person = recordJson?.person
   const name = person?.name
-  const given = jsonText(name?.givenNames)
-  const family = jsonText(name?.familyName)
-  const credit = jsonText(name?.creditName)
+  const given = jsonText(name?.['given-names'])
+  const family = jsonText(name?.['family-Nam'])
+  const credit = jsonText(name?.['credit-name'])
   const fullName = [given, family].filter(Boolean).join(' ')
   const chosenName = credit || fullName || 'Unnamed ORCID profile'
 
@@ -289,7 +289,7 @@ function renderPersonalInfoFromJson(recordJson, container) {
   const section = makeSection('Personal information')
   const blocks = []
 
-  const emails = jsonList(person?.emails?.emails)
+  const emails = jsonList(person?.emails?.email)
     .map((e) => jsonText(e?.email))
     .filter(Boolean)
   if (emails.length) {
@@ -304,9 +304,9 @@ function renderPersonalInfoFromJson(recordJson, container) {
     blocks.push(block)
   }
 
-  const links = jsonList(person?.researcherUrls?.researcherUrls)
+  const links = jsonList(person?.['researcher-urls']?.['researcher-url'])
     .map((u) => ({
-      name: jsonText(u?.urlName),
+      name: jsonText(u?.['url-name']),
       url: sanitizeUrl(jsonText(u?.url?.value) || jsonText(u?.url)),
     }))
     .filter((u) => u.url)
@@ -331,45 +331,13 @@ function renderPersonalInfoFromJson(recordJson, container) {
     })
     appendList(block, lines)
     blocks.push(block)
-  }
+  }  
 
-  const countries = jsonList(person?.addresses?.address)
-    .map((a) => {
-      console.log('xxxxxxxxxxxxxxxxxxx')
-      console.log(a.country)
-      console.log('xxxxxxxxxxxxxxxxxxx')
-      return jsonText(a?.country)
-    })
-    .filter(Boolean)
-
-  console.log(JSON.stringify(countries))
-
-  if (countries.length) {
-    const block = document.createElement('div')
-    const title = document.createElement('h3')
-    title.textContent = 'Countries'
-    block.appendChild(title)
-    appendList(block, [textLineNode('', countries.join(', '))])
-    blocks.push(block)
-  }
-
-  const keywords = jsonList(person?.keywords?.keywords)
-    .map((k) => jsonText(k?.content))
-    .filter(Boolean)
-  if (keywords.length) {
-    const block = document.createElement('div')
-    const title = document.createElement('h3')
-    title.textContent = 'Keywords'
-    block.appendChild(title)
-    appendList(block, [textLineNode('', keywords.join(', '))])
-    blocks.push(block)
-  }
-
-  const externalIds = jsonList(person?.externalIdentifiers?.externalIdentifiers)
+  const externalIds = jsonList(person?.['external-identifiers']?.['external-identifier'])
     .map((id) => ({
-      type: jsonText(id?.type),
-      value: jsonText(id?.value),
-      url: sanitizeUrl(jsonText(id?.url?.value) || jsonText(id?.url)),
+      type: jsonText(id?.['external-id-type']),
+      value: jsonText(id?.['external-id-value']),
+      url: sanitizeUrl(jsonText(id?.['external-id-url']?.value) || jsonText(id?.url)),
     }))
     .filter((id) => id.type || id.value || id.url)
   if (externalIds.length) {
@@ -383,6 +351,33 @@ function renderPersonalInfoFromJson(recordJson, container) {
       return textLineNode(label, value, entry.url)
     })
     appendList(block, lines)
+    blocks.push(block)
+  }
+
+  const keywords = jsonList(person?.keywords?.keyword)
+    .map((k) => jsonText(k?.content))
+    .filter(Boolean)
+  if (keywords.length) {
+    const block = document.createElement('div')
+    const title = document.createElement('h3')
+    title.textContent = 'Keywords'
+    block.appendChild(title)
+    appendList(block, [textLineNode('', keywords.join(', '))])
+    blocks.push(block)
+  }  
+
+  const countries = jsonList(person?.addresses?.address)
+    .map((a) => {
+      return jsonText(a?.country)
+    })
+    .filter(Boolean)
+
+  if (countries.length) {
+    const block = document.createElement('div')
+    const title = document.createElement('h3')
+    title.textContent = 'Countries'
+    block.appendChild(title)
+    appendList(block, [textLineNode('', countries.join(', '))])
     blocks.push(block)
   }
 
@@ -423,7 +418,7 @@ function safeTextNode(value) {
   return (value || '').replace(/\s+/g, ' ').trim()
 }
 
-function renderActivityGroupFromJson(section, title, items, renderItem) {
+function renderActivityGroupFromJson(section, title, items, renderItem) {  
   const entries = (items || []).filter(Boolean)
   if (!entries.length) return false
   const block = document.createElement('div')
@@ -433,7 +428,7 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
   block.appendChild(heading)
   const list = document.createElement('ul')
   entries.forEach((entry) => {
-    const li = document.createElement('li')
+    const li = document.createElement('li')    
     li.appendChild(renderItem(entry))
     list.appendChild(li)
   })
@@ -442,21 +437,23 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
   return true
 }
 
-function composeActivityEntryFromJson(entry, opts = {}) {
+function composeActivityEntryFromJson(entry, opts = {}) {  
+  console.log(JSON.stringify("--------------------------------------------------"))
+  console.log(JSON.stringify(entry))  
+  console.log(JSON.stringify("--------------------------------------------------"))
   const wrapper = document.createElement('div')
-  wrapper.className = 'activity-item'
-
+  wrapper.className = 'activity-item'  
   const title =
     opts.title ||
     jsonText(entry?.title?.title) ||
     jsonText(entry?.organization?.name) ||
-    jsonText(entry?.roleTitle) ||
+    jsonText(entry?.['role-title']) ||
     jsonText(entry?.type) ||
     'Untitled'
   const titleNode = document.createElement('strong')
   titleNode.textContent = title
   wrapper.appendChild(titleNode)
-
+  
   const org = jsonText(entry?.organization?.name)
   if (org && org !== title)
     wrapper.appendChild(textLineNode('Organization', org))
@@ -467,27 +464,23 @@ function composeActivityEntryFromJson(entry, opts = {}) {
     jsonText(entry?.organization?.address?.country),
   ]
     .filter(Boolean)
-    .join(', ')
+    .join(', ')  
   if (orgAddress)
     wrapper.appendChild(textLineNode('Organization address', orgAddress))
 
-  const start = jsonDate(entry?.startDate)
-  const end = jsonDate(entry?.endDate)
+  const start = jsonDate(entry?.['start-date'])
+  const end = jsonDate(entry?.['end-date'])
   if (start) wrapper.appendChild(textLineNode('Start date', start))
   if (end) wrapper.appendChild(textLineNode('End date', end))
 
-  const pub = jsonDate(entry?.publicationDate)
+  const pub = jsonDate(entry?.['publication-date'])
   if (pub) wrapper.appendChild(textLineNode('Publication date', pub))
-
-  const journal = jsonText(entry?.journalTitle)
+  const journal = jsonText(entry?.['journal-title'])
   if (journal) wrapper.appendChild(textLineNode('Journal', journal))
-
-  const roleTitle = jsonText(entry?.roleTitle)
+  const roleTitle = jsonText(entry?.['role-title'])
   if (roleTitle) wrapper.appendChild(textLineNode('Role title', roleTitle))
-
-  const dept = jsonText(entry?.departmentName)
+  const dept = jsonText(entry?.['department-nName'])
   if (dept) wrapper.appendChild(textLineNode('Department', dept))
-
   const type = jsonText(entry?.type)
   if (type) wrapper.appendChild(textLineNode('Type', type))
 
@@ -496,18 +489,16 @@ function composeActivityEntryFromJson(entry, opts = {}) {
 
   // External identifiers (works / fundings etc)
   const extIds =
-    entry?.externalIdentifiers?.externalIdentifier ||
-    entry?.externalIDs?.externalIdentifier ||
-    entry?.externalIds?.externalId ||
+    entry?.['external-ids']?.['external-id'] ||
     []
   if (Array.isArray(extIds) && extIds.length) {
     extIds.forEach((id) => {
-      const idType = jsonText(id.type || id.externalIdType)
-      const idValue = jsonText(id.value || id.externalIdValue)
-      const idRel = jsonText(id.relationship || id.externalIdRelationship)
+      const idType = jsonText(id.type || id['external-id-type'])
+      const idValue = jsonText(id.value || id['external-id-value'])
+      const idRel = jsonText(id.relationship || id['external-id-relationship'])
       const idUrl = sanitizeUrl(
         jsonText(
-          id.url?.value || id.externalIdUrl?.value || id.externalIdUrl || id.url
+          id['external-id-url']?.value
         )
       )
       const label =
@@ -521,44 +512,87 @@ function composeActivityEntryFromJson(entry, opts = {}) {
   return wrapper
 }
 
-function renderActivitiesFromJson(recordJson, container) {
-  const activities = recordJson?.activitiesSummary
-  if (!activities) return
+function renderEmployments(activities, section) {
+  // Employments: activities-summary.employments.affiliation-group[].summaries[]
+  const employments = []
+  
+  for (const groups of activities?.employments?.['affiliation-group']) {
+    // Get just the first element from each group
+    for(const summaries of groups.summaries) {
+      employments.push(summaries['employment-summary'])
+      break;
+    }
+  }
 
-  const section = makeSection('Activities')
-  let hasContent = false
-
-  // Works: activitiesSummary.works.workGroup[].workSummary[]
-  const workSummaries = (activities?.works?.workGroup || []).flatMap(
-    (g) => g?.workSummary || []
-  )
-  hasContent =
-    renderActivityGroupFromJson(section, 'Works', workSummaries, (w) =>
-      composeActivityEntryFromJson(w, { title: jsonText(w?.title?.title) })
-    ) || hasContent
-
-  // Educations: activitiesSummary.educations.educationGroups[].activities[]
-  const educations = (activities?.educations?.educationGroups || []).flatMap(
-    (g) => g?.activities || []
-  )
-  hasContent =
-    renderActivityGroupFromJson(section, 'Educations', educations, (e) =>
-      composeActivityEntryFromJson(e, {
-        title: jsonText(e?.organization?.name) || jsonText(e?.roleTitle),
-      })
-    ) || hasContent
-
-  // Employments: activitiesSummary.employments.employmentGroups[].activities[]
-  const employments = (activities?.employments?.employmentGroups || []).flatMap(
-    (g) => g?.activities || []
-  )
+  hasContent = false
   hasContent =
     renderActivityGroupFromJson(section, 'Employments', employments, (e) =>
       composeActivityEntryFromJson(e, {
         title: jsonText(e?.organization?.name) || jsonText(e?.roleTitle),
       })
     ) || hasContent
+    return hasContent
+}
 
+function renderEducationsAndQualifications(activities, section) {  
+  const educations = [] 
+  // Educations: activities.educations.affiliation-group[].[0].summaries[]
+  if(activities?.educations?.['affiliation-group']?.[0]?.summaries?.length > 0) {    
+    for(const edu of activities?.educations?.['affiliation-group']?.[0]?.summaries) {
+      educations.push({
+        type: 'education',
+        title: edu['education-summary'].organization?.name || edu['education-summary']?.['role-title'],
+        original: edu['education-summary']
+      })
+    }              
+  }
+
+  // Qualifications: activities.qualifications.affiliation-group[].[0].summaries[]
+  const qualifications = []
+  if(activities?.qualifications?.['affiliation-group']?.[0]?.summaries?.length > 0) {
+    for(const qual of activities?.qualifications?.['affiliation-group']?.[0]?.summaries) {
+      qualifications.push({
+        type: 'qualification',
+        title: qual['qualification-summary'].organization?.name || qual['qualification-summary']?.['role-title'],
+        original: qual['qualification-summary']
+      })
+    }       
+  }  
+  const merged = [...educations, ...qualifications]  
+  merged.sort((a,b) => a.title.localeCompare(b.title))
+  
+  hasContent = false
+  hasContent =
+    renderActivityGroupFromJson(section, 'Education and qualifications', merged, (e) =>
+      composeActivityEntryFromJson(e.original, { title: e.title })
+    ) || hasContent   
+    return hasContent
+}
+
+function renderWorks(activities, section) {
+  // Works: activities-summary.works.group[].work-summary[]
+  const workSummaries = (activities?.works?.group || []).flatMap(
+    (g) => g?.['work-summary'] || []
+  )
+  hasContent = false
+  hasContent =
+    renderActivityGroupFromJson(section, 'Works', workSummaries, (w) =>
+      composeActivityEntryFromJson(w, { title: jsonText(w?.title?.title) })
+    ) || hasContent
+  return hasContent
+}
+
+function renderActivitiesFromJson(recordJson, container) {  
+  const activities = recordJson?.['activities-summary']  
+  if (!activities) return
+
+  const section = makeSection('Activities')
+  let hasContent = false
+
+  if(renderEmployments(activities, section)) hasContent = true  
+  if(renderEducationsAndQualifications(activities, section)) hasContent = true  
+  //if(renderWorks(activities, section)) hasContent = true  
+    
   // Fundings: activitiesSummary.fundings.fundingGroup[].activities[]
   const fundings = (activities?.fundings?.fundingGroup || []).flatMap(
     (g) => g?.activities || []
@@ -580,21 +614,6 @@ function renderActivitiesFromJson(recordJson, container) {
       composeActivityEntryFromJson(p, {
         title: jsonText(p?.organization?.name) || jsonText(p?.groupId),
       })
-    ) || hasContent
-
-  // Qualifications: activitiesSummary.qualifications.qualificationGroups[].activities[]
-  const qualifications = (
-    activities?.qualifications?.qualificationGroups || []
-  ).flatMap((g) => g?.activities || [])
-  hasContent =
-    renderActivityGroupFromJson(
-      section,
-      'Qualifications',
-      qualifications,
-      (q) =>
-        composeActivityEntryFromJson(q, {
-          title: jsonText(q?.organization?.name) || jsonText(q?.roleTitle),
-        })
     ) || hasContent
 
   // Research resources: activitiesSummary.researchResources.researchResourceGroup[].activities[] (or researchResourceSummary)
@@ -623,8 +642,8 @@ function renderRecord(recordJson) {
   }
   clearNode(cvRoot)
   const container = renderIdentityFromJson(recordJson)
-  renderBiographyFromJson(recordJson, container)
-  renderPersonalInfoFromJson(recordJson, container)
+  //renderBiographyFromJson(recordJson, container)
+  //renderPersonalInfoFromJson(recordJson, container)
   renderActivitiesFromJson(recordJson, container)
   cvRoot.appendChild(container)
 }
@@ -675,9 +694,6 @@ async function loadRecord(orcidId) {
 
   try {
     const { recordJson } = await fetchOrcidRecord(orcidId)
-    console.log('==========================================')
-    console.log(JSON.stringify(recordJson))
-    console.log('==========================================')
     renderRecord(recordJson)
     clearStatus()
     cvRoot.setAttribute('aria-busy', 'false')
