@@ -438,10 +438,6 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
 }
 
 function composeActivityEntryFromJson(entry, opts = {}) {  
-  console.log(JSON.stringify("--------------------------------------------------"))
-  console.log(JSON.stringify(entry))  
-  console.log(JSON.stringify(opts))  
-  console.log(JSON.stringify("--------------------------------------------------"))
   const wrapper = document.createElement('div')
   wrapper.className = 'activity-item'  
   const title =
@@ -493,8 +489,12 @@ function composeActivityEntryFromJson(entry, opts = {}) {
   }
 
   // External identifiers (works / fundings etc)
+  console.log("1")
+  console.log(JSON.stringify(entry))
+  console.log("2")
+  console.log(JSON.stringify(entry?.['external-ids']))
   const extIds =
-    entry?.['external-ids']?.['external-id'] ||
+    entry?.['external-ids']?.['external-id'] || entry?.proposal?.['external-ids']?.['external-id'] || 
     []
   if (Array.isArray(extIds) && extIds.length) {
     extIds.forEach((id) => {
@@ -671,6 +671,34 @@ function renderProfessionalActivities(activities, section) {
     return hasContent
 }
 
+function renderFundings(activities, section) {  
+  // Fundings: activitiesSummary.fundings.group[].activities[]
+  const fundings = (activities?.fundings?.group || []).flatMap(
+    (g) => g?.['funding-summary'] || []
+  )
+  hasContent = false
+  hasContent =
+    renderActivityGroupFromJson(section, 'Fundings', fundings, (f) =>
+      composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
+    ) || hasContent    
+  return hasContent
+}
+
+function renderResearchResources(activities, section) {
+  // Research resources: activities.research-resources.group.research-resource-summary
+  const researchResources = (
+    activities?.['research-resources']?.group || []
+  ).flatMap((g) => g?.['research-resource-summary'] || [])
+  
+
+  hasContent = false
+  hasContent =
+    renderActivityGroupFromJson(section, 'Research Resources', researchResources, (r) =>
+      composeActivityEntryFromJson(r, { title: jsonText(r?.proposal?.title?.title) || jsonText(r?.proposal?.url?.value), })
+    ) || hasContent    
+  return hasContent
+}
+
 function renderActivitiesFromJson(recordJson, container) {  
   const activities = recordJson?.['activities-summary']  
   if (!activities) return
@@ -678,21 +706,12 @@ function renderActivitiesFromJson(recordJson, container) {
   const section = makeSection('Activities')
   let hasContent = false
 
-  if(renderEmployments(activities, section)) hasContent = true  
-  if(renderEducationsAndQualifications(activities, section)) hasContent = true  
-  if(renderProfessionalActivities(activities, section)) hasContent = true
-  if(renderWorks(activities, section)) hasContent = true  
-    
-  // Fundings: activitiesSummary.fundings.fundingGroup[].activities[]
-  const fundings = (activities?.fundings?.fundingGroup || []).flatMap(
-    (g) => g?.activities || []
-  )
-  hasContent =
-    renderActivityGroupFromJson(section, 'Fundings', fundings, (f) =>
-      composeActivityEntryFromJson(f, {
-        title: jsonText(f?.title?.title) || jsonText(f?.type),
-      })
-    ) || hasContent
+  //if(renderEmployments(activities, section)) hasContent = true  
+  //if(renderEducationsAndQualifications(activities, section)) hasContent = true  
+  //if(renderProfessionalActivities(activities, section)) hasContent = true  
+  //if(renderFundings(activities, section)) hasContent = true  
+  if(renderResearchResources(activities, section)) hasContent = true  
+  //if(renderWorks(activities, section)) hasContent = true  
 
   // Peer reviews: activitiesSummary.peerReviews.peerReviewGroup[].peerReviewGroup[].peerReviewSummary[]
   const peerReviews = (activities?.peerReviews?.peerReviewGroup || []).flatMap(
@@ -706,22 +725,7 @@ function renderActivitiesFromJson(recordJson, container) {
       })
     ) || hasContent
 
-  // Research resources: activitiesSummary.researchResources.researchResourceGroup[].activities[] (or researchResourceSummary)
-  const researchResources = (
-    activities?.researchResources?.researchResourceGroup || []
-  ).flatMap((g) => g?.activities || [])
-  hasContent =
-    renderActivityGroupFromJson(
-      section,
-      'Research resources',
-      researchResources,
-      (r) =>
-        composeActivityEntryFromJson(r, {
-          title:
-            jsonText(r?.proposal?.title?.title) ||
-            jsonText(r?.proposal?.url?.value),
-        })
-    ) || hasContent
+  
 
   if (hasContent) container.appendChild(section)
 }
