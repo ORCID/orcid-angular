@@ -440,6 +440,7 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
 function composeActivityEntryFromJson(entry, opts = {}) {  
   console.log(JSON.stringify("--------------------------------------------------"))
   console.log(JSON.stringify(entry))  
+  console.log(JSON.stringify(opts))  
   console.log(JSON.stringify("--------------------------------------------------"))
   const wrapper = document.createElement('div')
   wrapper.className = 'activity-item'  
@@ -537,34 +538,39 @@ function renderEmployments(activities, section) {
 function renderEducationsAndQualifications(activities, section) {  
   const educations = [] 
   // Educations: activities.educations.affiliation-group[].[0].summaries[]
-  if(activities?.educations?.['affiliation-group']?.[0]?.summaries?.length > 0) {    
-    for(const edu of activities?.educations?.['affiliation-group']?.[0]?.summaries) {
+  for (const groups of activities?.educations?.['affiliation-group']) {
+    // Get just the first element from each group
+    for(const summaries of groups.summaries) {
       educations.push({
         type: 'education',
-        title: edu['education-summary'].organization?.name || edu['education-summary']?.['role-title'],
-        original: edu['education-summary']
+        title: summaries['education-summary'].organization?.name || summaries['education-summary']?.['role-title'],
+        original: summaries['education-summary']
       })
-    }              
-  }
-
+      break;
+    }
+  }  
+  
   // Qualifications: activities.qualifications.affiliation-group[].[0].summaries[]
   const qualifications = []
-  if(activities?.qualifications?.['affiliation-group']?.[0]?.summaries?.length > 0) {
-    for(const qual of activities?.qualifications?.['affiliation-group']?.[0]?.summaries) {
+  for (const groups of activities?.qualifications?.['affiliation-group']) {
+    // Get just the first element from each group
+    for(const summaries of groups.summaries) {
       qualifications.push({
         type: 'qualification',
-        title: qual['qualification-summary'].organization?.name || qual['qualification-summary']?.['role-title'],
-        original: qual['qualification-summary']
+        title: summaries['qualification-summary'].organization?.name || summaries['qualification-summary']?.['role-title'],
+        original: summaries['qualification-summary']
       })
-    }       
+      break;
+    }
   }  
+
   const merged = [...educations, ...qualifications]  
   merged.sort((a,b) => a.title.localeCompare(b.title))
   
   hasContent = false
   hasContent =
     renderActivityGroupFromJson(section, 'Education and qualifications', merged, (e) =>
-      composeActivityEntryFromJson(e.original, { title: e.title })
+      composeActivityEntryFromJson(e.original, { title: e.title, type: e.type })
     ) || hasContent   
     return hasContent
 }
@@ -582,6 +588,85 @@ function renderWorks(activities, section) {
   return hasContent
 }
 
+function renderProfessionalActivities(activities, section) {
+  const invitedPositions = [] 
+  // invitedPositions: activities.invited-positions.affiliation-group[].[0].summaries[]
+  for (const groups of activities?.['invited-positions']?.['affiliation-group']) {
+    // Get just the first element from each group
+    for(const summaries of groups.summaries) {
+      invitedPositions.push({
+        type: 'invited-position',
+        title: summaries['invited-position-summary'].organization?.name || summaries['invited-position-summary']?.['role-title'],
+        original: summaries['invited-position-summary']
+      })
+      break;
+    }
+  }  
+
+  const distinctions = [] 
+  // distinctions: activities.distinctions.affiliation-group[].[0].summaries[]
+  for (const groups of activities?.['distinctions']?.['affiliation-group']) {
+    // Get just the first element from each group
+    for(const summaries of groups.summaries) {
+      distinctions.push({
+        type: 'distinction',
+        title: summaries['distinction-summary'].organization?.name || summaries['distinction-summary']?.['role-title'],
+        original: summaries['distinction-summary']
+      })
+      break;
+    }
+  }  
+
+  const memberships = [] 
+  // memberships: activities.memberships.affiliation-group[].[0].summaries[]
+  for (const groups of activities?.['memberships']?.['affiliation-group']) {
+    // Get just the first element from each group
+    for(const summaries of groups.summaries) {
+      memberships.push({
+        type: 'membership',
+        title: summaries['membership-summary'].organization?.name || summaries['membership-summary']?.['role-title'],
+        original: summaries['membership-summary']
+      })
+      break;
+    }
+  }  
+
+  const services = [] 
+  const editorialServices = []
+  // memberships: activities.services.affiliation-group[].[0].summaries[]
+  for (const groups of activities?.['services']?.['affiliation-group']) {
+    // Get just the first element from each group
+    for(const summaries of groups.summaries) {
+      // If there is an issn, then it will be set as an editorial service
+      const isEditorialService = summaries['external-ids']?.['external-id']?.some(extId => extId['external-id-type'] === 'issn')
+      if(isEditorialService) {
+        editorialServices.push({
+        type: 'editorial-service',
+        title: summaries['service-summary'].organization?.name || summaries['service-summary']?.['role-title'],
+        original: summaries['service-summary']
+        })
+      } else {
+        services.push({
+        type: 'service',
+        title: summaries['service-summary'].organization?.name || summaries['service-summary']?.['role-title'],
+        original: summaries['service-summary']
+        })
+      }      
+      break;
+    }
+  }  
+
+  const merged = [...invitedPositions, ...distinctions, ...memberships, ...editorialServices, ...services]  
+  merged.sort((a,b) => a.title.localeCompare(b.title))
+
+  hasContent = false
+  hasContent =
+    renderActivityGroupFromJson(section, 'Professional activities', merged, (e) =>
+      composeActivityEntryFromJson(e.original, { title: e.title, type: e.type })
+    ) || hasContent   
+    return hasContent
+}
+
 function renderActivitiesFromJson(recordJson, container) {  
   const activities = recordJson?.['activities-summary']  
   if (!activities) return
@@ -591,7 +676,8 @@ function renderActivitiesFromJson(recordJson, container) {
 
   if(renderEmployments(activities, section)) hasContent = true  
   if(renderEducationsAndQualifications(activities, section)) hasContent = true  
-  //if(renderWorks(activities, section)) hasContent = true  
+  if(renderProfessionalActivities(activities, section)) hasContent = true
+  if(renderWorks(activities, section)) hasContent = true  
     
   // Fundings: activitiesSummary.fundings.fundingGroup[].activities[]
   const fundings = (activities?.fundings?.fundingGroup || []).flatMap(
