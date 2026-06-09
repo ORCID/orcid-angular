@@ -488,6 +488,10 @@ function composeActivityEntryFromJson(entry, opts = {}) {
   const url = sanitizeUrl(jsonText(entry?.url?.value) || jsonText(entry?.url))
   if (url) wrapper.appendChild(textLineNode('URL', url, url))
 
+  if (opts.type) {
+    wrapper.appendChild(textLineNode('Type', opts.type))
+  }
+
   // External identifiers (works / fundings etc)
   const extIds =
     entry?.['external-ids']?.['external-id'] ||
