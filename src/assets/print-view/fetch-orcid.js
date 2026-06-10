@@ -227,7 +227,7 @@ function renderIdentityFromJson(recordJson) {
   title.textContent = chosenName
   header.appendChild(title)
 
-  const otherNames = jsonList(person?.otherNames?.otherNames)
+  const otherNames = jsonList(person?.['other-names']?.['other-name'])
     .map((n) => jsonText(n?.content))
     .filter(Boolean)
   if (otherNames.length) {
@@ -237,7 +237,7 @@ function renderIdentityFromJson(recordJson) {
     header.appendChild(namesLine)
   }
 
-  const orcidUri = jsonOrcidUri(recordJson?.orcidIdentifier)
+  const orcidUri = jsonOrcidUri(recordJson?.['orcid-identifier'])
   if (orcidUri) {
     const orcidRow = document.createElement('div')
     orcidRow.className = 'orcid-id'
@@ -762,8 +762,8 @@ function renderRecord(recordJson) {
   }
   clearNode(cvRoot)
   const container = renderIdentityFromJson(recordJson)
-  //renderBiographyFromJson(recordJson, container)
-  //renderPersonalInfoFromJson(recordJson, container)
+  renderBiographyFromJson(recordJson, container)
+  renderPersonalInfoFromJson(recordJson, container)
   renderActivitiesFromJson(recordJson, container)
   cvRoot.appendChild(container)
 }

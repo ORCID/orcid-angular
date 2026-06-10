@@ -16,7 +16,7 @@
 body {
   margin: 0;
   padding: 24px;
-  background: var(--page-bg);
+  background: #fafafa;
   color: var(--text);
   font-family: Arial, sans-serif;
   line-height: 1.5;
