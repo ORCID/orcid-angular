@@ -6219,7 +6219,7 @@
         <source>ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6227,11 +6227,11 @@
         <source>2FA - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6239,7 +6239,7 @@
         <source>Institutional linking - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6247,7 +6247,7 @@
         <source>Social linking - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6255,7 +6255,7 @@
         <source>Institutional sign in - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6263,7 +6263,7 @@
         <source>Notifications inbox - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6271,15 +6271,15 @@
         <source>Sign in - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">125</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/constants.ts</context>
           <context context-type="linenumber">126</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants.ts</context>
+          <context context-type="linenumber">133</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6287,7 +6287,7 @@
         <source>Oauth - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6295,7 +6295,7 @@
         <source>Search - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6303,7 +6303,7 @@
         <source>Account reactivation - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">130</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6311,7 +6311,7 @@
         <source>Reset password - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">131</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6319,7 +6319,7 @@
         <source>Register - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6327,7 +6327,7 @@
         <source>Account settings - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6335,7 +6335,7 @@
         <source>Deactivate account - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6343,7 +6343,7 @@
         <source>Trusted parties - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6351,7 +6351,7 @@
         <source>Reset password - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6359,7 +6359,7 @@
         <source>Self Service - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6367,7 +6367,15 @@
         <source>Developer tools - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="share.smsPoc" datatype="html" resname="share.smsPoc">
+        <source>SMS POC - ORCID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants.ts</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6375,7 +6383,7 @@
         <source>- ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6383,7 +6391,7 @@
         <source>- My ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6391,7 +6399,7 @@
         <source>Manage employment dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">368</context>
+          <context context-type="linenumber">370</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6399,7 +6407,7 @@
         <source>Manage education dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">370</context>
+          <context context-type="linenumber">372</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6407,7 +6415,7 @@
         <source>Manage qualification dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">374</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6415,7 +6423,7 @@
         <source>Manage distinction dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">376</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6423,7 +6431,7 @@
         <source>Manage invited position dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">376</context>
+          <context context-type="linenumber">378</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6431,7 +6439,7 @@
         <source>Manage membership dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">380</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6439,7 +6447,7 @@
         <source>Manage service dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">382</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6447,7 +6455,7 @@
         <source>Manage editorial service dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">382</context>
+          <context context-type="linenumber">384</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6455,7 +6463,7 @@
         <source>Manage bibtex dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">387</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6463,7 +6471,7 @@
         <source>Manage external identifier dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">387</context>
+          <context context-type="linenumber">389</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6471,7 +6479,7 @@
         <source>Manage your names dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">391</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6479,7 +6487,7 @@
         <source>Manage your biography dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">391</context>
+          <context context-type="linenumber">393</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6487,7 +6495,7 @@
         <source>Manage your emails dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">395</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6495,7 +6503,7 @@
         <source>Manage your countries dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">395</context>
+          <context context-type="linenumber">397</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6503,7 +6511,7 @@
         <source>Manage your keywords dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">399</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6511,7 +6519,7 @@
         <source>Manage your other IDs dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">401</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6519,7 +6527,7 @@
         <source>Manage your websites &amp; social links dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">403</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6527,7 +6535,7 @@
         <source>Manage funding dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">403</context>
+          <context context-type="linenumber">405</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6535,7 +6543,7 @@
         <source>Manage funding search dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">407</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6543,7 +6551,7 @@
         <source>Manage work dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">407</context>
+          <context context-type="linenumber">409</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6551,7 +6559,7 @@
         <source>Manage work search dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">409</context>
+          <context context-type="linenumber">411</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6559,7 +6567,7 @@
         <source>Manage peer review dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">411</context>
+          <context context-type="linenumber">413</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -18956,6 +18964,126 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/pages/sign-in/sign-in.component.ts</context>
           <context context-type="linenumber">54</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.title" datatype="html" resname="smsPoc.title">
+        <source>SMS POC</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">2,4</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.description" datatype="html" resname="smsPoc.description">
+        <source>Send a test SMS. Choose AWS or Twilio for each send.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.sandboxNotice" datatype="html" resname="smsPoc.sandboxNotice">
+        <source>This POC currently runs in SANDBOX mode. If you want to test actual SMS delivery to your phone, please reach out to Leo on Slack to add your phone number to our AWS SNS ORCID Friend Sandbox and the Twilio accounts.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">14,19</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.provider" datatype="html" resname="smsPoc.provider">
+        <source>Provider</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">28,30</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.providerAws" datatype="html" resname="smsPoc.providerAws">
+        <source>AWS SNS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">36,38</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.providerTwilio" datatype="html" resname="smsPoc.providerTwilio">
+        <source>Twilio</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">39,41</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.phoneNumber" datatype="html" resname="smsPoc.phoneNumber">
+        <source>Phone number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">50,52</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.message" datatype="html" resname="smsPoc.message">
+        <source>Message</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.messageRequired" datatype="html" resname="smsPoc.messageRequired">
+        <source>Message is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.messageTooLong" datatype="html" resname="smsPoc.messageTooLong">
+        <source>Message must be 1600 characters or fewer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">80,82</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.sent" datatype="html" resname="smsPoc.sent">
+        <source>SMS sent.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.send" datatype="html" resname="smsPoc.send">
+        <source>Send SMS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
+          <context context-type="linenumber">111,113</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.phoneRequired" datatype="html" resname="smsPoc.phoneRequired">
+        <source>Phone number is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.phoneInvalid" datatype="html" resname="smsPoc.phoneInvalid">
+        <source>Enter a valid phone number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="smsPoc.sendFailed" datatype="html" resname="smsPoc.sendFailed">
+        <source>SMS send failed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.ts</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <target>X</target>
       </trans-unit>
