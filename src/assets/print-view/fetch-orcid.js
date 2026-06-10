@@ -517,9 +517,9 @@ function renderEmployments(activities, section) {
   // Employments: activities-summary.employments.affiliation-group[].summaries[]
   const employments = []
   
-  for (const groups of activities?.employments?.['affiliation-group']) {
+  for (const groups of activities?.employments?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries) {
+    for(const summaries of groups.summaries || []) {
       employments.push(summaries['employment-summary'])
       break;
     }
@@ -538,9 +538,9 @@ function renderEmployments(activities, section) {
 function renderEducationsAndQualifications(activities, section) {  
   const educations = [] 
   // Educations: activities.educations.affiliation-group[].[0].summaries[]
-  for (const groups of activities?.educations?.['affiliation-group']) {
+  for (const groups of activities?.educations?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries) {
+    for(const summaries of groups.summaries || []) {
       educations.push({
         type: 'education',
         title: summaries['education-summary'].organization?.name || summaries['education-summary']?.['role-title'],
@@ -552,9 +552,9 @@ function renderEducationsAndQualifications(activities, section) {
   
   // Qualifications: activities.qualifications.affiliation-group[].[0].summaries[]
   const qualifications = []
-  for (const groups of activities?.qualifications?.['affiliation-group']) {
+  for (const groups of activities?.qualifications?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries) {
+    for(const summaries of groups.summaries || []) {
       qualifications.push({
         type: 'qualification',
         title: summaries['qualification-summary'].organization?.name || summaries['qualification-summary']?.['role-title'],
@@ -591,9 +591,9 @@ function renderWorks(activities, section) {
 function renderProfessionalActivities(activities, section) {
   const invitedPositions = [] 
   // invitedPositions: activities.invited-positions.affiliation-group[].[0].summaries[]
-  for (const groups of activities?.['invited-positions']?.['affiliation-group']) {
+  for (const groups of activities?.['invited-positions']?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries) {
+    for(const summaries of groups.summaries || []) {
       invitedPositions.push({
         type: 'invited-position',
         title: summaries['invited-position-summary'].organization?.name || summaries['invited-position-summary']?.['role-title'],
@@ -605,9 +605,9 @@ function renderProfessionalActivities(activities, section) {
 
   const distinctions = [] 
   // distinctions: activities.distinctions.affiliation-group[].[0].summaries[]
-  for (const groups of activities?.['distinctions']?.['affiliation-group']) {
+  for (const groups of activities?.['distinctions']?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries) {
+    for(const summaries of groups.summaries || []) {
       distinctions.push({
         type: 'distinction',
         title: summaries['distinction-summary'].organization?.name || summaries['distinction-summary']?.['role-title'],
@@ -619,9 +619,9 @@ function renderProfessionalActivities(activities, section) {
 
   const memberships = [] 
   // memberships: activities.memberships.affiliation-group[].[0].summaries[]
-  for (const groups of activities?.['memberships']?.['affiliation-group']) {
+  for (const groups of activities?.['memberships']?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries) {
+    for(const summaries of groups.summaries || []) {
       memberships.push({
         type: 'membership',
         title: summaries['membership-summary'].organization?.name || summaries['membership-summary']?.['role-title'],
@@ -634,9 +634,9 @@ function renderProfessionalActivities(activities, section) {
   const services = [] 
   const editorialServices = []
   // memberships: activities.services.affiliation-group[].[0].summaries[]
-  for (const groups of activities?.['services']?.['affiliation-group']) {
+  for (const groups of activities?.['services']?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries) {
+    for(const summaries of groups.summaries || []) {
       // If there is an issn, then it will be set as an editorial service
       const isEditorialService = summaries['external-ids']?.['external-id']?.some(extId => extId['external-id-type'] === 'issn')
       if(isEditorialService) {
@@ -699,9 +699,9 @@ function renderPeerReviews(activities, section) {
   const publications = new Set()
   const peerReviewsPerPublication = new Map()
   // Peer reviews: activities.peer-reviews.group.peer-review-group    
-  for (const group of activities?.['peer-reviews']?.group) {    
-    for(const peerReviewGroup of group['peer-review-group']) {           
-      for(const peerReviewSummary of peerReviewGroup['peer-review-summary']) {        
+  for (const group of activities?.['peer-reviews']?.group || []) {    
+    for(const peerReviewGroup of group['peer-review-group'] || []) {           
+      for(const peerReviewSummary of peerReviewGroup['peer-review-summary'] || []) {        
         reviews++
         const publication = peerReviewSummary['review-group-id']
         if(publications.has(publication)) {
@@ -724,7 +724,7 @@ function renderPeerReviews(activities, section) {
     heading.textContent = `Peer review (${reviews} reviews for ${sortedPublications.size} publications/grants)`
     block.appendChild(heading)
     const list = document.createElement('ul')
-    for(publication of sortedPublications) {          
+    for(publication of sortedPublications || []) {          
       const numberOfPublications = peerReviewsPerPublication.get(publication)
       const li = document.createElement('li')    
       li.textContent = publication + "(" + numberOfPublications + ")"

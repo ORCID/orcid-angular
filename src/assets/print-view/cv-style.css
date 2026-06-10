@@ -1,5 +1,5 @@
 :root {
-  --page-bg: #f3f3f3;
+  --page-bg: #fafafa;
   --paper-bg: #ffffff;
   --text: #000000;
   --muted: #333333;
@@ -16,7 +16,7 @@
 body {
   margin: 0;
   padding: 24px;
-  background: #fafafa;
+  background: var(--page-bg);
   color: var(--text);
   font-family: Arial, sans-serif;
   line-height: 1.5;
