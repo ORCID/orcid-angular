@@ -489,10 +489,6 @@ function composeActivityEntryFromJson(entry, opts = {}) {
   }
 
   // External identifiers (works / fundings etc)
-  console.log("1")
-  console.log(JSON.stringify(entry))
-  console.log("2")
-  console.log(JSON.stringify(entry?.['external-ids']))
   const extIds =
     entry?.['external-ids']?.['external-id'] || entry?.proposal?.['external-ids']?.['external-id'] || 
     []
@@ -689,7 +685,6 @@ function renderResearchResources(activities, section) {
   const researchResources = (
     activities?.['research-resources']?.group || []
   ).flatMap((g) => g?.['research-resource-summary'] || [])
-  
 
   hasContent = false
   hasContent =
@@ -699,33 +694,64 @@ function renderResearchResources(activities, section) {
   return hasContent
 }
 
-function renderActivitiesFromJson(recordJson, container) {  
+function renderPeerReviews(activities, section) {  
+  let reviews = 0
+  const publications = new Set()
+  const peerReviewsPerPublication = new Map()
+  // Peer reviews: activities.peer-reviews.group.peer-review-group    
+  for (const group of activities?.['peer-reviews']?.group) {    
+    for(const peerReviewGroup of group['peer-review-group']) {           
+      for(const peerReviewSummary of peerReviewGroup['peer-review-summary']) {        
+        reviews++
+        const publication = peerReviewSummary['review-group-id']
+        if(publications.has(publication)) {
+            const count = peerReviewsPerPublication.get(publication);
+            peerReviewsPerPublication.set(publication, count + 1)
+        } else {
+          publications.add(publication);
+          peerReviewsPerPublication.set(publication, 1)          
+        }
+      }
+    }    
+  }
+    
+  if(publications.size > 0) {
+    // Sorted publications    
+    const sortedPublications = new Set([...publications].sort());
+    const block = document.createElement('div')
+    block.className = 'activity-group'
+    const heading = document.createElement('h3')
+    heading.textContent = `Peer review (${reviews} reviews for ${sortedPublications.size} publications/grants)`
+    block.appendChild(heading)
+    const list = document.createElement('ul')
+    for(publication of sortedPublications) {          
+      const numberOfPublications = peerReviewsPerPublication.get(publication)
+      const li = document.createElement('li')    
+      li.textContent = publication + "(" + numberOfPublications + ")"
+      list.appendChild(li)      
+    }
+    block.appendChild(list)
+    section.appendChild(block)
+    return true
+  }
+  
+  return false
+}
+
+function renderActivitiesFromJson(recordJson, container) {    
   const activities = recordJson?.['activities-summary']  
   if (!activities) return
 
   const section = makeSection('Activities')
   let hasContent = false
 
-  //if(renderEmployments(activities, section)) hasContent = true  
-  //if(renderEducationsAndQualifications(activities, section)) hasContent = true  
-  //if(renderProfessionalActivities(activities, section)) hasContent = true  
-  //if(renderFundings(activities, section)) hasContent = true  
+  if(renderEmployments(activities, section)) hasContent = true  
+  if(renderEducationsAndQualifications(activities, section)) hasContent = true  
+  if(renderProfessionalActivities(activities, section)) hasContent = true  
+  if(renderFundings(activities, section)) hasContent = true  
   if(renderResearchResources(activities, section)) hasContent = true  
-  //if(renderWorks(activities, section)) hasContent = true  
-
-  // Peer reviews: activitiesSummary.peerReviews.peerReviewGroup[].peerReviewGroup[].peerReviewSummary[]
-  const peerReviews = (activities?.peerReviews?.peerReviewGroup || []).flatMap(
-    (g) =>
-      (g?.peerReviewGroup || []).flatMap((gg) => gg?.peerReviewSummary || [])
-  )
-  hasContent =
-    renderActivityGroupFromJson(section, 'Peer reviews', peerReviews, (p) =>
-      composeActivityEntryFromJson(p, {
-        title: jsonText(p?.organization?.name) || jsonText(p?.groupId),
-      })
-    ) || hasContent
-
-  
+  if(renderWorks(activities, section)) hasContent = true  
+  if(renderPeerReviews(activities, section))  hasContent = true   
 
   if (hasContent) container.appendChild(section)
 }
