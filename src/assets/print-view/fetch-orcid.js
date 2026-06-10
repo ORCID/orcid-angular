@@ -213,7 +213,7 @@ function renderIdentityFromJson(recordJson) {
   const person = recordJson?.person
   const name = person?.name
   const given = jsonText(name?.['given-names'])
-  const family = jsonText(name?.['family-Nam'])
+  const family = jsonText(name?.['family-name'])
   const credit = jsonText(name?.['credit-name'])
   const fullName = [given, family].filter(Boolean).join(' ')
   const chosenName = credit || fullName || 'Unnamed ORCID profile'
@@ -272,7 +272,7 @@ function renderBiographyFromJson(recordJson, container) {
   
   const biography = jsonText(bioElement?.content)
   
-  if (typeof myVar === 'string' && myVar.length === 0) return     
+  if (!biography) return     
 
   const bioSection = makeSection('Biography')
   const bioLine = document.createElement('p')
@@ -476,7 +476,7 @@ function composeActivityEntryFromJson(entry, opts = {}) {
   if (journal) wrapper.appendChild(textLineNode('Journal', journal))
   const roleTitle = jsonText(entry?.['role-title'])
   if (roleTitle) wrapper.appendChild(textLineNode('Role title', roleTitle))
-  const dept = jsonText(entry?.['department-nName'])
+  const dept = jsonText(entry?.['department-name'])
   if (dept) wrapper.appendChild(textLineNode('Department', dept))
   const type = jsonText(entry?.type)
   if (type) wrapper.appendChild(textLineNode('Type', type))
