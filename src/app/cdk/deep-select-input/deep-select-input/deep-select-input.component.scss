@@ -82,6 +82,18 @@ button.mat-button-wrap-text.secondaryItem {
   font-style: italic;
   height: 100%;
   padding: 16px 16px !important;
+  .menu-item-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    white-space: normal;
+    line-height: 1.2;
+    width: 100%;
+  }
+  .menu-item-label {
+    display: block;
+  }
   p {
     margin: 0;
     padding-top: 4px;
