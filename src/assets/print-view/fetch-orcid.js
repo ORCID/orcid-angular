@@ -178,7 +178,7 @@ function appendList(section, entries) {
   section.appendChild(list)
 }
 
-function jsonText(value) {  
+function jsonText(value) {
   if (value === null || value === undefined) return ''
   if (typeof value === 'string') return value.trim()
   if (typeof value === 'number' || typeof value === 'boolean')
@@ -263,16 +263,16 @@ function renderIdentityFromJson(recordJson) {
 
 function renderBiographyFromJson(recordJson, container) {
   const person = recordJson?.person
-  
+
   if (!person) return
-  
+
   const bioElement = person?.biography
-  
+
   if (!bioElement) return
-  
+
   const biography = jsonText(bioElement?.content)
-  
-  if (!biography) return     
+
+  if (!biography) return
 
   const bioSection = makeSection('Biography')
   const bioLine = document.createElement('p')
@@ -331,13 +331,17 @@ function renderPersonalInfoFromJson(recordJson, container) {
     })
     appendList(block, lines)
     blocks.push(block)
-  }  
+  }
 
-  const externalIds = jsonList(person?.['external-identifiers']?.['external-identifier'])
+  const externalIds = jsonList(
+    person?.['external-identifiers']?.['external-identifier']
+  )
     .map((id) => ({
       type: jsonText(id?.['external-id-type']),
       value: jsonText(id?.['external-id-value']),
-      url: sanitizeUrl(jsonText(id?.['external-id-url']?.value) || jsonText(id?.url)),
+      url: sanitizeUrl(
+        jsonText(id?.['external-id-url']?.value) || jsonText(id?.url)
+      ),
     }))
     .filter((id) => id.type || id.value || id.url)
   if (externalIds.length) {
@@ -364,7 +368,7 @@ function renderPersonalInfoFromJson(recordJson, container) {
     block.appendChild(title)
     appendList(block, [textLineNode('', keywords.join(', '))])
     blocks.push(block)
-  }  
+  }
 
   const countries = jsonList(person?.addresses?.address)
     .map((a) => {
@@ -418,7 +422,7 @@ function safeTextNode(value) {
   return (value || '').replace(/\s+/g, ' ').trim()
 }
 
-function renderActivityGroupFromJson(section, title, items, renderItem) {  
+function renderActivityGroupFromJson(section, title, items, renderItem) {
   const entries = (items || []).filter(Boolean)
   if (!entries.length) return false
   const block = document.createElement('div')
@@ -428,7 +432,7 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
   block.appendChild(heading)
   const list = document.createElement('ul')
   entries.forEach((entry) => {
-    const li = document.createElement('li')    
+    const li = document.createElement('li')
     li.appendChild(renderItem(entry))
     list.appendChild(li)
   })
@@ -437,9 +441,9 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
   return true
 }
 
-function composeActivityEntryFromJson(entry, opts = {}) {  
+function composeActivityEntryFromJson(entry, opts = {}) {
   const wrapper = document.createElement('div')
-  wrapper.className = 'activity-item'  
+  wrapper.className = 'activity-item'
   const title =
     opts.title ||
     jsonText(entry?.title?.title) ||
@@ -450,7 +454,7 @@ function composeActivityEntryFromJson(entry, opts = {}) {
   const titleNode = document.createElement('strong')
   titleNode.textContent = title
   wrapper.appendChild(titleNode)
-  
+
   const org = jsonText(entry?.organization?.name)
   if (org && org !== title)
     wrapper.appendChild(textLineNode('Organization', org))
@@ -461,7 +465,7 @@ function composeActivityEntryFromJson(entry, opts = {}) {
     jsonText(entry?.organization?.address?.country),
   ]
     .filter(Boolean)
-    .join(', ')  
+    .join(', ')
   if (orgAddress)
     wrapper.appendChild(textLineNode('Organization address', orgAddress))
 
@@ -490,18 +494,15 @@ function composeActivityEntryFromJson(entry, opts = {}) {
 
   // External identifiers (works / fundings etc)
   const extIds =
-    entry?.['external-ids']?.['external-id'] || entry?.proposal?.['external-ids']?.['external-id'] || 
+    entry?.['external-ids']?.['external-id'] ||
+    entry?.proposal?.['external-ids']?.['external-id'] ||
     []
   if (Array.isArray(extIds) && extIds.length) {
     extIds.forEach((id) => {
       const idType = jsonText(id.type || id['external-id-type'])
       const idValue = jsonText(id.value || id['external-id-value'])
       const idRel = jsonText(id.relationship || id['external-id-relationship'])
-      const idUrl = sanitizeUrl(
-        jsonText(
-          id['external-id-url']?.value
-        )
-      )
+      const idUrl = sanitizeUrl(jsonText(id['external-id-url']?.value))
       const label =
         idRel && idRel.toLowerCase() !== 'self'
           ? `${idRel} ${idType}`
@@ -516,12 +517,12 @@ function composeActivityEntryFromJson(entry, opts = {}) {
 function renderEmployments(activities, section) {
   // Employments: activities-summary.employments.affiliation-group[].summaries[]
   const employments = []
-  
+
   for (const groups of activities?.employments?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries || []) {
+    for (const summaries of groups.summaries || []) {
       employments.push(summaries['employment-summary'])
-      break;
+      break
     }
   }
 
@@ -532,47 +533,59 @@ function renderEmployments(activities, section) {
         title: jsonText(e?.organization?.name) || jsonText(e?.roleTitle),
       })
     ) || hasContent
-    return hasContent
+  return hasContent
 }
 
-function renderEducationsAndQualifications(activities, section) {  
-  const educations = [] 
+function renderEducationsAndQualifications(activities, section) {
+  const educations = []
   // Educations: activities.educations.affiliation-group[].[0].summaries[]
   for (const groups of activities?.educations?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries || []) {
+    for (const summaries of groups.summaries || []) {
       educations.push({
         type: 'education',
-        title: summaries['education-summary'].organization?.name || summaries['education-summary']?.['role-title'],
-        original: summaries['education-summary']
+        title:
+          summaries['education-summary'].organization?.name ||
+          summaries['education-summary']?.['role-title'],
+        original: summaries['education-summary'],
       })
-      break;
+      break
     }
-  }  
-  
+  }
+
   // Qualifications: activities.qualifications.affiliation-group[].[0].summaries[]
   const qualifications = []
-  for (const groups of activities?.qualifications?.['affiliation-group'] || []) {
+  for (const groups of activities?.qualifications?.['affiliation-group'] ||
+    []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries || []) {
+    for (const summaries of groups.summaries || []) {
       qualifications.push({
         type: 'qualification',
-        title: summaries['qualification-summary'].organization?.name || summaries['qualification-summary']?.['role-title'],
-        original: summaries['qualification-summary']
+        title:
+          summaries['qualification-summary'].organization?.name ||
+          summaries['qualification-summary']?.['role-title'],
+        original: summaries['qualification-summary'],
       })
-      break;
+      break
     }
-  }  
+  }
 
-  const merged = [...educations, ...qualifications]  
-  merged.sort((a,b) => a.title.localeCompare(b.title))
-  
+  const merged = [...educations, ...qualifications]
+  merged.sort((a, b) => a.title.localeCompare(b.title))
+
   hasContent = false
   hasContent =
-    renderActivityGroupFromJson(section, 'Education and qualifications', merged, (e) =>
-      composeActivityEntryFromJson(e.original, { title: e.title, type: e.type })
-    ) || hasContent   
-    return hasContent
+    renderActivityGroupFromJson(
+      section,
+      'Education and qualifications',
+      merged,
+      (e) =>
+        composeActivityEntryFromJson(e.original, {
+          title: e.title,
+          type: e.type,
+        })
+    ) || hasContent
+  return hasContent
 }
 
 function renderWorks(activities, section) {
@@ -589,85 +602,114 @@ function renderWorks(activities, section) {
 }
 
 function renderProfessionalActivities(activities, section) {
-  const invitedPositions = [] 
+  const invitedPositions = []
   // invitedPositions: activities.invited-positions.affiliation-group[].[0].summaries[]
-  for (const groups of activities?.['invited-positions']?.['affiliation-group'] || []) {
+  for (const groups of activities?.['invited-positions']?.[
+    'affiliation-group'
+  ] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries || []) {
+    for (const summaries of groups.summaries || []) {
       invitedPositions.push({
         type: 'invited-position',
-        title: summaries['invited-position-summary'].organization?.name || summaries['invited-position-summary']?.['role-title'],
-        original: summaries['invited-position-summary']
+        title:
+          summaries['invited-position-summary'].organization?.name ||
+          summaries['invited-position-summary']?.['role-title'],
+        original: summaries['invited-position-summary'],
       })
-      break;
+      break
     }
-  }  
+  }
 
-  const distinctions = [] 
+  const distinctions = []
   // distinctions: activities.distinctions.affiliation-group[].[0].summaries[]
-  for (const groups of activities?.['distinctions']?.['affiliation-group'] || []) {
+  for (const groups of activities?.['distinctions']?.['affiliation-group'] ||
+    []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries || []) {
+    for (const summaries of groups.summaries || []) {
       distinctions.push({
         type: 'distinction',
-        title: summaries['distinction-summary'].organization?.name || summaries['distinction-summary']?.['role-title'],
-        original: summaries['distinction-summary']
+        title:
+          summaries['distinction-summary'].organization?.name ||
+          summaries['distinction-summary']?.['role-title'],
+        original: summaries['distinction-summary'],
       })
-      break;
+      break
     }
-  }  
+  }
 
-  const memberships = [] 
+  const memberships = []
   // memberships: activities.memberships.affiliation-group[].[0].summaries[]
-  for (const groups of activities?.['memberships']?.['affiliation-group'] || []) {
+  for (const groups of activities?.['memberships']?.['affiliation-group'] ||
+    []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries || []) {
+    for (const summaries of groups.summaries || []) {
       memberships.push({
         type: 'membership',
-        title: summaries['membership-summary'].organization?.name || summaries['membership-summary']?.['role-title'],
-        original: summaries['membership-summary']
+        title:
+          summaries['membership-summary'].organization?.name ||
+          summaries['membership-summary']?.['role-title'],
+        original: summaries['membership-summary'],
       })
-      break;
+      break
     }
-  }  
+  }
 
-  const services = [] 
+  const services = []
   const editorialServices = []
   // memberships: activities.services.affiliation-group[].[0].summaries[]
   for (const groups of activities?.['services']?.['affiliation-group'] || []) {
     // Get just the first element from each group
-    for(const summaries of groups.summaries || []) {
+    for (const summaries of groups.summaries || []) {
       // If there is an issn, then it will be set as an editorial service
-      const isEditorialService = summaries['external-ids']?.['external-id']?.some(extId => extId['external-id-type'] === 'issn')
-      if(isEditorialService) {
+      const isEditorialService = summaries['external-ids']?.[
+        'external-id'
+      ]?.some((extId) => extId['external-id-type'] === 'issn')
+      if (isEditorialService) {
         editorialServices.push({
-        type: 'editorial-service',
-        title: summaries['service-summary'].organization?.name || summaries['service-summary']?.['role-title'],
-        original: summaries['service-summary']
+          type: 'editorial-service',
+          title:
+            summaries['service-summary'].organization?.name ||
+            summaries['service-summary']?.['role-title'],
+          original: summaries['service-summary'],
         })
       } else {
         services.push({
-        type: 'service',
-        title: summaries['service-summary'].organization?.name || summaries['service-summary']?.['role-title'],
-        original: summaries['service-summary']
+          type: 'service',
+          title:
+            summaries['service-summary'].organization?.name ||
+            summaries['service-summary']?.['role-title'],
+          original: summaries['service-summary'],
         })
-      }      
-      break;
+      }
+      break
     }
-  }  
+  }
 
-  const merged = [...invitedPositions, ...distinctions, ...memberships, ...editorialServices, ...services]  
-  merged.sort((a,b) => a.title.localeCompare(b.title))
+  const merged = [
+    ...invitedPositions,
+    ...distinctions,
+    ...memberships,
+    ...editorialServices,
+    ...services,
+  ]
+  merged.sort((a, b) => a.title.localeCompare(b.title))
 
   hasContent = false
   hasContent =
-    renderActivityGroupFromJson(section, 'Professional activities', merged, (e) =>
-      composeActivityEntryFromJson(e.original, { title: e.title, type: e.type })
-    ) || hasContent   
-    return hasContent
+    renderActivityGroupFromJson(
+      section,
+      'Professional activities',
+      merged,
+      (e) =>
+        composeActivityEntryFromJson(e.original, {
+          title: e.title,
+          type: e.type,
+        })
+    ) || hasContent
+  return hasContent
 }
 
-function renderFundings(activities, section) {  
+function renderFundings(activities, section) {
   // Fundings: activitiesSummary.fundings.group[].activities[]
   const fundings = (activities?.fundings?.group || []).flatMap(
     (g) => g?.['funding-summary'] || []
@@ -676,7 +718,7 @@ function renderFundings(activities, section) {
   hasContent =
     renderActivityGroupFromJson(section, 'Fundings', fundings, (f) =>
       composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
-    ) || hasContent    
+    ) || hasContent
   return hasContent
 }
 
@@ -688,70 +730,79 @@ function renderResearchResources(activities, section) {
 
   hasContent = false
   hasContent =
-    renderActivityGroupFromJson(section, 'Research Resources', researchResources, (r) =>
-      composeActivityEntryFromJson(r, { title: jsonText(r?.proposal?.title?.title) || jsonText(r?.proposal?.url?.value), })
-    ) || hasContent    
+    renderActivityGroupFromJson(
+      section,
+      'Research Resources',
+      researchResources,
+      (r) =>
+        composeActivityEntryFromJson(r, {
+          title:
+            jsonText(r?.proposal?.title?.title) ||
+            jsonText(r?.proposal?.url?.value),
+        })
+    ) || hasContent
   return hasContent
 }
 
-function renderPeerReviews(activities, section) {  
+function renderPeerReviews(activities, section) {
   let reviews = 0
   const publications = new Set()
   const peerReviewsPerPublication = new Map()
-  // Peer reviews: activities.peer-reviews.group.peer-review-group    
-  for (const group of activities?.['peer-reviews']?.group || []) {    
-    for(const peerReviewGroup of group['peer-review-group'] || []) {           
-      for(const peerReviewSummary of peerReviewGroup['peer-review-summary'] || []) {        
+  // Peer reviews: activities.peer-reviews.group.peer-review-group
+  for (const group of activities?.['peer-reviews']?.group || []) {
+    for (const peerReviewGroup of group['peer-review-group'] || []) {
+      for (const peerReviewSummary of peerReviewGroup['peer-review-summary'] ||
+        []) {
         reviews++
         const publication = peerReviewSummary['review-group-id']
-        if(publications.has(publication)) {
-            const count = peerReviewsPerPublication.get(publication);
-            peerReviewsPerPublication.set(publication, count + 1)
+        if (publications.has(publication)) {
+          const count = peerReviewsPerPublication.get(publication)
+          peerReviewsPerPublication.set(publication, count + 1)
         } else {
-          publications.add(publication);
-          peerReviewsPerPublication.set(publication, 1)          
+          publications.add(publication)
+          peerReviewsPerPublication.set(publication, 1)
         }
       }
-    }    
+    }
   }
-    
-  if(publications.size > 0) {
-    // Sorted publications    
-    const sortedPublications = new Set([...publications].sort());
+
+  if (publications.size > 0) {
+    // Sorted publications
+    const sortedPublications = new Set([...publications].sort())
     const block = document.createElement('div')
     block.className = 'activity-group'
     const heading = document.createElement('h3')
     heading.textContent = `Peer review (${reviews} reviews for ${sortedPublications.size} publications/grants)`
     block.appendChild(heading)
     const list = document.createElement('ul')
-    for(publication of sortedPublications || []) {          
+    for (publication of sortedPublications || []) {
       const numberOfPublications = peerReviewsPerPublication.get(publication)
-      const li = document.createElement('li')    
-      li.textContent = publication + "(" + numberOfPublications + ")"
-      list.appendChild(li)      
+      const li = document.createElement('li')
+      li.textContent = publication + '(' + numberOfPublications + ')'
+      list.appendChild(li)
     }
     block.appendChild(list)
     section.appendChild(block)
     return true
   }
-  
+
   return false
 }
 
-function renderActivitiesFromJson(recordJson, container) {    
-  const activities = recordJson?.['activities-summary']  
+function renderActivitiesFromJson(recordJson, container) {
+  const activities = recordJson?.['activities-summary']
   if (!activities) return
 
   const section = makeSection('Activities')
   let hasContent = false
 
-  if(renderEmployments(activities, section)) hasContent = true  
-  if(renderEducationsAndQualifications(activities, section)) hasContent = true  
-  if(renderProfessionalActivities(activities, section)) hasContent = true  
-  if(renderFundings(activities, section)) hasContent = true  
-  if(renderResearchResources(activities, section)) hasContent = true  
-  if(renderWorks(activities, section)) hasContent = true  
-  if(renderPeerReviews(activities, section))  hasContent = true   
+  if (renderEmployments(activities, section)) hasContent = true
+  if (renderEducationsAndQualifications(activities, section)) hasContent = true
+  if (renderProfessionalActivities(activities, section)) hasContent = true
+  if (renderFundings(activities, section)) hasContent = true
+  if (renderResearchResources(activities, section)) hasContent = true
+  if (renderWorks(activities, section)) hasContent = true
+  if (renderPeerReviews(activities, section)) hasContent = true
 
   if (hasContent) container.appendChild(section)
 }
