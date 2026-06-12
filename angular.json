@@ -117,12 +117,13 @@
               {
                 "glob": "**/*",
                 "input": "src/assets/",
-                "ignore": ["fonts/**/*", "**/*.scss"],
+                "ignore": ["fonts/**/*", "**/*.scss", "**/*.spec.ts", "print-view/**"],
                 "output": "/assets/"
               },
               {
                 "glob": "**/*",
                 "input": "src/assets/print-view/",
+                "ignore": ["fetch-orcid.js", "**/*.spec.ts"],
                 "output": "/print-view/"
               },
               {
@@ -425,7 +426,8 @@
             ],
             "scripts": [
               "/scripts/environment.runtime.js",
-              "/scripts/onetrust.runtime.js"
+              "/scripts/onetrust.runtime.js",
+              "src/assets/print-view/fetch-orcid.js"
             ],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
             "sourceMap": true
