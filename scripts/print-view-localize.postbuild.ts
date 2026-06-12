@@ -48,9 +48,14 @@ function getTranslations(locale: string): Record<string, any> | null {
   }
   const content = readFileSync(xlf, 'utf8')
   const parser = new Xliff1TranslationParser()
-  const analyzed = (parser as any).analyze(xlf, content) as { canParse: boolean; hint: any }
+  const analyzed = (parser as any).analyze(xlf, content) as {
+    canParse: boolean
+    hint: any
+  }
   if (!analyzed.canParse) {
-    console.warn(`[print-view-localize] Could not parse XLF for locale "${locale}": ${xlf}`)
+    console.warn(
+      `[print-view-localize] Could not parse XLF for locale "${locale}": ${xlf}`
+    )
     return null
   }
   const { translations } = parser.parse(xlf, content, analyzed.hint)
@@ -89,9 +94,13 @@ export function localizeAndWritePrintViewScript(): void {
       const result = babel.transformSync(source, {
         filename: PRINT_VIEW_SOURCE,
         plugins: [
-          makeEs2015TranslatePlugin(diagnostics, {}, {
-            missingTranslation: 'ignore',
-          }),
+          makeEs2015TranslatePlugin(
+            diagnostics,
+            {},
+            {
+              missingTranslation: 'ignore',
+            }
+          ),
         ],
         configFile: false,
         babelrc: false,
@@ -113,7 +122,7 @@ export function localizeAndWritePrintViewScript(): void {
       if (diagnostics.hasErrors) {
         console.warn(
           `[print-view-localize] Errors for locale "${locale}":`,
-          diagnostics.messages,
+          diagnostics.messages
         )
       }
 
@@ -122,5 +131,22 @@ export function localizeAndWritePrintViewScript(): void {
 
     writeFileSync(destFile, output, 'utf8')
     console.log(`[print-view-localize] ✓ ${destFile}`)
+
+    // Fix the lang attribute in the copied print-view/index.html.
+    // The source file always has lang="en"; we rewrite it to the actual locale.
+    const printViewIndexPath = `${destDir}/index.html`
+    if (existsSync(printViewIndexPath)) {
+      const htmlSource = readFileSync(printViewIndexPath, 'utf8')
+      const htmlLocalized = htmlSource.replace(
+        /<html([^>]*)lang="[^"]*"/,
+        `<html$1lang="${locale}"`
+      )
+      if (htmlLocalized !== htmlSource) {
+        writeFileSync(printViewIndexPath, htmlLocalized, 'utf8')
+        console.log(
+          `[print-view-localize] ✓ ${printViewIndexPath} (lang=${locale})`
+        )
+      }
+    }
   }
 }
