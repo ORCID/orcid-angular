@@ -1,3 +1,7 @@
+## v2.135.4 - 2026-06-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.3...v2.135.4)
+
 ## v2.135.3 - 2026-06-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.2...v2.135.3)
