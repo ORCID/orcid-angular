@@ -123,6 +123,7 @@
               {
                 "glob": "**/*",
                 "input": "src/assets/print-view/",
+                "ignore": ["fetch-orcid.js"],
                 "output": "/print-view/"
               },
               {
