@@ -117,13 +117,13 @@
               {
                 "glob": "**/*",
                 "input": "src/assets/",
-                "ignore": ["fonts/**/*", "**/*.scss"],
+                "ignore": ["fonts/**/*", "**/*.scss", "**/*.spec.ts", "print-view/**"],
                 "output": "/assets/"
               },
               {
                 "glob": "**/*",
                 "input": "src/assets/print-view/",
-                "ignore": ["fetch-orcid.js"],
+                "ignore": ["fetch-orcid.js", "**/*.spec.ts"],
                 "output": "/print-view/"
               },
               {
