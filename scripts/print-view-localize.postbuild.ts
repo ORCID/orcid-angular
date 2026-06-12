@@ -156,10 +156,7 @@ export function localizeAndWritePrintViewScript(): void {
       const cacheKey = printViewCacheKey(destDir, locale)
       let html = readFileSync(printViewIndexPath, 'utf8')
       const htmlOriginal = html
-      html = html.replace(
-        /<html([^>]*)lang="[^"]*"/,
-        `<html$1lang="${locale}"`
-      )
+      html = html.replace(/<html([^>]*)lang="[^"]*"/, `<html$1lang="${locale}"`)
       html = html.replace(/__PRINT_VIEW_VERSION__/g, cacheKey)
       if (html !== htmlOriginal) {
         writeFileSync(printViewIndexPath, html, 'utf8')
