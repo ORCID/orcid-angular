@@ -1,3 +1,57 @@
+// Fallback for non-localized builds (development / unit tests).
+// In production, all $localize calls are statically inlined by the Angular build.
+if (typeof $localize === 'undefined') {
+  self.$localize = function (messageParts) {
+    var substitutions = Array.prototype.slice.call(arguments, 1)
+    return messageParts.reduce(function (result, part, i) {
+      return (
+        result +
+        (substitutions[i - 1] != null ? substitutions[i - 1] : '') +
+        part
+      )
+    })
+  }
+}
+
+// All user-visible strings. Values are replaced per-locale by the Angular localize pipeline at build time.
+const STRINGS = {
+  unnamedProfile: $localize`:@@printView.unnamedProfile:Unnamed ORCID profile`,
+  orcidIdAlt: $localize`:@@printView.orcidIdAlt:ORCID iD`,
+  biography: $localize`:@@printView.biography:Biography`,
+  personalInformation: $localize`:@@printView.personalInformation:Personal information`,
+  emails: $localize`:@@printView.emails:Emails`,
+  websitesSocialLinks: $localize`:@@printView.websitesSocialLinks:Websites & social links`,
+  otherIds: $localize`:@@printView.otherIds:Other IDs`,
+  keywords: $localize`:@@printView.keywords:Keywords`,
+  countries: $localize`:@@printView.countries:Countries`,
+  activities: $localize`:@@printView.activities:Activities`,
+  employments: $localize`:@@printView.employments:Employments`,
+  educationAndQualifications: $localize`:@@printView.educationAndQualifications:Education and qualifications`,
+  professionalActivities: $localize`:@@printView.professionalActivities:Professional activities`,
+  fundings: $localize`:@@printView.fundings:Fundings`,
+  researchResources: $localize`:@@printView.researchResources:Research Resources`,
+  works: $localize`:@@printView.works:Works`,
+  organization: $localize`:@@printView.organization:Organization`,
+  organizationAddress: $localize`:@@printView.organizationAddress:Organization address`,
+  startDate: $localize`:@@printView.startDate:Start date`,
+  endDate: $localize`:@@printView.endDate:End date`,
+  publicationDate: $localize`:@@printView.publicationDate:Publication date`,
+  journal: $localize`:@@printView.journal:Journal`,
+  roleTitle: $localize`:@@printView.roleTitle:Role title`,
+  department: $localize`:@@printView.department:Department`,
+  type: $localize`:@@printView.type:Type`,
+  url: $localize`:@@printView.url:URL`,
+  untitled: $localize`:@@printView.untitled:Untitled`,
+  identifier: $localize`:@@printView.identifier:Identifier`,
+  enterOrcidId: $localize`:@@printView.enterOrcidId:Enter an ORCID iD`,
+  orcidIdHelp: $localize`:@@printView.orcidIdHelp:Add an ORCID iD to the URL or use the form below.`,
+  loadProfile: $localize`:@@printView.loadProfile:Load profile`,
+  invalidOrcidId: $localize`:@@printView.invalidOrcidId:Enter a valid ORCID iD (format: 0000-0000-0000-0000).`,
+  loadingRecord: $localize`:@@printView.loadingRecord:Loading ORCID record...`,
+  recordNotFound: $localize`:@@printView.recordNotFound:Record data was not found in ORCID response.`,
+  redirectingToPrimary: $localize`:@@printView.redirectingToPrimary:Redirecting to primary ORCID record…`,
+}
+
 const ORCID_REGEX = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
 
 const cvRoot = document.getElementById('cv-root')
@@ -113,11 +167,11 @@ function renderOrcidPrompt(message = '') {
   card.className = 'orcid-prompt'
 
   const heading = document.createElement('h2')
-  heading.textContent = 'Enter an ORCID iD'
+  heading.textContent = STRINGS.enterOrcidId
   card.appendChild(heading)
 
   const help = document.createElement('p')
-  help.textContent = 'Add an ORCID iD to the URL or use the form below.'
+  help.textContent = STRINGS.orcidIdHelp
   card.appendChild(help)
 
   const form = document.createElement('form')
@@ -134,7 +188,7 @@ function renderOrcidPrompt(message = '') {
 
   const button = document.createElement('button')
   button.type = 'submit'
-  button.textContent = 'Load profile'
+  button.textContent = STRINGS.loadProfile
   form.appendChild(button)
 
   const formError = document.createElement('p')
@@ -146,8 +200,7 @@ function renderOrcidPrompt(message = '') {
     event.preventDefault()
     const orcidId = normalizeOrcidId(input.value)
     if (!orcidId) {
-      formError.textContent =
-        'Enter a valid ORCID iD (format: 0000-0000-0000-0000).'
+      formError.textContent = STRINGS.invalidOrcidId
       input.focus()
       return
     }
@@ -212,11 +265,11 @@ function jsonOrcidUri(orcidIdentifier) {
 function renderIdentityFromJson(recordJson) {
   const person = recordJson?.person
   const name = person?.name
-  const given = jsonText(name?.givenNames)
-  const family = jsonText(name?.familyName)
-  const credit = jsonText(name?.creditName)
+  const given = jsonText(name?.['given-names'])
+  const family = jsonText(name?.['family-name'])
+  const credit = jsonText(name?.['credit-name'])
   const fullName = [given, family].filter(Boolean).join(' ')
-  const chosenName = credit || fullName || 'Unnamed ORCID profile'
+  const chosenName = credit || fullName || STRINGS.unnamedProfile
 
   const container = document.createElement('article')
   container.className = 'cv-container'
@@ -227,7 +280,7 @@ function renderIdentityFromJson(recordJson) {
   title.textContent = chosenName
   header.appendChild(title)
 
-  const otherNames = jsonList(person?.otherNames?.otherNames)
+  const otherNames = jsonList(person?.['other-names']?.['other-name'])
     .map((n) => jsonText(n?.content))
     .filter(Boolean)
   if (otherNames.length) {
@@ -237,14 +290,14 @@ function renderIdentityFromJson(recordJson) {
     header.appendChild(namesLine)
   }
 
-  const orcidUri = jsonOrcidUri(recordJson?.orcidIdentifier)
+  const orcidUri = jsonOrcidUri(recordJson?.['orcid-identifier'])
   if (orcidUri) {
     const orcidRow = document.createElement('div')
     orcidRow.className = 'orcid-id'
 
     const icon = document.createElement('img')
-    icon.src = 'https://orcid.org/sites/default/files/images/orcid_16x16.png'
-    icon.alt = 'ORCID iD'
+    icon.src = 'https://orcid.org/assets/vectors/orcid.logo.black.icon.svg'
+    icon.alt = STRINGS.orcidIdAlt
     orcidRow.appendChild(icon)
 
     const link = document.createElement('a')
@@ -261,20 +314,41 @@ function renderIdentityFromJson(recordJson) {
   return container
 }
 
+function renderBiographyFromJson(recordJson, container) {
+  const person = recordJson?.person
+
+  if (!person) return
+
+  const bioElement = person?.biography
+
+  if (!bioElement) return
+
+  const biography = jsonText(bioElement?.content)
+
+  if (!biography) return
+
+  const bioSection = makeSection(STRINGS.biography)
+  const bioLine = document.createElement('p')
+  bioLine.className = 'other-names'
+  bioLine.textContent = biography
+  bioSection.appendChild(bioLine)
+  container.appendChild(bioSection)
+}
+
 function renderPersonalInfoFromJson(recordJson, container) {
   const person = recordJson?.person
   if (!person) return
 
-  const section = makeSection('Personal information')
+  const section = makeSection(STRINGS.personalInformation)
   const blocks = []
 
-  const emails = jsonList(person?.emails?.emails)
+  const emails = jsonList(person?.emails?.email)
     .map((e) => jsonText(e?.email))
     .filter(Boolean)
   if (emails.length) {
     const block = document.createElement('div')
     const title = document.createElement('h3')
-    title.textContent = 'Emails'
+    title.textContent = STRINGS.emails
     block.appendChild(title)
     appendList(
       block,
@@ -283,16 +357,16 @@ function renderPersonalInfoFromJson(recordJson, container) {
     blocks.push(block)
   }
 
-  const links = jsonList(person?.researcherUrls?.researcherUrls)
+  const links = jsonList(person?.['researcher-urls']?.['researcher-url'])
     .map((u) => ({
-      name: jsonText(u?.urlName),
+      name: jsonText(u?.['url-name']),
       url: sanitizeUrl(jsonText(u?.url?.value) || jsonText(u?.url)),
     }))
     .filter((u) => u.url)
   if (links.length) {
     const block = document.createElement('div')
     const title = document.createElement('h3')
-    title.textContent = 'Websites & social links'
+    title.textContent = STRINGS.websitesSocialLinks
     block.appendChild(title)
     const lines = links.map((entry) => {
       const row = document.createElement('span')
@@ -312,29 +386,21 @@ function renderPersonalInfoFromJson(recordJson, container) {
     blocks.push(block)
   }
 
-  const keywords = jsonList(person?.keywords?.keywords)
-    .map((k) => jsonText(k?.content))
-    .filter(Boolean)
-  if (keywords.length) {
-    const block = document.createElement('div')
-    const title = document.createElement('h3')
-    title.textContent = 'Keywords'
-    block.appendChild(title)
-    appendList(block, [textLineNode('', keywords.join(', '))])
-    blocks.push(block)
-  }
-
-  const externalIds = jsonList(person?.externalIdentifiers?.externalIdentifiers)
+  const externalIds = jsonList(
+    person?.['external-identifiers']?.['external-identifier']
+  )
     .map((id) => ({
-      type: jsonText(id?.type),
-      value: jsonText(id?.value),
-      url: sanitizeUrl(jsonText(id?.url?.value) || jsonText(id?.url)),
+      type: jsonText(id?.['external-id-type']),
+      value: jsonText(id?.['external-id-value']),
+      url: sanitizeUrl(
+        jsonText(id?.['external-id-url']?.value) || jsonText(id?.url)
+      ),
     }))
     .filter((id) => id.type || id.value || id.url)
   if (externalIds.length) {
     const block = document.createElement('div')
     const title = document.createElement('h3')
-    title.textContent = 'Other IDs'
+    title.textContent = STRINGS.otherIds
     block.appendChild(title)
     const lines = externalIds.map((entry) => {
       const label = entry.type || 'Identifier'
@@ -342,6 +408,33 @@ function renderPersonalInfoFromJson(recordJson, container) {
       return textLineNode(label, value, entry.url)
     })
     appendList(block, lines)
+    blocks.push(block)
+  }
+
+  const keywords = jsonList(person?.keywords?.keyword)
+    .map((k) => jsonText(k?.content))
+    .filter(Boolean)
+  if (keywords.length) {
+    const block = document.createElement('div')
+    const title = document.createElement('h3')
+    title.textContent = STRINGS.keywords
+    block.appendChild(title)
+    appendList(block, [textLineNode('', keywords.join(', '))])
+    blocks.push(block)
+  }
+
+  const countries = jsonList(person?.addresses?.address)
+    .map((a) => {
+      return jsonText(a?.country)
+    })
+    .filter(Boolean)
+
+  if (countries.length) {
+    const block = document.createElement('div')
+    const title = document.createElement('h3')
+    title.textContent = STRINGS.countries
+    block.appendChild(title)
+    appendList(block, [textLineNode('', countries.join(', '))])
     blocks.push(block)
   }
 
@@ -388,7 +481,7 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
   const block = document.createElement('div')
   block.className = 'activity-group'
   const heading = document.createElement('h3')
-  heading.textContent = `${title} (${entries.length})`
+  heading.textContent = $localize`:@@printView.activityGroupHeading:${title}:TITLE: (${entries.length}:COUNT:)`
   block.appendChild(heading)
   const list = document.createElement('ul')
   entries.forEach((entry) => {
@@ -404,21 +497,20 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
 function composeActivityEntryFromJson(entry, opts = {}) {
   const wrapper = document.createElement('div')
   wrapper.className = 'activity-item'
-
   const title =
     opts.title ||
     jsonText(entry?.title?.title) ||
     jsonText(entry?.organization?.name) ||
-    jsonText(entry?.roleTitle) ||
+    jsonText(entry?.['role-title']) ||
     jsonText(entry?.type) ||
-    'Untitled'
+    STRINGS.untitled
   const titleNode = document.createElement('strong')
   titleNode.textContent = title
   wrapper.appendChild(titleNode)
 
   const org = jsonText(entry?.organization?.name)
   if (org && org !== title)
-    wrapper.appendChild(textLineNode('Organization', org))
+    wrapper.appendChild(textLineNode(STRINGS.organization, org))
 
   const orgAddress = [
     jsonText(entry?.organization?.address?.city),
@@ -428,51 +520,46 @@ function composeActivityEntryFromJson(entry, opts = {}) {
     .filter(Boolean)
     .join(', ')
   if (orgAddress)
-    wrapper.appendChild(textLineNode('Organization address', orgAddress))
+    wrapper.appendChild(textLineNode(STRINGS.organizationAddress, orgAddress))
 
-  const start = jsonDate(entry?.startDate)
-  const end = jsonDate(entry?.endDate)
-  if (start) wrapper.appendChild(textLineNode('Start date', start))
-  if (end) wrapper.appendChild(textLineNode('End date', end))
+  const start = jsonDate(entry?.['start-date'])
+  const end = jsonDate(entry?.['end-date'])
+  if (start) wrapper.appendChild(textLineNode(STRINGS.startDate, start))
+  if (end) wrapper.appendChild(textLineNode(STRINGS.endDate, end))
 
-  const pub = jsonDate(entry?.publicationDate)
-  if (pub) wrapper.appendChild(textLineNode('Publication date', pub))
-
-  const journal = jsonText(entry?.journalTitle)
-  if (journal) wrapper.appendChild(textLineNode('Journal', journal))
-
-  const roleTitle = jsonText(entry?.roleTitle)
-  if (roleTitle) wrapper.appendChild(textLineNode('Role title', roleTitle))
-
-  const dept = jsonText(entry?.departmentName)
-  if (dept) wrapper.appendChild(textLineNode('Department', dept))
-
+  const pub = jsonDate(entry?.['publication-date'])
+  if (pub) wrapper.appendChild(textLineNode(STRINGS.publicationDate, pub))
+  const journal = jsonText(entry?.['journal-title'])
+  if (journal) wrapper.appendChild(textLineNode(STRINGS.journal, journal))
+  const roleTitle = jsonText(entry?.['role-title'])
+  if (roleTitle) wrapper.appendChild(textLineNode(STRINGS.roleTitle, roleTitle))
+  const dept = jsonText(entry?.['department-name'])
+  if (dept) wrapper.appendChild(textLineNode(STRINGS.department, dept))
   const type = jsonText(entry?.type)
-  if (type) wrapper.appendChild(textLineNode('Type', type))
+  if (type) wrapper.appendChild(textLineNode(STRINGS.type, type))
 
   const url = sanitizeUrl(jsonText(entry?.url?.value) || jsonText(entry?.url))
-  if (url) wrapper.appendChild(textLineNode('URL', url, url))
+  if (url) wrapper.appendChild(textLineNode(STRINGS.url, url, url))
+
+  if (opts.type) {
+    wrapper.appendChild(textLineNode(STRINGS.type, opts.type))
+  }
 
   // External identifiers (works / fundings etc)
   const extIds =
-    entry?.externalIdentifiers?.externalIdentifier ||
-    entry?.externalIDs?.externalIdentifier ||
-    entry?.externalIds?.externalId ||
+    entry?.['external-ids']?.['external-id'] ||
+    entry?.proposal?.['external-ids']?.['external-id'] ||
     []
   if (Array.isArray(extIds) && extIds.length) {
     extIds.forEach((id) => {
-      const idType = jsonText(id.type || id.externalIdType)
-      const idValue = jsonText(id.value || id.externalIdValue)
-      const idRel = jsonText(id.relationship || id.externalIdRelationship)
-      const idUrl = sanitizeUrl(
-        jsonText(
-          id.url?.value || id.externalIdUrl?.value || id.externalIdUrl || id.url
-        )
-      )
+      const idType = jsonText(id.type || id['external-id-type'])
+      const idValue = jsonText(id.value || id['external-id-value'])
+      const idRel = jsonText(id.relationship || id['external-id-relationship'])
+      const idUrl = sanitizeUrl(jsonText(id['external-id-url']?.value))
       const label =
         idRel && idRel.toLowerCase() !== 'self'
           ? `${idRel} ${idType}`
-          : idType || 'Identifier'
+          : idType || STRINGS.identifier
       wrapper.appendChild(textLineNode(label, idValue || idUrl || '', idUrl))
     })
   }
@@ -480,90 +567,229 @@ function composeActivityEntryFromJson(entry, opts = {}) {
   return wrapper
 }
 
-function renderActivitiesFromJson(recordJson, container) {
-  const activities = recordJson?.activitiesSummary
-  if (!activities) return
+function renderEmployments(activities, section) {
+  // Employments: activities-summary.employments.affiliation-group[].summaries[]
+  const employments = []
 
-  const section = makeSection('Activities')
-  let hasContent = false
+  for (const groups of activities?.employments?.['affiliation-group'] || []) {
+    // Get just the first element from each group
+    for (const summaries of groups.summaries || []) {
+      employments.push(summaries['employment-summary'])
+      break
+    }
+  }
 
-  // Works: activitiesSummary.works.workGroup[].workSummary[]
-  const workSummaries = (activities?.works?.workGroup || []).flatMap(
-    (g) => g?.workSummary || []
-  )
-  hasContent =
-    renderActivityGroupFromJson(section, 'Works', workSummaries, (w) =>
-      composeActivityEntryFromJson(w, { title: jsonText(w?.title?.title) })
-    ) || hasContent
-
-  // Educations: activitiesSummary.educations.educationGroups[].activities[]
-  const educations = (activities?.educations?.educationGroups || []).flatMap(
-    (g) => g?.activities || []
-  )
-  hasContent =
-    renderActivityGroupFromJson(section, 'Educations', educations, (e) =>
-      composeActivityEntryFromJson(e, {
-        title: jsonText(e?.organization?.name) || jsonText(e?.roleTitle),
-      })
-    ) || hasContent
-
-  // Employments: activitiesSummary.employments.employmentGroups[].activities[]
-  const employments = (activities?.employments?.employmentGroups || []).flatMap(
-    (g) => g?.activities || []
-  )
-  hasContent =
-    renderActivityGroupFromJson(section, 'Employments', employments, (e) =>
-      composeActivityEntryFromJson(e, {
-        title: jsonText(e?.organization?.name) || jsonText(e?.roleTitle),
-      })
-    ) || hasContent
-
-  // Fundings: activitiesSummary.fundings.fundingGroup[].activities[]
-  const fundings = (activities?.fundings?.fundingGroup || []).flatMap(
-    (g) => g?.activities || []
-  )
-  hasContent =
-    renderActivityGroupFromJson(section, 'Fundings', fundings, (f) =>
-      composeActivityEntryFromJson(f, {
-        title: jsonText(f?.title?.title) || jsonText(f?.type),
-      })
-    ) || hasContent
-
-  // Peer reviews: activitiesSummary.peerReviews.peerReviewGroup[].peerReviewGroup[].peerReviewSummary[]
-  const peerReviews = (activities?.peerReviews?.peerReviewGroup || []).flatMap(
-    (g) =>
-      (g?.peerReviewGroup || []).flatMap((gg) => gg?.peerReviewSummary || [])
-  )
-  hasContent =
-    renderActivityGroupFromJson(section, 'Peer reviews', peerReviews, (p) =>
-      composeActivityEntryFromJson(p, {
-        title: jsonText(p?.organization?.name) || jsonText(p?.groupId),
-      })
-    ) || hasContent
-
-  // Qualifications: activitiesSummary.qualifications.qualificationGroups[].activities[]
-  const qualifications = (
-    activities?.qualifications?.qualificationGroups || []
-  ).flatMap((g) => g?.activities || [])
+  hasContent = false
   hasContent =
     renderActivityGroupFromJson(
       section,
-      'Qualifications',
-      qualifications,
-      (q) =>
-        composeActivityEntryFromJson(q, {
-          title: jsonText(q?.organization?.name) || jsonText(q?.roleTitle),
+      STRINGS.employments,
+      employments,
+      (e) =>
+        composeActivityEntryFromJson(e, {
+          title: jsonText(e?.organization?.name) || jsonText(e?.roleTitle),
         })
     ) || hasContent
+  return hasContent
+}
 
-  // Research resources: activitiesSummary.researchResources.researchResourceGroup[].activities[] (or researchResourceSummary)
-  const researchResources = (
-    activities?.researchResources?.researchResourceGroup || []
-  ).flatMap((g) => g?.activities || [])
+function renderEducationsAndQualifications(activities, section) {
+  const educations = []
+  // Educations: activities.educations.affiliation-group[].[0].summaries[]
+  for (const groups of activities?.educations?.['affiliation-group'] || []) {
+    // Get just the first element from each group
+    for (const summaries of groups.summaries || []) {
+      educations.push({
+        type: 'education',
+        title:
+          summaries['education-summary'].organization?.name ||
+          summaries['education-summary']?.['role-title'],
+        original: summaries['education-summary'],
+      })
+      break
+    }
+  }
+
+  // Qualifications: activities.qualifications.affiliation-group[].[0].summaries[]
+  const qualifications = []
+  for (const groups of activities?.qualifications?.['affiliation-group'] ||
+    []) {
+    // Get just the first element from each group
+    for (const summaries of groups.summaries || []) {
+      qualifications.push({
+        type: 'qualification',
+        title:
+          summaries['qualification-summary'].organization?.name ||
+          summaries['qualification-summary']?.['role-title'],
+        original: summaries['qualification-summary'],
+      })
+      break
+    }
+  }
+
+  const merged = [...educations, ...qualifications]
+  merged.sort((a, b) => a.title.localeCompare(b.title))
+
+  hasContent = false
   hasContent =
     renderActivityGroupFromJson(
       section,
-      'Research resources',
+      STRINGS.educationAndQualifications,
+      merged,
+      (e) =>
+        composeActivityEntryFromJson(e.original, {
+          title: e.title,
+          type: e.type,
+        })
+    ) || hasContent
+  return hasContent
+}
+
+function renderWorks(activities, section) {
+  // Works: activities-summary.works.group[].work-summary[]
+  const workSummaries = (activities?.works?.group || []).flatMap(
+    (g) => g?.['work-summary'] || []
+  )
+  hasContent = false
+  hasContent =
+    renderActivityGroupFromJson(section, STRINGS.works, workSummaries, (w) =>
+      composeActivityEntryFromJson(w, { title: jsonText(w?.title?.title) })
+    ) || hasContent
+  return hasContent
+}
+
+function renderProfessionalActivities(activities, section) {
+  const invitedPositions = []
+  // invitedPositions: activities.invited-positions.affiliation-group[].[0].summaries[]
+  for (const groups of activities?.['invited-positions']?.[
+    'affiliation-group'
+  ] || []) {
+    // Get just the first element from each group
+    for (const summaries of groups.summaries || []) {
+      invitedPositions.push({
+        type: 'invited-position',
+        title:
+          summaries['invited-position-summary'].organization?.name ||
+          summaries['invited-position-summary']?.['role-title'],
+        original: summaries['invited-position-summary'],
+      })
+      break
+    }
+  }
+
+  const distinctions = []
+  // distinctions: activities.distinctions.affiliation-group[].[0].summaries[]
+  for (const groups of activities?.['distinctions']?.['affiliation-group'] ||
+    []) {
+    // Get just the first element from each group
+    for (const summaries of groups.summaries || []) {
+      distinctions.push({
+        type: 'distinction',
+        title:
+          summaries['distinction-summary'].organization?.name ||
+          summaries['distinction-summary']?.['role-title'],
+        original: summaries['distinction-summary'],
+      })
+      break
+    }
+  }
+
+  const memberships = []
+  // memberships: activities.memberships.affiliation-group[].[0].summaries[]
+  for (const groups of activities?.['memberships']?.['affiliation-group'] ||
+    []) {
+    // Get just the first element from each group
+    for (const summaries of groups.summaries || []) {
+      memberships.push({
+        type: 'membership',
+        title:
+          summaries['membership-summary'].organization?.name ||
+          summaries['membership-summary']?.['role-title'],
+        original: summaries['membership-summary'],
+      })
+      break
+    }
+  }
+
+  const services = []
+  const editorialServices = []
+  // memberships: activities.services.affiliation-group[].[0].summaries[]
+  for (const groups of activities?.['services']?.['affiliation-group'] || []) {
+    // Get just the first element from each group
+    for (const summaries of groups.summaries || []) {
+      // If there is an issn, then it will be set as an editorial service
+      const isEditorialService = summaries['external-ids']?.[
+        'external-id'
+      ]?.some((extId) => extId['external-id-type'] === 'issn')
+      if (isEditorialService) {
+        editorialServices.push({
+          type: 'editorial-service',
+          title:
+            summaries['service-summary'].organization?.name ||
+            summaries['service-summary']?.['role-title'],
+          original: summaries['service-summary'],
+        })
+      } else {
+        services.push({
+          type: 'service',
+          title:
+            summaries['service-summary'].organization?.name ||
+            summaries['service-summary']?.['role-title'],
+          original: summaries['service-summary'],
+        })
+      }
+      break
+    }
+  }
+
+  const merged = [
+    ...invitedPositions,
+    ...distinctions,
+    ...memberships,
+    ...editorialServices,
+    ...services,
+  ]
+  merged.sort((a, b) => a.title.localeCompare(b.title))
+
+  hasContent = false
+  hasContent =
+    renderActivityGroupFromJson(
+      section,
+      STRINGS.professionalActivities,
+      merged,
+      (e) =>
+        composeActivityEntryFromJson(e.original, {
+          title: e.title,
+          type: e.type,
+        })
+    ) || hasContent
+  return hasContent
+}
+
+function renderFundings(activities, section) {
+  // Fundings: activitiesSummary.fundings.group[].activities[]
+  const fundings = (activities?.fundings?.group || []).flatMap(
+    (g) => g?.['funding-summary'] || []
+  )
+  hasContent = false
+  hasContent =
+    renderActivityGroupFromJson(section, STRINGS.fundings, fundings, (f) =>
+      composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
+    ) || hasContent
+  return hasContent
+}
+
+function renderResearchResources(activities, section) {
+  // Research resources: activities.research-resources.group.research-resource-summary
+  const researchResources = (
+    activities?.['research-resources']?.group || []
+  ).flatMap((g) => g?.['research-resource-summary'] || [])
+
+  hasContent = false
+  hasContent =
+    renderActivityGroupFromJson(
+      section,
+      STRINGS.researchResources,
       researchResources,
       (r) =>
         composeActivityEntryFromJson(r, {
@@ -572,16 +798,79 @@ function renderActivitiesFromJson(recordJson, container) {
             jsonText(r?.proposal?.url?.value),
         })
     ) || hasContent
+  return hasContent
+}
+
+function renderPeerReviews(activities, section) {
+  let reviews = 0
+  const publications = new Set()
+  const peerReviewsPerPublication = new Map()
+  // Peer reviews: activities.peer-reviews.group.peer-review-group
+  for (const group of activities?.['peer-reviews']?.group || []) {
+    for (const peerReviewGroup of group['peer-review-group'] || []) {
+      for (const peerReviewSummary of peerReviewGroup['peer-review-summary'] ||
+        []) {
+        reviews++
+        const publication = peerReviewSummary['review-group-id']
+        if (publications.has(publication)) {
+          const count = peerReviewsPerPublication.get(publication)
+          peerReviewsPerPublication.set(publication, count + 1)
+        } else {
+          publications.add(publication)
+          peerReviewsPerPublication.set(publication, 1)
+        }
+      }
+    }
+  }
+
+  if (publications.size > 0) {
+    // Sorted publications
+    const sortedPublications = new Set([...publications].sort())
+    const block = document.createElement('div')
+    block.className = 'activity-group'
+    const heading = document.createElement('h3')
+    heading.textContent = $localize`:@@printView.peerReviewHeading:Peer review (${reviews}:REVIEW_COUNT: reviews for ${sortedPublications.size}:PUBLICATION_COUNT: publications/grants)`
+    block.appendChild(heading)
+    const list = document.createElement('ul')
+    for (publication of sortedPublications || []) {
+      const numberOfPublications = peerReviewsPerPublication.get(publication)
+      const li = document.createElement('li')
+      li.textContent = publication + '(' + numberOfPublications + ')'
+      list.appendChild(li)
+    }
+    block.appendChild(list)
+    section.appendChild(block)
+    return true
+  }
+
+  return false
+}
+
+function renderActivitiesFromJson(recordJson, container) {
+  const activities = recordJson?.['activities-summary']
+  if (!activities) return
+
+  const section = makeSection(STRINGS.activities)
+  let hasContent = false
+
+  if (renderEmployments(activities, section)) hasContent = true
+  if (renderEducationsAndQualifications(activities, section)) hasContent = true
+  if (renderProfessionalActivities(activities, section)) hasContent = true
+  if (renderFundings(activities, section)) hasContent = true
+  if (renderResearchResources(activities, section)) hasContent = true
+  if (renderWorks(activities, section)) hasContent = true
+  if (renderPeerReviews(activities, section)) hasContent = true
 
   if (hasContent) container.appendChild(section)
 }
 
 function renderRecord(recordJson) {
   if (!recordJson || typeof recordJson !== 'object') {
-    throw new Error('Record data was not found in ORCID response.')
+    throw new Error(STRINGS.recordNotFound)
   }
   clearNode(cvRoot)
   const container = renderIdentityFromJson(recordJson)
+  renderBiographyFromJson(recordJson, container)
   renderPersonalInfoFromJson(recordJson, container)
   renderActivitiesFromJson(recordJson, container)
   cvRoot.appendChild(container)
@@ -611,11 +900,13 @@ async function fetchOrcidRecord(orcidId) {
     const primaryOrcid = primaryFromHeader || primaryFromLocation
     if (primaryOrcid) {
       window.location.replace(`/${encodeURIComponent(primaryOrcid)}/print`)
-      throw new Error('Redirecting to primary ORCID record…')
+      throw new Error(STRINGS.redirectingToPrimary)
     }
   }
   if (!response.ok) {
-    throw new Error(`Failed to fetch ORCID record (${response.status}).`)
+    throw new Error(
+      $localize`:@@printView.fetchFailed:Failed to fetch ORCID record (${response.status}:STATUS:).`
+    )
   }
 
   const recordJson = await response.json()
@@ -627,7 +918,7 @@ async function loadRecord(orcidId) {
   cvRoot.setAttribute('aria-busy', 'true')
   const loading = document.createElement('p')
   loading.className = 'loading'
-  loading.textContent = 'Loading ORCID record...'
+  loading.textContent = STRINGS.loadingRecord
   clearNode(cvRoot)
   cvRoot.appendChild(loading)
 
@@ -642,18 +933,26 @@ async function loadRecord(orcidId) {
     message.className = 'error'
     message.textContent = error.message
     cvRoot.appendChild(message)
-    showStatus(`Could not load ${orcidId}.`, 'error')
+    showStatus(
+      $localize`:@@printView.couldNotLoad:Could not load ${orcidId}:ORCID_ID:.`,
+      'error'
+    )
     cvRoot.setAttribute('aria-busy', 'false')
   }
 }
 
-printButton.addEventListener('click', () => window.print())
+// Guard: only run DOM initialization when the required elements are present.
+// This allows the file to be loaded in test environments (Karma/Jasmine) where
+// the print-view HTML is not present and getElementById returns null.
+if (cvRoot && statusNode && printButton) {
+  printButton.addEventListener('click', () => window.print())
 
-const startingId = resolveOrcidIdFromLocation()
-if (startingId) {
-  syncOrcidInUrl(startingId)
-  loadRecord(startingId)
-} else {
-  clearStatus()
-  renderOrcidPrompt()
+  const startingId = resolveOrcidIdFromLocation()
+  if (startingId) {
+    syncOrcidInUrl(startingId)
+    loadRecord(startingId)
+  } else {
+    clearStatus()
+    renderOrcidPrompt()
+  }
 }

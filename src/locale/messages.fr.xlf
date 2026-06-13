@@ -21100,6 +21100,162 @@
           <context context-type="linenumber">253</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="printView.unnamedProfile" datatype="html" resname="printView.unnamedProfile">
+        <source>Unnamed ORCID profile</source>
+        <target>Profil ORCID sans nom</target>
+      </trans-unit>
+      <trans-unit id="printView.orcidIdAlt" datatype="html" resname="printView.orcidIdAlt">
+        <source>ORCID iD</source>
+        <target>ORCID iD</target>
+      </trans-unit>
+      <trans-unit id="printView.biography" datatype="html" resname="printView.biography">
+        <source>Biography</source>
+        <target>Biographie</target>
+      </trans-unit>
+      <trans-unit id="printView.personalInformation" datatype="html" resname="printView.personalInformation">
+        <source>Personal information</source>
+        <target>Informations personnelles</target>
+      </trans-unit>
+      <trans-unit id="printView.emails" datatype="html" resname="printView.emails">
+        <source>Emails</source>
+        <target>Courriels</target>
+      </trans-unit>
+      <trans-unit id="printView.websitesSocialLinks" datatype="html" resname="printView.websitesSocialLinks">
+        <source>Websites &amp; social links</source>
+        <target>Sites web et liens sociaux</target>
+      </trans-unit>
+      <trans-unit id="printView.otherIds" datatype="html" resname="printView.otherIds">
+        <source>Other IDs</source>
+        <target>Autres identifiants</target>
+      </trans-unit>
+      <trans-unit id="printView.keywords" datatype="html" resname="printView.keywords">
+        <source>Keywords</source>
+        <target>Mots-clés</target>
+      </trans-unit>
+      <trans-unit id="printView.countries" datatype="html" resname="printView.countries">
+        <source>Countries</source>
+        <target>Pays</target>
+      </trans-unit>
+      <trans-unit id="printView.activities" datatype="html" resname="printView.activities">
+        <source>Activities</source>
+        <target>Activités</target>
+      </trans-unit>
+      <trans-unit id="printView.employments" datatype="html" resname="printView.employments">
+        <source>Employments</source>
+        <target>Emplois</target>
+      </trans-unit>
+      <trans-unit id="printView.educationAndQualifications" datatype="html" resname="printView.educationAndQualifications">
+        <source>Education and qualifications</source>
+        <target>Éducation et qualifications</target>
+      </trans-unit>
+      <trans-unit id="printView.professionalActivities" datatype="html" resname="printView.professionalActivities">
+        <source>Professional activities</source>
+        <target>Activités professionnelles</target>
+      </trans-unit>
+      <trans-unit id="printView.fundings" datatype="html" resname="printView.fundings">
+        <source>Fundings</source>
+        <target>Financements</target>
+      </trans-unit>
+      <trans-unit id="printView.researchResources" datatype="html" resname="printView.researchResources">
+        <source>Research Resources</source>
+        <target>Ressources de recherche</target>
+      </trans-unit>
+      <trans-unit id="printView.works" datatype="html" resname="printView.works">
+        <source>Works</source>
+        <target>Travaux</target>
+      </trans-unit>
+      <trans-unit id="printView.organization" datatype="html" resname="printView.organization">
+        <source>Organization</source>
+        <target>Organisation</target>
+      </trans-unit>
+      <trans-unit id="printView.organizationAddress" datatype="html" resname="printView.organizationAddress">
+        <source>Organization address</source>
+        <target>Adresse de l&apos;organisation</target>
+      </trans-unit>
+      <trans-unit id="printView.startDate" datatype="html" resname="printView.startDate">
+        <source>Start date</source>
+        <target>Date de début</target>
+      </trans-unit>
+      <trans-unit id="printView.endDate" datatype="html" resname="printView.endDate">
+        <source>End date</source>
+        <target>Date de fin</target>
+      </trans-unit>
+      <trans-unit id="printView.publicationDate" datatype="html" resname="printView.publicationDate">
+        <source>Publication date</source>
+        <target>Date de publication</target>
+      </trans-unit>
+      <trans-unit id="printView.journal" datatype="html" resname="printView.journal">
+        <source>Journal</source>
+        <target>Revue</target>
+      </trans-unit>
+      <trans-unit id="printView.roleTitle" datatype="html" resname="printView.roleTitle">
+        <source>Role title</source>
+        <target>Titre du rôle</target>
+      </trans-unit>
+      <trans-unit id="printView.department" datatype="html" resname="printView.department">
+        <source>Department</source>
+        <target>Département</target>
+      </trans-unit>
+      <trans-unit id="printView.type" datatype="html" resname="printView.type">
+        <source>Type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="printView.url" datatype="html" resname="printView.url">
+        <source>URL</source>
+        <target>URL</target>
+      </trans-unit>
+      <trans-unit id="printView.untitled" datatype="html" resname="printView.untitled">
+        <source>Untitled</source>
+        <target>Sans titre</target>
+      </trans-unit>
+      <trans-unit id="printView.identifier" datatype="html" resname="printView.identifier">
+        <source>Identifier</source>
+        <target>Identifiant</target>
+      </trans-unit>
+      <trans-unit id="printView.enterOrcidId" datatype="html" resname="printView.enterOrcidId">
+        <source>Enter an ORCID iD</source>
+        <target>Entrez un identifiant ORCID</target>
+      </trans-unit>
+      <trans-unit id="printView.orcidIdHelp" datatype="html" resname="printView.orcidIdHelp">
+        <source>Add an ORCID iD to the URL or use the form below.</source>
+        <target>Ajoutez un identifiant ORCID à l&apos;URL ou utilisez le formulaire ci-dessous.</target>
+      </trans-unit>
+      <trans-unit id="printView.loadProfile" datatype="html" resname="printView.loadProfile">
+        <source>Load profile</source>
+        <target>Charger le profil</target>
+      </trans-unit>
+      <trans-unit id="printView.invalidOrcidId" datatype="html" resname="printView.invalidOrcidId">
+        <source>Enter a valid ORCID iD (format: 0000-0000-0000-0000).</source>
+        <target>Entrez un identifiant ORCID valide (format : 0000-0000-0000-0000).</target>
+      </trans-unit>
+      <trans-unit id="printView.loadingRecord" datatype="html" resname="printView.loadingRecord">
+        <source>Loading ORCID record...</source>
+        <target>Chargement du dossier ORCID...</target>
+      </trans-unit>
+      <trans-unit id="printView.recordNotFound" datatype="html" resname="printView.recordNotFound">
+        <source>Record data was not found in ORCID response.</source>
+        <target>Les données du dossier n&apos;ont pas été trouvées dans la réponse ORCID.</target>
+      </trans-unit>
+      <trans-unit id="printView.redirectingToPrimary" datatype="html" resname="printView.redirectingToPrimary">
+        <source>Redirecting to primary ORCID record…</source>
+        <target>Redirection vers le dossier ORCID principal…</target>
+      </trans-unit>
+      <trans-unit id="printView.fetchFailed" datatype="html" resname="printView.fetchFailed">
+        <source>Failed to fetch ORCID record (<x id="STATUS" equiv-text="response.status"/>).</source>
+        <target>Impossible de récupérer le dossier ORCID (<x id="STATUS" equiv-text="response.status"/>).</target>
+      </trans-unit>
+      <trans-unit id="printView.couldNotLoad" datatype="html" resname="printView.couldNotLoad">
+        <source>Could not load <x id="ORCID_ID" equiv-text="orcidId"/>.</source>
+        <target>Impossible de charger <x id="ORCID_ID" equiv-text="orcidId"/>.</target>
+      </trans-unit>
+      <trans-unit id="printView.activityGroupHeading" datatype="html" resname="printView.activityGroupHeading">
+        <source><x id="TITLE" equiv-text="title"/> (<x id="COUNT" equiv-text="entries.length"/>)</source>
+        <target><x id="TITLE" equiv-text="title"/> (<x id="COUNT" equiv-text="entries.length"/>)</target>
+      </trans-unit>
+      <trans-unit id="printView.peerReviewHeading" datatype="html" resname="printView.peerReviewHeading">
+        <source>Peer review (<x id="REVIEW_COUNT" equiv-text="reviews"/> reviews for <x id="PUBLICATION_COUNT" equiv-text="sortedPublications.size"/> publications/grants)</source>
+        <target>Révision par les pairs (<x id="REVIEW_COUNT" equiv-text="reviews"/> révisions pour <x id="PUBLICATION_COUNT" equiv-text="sortedPublications.size"/> publications/subventions)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

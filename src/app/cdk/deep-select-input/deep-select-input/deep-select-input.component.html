@@ -66,14 +66,16 @@
                       [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
                       class="mat-button-wrap-text"
                     >
-                      {{ subItem.label }}
+                      <span class="menu-item-content">
+                        <span class="menu-item-label">{{ subItem.label }}</span>
 
-                      <p
-                        class="orc-font-small-print"
-                        *ngIf="subItem.description"
-                      >
-                        {{ subItem.description }}
-                      </p>
+                        <p
+                          class="orc-font-small-print"
+                          *ngIf="subItem.description"
+                        >
+                          {{ subItem.description }}
+                        </p>
+                      </span>
                     </button>
                   </ng-container>
                   <ng-container *ngIf="subItem.divider">
@@ -110,11 +112,16 @@
                     [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
                     class="mobile mat-button-wrap-text"
                   >
-                    {{ subItem.label }}
+                    <span class="menu-item-content">
+                      <span class="menu-item-label">{{ subItem.label }}</span>
 
-                    <p class="orc-font-small-print" *ngIf="subItem.description">
-                      {{ subItem.description }}
-                    </p>
+                      <p
+                        class="orc-font-small-print"
+                        *ngIf="subItem.description"
+                      >
+                        {{ subItem.description }}
+                      </p>
+                    </span>
                   </button>
                 </ng-container>
               </ng-container>

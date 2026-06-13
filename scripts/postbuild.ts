@@ -10,6 +10,7 @@ import { renameSync, readFileSync } from 'fs'
 import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
 import { addOneTrustNotAutoBlockForAppScripts } from './onetrust.postbuild'
 import { newRelic } from './new-relic.postbuild'
+import { localizeAndWritePrintViewScript } from './print-view-localize.postbuild'
 
 const glob = require('glob')
 // Run updates on index.html files across languages
@@ -37,6 +38,11 @@ glob.sync('./dist/*/*.js').forEach((file) => {
   // Save all the modified hash to update
   replacedHash[hash] = true
 })
+
+// Translate and write the print-view script for every locale using
+// @angular/localize/tools so $localize calls are replaced with the
+// correct locale's strings at build time.
+localizeAndWritePrintViewScript()
 
 // Replace all the `runtime*.js` references to match updated JS values with language code
 glob.sync('./dist/*/runtime*.js').forEach((file) => {

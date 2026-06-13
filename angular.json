@@ -117,12 +117,18 @@
               {
                 "glob": "**/*",
                 "input": "src/assets/",
-                "ignore": ["fonts/**/*", "**/*.scss"],
+                "ignore": [
+                  "fonts/**/*",
+                  "**/*.scss",
+                  "**/*.spec.ts",
+                  "print-view/**"
+                ],
                 "output": "/assets/"
               },
               {
                 "glob": "**/*",
                 "input": "src/assets/print-view/",
+                "ignore": ["fetch-orcid.js", "**/*.spec.ts"],
                 "output": "/print-view/"
               },
               {
@@ -138,6 +144,7 @@
               "projects/orcid-tokens/tokens.css",
               "src/assets/scss/orcid-ui-theme.scss",
               "src/assets/scss/orcid.scss",
+              "node_modules/intl-tel-input/dist/css/intlTelInput.css",
               "src/styles.scss",
               "src/assets/scss/grid.scss"
             ],
@@ -424,7 +431,8 @@
             ],
             "scripts": [
               "/scripts/environment.runtime.js",
-              "/scripts/onetrust.runtime.js"
+              "/scripts/onetrust.runtime.js",
+              "src/assets/print-view/fetch-orcid.js"
             ],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
             "sourceMap": true

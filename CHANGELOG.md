@@ -1,3 +1,43 @@
+## v2.135.6 - 2026-06-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.5...v2.135.6)
+
+- [#2852](https://github.com/ORCID/orcid-angular/pull/2852): PD-5670
+
+## v2.135.5 - 2026-06-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.4...v2.135.5)
+
+- [#2850](https://github.com/ORCID/orcid-angular/pull/2850): PD-5670
+
+## v2.135.4 - 2026-06-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.3...v2.135.4)
+
+## v2.135.3 - 2026-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.2...v2.135.3)
+
+## v2.135.2 - 2026-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.1...v2.135.2)
+
+- [#2846](https://github.com/ORCID/orcid-angular/pull/2846): PD-5541
+
+## v2.135.1 - 2026-06-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.0...v2.135.1)
+
+## v2.135.0 - 2026-06-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.134.8...v2.135.0)
+
+## v2.134.8 - 2026-06-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.134.7...v2.134.8)
+
+- [#2841](https://github.com/ORCID/orcid-angular/pull/2841): Transifex: update translations
+
 ## v2.134.7 - 2026-05-29
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.134.6...v2.134.7)
