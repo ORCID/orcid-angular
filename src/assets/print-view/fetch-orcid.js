@@ -600,6 +600,9 @@ function composeActivityEntryFromJson(entry, opts = {}) {
         idRel && idRel.toLowerCase() !== 'self'
           ? `${idRel} ${idType}`
           : idType || STRINGS.identifier
+      /////////////////////////////////////////////////////////////////////////////////
+      //---- This should be formatted as a identifier URL, like the other ids as well
+      /////////////////////////////////////////////////////////////////////////////////
       wrapper.appendChild(textLineNode(label, idValue || idUrl || '', idUrl))
     })
   }
