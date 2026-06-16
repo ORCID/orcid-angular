@@ -128,7 +128,7 @@
               {
                 "glob": "**/*",
                 "input": "src/assets/print-view/",
-                "ignore": ["fetch-orcid.js", "**/*.spec.ts"],
+                "ignore": ["**/*.spec.ts"],
                 "output": "/print-view/"
               },
               {
