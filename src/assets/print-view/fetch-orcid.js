@@ -46,6 +46,7 @@ const STRINGS = {
   loadingRecord: $localize`:@@printView.loadingRecord:Loading ORCID record...`,
   recordNotFound: $localize`:@@printView.recordNotFound:Record data was not found in ORCID response.`,
   redirectingToPrimary: $localize`:@@printView.redirectingToPrimary:Redirecting to primary ORCID record…`,
+  orcidPrintView: $localize`:@@printView.orcidPrintView:ORCID Print view`,
 }
 
 const ORCID_REGEX = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
@@ -258,6 +259,11 @@ function jsonOrcidUri(orcidIdentifier) {
   return uri || (path ? `https://orcid.org/${path}` : '')
 }
 
+function setTitle(recordJson, chosenName) {
+  const orcidId = jsonText(recordJson?.['orcid-identifier']?.path)
+  document.title = `${chosenName} (${orcidId}) - ${STRINGS.orcidPrintView}`
+}
+
 function renderIdentityFromJson(recordJson) {
   const person = recordJson?.person
   const name = person?.name
@@ -266,6 +272,8 @@ function renderIdentityFromJson(recordJson) {
   const credit = jsonText(name?.['credit-name'])
   const fullName = [given, family].filter(Boolean).join(' ')
   const chosenName = credit || fullName || STRINGS.unnamedProfile
+
+  setTitle(recordJson, chosenName)
 
   const container = document.createElement('article')
   container.className = 'cv-container'
