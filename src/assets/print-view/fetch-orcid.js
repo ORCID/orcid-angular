@@ -19,7 +19,7 @@ if (typeof $localize === 'undefined') {
 
 // All user-visible strings. Values are replaced per-locale by the Angular localize pipeline at build time.
 const STRINGS = {
-  unnamedProfile: $localize`:@@printView.unnamedProfile:Unnamed ORCID profile`,
+  unnamedProfile: $localize`:@@printView.unnamedProfile:Name is private`,
   orcidIdAlt: $localize`:@@printView.orcidIdAlt:ORCID iD`,
   biography: $localize`:@@printView.biography:Biography`,
   personalInformation: $localize`:@@printView.personalInformation:Personal information`,
@@ -54,6 +54,7 @@ const STRINGS = {
   loadingRecord: $localize`:@@printView.loadingRecord:Loading ORCID record...`,
   recordNotFound: $localize`:@@printView.recordNotFound:Record data was not found in ORCID response.`,
   redirectingToPrimary: $localize`:@@printView.redirectingToPrimary:Redirecting to primary ORCID record…`,
+  orcidPrintView: $localize`:@@printView.orcidPrintView:ORCID Print view`,
 }
 
 const ORCID_REGEX = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
@@ -266,6 +267,11 @@ function jsonOrcidUri(orcidIdentifier) {
   return uri || (path ? `https://orcid.org/${path}` : '')
 }
 
+function setTitle(recordJson, chosenName) {
+  const orcidId = jsonText(recordJson?.['orcid-identifier']?.path)
+  document.title = `${chosenName} (${orcidId}) - ${STRINGS.orcidPrintView}`
+}
+
 function renderIdentityFromJson(recordJson) {
   const person = recordJson?.person
   const name = person?.name
@@ -274,6 +280,9 @@ function renderIdentityFromJson(recordJson) {
   const credit = jsonText(name?.['credit-name'])
   const fullName = [given, family].filter(Boolean).join(' ')
   const chosenName = credit || fullName || STRINGS.unnamedProfile
+
+  // Set the page title
+  setTitle(recordJson, chosenName)
 
   const container = document.createElement('article')
   container.className = 'cv-container'
@@ -287,6 +296,11 @@ function renderIdentityFromJson(recordJson) {
   const otherNames = jsonList(person?.['other-names']?.['other-name'])
     .map((n) => jsonText(n?.content))
     .filter(Boolean)
+
+  if (credit && fullName) {
+    otherNames.unshift(fullName)
+  }
+
   if (otherNames.length) {
     const namesLine = document.createElement('p')
     namesLine.className = 'other-names'
@@ -409,7 +423,7 @@ function renderPersonalInfoFromJson(recordJson, container) {
     const lines = externalIds.map((entry) => {
       const label = entry.type || 'Identifier'
       const value = entry.value || entry.url || ''
-      return textLineNode(label, value, entry.url)
+      return otherIdsTextNode(label, value, entry.url)
     })
     appendList(block, lines)
     blocks.push(block)
@@ -475,6 +489,32 @@ function textLineNode(label, value, url) {
   }
   return wrapper
 }
+
+function otherIdsTextNode(label, value, url) {
+  const wrapper = document.createElement('p')
+  wrapper.className = 'line'
+  if (label) {
+    const prefix = document.createElement('span')
+    prefix.className = 'line-label'
+    prefix.textContent = `${label}: `
+    wrapper.appendChild(prefix)
+  }
+
+  wrapper.appendChild(document.createTextNode(value))
+
+  const safeUrl = sanitizeUrl(url)
+  if (safeUrl) {
+    wrapper.appendChild(document.createTextNode(' '))
+    const a = document.createElement('a')
+    a.href = safeUrl
+    a.target = '_blank'
+    a.rel = 'noopener noreferrer'
+    a.textContent = safeUrl
+    wrapper.appendChild(a)
+  }
+  return wrapper
+}
+
 function safeTextNode(value) {
   return (value || '').replace(/\s+/g, ' ').trim()
 }
@@ -564,7 +604,9 @@ function composeActivityEntryFromJson(entry, opts = {}) {
         idRel && idRel.toLowerCase() !== 'self'
           ? `${idRel} ${idType}`
           : idType || STRINGS.identifier
-      wrapper.appendChild(textLineNode(label, idValue || idUrl || '', idUrl))
+      wrapper.appendChild(
+        otherIdsTextNode(label, idValue || idUrl || '', idUrl)
+      )
     })
   }
 
@@ -650,10 +692,12 @@ function renderEducationsAndQualifications(activities, section) {
 }
 
 function renderWorks(activities, section) {
+  const workSummaries = []
   // Works: activities-summary.works.group[].work-summary[]
-  const workSummaries = (activities?.works?.group || []).flatMap(
-    (g) => g?.['work-summary'] || []
-  )
+  for (const group of activities?.works?.group || []) {
+    workSummaries.push(group['work-summary'][0])
+  }
+
   hasContent = false
   hasContent =
     renderActivityGroupFromJson(section, STRINGS.works, workSummaries, (w) =>
@@ -771,30 +815,36 @@ function renderProfessionalActivities(activities, section) {
 }
 
 function renderFundings(activities, section) {
-  // Fundings: activitiesSummary.fundings.group[].activities[]
-  const fundings = (activities?.fundings?.group || []).flatMap(
-    (g) => g?.['funding-summary'] || []
-  )
+  const fundingSummaries = []
+  for (const group of activities?.fundings?.group || []) {
+    fundingSummaries.push(group['funding-summary'][0])
+  }
+
   hasContent = false
   hasContent =
-    renderActivityGroupFromJson(section, STRINGS.fundings, fundings, (f) =>
-      composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
+    renderActivityGroupFromJson(
+      section,
+      STRINGS.fundings,
+      fundingSummaries,
+      (f) =>
+        composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
     ) || hasContent
   return hasContent
 }
 
 function renderResearchResources(activities, section) {
   // Research resources: activities.research-resources.group.research-resource-summary
-  const researchResources = (
-    activities?.['research-resources']?.group || []
-  ).flatMap((g) => g?.['research-resource-summary'] || [])
+  const researchResourceSummaries = []
+  for (const group of activities?.['research-resources']?.group || []) {
+    researchResourceSummaries.push(group['research-resource-summary'][0])
+  }
 
   hasContent = false
   hasContent =
     renderActivityGroupFromJson(
       section,
       STRINGS.researchResources,
-      researchResources,
+      researchResourceSummaries,
       (r) =>
         composeActivityEntryFromJson(r, {
           title:
@@ -839,7 +889,10 @@ function renderPeerReviews(activities, section) {
     for (publication of sortedPublications || []) {
       const numberOfPublications = peerReviewsPerPublication.get(publication)
       const li = document.createElement('li')
-      li.textContent = publication + '(' + numberOfPublications + ')'
+      const strong = document.createElement('strong')
+      strong.textContent = publication
+      li.appendChild(strong)
+      li.appendChild(document.createTextNode(' (' + numberOfPublications + ')'))
       list.appendChild(li)
     }
     block.appendChild(list)
