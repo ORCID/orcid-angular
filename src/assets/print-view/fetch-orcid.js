@@ -690,10 +690,12 @@ function renderEducationsAndQualifications(activities, section) {
 }
 
 function renderWorks(activities, section) {
+  const workSummaries = []
   // Works: activities-summary.works.group[].work-summary[]
-  const workSummaries = (activities?.works?.group || []).flatMap(
-    (g) => g?.['work-summary'] || []
-  )
+  for(const group of activities?.works?.group || []) {
+    workSummaries.push(group['work-summary'][0])
+  }
+
   hasContent = false
   hasContent =
     renderActivityGroupFromJson(section, STRINGS.works, workSummaries, (w) =>
