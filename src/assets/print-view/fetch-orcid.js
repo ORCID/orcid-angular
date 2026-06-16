@@ -419,7 +419,7 @@ function renderPersonalInfoFromJson(recordJson, container) {
     const lines = externalIds.map((entry) => {
       const label = entry.type || 'Identifier'
       const value = entry.value || entry.url || ''
-      return textLineNode(label, value, entry.url)
+      return otherIdsNode(label, value, entry.url)
     })
     appendList(block, lines)
     blocks.push(block)
@@ -485,6 +485,32 @@ function textLineNode(label, value, url) {
   }
   return wrapper
 }
+
+function otherIdsNode(label, value, url) {
+  const wrapper = document.createElement('p')
+  wrapper.className = 'line'
+  if (label) {
+    const prefix = document.createElement('span')
+    prefix.className = 'line-label'
+    prefix.textContent = `${label}: `
+    wrapper.appendChild(prefix)
+  }
+
+  wrapper.appendChild(document.createTextNode(value))
+
+  const safeUrl = sanitizeUrl(url)
+  if (safeUrl) {
+    wrapper.appendChild(document.createTextNode(' '))
+    const a = document.createElement('a')
+    a.href = safeUrl
+    a.target = '_blank'
+    a.rel = 'noopener noreferrer'
+    a.textContent = safeUrl
+    wrapper.appendChild(a)
+  }
+  return wrapper
+}
+
 function safeTextNode(value) {
   return (value || '').replace(/\s+/g, ' ').trim()
 }
