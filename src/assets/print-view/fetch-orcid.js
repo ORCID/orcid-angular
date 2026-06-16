@@ -891,7 +891,10 @@ function renderPeerReviews(activities, section) {
     for (publication of sortedPublications || []) {
       const numberOfPublications = peerReviewsPerPublication.get(publication)
       const li = document.createElement('li')
-      li.textContent = publication + '(' + numberOfPublications + ')'
+      const strong = document.createElement('strong')
+      strong.textContent = publication
+      li.appendChild(strong)
+      li.appendChild(document.createTextNode(' (' + numberOfPublications + ')'))
       list.appendChild(li)
     }
     block.appendChild(list)
