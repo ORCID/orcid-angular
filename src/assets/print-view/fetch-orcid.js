@@ -419,7 +419,7 @@ function renderPersonalInfoFromJson(recordJson, container) {
     const lines = externalIds.map((entry) => {
       const label = entry.type || 'Identifier'
       const value = entry.value || entry.url || ''
-      return otherIdsNode(label, value, entry.url)
+      return otherIdsTextNode(label, value, entry.url)
     })
     appendList(block, lines)
     blocks.push(block)
@@ -486,7 +486,7 @@ function textLineNode(label, value, url) {
   return wrapper
 }
 
-function otherIdsNode(label, value, url) {
+function otherIdsTextNode(label, value, url) {
   const wrapper = document.createElement('p')
   wrapper.className = 'line'
   if (label) {
@@ -600,10 +600,7 @@ function composeActivityEntryFromJson(entry, opts = {}) {
         idRel && idRel.toLowerCase() !== 'self'
           ? `${idRel} ${idType}`
           : idType || STRINGS.identifier
-      /////////////////////////////////////////////////////////////////////////////////
-      //---- This should be formatted as a identifier URL, like the other ids as well
-      /////////////////////////////////////////////////////////////////////////////////
-      wrapper.appendChild(textLineNode(label, idValue || idUrl || '', idUrl))
+      wrapper.appendChild(otherIdsTextNode(label, idValue || idUrl || '', idUrl))
     })
   }
 
