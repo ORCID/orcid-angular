@@ -3,7 +3,11 @@
 if (typeof $localize === 'undefined') {
   self.$localize = function (messageParts) {
     var substitutions = Array.prototype.slice.call(arguments, 1)
-    return messageParts.reduce(function (result, part, i) {
+    // Strip Angular localize metadata: `:description@@id:` (first part) or `:PLACEHOLDER:` (rest)
+    var parts = Array.prototype.map.call(messageParts, function (part) {
+      return typeof part === 'string' ? part.replace(/^:[^:]*:/, '') : part
+    })
+    return parts.reduce(function (result, part, i) {
       return (
         result +
         (substitutions[i - 1] != null ? substitutions[i - 1] : '') +
