@@ -813,13 +813,15 @@ function renderProfessionalActivities(activities, section) {
 }
 
 function renderFundings(activities, section) {
-  // Fundings: activitiesSummary.fundings.group[].activities[]
-  const fundings = (activities?.fundings?.group || []).flatMap(
-    (g) => g?.['funding-summary'] || []
-  )
+  const fundingSummaries = []
+  // Works: activities-summary.works.group[].work-summary[]
+  for(const group of activities?.fundings?.group || []) {
+    fundingSummaries.push(group['funding-summary'][0])
+  }
+
   hasContent = false
   hasContent =
-    renderActivityGroupFromJson(section, STRINGS.fundings, fundings, (f) =>
+    renderActivityGroupFromJson(section, STRINGS.fundings, fundingSummaries, (f) =>
       composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
     ) || hasContent
   return hasContent
@@ -827,16 +829,18 @@ function renderFundings(activities, section) {
 
 function renderResearchResources(activities, section) {
   // Research resources: activities.research-resources.group.research-resource-summary
-  const researchResources = (
-    activities?.['research-resources']?.group || []
-  ).flatMap((g) => g?.['research-resource-summary'] || [])
+  const researchResourceSummaries = []
+  // Works: activities-summary.works.group[].work-summary[]
+  for(const group of activities?.['research-resources']?.group || []) {
+    researchResourceSummaries.push(group['research-resource-summary'][0])
+  }
 
   hasContent = false
   hasContent =
     renderActivityGroupFromJson(
       section,
       STRINGS.researchResources,
-      researchResources,
+      researchResourceSummaries,
       (r) =>
         composeActivityEntryFromJson(r, {
           title:
