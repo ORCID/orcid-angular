@@ -12,6 +12,7 @@
  *    zh-CN→zh_CN, zh-TW→zh_TW) are handled via XLF_LOCALE_MAP.
  */
 
+import { createHash } from 'crypto'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import {
   makeEs2015TranslatePlugin,
@@ -36,6 +37,22 @@ const XLF_LOCALE_MAP: Record<string, string> = {
 /** Source file (pre-translation). */
 const PRINT_VIEW_SOURCE = './src/assets/print-view/fetch-orcid.js'
 
+/**
+ * Returns an 8-character hash of the built print-view assets for a locale,
+ * used as a cache-busting query param: `?v=<hash>-<locale>`.
+ * Hashes the translated JS + the shared CSS so any change invalidates the cache.
+ */
+function printViewCacheKey(destDir: string, locale: string): string {
+  const hash = createHash('sha256')
+  for (const file of ['fetch-orcid.js', 'cv-style.css']) {
+    const filePath = `${destDir}/${file}`
+    if (existsSync(filePath)) {
+      hash.update(readFileSync(filePath))
+    }
+  }
+  return `${hash.digest('hex').slice(0, 8)}-${locale}`
+}
+
 function xlfFileForLocale(locale: string): string {
   const suffix = XLF_LOCALE_MAP[locale] ?? locale
   return `./src/locale/messages.${suffix}.xlf`
@@ -48,9 +65,14 @@ function getTranslations(locale: string): Record<string, any> | null {
   }
   const content = readFileSync(xlf, 'utf8')
   const parser = new Xliff1TranslationParser()
-  const analyzed = (parser as any).analyze(xlf, content) as { canParse: boolean; hint: any }
+  const analyzed = (parser as any).analyze(xlf, content) as {
+    canParse: boolean
+    hint: any
+  }
   if (!analyzed.canParse) {
-    console.warn(`[print-view-localize] Could not parse XLF for locale "${locale}": ${xlf}`)
+    console.warn(
+      `[print-view-localize] Could not parse XLF for locale "${locale}": ${xlf}`
+    )
     return null
   }
   const { translations } = parser.parse(xlf, content, analyzed.hint)
@@ -89,9 +111,13 @@ export function localizeAndWritePrintViewScript(): void {
       const result = babel.transformSync(source, {
         filename: PRINT_VIEW_SOURCE,
         plugins: [
-          makeEs2015TranslatePlugin(diagnostics, {}, {
-            missingTranslation: 'ignore',
-          }),
+          makeEs2015TranslatePlugin(
+            diagnostics,
+            {},
+            {
+              missingTranslation: 'ignore',
+            }
+          ),
         ],
         configFile: false,
         babelrc: false,
@@ -113,7 +139,7 @@ export function localizeAndWritePrintViewScript(): void {
       if (diagnostics.hasErrors) {
         console.warn(
           `[print-view-localize] Errors for locale "${locale}":`,
-          diagnostics.messages,
+          diagnostics.messages
         )
       }
 
@@ -122,5 +148,22 @@ export function localizeAndWritePrintViewScript(): void {
 
     writeFileSync(destFile, output, 'utf8')
     console.log(`[print-view-localize] ✓ ${destFile}`)
+
+    // Fix the lang attribute and cache-busting version in print-view/index.html.
+    // The source file always has lang="en" and a static ?v=...; we rewrite both.
+    const printViewIndexPath = `${destDir}/index.html`
+    if (existsSync(printViewIndexPath)) {
+      const cacheKey = printViewCacheKey(destDir, locale)
+      let html = readFileSync(printViewIndexPath, 'utf8')
+      const htmlOriginal = html
+      html = html.replace(/<html([^>]*)lang="[^"]*"/, `<html$1lang="${locale}"`)
+      html = html.replace(/__PRINT_VIEW_VERSION__/g, cacheKey)
+      if (html !== htmlOriginal) {
+        writeFileSync(printViewIndexPath, html, 'utf8')
+        console.log(
+          `[print-view-localize] ✓ ${printViewIndexPath} (lang=${locale}, v=${cacheKey})`
+        )
+      }
+    }
   }
 }

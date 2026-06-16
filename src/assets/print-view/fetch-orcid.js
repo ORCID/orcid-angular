@@ -4,7 +4,11 @@ if (typeof $localize === 'undefined') {
   self.$localize = function (messageParts) {
     var substitutions = Array.prototype.slice.call(arguments, 1)
     return messageParts.reduce(function (result, part, i) {
-      return result + (substitutions[i - 1] != null ? substitutions[i - 1] : '') + part
+      return (
+        result +
+        (substitutions[i - 1] != null ? substitutions[i - 1] : '') +
+        part
+      )
     })
   }
 }
@@ -485,7 +489,7 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
   const block = document.createElement('div')
   block.className = 'activity-group'
   const heading = document.createElement('h3')
-  heading.textContent = $localize`:@@printView.activityGroupHeading:${ title }:TITLE: (${ entries.length }:COUNT:)`
+  heading.textContent = $localize`:@@printView.activityGroupHeading:${title}:TITLE: (${entries.length}:COUNT:)`
   block.appendChild(heading)
   const list = document.createElement('ul')
   entries.forEach((entry) => {
@@ -585,10 +589,14 @@ function renderEmployments(activities, section) {
 
   hasContent = false
   hasContent =
-    renderActivityGroupFromJson(section, STRINGS.employments, employments, (e) =>
-      composeActivityEntryFromJson(e, {
-        title: jsonText(e?.organization?.name) || jsonText(e?.roleTitle),
-      })
+    renderActivityGroupFromJson(
+      section,
+      STRINGS.employments,
+      employments,
+      (e) =>
+        composeActivityEntryFromJson(e, {
+          title: jsonText(e?.organization?.name) || jsonText(e?.roleTitle),
+        })
     ) || hasContent
   return hasContent
 }
@@ -829,7 +837,7 @@ function renderPeerReviews(activities, section) {
     const block = document.createElement('div')
     block.className = 'activity-group'
     const heading = document.createElement('h3')
-    heading.textContent = $localize`:@@printView.peerReviewHeading:Peer review (${ reviews }:REVIEW_COUNT: reviews for ${ sortedPublications.size }:PUBLICATION_COUNT: publications/grants)`
+    heading.textContent = $localize`:@@printView.peerReviewHeading:Peer review (${reviews}:REVIEW_COUNT: reviews for ${sortedPublications.size}:PUBLICATION_COUNT: publications/grants)`
     block.appendChild(heading)
     const list = document.createElement('ul')
     for (publication of sortedPublications || []) {
@@ -904,7 +912,9 @@ async function fetchOrcidRecord(orcidId) {
     }
   }
   if (!response.ok) {
-    throw new Error($localize`:@@printView.fetchFailed:Failed to fetch ORCID record (${ response.status }:STATUS:).`)
+    throw new Error(
+      $localize`:@@printView.fetchFailed:Failed to fetch ORCID record (${response.status}:STATUS:).`
+    )
   }
 
   const recordJson = await response.json()
@@ -931,18 +941,26 @@ async function loadRecord(orcidId) {
     message.className = 'error'
     message.textContent = error.message
     cvRoot.appendChild(message)
-    showStatus($localize`:@@printView.couldNotLoad:Could not load ${ orcidId }:ORCID_ID:.`, 'error')
+    showStatus(
+      $localize`:@@printView.couldNotLoad:Could not load ${orcidId}:ORCID_ID:.`,
+      'error'
+    )
     cvRoot.setAttribute('aria-busy', 'false')
   }
 }
 
-printButton.addEventListener('click', () => window.print())
+// Guard: only run DOM initialization when the required elements are present.
+// This allows the file to be loaded in test environments (Karma/Jasmine) where
+// the print-view HTML is not present and getElementById returns null.
+if (cvRoot && statusNode && printButton) {
+  printButton.addEventListener('click', () => window.print())
 
-const startingId = resolveOrcidIdFromLocation()
-if (startingId) {
-  syncOrcidInUrl(startingId)
-  loadRecord(startingId)
-} else {
-  clearStatus()
-  renderOrcidPrompt()
+  const startingId = resolveOrcidIdFromLocation()
+  if (startingId) {
+    syncOrcidInUrl(startingId)
+    loadRecord(startingId)
+  } else {
+    clearStatus()
+    renderOrcidPrompt()
+  }
 }
