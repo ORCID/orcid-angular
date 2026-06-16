@@ -816,7 +816,6 @@ function renderProfessionalActivities(activities, section) {
 
 function renderFundings(activities, section) {
   const fundingSummaries = []
-  // Works: activities-summary.works.group[].work-summary[]
   for (const group of activities?.fundings?.group || []) {
     fundingSummaries.push(group['funding-summary'][0])
   }
@@ -836,7 +835,6 @@ function renderFundings(activities, section) {
 function renderResearchResources(activities, section) {
   // Research resources: activities.research-resources.group.research-resource-summary
   const researchResourceSummaries = []
-  // Works: activities-summary.works.group[].work-summary[]
   for (const group of activities?.['research-resources']?.group || []) {
     researchResourceSummaries.push(group['research-resource-summary'][0])
   }
