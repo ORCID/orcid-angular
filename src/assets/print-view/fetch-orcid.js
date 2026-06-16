@@ -604,7 +604,9 @@ function composeActivityEntryFromJson(entry, opts = {}) {
         idRel && idRel.toLowerCase() !== 'self'
           ? `${idRel} ${idType}`
           : idType || STRINGS.identifier
-      wrapper.appendChild(otherIdsTextNode(label, idValue || idUrl || '', idUrl))
+      wrapper.appendChild(
+        otherIdsTextNode(label, idValue || idUrl || '', idUrl)
+      )
     })
   }
 
@@ -692,7 +694,7 @@ function renderEducationsAndQualifications(activities, section) {
 function renderWorks(activities, section) {
   const workSummaries = []
   // Works: activities-summary.works.group[].work-summary[]
-  for(const group of activities?.works?.group || []) {
+  for (const group of activities?.works?.group || []) {
     workSummaries.push(group['work-summary'][0])
   }
 
@@ -815,14 +817,18 @@ function renderProfessionalActivities(activities, section) {
 function renderFundings(activities, section) {
   const fundingSummaries = []
   // Works: activities-summary.works.group[].work-summary[]
-  for(const group of activities?.fundings?.group || []) {
+  for (const group of activities?.fundings?.group || []) {
     fundingSummaries.push(group['funding-summary'][0])
   }
 
   hasContent = false
   hasContent =
-    renderActivityGroupFromJson(section, STRINGS.fundings, fundingSummaries, (f) =>
-      composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
+    renderActivityGroupFromJson(
+      section,
+      STRINGS.fundings,
+      fundingSummaries,
+      (f) =>
+        composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
     ) || hasContent
   return hasContent
 }
@@ -831,7 +837,7 @@ function renderResearchResources(activities, section) {
   // Research resources: activities.research-resources.group.research-resource-summary
   const researchResourceSummaries = []
   // Works: activities-summary.works.group[].work-summary[]
-  for(const group of activities?.['research-resources']?.group || []) {
+  for (const group of activities?.['research-resources']?.group || []) {
     researchResourceSummaries.push(group['research-resource-summary'][0])
   }
 
