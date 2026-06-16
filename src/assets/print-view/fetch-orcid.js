@@ -15,7 +15,7 @@ if (typeof $localize === 'undefined') {
 
 // All user-visible strings. Values are replaced per-locale by the Angular localize pipeline at build time.
 const STRINGS = {
-  unnamedProfile: $localize`:@@printView.unnamedProfile:Unnamed ORCID profile`,
+  unnamedProfile: $localize`:@@printView.unnamedProfile:Name is private`,
   orcidIdAlt: $localize`:@@printView.orcidIdAlt:ORCID iD`,
   biography: $localize`:@@printView.biography:Biography`,
   personalInformation: $localize`:@@printView.personalInformation:Personal information`,
