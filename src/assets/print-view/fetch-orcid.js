@@ -277,6 +277,7 @@ function renderIdentityFromJson(recordJson) {
   const fullName = [given, family].filter(Boolean).join(' ')
   const chosenName = credit || fullName || STRINGS.unnamedProfile
 
+  // Set the page title
   setTitle(recordJson, chosenName)
 
   const container = document.createElement('article')
@@ -291,6 +292,11 @@ function renderIdentityFromJson(recordJson) {
   const otherNames = jsonList(person?.['other-names']?.['other-name'])
     .map((n) => jsonText(n?.content))
     .filter(Boolean)
+
+  if (credit && fullName) {
+    otherNames.unshift(fullName)
+  }
+
   if (otherNames.length) {
     const namesLine = document.createElement('p')
     namesLine.className = 'other-names'
