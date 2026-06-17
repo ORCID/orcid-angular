@@ -878,17 +878,17 @@ function renderPeerReviews(activities, section) {
   // Peer reviews: activities.peer-reviews.group.peer-review-group
   for (const group of activities?.['peer-reviews']?.group || []) {
     for (const peerReviewGroup of group['peer-review-group'] || []) {
-      for (const peerReviewSummary of peerReviewGroup['peer-review-summary'] ||
-        []) {
-        reviews++
-        const publication = peerReviewSummary['review-group-id']
-        if (publications.has(publication)) {
-          const count = peerReviewsPerPublication.get(publication)
-          peerReviewsPerPublication.set(publication, count + 1)
-        } else {
-          publications.add(publication)
-          peerReviewsPerPublication.set(publication, 1)
-        }
+      // Just process the first peer review element on each group
+      const firstPeerReviewSummary = peerReviewGroup['peer-review-summary'][0]
+      const numOfReviewsInGroup = peerReviewGroup['peer-review-summary'].length
+      reviews += numOfReviewsInGroup
+      const publication = firstPeerReviewSummary['review-group-id']
+      if (publications.has(publication)) {
+        const count = peerReviewsPerPublication.get(publication)
+        peerReviewsPerPublication.set(publication, count + 1)
+      } else {
+        publications.add(publication)
+        peerReviewsPerPublication.set(publication, 1)
       }
     }
   }
