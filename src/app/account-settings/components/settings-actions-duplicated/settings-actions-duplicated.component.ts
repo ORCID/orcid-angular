@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
 import {
   FormGroupDirective,
   NgForm,
@@ -37,7 +44,7 @@ export class NeverShowErrorMatcher implements ErrorStateMatcher {
   preserveWhitespaces: true,
   standalone: false,
 })
-export class SettingsActionsDuplicatedComponent implements OnInit {
+export class SettingsActionsDuplicatedComponent implements OnInit, OnDestroy {
   errorMatcher = new NeverShowErrorMatcher()
   userSession: UserSession
   constructor(
@@ -121,7 +128,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
         document.activeElement.blur()
       }
       this.loadingVerify = false
-      this.form.reset()
+      this.resetFormState()
       if (success) {
         this.authenticated = true
       } else {
@@ -169,7 +176,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
 
         if (data.success) {
           this.errors = []
-          this.form.reset()
+          this.resetFormState()
           this.success = true
         }
         if (data.errors?.length || !data.twoFactorToken) {
@@ -179,9 +186,17 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
       },
       error: () => {
         this.cancelAuthentication = true
-        this.form.reset()
+        this.resetFormState()
         this.loading.next(false)
       },
     })
+  }
+
+  ngOnDestroy(): void {
+    this.resetFormState()
+  }
+
+  private resetFormState(): void {
+    this.form?.reset()
   }
 }

@@ -325,6 +325,11 @@
   min-width: 0;
   flex: 1; // Grow to fill space
 
+  // Keep Copy/Print actions close to the ORCID iD on desktop non-compact mode.
+  .desktop:not(.compact) & {
+    flex: 0 0 auto;
+  }
+
   .id-content {
     display: flex;
     align-items: center;

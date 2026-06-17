@@ -193,6 +193,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
     return status
   }
   ngOnDestroy(): void {
+    this.form?.reset()
     this.$destroy.next()
     this.$destroy.complete()
   }
