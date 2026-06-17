@@ -1,3 +1,9 @@
+## v2.135.11 - 2026-06-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.10...v2.135.11)
+
+- [#2864](https://github.com/ORCID/orcid-angular/pull/2864): {PD-5754} {PD-5756} {PD-5755} Amontenegro/pd 5754
+
 ## v2.135.10 - 2026-06-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.9...v2.135.10)
