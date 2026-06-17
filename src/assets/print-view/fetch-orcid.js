@@ -55,6 +55,12 @@ const STRINGS = {
   recordNotFound: $localize`:@@printView.recordNotFound:Record data was not found in ORCID response.`,
   redirectingToPrimary: $localize`:@@printView.redirectingToPrimary:Redirecting to primary ORCID record…`,
   orcidPrintView: $localize`:@@printView.orcidPrintView:ORCID Print view`,
+  printSaveAsPdf: $localize`:@@printView.printSaveAsPdf:Print / Save as PDF`,
+  printThisOrcidProfile: $localize`:@@printView.printThisOrcidProfile:Print this ORCID profile`,
+  relSelf: $localize`:@@printView.relSelf:Self`,
+  relPartOf: $localize`:@@printView.relPartOf:Part of`,
+  relVersionOf: $localize`:@@printView.relVersionOf:Version of`,
+  relFundedBy: $localize`:@@printView.relFundedBy:Funded by`,
 }
 
 const ORCID_REGEX = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
@@ -600,9 +606,19 @@ function composeActivityEntryFromJson(entry, opts = {}) {
       const idValue = jsonText(id.value || id['external-id-value'])
       const idRel = jsonText(id.relationship || id['external-id-relationship'])
       const idUrl = sanitizeUrl(jsonText(id['external-id-url']?.value))
+
+      let localizedRel = idRel
+      if (idRel) {
+        const lowerRel = idRel.toLowerCase()
+        if (lowerRel === 'self') localizedRel = STRINGS.relSelf
+        else if (lowerRel === 'part-of') localizedRel = STRINGS.relPartOf
+        else if (lowerRel === 'version-of') localizedRel = STRINGS.relVersionOf
+        else if (lowerRel === 'funded-by') localizedRel = STRINGS.relFundedBy
+      }
+
       const label =
         idRel && idRel.toLowerCase() !== 'self'
-          ? `${idRel} ${idType}`
+          ? `${localizedRel} ${idType}`.trim()
           : idType || STRINGS.identifier
       wrapper.appendChild(
         otherIdsTextNode(label, idValue || idUrl || '', idUrl)
@@ -862,17 +878,17 @@ function renderPeerReviews(activities, section) {
   // Peer reviews: activities.peer-reviews.group.peer-review-group
   for (const group of activities?.['peer-reviews']?.group || []) {
     for (const peerReviewGroup of group['peer-review-group'] || []) {
-      for (const peerReviewSummary of peerReviewGroup['peer-review-summary'] ||
-        []) {
-        reviews++
-        const publication = peerReviewSummary['review-group-id']
-        if (publications.has(publication)) {
-          const count = peerReviewsPerPublication.get(publication)
-          peerReviewsPerPublication.set(publication, count + 1)
-        } else {
-          publications.add(publication)
-          peerReviewsPerPublication.set(publication, 1)
-        }
+      // Just process the first peer review element on each group
+      const firstPeerReviewSummary = peerReviewGroup['peer-review-summary'][0]
+      const numOfReviewsInGroup = peerReviewGroup['peer-review-summary'].length
+      reviews += numOfReviewsInGroup
+      const publication = firstPeerReviewSummary['review-group-id']
+      if (publications.has(publication)) {
+        const count = peerReviewsPerPublication.get(publication)
+        peerReviewsPerPublication.set(publication, count + 1)
+      } else {
+        publications.add(publication)
+        peerReviewsPerPublication.set(publication, 1)
       }
     }
   }
@@ -1002,6 +1018,8 @@ async function loadRecord(orcidId) {
 // This allows the file to be loaded in test environments (Karma/Jasmine) where
 // the print-view HTML is not present and getElementById returns null.
 if (cvRoot && statusNode && printButton) {
+  printButton.textContent = STRINGS.printSaveAsPdf
+  printButton.setAttribute('aria-label', STRINGS.printThisOrcidProfile)
   printButton.addEventListener('click', () => window.print())
 
   const startingId = resolveOrcidIdFromLocation()

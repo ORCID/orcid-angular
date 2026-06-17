@@ -129,6 +129,12 @@ function normalizeXlf12Sources(path: string) {
       'printView.couldNotLoad',
       'printView.activityGroupHeading',
       'printView.peerReviewHeading',
+      'printView.printSaveAsPdf',
+      'printView.printThisOrcidProfile',
+      'printView.relSelf',
+      'printView.relPartOf',
+      'printView.relVersionOf',
+      'printView.relFundedBy',
     ]
     const PRINT_VIEW_SOURCES: Record<string, string> = {
       'printView.unnamedProfile': 'Unnamed ORCID profile',
@@ -174,6 +180,12 @@ function normalizeXlf12Sources(path: string) {
       'printView.couldNotLoad': 'Could not load',
       'printView.activityGroupHeading': 'Activity group heading',
       'printView.peerReviewHeading': 'Peer review heading',
+      'printView.printSaveAsPdf': 'Print / Save as PDF',
+      'printView.printThisOrcidProfile': 'Print this ORCID profile',
+      'printView.relSelf': 'Self',
+      'printView.relPartOf': 'Part of',
+      'printView.relVersionOf': 'Version of',
+      'printView.relFundedBy': 'Funded by',
     }
     const existingIds = new Set(transUnits.map((tu: any) => tu?.$?.id))
     const printViewBody = fileNode?.body?.[0]
