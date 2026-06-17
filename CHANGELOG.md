@@ -1,3 +1,9 @@
+## v2.135.10 - 2026-06-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.9...v2.135.10)
+
+- [#2863](https://github.com/ORCID/orcid-angular/pull/2863): PD-5389, PD-5402
+
 ## v2.135.9 - 2026-06-16
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.8...v2.135.9)
