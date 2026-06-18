@@ -18909,7 +18909,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="printView.unnamedProfile" datatype="html" resname="printView.unnamedProfile">
-        <source>Unnamed ORCID profile</source>
+        <source>Name is private</source>
       </trans-unit>
       <trans-unit id="printView.orcidIdAlt" datatype="html" resname="printView.orcidIdAlt">
         <source>ORCID iD</source>
@@ -18992,18 +18992,6 @@
       <trans-unit id="printView.identifier" datatype="html" resname="printView.identifier">
         <source>Identifier</source>
       </trans-unit>
-      <trans-unit id="printView.enterOrcidId" datatype="html" resname="printView.enterOrcidId">
-        <source>Enter an ORCID iD</source>
-      </trans-unit>
-      <trans-unit id="printView.orcidIdHelp" datatype="html" resname="printView.orcidIdHelp">
-        <source>Add an ORCID iD to the URL or use the form below.</source>
-      </trans-unit>
-      <trans-unit id="printView.loadProfile" datatype="html" resname="printView.loadProfile">
-        <source>Load profile</source>
-      </trans-unit>
-      <trans-unit id="printView.invalidOrcidId" datatype="html" resname="printView.invalidOrcidId">
-        <source>Enter a valid ORCID iD (format: 0000-0000-0000-0000).</source>
-      </trans-unit>
       <trans-unit id="printView.loadingRecord" datatype="html" resname="printView.loadingRecord">
         <source>Loading ORCID record...</source>
       </trans-unit>
@@ -19013,17 +19001,8 @@
       <trans-unit id="printView.redirectingToPrimary" datatype="html" resname="printView.redirectingToPrimary">
         <source>Redirecting to primary ORCID record…</source>
       </trans-unit>
-      <trans-unit id="printView.fetchFailed" datatype="html" resname="printView.fetchFailed">
-        <source>Failed to fetch ORCID record</source>
-      </trans-unit>
-      <trans-unit id="printView.couldNotLoad" datatype="html" resname="printView.couldNotLoad">
-        <source>Could not load</source>
-      </trans-unit>
-      <trans-unit id="printView.activityGroupHeading" datatype="html" resname="printView.activityGroupHeading">
-        <source>Activity group heading</source>
-      </trans-unit>
-      <trans-unit id="printView.peerReviewHeading" datatype="html" resname="printView.peerReviewHeading">
-        <source>Peer review heading</source>
+      <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
+        <source>ORCID Print view</source>
       </trans-unit>
       <trans-unit id="printView.printSaveAsPdf" datatype="html" resname="printView.printSaveAsPdf">
         <source>Print / Save as PDF</source>
@@ -19042,6 +19021,18 @@
       </trans-unit>
       <trans-unit id="printView.relFundedBy" datatype="html" resname="printView.relFundedBy">
         <source>Funded by</source>
+      </trans-unit>
+      <trans-unit id="printView.activityGroupHeading" datatype="html" resname="printView.activityGroupHeading">
+        <source>{$TITLE} ({$COUNT})</source>
+      </trans-unit>
+      <trans-unit id="printView.peerReviewHeading" datatype="html" resname="printView.peerReviewHeading">
+        <source>Peer review ({$REVIEW_COUNT} reviews for {$PUBLICATION_COUNT} publications/grants)</source>
+      </trans-unit>
+      <trans-unit id="printView.fetchFailed" datatype="html" resname="printView.fetchFailed">
+        <source>Failed to fetch ORCID record ({$STATUS}).</source>
+      </trans-unit>
+      <trans-unit id="printView.couldNotLoad" datatype="html" resname="printView.couldNotLoad">
+        <source>Could not load {$ORCID_ID}.</source>
       </trans-unit>
     </body>
   </file>
