@@ -1,3 +1,9 @@
+## v2.135.13 - 2026-06-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.12...v2.135.13)
+
+- [#2866](https://github.com/ORCID/orcid-angular/pull/2866): PD-000 fix-print-view-translations-wont-get-deleted-when-not-use
+
 ## v2.135.12 - 2026-06-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.11...v2.135.12)
