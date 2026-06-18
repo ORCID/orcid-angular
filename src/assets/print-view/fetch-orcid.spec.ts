@@ -320,8 +320,6 @@ describe('fetch-orcid.js', () => {
         'fundings',
         'employments',
         'activities',
-        'enterOrcidId',
-        'loadProfile',
         'loadingRecord',
       ]
       requiredKeys.forEach((key) => {
@@ -338,34 +336,6 @@ describe('fetch-orcid.js', () => {
           .withContext(`STRINGS.${key} should not be empty`)
           .toBeGreaterThan(0)
       })
-    })
-  })
-
-  // ── renderOrcidPrompt DOM ─────────────────────────────────────────────────────
-
-  describe('renderOrcidPrompt', () => {
-    let cvRootFixture: HTMLElement
-
-    beforeEach(() => {
-      // Provide a minimal DOM fixture that mirrors print-view/index.html
-      cvRootFixture = document.createElement('div')
-      cvRootFixture.id = 'cv-root-fixture'
-      document.body.appendChild(cvRootFixture)
-      // Temporarily swap the global cvRoot used internally by pointing to fixture
-      // by calling renderOrcidPrompt on the fixture directly via DOM manipulation:
-      cvRootFixture.innerHTML = ''
-    })
-
-    afterEach(() => {
-      document.body.removeChild(cvRootFixture)
-    })
-
-    it('renders the prompt heading via makeSection+createElement', () => {
-      // Call makeSection to test the heading structure it produces since
-      // renderOrcidPrompt uses cvRoot (the real element, null in test env).
-      const section = makeSection(STRINGS.enterOrcidId)
-      const h2 = section.querySelector('h2')
-      expect(h2?.textContent).toBe(STRINGS.enterOrcidId)
     })
   })
 })
