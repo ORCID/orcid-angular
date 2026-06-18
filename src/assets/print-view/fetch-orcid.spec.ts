@@ -286,7 +286,7 @@ describe('fetch-orcid.js', () => {
       const anchor = node.querySelector('a')
       expect(anchor).not.toBeNull()
       expect(anchor!.href).toBe('https://scopus.com/12345')
-      expect(anchor!.textContent).toBe('(https://scopus.com/12345)')
+      expect(anchor!.textContent).toBe('https://scopus.com/12345')
     })
 
     it('renders value as a link and IGNORES url parameter when value IS a URL', () => {
