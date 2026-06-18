@@ -137,7 +137,7 @@ export const ApplicationRoutesLabels = {
   [ApplicationRoutes.resetPasswordEmail]: $localize`:@@share.resetPasswordEmail:Reset password - ORCID`,
   [ApplicationRoutes.selfService]: $localize`:@@share.selfService:Self Service - ORCID`,
   [ApplicationRoutes.developerTools]: $localize`:@@share.developerTools:Developer tools - ORCID`,
-  [ApplicationRoutes.smsPoc]: $localize`:@@share.smsPoc:SMS POC - ORCID`,
+  [ApplicationRoutes.smsPoc]: 'SMS POC - ORCID',
 }
 
 export const ApplicationDynamicRoutesLabels = {

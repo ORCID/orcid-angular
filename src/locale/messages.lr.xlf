@@ -6371,14 +6371,6 @@
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="share.smsPoc" datatype="html" resname="share.smsPoc">
-        <source>SMS POC - ORCID</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">140</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
       <trans-unit id="share.orcidTitle" datatype="html" resname="share.orcidTitle">
         <source>- ORCID</source>
         <context-group purpose="location">
@@ -18967,126 +18959,6 @@
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="smsPoc.title" datatype="html" resname="smsPoc.title">
-        <source>SMS POC</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.description" datatype="html" resname="smsPoc.description">
-        <source>Send a test SMS. Choose AWS or Twilio for each send.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.sandboxNotice" datatype="html" resname="smsPoc.sandboxNotice">
-        <source>This POC currently runs in SANDBOX mode. If you want to test actual SMS delivery to your phone, please reach out to Leo on Slack to add your phone number to our AWS SNS ORCID Friend Sandbox and the Twilio accounts.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">14,19</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.provider" datatype="html" resname="smsPoc.provider">
-        <source>Provider</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">28,30</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.providerAws" datatype="html" resname="smsPoc.providerAws">
-        <source>AWS SNS</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">36,38</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.providerTwilio" datatype="html" resname="smsPoc.providerTwilio">
-        <source>Twilio</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">39,41</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.phoneNumber" datatype="html" resname="smsPoc.phoneNumber">
-        <source>Phone number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">50,52</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.message" datatype="html" resname="smsPoc.message">
-        <source>Message</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.messageRequired" datatype="html" resname="smsPoc.messageRequired">
-        <source>Message is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">78</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.messageTooLong" datatype="html" resname="smsPoc.messageTooLong">
-        <source>Message must be 1600 characters or fewer</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">80,82</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.sent" datatype="html" resname="smsPoc.sent">
-        <source>SMS sent.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">93</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.send" datatype="html" resname="smsPoc.send">
-        <source>Send SMS</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">111,113</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.phoneRequired" datatype="html" resname="smsPoc.phoneRequired">
-        <source>Phone number is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.ts</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.phoneInvalid" datatype="html" resname="smsPoc.phoneInvalid">
-        <source>Enter a valid phone number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.ts</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.sendFailed" datatype="html" resname="smsPoc.sendFailed">
-        <source>SMS send failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.ts</context>
-          <context context-type="linenumber">76</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
       <trans-unit id="account.step1AuthenticationApp" datatype="html" resname="account.step1AuthenticationApp">
         <source>Step 1 of 2 - Authentication app</source>
         <context-group purpose="location">
@@ -21153,7 +21025,7 @@
         <target>LR</target>
       </trans-unit>
       <trans-unit id="printView.unnamedProfile" datatype="html" resname="printView.unnamedProfile">
-        <source>Unnamed ORCID profile</source>
+        <source>Name is private</source>
         <target>LR</target>
       </trans-unit>
       <trans-unit id="printView.orcidIdAlt" datatype="html" resname="printView.orcidIdAlt">
@@ -21264,22 +21136,6 @@
         <source>Identifier</source>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="printView.enterOrcidId" datatype="html" resname="printView.enterOrcidId">
-        <source>Enter an ORCID iD</source>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="printView.orcidIdHelp" datatype="html" resname="printView.orcidIdHelp">
-        <source>Add an ORCID iD to the URL or use the form below.</source>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="printView.loadProfile" datatype="html" resname="printView.loadProfile">
-        <source>Load profile</source>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="printView.invalidOrcidId" datatype="html" resname="printView.invalidOrcidId">
-        <source>Enter a valid ORCID iD (format: 0000-0000-0000-0000).</source>
-        <target>LR</target>
-      </trans-unit>
       <trans-unit id="printView.loadingRecord" datatype="html" resname="printView.loadingRecord">
         <source>Loading ORCID record...</source>
         <target>LR</target>
@@ -21292,20 +21148,8 @@
         <source>Redirecting to primary ORCID record…</source>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="printView.fetchFailed" datatype="html" resname="printView.fetchFailed">
-        <source>Failed to fetch ORCID record</source>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="printView.couldNotLoad" datatype="html" resname="printView.couldNotLoad">
-        <source>Could not load</source>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="printView.activityGroupHeading" datatype="html" resname="printView.activityGroupHeading">
-        <source>Activity group heading</source>
-        <target>LR</target>
-      </trans-unit>
-      <trans-unit id="printView.peerReviewHeading" datatype="html" resname="printView.peerReviewHeading">
-        <source>Peer review heading</source>
+      <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
+        <source>ORCID Print view</source>
         <target>LR</target>
       </trans-unit>
       <trans-unit id="printView.printSaveAsPdf" datatype="html" resname="printView.printSaveAsPdf">
@@ -21330,6 +21174,22 @@
       </trans-unit>
       <trans-unit id="printView.relFundedBy" datatype="html" resname="printView.relFundedBy">
         <source>Funded by</source>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="printView.activityGroupHeading" datatype="html" resname="printView.activityGroupHeading">
+        <source>{$TITLE} ({$COUNT})</source>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="printView.peerReviewHeading" datatype="html" resname="printView.peerReviewHeading">
+        <source>Peer review ({$REVIEW_COUNT} reviews for {$PUBLICATION_COUNT} publications/grants)</source>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="printView.fetchFailed" datatype="html" resname="printView.fetchFailed">
+        <source>Failed to fetch ORCID record ({$STATUS}).</source>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="printView.couldNotLoad" datatype="html" resname="printView.couldNotLoad">
+        <source>Could not load {$ORCID_ID}.</source>
         <target>LR</target>
       </trans-unit>
     </body>
