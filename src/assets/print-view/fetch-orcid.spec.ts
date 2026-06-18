@@ -22,6 +22,11 @@ declare function textLineNode(
   value: string,
   url?: string
 ): HTMLElement
+declare function otherIdsTextNode(
+  label: string,
+  value: string,
+  url?: string
+): HTMLElement
 declare const STRINGS: Record<string, string>
 
 describe('fetch-orcid.js', () => {
@@ -259,6 +264,46 @@ describe('fetch-orcid.js', () => {
     it('omits the anchor when url is unsafe', () => {
       const node = textLineNode('', 'bad link', 'javascript:alert(1)')
       expect(node.querySelector('a')).toBeNull()
+    })
+  })
+
+  // ── otherIdsTextNode ──────────────────────────────────────────────────────────
+
+  describe('otherIdsTextNode', () => {
+    it('renders label and value as text when value is not a URL', () => {
+      const node = otherIdsTextNode('Scopus ID', '12345')
+      expect(node.textContent).toBe('Scopus ID: 12345')
+      expect(node.querySelector('a')).toBeNull()
+    })
+
+    it('renders value and url (in parenthesis) when value is not a URL but url is provided', () => {
+      const node = otherIdsTextNode(
+        'Scopus ID',
+        '12345',
+        'https://scopus.com/12345'
+      )
+      expect(node.textContent).toContain('Scopus ID: 12345')
+      const anchor = node.querySelector('a')
+      expect(anchor).not.toBeNull()
+      expect(anchor!.href).toBe('https://scopus.com/12345')
+      expect(anchor!.textContent).toBe('(https://scopus.com/12345)')
+    })
+
+    it('renders value as a link and IGNORES url parameter when value IS a URL', () => {
+      const node = otherIdsTextNode(
+        'ResearcherID',
+        'https://researcherid.com/rid/H-1234-2012',
+        'https://some-other-url.com'
+      )
+      // This is the NEW behavior we want.
+      // Currently it would probably render "ResearcherID: https://researcherid.com/rid/H-1234-2012 (https://some-other-url.com)"
+      const anchor = node.querySelector('a')
+      expect(anchor).not.toBeNull()
+      expect(anchor!.href).toBe('https://researcherid.com/rid/H-1234-2012')
+      expect(anchor!.textContent).toBe('https://researcherid.com/rid/H-1234-2012')
+
+      // Ensure the other URL is NOT present
+      expect(node.textContent).not.toContain('https://some-other-url.com')
     })
   })
 
