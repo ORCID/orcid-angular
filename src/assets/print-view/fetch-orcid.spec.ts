@@ -300,7 +300,9 @@ describe('fetch-orcid.js', () => {
       const anchor = node.querySelector('a')
       expect(anchor).not.toBeNull()
       expect(anchor!.href).toBe('https://researcherid.com/rid/H-1234-2012')
-      expect(anchor!.textContent).toBe('https://researcherid.com/rid/H-1234-2012')
+      expect(anchor!.textContent).toBe(
+        'https://researcherid.com/rid/H-1234-2012'
+      )
 
       // Ensure the other URL is NOT present
       expect(node.textContent).not.toContain('https://some-other-url.com')
