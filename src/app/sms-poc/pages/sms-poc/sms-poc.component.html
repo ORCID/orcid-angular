@@ -1,7 +1,5 @@
 <mat-card class="sms-poc-card max-w-[560px] sm:p-10! p-6!">
-  <h1 class="orc-font-heading-small font-normal mb-4">
-    SMS POC
-  </h1>
+  <h1 class="orc-font-heading-small font-normal mb-4">SMS POC</h1>
   <p class="sms-poc-description orc-font-body-small mb-4">
     Send a test SMS. Choose AWS or Twilio for each send.
   </p>
@@ -27,12 +25,8 @@
         color="primary"
         class="provider-group flex gap-4"
       >
-        <mat-radio-button value="aws">
-          AWS SNS
-        </mat-radio-button>
-        <mat-radio-button value="twilio">
-          Twilio
-        </mat-radio-button>
+        <mat-radio-button value="aws"> AWS SNS </mat-radio-button>
+        <mat-radio-button value="twilio"> Twilio </mat-radio-button>
       </mat-radio-group>
     </div>
 
@@ -70,9 +64,7 @@
       @if (message?.hasError('required') && message?.touched) {
       <mat-error>Message is required</mat-error>
       } @if (message?.hasError('maxlength') && message?.touched) {
-      <mat-error>
-        Message must be 1600 characters or fewer
-      </mat-error>
+      <mat-error> Message must be 1600 characters or fewer </mat-error>
       }
     </mat-form-field>
 
