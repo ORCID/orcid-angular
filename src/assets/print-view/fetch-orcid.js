@@ -47,10 +47,6 @@ const STRINGS = {
   url: $localize`:@@printView.url:URL`,
   untitled: $localize`:@@printView.untitled:Untitled`,
   identifier: $localize`:@@printView.identifier:Identifier`,
-  enterOrcidId: $localize`:@@printView.enterOrcidId:Enter an ORCID iD`,
-  orcidIdHelp: $localize`:@@printView.orcidIdHelp:Add an ORCID iD to the URL or use the form below.`,
-  loadProfile: $localize`:@@printView.loadProfile:Load profile`,
-  invalidOrcidId: $localize`:@@printView.invalidOrcidId:Enter a valid ORCID iD (format: 0000-0000-0000-0000).`,
   loadingRecord: $localize`:@@printView.loadingRecord:Loading ORCID record...`,
   recordNotFound: $localize`:@@printView.recordNotFound:Record data was not found in ORCID response.`,
   redirectingToPrimary: $localize`:@@printView.redirectingToPrimary:Redirecting to primary ORCID record…`,
@@ -168,67 +164,6 @@ function makeSection(title) {
   heading.textContent = title
   section.appendChild(heading)
   return section
-}
-
-function renderOrcidPrompt(message = '') {
-  clearNode(cvRoot)
-  cvRoot.setAttribute('aria-busy', 'false')
-
-  const card = document.createElement('section')
-  card.className = 'orcid-prompt'
-
-  const heading = document.createElement('h2')
-  heading.textContent = STRINGS.enterOrcidId
-  card.appendChild(heading)
-
-  const help = document.createElement('p')
-  help.textContent = STRINGS.orcidIdHelp
-  card.appendChild(help)
-
-  const form = document.createElement('form')
-  form.className = 'orcid-prompt-form'
-  form.setAttribute('novalidate', 'novalidate')
-
-  const input = document.createElement('input')
-  input.type = 'text'
-  input.name = 'orcid'
-  input.placeholder = '0000-0000-0000-0000'
-  input.setAttribute('aria-label', 'ORCID iD')
-  input.required = true
-  form.appendChild(input)
-
-  const button = document.createElement('button')
-  button.type = 'submit'
-  button.textContent = STRINGS.loadProfile
-  form.appendChild(button)
-
-  const formError = document.createElement('p')
-  formError.className = 'orcid-prompt-error'
-  if (message) formError.textContent = message
-  form.appendChild(formError)
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault()
-    const orcidId = normalizeOrcidId(input.value)
-    if (!orcidId) {
-      formError.textContent = STRINGS.invalidOrcidId
-      input.focus()
-      return
-    }
-    clearStatus()
-    syncOrcidInUrl(orcidId)
-    loadRecord(orcidId)
-  })
-
-  card.appendChild(form)
-  cvRoot.appendChild(card)
-}
-
-function appendParagraph(section, content) {
-  if (!content) return
-  const p = document.createElement('p')
-  p.textContent = content
-  section.appendChild(p)
 }
 
 function appendList(section, entries) {
@@ -506,17 +441,32 @@ function otherIdsTextNode(label, value, url) {
     wrapper.appendChild(prefix)
   }
 
-  wrapper.appendChild(document.createTextNode(value))
-
-  const safeUrl = sanitizeUrl(url)
-  if (safeUrl) {
-    wrapper.appendChild(document.createTextNode(' '))
+  const valueAsUrl = sanitizeUrl(value)
+  if (valueAsUrl) {
+    // If the value itself is a URL, render it as a link and ignore the `url` parameter
+    wrapper.appendChild(document.createTextNode(' ('))
     const a = document.createElement('a')
-    a.href = safeUrl
+    a.href = valueAsUrl
     a.target = '_blank'
     a.rel = 'noopener noreferrer'
-    a.textContent = safeUrl
+    a.textContent = value || valueAsUrl
     wrapper.appendChild(a)
+    wrapper.appendChild(document.createTextNode(')'))
+  } else {
+    // Otherwise, keep the existing behavior: render value as text,
+    // and optionally append a (url) link if provided and safe
+    wrapper.appendChild(document.createTextNode(value))
+    const safeUrl = sanitizeUrl(url)
+    if (safeUrl) {
+      wrapper.appendChild(document.createTextNode(' ('))
+      const a = document.createElement('a')
+      a.href = safeUrl
+      a.target = '_blank'
+      a.rel = 'noopener noreferrer'
+      a.textContent = safeUrl
+      wrapper.appendChild(a)
+      wrapper.appendChild(document.createTextNode(')'))
+    }
   }
   return wrapper
 }
@@ -1028,6 +978,8 @@ if (cvRoot && statusNode && printButton) {
     loadRecord(startingId)
   } else {
     clearStatus()
-    renderOrcidPrompt()
+    console.log('-------------------------------')
+    console.log('ERROR: No ORCID ID found in URL')
+    console.log('-------------------------------')
   }
 }
