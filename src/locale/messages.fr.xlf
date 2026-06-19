@@ -21196,6 +21196,7 @@
       <trans-unit id="printView.redirectingToPrimary" datatype="html" resname="printView.redirectingToPrimary">
         <source>Redirecting to primary ORCID record…</source>
       </trans-unit>
+<<<<<<< Updated upstream
       <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
         <source>ORCID Print view</source>
       </trans-unit>
@@ -21222,6 +21223,8 @@
         <target>Financé par</target>
       </trans-unit>
 
+=======
+>>>>>>> Stashed changes
     </body>
   </file>
 </xliff>

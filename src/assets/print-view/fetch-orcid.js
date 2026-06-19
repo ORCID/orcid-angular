@@ -481,7 +481,7 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
   const block = document.createElement('div')
   block.className = 'activity-group'
   const heading = document.createElement('h3')
-  heading.textContent = $localize`:@@printView.activityGroupHeading:${title}:TITLE: (${entries.length}:COUNT:)`
+  heading.textContent = `${title} (${entries.length})`
   block.appendChild(heading)
   const list = document.createElement('ul')
   entries.forEach((entry) => {
@@ -849,7 +849,7 @@ function renderPeerReviews(activities, section) {
     const block = document.createElement('div')
     block.className = 'activity-group'
     const heading = document.createElement('h3')
-    heading.textContent = $localize`:@@printView.peerReviewHeading:Peer review (${reviews}:REVIEW_COUNT: reviews for ${sortedPublications.size}:PUBLICATION_COUNT: publications/grants)`
+    heading.textContent = `Peer review (${reviews} reviews for ${sortedPublications.size} publications/grants)`
     block.appendChild(heading)
     const list = document.createElement('ul')
     for (publication of sortedPublications || []) {
@@ -928,7 +928,7 @@ async function fetchOrcidRecord(orcidId) {
   }
   if (!response.ok) {
     throw new Error(
-      $localize`:@@printView.fetchFailed:Failed to fetch ORCID record (${response.status}:STATUS:).`
+      `Failed to fetch ORCID record (${response.status}).`
     )
   }
 
@@ -957,7 +957,7 @@ async function loadRecord(orcidId) {
     message.textContent = error.message
     cvRoot.appendChild(message)
     showStatus(
-      $localize`:@@printView.couldNotLoad:Could not load ${orcidId}:ORCID_ID:.`,
+      `Could not load ${orcidId}.`,
       'error'
     )
     cvRoot.setAttribute('aria-busy', 'false')
