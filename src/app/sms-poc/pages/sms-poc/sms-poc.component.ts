@@ -43,10 +43,10 @@ export class SmsPocComponent implements OnInit {
       return null
     }
     if (this.phoneNumber.hasError('required')) {
-      return $localize`:@@smsPoc.phoneRequired:Phone number is required`
+      return 'Phone number is required'
     }
     if (this.phoneNumber.hasError('invalidPhone')) {
-      return $localize`:@@smsPoc.phoneInvalid:Enter a valid phone number`
+      return 'Enter a valid phone number'
     }
     return null
   }
@@ -73,7 +73,7 @@ export class SmsPocComponent implements OnInit {
       },
       error: () => {
         this.loading = false
-        this.backendError = $localize`:@@smsPoc.sendFailed:SMS send failed`
+        this.backendError = 'SMS send failed'
       },
     })
   }

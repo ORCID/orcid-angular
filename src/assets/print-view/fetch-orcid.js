@@ -3,7 +3,11 @@
 if (typeof $localize === 'undefined') {
   self.$localize = function (messageParts) {
     var substitutions = Array.prototype.slice.call(arguments, 1)
-    return messageParts.reduce(function (result, part, i) {
+    // Strip Angular localize metadata: `:description@@id:` (first part) or `:PLACEHOLDER:` (rest)
+    var parts = Array.prototype.map.call(messageParts, function (part) {
+      return typeof part === 'string' ? part.replace(/^:[^:]*:/, '') : part
+    })
+    return parts.reduce(function (result, part, i) {
       return (
         result +
         (substitutions[i - 1] != null ? substitutions[i - 1] : '') +
@@ -15,7 +19,7 @@ if (typeof $localize === 'undefined') {
 
 // All user-visible strings. Values are replaced per-locale by the Angular localize pipeline at build time.
 const STRINGS = {
-  unnamedProfile: $localize`:@@printView.unnamedProfile:Unnamed ORCID profile`,
+  unnamedProfile: $localize`:@@printView.unnamedProfile:Name is private`,
   orcidIdAlt: $localize`:@@printView.orcidIdAlt:ORCID iD`,
   biography: $localize`:@@printView.biography:Biography`,
   personalInformation: $localize`:@@printView.personalInformation:Personal information`,
@@ -43,13 +47,16 @@ const STRINGS = {
   url: $localize`:@@printView.url:URL`,
   untitled: $localize`:@@printView.untitled:Untitled`,
   identifier: $localize`:@@printView.identifier:Identifier`,
-  enterOrcidId: $localize`:@@printView.enterOrcidId:Enter an ORCID iD`,
-  orcidIdHelp: $localize`:@@printView.orcidIdHelp:Add an ORCID iD to the URL or use the form below.`,
-  loadProfile: $localize`:@@printView.loadProfile:Load profile`,
-  invalidOrcidId: $localize`:@@printView.invalidOrcidId:Enter a valid ORCID iD (format: 0000-0000-0000-0000).`,
   loadingRecord: $localize`:@@printView.loadingRecord:Loading ORCID record...`,
   recordNotFound: $localize`:@@printView.recordNotFound:Record data was not found in ORCID response.`,
   redirectingToPrimary: $localize`:@@printView.redirectingToPrimary:Redirecting to primary ORCID record…`,
+  orcidPrintView: $localize`:@@printView.orcidPrintView:ORCID Print view`,
+  printSaveAsPdf: $localize`:@@printView.printSaveAsPdf:Print / Save as PDF`,
+  printThisOrcidProfile: $localize`:@@printView.printThisOrcidProfile:Print this ORCID profile`,
+  relSelf: $localize`:@@printView.relSelf:Self`,
+  relPartOf: $localize`:@@printView.relPartOf:Part of`,
+  relVersionOf: $localize`:@@printView.relVersionOf:Version of`,
+  relFundedBy: $localize`:@@printView.relFundedBy:Funded by`,
 }
 
 const ORCID_REGEX = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
@@ -159,67 +166,6 @@ function makeSection(title) {
   return section
 }
 
-function renderOrcidPrompt(message = '') {
-  clearNode(cvRoot)
-  cvRoot.setAttribute('aria-busy', 'false')
-
-  const card = document.createElement('section')
-  card.className = 'orcid-prompt'
-
-  const heading = document.createElement('h2')
-  heading.textContent = STRINGS.enterOrcidId
-  card.appendChild(heading)
-
-  const help = document.createElement('p')
-  help.textContent = STRINGS.orcidIdHelp
-  card.appendChild(help)
-
-  const form = document.createElement('form')
-  form.className = 'orcid-prompt-form'
-  form.setAttribute('novalidate', 'novalidate')
-
-  const input = document.createElement('input')
-  input.type = 'text'
-  input.name = 'orcid'
-  input.placeholder = '0000-0000-0000-0000'
-  input.setAttribute('aria-label', 'ORCID iD')
-  input.required = true
-  form.appendChild(input)
-
-  const button = document.createElement('button')
-  button.type = 'submit'
-  button.textContent = STRINGS.loadProfile
-  form.appendChild(button)
-
-  const formError = document.createElement('p')
-  formError.className = 'orcid-prompt-error'
-  if (message) formError.textContent = message
-  form.appendChild(formError)
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault()
-    const orcidId = normalizeOrcidId(input.value)
-    if (!orcidId) {
-      formError.textContent = STRINGS.invalidOrcidId
-      input.focus()
-      return
-    }
-    clearStatus()
-    syncOrcidInUrl(orcidId)
-    loadRecord(orcidId)
-  })
-
-  card.appendChild(form)
-  cvRoot.appendChild(card)
-}
-
-function appendParagraph(section, content) {
-  if (!content) return
-  const p = document.createElement('p')
-  p.textContent = content
-  section.appendChild(p)
-}
-
 function appendList(section, entries) {
   if (!entries.length) return
   const list = document.createElement('ul')
@@ -262,6 +208,11 @@ function jsonOrcidUri(orcidIdentifier) {
   return uri || (path ? `https://orcid.org/${path}` : '')
 }
 
+function setTitle(recordJson, chosenName) {
+  const orcidId = jsonText(recordJson?.['orcid-identifier']?.path)
+  document.title = `${chosenName} (${orcidId}) - ${STRINGS.orcidPrintView}`
+}
+
 function renderIdentityFromJson(recordJson) {
   const person = recordJson?.person
   const name = person?.name
@@ -270,6 +221,9 @@ function renderIdentityFromJson(recordJson) {
   const credit = jsonText(name?.['credit-name'])
   const fullName = [given, family].filter(Boolean).join(' ')
   const chosenName = credit || fullName || STRINGS.unnamedProfile
+
+  // Set the page title
+  setTitle(recordJson, chosenName)
 
   const container = document.createElement('article')
   container.className = 'cv-container'
@@ -283,6 +237,11 @@ function renderIdentityFromJson(recordJson) {
   const otherNames = jsonList(person?.['other-names']?.['other-name'])
     .map((n) => jsonText(n?.content))
     .filter(Boolean)
+
+  if (credit && fullName) {
+    otherNames.unshift(fullName)
+  }
+
   if (otherNames.length) {
     const namesLine = document.createElement('p')
     namesLine.className = 'other-names'
@@ -405,7 +364,7 @@ function renderPersonalInfoFromJson(recordJson, container) {
     const lines = externalIds.map((entry) => {
       const label = entry.type || 'Identifier'
       const value = entry.value || entry.url || ''
-      return textLineNode(label, value, entry.url)
+      return otherIdsTextNode(label, value, entry.url)
     })
     appendList(block, lines)
     blocks.push(block)
@@ -471,6 +430,47 @@ function textLineNode(label, value, url) {
   }
   return wrapper
 }
+
+function otherIdsTextNode(label, value, url) {
+  const wrapper = document.createElement('p')
+  wrapper.className = 'line'
+  if (label) {
+    const prefix = document.createElement('span')
+    prefix.className = 'line-label'
+    prefix.textContent = `${label}: `
+    wrapper.appendChild(prefix)
+  }
+
+  const valueAsUrl = sanitizeUrl(value)
+  if (valueAsUrl) {
+    // If the value itself is a URL, render it as a link and ignore the `url` parameter
+    wrapper.appendChild(document.createTextNode(' ('))
+    const a = document.createElement('a')
+    a.href = valueAsUrl
+    a.target = '_blank'
+    a.rel = 'noopener noreferrer'
+    a.textContent = value || valueAsUrl
+    wrapper.appendChild(a)
+    wrapper.appendChild(document.createTextNode(')'))
+  } else {
+    // Otherwise, keep the existing behavior: render value as text,
+    // and optionally append a (url) link if provided and safe
+    wrapper.appendChild(document.createTextNode(value))
+    const safeUrl = sanitizeUrl(url)
+    if (safeUrl) {
+      wrapper.appendChild(document.createTextNode(' ('))
+      const a = document.createElement('a')
+      a.href = safeUrl
+      a.target = '_blank'
+      a.rel = 'noopener noreferrer'
+      a.textContent = safeUrl
+      wrapper.appendChild(a)
+      wrapper.appendChild(document.createTextNode(')'))
+    }
+  }
+  return wrapper
+}
+
 function safeTextNode(value) {
   return (value || '').replace(/\s+/g, ' ').trim()
 }
@@ -556,11 +556,23 @@ function composeActivityEntryFromJson(entry, opts = {}) {
       const idValue = jsonText(id.value || id['external-id-value'])
       const idRel = jsonText(id.relationship || id['external-id-relationship'])
       const idUrl = sanitizeUrl(jsonText(id['external-id-url']?.value))
+
+      let localizedRel = idRel
+      if (idRel) {
+        const lowerRel = idRel.toLowerCase()
+        if (lowerRel === 'self') localizedRel = STRINGS.relSelf
+        else if (lowerRel === 'part-of') localizedRel = STRINGS.relPartOf
+        else if (lowerRel === 'version-of') localizedRel = STRINGS.relVersionOf
+        else if (lowerRel === 'funded-by') localizedRel = STRINGS.relFundedBy
+      }
+
       const label =
         idRel && idRel.toLowerCase() !== 'self'
-          ? `${idRel} ${idType}`
+          ? `${localizedRel} ${idType}`.trim()
           : idType || STRINGS.identifier
-      wrapper.appendChild(textLineNode(label, idValue || idUrl || '', idUrl))
+      wrapper.appendChild(
+        otherIdsTextNode(label, idValue || idUrl || '', idUrl)
+      )
     })
   }
 
@@ -646,10 +658,12 @@ function renderEducationsAndQualifications(activities, section) {
 }
 
 function renderWorks(activities, section) {
+  const workSummaries = []
   // Works: activities-summary.works.group[].work-summary[]
-  const workSummaries = (activities?.works?.group || []).flatMap(
-    (g) => g?.['work-summary'] || []
-  )
+  for (const group of activities?.works?.group || []) {
+    workSummaries.push(group['work-summary'][0])
+  }
+
   hasContent = false
   hasContent =
     renderActivityGroupFromJson(section, STRINGS.works, workSummaries, (w) =>
@@ -767,30 +781,36 @@ function renderProfessionalActivities(activities, section) {
 }
 
 function renderFundings(activities, section) {
-  // Fundings: activitiesSummary.fundings.group[].activities[]
-  const fundings = (activities?.fundings?.group || []).flatMap(
-    (g) => g?.['funding-summary'] || []
-  )
+  const fundingSummaries = []
+  for (const group of activities?.fundings?.group || []) {
+    fundingSummaries.push(group['funding-summary'][0])
+  }
+
   hasContent = false
   hasContent =
-    renderActivityGroupFromJson(section, STRINGS.fundings, fundings, (f) =>
-      composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
+    renderActivityGroupFromJson(
+      section,
+      STRINGS.fundings,
+      fundingSummaries,
+      (f) =>
+        composeActivityEntryFromJson(f, { title: jsonText(f?.title?.title) })
     ) || hasContent
   return hasContent
 }
 
 function renderResearchResources(activities, section) {
   // Research resources: activities.research-resources.group.research-resource-summary
-  const researchResources = (
-    activities?.['research-resources']?.group || []
-  ).flatMap((g) => g?.['research-resource-summary'] || [])
+  const researchResourceSummaries = []
+  for (const group of activities?.['research-resources']?.group || []) {
+    researchResourceSummaries.push(group['research-resource-summary'][0])
+  }
 
   hasContent = false
   hasContent =
     renderActivityGroupFromJson(
       section,
       STRINGS.researchResources,
-      researchResources,
+      researchResourceSummaries,
       (r) =>
         composeActivityEntryFromJson(r, {
           title:
@@ -808,17 +828,17 @@ function renderPeerReviews(activities, section) {
   // Peer reviews: activities.peer-reviews.group.peer-review-group
   for (const group of activities?.['peer-reviews']?.group || []) {
     for (const peerReviewGroup of group['peer-review-group'] || []) {
-      for (const peerReviewSummary of peerReviewGroup['peer-review-summary'] ||
-        []) {
-        reviews++
-        const publication = peerReviewSummary['review-group-id']
-        if (publications.has(publication)) {
-          const count = peerReviewsPerPublication.get(publication)
-          peerReviewsPerPublication.set(publication, count + 1)
-        } else {
-          publications.add(publication)
-          peerReviewsPerPublication.set(publication, 1)
-        }
+      // Just process the first peer review element on each group
+      const firstPeerReviewSummary = peerReviewGroup['peer-review-summary'][0]
+      const numOfReviewsInGroup = peerReviewGroup['peer-review-summary'].length
+      reviews += numOfReviewsInGroup
+      const publication = firstPeerReviewSummary['review-group-id']
+      if (publications.has(publication)) {
+        const count = peerReviewsPerPublication.get(publication)
+        peerReviewsPerPublication.set(publication, count + 1)
+      } else {
+        publications.add(publication)
+        peerReviewsPerPublication.set(publication, 1)
       }
     }
   }
@@ -835,7 +855,10 @@ function renderPeerReviews(activities, section) {
     for (publication of sortedPublications || []) {
       const numberOfPublications = peerReviewsPerPublication.get(publication)
       const li = document.createElement('li')
-      li.textContent = publication + '(' + numberOfPublications + ')'
+      const strong = document.createElement('strong')
+      strong.textContent = publication
+      li.appendChild(strong)
+      li.appendChild(document.createTextNode(' (' + numberOfPublications + ')'))
       list.appendChild(li)
     }
     block.appendChild(list)
@@ -945,6 +968,8 @@ async function loadRecord(orcidId) {
 // This allows the file to be loaded in test environments (Karma/Jasmine) where
 // the print-view HTML is not present and getElementById returns null.
 if (cvRoot && statusNode && printButton) {
+  printButton.textContent = STRINGS.printSaveAsPdf
+  printButton.setAttribute('aria-label', STRINGS.printThisOrcidProfile)
   printButton.addEventListener('click', () => window.print())
 
   const startingId = resolveOrcidIdFromLocation()
@@ -953,6 +978,8 @@ if (cvRoot && statusNode && printButton) {
     loadRecord(startingId)
   } else {
     clearStatus()
-    renderOrcidPrompt()
+    console.log('-------------------------------')
+    console.log('ERROR: No ORCID ID found in URL')
+    console.log('-------------------------------')
   }
 }

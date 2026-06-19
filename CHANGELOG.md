@@ -1,3 +1,37 @@
+## v2.135.13 - 2026-06-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.12...v2.135.13)
+
+- [#2866](https://github.com/ORCID/orcid-angular/pull/2866): PD-000 fix-print-view-translations-wont-get-deleted-when-not-use
+
+## v2.135.12 - 2026-06-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.11...v2.135.12)
+
+## v2.135.11 - 2026-06-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.10...v2.135.11)
+
+- [#2864](https://github.com/ORCID/orcid-angular/pull/2864): {PD-5754} {PD-5756} {PD-5755} Amontenegro/pd 5754
+
+## v2.135.10 - 2026-06-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.9...v2.135.10)
+
+- [#2863](https://github.com/ORCID/orcid-angular/pull/2863): PD-5389, PD-5402
+
+## v2.135.9 - 2026-06-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.8...v2.135.9)
+
+## v2.135.8 - 2026-06-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.7...v2.135.8)
+
+## v2.135.7 - 2026-06-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.6...v2.135.7)
+
 ## v2.135.6 - 2026-06-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.5...v2.135.6)

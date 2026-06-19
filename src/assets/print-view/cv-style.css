@@ -137,15 +137,15 @@ button:hover {
 }
 
 .orcid-id {
-  margin-top: 8px;
+  margin-top: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .orcid-id img {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
 }
 
 a {

@@ -53,7 +53,7 @@
     </ul>
   </app-alert-message>
   @if (authenticated) {
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
     <h3 i18n class="mb-2 mt-0">You are removing this duplicate account</h3>
     @if (data.deprecatingAccountName) {
     <p class="leading-5.25">{{ data.deprecatingAccountName }}</p>
@@ -82,7 +82,7 @@
     </button>
   </form>
   } @else {
-  <form [formGroup]="form" (ngSubmit)="submitVerify()">
+  <form [formGroup]="form" (ngSubmit)="submitVerify()" autocomplete="off">
     <h3 i18n class="mt-0 mb-2">Which account do you want to remove?</h3>
     <p i18n class="mb-8!">
       You will need to verify your sign in details for the duplicate account
@@ -108,7 +108,7 @@
         formControlName="deprecatingOrcidOrEmail"
         type="text"
         matInput
-        autocomplete="email"
+        autocomplete="off"
         [errorStateMatcher]="errorMatcher"
         id="cy-duplicate-rercod-email"
       />
@@ -132,7 +132,7 @@
         formControlName="password"
         type="password"
         matInput
-        autocomplete="password"
+        autocomplete="new-password"
         [errorStateMatcher]="errorMatcher"
         id="cy-duplicate-rercod-email"
       />

@@ -65,7 +65,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -836,7 +836,7 @@
         <source>for</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
@@ -848,7 +848,7 @@
         <source>to continue removing a duplicate account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1370,7 +1370,7 @@
         <source>New password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1378,7 +1378,7 @@
         <source>Password cannot be empty</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">112,114</context>
+          <context context-type="linenumber">113,115</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1386,7 +1386,7 @@
         <source>Password must meet all requirements</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">124,126</context>
+          <context context-type="linenumber">125,127</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1394,7 +1394,7 @@
         <source>Password must not be the same as your email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">131,133</context>
+          <context context-type="linenumber">132,134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1410,7 +1410,7 @@
         <source>Password must be between 8 and 256 characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">139,141</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1418,7 +1418,7 @@
         <source>Retype your password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">192,194</context>
+          <context context-type="linenumber">193,195</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1430,7 +1430,7 @@
         <source>Passwords do not match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">203,205</context>
+          <context context-type="linenumber">204,206</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1438,7 +1438,7 @@
         <source>Your password has:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">210</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1450,7 +1450,7 @@
         <source>8 or more characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">216</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1462,7 +1462,7 @@
         <source>At least 1 letter or symbol</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">221,223</context>
+          <context context-type="linenumber">222,224</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1474,7 +1474,7 @@
         <source>At least 1 number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">229</context>
+          <context context-type="linenumber">230</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1486,7 +1486,7 @@
         <source>Save changes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">240,242</context>
+          <context context-type="linenumber">241,243</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
@@ -6368,14 +6368,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
           <context context-type="linenumber">139</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="share.smsPoc" datatype="html" resname="share.smsPoc">
-        <source>SMS POC - ORCID</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">140</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -18967,126 +18959,6 @@
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="smsPoc.title" datatype="html" resname="smsPoc.title">
-        <source>SMS POC</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.description" datatype="html" resname="smsPoc.description">
-        <source>Send a test SMS. Choose AWS or Twilio for each send.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.sandboxNotice" datatype="html" resname="smsPoc.sandboxNotice">
-        <source>This POC currently runs in SANDBOX mode. If you want to test actual SMS delivery to your phone, please reach out to Leo on Slack to add your phone number to our AWS SNS ORCID Friend Sandbox and the Twilio accounts.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">14,19</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.provider" datatype="html" resname="smsPoc.provider">
-        <source>Provider</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">28,30</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.providerAws" datatype="html" resname="smsPoc.providerAws">
-        <source>AWS SNS</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">36,38</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.providerTwilio" datatype="html" resname="smsPoc.providerTwilio">
-        <source>Twilio</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">39,41</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.phoneNumber" datatype="html" resname="smsPoc.phoneNumber">
-        <source>Phone number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">50,52</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.message" datatype="html" resname="smsPoc.message">
-        <source>Message</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.messageRequired" datatype="html" resname="smsPoc.messageRequired">
-        <source>Message is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">78</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.messageTooLong" datatype="html" resname="smsPoc.messageTooLong">
-        <source>Message must be 1600 characters or fewer</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">80,82</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.sent" datatype="html" resname="smsPoc.sent">
-        <source>SMS sent.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">93</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.send" datatype="html" resname="smsPoc.send">
-        <source>Send SMS</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.html</context>
-          <context context-type="linenumber">111,113</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.phoneRequired" datatype="html" resname="smsPoc.phoneRequired">
-        <source>Phone number is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.ts</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.phoneInvalid" datatype="html" resname="smsPoc.phoneInvalid">
-        <source>Enter a valid phone number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.ts</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="smsPoc.sendFailed" datatype="html" resname="smsPoc.sendFailed">
-        <source>SMS send failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sms-poc/pages/sms-poc/sms-poc.component.ts</context>
-          <context context-type="linenumber">76</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
       <trans-unit id="account.step1AuthenticationApp" datatype="html" resname="account.step1AuthenticationApp">
         <source>Step 1 of 2 - Authentication app</source>
         <context-group purpose="location">
@@ -21153,7 +21025,7 @@
         <target>RL</target>
       </trans-unit>
       <trans-unit id="printView.unnamedProfile" datatype="html" resname="printView.unnamedProfile">
-        <source>Unnamed ORCID profile</source>
+        <source>Name is private</source>
         <target>RL</target>
       </trans-unit>
       <trans-unit id="printView.orcidIdAlt" datatype="html" resname="printView.orcidIdAlt">
@@ -21264,22 +21136,6 @@
         <source>Identifier</source>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="printView.enterOrcidId" datatype="html" resname="printView.enterOrcidId">
-        <source>Enter an ORCID iD</source>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="printView.orcidIdHelp" datatype="html" resname="printView.orcidIdHelp">
-        <source>Add an ORCID iD to the URL or use the form below.</source>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="printView.loadProfile" datatype="html" resname="printView.loadProfile">
-        <source>Load profile</source>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="printView.invalidOrcidId" datatype="html" resname="printView.invalidOrcidId">
-        <source>Enter a valid ORCID iD (format: 0000-0000-0000-0000).</source>
-        <target>RL</target>
-      </trans-unit>
       <trans-unit id="printView.loadingRecord" datatype="html" resname="printView.loadingRecord">
         <source>Loading ORCID record...</source>
         <target>RL</target>
@@ -21292,20 +21148,48 @@
         <source>Redirecting to primary ORCID record…</source>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="printView.fetchFailed" datatype="html" resname="printView.fetchFailed">
-        <source>Failed to fetch ORCID record</source>
+      <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
+        <source>ORCID Print view</source>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="printView.couldNotLoad" datatype="html" resname="printView.couldNotLoad">
-        <source>Could not load</source>
+      <trans-unit id="printView.printSaveAsPdf" datatype="html" resname="printView.printSaveAsPdf">
+        <source>Print / Save as PDF</source>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="printView.printThisOrcidProfile" datatype="html" resname="printView.printThisOrcidProfile">
+        <source>Print this ORCID profile</source>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="printView.relSelf" datatype="html" resname="printView.relSelf">
+        <source>Self</source>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="printView.relPartOf" datatype="html" resname="printView.relPartOf">
+        <source>Part of</source>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="printView.relVersionOf" datatype="html" resname="printView.relVersionOf">
+        <source>Version of</source>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="printView.relFundedBy" datatype="html" resname="printView.relFundedBy">
+        <source>Funded by</source>
         <target>RL</target>
       </trans-unit>
       <trans-unit id="printView.activityGroupHeading" datatype="html" resname="printView.activityGroupHeading">
-        <source>Activity group heading</source>
+        <source>{$TITLE} ({$COUNT})</source>
         <target>RL</target>
       </trans-unit>
       <trans-unit id="printView.peerReviewHeading" datatype="html" resname="printView.peerReviewHeading">
-        <source>Peer review heading</source>
+        <source>Peer review ({$REVIEW_COUNT} reviews for {$PUBLICATION_COUNT} publications/grants)</source>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="printView.fetchFailed" datatype="html" resname="printView.fetchFailed">
+        <source>Failed to fetch ORCID record ({$STATUS}).</source>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="printView.couldNotLoad" datatype="html" resname="printView.couldNotLoad">
+        <source>Could not load {$ORCID_ID}.</source>
         <target>RL</target>
       </trans-unit>
     </body>
