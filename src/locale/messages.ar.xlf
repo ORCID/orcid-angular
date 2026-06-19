@@ -66,7 +66,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="48679ad8c0f76c54cd6537e208dbd8c5d632519b" datatype="html" resname="48679ad8c0f76c54cd6537e208dbd8c5d632519b">
@@ -789,7 +789,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.ts</context>
@@ -865,7 +865,7 @@
         <target>لـ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
@@ -877,7 +877,7 @@
         <target>للمتابعة في إزالة حساب مكرر</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-duplicated/settings-actions-duplicated.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.accountActions" datatype="html" resname="account.accountActions">
@@ -1419,7 +1419,7 @@
         <target>كلمة مرور جديدة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.passwordCantBeEmpty" datatype="html" resname="shared.passwordCantBeEmpty">
@@ -1427,7 +1427,7 @@
         <target>لا يمكن أن تكون كلمة المرور فارغة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">112,114</context>
+          <context context-type="linenumber">113,115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.wrongPasswordPatternV2" datatype="html" resname="register.wrongPasswordPatternV2">
@@ -1435,7 +1435,7 @@
         <target>يجب أن تفي كلمة المرور بجميع المتطلبات</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">124,126</context>
+          <context context-type="linenumber">125,127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordCantBeEmail" datatype="html" resname="register.passwordCantBeEmail">
@@ -1443,7 +1443,7 @@
         <target>يجب أن تختلف كلمة المرور عن عنوان بريدك الإلكتروني</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">131,133</context>
+          <context context-type="linenumber">132,134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1459,7 +1459,7 @@
         <target>يجب أن تكون كلمة المرور بين 8 و256 حرفًا</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">139,141</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordConfirmationRequired" datatype="html" resname="register.passwordConfirmationRequired">
@@ -1467,7 +1467,7 @@
         <target>أعد كتابة كلمة المرور</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">192,194</context>
+          <context context-type="linenumber">193,195</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1479,7 +1479,7 @@
         <target>كلمة المرور غير مطابقة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">203,205</context>
+          <context context-type="linenumber">204,206</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.yourPasswordHas" datatype="html" resname="register.yourPasswordHas">
@@ -1487,7 +1487,7 @@
         <target>كلمة المرور الخاصة بك تحتوي على:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">210</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1499,7 +1499,7 @@
         <target>8 أحرف أو أكثر</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">216</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1511,7 +1511,7 @@
         <target>حرف أو رمز واحد على الأقل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">221,223</context>
+          <context context-type="linenumber">222,224</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1523,7 +1523,7 @@
         <target>رقم واحد على الأقل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">229</context>
+          <context context-type="linenumber">230</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1535,7 +1535,7 @@
         <target>حفظ التغييرات</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">240,242</context>
+          <context context-type="linenumber">241,243</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
@@ -2440,14 +2440,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.html</context>
           <context context-type="linenumber">51</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
-          <context context-type="linenumber">137</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -5716,7 +5708,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.recordIsDeprecated" datatype="html" resname="summary.recordIsDeprecated">
@@ -5728,7 +5720,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.recordIsDeactivated" datatype="html" resname="summary.recordIsDeactivated">
@@ -5740,7 +5732,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.affiliations" datatype="html" resname="summary.affiliations">
@@ -6284,7 +6276,7 @@
         <target>أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.twoFactorSetup" datatype="html" resname="share.twoFactorSetup">
@@ -6292,11 +6284,11 @@
         <target>الاستيثاق الثنائي - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.institutionalLinking" datatype="html" resname="share.institutionalLinking">
@@ -6304,7 +6296,7 @@
         <target>الربط المؤسسي - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.social" datatype="html" resname="share.social">
@@ -6312,7 +6304,7 @@
         <target>الربط الاجتماعي - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.institutional" datatype="html" resname="share.institutional">
@@ -6320,7 +6312,7 @@
         <target>تسجيل الدخول المؤسسي - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.inbox" datatype="html" resname="share.inbox">
@@ -6328,7 +6320,7 @@
         <target>صندوق بريد الإشعارات - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.signin" datatype="html" resname="share.signin">
@@ -6336,15 +6328,15 @@
         <target>تسجيل الدخول - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">125</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/constants.ts</context>
           <context context-type="linenumber">126</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants.ts</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.authorize" datatype="html" resname="share.authorize">
@@ -6352,7 +6344,7 @@
         <target>Oauth - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.search" datatype="html" resname="share.search">
@@ -6360,7 +6352,7 @@
         <target>البحث - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.reactivation" datatype="html" resname="share.reactivation">
@@ -6368,7 +6360,7 @@
         <target>إعادة تفعيل الحساب - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.resetPassword" datatype="html" resname="share.resetPassword">
@@ -6376,7 +6368,7 @@
         <target>إعادة تعيين كلمة المرور - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.register" datatype="html" resname="share.register">
@@ -6384,7 +6376,7 @@
         <target>التسجيل - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.account" datatype="html" resname="share.account">
@@ -6392,7 +6384,7 @@
         <target>إعدادات الحساب - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.deactivateAccount" datatype="html" resname="share.deactivateAccount">
@@ -6400,7 +6392,7 @@
         <target>تعطيل الحساب - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.trustedParties" datatype="html" resname="share.trustedParties">
@@ -6408,7 +6400,7 @@
         <target>الأطراف الموثوقة - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.resetPasswordEmail" datatype="html" resname="share.resetPasswordEmail">
@@ -6416,7 +6408,7 @@
         <target>إعادة تعيين كلمة المرور - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.selfService" datatype="html" resname="share.selfService">
@@ -6424,7 +6416,7 @@
         <target>الخدمة الذاتية - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.developerTools" datatype="html" resname="share.developerTools">
@@ -6432,7 +6424,7 @@
         <target>أدوات المطور - أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.orcidTitle" datatype="html" resname="share.orcidTitle">
@@ -6440,7 +6432,7 @@
         <target>- أوركيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.myOrcidTitle" datatype="html" resname="share.myOrcidTitle">
@@ -6448,7 +6440,7 @@
         <target>- أوركيد الخاص بي</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEmployment" datatype="html" resname="shared.dialogAriaLabeledByEmployment">
@@ -6456,7 +6448,7 @@
         <target>إدارة مربع حوار التوظيف</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">368</context>
+          <context context-type="linenumber">370</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEducation" datatype="html" resname="shared.dialogAriaLabeledByEducation">
@@ -6464,7 +6456,7 @@
         <target>إدارة مربع حوار التعليم</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">370</context>
+          <context context-type="linenumber">372</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByQualification" datatype="html" resname="shared.dialogAriaLabeledByQualification">
@@ -6472,7 +6464,7 @@
         <target>إدارة مربع حوار التأهيل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">374</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByDistinction" datatype="html" resname="shared.dialogAriaLabeledByDistinction">
@@ -6480,7 +6472,7 @@
         <target>إدارة مربع حوار التميز</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">376</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByInvitedPosition" datatype="html" resname="shared.dialogAriaLabeledByInvitedPosition">
@@ -6488,7 +6480,7 @@
         <target>إدارة مربع حوار المناصب المدعوة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">376</context>
+          <context context-type="linenumber">378</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByMembership" datatype="html" resname="shared.dialogAriaLabeledByMembership">
@@ -6496,7 +6488,7 @@
         <target>إدارة مربع حوار العضوية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">380</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByService" datatype="html" resname="shared.dialogAriaLabeledByService">
@@ -6504,7 +6496,7 @@
         <target>إدارة مربع حوار الخدمة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">382</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEditorialService" datatype="html" resname="shared.dialogAriaLabeledByEditorialService">
@@ -6512,7 +6504,7 @@
         <target>إدارة مربع حوار الخدمة التحريرية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">382</context>
+          <context context-type="linenumber">384</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByBibtex" datatype="html" resname="shared.dialogAriaLabeledByBibtex">
@@ -6520,7 +6512,7 @@
         <target>إدارة مربع حوار bibtex</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">387</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByExternalIdentifier" datatype="html" resname="shared.dialogAriaLabeledByExternalIdentifier">
@@ -6528,7 +6520,7 @@
         <target>إدارة مربع حوار المعرف الخارجي</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">387</context>
+          <context context-type="linenumber">389</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByNames" datatype="html" resname="shared.dialogAriaLabeledByNames">
@@ -6536,7 +6528,7 @@
         <target>إدارة مربع حوار الأسماء</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">391</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByBiography" datatype="html" resname="shared.dialogAriaLabeledByBiography">
@@ -6544,7 +6536,7 @@
         <target>إدارة مربع حوار سيرتك الذاتية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">391</context>
+          <context context-type="linenumber">393</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEmails" datatype="html" resname="shared.dialogAriaLabeledByEmails">
@@ -6552,7 +6544,7 @@
         <target>إدارة مربع حوار رسائل البريد الإلكتروني</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">395</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByCountries" datatype="html" resname="shared.dialogAriaLabeledByCountries">
@@ -6560,7 +6552,7 @@
         <target>إدارة مربع حوار بلادك</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">395</context>
+          <context context-type="linenumber">397</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByKeywords" datatype="html" resname="shared.dialogAriaLabeledByKeywords">
@@ -6568,7 +6560,7 @@
         <target>إدارة مربع حوار كلماتك الرئيسية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">399</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByOtherIds" datatype="html" resname="shared.dialogAriaLabeledByOtherIds">
@@ -6576,7 +6568,7 @@
         <target>إدارة مربع حوار المعرّفات الأخرى</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">401</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByWebsites" datatype="html" resname="shared.dialogAriaLabeledByWebsites">
@@ -6584,7 +6576,7 @@
         <target>إدارة مربع حوار المواقع الإلكترونية والروابط الاجتماعية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">403</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByFunding" datatype="html" resname="shared.dialogAriaLabeledByFunding">
@@ -6592,7 +6584,7 @@
         <target>إدارة مربع حوار التمويل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">403</context>
+          <context context-type="linenumber">405</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByFundingSearch" datatype="html" resname="shared.dialogAriaLabeledByFundingSearch">
@@ -6600,7 +6592,7 @@
         <target>إدارة مربع حوار البحث عن التمويل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">407</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByWork" datatype="html" resname="shared.dialogAriaLabeledByWork">
@@ -6608,7 +6600,7 @@
         <target>إدارة مربع حوار العمل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">407</context>
+          <context context-type="linenumber">409</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByWorkSearch" datatype="html" resname="shared.dialogAriaLabeledByWorkSearch">
@@ -6616,7 +6608,7 @@
         <target>إدارة مربع حوار البحث عن العمل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">409</context>
+          <context context-type="linenumber">411</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByPeerReview" datatype="html" resname="shared.dialogAriaLabeledByPeerReview">
@@ -6624,7 +6616,7 @@
         <target>إدارة مربع حوار مراجعة النظير</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">411</context>
+          <context context-type="linenumber">413</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.youAreOnPage" datatype="html" resname="shared.youAreOnPage">
@@ -10915,36 +10907,12 @@
           <context context-type="linenumber">27,29</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="header.signin" datatype="html" resname="header.signin">
-        <source>Sign in</source>
-        <target>تسجيل الدخول</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
-          <context context-type="linenumber">120</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="header.register" datatype="html" resname="header.register">
-        <source>Register</source>
-        <target>تسجيل</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
-          <context context-type="linenumber">122</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="layout.ariaLabelConnectingResearchers" datatype="html" resname="layout.ariaLabelConnectingResearchers">
         <source>Connecting research and researchers</source>
         <target>ربط الأبحاث والباحثين</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.ariaLabelMenu" datatype="html" resname="layout.ariaLabelMenu">
@@ -10952,7 +10920,7 @@
         <target>القائمة الرئيسية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/menu-icon/menu-icon.component.ts</context>
@@ -11037,18 +11005,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">127</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.sign_in" datatype="html" resname="public-layout.sign_in">
-        <source>SIGN IN</source>
-        <target>تسجيل الدخول</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.ariaLabelLanguage" datatype="html" resname="layout.ariaLabelLanguage">
@@ -11145,6 +11101,22 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="header.signin" datatype="html" resname="header.signin">
+        <source>Sign in</source>
+        <target>تسجيل الدخول</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="header.register" datatype="html" resname="header.register">
+        <source>Register</source>
+        <target>تسجيل</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.viewMyOrcid" datatype="html" resname="ngOrcid.viewMyOrcid">
@@ -12560,7 +12532,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">327</context>
+          <context context-type="linenumber">328</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component.html</context>
@@ -12596,7 +12568,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">335,337</context>
+          <context context-type="linenumber">336,338</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.undefinedId" datatype="html" resname="share.undefinedId">
@@ -13432,7 +13404,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">276</context>
+          <context context-type="linenumber">281</context>
         </context-group>
       </trans-unit>
       <trans-unit id="record.editYourOrcidRecord" datatype="html" resname="record.editYourOrcidRecord">
@@ -13444,7 +13416,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">280</context>
+          <context context-type="linenumber">285</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.names" datatype="html" resname="topBar.names">
@@ -13452,7 +13424,7 @@
         <target>الأسماء</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/modals/modal-name/modal-name.component.html</context>
@@ -13472,7 +13444,7 @@
         <target>السجل القابل للطباعة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.copyId" datatype="html" resname="topBar.copyId">
@@ -13480,7 +13452,7 @@
         <target>نسخ رقم المعرّف</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.hideRecordSummary" datatype="html" resname="summary.hideRecordSummary">
@@ -13488,7 +13460,7 @@
         <target>إخفاء ملخص السجل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.showRecordSummary" datatype="html" resname="summary.showRecordSummary">
@@ -13496,7 +13468,7 @@
         <target>عرض ملخص السجل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.ariaLabelCopyOrcidId" datatype="html" resname="topBar.ariaLabelCopyOrcidId">
@@ -13504,7 +13476,7 @@
         <target>انسخ رقم المعرّف الخاص بالمعرّف المفتوح للباحثين والمساهمين &quot;ORCID&quot; الخاص بك إلى الحافظة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.ariaLabelViewPrintable" datatype="html" resname="topBar.ariaLabelViewPrintable">
@@ -13512,7 +13484,7 @@
         <target>عرض نسخة قابلة للطباعة من سجل المعرّف المفتوح للباحثين والمساهمين &quot;ORCID&quot; الخاص بك (تفتح في نافذة جديدة)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.weLockRecords" datatype="html" resname="topBar.weLockRecords">
@@ -14488,7 +14460,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">122,124</context>
+          <context context-type="linenumber">123,125</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/work.component.html</context>
@@ -14620,7 +14592,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">75,77</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.html</context>
@@ -14652,7 +14624,7 @@
         <target>لإظهار قائمة المشاركين كاملة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">127,129</context>
+          <context context-type="linenumber">128,130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.exportAsBibtex" datatype="html" resname="works.exportAsBibtex">
@@ -14660,11 +14632,11 @@
         <target>صدّر هذا العمل بصيغة BibTeX</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">135,137</context>
+          <context context-type="linenumber">136,138</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">246,248</context>
+          <context context-type="linenumber">247,249</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.or" datatype="html" resname="works.or">
@@ -14672,11 +14644,11 @@
         <target>أو</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">145,147</context>
+          <context context-type="linenumber">146,148</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">249,251</context>
+          <context context-type="linenumber">250,252</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.visitWorkSource" datatype="html" resname="works.visitWorkSource">
@@ -14684,11 +14656,11 @@
         <target>زيارة مصدر العمل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">157,159</context>
+          <context context-type="linenumber">158,160</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">261,263</context>
+          <context context-type="linenumber">262,264</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.citation" datatype="html" resname="works.citation">
@@ -14696,7 +14668,7 @@
         <target>اقتباس</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">169</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.html</context>
@@ -14720,7 +14692,7 @@
         <target>عرض الاقتباس</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">185,187</context>
+          <context context-type="linenumber">186,188</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.hideCitation" datatype="html" resname="works.hideCitation">
@@ -14728,7 +14700,7 @@
         <target>إخفاء الاقتباس</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">192,194</context>
+          <context context-type="linenumber">193,195</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.expandedFormatBibtex" datatype="html" resname="works.expandedFormatBibtex">
@@ -14736,11 +14708,11 @@
         <target>قم بالتبديل إلى التنسيق الموسع</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">225,227</context>
+          <context context-type="linenumber">226,228</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">291,293</context>
+          <context context-type="linenumber">292,294</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.compactFormatBibtex" datatype="html" resname="works.compactFormatBibtex">
@@ -14748,11 +14720,11 @@
         <target>قم بالتبديل إلى التنسيق المضغوط</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">232,234</context>
+          <context context-type="linenumber">233,235</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">299,301</context>
+          <context context-type="linenumber">300,302</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.fullCitation" datatype="html" resname="works.fullCitation">
@@ -14760,7 +14732,7 @@
         <target>لإظهار الاقتباس الكامل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.description" datatype="html" resname="works.description">
@@ -14768,7 +14740,7 @@
         <target>الوصف</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">310</context>
+          <context context-type="linenumber">311</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.countryOrLocationOfPublication" datatype="html" resname="works.countryOrLocationOfPublication">
@@ -14776,7 +14748,7 @@
         <target>بلد/موقع النشر</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
-          <context context-type="linenumber">316,318</context>
+          <context context-type="linenumber">317,319</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.html</context>
@@ -16356,7 +16328,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.collapseAll" datatype="html" resname="shared.collapseAll">
@@ -16380,7 +16352,7 @@
         <target>طي جميع أقسام النشاط</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.expandAllActivitiesArialLabel" datatype="html" resname="shared.expandAllActivitiesArialLabel">
@@ -16388,7 +16360,7 @@
         <target>توسيع جميع أقسام النشاط</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.emailIsAlreadyAssociated" datatype="html" resname="register.emailIsAlreadyAssociated">
@@ -20535,6 +20507,15 @@
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="public-layout.sign_in" datatype="html" resname="public-layout.sign_in">
+        <source>SIGN IN</source>
+        <target>تسجيل الدخول</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">#upperCase</note>
+      </trans-unit>
       <trans-unit id="login.registerOrcidId" datatype="html" resname="login.registerOrcidId">
         <source>Register for an ORCID iD</source>
         <target>التسجيل للحصول على معرف أوركيد</target>
@@ -21099,6 +21080,147 @@
           <context context-type="linenumber">253</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="printView.unnamedProfile" datatype="html" resname="printView.unnamedProfile">
+        <source>Name is private</source>
+        <target>الاسم خاص</target>
+      </trans-unit>
+      <trans-unit id="printView.orcidIdAlt" datatype="html" resname="printView.orcidIdAlt">
+        <source>ORCID iD</source>
+        <target>معرف أوركيد</target>
+      </trans-unit>
+      <trans-unit id="printView.biography" datatype="html" resname="printView.biography">
+        <source>Biography</source>
+        <target>سيرة شخصية</target>
+      </trans-unit>
+      <trans-unit id="printView.personalInformation" datatype="html" resname="printView.personalInformation">
+        <source>Personal information</source>
+        <target>المعلومات الشخصية</target>
+      </trans-unit>
+      <trans-unit id="printView.emails" datatype="html" resname="printView.emails">
+        <source>Emails</source>
+        <target>البريد الالكتروني</target>
+      </trans-unit>
+      <trans-unit id="printView.websitesSocialLinks" datatype="html" resname="printView.websitesSocialLinks">
+        <source>Websites &amp; social links</source>
+        <target>المواقع الإلكترونية والروابط الاجتماعية</target>
+      </trans-unit>
+      <trans-unit id="printView.otherIds" datatype="html" resname="printView.otherIds">
+        <source>Other IDs</source>
+        <target>معرفات أخرى</target>
+      </trans-unit>
+      <trans-unit id="printView.keywords" datatype="html" resname="printView.keywords">
+        <source>Keywords</source>
+        <target>كلمات مفتاحية</target>
+      </trans-unit>
+      <trans-unit id="printView.countries" datatype="html" resname="printView.countries">
+        <source>Countries</source>
+        <target>البلدان</target>
+      </trans-unit>
+      <trans-unit id="printView.activities" datatype="html" resname="printView.activities">
+        <source>Activities</source>
+        <target>الأنشطة</target>
+      </trans-unit>
+      <trans-unit id="printView.employments" datatype="html" resname="printView.employments">
+        <source>Employments</source>
+      </trans-unit>
+      <trans-unit id="printView.educationAndQualifications" datatype="html" resname="printView.educationAndQualifications">
+        <source>Education and qualifications</source>
+        <target>التعليم والمؤهلات</target>
+      </trans-unit>
+      <trans-unit id="printView.professionalActivities" datatype="html" resname="printView.professionalActivities">
+        <source>Professional activities</source>
+        <target>الأنشطة الاحترافية</target>
+      </trans-unit>
+      <trans-unit id="printView.fundings" datatype="html" resname="printView.fundings">
+        <source>Fundings</source>
+      </trans-unit>
+      <trans-unit id="printView.researchResources" datatype="html" resname="printView.researchResources">
+        <source>Research Resources</source>
+      </trans-unit>
+      <trans-unit id="printView.works" datatype="html" resname="printView.works">
+        <source>Works</source>
+        <target>أعمال</target>
+      </trans-unit>
+      <trans-unit id="printView.organization" datatype="html" resname="printView.organization">
+        <source>Organization</source>
+        <target>مؤسسة</target>
+      </trans-unit>
+      <trans-unit id="printView.organizationAddress" datatype="html" resname="printView.organizationAddress">
+        <source>Organization address</source>
+      </trans-unit>
+      <trans-unit id="printView.startDate" datatype="html" resname="printView.startDate">
+        <source>Start date</source>
+        <target>تاريخ البدء</target>
+      </trans-unit>
+      <trans-unit id="printView.endDate" datatype="html" resname="printView.endDate">
+        <source>End date</source>
+        <target>تاريخ الانتهاء</target>
+      </trans-unit>
+      <trans-unit id="printView.publicationDate" datatype="html" resname="printView.publicationDate">
+        <source>Publication date</source>
+        <target>التاريخ العام</target>
+      </trans-unit>
+      <trans-unit id="printView.journal" datatype="html" resname="printView.journal">
+        <source>Journal</source>
+        <target>المجلة</target>
+      </trans-unit>
+      <trans-unit id="printView.roleTitle" datatype="html" resname="printView.roleTitle">
+        <source>Role title</source>
+      </trans-unit>
+      <trans-unit id="printView.department" datatype="html" resname="printView.department">
+        <source>Department</source>
+        <target>القسم</target>
+      </trans-unit>
+      <trans-unit id="printView.type" datatype="html" resname="printView.type">
+        <source>Type</source>
+        <target>النوع</target>
+      </trans-unit>
+      <trans-unit id="printView.url" datatype="html" resname="printView.url">
+        <source>URL</source>
+        <target>رابط</target>
+      </trans-unit>
+      <trans-unit id="printView.untitled" datatype="html" resname="printView.untitled">
+        <source>Untitled</source>
+      </trans-unit>
+      <trans-unit id="printView.identifier" datatype="html" resname="printView.identifier">
+        <source>Identifier</source>
+        <target>المعرف</target>
+      </trans-unit>
+      <trans-unit id="printView.loadingRecord" datatype="html" resname="printView.loadingRecord">
+        <source>Loading ORCID record...</source>
+      </trans-unit>
+      <trans-unit id="printView.recordNotFound" datatype="html" resname="printView.recordNotFound">
+        <source>Record data was not found in ORCID response.</source>
+      </trans-unit>
+      <trans-unit id="printView.redirectingToPrimary" datatype="html" resname="printView.redirectingToPrimary">
+        <source>Redirecting to primary ORCID record…</source>
+      </trans-unit>
+      <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
+        <source>ORCID Print view</source>
+      </trans-unit>
+      <trans-unit id="printView.printSaveAsPdf" datatype="html" resname="printView.printSaveAsPdf">
+        <source>Print / Save as PDF</source>
+      </trans-unit>
+      <trans-unit id="printView.printThisOrcidProfile" datatype="html" resname="printView.printThisOrcidProfile">
+        <source>Print this ORCID profile</source>
+      </trans-unit>
+      <trans-unit id="printView.relSelf" datatype="html" resname="printView.relSelf">
+        <source>Self</source>
+        <target>ذاتي</target>
+      </trans-unit>
+      <trans-unit id="printView.relPartOf" datatype="html" resname="printView.relPartOf">
+        <source>Part of</source>
+        <target>جزء من</target>
+      </trans-unit>
+      <trans-unit id="printView.relVersionOf" datatype="html" resname="printView.relVersionOf">
+        <source>Version of</source>
+        <target>إصدار</target>
+      </trans-unit>
+      <trans-unit id="printView.relFundedBy" datatype="html" resname="printView.relFundedBy">
+        <source>Funded by</source>
+        <target>ممول من</target>
+      </trans-unit>
+
     </body>
   </file>
 </xliff>
