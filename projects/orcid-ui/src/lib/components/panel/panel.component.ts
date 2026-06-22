@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common'
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { MatTooltipModule } from '@angular/material/tooltip'
@@ -9,6 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
   standalone: true,
   imports: [CommonModule, MatIconModule, MatButtonModule, MatTooltipModule],
   templateUrl: './panel.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./panel.component.scss'],
 })
 export class OrcidPanelComponent {

@@ -1,24 +1,19 @@
-<mat-error *ngIf="userInfo?.RECORD_WITH_ISSUES">
+@if (userInfo?.RECORD_WITH_ISSUES) {
+<mat-error>
   <mat-icon>error</mat-icon>
-  <ng-container
-    *ngIf="userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD"
-    i18n="@@topBar.deactivatedRecord"
+  @if (userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD) {
+  <ng-container i18n="@@topBar.deactivatedRecord"
     >This ORCID Record is deactivated
   </ng-container>
-  <br
-    *ngIf="
-      userInfo.IS_DEACTIVATED === 'true' &&
-      !userInfo.PRIMARY_RECORD &&
-      userInfo.IS_LOCKED === 'true'
-    "
-  />
-  <ng-container
-    *ngIf="userInfo.IS_LOCKED === 'true'"
-    i18n="@@topBar.lockedRecord"
+  } @if ( userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD &&
+  userInfo.IS_LOCKED === 'true' ) {
+  <br />
+  } @if (userInfo.IS_LOCKED === 'true') {
+  <ng-container i18n="@@topBar.lockedRecord"
     >This ORCID Record is locked
   </ng-container>
-
-  <p *ngIf="userInfo.PRIMARY_RECORD">
+  } @if (userInfo.PRIMARY_RECORD) {
+  <p>
     <ng-container i18n="@@topBar.accountDeprecated">
       This account has been deprecated, please see account
     </ng-container>
@@ -29,4 +24,6 @@
       >for the latest information
     </ng-container>
   </p>
+  }
 </mat-error>
+}

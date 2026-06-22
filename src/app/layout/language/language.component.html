@@ -16,8 +16,8 @@
   [attr.aria-label]="labelLanguage"
   class="orcid-language-menu-panel"
 >
+  @for (language of languageMenuOptions | keyvalue; track language) {
   <button
-    *ngFor="let language of languageMenuOptions | keyvalue"
     (click)="changeLanguage(language.key)"
     mat-menu-item
     [attr.aria-label]="language.value"
@@ -26,7 +26,10 @@
   >
     <div class="row middle space-between">
       {{ language.value }}
-      <mat-icon *ngIf="language.key === locale">check</mat-icon>
+      @if (language.key === locale) {
+      <mat-icon>check</mat-icon>
+      }
     </div>
   </button>
+  }
 </mat-menu>

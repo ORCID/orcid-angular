@@ -1,11 +1,16 @@
-import { Component, Input, HostBinding } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import {
+  Component,
+  Input,
+  HostBinding,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'orcid-skeleton-placeholder',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       :host {

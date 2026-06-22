@@ -2,7 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { StepCComponent } from './step-c.component'
 
-import { Component, CUSTOM_ELEMENTS_SCHEMA, forwardRef } from '@angular/core'
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  forwardRef,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
@@ -28,6 +33,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class MockFormVisibilityComponent implements ControlValueAccessor {

@@ -5,6 +5,7 @@ import {
   Inject,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { combineLatest } from 'rxjs'
 import { first, map, take } from 'rxjs/operators'
@@ -29,6 +30,7 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
     './sign-in.component.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SignInComponent implements OnInit {

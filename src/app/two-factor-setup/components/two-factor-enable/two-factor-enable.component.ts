@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { first } from 'rxjs/operators'
 import {
   UntypedFormControl,
@@ -34,6 +40,7 @@ export const clipboardTooltip: MatTooltipDefaultOptions = {
     { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: clipboardTooltip },
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TwoFactorEnableComponent implements OnInit {

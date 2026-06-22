@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { take } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { UserSession } from 'src/app/types/session.local'
@@ -7,6 +13,7 @@ import { UserSession } from 'src/app/types/session.local'
   selector: 'app-settings-sharing-html-code',
   templateUrl: './settings-sharing-html-code.component.html',
   styleUrls: ['./settings-sharing-html-code.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsSharingHtmlCodeComponent implements OnInit {

@@ -1,7 +1,8 @@
-import { UntypedFormGroup } from '@angular/forms'
+import { AbstractControl, UntypedFormGroup } from '@angular/forms'
 
 export function AtLeastOneInputHasValue() {
-  return (group: UntypedFormGroup) => {
+  return (control: AbstractControl) => {
+    const group = control as UntypedFormGroup
     if (
       !Object.keys(group.value).some(
         (x) =>

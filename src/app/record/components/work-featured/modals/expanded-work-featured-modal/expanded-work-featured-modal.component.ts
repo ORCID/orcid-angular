@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
@@ -15,6 +22,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './expanded-work-featured-modal.component.scss',
     './expanded-work-featured-modal.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ExpandedWorkFeaturedModalComponent implements OnInit {

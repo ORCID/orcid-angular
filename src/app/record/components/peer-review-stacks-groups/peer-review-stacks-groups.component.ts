@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { UserService } from '../../../core'
@@ -29,6 +36,7 @@ import { isQA } from 'src/app/shared/validators/environment-check/environment-ch
     './peer-review-stacks-groups.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PeerReviewStacksGroupsComponent implements OnInit {

@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject, DOCUMENT } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  DOCUMENT,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { enterAnimation } from 'src/app/animations'
 import { WINDOW } from '../../../cdk/window'
 
@@ -22,6 +28,7 @@ import { take } from 'rxjs/operators'
   ],
   animations: [enterAnimation],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class HomeComponent implements OnInit {

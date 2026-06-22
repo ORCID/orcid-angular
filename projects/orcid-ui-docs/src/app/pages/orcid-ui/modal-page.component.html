@@ -34,32 +34,34 @@
           Open modal
         </button>
 
-        <p class="orc-ui-font-body-small result" *ngIf="lastResult">
+        @if (lastResult) {
+        <p class="orc-ui-font-body-small result">
           Last close result: <strong>{{ lastResult }}</strong>
         </p>
+        }
       </div>
     </div>
   </div>
 
   <div usage>
     <pre><code class="language-ts">import &#123; MatDialog &#125; from '@angular/material/dialog'
-import &#123; ORCID_MODAL_DIALOG_PANEL_CLASS &#125; from '@orcid/ui'
+      import &#123; ORCID_MODAL_DIALOG_PANEL_CLASS &#125; from '@orcid/ui'
 
-// ...
-this.dialog.open(YourDialogComponent, &#123;
-  panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
-&#125;)</code></pre>
+      // ...
+      this.dialog.open(YourDialogComponent, &#123;
+      panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
+    &#125;)</code></pre>
 
     <pre><code class="language-html">&lt;orcid-modal title="Import your works"&gt;
-  &lt;div orcidModalBody&gt;
-    Modal content
-  &lt;/div&gt;
+      &lt;div orcidModalBody&gt;
+      Modal content
+      &lt;/div&gt;
 
-  &lt;div orcidModalFooter&gt;
-    &lt;button mat-button mat-dialog-close="cancel"&gt;Cancel&lt;/button&gt;
-    &lt;button mat-flat-button mat-dialog-close="confirm"&gt;Confirm&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/orcid-modal&gt;</code></pre>
+      &lt;div orcidModalFooter&gt;
+      &lt;button mat-button mat-dialog-close="cancel"&gt;Cancel&lt;/button&gt;
+      &lt;button mat-flat-button mat-dialog-close="confirm"&gt;Confirm&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/orcid-modal&gt;</code></pre>
   </div>
 
   <div inputs>

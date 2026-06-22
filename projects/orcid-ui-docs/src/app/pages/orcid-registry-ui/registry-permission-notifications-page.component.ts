@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -26,6 +26,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
     DocumentationPageComponent,
   ],
   styleUrls: ['./registry-permission-notifications-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './registry-permission-notifications-page.component.html',
 })
 export class RegistryPermissionNotificationsPageComponent {

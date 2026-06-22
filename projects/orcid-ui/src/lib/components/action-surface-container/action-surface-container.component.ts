@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core'
-import { NgIf } from '@angular/common'
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
 
 /**
  * Container surface for action surfaces or other content blocks.
@@ -14,8 +13,9 @@ import { NgIf } from '@angular/common'
 @Component({
   selector: 'orcid-action-surface-container',
   standalone: true,
-  imports: [NgIf],
+  imports: [],
   templateUrl: './action-surface-container.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./action-surface-container.component.scss'],
 })
 export class ActionSurfaceContainerComponent {

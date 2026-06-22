@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Observable, Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
@@ -28,6 +35,7 @@ import { UserInfo } from '../../../types'
   templateUrl: './affiliation-stacks-groups.component.html',
   styleUrls: ['./affiliation-stacks-groups.component.scss'],
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
   preserveWhitespaces: true,
 })
 export class AffiliationStacksGroupsComponent implements OnInit {

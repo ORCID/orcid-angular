@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
@@ -20,6 +21,7 @@ import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
     './work-external-identifiers-edit.component.scss',
     'work-external-identifiers-edit.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkExternalIdentifiersEditComponent

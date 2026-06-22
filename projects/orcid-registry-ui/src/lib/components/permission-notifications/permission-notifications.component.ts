@@ -7,13 +7,7 @@ import {
 } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
 import { sanitizeHtmlForTrustedBypass } from '@orcid/ui'
-import {
-  NgClass,
-  NgFor,
-  NgSwitch,
-  NgSwitchCase,
-  NgSwitchDefault,
-} from '@angular/common'
+import { NgClass } from '@angular/common'
 import { MatButtonModule } from '@angular/material/button'
 import {
   ActionSurfaceComponent,
@@ -58,10 +52,6 @@ export interface RegistryNotificationActionEvent {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NgClass,
-    NgFor,
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
     MatButtonModule,
     ActionSurfaceComponent,
     ActionSurfaceContainerComponent,

@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { EMPTY, of, Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -49,6 +56,7 @@ import { normalize } from 'path'
     './modal-affiliations.component.scss',
     './modal-affiliations.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalAffiliationsComponent implements OnInit, OnDestroy {

@@ -1,4 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
@@ -12,6 +18,7 @@ import { ActivitySummary } from 'src/app/types/trust-summary'
     './summary-panel.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SummaryPanelComponent implements OnInit {

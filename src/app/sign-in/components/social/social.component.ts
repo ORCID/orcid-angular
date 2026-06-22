@@ -1,4 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { first } from 'rxjs/operators'
@@ -9,6 +15,7 @@ import { WINDOW } from '../../../cdk/window'
   selector: 'app-social',
   templateUrl: './social.component.html',
   styleUrls: ['./social.component.scss', './social.component.scss-theme.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SocialComponent implements OnInit {

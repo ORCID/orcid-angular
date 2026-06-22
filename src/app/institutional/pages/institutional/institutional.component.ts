@@ -4,6 +4,7 @@ import {
   Inject,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   UntypedFormControl,
@@ -34,6 +35,7 @@ import {
     './institutional.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class InstitutionalComponent implements OnInit {

@@ -1,4 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { startWith, switchMap } from 'rxjs/operators'
@@ -18,6 +24,7 @@ import {
     './top-bar-my-public-record-preview.component.scss',
     './top-bar-my-public-record-preview.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TopBarMyPublicRecordPreviewComponent implements OnInit {

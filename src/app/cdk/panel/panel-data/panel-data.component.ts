@@ -1,4 +1,11 @@
-import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../platform-info'
 import { Subject } from 'rxjs'
@@ -10,6 +17,7 @@ import { Subject } from 'rxjs'
     './panel-data.component.scss',
     './panel-data.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PanelDataComponent implements OnInit, OnDestroy {

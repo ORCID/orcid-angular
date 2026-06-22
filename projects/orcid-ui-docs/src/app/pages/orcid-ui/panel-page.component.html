@@ -13,9 +13,11 @@
       <mat-form-field appearance="outline">
         <mat-label>Icon (any material icon) </mat-label>
         <mat-select [(ngModel)]="config.icon">
-          <mat-option *ngFor="let option of iconOptions" [value]="option.value">
+          @for (option of iconOptions; track option) {
+          <mat-option [value]="option.value">
             {{ option.label }}
           </mat-option>
+          }
         </mat-select>
       </mat-form-field>
 
@@ -50,11 +52,8 @@
       <mat-checkbox [(ngModel)]="config.showContent">
         Show Content
       </mat-checkbox>
-      <mat-form-field
-        appearance="outline"
-        class="full-width"
-        *ngIf="config.showContent"
-      >
+      @if (config.showContent) {
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Content (HTML)</mat-label>
         <textarea
           matInput
@@ -63,6 +62,7 @@
           placeholder="<div>Line 1</div>"
         ></textarea>
       </mat-form-field>
+      }
     </div>
   </div>
 
@@ -86,10 +86,9 @@
               (toggleFeatured)="onToggleFeatured()"
               [isMobile]="false"
             >
-              <div
-                *ngIf="config.showContent"
-                [innerHTML]="config.content"
-              ></div>
+              @if (config.showContent) {
+              <div [innerHTML]="config.content"></div>
+              }
               <div panel-footer>{{ config.footerText }}</div>
             </orcid-panel>
           </div>
@@ -114,10 +113,9 @@
               (toggleFeatured)="onToggleFeatured()"
               [isMobile]="true"
             >
-              <div
-                *ngIf="config.showContent"
-                [innerHTML]="config.content"
-              ></div>
+              @if (config.showContent) {
+              <div [innerHTML]="config.content"></div>
+              }
               <div panel-footer>{{ config.footerText }}</div>
             </orcid-panel>
           </div>

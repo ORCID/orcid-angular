@@ -7,6 +7,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { Subject } from 'rxjs'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
@@ -30,6 +31,7 @@ import { UserRecord } from '../../../../../types/record.local'
   selector: 'app-work-doi-modal',
   templateUrl: './work-external-id-modal.component.html',
   styleUrls: ['./work-external-id-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkExternalIdModalComponent

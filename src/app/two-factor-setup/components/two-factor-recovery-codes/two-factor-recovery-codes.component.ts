@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, inject } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  inject,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { ApplicationRoutes } from '../../../constants'
 import { WINDOW } from '../../../cdk/window'
 import {
@@ -19,6 +25,7 @@ declare const $localize: any
     './two-factor-recovery-codes.component.scss',
     './two-factor-recovery-codes.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TwoFactorRecoveryCodesComponent implements OnInit {

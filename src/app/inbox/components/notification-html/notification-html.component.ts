@@ -1,10 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { InboxNotificationHtml } from 'src/app/types/notifications.endpoint'
 
 @Component({
   selector: 'app-notification-html',
   templateUrl: './notification-html.component.html',
   styleUrls: ['./notification-html.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NotificationHtmlComponent implements OnInit {

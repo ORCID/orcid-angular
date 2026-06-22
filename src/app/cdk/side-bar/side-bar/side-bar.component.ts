@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
@@ -38,6 +39,7 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
     './side-bar.component.scss-theme.scss',
     './side-bar.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SideBarComponent implements OnInit, OnDestroy {

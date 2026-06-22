@@ -1,12 +1,7 @@
-<app-panel-data
-  [borderBottom]="true"
-  *ngIf="subPeerReview?.showDetails"
-  [deprecatedPadding]="true"
->
-  <app-panel-element
-    [hideVisibility]="false"
-    *ngIf="getPeerReview(subPeerReview.putCode.value) as peerReview"
-  >
+@if (subPeerReview?.showDetails) {
+<app-panel-data [borderBottom]="true" [deprecatedPadding]="true">
+  @if (getPeerReview(subPeerReview.putCode.value); as peerReview) {
+  <app-panel-element [hideVisibility]="false">
     <div class="details">
       <div>
         <b i18n="@@peerReview.reviewIdentifiers">Review identifier(s)</b>
@@ -19,35 +14,36 @@
     <div class="details">
       <b i18n="@@peerReview.conveningOrganization"> Convening organization </b>
       <div>
-        {{ peerReview?.orgName?.value }} ({{ peerReview?.city?.value
-        }}<span *ngIf="peerReview?.city?.value && peerReview?.country?.value"
-          >, </span
-        >{{ peerReview?.country?.value }})
+        {{ peerReview?.orgName?.value }} ({{ peerReview?.city?.value }}@if
+        (peerReview?.city?.value && peerReview?.country?.value) {
+        <span>, </span>
+        }{{ peerReview?.country?.value }})
       </div>
     </div>
-    <div
-      class="details"
-      *ngIf="
-        (peerReview?.subjectName?.value && peerReview?.subjectType?.value) ||
-        peerReview?.subjectExternalIdentifier?.externalIdentifierType?.value
-      "
-    >
+    @if ( (peerReview?.subjectName?.value && peerReview?.subjectType?.value) ||
+    peerReview?.subjectExternalIdentifier?.externalIdentifierType?.value ) {
+    <div class="details">
       <b i18n="@@peerReview.reviewSubject"> Review subject </b>
       <div>
-        <ng-container *ngIf="peerReview?.subjectName?.value">
-          {{ peerReview.subjectName.value }}
-        </ng-container>
-        <ng-container *ngIf="peerReview?.subjectType?.value">
-          ({{ peerReview.subjectType.value }})
-        </ng-container>
-        <div *ngIf="peerReview?.subjectContainerName?.value">
+        @if (peerReview?.subjectName?.value) {
+        {{ peerReview.subjectName.value }}
+        } @if (peerReview?.subjectType?.value) { ({{
+          peerReview.subjectType.value
+        }}) } @if (peerReview?.subjectContainerName?.value) {
+        <div>
           {{ peerReview.subjectContainerName.value }}
         </div>
+        }
         <app-display-external-ids
-          [externalIdentifier]="peerReview?.subjectExternalIdentifier"
+          [externalIdentifier]="
+            $safeNavigationMigration(peerReview?.subjectExternalIdentifier)
+          "
           [noBoldTitle]="true"
         ></app-display-external-ids>
       </div>
     </div>
+    }
   </app-panel-element>
+  }
 </app-panel-data>
+}

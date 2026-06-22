@@ -1,4 +1,11 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -33,6 +40,7 @@ import { AuthChallengeComponent } from '@orcid/registry-ui'
     './reset-password.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ResetPasswordComponent implements OnInit, OnDestroy {

@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'app-code-panel',
@@ -7,6 +12,7 @@ import { Component, Input, OnInit } from '@angular/core'
     './code-panel.component.scss',
     './code-panel.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class CodePanelComponent implements OnInit {

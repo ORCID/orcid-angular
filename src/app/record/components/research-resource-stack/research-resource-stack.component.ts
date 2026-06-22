@@ -1,4 +1,10 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { VisibilityStrings } from '../../../types/common.endpoint'
 import {
   ResearchResource,
@@ -15,6 +21,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './research-resource-stack.component.scss',
     './research-resource-stack.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ResearchResourceStackComponent implements OnInit {

@@ -1,4 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'app-info-drop-down',
@@ -7,6 +12,7 @@ import { Component, OnInit, Input } from '@angular/core'
     './info-drop-down.component.scss',
     './info-drop-down.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class InfoDropDownComponent implements OnInit {

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'app-client-secret',
@@ -7,6 +14,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
     './client-secret.component.scss',
     './client-secret.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ClientSecretComponent implements OnInit {

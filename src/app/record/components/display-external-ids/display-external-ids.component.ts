@@ -1,10 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { ExternalIdentifier } from 'src/app/types/common.endpoint'
 
 @Component({
   selector: 'app-display-external-ids',
   templateUrl: './display-external-ids.component.html',
   styleUrls: ['./display-external-ids.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class DisplayExternalIdsComponent implements OnInit {

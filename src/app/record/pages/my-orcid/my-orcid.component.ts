@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   DOCUMENT,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -51,6 +52,7 @@ import { getFeaturedEmploymentCaption } from '../../components/record-header/fea
     './my-orcid.component.scss',
     './my-orcid.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {

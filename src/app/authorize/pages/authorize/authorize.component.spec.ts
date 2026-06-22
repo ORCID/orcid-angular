@@ -6,7 +6,11 @@ import {
 } from '@angular/core/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core'
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { of, Subject, NEVER, throwError } from 'rxjs'
 
 import { WINDOW } from '../../../cdk/window'
@@ -22,7 +26,11 @@ import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AuthorizeComponent } from './authorize.component'
 
 // Dummy interstitial component used for typing purposes in tests
-@Component({ template: '', standalone: true })
+@Component({
+  template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: true,
+})
 class DummyInterstitialComponent {
   finish = new Subject<void>()
 }

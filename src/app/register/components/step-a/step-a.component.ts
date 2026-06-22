@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 
 import { Router } from '@angular/router'
@@ -26,6 +27,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
     '../register.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class StepAComponent

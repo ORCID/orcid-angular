@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Observable, of, Subject } from 'rxjs'
 import { startWith, switchMap, takeUntil, tap } from 'rxjs/operators'
@@ -15,6 +20,7 @@ import { DialogRevokeTrustedIndividualsComponent } from '../dialog-revoke-truste
     './settings-trusted-individuals.component.scss',
     './settings-trusted-individuals.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {

@@ -8,15 +8,16 @@
   }"
 >
   <!-- Names Section -->
+  @if (!compactMode && !hideTitle) {
   <section
     class="names-section"
-    *ngIf="!compactMode && !hideTitle"
     [id]="'names'"
     role="region"
     [attr.aria-label]="regionNames"
   >
     <!-- Title -->
-    <div class="title-area" *ngIf="title || loading">
+    @if (title || loading) {
+    <div class="title-area">
       <orcid-text-with-tooltip
         [text]="title"
         [loading]="loading"
@@ -35,11 +36,12 @@
         </h1>
       </orcid-text-with-tooltip>
     </div>
-
+    }
     <!-- Other Names (Subtitle/Caption) -->
-    <div class="other-names-area" *ngIf="subtitle || caption || loading">
+    @if (subtitle || caption || loading) {
+    <div class="other-names-area">
+      @if (subtitle) {
       <orcid-text-with-tooltip
-        *ngIf="subtitle"
         [text]="subtitle"
         [loading]="loading"
         skeletonWidth="40%"
@@ -52,8 +54,8 @@
           {{ subtitle }}
         </p>
       </orcid-text-with-tooltip>
+      } @if (caption) {
       <orcid-text-with-tooltip
-        *ngIf="caption"
         [text]="caption"
         [loading]="loading"
         [hiddenSkeleton]="true"
@@ -70,12 +72,14 @@
           {{ caption }}
         </p>
       </orcid-text-with-tooltip>
+      }
     </div>
-
+    }
     <!-- Name Actions (Edit Button) -->
-    <div class="name-actions-area" *ngIf="!issueTitle">
+    @if (!issueTitle) {
+    <div class="name-actions-area">
+      @if (!loading && mainActionName) {
       <button
-        *ngIf="!loading && mainActionName"
         mat-icon-button
         accentButton
         [matTooltip]="mainActionName"
@@ -85,19 +89,24 @@
       >
         <mat-icon>edit</mat-icon>
       </button>
+      }
       <!-- Name Actions Placeholder -->
+      @if (loading) {
       <orcid-skeleton-placeholder
-        *ngIf="loading"
         shape="circle"
         width="48px"
         height="48px"
         [shimmerPercentage]="60"
       ></orcid-skeleton-placeholder>
+      }
     </div>
+    }
   </section>
+  }
 
   <!-- Issue Banner -->
-  <div class="issue-area" *ngIf="!loading && issueTitle">
+  @if (!loading && issueTitle) {
+  <div class="issue-area">
     <orcid-text-with-tooltip>
       <h1
         [ngClass]="{
@@ -109,8 +118,9 @@
       </h1>
     </orcid-text-with-tooltip>
   </div>
-
-  <mat-divider *ngIf="!compactMode || issueTitle" class="divider"></mat-divider>
+  } @if (!compactMode || issueTitle) {
+  <mat-divider class="divider"></mat-divider>
+  }
 
   <!-- ID Section -->
   <section
@@ -120,10 +130,8 @@
     [attr.aria-label]="regionOrcidId"
   >
     <!-- Compact Title -->
-    <div
-      class="compact-title-area"
-      *ngIf="compactMode && (title || loading) && !hideTitle"
-    >
+    @if (compactMode && (title || loading) && !hideTitle) {
+    <div class="compact-title-area">
       <orcid-text-with-tooltip
         [text]="title"
         [loading]="loading"
@@ -140,9 +148,11 @@
         </h1>
       </orcid-text-with-tooltip>
     </div>
+    }
 
     <!-- ORCID ID / Logo -->
-    <div class="id-area" *ngIf="!loading">
+    @if (!loading) {
+    <div class="id-area">
       <div class="id-content">
         <ng-content select="[header-banner-logo]"></ng-content>
         <h2
@@ -153,16 +163,19 @@
           }"
           class="font-weight-400"
         >
-          <ng-container *ngIf="!isDesktop; else elseBlock">
-            {{ primaryIdText }}
-          </ng-container>
-          <ng-template #elseBlock>{{ secondaryIdText }}</ng-template>
+          @if (!isDesktop) {
+          {{ primaryIdText }}
+          } @else {
+          {{ secondaryIdText }}
+          }
         </h2>
       </div>
     </div>
+    }
 
     <!-- Loading ID Placeholder -->
-    <div class="id-area loading-placeholder" *ngIf="loading" aria-hidden="true">
+    @if (loading) {
+    <div class="id-area loading-placeholder" aria-hidden="true">
       <div class="id-content">
         <orcid-skeleton-placeholder
           shape="circle"
@@ -175,21 +188,18 @@
         ></orcid-skeleton-placeholder>
       </div>
     </div>
+    }
 
     <!-- ID Actions (Copy/Print) -->
-    <div
-      class="id-actions-area"
-      *ngIf="!compactMode && !loading && !issueTitle"
-    >
+    @if (!compactMode && !loading && !issueTitle) {
+    <div class="id-actions-area">
       <ng-content select="[header-banner-id-actions]"></ng-content>
     </div>
+    }
 
     <!-- Loading ID Actions Placeholder -->
-    <div
-      class="id-actions-area loading-placeholder"
-      *ngIf="!compactMode && loading"
-      aria-hidden="true"
-    >
+    @if (!compactMode && loading) {
+    <div class="id-actions-area loading-placeholder" aria-hidden="true">
       <orcid-skeleton-placeholder
         shape="circle"
         width="48px"
@@ -203,74 +213,65 @@
         [shimmerPercentage]="60"
       ></orcid-skeleton-placeholder>
     </div>
+    }
 
     <!-- Summary Actions / Toggle -->
-    <div class="summary-actions-area" *ngIf="!loading && title && !hideTitle">
-      <ng-container
-        *ngIf="
-          (compactMode && isDesktop && !expanded) ||
-            (compactMode && !isDesktop);
-          else summaryToggle
-        "
+    @if (!loading && title && !hideTitle) {
+    <div class="summary-actions-area">
+      @if ( (compactMode && isDesktop && !expanded) || (compactMode &&
+      !isDesktop)) {
+      <ng-content select="[record-header-summary-actions]"></ng-content>
+      } @else { @if (canToggleExpanded) {
+      <button
+        mat-button
+        accentButton
+        (click)="onToggleExpanded()"
+        class="orc-ui-font-body-small"
       >
-        <ng-content select="[record-header-summary-actions]"></ng-content>
-      </ng-container>
-      <ng-template #summaryToggle>
-        <button
-          *ngIf="canToggleExpanded"
-          mat-button
-          accentButton
-          (click)="onToggleExpanded()"
-          class="orc-ui-font-body-small"
-        >
-          <mat-icon *ngIf="expanded">expand_more</mat-icon>
-          <mat-icon class="expand_more" *ngIf="!expanded">
-            expand_less
-          </mat-icon>
-          <ng-container *ngIf="expanded">
-            <ng-content select="[header-banner-expanded-label]"></ng-content>
-          </ng-container>
-          <ng-container *ngIf="!expanded">
-            <ng-content select="[header-banner-collapsed-label]"></ng-content>
-          </ng-container>
-        </button>
-      </ng-template>
+        @if (expanded) {
+        <mat-icon>expand_more</mat-icon>
+        } @if (!expanded) {
+        <mat-icon class="expand_more"> expand_less </mat-icon>
+        } @if (expanded) {
+        <ng-content select="[header-banner-expanded-label]"></ng-content>
+        } @if (!expanded) {
+        <ng-content select="[header-banner-collapsed-label]"></ng-content>
+        }
+      </button>
+      } }
     </div>
+    }
 
     <!-- Loading Summary Actions Placeholder -->
-    <div
-      class="summary-actions-area loading-placeholder"
-      *ngIf="loading"
-      aria-hidden="true"
-    >
+    @if (loading) {
+    <div class="summary-actions-area loading-placeholder" aria-hidden="true">
       <!-- Mobile Compact: Edit button placeholder -->
-      <ng-container *ngIf="compactMode && !isDesktop">
-        <orcid-skeleton-placeholder
-          shape="circle"
-          width="40px"
-          height="40px"
-          textHeightSkeleton="14px"
-        ></orcid-skeleton-placeholder>
-      </ng-container>
+      @if (compactMode && !isDesktop) {
+      <orcid-skeleton-placeholder
+        shape="circle"
+        width="40px"
+        height="40px"
+        textHeightSkeleton="14px"
+      ></orcid-skeleton-placeholder>
+      }
       <!-- Desktop Compact: Edit button placeholder -->
-      <ng-container *ngIf="compactMode && isDesktop">
-        <orcid-skeleton-placeholder
-          shape="circle"
-          width="40px"
-          height="40px"
-          textHeightSkeleton="14px"
-        ></orcid-skeleton-placeholder>
-      </ng-container>
-
-      <ng-container *ngIf="!compactMode">
-        <orcid-skeleton-placeholder
-          shape="square"
-          width="194px"
-          height="36px"
-          textHeightSkeleton="14px"
-          [shimmerPercentage]="70"
-        ></orcid-skeleton-placeholder>
-      </ng-container>
+      @if (compactMode && isDesktop) {
+      <orcid-skeleton-placeholder
+        shape="circle"
+        width="40px"
+        height="40px"
+        textHeightSkeleton="14px"
+      ></orcid-skeleton-placeholder>
+      } @if (!compactMode) {
+      <orcid-skeleton-placeholder
+        shape="square"
+        width="194px"
+        height="36px"
+        textHeightSkeleton="14px"
+        [shimmerPercentage]="70"
+      ></orcid-skeleton-placeholder>
+      }
     </div>
+    }
   </section>
 </div>

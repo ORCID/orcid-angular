@@ -1,4 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { InboxNotificationInstitutional } from 'src/app/types/notifications.endpoint'
 
@@ -10,6 +16,7 @@ import { InboxNotificationInstitutional } from 'src/app/types/notifications.endp
     './notification-permission-institutional-connection.component.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NotificationPermissionInstitutionalConnectionComponent

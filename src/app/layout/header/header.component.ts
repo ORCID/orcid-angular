@@ -9,6 +9,7 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
 import { filter, map, switchMap, tap } from 'rxjs/operators'
@@ -34,6 +35,7 @@ import { RecordHeaderStateService } from 'src/app/core/record-header-state/recor
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {

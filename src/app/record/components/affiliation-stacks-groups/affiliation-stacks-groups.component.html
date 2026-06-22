@@ -1,18 +1,10 @@
-<section
-  id="affiliations"
-  role="region"
-  [attr.aria-label]="regionAffiliations"
-  *ngIf="
-    !(
-      isPublicRecord &&
-      getAffiliationType('EMPLOYMENT')?.affiliationGroup?.length === 0
-    )
-  "
->
+@if ( !( isPublicRecord &&
+getAffiliationType('EMPLOYMENT')?.affiliationGroup?.length === 0 ) ) {
+<section id="affiliations" role="region" [attr.aria-label]="regionAffiliations">
   <!-- A PANELS COMPONENT FOR EMPLOYMENT -->
+  @if (getAffiliationType('EMPLOYMENT'); as profileAffiliationsGroup) {
   <app-panels
     [loading]="$loading | async"
-    *ngIf="getAffiliationType('EMPLOYMENT') as profileAffiliationsGroup"
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
     [type]="'employment'"
@@ -26,138 +18,118 @@
     (sort)="sortEvent($event, 'EMPLOYMENT')"
     id="cy-affiliation-employment"
   >
-    <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
-      <app-alert-message
-        type="success"
-        *ngIf="showFeaturedSuccessAlert"
-        role="alert"
-        class="featured-success-alert"
-      >
-        <span content class="orc-font-body-small">
-          <span class="orc-font-body-small">
-            <ng-container
-              i18n="@@shared.featuredAffiliationSuccessMessageBefore"
-              >Your affiliation</ng-container
-            >
-            <strong>{{ featuredAffiliationName }}</strong>
-            <ng-container i18n="@@shared.featuredAffiliationSuccessMessageAfter"
-              >has been highlighted and will be shown at the top of your public
-              record. To remove this highlight click the star icon next to the
-              affiliation name.</ng-container
-            >
-          </span>
-          <p>
-            <a
-              class="underline brand-primary-darkest-link"
-              rel="noopener noreferrer"
-              target="_blank"
-              href="https://support.orcid.org/hc/en-us/articles/36593307715095-Highlight-an-Employment-Affiliation-on-Your-Record-Header"
-              i18n="@@shared.featuredAffiliationLearnMore"
-            >
-              Find out more about highlighting affiliations in your ORCID record
-            </a>
-          </p>
-        </span>
-      </app-alert-message>
-      <app-alert-message
-        type="notice"
-        *ngIf="showFeaturedNoticeAlert"
-        role="alert"
-        class="featured-notice-alert"
-      >
-        <span title i18n="@@shared.highlightYourAffiliations"
-          >Highlight your affiliations</span
-        >
-        <span content class="orc-font-body-small">
-          <span class="orc-font-body-small">
-            <ng-container i18n="@@shared.featuredAffiliationNoticeMessagePart1"
-              >Highlighted affiliations are shown at the top of your public
-              record.</ng-container
-            >
-            <ng-container
-              i18n="@@shared.featuredAffiliationNoticeMessagePart2Before"
-              >To highlight an affiliation click the</ng-container
-            >
-            <strong i18n="@@shared.featuredAffiliationNoticeMessageStar"
-              >star</strong
-            >
-            <ng-container
-              i18n="@@shared.featuredAffiliationNoticeMessagePart2After"
-              >icon next to the affiliation name.</ng-container
-            >
-            <em
-              ><ng-container
-                i18n="@@shared.featuredAffiliationNoticeMessagePart3"
-                >You can only highlight one affiliation at a time.</ng-container
-              ></em
-            >
-          </span>
-          <p>
-            <a
-              class="underline brand-primary-darkest-link"
-              rel="noopener noreferrer"
-              target="_blank"
-              href="https://support.orcid.org/hc/en-us/articles/36593307715095-Highlight-an-Employment-Affiliation-on-Your-Record-Header"
-              i18n="@@shared.featuredAffiliationLearnMore"
-            >
-              Find out more about highlighting affiliations in your ORCID record
-            </a>
-          </p>
-        </span>
-      </app-alert-message>
-      <app-affiliation-stack
-        [userRecord]="userRecord"
-        [isPublicRecord]="isPublicRecord"
-        *ngFor="
-          let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
-          trackBy: trackByAffiliationGroup
-        "
-        [affiliationStack]="affiliationGroup"
-        [type]="affiliationType.employment"
-        [userInfo]="userInfo"
-        (featuredToggled)="onFeaturedToggled($event)"
-      ></app-affiliation-stack>
-    </ng-container>
-    <ng-container
-      *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
+    @if (profileAffiliationsGroup.affiliationGroup.length > 0) { @if
+    (showFeaturedSuccessAlert) {
+    <app-alert-message
+      type="success"
+      role="alert"
+      class="featured-success-alert"
     >
-      <div class="orc-font-body-small">
-        <p i18n="@@shared.employmentDescription">
-          Add details of your current and previous employers.
+      <span content class="orc-font-body-small">
+        <span class="orc-font-body-small">
+          <ng-container i18n="@@shared.featuredAffiliationSuccessMessageBefore"
+            >Your affiliation</ng-container
+          >
+          <strong>{{ featuredAffiliationName }}</strong>
+          <ng-container i18n="@@shared.featuredAffiliationSuccessMessageAfter"
+            >has been highlighted and will be shown at the top of your public
+            record. To remove this highlight click the star icon next to the
+            affiliation name.</ng-container
+          >
+        </span>
+        <p>
+          <a
+            class="underline brand-primary-darkest-link"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://support.orcid.org/hc/en-us/articles/36593307715095-Highlight-an-Employment-Affiliation-on-Your-Record-Header"
+            i18n="@@shared.featuredAffiliationLearnMore"
+          >
+            Find out more about highlighting affiliations in your ORCID record
+          </a>
         </p>
-        <a
-          rel="noopener noreferrer"
-          class="underline"
-          target="_blank"
-          href="https://support.orcid.org/hc/en-us/articles/360006894834-Add-employment-information-to-your-ORCID-record"
-          i18n="@@shared.employmentLearnMore"
-        >
-          Learn more about adding employment information to your ORCID record
-        </a>
-      </div>
-    </ng-container>
+      </span>
+    </app-alert-message>
+    } @if (showFeaturedNoticeAlert) {
+    <app-alert-message type="notice" role="alert" class="featured-notice-alert">
+      <span title i18n="@@shared.highlightYourAffiliations"
+        >Highlight your affiliations</span
+      >
+      <span content class="orc-font-body-small">
+        <span class="orc-font-body-small">
+          <ng-container i18n="@@shared.featuredAffiliationNoticeMessagePart1"
+            >Highlighted affiliations are shown at the top of your public
+            record.</ng-container
+          >
+          <ng-container
+            i18n="@@shared.featuredAffiliationNoticeMessagePart2Before"
+            >To highlight an affiliation click the</ng-container
+          >
+          <strong i18n="@@shared.featuredAffiliationNoticeMessageStar"
+            >star</strong
+          >
+          <ng-container
+            i18n="@@shared.featuredAffiliationNoticeMessagePart2After"
+            >icon next to the affiliation name.</ng-container
+          >
+          <em
+            ><ng-container i18n="@@shared.featuredAffiliationNoticeMessagePart3"
+              >You can only highlight one affiliation at a time.</ng-container
+            ></em
+          >
+        </span>
+        <p>
+          <a
+            class="underline brand-primary-darkest-link"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://support.orcid.org/hc/en-us/articles/36593307715095-Highlight-an-Employment-Affiliation-on-Your-Record-Header"
+            i18n="@@shared.featuredAffiliationLearnMore"
+          >
+            Find out more about highlighting affiliations in your ORCID record
+          </a>
+        </p>
+      </span>
+    </app-alert-message>
+    } @for ( affiliationGroup of profileAffiliationsGroup.affiliationGroup;
+    track trackByAffiliationGroup($index, affiliationGroup)) {
+    <app-affiliation-stack
+      [userRecord]="userRecord"
+      [isPublicRecord]="isPublicRecord"
+      [affiliationStack]="affiliationGroup"
+      [type]="affiliationType.employment"
+      [userInfo]="userInfo"
+      (featuredToggled)="onFeaturedToggled($event)"
+    ></app-affiliation-stack>
+    } } @if (profileAffiliationsGroup.affiliationGroup.length === 0) {
+    <div class="orc-font-body-small">
+      <p i18n="@@shared.employmentDescription">
+        Add details of your current and previous employers.
+      </p>
+      <a
+        rel="noopener noreferrer"
+        class="underline"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/360006894834-Add-employment-information-to-your-ORCID-record"
+        i18n="@@shared.employmentLearnMore"
+      >
+        Learn more about adding employment information to your ORCID record
+      </a>
+    </div>
+    }
   </app-panels>
+  }
 </section>
-
-<section
-  id="education-and-qualification"
-  *ngIf="
-    !(
-      isPublicRecord &&
-      getAffiliationType('EDUCATION_AND_QUALIFICATION')?.affiliationGroup
-        ?.length === 0
-    )
-  "
->
+} @if ( !( isPublicRecord &&
+getAffiliationType('EDUCATION_AND_QUALIFICATION')?.affiliationGroup ?.length ===
+0 ) ) {
+<section id="education-and-qualification">
   <!-- A PANELS COMPONENT FOR EDUCATION_AND_QUALIFICATION -->
+  @if ( getAffiliationType( 'EDUCATION_AND_QUALIFICATION' ); as
+  profileAffiliationsGroup ) {
   <app-panels
     [loading]="$loading | async"
     s
-    *ngIf="
-      getAffiliationType(
-        'EDUCATION_AND_QUALIFICATION'
-      ) as profileAffiliationsGroup
-    "
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
     [type]="'education'"
@@ -171,113 +143,96 @@
     (sort)="sortEvent($event, 'EDUCATION_AND_QUALIFICATION')"
     id="cy-affiliation-education-and-qualification"
   >
-    <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
-      <app-affiliation-stack
-        [userRecord]="userRecord"
-        [isPublicRecord]="isPublicRecord"
-        *ngFor="
-          let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
-          trackBy: trackByAffiliationGroup
-        "
-        [affiliationStack]="affiliationGroup"
-        [type]="affiliationGroup.affiliationType | affiliationType"
-        [userInfo]="userInfo"
-      ></app-affiliation-stack>
-    </ng-container>
-    <ng-container
-      *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
-    >
-      <div class="orc-font-body-small">
-        <p i18n="@@shared.educationQualificationsDescription">
-          Add details about where you have studied and educational or
-          professional qualifications you have been awarded.
-        </p>
-        <a
-          class="underline"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="https://support.orcid.org/hc/en-us/articles/360006973933-Add-an-education-or-qualification-to-your-ORCID-record"
-          i18n="@@shared.educationLearnMore"
-        >
-          Learn more about adding education or qualifications to your ORCID
-          record
-        </a>
-      </div>
-    </ng-container>
+    @if (profileAffiliationsGroup.affiliationGroup.length > 0) { @for (
+    affiliationGroup of profileAffiliationsGroup.affiliationGroup; track
+    trackByAffiliationGroup($index, affiliationGroup)) {
+    <app-affiliation-stack
+      [userRecord]="userRecord"
+      [isPublicRecord]="isPublicRecord"
+      [affiliationStack]="affiliationGroup"
+      [type]="affiliationGroup.affiliationType | affiliationType"
+      [userInfo]="userInfo"
+    ></app-affiliation-stack>
+    } } @if (profileAffiliationsGroup.affiliationGroup.length === 0) {
+    <div class="orc-font-body-small">
+      <p i18n="@@shared.educationQualificationsDescription">
+        Add details about where you have studied and educational or professional
+        qualifications you have been awarded.
+      </p>
+      <a
+        class="underline"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/360006973933-Add-an-education-or-qualification-to-your-ORCID-record"
+        i18n="@@shared.educationLearnMore"
+      >
+        Learn more about adding education or qualifications to your ORCID record
+      </a>
+    </div>
+    }
   </app-panels>
+  }
 </section>
+}
 
 <section
   role="region"
   [attr.aria-label]="regionProfessionalActivities"
   id="professional-activities"
 >
-  <ng-container
-    *ngIf="
-      !(
-        isPublicRecord &&
-        getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup
-          ?.length === 0
+  @if ( !( isPublicRecord &&
+  getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup ?.length === 0
+  ) ) {
+  <!-- A PANELS COMPONENT FOR INVITED_POSITION_AND_DISTINCTION AND MEMBERSHIP_AND_SERVICE -->
+  @if ( getAffiliationType( 'PROFESSIONAL_ACTIVITIES' ); as
+  profileAffiliationsGroup ) {
+  <app-panels
+    [loading]="$loading | async"
+    class="row"
+    [title]="affiliationTypeLabel('PROFESSIONAL_ACTIVITIES')"
+    [type]="'professional-activities'"
+    [userRecord]="userRecord"
+    [currentAmount]="
+      $safeNavigationMigration(
+        profileAffiliationsGroup?.affiliationGroup?.length
       )
     "
+    [(expandedContent)]="expandedContent['PROFESSIONAL_ACTIVITIES']"
+    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
+    [isPublicRecord]="isPublicRecord"
+    [sortTypes]="professionalActivitiesSortTypes"
+    (sort)="sortEvent($event, 'PROFESSIONAL_ACTIVITIES')"
+    id="cy-affiliation-professional-activities"
   >
-    <!-- A PANELS COMPONENT FOR INVITED_POSITION_AND_DISTINCTION AND MEMBERSHIP_AND_SERVICE -->
-    <app-panels
-      [loading]="$loading | async"
-      class="row"
-      *ngIf="
-        getAffiliationType(
-          'PROFESSIONAL_ACTIVITIES'
-        ) as profileAffiliationsGroup
-      "
-      [title]="affiliationTypeLabel('PROFESSIONAL_ACTIVITIES')"
-      [type]="'professional-activities'"
+    @if (profileAffiliationsGroup?.affiliationGroup?.length > 0) { @for (
+    affiliationGroup of getAffiliationType( 'PROFESSIONAL_ACTIVITIES'
+    ).affiliationGroup; track trackByAffiliationGroup($index, affiliationGroup))
+    {
+    <app-affiliation-stack
       [userRecord]="userRecord"
-      [currentAmount]="profileAffiliationsGroup?.affiliationGroup?.length"
-      [(expandedContent)]="expandedContent['PROFESSIONAL_ACTIVITIES']"
-      (expandedContentChange)="expandedContentChange.emit(expandedContent)"
       [isPublicRecord]="isPublicRecord"
-      [sortTypes]="professionalActivitiesSortTypes"
-      (sort)="sortEvent($event, 'PROFESSIONAL_ACTIVITIES')"
-      id="cy-affiliation-professional-activities"
-    >
-      <ng-container
-        *ngIf="profileAffiliationsGroup?.affiliationGroup?.length > 0"
+      [affiliationStack]="affiliationGroup"
+      [type]="affiliationGroup.affiliationType | affiliationType"
+      [userInfo]="userInfo"
+      [professionalActivities]="true"
+    ></app-affiliation-stack>
+    } } @if (profileAffiliationsGroup?.affiliationGroup?.length === 0) {
+    <div class="orc-font-body-small">
+      <p i18n="@@shared.addInvitedPositionsMemberships">
+        Add the invited positions or memberships you have held, awards or prizes
+        you have received, and donations of time and resources given in service
+        of organizations or institutions.
+      </p>
+      <a
+        class="underline"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/360008897694-Add-a-membership-or-service-to-your-ORCID-record"
+        i18n="@@shared.learnMoreProfessionalActivities"
       >
-        <app-affiliation-stack
-          [userRecord]="userRecord"
-          [isPublicRecord]="isPublicRecord"
-          *ngFor="
-            let affiliationGroup of getAffiliationType(
-              'PROFESSIONAL_ACTIVITIES'
-            ).affiliationGroup;
-            trackBy: trackByAffiliationGroup
-          "
-          [affiliationStack]="affiliationGroup"
-          [type]="affiliationGroup.affiliationType | affiliationType"
-          [userInfo]="userInfo"
-          [professionalActivities]="true"
-        ></app-affiliation-stack>
-      </ng-container>
-      <ng-container
-        *ngIf="profileAffiliationsGroup?.affiliationGroup?.length === 0"
-      >
-        <div class="orc-font-body-small">
-          <p i18n="@@shared.addInvitedPositionsMemberships">
-            Add the invited positions or memberships you have held, awards or
-            prizes you have received, and donations of time and resources given
-            in service of organizations or institutions.
-          </p>
-          <a
-            class="underline"
-            target="_blank"
-            href="https://support.orcid.org/hc/en-us/articles/360008897694-Add-a-membership-or-service-to-your-ORCID-record"
-            i18n="@@shared.learnMoreProfessionalActivities"
-          >
-            Learn more about adding professional activities to your ORCID record
-          </a>
-        </div>
-      </ng-container>
-    </app-panels>
-  </ng-container>
+        Learn more about adding professional activities to your ORCID record
+      </a>
+    </div>
+    }
+  </app-panels>
+  } }
 </section>

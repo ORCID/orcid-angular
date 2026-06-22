@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Observable, Subject } from 'rxjs'
 import { first, take, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -21,6 +28,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
   selector: 'app-fundings',
   templateUrl: './funding-stacks-groups.component.html',
   styleUrls: ['./funding-stacks-groups.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FundingStacksGroupsComponent implements OnInit {

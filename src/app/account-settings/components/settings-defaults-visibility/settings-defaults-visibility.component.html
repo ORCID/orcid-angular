@@ -1,4 +1,5 @@
-<app-settings-panels-data [formGroup]="form" *ngIf="form">
+@if (form) {
+<app-settings-panels-data [formGroup]="form">
   <p i18n="@@account.byDefaultVisibility">
     By default, what visibility should be given to new items added to your ORCID
     Record?
@@ -19,7 +20,6 @@
         >
         <div class="inlined">
           <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
-
           <ng-container i18n="@@register.VisibilityEveryone2"
             >(87% of users choose this)</ng-container
           >
@@ -35,7 +35,6 @@
           class="trusted material-symbols-outlined mr-2 ml-1"
           >visibility_lock</mat-icon
         >
-
         <div class="inlined">
           <strong i18n="@@register.VisibilityTrusted"
             >Trusted Organizations</strong
@@ -53,10 +52,8 @@
         <mat-icon aria-hidden="true" class="private mr-2 ml-1"
           >visibility_off</mat-icon
         >
-
         <div class="inlined">
           <strong i18n="@@register.VisibilityPrivate">Only me</strong>
-
           <ng-container i18n="@@register.VisibilityPrivate2"
             >(8% of users choose this)</ng-container
           >
@@ -76,3 +73,4 @@
     >
   </p>
 </app-settings-panels-data>
+}

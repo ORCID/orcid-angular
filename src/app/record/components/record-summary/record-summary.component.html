@@ -1,4 +1,5 @@
-<section *ngIf="recordSummaryOpen" id="summary">
+@if (recordSummaryOpen) {
+<section id="summary">
   <div class="container summary-container-head">
     <h2 class="orc-font-body-large" i18n="@@summary.recordSummary">
       Record summary
@@ -41,8 +42,8 @@
       </svg>
     </div>
   </div>
-  <app-trusted-summary
-    [standaloneMode]="false"
-    *ngIf="recordSummaryOpen"
-  ></app-trusted-summary>
+  @if (recordSummaryOpen) {
+  <app-trusted-summary [standaloneMode]="false"></app-trusted-summary>
+  }
 </section>
+}

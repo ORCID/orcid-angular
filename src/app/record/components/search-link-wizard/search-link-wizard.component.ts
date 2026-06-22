@@ -1,10 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { RecordImportWizard } from '../../../types/record-peer-review-import.endpoint'
 
 @Component({
   selector: 'app-search-link-wizard',
   templateUrl: './search-link-wizard.component.html',
   styleUrls: ['./search-link-wizard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SearchLinkWizardComponent implements OnInit {

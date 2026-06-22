@@ -1,4 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { UserService } from 'src/app/core'
 
 import { WINDOW } from '../../../cdk/window'
@@ -7,6 +13,7 @@ import { WINDOW } from '../../../cdk/window'
   selector: 'app-logged-in',
   templateUrl: './logged-in.component.html',
   styleUrls: ['./logged-in.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class LoggedInComponent implements OnInit {

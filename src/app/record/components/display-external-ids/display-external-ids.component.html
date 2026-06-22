@@ -1,13 +1,13 @@
-<ng-container *ngFor="let workExternal of getExternalIdentifiers()">
-  <app-panel-data-line
-    [prefixTitle]="workExternal?.relationship?.value"
-    title="{{ workExternal.externalIdentifierType.value + ':' | uppercase }}"
-    [content]="workExternal.externalIdentifierId?.value || undefinedIdLabel"
-    [url]="workExternal.normalizedUrl?.value || workExternal.url?.value"
-    [titleMargin]="false"
-    [secondaryText]="true"
-    [marginBotton]="false"
-    [noBoldTitle]="noBoldTitle"
-  >
-  </app-panel-data-line>
-</ng-container>
+@for (workExternal of getExternalIdentifiers(); track workExternal) {
+<app-panel-data-line
+  [prefixTitle]="$safeNavigationMigration(workExternal?.relationship?.value)"
+  title="{{ workExternal.externalIdentifierType.value + ':' | uppercase }}"
+  [content]="workExternal.externalIdentifierId?.value || undefinedIdLabel"
+  [url]="workExternal.normalizedUrl?.value || workExternal.url?.value"
+  [titleMargin]="false"
+  [secondaryText]="true"
+  [marginBotton]="false"
+  [noBoldTitle]="noBoldTitle"
+>
+</app-panel-data-line>
+}

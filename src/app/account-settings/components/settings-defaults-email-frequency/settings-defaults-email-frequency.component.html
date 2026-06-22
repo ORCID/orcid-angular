@@ -1,4 +1,5 @@
-<app-settings-panels-data *ngIf="form" [formGroup]="form">
+@if (form) {
+<app-settings-panels-data [formGroup]="form">
   <p i18n="@@account.notifications">
     Notifications keep you up-to-date with activity in your ORCID record.
     Updates are automatically sent to your ORCID inbox but you can also have
@@ -23,48 +24,47 @@
       Privacy Policy
     </a>
   </p>
-
   <h4 class="orc-font-body" i18n="@@account.notificationEmailAddress">
     Notification email address
   </h4>
   <p class="margin-bottom-16" i18n="@@account.yourOrcidNotification">
     Your ORCID notification emails will be sent to:
   </p>
-
   <div class="email-edit-container">
     <div class="email-container">
+      @if (primaryEmailVerified) {
       <img
-        *ngIf="primaryEmailVerified"
         cdkDragHandle
         src="./assets/vectors/email-verified-icon.svg"
         aria-labelledby="email-verified-address"
         height="32"
       />
+      } @if (!primaryEmailVerified) {
       <img
-        *ngIf="!primaryEmailVerified"
         cdkDragHandle
         src="./assets/vectors/email-unverfied-icon.svg"
         aria-labelledby="email-unverified-address"
       />
-
+      }
       <div>
         <label class="orc-font-body-small">{{ primaryEmail }}</label>
+        @if (primaryEmailVerified) {
         <caption
           id="email-verified-address"
           class="orc-font-small-print"
-          *ngIf="primaryEmailVerified"
           i18n="@@account.verifiedEmailAddress"
         >
           Verified email address
         </caption>
+        } @if (!primaryEmailVerified) {
         <caption
           id="email-unverified-address"
           class="orc-font-small-print"
-          *ngIf="!primaryEmailVerified"
           i18n="@@account.unverifiedEmailAddress"
         >
           Unverified email address
         </caption>
+        }
       </div>
     </div>
     <div class="email-manage-emails-link">
@@ -75,18 +75,18 @@
       >
         <mat-icon>edit</mat-icon>
       </button>
+      @if (!isMobile) {
       <a
         (click)="openEmailModal()"
         class="underline"
-        *ngIf="!isMobile"
         id="manage-your-emails"
         i18n="@@account.manageYourEmails"
       >
         Manage your emails
       </a>
+      }
     </div>
   </div>
-
   <div class="row">
     <h4 class="orc-font-body" i18n="@@account.emailFrequency">
       Email frequency
@@ -112,16 +112,14 @@
         formControlName="sendChangeNotifications"
         [aria-label]="arialabelSetTheFrequency"
       >
-        <mat-option
-          *ngFor="let frequency of frequencyOption"
-          [value]="emailFrequenciesValues[frequency]"
-        >
+        @for (frequency of frequencyOption; track frequency) {
+        <mat-option [value]="emailFrequenciesValues[frequency]">
           {{ frequency | emailFrequencyLabel }}
         </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>
-
   <div class="row">
     <label
       class="margin-bottom-8 row"
@@ -137,16 +135,14 @@
         formControlName="sendAdministrativeChangeNotifications"
         [aria-label]="ariaLabelSetTheFrequencyAdministrative"
       >
-        <mat-option
-          *ngFor="let frequency of frequencyOption"
-          [value]="emailFrequenciesValues[frequency]"
-        >
+        @for (frequency of frequencyOption; track frequency) {
+        <mat-option [value]="emailFrequenciesValues[frequency]">
           {{ frequency | emailFrequencyLabel }}
         </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>
-
   <div class="row">
     <label class="row" i18n="@@account.orcidMembers">
       ORCID members wanting your permission to automatically update your record
@@ -159,16 +155,14 @@
         formControlName="sendMemberUpdateRequests"
         [aria-label]="ariaLabelSetTheFrequencyPermission"
       >
-        <mat-option
-          *ngFor="let frequency of frequencyOption"
-          [value]="emailFrequenciesValues[frequency]"
-        >
+        @for (frequency of frequencyOption; track frequency) {
+        <mat-option [value]="emailFrequenciesValues[frequency]">
           {{ frequency | emailFrequencyLabel }}
         </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>
-
   <h4
     class="orc-font-body margin-top-0 margin-bottom-16"
     i18n="@@account.tipsAndFeatures"
@@ -182,6 +176,7 @@
   <mat-checkbox formControlName="sendQuarterlyTips" class="margin-bottom-16">
     <!-- prettier-ignore -->
     <div class="mat-checkbox-content" i18n="@@account.idLikeToReceiveTheOrcidTips"
-    >I’d like to receive the ORCID tips & features email</div>
+      >I’d like to receive the ORCID tips & features email</div>
   </mat-checkbox>
 </app-settings-panels-data>
+}

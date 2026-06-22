@@ -2,7 +2,7 @@
   class="orcid-theme"
   [loading]="loadingUserRecord"
   [compactMode]="compactMode"
-  [isDesktop]="platform?.columns12"
+  [isDesktop]="$safeNavigationMigration(platform?.columns12)"
   [title]="bannerTitle"
   [subtitle]="bannerSubtitle"
   [caption]="bannerCaption"
@@ -27,19 +27,20 @@
     alt="orcid logo"
   />
 
+  @if (headerCompactEnabled) {
   <app-record-edit-button
-    *ngIf="headerCompactEnabled"
     record-header-summary-actions
   ></app-record-edit-button>
-
-  <span header-banner-expanded-label *ngIf="!noDisplayableData">
+  } @if (!noDisplayableData) {
+  <span header-banner-expanded-label>
     {{ hideSummaryLabel }}
   </span>
-  <span header-banner-collapsed-label *ngIf="!noDisplayableData">
+  } @if (!noDisplayableData) {
+  <span header-banner-collapsed-label>
     {{ showSummaryLabel }}
   </span>
-
-  <ng-container header-banner-id-actions *ngIf="!noDisplayableData">
+  } @if (!noDisplayableData) {
+  <ng-container header-banner-id-actions>
     <button
       mat-icon-button
       class="orc-font-small-print"
@@ -63,4 +64,5 @@
       </mat-icon>
     </button>
   </ng-container>
+  }
 </orcid-header-banner>

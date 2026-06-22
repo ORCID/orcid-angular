@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'app-documentation-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './documentation-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./documentation-page.component.scss'],
 })
 export class DocumentationPageComponent {

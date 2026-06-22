@@ -1,4 +1,10 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Observable } from 'rxjs'
 import { OrganizationsService } from 'src/app/core'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
@@ -16,6 +22,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './funding-stack.component.scss',
     './funding-stack.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FundingStackComponent implements OnInit {

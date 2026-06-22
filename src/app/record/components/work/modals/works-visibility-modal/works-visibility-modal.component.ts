@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { MatDialogRef } from '@angular/material/dialog'
@@ -18,6 +23,7 @@ import { RecordService } from 'src/app/core/record/record.service'
   selector: 'app-works-visibility-modal',
   templateUrl: './works-visibility-modal.component.html',
   styleUrls: ['./works-visibility-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorksVisibilityModalComponent implements OnInit, OnDestroy {

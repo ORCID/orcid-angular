@@ -1,4 +1,10 @@
-import { Component, Input, QueryList, ViewChildren } from '@angular/core'
+import {
+  Component,
+  Input,
+  QueryList,
+  ViewChildren,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
@@ -12,6 +18,7 @@ import { UserInfo } from '../../../types'
     './work-featured.component.scss',
     './work-featured.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkFeaturedComponent {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { take, filter } from 'rxjs/operators'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
@@ -11,6 +11,7 @@ import { CookieService } from 'ngx-cookie-service'
   templateUrl: './banners.component.html',
   styleUrls: ['./banners.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class BannersComponent implements OnInit {

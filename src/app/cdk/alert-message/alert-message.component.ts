@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
 import { AlertType } from 'src/app/constants'
 
 @Component({
@@ -8,6 +8,7 @@ import { AlertType } from 'src/app/constants'
     './alert-message.component.scss',
     'alert-message.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 /**

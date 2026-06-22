@@ -57,10 +57,10 @@
         cdkDropList
         (cdkDropListDropped)="drop($event)"
       >
+        @for (w of works; track w; let i = $index) {
         <div
           cdkDrag
           class="row featured-work-box card"
-          *ngFor="let w of works; let i = index"
           (cdkDragStarted)="dragStarted($event)"
           (cdkDragEnded)="dragEnded($event)"
         >
@@ -81,14 +81,12 @@
                 "
               />
             </div>
-
             <app-work-featured
               class="featured-work"
               [work]="w"
               [minimized]="true"
             >
             </app-work-featured>
-
             <!-- Close button container -->
             <div class="close-wrapper">
               <button
@@ -112,6 +110,7 @@
             </div>
           </div>
         </div>
+        }
       </div>
       @if (works?.length === 5) {
       <app-alert-message class="mbottom-4">

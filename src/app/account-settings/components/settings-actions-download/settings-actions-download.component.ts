@@ -1,10 +1,17 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { AccountActionsDownloadService } from 'src/app/core/account-actions-download/account-actions-download.service'
 
 @Component({
   selector: 'app-settings-actions-download',
   templateUrl: './settings-actions-download.component.html',
   styleUrls: ['./settings-actions-download.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsActionsDownloadComponent implements OnInit {

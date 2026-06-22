@@ -1,5 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { NgIf, NgClass } from '@angular/common'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
+import { NgClass } from '@angular/common'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatButtonModule } from '@angular/material/button'
@@ -13,7 +19,6 @@ import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-p
   selector: 'orcid-header-banner',
   standalone: true,
   imports: [
-    NgIf,
     NgClass,
     MatProgressBarModule,
     MatDividerModule,
@@ -25,6 +30,7 @@ import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-p
     SkeletonPlaceholderComponent,
   ],
   templateUrl: './record-header.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./record-header.component.scss'],
 })
 export class HeaderBannerComponent {

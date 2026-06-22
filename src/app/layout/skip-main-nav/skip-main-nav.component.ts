@@ -1,4 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
 import { WINDOW } from 'src/app/cdk/window'
 import { filter } from 'rxjs/operators'
@@ -7,6 +12,7 @@ import { filter } from 'rxjs/operators'
   selector: 'app-skip-main-nav',
   templateUrl: './skip-main-nav.component.html',
   styleUrls: ['./skip-main-nav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SkipMainNavComponent implements OnInit {

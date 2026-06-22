@@ -72,11 +72,12 @@ export class OrcidValidators {
     value2: string,
     caseSensitive = true
   ): ValidatorFn {
-    return (formGroup: UntypedFormGroup) => {
-      const control = formGroup.controls[value1]
+    return (control: AbstractControl) => {
+      const formGroup = control as UntypedFormGroup
+      const group = formGroup.controls[value1]
       const confirmControl = formGroup.controls[value2]
 
-      if (!control || !confirmControl) {
+      if (!group || !confirmControl) {
         return null
       }
 
@@ -85,8 +86,8 @@ export class OrcidValidators {
       }
 
       const firstValue = caseSensitive
-        ? control.value
-        : control.value.toLowerCase()
+        ? group.value
+        : group.value.toLowerCase()
       const secondValue = caseSensitive
         ? confirmControl.value
         : confirmControl.value.toLowerCase()

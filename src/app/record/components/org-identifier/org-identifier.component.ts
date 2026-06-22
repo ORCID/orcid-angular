@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { OrgDisambiguated } from '../../../types'
 import { OrganizationsService } from '../../../core'
 import { URL_REGEXP_BACKEND } from '../../../constants'
@@ -8,6 +13,7 @@ import { URL_REGEXP_BACKEND } from '../../../constants'
   templateUrl: './org-identifier.component.html',
   styleUrls: ['./org-identifier.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class OrgIdentifierComponent implements OnInit {

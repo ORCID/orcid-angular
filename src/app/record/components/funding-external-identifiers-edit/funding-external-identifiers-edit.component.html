@@ -33,18 +33,15 @@
         matInput
         formControlName="grantNumber"
       />
-      <mat-error
-        *ngIf="grantForm?.get('grantNumber').errors?.required"
-        i18n="@@funding.grantNumberRequired"
-      >
+      @if (grantForm?.get('grantNumber').errors?.required) {
+      <mat-error i18n="@@funding.grantNumberRequired">
         Grant number is required
       </mat-error>
-      <mat-error
-        *ngIf="grantForm?.get('grantNumber').errors?.maxlength"
-        i18n="@@shared.maxLength.less_than_two_thousand_forty_eight"
-      >
+      } @if (grantForm?.get('grantNumber').errors?.maxlength) {
+      <mat-error i18n="@@shared.maxLength.less_than_two_thousand_forty_eight">
         Must be less than 2084 characters
       </mat-error>
+      }
     </mat-form-field>
   </div>
 
@@ -75,18 +72,13 @@
     <mat-hint i18n="@@funding.grantUrlHint">
       A link to more information about the funding award
     </mat-hint>
-    <mat-error
-      *ngIf="grantForm?.get('grantUrl').hasError('pattern')"
-      i18n="@@funding.invalidUrl"
-    >
-      Invalid URL
-    </mat-error>
-    <mat-error
-      *ngIf="grantForm?.get('grantUrl').hasError('maxlength')"
-      i18n="@@shared.maxLength.less_than_two_thousand"
-    >
+    @if (grantForm?.get('grantUrl').hasError('pattern')) {
+    <mat-error i18n="@@funding.invalidUrl"> Invalid URL </mat-error>
+    } @if (grantForm?.get('grantUrl').hasError('maxlength')) {
+    <mat-error i18n="@@shared.maxLength.less_than_two_thousand">
       Must be less than 2000 characters
     </mat-error>
+    }
   </mat-form-field>
 
   <!-- Funding relationship -->
@@ -110,14 +102,14 @@
         class="mat-form-field-min"
         formControlName="fundingRelationship"
       >
-        <ng-container *ngFor="let value of fundingRelationships">
-          <mat-radio-button [value]="value"
-            >{{ value | recordFundingRelationshipLabel }}
-          </mat-radio-button>
-          <mat-hint class="mat-caption"
-            >{{ value | recordFundingRelationshipHintLabel }}
-          </mat-hint>
-        </ng-container>
+        @for (value of fundingRelationships; track value) {
+        <mat-radio-button [value]="value"
+          >{{ value | recordFundingRelationshipLabel }}
+        </mat-radio-button>
+        <mat-hint class="mat-caption"
+          >{{ value | recordFundingRelationshipHintLabel }}
+        </mat-hint>
+        }
       </mat-radio-group>
     </div>
   </div>

@@ -11,6 +11,7 @@ import {
   Output,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
@@ -66,6 +67,7 @@ import {
     './work-stack-group.component.scss',
     './work-stack-group.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkStackGroupComponent implements OnInit, OnDestroy {

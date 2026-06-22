@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { WINDOW } from '../../../../cdk/window'
 import { isValidOrcidFormat } from 'src/app/constants'
@@ -18,6 +19,7 @@ import { isValidOrcidFormat } from 'src/app/constants'
     '../../sign-in.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PrintErrorsComponent implements OnInit {

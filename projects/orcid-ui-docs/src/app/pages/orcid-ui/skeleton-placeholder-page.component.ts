@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -22,6 +22,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
     DocumentationPageComponent,
   ],
   templateUrl: './skeleton-placeholder-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       .example-container {

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { OrgDisambiguated } from 'src/app/types'
 import { Funding, LanguageMap } from 'src/app/types/record-funding.endpoint'
 
@@ -7,6 +14,7 @@ import { Funding, LanguageMap } from 'src/app/types/record-funding.endpoint'
   templateUrl: './funding.component.html',
   styleUrls: ['./funding.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FundingComponent implements OnInit {

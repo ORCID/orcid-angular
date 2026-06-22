@@ -1,4 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { WINDOW } from '../../../cdk/window'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { first, takeUntil } from 'rxjs/operators'
@@ -15,6 +21,7 @@ import { Router } from '@angular/router'
     './two-factor-setup.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TwoFactorSetupComponent implements OnInit, OnDestroy {

@@ -4,6 +4,7 @@ import {
   Input,
   SimpleChanges,
   OnChanges,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { SearchResults, ExpandedSearchResultsContent } from 'src/app/types'
 
@@ -15,6 +16,7 @@ import { SearchResults, ExpandedSearchResultsContent } from 'src/app/types'
     './results.component.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ResultsComponent implements OnInit, OnChanges {

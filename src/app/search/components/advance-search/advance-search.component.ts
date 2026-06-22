@@ -10,6 +10,7 @@ import {
   Optional,
   SimpleChanges,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   UntypedFormControl,
@@ -31,6 +32,7 @@ import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validato
     './advance-search.component.scss-theme.scss',
     './advance-search.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AdvanceSearchComponent implements OnInit, OnChanges {

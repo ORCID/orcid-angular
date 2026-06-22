@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'app-panel-element-source',
@@ -7,6 +12,7 @@ import { Component, Input, OnInit } from '@angular/core'
     './panel-element-source.component.scss',
     './panel-element-source.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PanelElementSourceComponent implements OnInit {

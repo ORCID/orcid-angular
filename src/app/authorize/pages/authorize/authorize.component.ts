@@ -1,5 +1,10 @@
 import { ComponentType } from '@angular/cdk/overlay'
-import { Component, Inject, ViewChild } from '@angular/core'
+import {
+  Component,
+  Inject,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Observable, forkJoin, of } from 'rxjs'
 import {
   filter,
@@ -30,6 +35,7 @@ import { AppEventName } from 'src/app/rum/app-event-names'
   templateUrl: './authorize.component.html',
   styleUrls: ['./authorize.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AuthorizeComponent {

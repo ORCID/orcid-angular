@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -20,6 +27,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
     './work-bibtex-modal.component.scss',
     './work-bibtex-modal.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkBibtexModalComponent implements OnInit, OnDestroy {

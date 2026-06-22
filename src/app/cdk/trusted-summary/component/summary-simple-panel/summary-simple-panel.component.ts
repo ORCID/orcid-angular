@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -23,6 +30,7 @@ export interface SimpleActivityModel {
     './summary-simple-panel.component.scss',
     './summary-simple-panel.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SummarySimplePanelComponent implements OnInit {

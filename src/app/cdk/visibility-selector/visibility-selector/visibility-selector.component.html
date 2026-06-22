@@ -17,8 +17,8 @@
   >
   } @if (privacy === 'PRIVATE') {
   <mat-icon class="menu-icon privateIcon">visibility_off</mat-icon>
-  } }
-  <div class="main-button-container" *ngIf="!mobile">
+  } } @if (!mobile) {
+  <div class="main-button-container">
     <div class="icon-title-container">
       @if (privacy === 'PUBLIC') {
       <mat-icon class="menu-icon publicIcon">visibility</mat-icon>
@@ -28,50 +28,38 @@
       >
       } @if (privacy === 'PRIVATE') {
       <mat-icon class="menu-icon privateIcon">visibility_off</mat-icon>
+      } @if (privacy === 'PUBLIC') {
+      <ng-container i18n="@@register.VisibilityEveryone">Everyone</ng-container>
+      } @if (privacy === 'LIMITED') {
+      <ng-container i18n="@@account.trusted">Trusted</ng-container>
+      } @if (privacy === 'PRIVATE') {
+      <ng-container i18n="@@register.VisibilityPrivate">Only me</ng-container>
       }
-
-      <ng-container
-        *ngIf="privacy === 'PUBLIC'"
-        i18n="@@register.VisibilityEveryone"
-        >Everyone</ng-container
-      >
-      <ng-container *ngIf="privacy === 'LIMITED'" i18n="@@account.trusted"
-        >Trusted</ng-container
-      >
-      <ng-container
-        *ngIf="privacy === 'PRIVATE'"
-        i18n="@@register.VisibilityPrivate"
-        >Only me</ng-container
-      >
     </div>
-    <mat-icon *ngIf="editable" class="arrow-drop-down"
-      >arrow_drop_down</mat-icon
-    >
+    @if (editable) {
+    <mat-icon class="arrow-drop-down">arrow_drop_down</mat-icon>
+    }
   </div>
+  }
 </button>
 <mat-menu #menu="matMenu">
   <div class="visibilityTitleContainer">
     <h1 class="orc-font-body" i18n="@@shared.setVisibilityFor">
       Set visibility for
     </h1>
-    <i
-      class="orc-font-body-small"
-      *ngIf="multiEdit === 'single'"
-      i18n="@@shared.thisItemOnly"
+    @if (multiEdit === 'single') {
+    <i class="orc-font-body-small" i18n="@@shared.thisItemOnly"
       >This item only</i
     >
-    <i
-      class="orc-font-body-small"
-      *ngIf="multiEdit === 'multi'"
-      i18n="@@shared.allItemsInThisGroup"
+    } @if (multiEdit === 'multi') {
+    <i class="orc-font-body-small" i18n="@@shared.allItemsInThisGroup"
       >All items in this group</i
     >
-    <i
-      class="orc-font-body-small"
-      *ngIf="multiEdit === 'selected'"
-      i18n="@@shared.selectedItemsForVisibility"
+    } @if (multiEdit === 'selected') {
+    <i class="orc-font-body-small" i18n="@@shared.selectedItemsForVisibility"
       >Selected items
     </i>
+    }
   </div>
   <button
     [disabled]="disableOptions['PUBLIC']"

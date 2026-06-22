@@ -10,8 +10,9 @@ import {
   HostListener,
   ChangeDetectorRef,
   HostBinding,
+  ChangeDetectionStrategy,
 } from '@angular/core'
-import { CommonModule, NgIf } from '@angular/common'
+
 import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-placeholder.component'
 
 /**
@@ -28,10 +29,10 @@ import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-p
 @Component({
   selector: 'orcid-text-with-tooltip',
   standalone: true,
-  imports: [CommonModule, NgIf, SkeletonPlaceholderComponent],
+  imports: [SkeletonPlaceholderComponent],
   template: `
+    @if (!loading) {
     <span
-      *ngIf="!loading"
       #wrapperRef
       (mouseenter)="onMouseEnter($event)"
       (mousemove)="onMouseMove($event)"
@@ -40,21 +41,23 @@ import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-p
     >
       <ng-content></ng-content>
     </span>
+    } @if (loading && !hiddenSkeleton) {
     <orcid-skeleton-placeholder
-      *ngIf="loading && !hiddenSkeleton"
       [shape]="skeletonShape"
       [width]="skeletonWidth"
       [height]="textHeightSkeleton"
     ></orcid-skeleton-placeholder>
+    } @if (showCustomTooltip) {
     <div
-      *ngIf="showCustomTooltip"
       class="custom-tooltip"
       [style.left.px]="tooltipX"
       [style.top.px]="tooltipY"
     >
       {{ tooltipText }}
     </div>
+    }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       :host {
@@ -155,7 +158,7 @@ export class TextWithTooltipComponent
     }
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     this.checkOverflow()
   }

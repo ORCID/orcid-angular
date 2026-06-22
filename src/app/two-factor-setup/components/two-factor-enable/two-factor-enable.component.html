@@ -36,7 +36,8 @@
       </button>
     </p>
 
-    <div class="text-code-wrapper" *ngIf="showTextCode">
+    @if (showTextCode) {
+    <div class="text-code-wrapper">
       <textarea
         data-cy="textCode"
         class="text-code orc-font-body-small"
@@ -55,6 +56,7 @@
         <mat-icon aria-hidden="true">content_copy</mat-icon>
       </button>
     </div>
+    }
 
     <div class="verification-section">
       <label
@@ -81,9 +83,8 @@
         <mat-hint align="end"
           >{{ inputVerificationCode.value?.length || 0 }}/6
         </mat-hint>
-        <mat-error
-          *ngIf="twoFactorForm.get('verificationCode').hasError('required')"
-        >
+        @if (twoFactorForm.get('verificationCode').hasError('required')) {
+        <mat-error>
           <p
             i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
             class="error-message"
@@ -94,13 +95,9 @@
             {{ inputVerificationCode.value?.length || 0 }}/6
           </p>
         </mat-error>
-
-        <mat-error
-          *ngIf="
-            twoFactorForm.get('verificationCode').hasError('minlength') ||
-            twoFactorForm.get('verificationCode').hasError('maxlength')
-          "
-        >
+        } @if ( twoFactorForm.get('verificationCode').hasError('minlength') ||
+        twoFactorForm.get('verificationCode').hasError('maxlength') ) {
+        <mat-error>
           <p
             i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
             class="error-message"
@@ -111,10 +108,8 @@
             {{ inputVerificationCode.value?.length || 0 }}/6
           </p>
         </mat-error>
-
-        <mat-error
-          *ngIf="twoFactorForm.get('verificationCode').hasError('invalidCode')"
-        >
+        } @if (twoFactorForm.get('verificationCode').hasError('invalidCode')) {
+        <mat-error>
           <p
             i18n="@@ngOrcid.signin.2fa.badVerificationCode"
             class="error-message"
@@ -125,14 +120,17 @@
             {{ inputVerificationCode.value?.length || 0 }}/6
           </p>
         </mat-error>
+        }
       </mat-form-field>
     </div>
 
-    <div class="loading-wrapper" *ngIf="loading">
+    @if (loading) {
+    <div class="loading-wrapper">
       <mat-progress-spinner
         color="primary"
         mode="indeterminate"
       ></mat-progress-spinner>
     </div>
+    }
   </orcid-step-view>
 </form>

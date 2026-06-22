@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
+
 import { FormsModule } from '@angular/forms'
 import { OrcidPanelComponent } from '@orcid/ui'
 import { MatButtonModule } from '@angular/material/button'
@@ -15,7 +15,6 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
   selector: 'orcid-panel-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     OrcidPanelComponent,
     MatButtonModule,
@@ -28,6 +27,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
     DocumentationPageComponent,
   ],
   templateUrl: './panel-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./panel-page.component.scss'],
 })
 export class PanelPageComponent {

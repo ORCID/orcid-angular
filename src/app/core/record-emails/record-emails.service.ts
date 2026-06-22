@@ -58,7 +58,7 @@ export class RecordEmailsService {
       })
       .pipe(
         catchError((error) => this._errorHandler.handleError(error)),
-        catchError(() => of({ emails: [] })),
+        catchError(() => of({ emails: [] } as any)),
         map((value: EmailsEndpoint) => {
           value.emails.sort(this.sortByEmailCreationDate)
           value = setProfessionalEmails(value)

@@ -8,6 +8,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   UntypedFormControl,
@@ -38,6 +39,7 @@ import { WINDOW } from '../../../window'
     './modal-keyword.component.scss-theme.scss',
     './modal-keyword.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalKeywordComponent implements OnInit, OnDestroy {

@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
@@ -13,6 +19,7 @@ import { PlatformInfoService } from '../platform-info'
     './top-bar-verification-email.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {

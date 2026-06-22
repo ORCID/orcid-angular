@@ -8,12 +8,13 @@
   [(expandedContent)]="settingSecurityPasswordOpen"
   [loading]="settingSecurityPasswordLoading"
 >
+  @if (settingSecurityPasswordOpen) {
   <app-settings-security-password
     [twoFactorState]="twoFactorEnabled"
-    *ngIf="settingSecurityPasswordOpen"
     (loading)="settingSecurityPasswordLoading = $event"
   >
   </app-settings-security-password>
+  }
 </app-settings-panels>
 
 <app-settings-panels
@@ -38,9 +39,10 @@
   [title]="titleAlternativeSignin"
   [loading]="settingSecurityAlternateAccountsLoading"
 >
+  @if (settingSecurityAlternateAccounts) {
   <app-settings-security-alternate-sign-in
     [twoFactorState]="twoFactorEnabled"
     (loading)="settingSecurityAlternateAccountsLoading = $event"
-    *ngIf="settingSecurityAlternateAccounts"
   ></app-settings-security-alternate-sign-in>
+  }
 </app-settings-panels>

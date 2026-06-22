@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core'
-import { NgFor, NgIf } from '@angular/common'
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core'
+
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
@@ -32,14 +32,13 @@ const MORE_SERVICES_SKELETON_COUNT = 15
   selector: 'orcid-registry-import-works-dialog',
   standalone: true,
   imports: [
-    NgFor,
-    NgIf,
     MatButtonModule,
     MatIconModule,
     OrcidModalComponent,
     SkeletonPlaceholderComponent,
   ],
   templateUrl: './import-works-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./import-works-dialog.component.scss'],
 })
 export class ImportWorksDialogComponent {

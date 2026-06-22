@@ -9,6 +9,7 @@ import {
   QueryList,
   ViewChildren,
   ViewContainerRef,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -46,6 +47,7 @@ import { MatSelect } from '@angular/material/select'
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkContributorsComponent implements OnInit, OnDestroy {

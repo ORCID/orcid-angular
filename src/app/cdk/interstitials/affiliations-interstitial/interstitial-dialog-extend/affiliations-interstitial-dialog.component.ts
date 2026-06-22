@@ -5,6 +5,7 @@ import {
   Inject,
   Input,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import {
@@ -53,6 +54,7 @@ export interface AffilationsComponentDialogOutput
     '../interstitial-component/affiliations-interstitial.component.scss',
     '../interstitial-component/affiliations-interstitial.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AffiliationsInterstitialDialogComponent extends AffiliationsInterstitialComponent {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
 
 @Component({
@@ -6,6 +6,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './docs-shell.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './docs-shell.component.scss',
 })
 export class DocsShellComponent {}

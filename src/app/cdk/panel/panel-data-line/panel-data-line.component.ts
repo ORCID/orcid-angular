@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 
 @Component({
@@ -12,6 +13,7 @@ import {
   templateUrl: './panel-data-line.component.html',
   styleUrls: ['./panel-data-line.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PanelDataLineComponent implements OnInit {

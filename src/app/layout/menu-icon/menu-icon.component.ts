@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'app-menu-icon',
@@ -7,6 +14,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
     './menu-icon.component.scss',
     './menu-icon.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class MenuIconComponent implements OnInit {

@@ -203,8 +203,8 @@
                 src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
                 alt="ORCID logo"
               />
+              @if (config.showEditButton) {
               <button
-                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -214,6 +214,7 @@
               >
                 <mat-icon>edit</mat-icon>
               </button>
+              }
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
@@ -265,8 +266,8 @@
                 src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
                 alt="ORCID logo"
               />
+              @if (config.showEditButton) {
               <button
-                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -276,6 +277,7 @@
               >
                 <mat-icon>edit</mat-icon>
               </button>
+              }
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
@@ -444,8 +446,8 @@
                 alt="ORCID logo"
               />
 
+              @if (config.showEditButton) {
               <button
-                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -455,6 +457,7 @@
               >
                 <mat-icon>edit</mat-icon>
               </button>
+              }
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
@@ -507,8 +510,8 @@
                 alt="ORCID logo"
               />
 
+              @if (config.showEditButton) {
               <button
-                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -518,6 +521,7 @@
               >
                 <mat-icon>edit</mat-icon>
               </button>
+              }
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>

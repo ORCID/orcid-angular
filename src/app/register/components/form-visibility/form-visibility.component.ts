@@ -4,6 +4,7 @@ import {
   forwardRef,
   OnDestroy,
   OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
@@ -44,6 +45,7 @@ import { takeUntil } from 'rxjs/operators'
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FormVisibilityComponent

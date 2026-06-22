@@ -18,9 +18,13 @@
     "esModuleInterop": true,
     "target": "ES2022",
     "typeRoots": ["node_modules/@types", "src/environments/interface.d.ts"],
-    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "useUnknownInCatchVariables": false,
+    "ignoreDeprecations": "6.0"
   },
 
   "angularCompilerOptions": {

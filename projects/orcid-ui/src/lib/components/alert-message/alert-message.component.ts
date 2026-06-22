@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core'
-import { NgIf, NgClass } from '@angular/common'
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
+import { NgClass } from '@angular/common'
 import { MatIconModule } from '@angular/material/icon'
 
 /**
@@ -18,8 +18,9 @@ import { MatIconModule } from '@angular/material/icon'
 @Component({
   selector: 'app-alert-message',
   standalone: true,
-  imports: [NgIf, NgClass, MatIconModule],
+  imports: [NgClass, MatIconModule],
   templateUrl: './alert-message.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     './alert-message.component.scss',
     './alert-message.component.scss-theme.scss',

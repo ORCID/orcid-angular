@@ -4,10 +4,13 @@ import {
   Component,
   DoBootstrap,
   Injector,
+  provideZoneChangeDetection,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   bootstrapApplication,
   provideClientHydration,
+  withNoIncrementalHydration,
 } from '@angular/platform-browser'
 import { createCustomElement } from '@angular/elements'
 import { OrcidUi } from '@orcid/ui'
@@ -15,6 +18,7 @@ import { OrcidUi } from '@orcid/ui'
 @Component({
   selector: 'orcid-elements-bootstrap',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '',
 })
 export class OrcidElementsBootstrapComponent implements DoBootstrap {
@@ -32,9 +36,12 @@ export class OrcidElementsBootstrapComponent implements DoBootstrap {
 }
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideClientHydration()],
+  providers: [provideClientHydration(withNoIncrementalHydration())],
 }
 
 export function bootstrapOrcidElements() {
-  return bootstrapApplication(OrcidElementsBootstrapComponent, appConfig)
+  return bootstrapApplication(OrcidElementsBootstrapComponent, {
+    ...appConfig,
+    providers: [provideZoneChangeDetection(), ...appConfig.providers],
+  })
 }

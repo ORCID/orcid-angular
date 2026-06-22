@@ -31,10 +31,8 @@
     </div>
 
     <h4>Certified links (first connected = show "Connected")</h4>
-    <div
-      class="controls-grid"
-      *ngFor="let link of certifiedLinks; let i = index"
-    >
+    @for (link of certifiedLinks; track link; let i = $index) {
+    <div class="controls-grid">
       <mat-form-field appearance="outline">
         <mat-label>Certified {{ i + 1 }} name</mat-label>
         <input matInput [(ngModel)]="link.name" />
@@ -49,12 +47,11 @@
         <textarea matInput [(ngModel)]="link.description" rows="2"></textarea>
       </mat-form-field>
     </div>
+    }
 
     <h4>More services links</h4>
-    <div
-      class="controls-grid"
-      *ngFor="let link of moreServicesLinks; let i = index"
-    >
+    @for (link of moreServicesLinks; track link; let i = $index) {
+    <div class="controls-grid">
       <mat-form-field appearance="outline">
         <mat-label>More {{ i + 1 }} name</mat-label>
         <input matInput [(ngModel)]="link.name" />
@@ -68,6 +65,7 @@
         <textarea matInput [(ngModel)]="link.description" rows="2"></textarea>
       </mat-form-field>
     </div>
+    }
   </div>
 
   <div examples>
@@ -87,43 +85,43 @@
 
   <div usage>
     <pre><code class="language-ts">import &#123; MatDialog &#125; from '@angular/material/dialog'
-import &#123;
-  ImportWorksDialogComponent,
-  ORCID_MODAL_DIALOG_PANEL_CLASS,
-  type ImportWorksDialogData,
-&#125; from '@orcid/registry-ui'
+      import &#123;
+      ImportWorksDialogComponent,
+      ORCID_MODAL_DIALOG_PANEL_CLASS,
+      type ImportWorksDialogData,
+      &#125; from '@orcid/registry-ui'
 
-// ...
+      // ...
 
-// Open with loading state (shimmer), then update when data is ready:
-const dialogRef = this.dialog.open(ImportWorksDialogComponent, &#123;
-  panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
-  data: &#123;
-    loading: true,
-    title: 'Import your works',
-    certifiedLinks: [],
-    moreServicesLinks: [],
-  &#125; as ImportWorksDialogData,
-  width: '850px',
-  maxHeight: '90vh',
-&#125;)
-this.loadDialogData().subscribe((data) => &#123;
-  dialogRef.componentInstance.data = &#123; ...data, loading: false &#125;
-&#125;)
+      // Open with loading state (shimmer), then update when data is ready:
+      const dialogRef = this.dialog.open(ImportWorksDialogComponent, &#123;
+      panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
+      data: &#123;
+      loading: true,
+      title: 'Import your works',
+      certifiedLinks: [],
+      moreServicesLinks: [],
+      &#125; as ImportWorksDialogData,
+      width: '850px',
+      maxHeight: '90vh',
+      &#125;)
+      this.loadDialogData().subscribe((data) => &#123;
+      dialogRef.componentInstance.data = &#123; ...data, loading: false &#125;
+      &#125;)
 
-// Or open with data already loaded:
-this.dialog.open(ImportWorksDialogComponent, &#123;
-  panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
-  data: &#123;
-    title: 'Import your works',
-    introText: '...',
-    supportLink: &#123; url: '...', label: '...' &#125;,
-    certifiedLinks: [&#123; name, description, url, connected &#125;],
-    moreServicesLinks: [&#123; name, description, url &#125;],
-  &#125; as ImportWorksDialogData,
-  width: '850px',
-  maxHeight: '90vh',
-&#125;)</code></pre>
+      // Or open with data already loaded:
+      this.dialog.open(ImportWorksDialogComponent, &#123;
+      panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
+      data: &#123;
+      title: 'Import your works',
+      introText: '...',
+      supportLink: &#123; url: '...', label: '...' &#125;,
+      certifiedLinks: [&#123; name, description, url, connected &#125;],
+      moreServicesLinks: [&#123; name, description, url &#125;],
+      &#125; as ImportWorksDialogData,
+      width: '850px',
+      maxHeight: '90vh',
+    &#125;)</code></pre>
   </div>
 
   <div inputs>

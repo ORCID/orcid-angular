@@ -7,6 +7,7 @@ import {
   Inject,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { MatStep, MatStepper } from '@angular/material/stepper'
@@ -46,6 +47,7 @@ import { AppEventName } from 'src/app/rum/app-event-names'
     '../../components/register.scss-theme.scss',
     '../../components/register.style.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class RegisterComponent implements OnInit, AfterViewInit {

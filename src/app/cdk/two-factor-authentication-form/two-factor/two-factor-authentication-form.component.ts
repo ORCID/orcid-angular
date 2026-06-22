@@ -8,6 +8,7 @@ import {
   Input,
   Output,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   UntypedFormControl,
@@ -24,6 +25,7 @@ import { WINDOW } from '../../window'
     './two-factor-authentication-form.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TwoFactorAuthenticationFormComponent implements AfterViewInit {

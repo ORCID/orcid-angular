@@ -1,4 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { first } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
@@ -8,6 +13,7 @@ import { Status } from '../../../types/two-factor.endpoint'
   selector: 'app-settings-security',
   templateUrl: './settings-security.component.html',
   styleUrls: ['./settings-security.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsSecurityComponent implements OnInit {

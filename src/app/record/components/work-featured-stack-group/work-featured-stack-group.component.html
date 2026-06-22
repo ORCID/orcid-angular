@@ -1,12 +1,6 @@
-<section
-  id="works"
-  role="region"
-  [attr.aria-label]="regionWorks"
-  *ngIf="
-    featuredWorks?.length > 0 ||
-    (!isPublicRecord && featuredWorks?.length === 0)
-  "
->
+@if ( featuredWorks?.length > 0 || (!isPublicRecord && featuredWorks?.length ===
+0) ) {
+<section id="works" role="region" [attr.aria-label]="regionWorks">
   <app-panels
     [userRecord]="userRecord"
     class="row"
@@ -16,21 +10,21 @@
     id="cy-featured-works-panels"
     [total]="noWorksAdded && 0"
   >
-    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-    <ng-container *ngIf="featuredWorks.length > 0 && !loading">
-      <app-work-featured
-        [userRecord]="userRecord"
-        [isPublicRecord]="isPublicRecord"
-        *ngFor="let work of featuredWorks | slice : 0 : 5"
-        [work]="work"
-        [userInfo]="userInfo"
-      ></app-work-featured>
-    </ng-container>
-    <app-alert-message *ngIf="noWorksAdded && !isPublicRecord">
+    @if (loading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    } @if (featuredWorks.length > 0 && !loading) { @for (work of featuredWorks |
+    slice : 0 : 5; track work) {
+    <app-work-featured
+      [userRecord]="userRecord"
+      [isPublicRecord]="isPublicRecord"
+      [work]="work"
+      [userInfo]="userInfo"
+    ></app-work-featured>
+    } } @if (noWorksAdded && !isPublicRecord) {
+    <app-alert-message>
       <h3 title class="orc-font-body" i18n="@@shared.addWorksToEnableFeaturing">
         Add your works to enable featuring
       </h3>
-
       <div class="orc-font-body-small" content>
         <ng-container i18n="@@shared.youNeedToAdd">You need to add</ng-container
         >&nbsp;<em i18n="@@shared.atLeastOneWork">at least one work</em
@@ -44,10 +38,8 @@
         >
       </div>
     </app-alert-message>
-    <div
-      *ngIf="featuredWorks.length === 0 && !isPublicRecord && !noWorksAdded"
-      class="orc-font-body-small no-featured-works"
-    >
+    } @if (featuredWorks.length === 0 && !isPublicRecord && !noWorksAdded) {
+    <div class="orc-font-body-small no-featured-works">
       <p class="empty" i18n="@@shared.featuredWorksDescription">
         You can feature up to 5 works in your ORCID record.
       </p>
@@ -61,6 +53,9 @@
         Learn more about featuring works in your ORCID record
       </a>
     </div>
-    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    } @if (loading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
   </app-panels>
 </section>
+}

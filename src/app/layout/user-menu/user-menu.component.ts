@@ -1,4 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { UserService } from 'src/app/core'
 
 import { UserInfo } from 'src/app/types'
@@ -20,6 +25,7 @@ import { JourneyType } from 'src/app/rum/journeys/types'
     './user-menu.component.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class UserMenuComponent implements OnInit {

@@ -3,7 +3,8 @@
     Current employment
   </h3>
 
-  <div class="announce" *ngIf="rorIdHasBeenMatched">
+  @if (rorIdHasBeenMatched) {
+  <div class="announce">
     <div>
       <img
         src="/assets/vectors/registration-affiliation-icon.svg"
@@ -22,7 +23,6 @@
             Based on your emails we think you are currently affiliated with
           </ng-container>
           <strong> {{ autoCompleteDisplayOrganization(organization) }}.</strong>
-
           <ng-container
             i18n="
               @@register.webePreselectedThisOrganizationForYouInTheFormBelow"
@@ -31,7 +31,6 @@
             below.</ng-container
           >
         </p>
-
         <div i18n="@@register.whenYouCompleteRegistrationAnEmployment">
           When you complete registration an employment affiliation will be
           automatically added to your new ORCID record.
@@ -39,6 +38,7 @@
       </div>
     </div>
   </div>
+  }
 
   <section id="{{ type }}-organization">
     <div
@@ -68,7 +68,10 @@
         class="mat-form-field-min no-hint"
         id="cy-org-dd-mat-form"
         [ngClass]="{
-          'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50,
+          'two-line-hint':
+            $safeNavigationMigration(
+              selectedOrganizationFromDatabase?.value.length
+            ) > 50,
           'selected-org': organizationIsValidAndTouched
         }"
       >
@@ -93,11 +96,10 @@
           [displayWith]="autoCompleteDisplayOrganization"
           id="cy-org-dd"
         >
-          <ng-container *ngIf="filteredOptions" id="cy-org-filtered-options">
-            <mat-option
-              *ngFor="let option of filteredOptions | async"
-              [value]="option"
-            >
+          @if (filteredOptions) {
+          <ng-container id="cy-org-filtered-options">
+            @for (option of filteredOptions | async; track option) {
+            <mat-option [value]="option">
               <div class="row orc-font-body-small title">
                 {{ option.value }}
               </div>
@@ -105,59 +107,51 @@
                 {{ option.city }} {{ option.region }} {{ option.country }}
               </div>
             </mat-option>
+            }
           </ng-container>
+          }
         </mat-autocomplete>
 
+        @if (form.get('organization').value) {
         <button
           class="clear"
           matSuffix
           mat-icon-button
           [attr.aria-label]="ariaLabelClearOrganization"
           (click)="clearForm()"
-          *ngIf="form.get('organization').value"
         >
           <mat-icon>close</mat-icon>
         </button>
+        }
       </mat-form-field>
-      <div
-        class="selected-org orc-font-small-print"
-        *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
-      >
-        {{ selectedOrganizationFromDatabase.city
-        }}<ng-container *ngIf="selectedOrganizationFromDatabase.city"
-          >,</ng-container
-        >
-        {{ selectedOrganizationFromDatabase.region
-        }}<ng-container *ngIf="selectedOrganizationFromDatabase.region"
-          >,</ng-container
-        >
+      @if (selectedOrganizationFromDatabase && displayOrganizationHint) {
+      <div class="selected-org orc-font-small-print">
+        {{ selectedOrganizationFromDatabase.city }}@if
+        (selectedOrganizationFromDatabase.city) { , }
+        {{ selectedOrganizationFromDatabase.region }}@if
+        (selectedOrganizationFromDatabase.region) { , }
         {{ selectedOrganizationFromDatabase.country }}
       </div>
+      } @if ( !selectedOrganizationFromDatabase &&
+      form.get('organization').value && organizationIsInvalidAndTouched &&
+      displayOrganizationHint ) {
       <div
         class="selected-org orc-font-small-print error"
-        *ngIf="
-          !selectedOrganizationFromDatabase &&
-          form.get('organization').value &&
-          organizationIsInvalidAndTouched &&
-          displayOrganizationHint
-        "
         i18n="@@register.weCantIdentifyThisOrganization"
       >
         We can’t identify this organization. Please try entering the
         organization name again.
       </div>
+      } @if ( !selectedOrganizationFromDatabase &&
+      !form.get('organization').value && organizationIsInvalidAndTouched &&
+      !displayOrganizationHint ) {
       <div
         class="selected-org orc-font-small-print error"
-        *ngIf="
-          !selectedOrganizationFromDatabase &&
-          !form.get('organization').value &&
-          organizationIsInvalidAndTouched &&
-          !displayOrganizationHint
-        "
         i18n="@@register.pleaseEnterAnOrganizationName"
       >
         Please enter an organization name
       </div>
+      }
     </div>
   </section>
 
@@ -184,12 +178,11 @@
         [placeholder]="departmentPlaceholder"
       />
     </mat-form-field>
-    <mat-error
-      *ngIf="departmentNameIsInvalidAndTouched"
-      i18n="@@shared.maxLength.less_than_one_thousand"
-    >
+    @if (departmentNameIsInvalidAndTouched) {
+    <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
       Must be less than 1000 characters
     </mat-error>
+    }
   </div>
 
   <div class="input-container">
@@ -217,12 +210,11 @@
         [placeholder]="rolePlaceholder"
       />
     </mat-form-field>
-    <mat-error
-      *ngIf="roleTitleIsInvalidAndTouched"
-      i18n="@@shared.maxLength.less_than_one_thousand"
-    >
+    @if (roleTitleIsInvalidAndTouched) {
+    <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
       Must be less than 1000 characters
     </mat-error>
+    }
   </div>
 
   <!-- Start date  -->
@@ -255,9 +247,11 @@
               formControlName="startDateYear"
             >
               <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-              <mat-option *ngFor="let year of years" [value]="year">
+              @for (year of years; track year) {
+              <mat-option [value]="year">
                 {{ year }}
               </mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </div>
@@ -275,21 +269,24 @@
               formControlName="startDateMonth"
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-              <mat-option *ngFor="let month of months" [value]="month">
+              @for (month of months; track month) {
+              <mat-option [value]="month">
                 {{ month | trailingZeros }}
               </mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
+        @if (form.get('startDateGroup').errors?.date) {
         <mat-error
           class="mat-caption error-out-input-context"
           i18n="@@shared.invalidDate"
-          *ngIf="form.get('startDateGroup').errors?.date"
         >
           Invalid date
         </mat-error>
+        }
       </div>
     </div>
   </div>

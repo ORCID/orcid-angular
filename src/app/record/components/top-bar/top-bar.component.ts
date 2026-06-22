@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { ModalNameComponent } from './modals/modal-name/modal-name.component'
@@ -36,6 +43,7 @@ import { TogglzFlag } from '../../../types/config.endpoint'
     './top-bar.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TopBarComponent implements OnInit, OnDestroy {

@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'app-my-orcid-alerts',
@@ -7,6 +12,7 @@ import { Component, Input, OnInit } from '@angular/core'
     './my-orcid-alerts.component.scss',
     './my-orcid-alerts.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class MyOrcidAlertsComponent implements OnInit {

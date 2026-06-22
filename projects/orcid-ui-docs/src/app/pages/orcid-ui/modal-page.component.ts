@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
+
 import { FormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCheckboxModule } from '@angular/material/checkbox'
@@ -19,7 +19,8 @@ type ModalDocsConfig = {
 @Component({
   selector: 'orcid-modal-demo-dialog',
   standalone: true,
-  imports: [CommonModule, OrcidModalComponent, MatButtonModule],
+  imports: [OrcidModalComponent, MatButtonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <orcid-modal
       [title]="config.title"
@@ -54,7 +55,6 @@ class ModalDemoDialogComponent {
   selector: 'orcid-modal-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatDialogModule,
     MatButtonModule,
@@ -64,6 +64,7 @@ class ModalDemoDialogComponent {
     DocumentationPageComponent,
   ],
   templateUrl: './modal-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./modal-page.component.scss'],
 })
 export class ModalPageComponent {

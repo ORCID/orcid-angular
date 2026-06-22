@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject, HostBinding } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  HostBinding,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { CookieService } from 'ngx-cookie-service'
 import { WINDOW } from '../../cdk/window'
 
@@ -7,6 +13,7 @@ import { WINDOW } from '../../cdk/window'
   templateUrl: './environment-banner.component.html',
   styleUrls: ['./environment-banner.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class EnvironmentBannerComponent implements OnInit {

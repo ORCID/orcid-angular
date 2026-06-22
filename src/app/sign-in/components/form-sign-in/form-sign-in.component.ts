@@ -9,6 +9,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   UntypedFormControl,
@@ -55,6 +56,7 @@ import { AppEventName } from 'src/app/rum/app-event-names'
     '../sign-in.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FormSignInComponent implements OnInit, OnDestroy {

@@ -1,4 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { set } from 'lodash'
 import { WINDOW } from 'src/app/cdk/window'
@@ -9,6 +14,7 @@ import { first } from 'rxjs'
   selector: 'app-settings-actions',
   templateUrl: './settings-actions.component.html',
   styleUrls: ['./settings-actions.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsActionsComponent implements OnInit {

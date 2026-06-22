@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { VisibilityStrings } from '../../../types/common.endpoint'
 import {
@@ -23,6 +24,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './peer-review-stack.component.scss',
     './peer-review-stack.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PeerReviewStackComponent implements OnInit {

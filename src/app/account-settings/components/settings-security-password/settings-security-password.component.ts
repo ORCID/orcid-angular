@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   UntypedFormBuilder,
@@ -30,6 +31,7 @@ import { AuthChallengeFormData } from '../../../types/common.endpoint'
     './settings-security-password.component.scss',
     './settings-security-password.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {

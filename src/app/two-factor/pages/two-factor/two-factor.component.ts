@@ -1,4 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { TwoFactor } from '../../../types/two-factor.endpoint'
 import { WINDOW } from '../../../cdk/window'
@@ -11,6 +16,7 @@ import { TwoFactorAuthenticationService } from '../../../core/two-factor-authent
   templateUrl: './two-factor.component.html',
   styleUrls: ['./two-factor.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TwoFactorComponent implements OnInit {

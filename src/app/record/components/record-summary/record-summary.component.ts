@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common'
 import {
   Component,
   ElementRef,
@@ -6,6 +5,7 @@ import {
   HostListener,
   OnDestroy,
   OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -19,7 +19,8 @@ import { TrustedSummaryModule } from 'src/app/cdk/trusted-summary/trusted-summar
   templateUrl: './record-summary.component.html',
   styleUrls: ['./record-summary.component.scss'],
   standalone: true,
-  imports: [CommonModule, TrustedSummaryModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [TrustedSummaryModule],
 })
 export class RecordSummaryComponent implements OnInit, OnDestroy {
   private readonly $destroy = new Subject<void>()
@@ -44,7 +45,7 @@ export class RecordSummaryComponent implements OnInit, OnDestroy {
   }
 
   // Listen to scroll events and save position to state
-  @HostListener('scroll', ['$event'])
+  @HostListener('scroll')
   onScroll() {
     const scrollTop = this._elementRef.nativeElement.scrollTop
     this._state.setRecordSummaryScrollPosition(scrollTop)

@@ -1,4 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -60,6 +66,7 @@ import { WorkTypeMenu } from './work-type-menu'
     './work-form.component.scss',
     './work-form.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkFormComponent implements OnInit {
@@ -413,16 +420,17 @@ export class WorkFormComponent implements OnInit {
     workIdentifiersArray: UntypedFormArray,
     formGroup: UntypedFormGroup
   ) {
-    workIdentifiersArray.controls.forEach((element: UntypedFormGroup) => {
+    workIdentifiersArray.controls.forEach((element) => {
+      const formGroupElement = element as UntypedFormGroup
       // Updates the value and validity of all the external identifier relationships on the array
       // Since those depend on each other to validate the `versionOfInvalidRelationship` validator
       if (
         !Object.is(
-          element.controls.externalRelationship,
+          formGroupElement.controls.externalRelationship,
           formGroup.controls.externalRelationship
         )
       ) {
-        element.controls.externalRelationship.updateValueAndValidity({
+        formGroupElement.controls.externalRelationship.updateValueAndValidity({
           emitEvent: false,
         })
       }

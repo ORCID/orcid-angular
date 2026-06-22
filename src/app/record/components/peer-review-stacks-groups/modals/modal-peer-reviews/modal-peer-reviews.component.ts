@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { Subject } from 'rxjs'
@@ -10,6 +15,7 @@ import { RecordImportWizard } from '../../../../../types/record-peer-review-impo
   selector: 'app-modal-peer-reviews',
   templateUrl: './modal-peer-reviews.component.html',
   styleUrls: ['./modal-peer-reviews.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalPeerReviewsComponent implements OnInit, OnDestroy {

@@ -1,13 +1,16 @@
 <section class="orcid-step-view">
   <header class="orcid-step-view__header">
+    @if (showHeaderIcon) {
     <img
-      *ngIf="showHeaderIcon"
       class="orcid-step-view__icon"
       [src]="headerIconSrc"
       [alt]="headerIconAlt"
     />
+    }
     <h2 class="orcid-step-view__title">{{ title }}</h2>
-    <p *ngIf="subtitle" class="orcid-step-view__subtitle">{{ subtitle }}</p>
+    @if (subtitle) {
+    <p class="orcid-step-view__subtitle">{{ subtitle }}</p>
+    }
   </header>
 
   <div class="orcid-step-view__body">
@@ -21,8 +24,8 @@
       class="orcid-step-view__actions"
       [class.orcid-step-view__actions--full]="fullWidthActions"
     >
+      @if (primaryLabel) {
       <button
-        *ngIf="primaryLabel"
         mat-flat-button
         class="orcid-step-view__primary-action"
         type="button"
@@ -31,6 +34,7 @@
       >
         {{ primaryLabel }}
       </button>
+      }
     </div>
   </footer>
 </section>

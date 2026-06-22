@@ -1,4 +1,11 @@
-import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -10,6 +17,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
     './settings-panels-data.component.scss',
     './settings-panels-data.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsPanelsDataComponent implements OnInit, OnDestroy {

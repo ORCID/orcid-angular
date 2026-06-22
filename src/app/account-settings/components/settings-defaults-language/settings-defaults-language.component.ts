@@ -6,6 +6,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { UntypedFormBuilder } from '@angular/forms'
 import { Subject } from 'rxjs'
@@ -17,6 +18,7 @@ import { LanguageService } from 'src/app/core/language/language.service'
   selector: 'app-settings-defaults-language',
   templateUrl: './settings-defaults-language.component.html',
   styleUrls: ['./settings-defaults-language.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsDefaultsLanguageComponent implements OnInit, OnDestroy {

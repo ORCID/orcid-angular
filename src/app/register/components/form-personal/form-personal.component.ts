@@ -8,6 +8,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   FormControl,
@@ -15,6 +16,7 @@ import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NgForm,
+  AbstractControl,
   UntypedFormControl,
   UntypedFormGroup,
   ValidatorFn,
@@ -88,6 +90,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FormPersonalComponent
@@ -240,7 +243,8 @@ export class FormPersonalComponent
   }
 
   allEmailsAreUnique(): ValidatorFn {
-    return (formGroup: UntypedFormGroup) => {
+    return (control: AbstractControl) => {
+      const formGroup = control as UntypedFormGroup
       let hasError = false
       const registerForm =
         this._register.formGroupToEmailRegisterForm(formGroup)

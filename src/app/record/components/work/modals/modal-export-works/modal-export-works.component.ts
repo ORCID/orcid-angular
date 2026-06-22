@@ -1,4 +1,11 @@
-import { Component, ElementRef, Inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -13,6 +20,7 @@ import { WINDOW } from 'src/app/cdk/window'
   templateUrl: './modal-export-works.component.html',
   styleUrls: ['./modal-export-works.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalExportWorksComponent implements OnInit, OnDestroy {

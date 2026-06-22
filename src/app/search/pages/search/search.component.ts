@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, Optional } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  Optional,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SearchService } from '../../../core/search/search.service'
 import { tap, switchMap, catchError } from 'rxjs/operators'
@@ -14,6 +20,7 @@ import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SearchComponent implements OnInit, OnDestroy {

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
 import { OrcidUi } from '@orcid/ui'
 
 @Component({
   selector: 'orcid-overview-page',
   standalone: true,
   imports: [OrcidUi],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h2>Overview</h2>
     <p>

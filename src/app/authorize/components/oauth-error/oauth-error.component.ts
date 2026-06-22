@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { combineLatest, Subject } from 'rxjs'
 import { switchMap, take, takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -21,6 +26,7 @@ import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-man
   templateUrl: './oauth-error.component.html',
   styleUrls: ['./oauth-error.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class OauthErrorComponent implements OnInit, OnDestroy {

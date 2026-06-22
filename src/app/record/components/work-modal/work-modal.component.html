@@ -43,8 +43,8 @@
     </ng-container>
   </app-modal-side-bar>
   <app-modal-footer>
+    @if (work) {
     <button
-      *ngIf="work"
       mat-raised-button
       color="primary"
       (click)="workFormComponent.saveEvent()"
@@ -54,6 +54,7 @@
     >
       Save changes
     </button>
+    }
     <button
       mat-stroked-button
       color="primary"
@@ -65,11 +66,8 @@
       Cancel
     </button>
   </app-modal-footer>
-  <app-work-form
-    [work]="work"
-    [userRecord]="userRecord"
-    *ngIf="work && !loading"
-    #workFormComponent
-  >
+  @if (work && !loading) {
+  <app-work-form [work]="work" [userRecord]="userRecord" #workFormComponent>
   </app-work-form>
+  }
 </app-modal>

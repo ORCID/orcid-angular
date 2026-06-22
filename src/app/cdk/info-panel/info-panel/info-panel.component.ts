@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'app-info-panel',
@@ -7,6 +7,7 @@ import { Component } from '@angular/core'
     './info-panel.component.scss',
     './info-panel.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class InfoPanelComponent {}

@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 
 @Component({
@@ -8,6 +13,7 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
     './panel-element.component.scss',
     './panel-element.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PanelElementComponent implements OnInit {

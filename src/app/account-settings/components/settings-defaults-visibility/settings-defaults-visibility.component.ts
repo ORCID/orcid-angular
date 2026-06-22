@@ -4,6 +4,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { Subject } from 'rxjs'
@@ -20,6 +21,7 @@ import { RecordService } from 'src/app/core/record/record.service'
     './settings-defaults-visibility.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsDefaultsVisibilityComponent implements OnInit, OnDestroy {

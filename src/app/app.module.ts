@@ -19,6 +19,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
   withXsrfConfiguration,
+  withXhr,
 } from '@angular/common/http'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
@@ -71,6 +72,7 @@ import { FormsModule } from '@angular/forms'
       multi: true,
     },
     provideHttpClient(
+      withXhr(),
       withInterceptorsFromDi(),
       withXsrfConfiguration({
         cookieName: 'XSRF-TOKEN',

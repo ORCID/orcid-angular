@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
@@ -9,6 +15,7 @@ import { UserInfo } from 'src/app/types'
   templateUrl: './top-bar-record-issues.component.html',
   styleUrls: ['./top-bar-record-issues.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TopBarRecordIssuesComponent implements OnInit, OnDestroy {

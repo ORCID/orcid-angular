@@ -6,8 +6,9 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
-import { CommonModule, NgIf } from '@angular/common'
+import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
@@ -39,9 +40,9 @@ import { getFeaturedEmploymentCaption } from './featured-employment-caption.util
     './record-header.component.scss-theme.scss',
   ],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
-    NgIf,
     RecordEditButtonComponent,
     HeaderBannerComponent,
     MatIconModule,

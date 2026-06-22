@@ -4,7 +4,14 @@ import {
   CdkDragStart,
   moveItemInArray,
 } from '@angular/cdk/drag-drop'
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -22,6 +29,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './manage-work-featured-modal.component.scss-theme.scss',
     './manage-work-featured-modal.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {

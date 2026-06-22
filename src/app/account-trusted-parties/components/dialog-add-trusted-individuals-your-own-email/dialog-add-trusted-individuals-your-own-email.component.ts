@@ -1,4 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ExpandedSearchResultsContent } from 'src/app/types'
@@ -7,6 +12,7 @@ import { ExpandedSearchResultsContent } from 'src/app/types'
   selector: 'app-dialog-add-trusted-individuals-your-own-email',
   templateUrl: './dialog-add-trusted-individuals-your-own-email.component.html',
   styleUrls: ['./dialog-add-trusted-individuals-your-own-email.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class DialogAddTrustedIndividualsYourOwnEmailComponent

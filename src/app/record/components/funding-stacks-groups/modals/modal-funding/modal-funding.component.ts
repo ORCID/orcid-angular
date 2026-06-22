@@ -1,4 +1,11 @@
-import { Component, Inject, OnDestroy, OnInit, Input } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import {
@@ -60,6 +67,7 @@ import { validateFundingAmount } from 'src/app/shared/validators/funding-amount/
     './modal-funding.component.scss-theme.scss',
     './modal-funding.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalFundingComponent implements OnInit, OnDestroy {

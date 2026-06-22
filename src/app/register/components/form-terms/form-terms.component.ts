@@ -1,4 +1,11 @@
-import { Component, DoCheck, forwardRef, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  DoCheck,
+  forwardRef,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -33,6 +40,7 @@ import { RegisterStateService } from '../../register-state.service'
     },
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 // tslint:disable-next-line: class-name

@@ -1,4 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { forkJoin, Subject } from 'rxjs'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
@@ -16,6 +22,7 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
     './modal-combine-works-with-selector.component.scss',
     './modal-combine-works-with-selector.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalCombineWorksWithSelectorComponent

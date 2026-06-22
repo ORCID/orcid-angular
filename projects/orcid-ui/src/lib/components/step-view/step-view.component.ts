@@ -1,12 +1,19 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { NgIf } from '@angular/common'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
+
 import { MatButtonModule } from '@angular/material/button'
 
 @Component({
   selector: 'orcid-step-view',
   standalone: true,
-  imports: [NgIf, MatButtonModule],
+  imports: [MatButtonModule],
   templateUrl: './step-view.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./step-view.component.scss'],
 })
 export class OrcidStepViewComponent {

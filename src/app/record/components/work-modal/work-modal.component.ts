@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
@@ -13,6 +20,7 @@ import { WorkFormComponent } from '../work-form/work-form/work-form.component'
   selector: 'app-work-modal',
   templateUrl: './work-modal.component.html',
   styleUrls: ['./work-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkModalComponent implements OnInit {

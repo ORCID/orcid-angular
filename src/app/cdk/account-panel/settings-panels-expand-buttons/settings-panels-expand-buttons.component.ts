@@ -1,9 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'app-settings-panels-expand-buttons',
   templateUrl: './settings-panels-expand-buttons.component.html',
   styleUrls: ['./settings-panels-expand-buttons.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PanelExpandButtonsComponent implements OnInit {

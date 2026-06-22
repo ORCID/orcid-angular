@@ -6,88 +6,86 @@
   </app-modal-header>
   <app-modal-side-bar>
     <ng-container id="side-bar-title">
+      @if (type !== 'editorial-service') {
       <a
         class="side-bar"
         i18n="@@shared.organization"
         (click)="toOrganization()"
-        *ngIf="type !== 'editorial-service'"
       >
         Organization
       </a>
-      <a
-        class="side-bar"
-        i18n="@@shared.journal"
-        (click)="toOrganization()"
-        *ngIf="type === 'editorial-service'"
-      >
+      } @if (type === 'editorial-service') {
+      <a class="side-bar" i18n="@@shared.journal" (click)="toOrganization()">
         Journal
       </a>
+      }
     </ng-container>
     <ng-container id="side-bar-url-1">
+      @if (type === 'employment') {
       <a
         class="side-bar"
         i18n="@@shared.employmentDetails"
         (click)="toAffiliationDetails()"
-        *ngIf="type === 'employment'"
       >
         Employment details
       </a>
+      } @if (type === 'qualification') {
       <a
         class="side-bar"
         i18n="@@shared.qualificationDetails"
         (click)="toAffiliationDetails()"
-        *ngIf="type === 'qualification'"
       >
         Qualification details
       </a>
+      } @if (type === 'education') {
       <a
         class="side-bar"
         i18n="@@shared.educationDetails"
         (click)="toAffiliationDetails()"
-        *ngIf="type === 'education'"
       >
         Education details
       </a>
+      } @if (type === 'invited-position') {
       <a
         class="side-bar"
         i18n="@@shared.invitedPositionDetails"
         (click)="toAffiliationDetails()"
-        *ngIf="type === 'invited-position'"
       >
         Invited Position details
       </a>
+      } @if (type === 'distinction') {
       <a
         class="side-bar"
         i18n="@@shared.distinctionDetails"
         (click)="toAffiliationDetails()"
-        *ngIf="type === 'distinction'"
       >
         Distinction details
       </a>
+      } @if (type === 'membership') {
       <a
         class="side-bar"
         i18n="@@shared.membershipDetails"
         (click)="toAffiliationDetails()"
-        *ngIf="type === 'membership'"
       >
         Membership details
       </a>
+      } @if (type === 'service') {
       <a
         class="side-bar"
         i18n="@@shared.serviceDetails"
         (click)="toAffiliationDetails()"
-        *ngIf="type === 'service'"
       >
         Service details
       </a>
+      } @if (type === 'editorial-service') {
       <a
         class="side-bar"
         i18n="@@shared.serviceDetails"
         (click)="toAffiliationDetails()"
-        *ngIf="type === 'editorial-service'"
       >
         EditorialService details
       </a>
+      }
     </ng-container>
     <ng-container id="side-bar-url-2">
       <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
@@ -135,29 +133,22 @@
               'orc-font-body-large': platform.columns12
             }"
           >
-            <strong
-              i18n="@@shared.organization"
-              *ngIf="type !== 'editorial-service'"
-            >
-              Organization
-            </strong>
-            <strong
-              i18n="@@shared.journal"
-              *ngIf="type === 'editorial-service'"
-            >
-              Journal
-            </strong>
-            <span *ngIf="!platform.columns12" class="required">*</span>
+            @if (type !== 'editorial-service') {
+            <strong i18n="@@shared.organization"> Organization </strong>
+            } @if (type === 'editorial-service') {
+            <strong i18n="@@shared.journal"> Journal </strong>
+            } @if (!platform.columns12) {
+            <span class="required">*</span>
+            }
           </h2>
-          <p
-            *ngIf="platform.columns12"
-            class="required-information mat-caption"
-          >
+          @if (platform.columns12) {
+          <p class="required-information mat-caption">
             <span class="required">*</span>
             <ng-container i18n="@@shared.requiredInformation"
               >Required information
             </ng-container>
           </p>
+          }
         </div>
       </div>
       <hr />
@@ -171,33 +162,29 @@
             error: organizationIsInvalidAndTouched
           }"
         >
-          <strong
-            i18n="@@shared.organization"
-            id="organizationLabel"
-            *ngIf="type !== 'editorial-service'"
-          >
+          @if (type !== 'editorial-service') {
+          <strong i18n="@@shared.organization" id="organizationLabel">
             Organization</strong
           >
-          <strong
-            i18n="@@shared.journal"
-            id="journalLabel"
-            *ngIf="type === 'editorial-service'"
-          >
-            Journal</strong
-          >
+          } @if (type === 'editorial-service') {
+          <strong i18n="@@shared.journal" id="journalLabel"> Journal</strong>
+          }
           <span class="required">*</span>
         </label>
       </div>
 
       <div class="input-container" id="cy-org-dd-div">
+        @if (type !== 'editorial-service') {
         <mat-form-field
           appearance="outline"
           class="mat-form-field-min"
           id="cy-org-dd-mat-form"
           [ngClass]="{
-            'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
+            'two-line-hint':
+              $safeNavigationMigration(
+                selectedOrganizationFromDatabase?.value.length
+              ) > 50
           }"
-          *ngIf="type !== 'editorial-service'"
         >
           <input
             aria-labelledby="organizationLabel"
@@ -213,11 +200,10 @@
             [displayWith]="autoCompleteDisplayOrganization"
             id="cy-org-dd"
           >
-            <ng-container *ngIf="filteredOptions" id="cy-org-filtered-options">
-              <mat-option
-                *ngFor="let option of filteredOptions | async"
-                [value]="option"
-              >
+            @if (filteredOptions) {
+            <ng-container id="cy-org-filtered-options">
+              @for (option of filteredOptions | async; track option) {
+              <mat-option [value]="option">
                 <div class="row orc-font-body-small title">
                   {{ option.value }}
                 </div>
@@ -225,60 +211,57 @@
                   {{ option.city }} {{ option.region }} {{ option.country }}
                 </div>
               </mat-option>
+              }
             </ng-container>
+            }
           </mat-autocomplete>
-          <mat-hint
-            *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
-          >
+          @if (selectedOrganizationFromDatabase && displayOrganizationHint) {
+          <mat-hint>
             <ng-container i18n="@@record.identifyAS">Identify as:</ng-container>
             {{ selectedOrganizationFromDatabase.value }}
           </mat-hint>
-          <mat-hint
-            *ngIf="
-              !selectedOrganizationFromDatabase &&
-              affiliationForm.get('organization').value &&
-              displayOrganizationHint
-            "
-            i18n="@@record.unidentifiedOrganization"
-          >
+          } @if ( !selectedOrganizationFromDatabase &&
+          affiliationForm.get('organization').value && displayOrganizationHint )
+          {
+          <mat-hint i18n="@@record.unidentifiedOrganization">
             Unidentified organization
           </mat-hint>
-
+          } @if (affiliationForm.get('organization').value) {
           <button
             class="clear"
             matSuffix
             mat-icon-button
             aria-label="Clear"
             (click)="clearForm()"
-            *ngIf="affiliationForm.get('organization').value"
           >
             <mat-icon>close</mat-icon>
           </button>
+          } @if (organizationIsInvalidAndTouched) {
           <mat-error
             role="alert"
             aria-describedby="organization-label"
             class="mat-caption"
-            *ngIf="organizationIsInvalidAndTouched"
             i18n="@@shared.pleaseEnterAnOrganization"
           >
             Please enter an organization
           </mat-error>
-          <mat-error
-            *ngIf="affiliationForm.get('organization').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_one_thousand"
-          >
+          } @if (affiliationForm.get('organization').errors?.maxlength) {
+          <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
             Must be less than 1000 characters
           </mat-error>
+          }
         </mat-form-field>
-
+        } @if (type === 'editorial-service') {
         <mat-form-field
           appearance="outline"
           class="mat-form-field-min"
           id="cy-org-dd-mat-form"
           [ngClass]="{
-            'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
+            'two-line-hint':
+              $safeNavigationMigration(
+                selectedOrganizationFromDatabase?.value.length
+              ) > 50
           }"
-          *ngIf="type === 'editorial-service'"
         >
           <input
             aria-labelledby="organizationLabel"
@@ -287,24 +270,25 @@
             formControlName="organization"
             [attr.aria-invalid]="organizationIsInvalidAndTouched"
           />
+          @if (organizationIsInvalidAndTouched) {
           <mat-error
             role="alert"
             aria-describedby="organization-label"
             class="mat-caption"
-            *ngIf="organizationIsInvalidAndTouched"
             i18n="@@shared.pleaseEnterAnOrganization"
           >
             Please enter an organization
           </mat-error>
-          <mat-error
-            *ngIf="affiliationForm.get('organization').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_one_thousand"
-          >
+          } @if (affiliationForm.get('organization').errors?.maxlength) {
+          <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
             Must be less than 1000 characters
           </mat-error>
+          }
         </mat-form-field>
+        }
       </div>
-      <div class="row" *ngIf="type !== 'editorial-service'">
+      @if (type !== 'editorial-service') {
+      <div class="row">
         <label
           for="city-input"
           id="city-label"
@@ -317,7 +301,8 @@
           <span class="required">*</span>
         </label>
       </div>
-      <div class="input-container" *ngIf="type !== 'editorial-service'">
+      } @if (type !== 'editorial-service') {
+      <div class="input-container">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="city-input"
@@ -326,29 +311,30 @@
             aria-labelledby="cityLabel"
             [attr.aria-invalid]="cityIsInvalidAndTouched"
           />
+          @if (affiliationForm.get('city').hasError('required')) {
           <mat-error
             role="alert"
             aria-describedby="city-label"
             class="mat-caption"
-            *ngIf="affiliationForm.get('city').hasError('required')"
             i18n="@@shared.cityError"
           >
             Please enter a city
           </mat-error>
-          <mat-error
-            *ngIf="affiliationForm.get('city').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_one_thousand"
-          >
+          } @if (affiliationForm.get('city').errors?.maxlength) {
+          <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
             Must be less than 1000 characters
           </mat-error>
+          }
         </mat-form-field>
       </div>
-      <div class="row" *ngIf="type !== 'editorial-service'">
+      } @if (type !== 'editorial-service') {
+      <div class="row">
         <label for="region-input" class="mat-caption">
           <strong i18n="@@shared.region">Region, State or County</strong>
         </label>
       </div>
-      <div class="input-container" *ngIf="type !== 'editorial-service'">
+      } @if (type !== 'editorial-service') {
+      <div class="input-container">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="region-input"
@@ -356,15 +342,15 @@
             matInput
             formControlName="region"
           />
-          <mat-error
-            *ngIf="affiliationForm.get('region').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_one_thousand"
-          >
+          @if (affiliationForm.get('region').errors?.maxlength) {
+          <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
             Must be less than 1000 characters
           </mat-error>
+          }
         </mat-form-field>
       </div>
-      <div class="row" *ngIf="type !== 'editorial-service'">
+      } @if (type !== 'editorial-service') {
+      <div class="row">
         <label
           for="country-input"
           id="country-label"
@@ -379,7 +365,8 @@
           <span class="required">*</span>
         </label>
       </div>
-      <div class="input-container" *ngIf="type !== 'editorial-service'">
+      } @if (type !== 'editorial-service') {
+      <div class="input-container">
         <mat-form-field
           appearance="outline"
           class="mat-form-field-min"
@@ -392,24 +379,26 @@
             formControlName="country"
             [attr.aria-invalid]="countryIsInvalidAndTouched"
           >
-            <mat-option
-              *ngFor="let countryCode of countryCodes | sortBy : 'asc' : 'key'"
-              [value]="countryCode.key"
-            >
+            @for (countryCode of countryCodes | sortBy : 'asc' : 'key'; track
+            countryCode) {
+            <mat-option [value]="countryCode.key">
               {{ countryCode.key }}
             </mat-option>
+            }
           </mat-select>
+          @if (countryIsInvalidAndTouched) {
           <mat-error
             role="alert"
             aria-describedby="country-label"
             i18n="@@shared.countryOrLocationError"
-            *ngIf="countryIsInvalidAndTouched"
           >
             Please enter a country or location
           </mat-error>
+          }
         </mat-form-field>
       </div>
-      <div class="row" *ngIf="type === 'editorial-service'">
+      } @if (type === 'editorial-service') {
+      <div class="row">
         <label
           for="issn-input"
           class="mat-caption"
@@ -419,10 +408,8 @@
           <span class="required">*</span>
         </label>
       </div>
-      <div
-        class="input-container bottom-padding"
-        *ngIf="type === 'editorial-service'"
-      >
+      } @if (type === 'editorial-service') {
+      <div class="input-container bottom-padding">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="issn-input"
@@ -433,16 +420,15 @@
           <mat-hint class="mat-caption" i18n="@@shared.issnDescription">
             ISSN identifier for the journal. Use the 1234-5678 format.
           </mat-hint>
-          <mat-error
-            class="mat-caption"
-            *ngIf="affiliationForm.get('issn').hasError('pattern')"
-            i18n="@@shared.invalidIssn"
-          >
+          @if (affiliationForm.get('issn').hasError('pattern')) {
+          <mat-error class="mat-caption" i18n="@@shared.invalidIssn">
             Invalid ISSN
           </mat-error>
+          }
         </mat-form-field>
       </div>
-      <div class="row" *ngIf="type === 'editorial-service'">
+      } @if (type === 'editorial-service') {
+      <div class="row">
         <label
           for="url-input"
           class="mat-caption"
@@ -451,10 +437,8 @@
           <strong i18n="@@shared.url">Homepage URL</strong>
         </label>
       </div>
-      <div
-        class="input-container mat-hint bottom-padding"
-        *ngIf="type === 'editorial-service'"
-      >
+      } @if (type === 'editorial-service') {
+      <div class="input-container mat-hint bottom-padding">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="url-input"
@@ -465,21 +449,18 @@
           <mat-hint class="mat-caption" i18n="@@shared.urlDescription">
             Use the full URL format e.g. http://www.website.com/page.html
           </mat-hint>
-          <mat-error
-            class="mat-caption"
-            *ngIf="affiliationForm.get('link').hasError('pattern')"
-            i18n="@@shared.invalidUrl"
-          >
+          @if (affiliationForm.get('link').hasError('pattern')) {
+          <mat-error class="mat-caption" i18n="@@shared.invalidUrl">
             Invalid URL
           </mat-error>
-          <mat-error
-            *ngIf="affiliationForm.get('link').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_two_thousand"
-          >
+          } @if (affiliationForm.get('link').errors?.maxlength) {
+          <mat-error i18n="@@shared.maxLength.less_than_two_thousand">
             Must be less than 2000 characters
           </mat-error>
+          }
         </mat-form-field>
       </div>
+      }
     </section>
     <section id="{{ type }}-details">
       <div
@@ -497,64 +478,53 @@
               'orc-font-body-large': platform.columns12
             }"
           >
-            <strong
-              i18n="@@shared.employmentDetails"
-              *ngIf="type === 'employment'"
-            >
+            @if (type === 'employment') {
+            <strong i18n="@@shared.employmentDetails">
               Employment details
             </strong>
-            <strong
-              i18n="@@shared.qualificationDetails"
-              *ngIf="type === 'qualification'"
-            >
+            } @if (type === 'qualification') {
+            <strong i18n="@@shared.qualificationDetails">
               Qualification details
             </strong>
-            <strong
-              i18n="@@shared.educationDetails"
-              *ngIf="type === 'education'"
-            >
+            } @if (type === 'education') {
+            <strong i18n="@@shared.educationDetails">
               Education details
             </strong>
-            <strong
-              i18n="@@shared.invitedPositionDetails"
-              *ngIf="type === 'invited-position'"
-            >
+            } @if (type === 'invited-position') {
+            <strong i18n="@@shared.invitedPositionDetails">
               Invited Position details
             </strong>
-            <strong
-              i18n="@@shared.distinctionDetails"
-              *ngIf="type === 'distinction'"
-            >
+            } @if (type === 'distinction') {
+            <strong i18n="@@shared.distinctionDetails">
               Distinction details
             </strong>
-            <strong
-              i18n="@@shared.membershipDetails"
-              *ngIf="type === 'membership'"
-            >
+            } @if (type === 'membership') {
+            <strong i18n="@@shared.membershipDetails">
               Membership details
             </strong>
-            <strong i18n="@@shared.serviceDetails" *ngIf="type === 'service'">
-              Service details
-            </strong>
-            <strong
-              i18n="@@shared.editorialServiceDetails"
-              *ngIf="type === 'editorial-service'"
-            >
+            } @if (type === 'service') {
+            <strong i18n="@@shared.serviceDetails"> Service details </strong>
+            } @if (type === 'editorial-service') {
+            <strong i18n="@@shared.editorialServiceDetails">
               Editorial Service details
             </strong>
-            <span *ngIf="!platform.columns12" class="required">*</span>
+            } @if (!platform.columns12) {
+            <span class="required">*</span>
+            }
           </h2>
         </div>
       </div>
       <hr />
-      <div class="row" *ngIf="type !== 'editorial-service'">
+      @if (type !== 'editorial-service') {
+      <div class="row">
         <label for="department-input" class="mat-caption">
           <strong i18n="@@shared.department" id="deparmentLabel"
             >Department</strong
           >
         </label>
       </div>
-      <div class="input-container" *ngIf="type !== 'editorial-service'">
+      } @if (type !== 'editorial-service') {
+      <div class="input-container">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="department-input"
@@ -562,37 +532,27 @@
             formControlName="department"
             aria-labelledby="deparmentLabel"
           />
-          <mat-error
-            *ngIf="affiliationForm.get('department').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_one_thousand"
-          >
+          @if (affiliationForm.get('department').errors?.maxlength) {
+          <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
             Must be less than 1000 characters
           </mat-error>
+          }
         </mat-form-field>
       </div>
+      }
       <div class="row">
         <label for="title-input" class="mat-caption" id="award-label">
-          <strong i18n="@@shared.degree" *ngIf="type === 'education'">
-            Degree/title
-          </strong>
-          <strong
-            i18n="@@shared.role"
-            *ngIf="
-              type === 'employment' ||
-              type === 'qualification' ||
-              type === 'invited-position' ||
-              type === 'service' ||
-              type === 'editorial-service'
-            "
-          >
-            Role/title
-          </strong>
-          <strong i18n="@@shared.award" *ngIf="type === 'distinction'">
-            Distinction/award
-          </strong>
-          <strong i18n="@@shared.membershipType" *ngIf="type === 'membership'">
-            Membership type
-          </strong>
+          @if (type === 'education') {
+          <strong i18n="@@shared.degree"> Degree/title </strong>
+          } @if ( type === 'employment' || type === 'qualification' || type ===
+          'invited-position' || type === 'service' || type ===
+          'editorial-service' ) {
+          <strong i18n="@@shared.role"> Role/title </strong>
+          } @if (type === 'distinction') {
+          <strong i18n="@@shared.award"> Distinction/award </strong>
+          } @if (type === 'membership') {
+          <strong i18n="@@shared.membershipType"> Membership type </strong>
+          }
         </label>
       </div>
       <div class="input-container">
@@ -603,12 +563,11 @@
             matInput
             formControlName="title"
           />
-          <mat-error
-            *ngIf="affiliationForm.get('title').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_one_thousand"
-          >
+          @if (affiliationForm.get('title').errors?.maxlength) {
+          <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
             Must be less than 1000 characters
           </mat-error>
+          }
         </mat-form-field>
       </div>
       <ng-container
@@ -640,9 +599,11 @@
                 id="cy-start-date-year-sel"
               >
                 <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-                <mat-option *ngFor="let year of years" [value]="year">
+                @for (year of years; track year) {
+                <mat-option [value]="year">
                   {{ year }}
                 </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
@@ -659,9 +620,11 @@
                 id="cy-start-date-month-sel"
               >
                 <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-                <mat-option *ngFor="let month of months" [value]="month">
+                @for (month of months; track month) {
+                <mat-option [value]="month">
                   {{ month | trailingZeros }}
                 </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
@@ -678,24 +641,24 @@
                 id="cy-start-date-day-sel"
               >
                 <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
-                <mat-option *ngFor="let day of days" [value]="day">
+                @for (day of days; track day) {
+                <mat-option [value]="day">
                   {{ day | trailingZeros }}
                 </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
-          <mat-error
-            class="mat-caption"
-            i18n="@@shared.invalidDate"
-            *ngIf="affiliationForm.get('startDateGroup').errors?.date"
-          >
+          @if (affiliationForm.get('startDateGroup').errors?.date) {
+          <mat-error class="mat-caption" i18n="@@shared.invalidDate">
             Invalid date
           </mat-error>
+          }
         </div>
       </ng-container>
+      @if (type !== 'distinction') {
       <ng-container
         formGroupName="endDateGroup"
-        *ngIf="type !== 'distinction'"
         id="cy-affiliation-end-date-group"
       >
         <div class="row">
@@ -723,9 +686,11 @@
                 id="cy-end-date-year-sel"
               >
                 <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-                <mat-option *ngFor="let year of yearsEndDate" [value]="year">
+                @for (year of yearsEndDate; track year) {
+                <mat-option [value]="year">
                   {{ year }}
                 </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
@@ -742,9 +707,11 @@
                 id="cy-end-date-month-sel"
               >
                 <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-                <mat-option *ngFor="let month of months" [value]="month">
+                @for (month of months; track month) {
+                <mat-option [value]="month">
                   {{ month | trailingZeros }}
                 </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
@@ -761,32 +728,30 @@
                 id="cy-end-date-day-sel"
               >
                 <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
-                <mat-option *ngFor="let day of days" [value]="day">
+                @for (day of days; track day) {
+                <mat-option [value]="day">
                   {{ day | trailingZeros }}
                 </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
-
-          <mat-error
-            class="mat-caption"
-            i18n="@@shared.invalidDate"
-            *ngIf="affiliationForm.get('endDateGroup').errors?.date"
-          >
+          @if (affiliationForm.get('endDateGroup').errors?.date) {
+          <mat-error class="mat-caption" i18n="@@shared.invalidDate">
             Invalid date
           </mat-error>
+          }
           <div class="row">
-            <mat-error
-              class="mat-caption"
-              i18n="@@shared.endDateError"
-              *ngIf="affiliationForm.errors?.invalidEndDate"
-            >
+            @if (affiliationForm.errors?.invalidEndDate) {
+            <mat-error class="mat-caption" i18n="@@shared.endDateError">
               End date must come after start date
             </mat-error>
+            }
           </div>
         </div>
       </ng-container>
-      <div class="row" *ngIf="type !== 'editorial-service'">
+      } @if (type !== 'editorial-service') {
+      <div class="row">
         <label
           for="url-input"
           class="mat-caption"
@@ -795,10 +760,8 @@
           <strong i18n="@@shared.link">Link</strong>
         </label>
       </div>
-      <div
-        class="input-container mat-hint"
-        *ngIf="type !== 'editorial-service'"
-      >
+      } @if (type !== 'editorial-service') {
+      <div class="input-container mat-hint">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="url-input"
@@ -810,21 +773,18 @@
             A link to a profile page or description of the role. Links should be
             in the full URL format e.g. http://www.website.com/page.html
           </mat-hint>
-          <mat-error
-            class="mat-caption"
-            *ngIf="affiliationForm.get('link').hasError('pattern')"
-            i18n="@@shared.invalidLink"
-          >
+          @if (affiliationForm.get('link').hasError('pattern')) {
+          <mat-error class="mat-caption" i18n="@@shared.invalidLink">
             Invalid Link
           </mat-error>
-          <mat-error
-            *ngIf="affiliationForm.get('link').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_two_thousand"
-          >
+          } @if (affiliationForm.get('link').errors?.maxlength) {
+          <mat-error i18n="@@shared.maxLength.less_than_two_thousand">
             Must be less than 2000 characters
           </mat-error>
+          }
         </mat-form-field>
       </div>
+      }
     </section>
     <section id="{{ type }} + 'visibility'">
       <form>

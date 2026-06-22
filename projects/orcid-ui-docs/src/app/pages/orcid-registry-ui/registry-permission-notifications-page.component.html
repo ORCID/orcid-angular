@@ -36,13 +36,12 @@
     </div>
 
     <div style="display: grid; gap: 12px">
-      <mat-form-field
-        appearance="outline"
-        *ngFor="let item of notifications; let i = index"
-      >
+      @for (item of notifications; track item; let i = $index) {
+      <mat-form-field appearance="outline">
         <mat-label>Notification {{ i + 1 }} text</mat-label>
         <input matInput [(ngModel)]="item.text" />
       </mat-form-field>
+      }
     </div>
   </div>
 
@@ -54,19 +53,21 @@
       (actionClicked)="onActionClicked($event)"
     >
     </orcid-registry-permission-notifications>
-    <div class="event-panel" *ngIf="lastAction">
+    @if (lastAction) {
+    <div class="event-panel">
       <p class="event-title">Last action clicked</p>
       <pre>{{ lastAction | json }}</pre>
     </div>
+    }
   </div>
 
   <div usage>
     <pre><code class="language-html">&lt;orcid-registry-permission-notifications
-  [title]="title"
-  [subtitle]="subtitle"
-  [notifications]="notifications"
-&gt;&lt;/orcid-registry-permission-notifications&gt;
-</code></pre>
+      [title]="title"
+      [subtitle]="subtitle"
+      [notifications]="notifications"
+      &gt;&lt;/orcid-registry-permission-notifications&gt;
+    </code></pre>
   </div>
 
   <div inputs>

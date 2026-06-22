@@ -1,20 +1,19 @@
-<div class="oauth-error" *ngIf="!TOGGLZ_OAUTH_AUTHORIZATION">
+@if (!TOGGLZ_OAUTH_AUTHORIZATION) {
+<div class="oauth-error">
   <img
     class="logo"
     src="./assets/vectors/orcid.logo.svg"
     alt="orcid logo"
     i18n="@@authorize.authorizeAccess"
   />
-
   <mat-card-content>
     <div id="error-message">
       <!----------------------------------------------------->
       <!-- REDIRECT URI -->
       <!-- MISSING REDIRECT URI -->
       <div role="heading" aria-level="1">
-        <div
-          *ngIf="errorDescription.indexOf('Please specify a redirect URL') >= 0"
-        >
+        @if (errorDescription.indexOf('Please specify a redirect URL') >= 0) {
+        <div>
           <ng-container i18n="@@authorize.errorMissingRedirect"
             >Error: Incorrect OAuth Link for client id</ng-container
           >
@@ -23,10 +22,10 @@
             >, missing redirect uri parameter</ng-container
           >
         </div>
+        }
         <!-- INVALID REDIRECT URI -->
-        <div
-          *ngIf="errorDescription.indexOf('Redirect URI doesn\'t match') >= 0"
-        >
+        @if (errorDescription.indexOf('Redirect URI doesn\'t match') >= 0) {
+        <div>
           <ng-container i18n="@@authorize.errorInvalidRedirect1">
             Error: The provided redirect URI</ng-container
           >
@@ -40,11 +39,12 @@
             }}).</strong
           >
         </div>
-
+        }
         <!----------------------------------------------------->
         <!-- CLIENT_ID ERRORS -->
         <!-- INVALID CLIENT ID!!! -->
-        <div *ngIf="errorDescription.indexOf('Client not found') >= 0">
+        @if (errorDescription.indexOf('Client not found') >= 0) {
+        <div>
           <ng-container i18n="@@authorize.errorInvalidClientID1"
             >Error: The provided client id</ng-container
           >
@@ -53,15 +53,16 @@
             >is invalid.</ng-container
           >
         </div>
+        }
         <!--  MISSING CLIENT ID!!! -->
-        <div
-          *ngIf="errorDescription.indexOf('Please specify a client id') >= 0"
-          i18n="@@authorize.errorMissingClientID1"
-        >
+        @if (errorDescription.indexOf('Please specify a client id') >= 0) {
+        <div i18n="@@authorize.errorMissingClientID1">
           Error: Incorrect OAuth Link, missing client id parameter.
         </div>
+        }
         <!-- LOCKED Member!!! -->
-        <div *ngIf="error === 'client_locked'">
+        @if (error === 'client_locked') {
+        <div>
           <ng-container i18n="@@authorize.errorLockedMemberID1"
             >Error: The provided request couldn't be completed because the
             integration and hence, the client</ng-container
@@ -71,9 +72,10 @@
             >is locked.</ng-container
           >
         </div>
-
+        }
         <!-- Deactivated CLIENT ID!!! -->
-        <div *ngIf="error === 'client_deactivated'">
+        @if (error === 'client_deactivated') {
+        <div>
           <ng-container i18n="@@authorize.errorLockedClientID1"
             >Error: The provided client id</ng-container
           >
@@ -82,17 +84,15 @@
             >is locked.</ng-container
           >
         </div>
+        }
         <!----------------------------------------------------->
-
         <!-- SCOPES ERRORS -->
         <!-- INVALID SCOPES: Handle by the thirty party application with the code `invalid_scope` -->
         <!-- UNAHOTURIZED SCOPES: Handle by the thirty party application with the code `invalid_scope`  -->
         <!-- MISSING SCOPES!!! -->
-        <div
-          *ngIf="
-            errorDescription.indexOf('Please specify the desired scopes') >= 0
-          "
-        >
+        @if ( errorDescription.indexOf('Please specify the desired scopes') >= 0
+        ) {
+        <div>
           <ng-container i18n="@@authorize.errorMissingScopes1"
             >Error: Incorrect OAuth Link for client id</ng-container
           >
@@ -101,15 +101,14 @@
             >, missing scope parameter.</ng-container
           >
         </div>
+        }
         <!----------------------------------------------------->
         <!-- RESPONSE TYPE ERRORS-->
         <!-- INVALID RESPONSE TYPE Handle by the thirty party application with the code `unsupported_response_type` -->
         <!-- MISSING RESPONSE TYPE -->
-        <div
-          *ngIf="
-            errorDescription.indexOf('Please specify a response type') >= 0
-          "
-        >
+        @if ( errorDescription.indexOf('Please specify a response type') >= 0 )
+        {
+        <div>
           <ng-container i18n="@@authorize.errorMissingResponseType"
             >Error: Incorrect OAuth Link for client id</ng-container
           >
@@ -118,9 +117,9 @@
             >, missing response type parameter.</ng-container
           >
         </div>
+        }
       </div>
       <mat-divider></mat-divider>
-
       <div i18n="@@authorize.error">
         You have reached this page due to an error with the application's
         integration. Please report this error to the organization that is
@@ -129,21 +128,19 @@
       <mat-divider> </mat-divider>
     </div>
   </mat-card-content>
-
   <p class="mat-subtitle-2 mat-caption">
     {{ error }} /
     {{ errorDescription }}
   </p>
 </div>
-
-<div class="oauth-error" *ngIf="TOGGLZ_OAUTH_AUTHORIZATION">
+} @if (TOGGLZ_OAUTH_AUTHORIZATION) {
+<div class="oauth-error">
   <img
     class="logo"
     src="./assets/vectors/orcid.logo.svg"
     alt="orcid logo"
     i18n="@@authorize.authorizeAccess"
   />
-
   <mat-card-content>
     <div id="error-message">
       <div i18n="@@authorize.error">
@@ -157,3 +154,4 @@
     {{ error }}: {{ errorCode }} - {{ errorDescription }}
   </p>
 </div>
+}

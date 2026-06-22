@@ -11,6 +11,7 @@ import {
   ElementRef,
   AfterViewInit,
   forwardRef,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { InboxNotification } from 'src/app/types/notifications.endpoint'
 import { uiNotificationType } from 'src/app/types/notifications.local'
@@ -41,6 +42,7 @@ import {
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NotificationComponent

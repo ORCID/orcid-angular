@@ -8,9 +8,11 @@ import {
   QueryList,
   ViewChild,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormGroup,
@@ -44,6 +46,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
     './developer-tools.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class DeveloperToolsComponent implements OnInit, OnDestroy {
@@ -220,20 +223,22 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     }
   }
   validatorAtLeastOne(): ValidatorFn {
-    return (control: FormArray) => {
-      const forbidden = control.length === 0
-      return forbidden ? { forbiddenLength: { value: control.value } } : null
+    return (control: AbstractControl) => {
+      const arr = control as FormArray
+      const forbidden = arr.length === 0
+      return forbidden ? { forbiddenLength: { value: arr.value } } : null
     }
   }
 
   validatorNotDuplicate(): ValidatorFn {
-    return (control: FormArray) => {
-      if (control.length > 1) {
+    return (control: AbstractControl) => {
+      const arr = control as FormArray
+      if (arr.length > 1) {
         // Checks if there is a duplicate in the array
-        const duplicate = control.value.some((uri, index) => {
-          return uri && control.value.indexOf(uri) !== index
+        const duplicate = arr.value.some((uri, index) => {
+          return uri && arr.value.indexOf(uri) !== index
         })
-        return duplicate ? { duplicate: { value: control.value } } : null
+        return duplicate ? { duplicate: { value: arr.value } } : null
       }
     }
   }

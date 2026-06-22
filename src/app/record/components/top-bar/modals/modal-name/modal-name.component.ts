@@ -8,6 +8,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   UntypedFormControl,
@@ -44,6 +45,7 @@ import { OrcidValidators } from '../../../../../validators'
     './modal-name.component.scss-theme.scss',
     './modal-name.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalNameComponent implements OnInit, OnDestroy {

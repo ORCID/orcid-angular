@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
+
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatTooltipModule } from '@angular/material/tooltip'
@@ -13,7 +13,6 @@ import {
   selector: 'orcid-material-buttons-directives-page',
   standalone: true,
   imports: [
-    CommonModule,
     AccentButtonDirective,
     BrandSecondaryDarkButtonDirective,
     UnderlineButtonDirective,
@@ -134,6 +133,7 @@ import {
       <pre><code>&lt;button mat-button orcidUnderlineButton&gt;Read&lt;/button&gt;</code></pre>
     </section>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       .docs-section {

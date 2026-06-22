@@ -1,4 +1,5 @@
-<app-settings-panels-data *ngIf="userSession">
+@if (userSession) {
+<app-settings-panels-data>
   <p i18n="@@account.copyTheCodeBelow">
     Copy the code below and paste it into your personal website.
   </p>
@@ -10,22 +11,21 @@
       cdkTextareaAutosize
       [readonly]="true"
     >
-    <a
-    id="cy-effective-orcid-url"
-    class="underline"
-     href="{{ userSession?.effectiveOrcidUrl }}"
-     target="orcid.widget"
-     rel="me noopener noreferrer"
-     style="vertical-align: top">
-     <img
-        src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-        style="width: 1em; margin-inline-start: 0.5em"
-        alt="ORCID iD icon"/>
-      {{ userSession.effectiveOrcidUrl }}
-    </a></textarea
+        <a
+          id="cy-effective-orcid-url"
+          class="underline"
+          href="{{ userSession?.effectiveOrcidUrl }}"
+          target="orcid.widget"
+          rel="me noopener noreferrer"
+          style="vertical-align: top">
+          <img
+            src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
+            style="width: 1em; margin-inline-start: 0.5em"
+            alt="ORCID iD icon"/>
+          {{ userSession.effectiveOrcidUrl }}
+        </a></textarea
     >
   </mat-form-field>
-
   <p>
     <strong i18n="@@account.preview">Preview</strong>
   </p>
@@ -50,3 +50,4 @@
     </i>
   </p>
 </app-settings-panels-data>
+}

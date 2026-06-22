@@ -138,9 +138,9 @@
       />
     </mat-form-field>
 
-    <mat-error class="mb-4! -mt-2!" *ngFor="let error of errors">{{
-      error
-    }}</mat-error>
+    @for (error of errors; track error) {
+    <mat-error class="mb-4! -mt-2!">{{ error }}</mat-error>
+    }
 
     <div class="button-container">
       <button

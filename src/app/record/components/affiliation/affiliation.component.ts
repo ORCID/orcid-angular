@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { OrgDisambiguated } from 'src/app/types'
 import {
   Affiliation,
@@ -11,6 +18,7 @@ import { URL_REGEXP } from '../../../constants'
   templateUrl: './affiliation.component.html',
   styleUrls: ['./affiliation.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AffiliationComponent implements OnInit {

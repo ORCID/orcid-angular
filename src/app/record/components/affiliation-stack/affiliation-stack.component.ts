@@ -6,6 +6,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { combineLatest, Observable, of, Subject } from 'rxjs'
 import { first, takeUntil, finalize } from 'rxjs/operators'
@@ -37,6 +38,7 @@ import { getAriaLabel } from 'src/app/constants'
     './affiliation-stack.component.scss',
     './affiliation-stack.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AffiliationStackComponent implements OnInit, OnDestroy {

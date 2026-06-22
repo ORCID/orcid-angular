@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject, HostBinding } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  HostBinding,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar'
 import { ScreenDirection, DisplayMessage } from 'src/app/types'
 import { PlatformInfoService } from '../../platform-info'
@@ -11,6 +17,7 @@ import { take } from 'rxjs/operators'
     './snackbar.component.scss.theme.scss',
     './snackbar.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SnackbarComponent implements OnInit {

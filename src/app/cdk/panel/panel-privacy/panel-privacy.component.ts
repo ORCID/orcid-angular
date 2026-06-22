@@ -1,4 +1,10 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 
 @Component({
@@ -8,6 +14,7 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
     './panel-privacy.component.scss',
     './panel-privacy.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PanelPrivacyComponent implements OnInit {

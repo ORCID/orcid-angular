@@ -6,6 +6,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { forkJoin, Subject, Subscription } from 'rxjs'
@@ -24,6 +25,7 @@ import { NotificationComponent } from '../notification/notification.component'
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NotificationsComponent

@@ -5,6 +5,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { ContributionRoles, Role } from '../../../types/works.endpoint'
 import {
@@ -27,6 +28,7 @@ import { MatSelect } from '@angular/material/select'
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkContributorRolesComponent implements OnInit {

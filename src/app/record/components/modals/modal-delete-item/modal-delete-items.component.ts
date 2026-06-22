@@ -4,6 +4,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { Subject } from 'rxjs'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
@@ -26,6 +27,7 @@ import { Work } from '../../../../types/record-works.endpoint'
     './modal-delete-items.component.scss',
     './modal-delete-items.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalDeleteItemsComponent implements OnInit, OnDestroy {

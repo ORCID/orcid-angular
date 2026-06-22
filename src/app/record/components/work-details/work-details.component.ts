@@ -1,4 +1,10 @@
-import { Component, ElementRef, Inject, Input } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { Work } from 'src/app/types/record-works.endpoint'
@@ -8,6 +14,7 @@ import { LanguageMap } from 'src/app/types/works.endpoint'
   selector: 'app-work-details',
   templateUrl: './work-details.component.html',
   styleUrls: ['./work-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkDetailsComponent {

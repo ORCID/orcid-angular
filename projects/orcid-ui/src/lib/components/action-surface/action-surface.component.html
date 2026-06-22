@@ -1,5 +1,6 @@
 <div class="action-surface">
-  <div class="action-surface__icon" *ngIf="icon">
+  @if (icon) {
+  <div class="action-surface__icon">
     <span
       class="action-surface__icon-symbol material-symbols-outlined"
       role="img"
@@ -8,6 +9,7 @@
       >{{ icon }}</span
     >
   </div>
+  }
 
   <div class="action-surface__body">
     <div class="action-surface__text">

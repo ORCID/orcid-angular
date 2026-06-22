@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { DiscoService } from '../../../core/disco/disco.service'
@@ -19,6 +19,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
     './link-account.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class LinkAccountComponent implements OnInit {

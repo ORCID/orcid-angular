@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { SmsPocService } from 'src/app/core/sms-poc/sms-poc.service'
 import { SmsPocResponse } from 'src/app/types/sms-poc.endpoint'
@@ -7,6 +7,7 @@ import { SmsPocResponse } from 'src/app/types/sms-poc.endpoint'
   selector: 'app-sms-poc',
   standalone: false,
   templateUrl: './sms-poc.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./sms-poc.component.scss'],
 })
 export class SmsPocComponent implements OnInit {

@@ -1,4 +1,5 @@
-<div class="container no-padding" *ngIf="roles?.controls?.length > 0">
+@if (roles?.controls?.length > 0) {
+<div class="container no-padding">
   <div class="row title">
     <label for="cy-role" class="orc-font-body">
       <h3
@@ -11,17 +12,14 @@
     </label>
   </div>
   <ng-container formArrayName="roles">
-    <ng-container
-      *ngFor="let role of roles?.controls; index as i"
-      [formGroupName]="i"
-    >
+    @for (role of roles?.controls; track role; let i = $index) {
+    <ng-container [formGroupName]="i">
       <div class="row role">
         <div class="col l9 m8 s4 no-gutters orc-font-body-small">
-          <ng-container *ngIf="role.disabled">
-            {{ role.get('role').value | roleTranslation | titlecase }}
-          </ng-container>
+          @if (role.disabled) {
+          {{ role.get('role').value | roleTranslation | titlecase }}
+          } @if (!role.disabled) {
           <mat-form-field
-            *ngIf="!role.disabled"
             appearance="outline"
             class="mat-form-field-min"
             [ngClass]="{
@@ -34,26 +32,28 @@
               placeholder="{{ ngOrcidSelectRole }}"
               formControlName="role"
             >
+              @for (contributionRole of contributionRoles; track
+              contributionRole) {
               <mat-option
-                *ngFor="let contributionRole of contributionRoles"
                 [value]="contributionRole.key"
                 [disabled]="contributionRole.key | disableRole : role"
               >
                 {{ contributionRole.translation | titlecase }}
               </mat-option>
+              }
             </mat-select>
-            <mat-error
-              *ngIf="role.get('role').errors?.unique"
-              i18n="@@works.roleNotDuplicated"
-            >
+            @if (role.get('role').errors?.unique) {
+            <mat-error i18n="@@works.roleNotDuplicated">
               Role cannot be duplicated
             </mat-error>
+            }
           </mat-form-field>
+          }
         </div>
         <div class="col l3 delete-button">
+          @if (role.disabled || (!role.disabled && i !== 0)) {
           <button
             mat-icon-button
-            *ngIf="role.disabled || (!role.disabled && i !== 0)"
             (click)="deleteRole(i)"
             [attr.aria-label]="
               deleteLabel +
@@ -65,12 +65,15 @@
               >delete
             </mat-icon>
           </button>
+          }
         </div>
       </div>
-      <hr class="dashed-line" *ngIf="role.disabled" />
+      @if (role.disabled) {
+      <hr class="dashed-line" />
+      }
     </ng-container>
+    }
   </ng-container>
-
   <div class="row">
     <a
       class="underline"
@@ -83,3 +86,4 @@
     </a>
   </div>
 </div>
+}

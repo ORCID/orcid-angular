@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { isEmpty } from 'lodash'
@@ -23,6 +30,7 @@ import { GroupingSuggestions } from 'src/app/types/works.endpoint'
     './work-featured-stack-group.component.scss',
     './work-featured-stack-group.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkFeaturedStackGroupComponent implements OnInit {

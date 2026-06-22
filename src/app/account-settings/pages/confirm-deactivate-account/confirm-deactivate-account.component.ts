@@ -1,4 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import {
   UntypedFormControl,
   UntypedFormGroup,
@@ -18,6 +23,7 @@ import {
   selector: 'app-confirm-deactivate-account',
   standalone: false,
   templateUrl: './confirm-deactivate-account.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     './confirm-deactivate-account.component.scss',
     './confirm-deactivate-account.component.scss-theme.scss',

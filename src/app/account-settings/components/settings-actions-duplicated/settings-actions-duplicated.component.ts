@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   FormGroupDirective,
@@ -42,6 +43,7 @@ export class NeverShowErrorMatcher implements ErrorStateMatcher {
     './settings-actions-duplicated.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsActionsDuplicatedComponent implements OnInit, OnDestroy {

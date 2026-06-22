@@ -1,4 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 import {
   InboxNotificationPermission,
@@ -12,6 +18,7 @@ import { InboxService } from '../../../core/inbox/inbox.service'
   templateUrl: './notification-permission.component.html',
   styleUrls: ['./notification-permission.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NotificationPermissionComponent implements OnInit {

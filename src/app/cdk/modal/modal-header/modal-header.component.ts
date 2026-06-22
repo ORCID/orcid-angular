@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
@@ -18,6 +19,7 @@ import { Subject } from 'rxjs'
     './modal-header.component.scss',
     './modal-header.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalHeaderComponent implements OnInit, OnDestroy {

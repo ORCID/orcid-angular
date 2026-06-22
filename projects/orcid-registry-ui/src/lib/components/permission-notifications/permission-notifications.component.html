@@ -1,7 +1,8 @@
 <orcid-action-surface-container [title]="title" [subtitle]="subtitle">
   <div class="permission-notifications__list">
+    @for (notification of visibleNotifications; track notification; let index =
+    $index) {
     <orcid-action-surface
-      *ngFor="let notification of visibleNotifications; let index = index"
       [icon]="notification.icon"
       [iconColor]="
         notification.iconColor ??
@@ -10,49 +11,46 @@
     >
       <span text [innerHTML]="getTrustedHtml(notification.text)"></span>
       <ng-container actions>
-        <ng-container
-          *ngFor="let action of notification.actions; let actionIndex = index"
+        @for (action of notification.actions; track action; let actionIndex =
+        $index) { @switch (action.variant) { @case ('flat') {
+        <button
+          mat-flat-button
+          [attr.aria-label]="action.ariaLabel ?? action.label"
+          [orcidBrandSecondaryDarkButton]="!action.color"
+          [color]="action.color"
+          [disabled]="action.disabled"
+          [ngClass]="{
+            'registry-underline-button': action.underline
+          }"
+          (click)="onActionClick(notification, index, action, actionIndex)"
         >
-          <ng-container [ngSwitch]="action.variant">
-            <button
-              *ngSwitchCase="'flat'"
-              mat-flat-button
-              [attr.aria-label]="action.ariaLabel ?? action.label"
-              [orcidBrandSecondaryDarkButton]="!action.color"
-              [color]="action.color"
-              [disabled]="action.disabled"
-              [ngClass]="{
-                'registry-underline-button': action.underline
-              }"
-              (click)="onActionClick(notification, index, action, actionIndex)"
-            >
-              {{ action.label }}
-            </button>
-            <button
-              *ngSwitchCase="'stroked'"
-              mat-stroked-button
-              [attr.aria-label]="action.ariaLabel ?? action.label"
-              [color]="action.color"
-              [disabled]="action.disabled"
-              [ngClass]="{ 'registry-underline-button': action.underline }"
-              (click)="onActionClick(notification, index, action, actionIndex)"
-            >
-              {{ action.label }}
-            </button>
-            <button
-              *ngSwitchDefault
-              mat-button
-              [attr.aria-label]="action.ariaLabel ?? action.label"
-              [color]="action.color"
-              [disabled]="action.disabled"
-              [orcidUnderlineButton]="action.underline"
-              (click)="onActionClick(notification, index, action, actionIndex)"
-            >
-              {{ action.label }}
-            </button>
-          </ng-container>
-        </ng-container>
+          {{ action.label }}
+        </button>
+        } @case ('stroked') {
+        <button
+          mat-stroked-button
+          [attr.aria-label]="action.ariaLabel ?? action.label"
+          [color]="action.color"
+          [disabled]="action.disabled"
+          [ngClass]="{ 'registry-underline-button': action.underline }"
+          (click)="onActionClick(notification, index, action, actionIndex)"
+        >
+          {{ action.label }}
+        </button>
+        } @default {
+        <button
+          mat-button
+          [attr.aria-label]="action.ariaLabel ?? action.label"
+          [color]="action.color"
+          [disabled]="action.disabled"
+          [orcidUnderlineButton]="action.underline"
+          (click)="onActionClick(notification, index, action, actionIndex)"
+        >
+          {{ action.label }}
+        </button>
+        } } }
       </ng-container>
     </orcid-action-surface>
+    }
   </div>
 </orcid-action-surface-container>

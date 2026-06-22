@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { ApplicationRoutes } from '../../../constants'
 import { Router } from '@angular/router'
 import { first, takeUntil } from 'rxjs/operators'
@@ -20,6 +27,7 @@ import { Status } from '../../../types/two-factor.endpoint'
     './settings-security-two-factor-auth.component.scss',
     './settings-security-two-factor-auth.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsSecurityTwoFactorAuthComponent implements OnInit {

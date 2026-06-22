@@ -11,7 +11,8 @@
     >Cancel</a
   >
 </div>
-<ng-container *ngIf="externalIdForm" [formGroup]="externalIdForm">
+@if (externalIdForm) {
+<ng-container [formGroup]="externalIdForm">
   <!-- Work identifier type -->
   <div>
     <div class="row">
@@ -42,27 +43,26 @@
           formControlName="externalIdentifierType"
           (selectionChange)="updateExternal($event)"
         >
-          <mat-option *ngFor="let item of workIdTypes" [value]="item.name">
+          @for (item of workIdTypes; track item) {
+          <mat-option [value]="item.name">
             {{ item.description }}
           </mat-option>
+          }
         </mat-select>
         <mat-hint i18n="@@works.typeOfIdentifier"
           >The type of identifier associated with the work, such as an ISBN, DOI
           or PMID.
         </mat-hint>
-        <mat-error
-          *ngIf="
-            externalIdForm.get('externalIdentifierType').hasError('required') &&
-            externalIdForm.get('externalIdentifierType').touched
-          "
-          i18n="@@works.pleaseSelectIdentifierType"
+        @if ( externalIdForm.get('externalIdentifierType').hasError('required')
+        && externalIdForm.get('externalIdentifierType').touched ) {
+        <mat-error i18n="@@works.pleaseSelectIdentifierType"
           >Please select an identifier type</mat-error
         >
+        }
       </mat-form-field>
     </div>
   </div>
   <!-- Work identifier value -->
-
   <div>
     <div class="row">
       <label
@@ -91,81 +91,52 @@
         formControlName="externalIdentifierId"
         [errorStateMatcher]="workExternalIdErrorMatcher"
       />
-
-      <mat-error
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('validFormat') &&
-          externalIdForm.get('externalIdentifierId').touched
-        "
-      >
+      @if ( externalIdForm.get('externalIdentifierId').hasError('validFormat')
+      && externalIdForm.get('externalIdentifierId').touched ) {
+      <mat-error>
         <ng-container i18n="@@works.validFormat">
           Invalid id for the selected identifier type
         </ng-container>
       </mat-error>
-
-      <mat-icon
-        matSuffix
-        [matTooltip]="invalidISBNTooltip"
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('invalidISBN')
-        "
-        >warning</mat-icon
-      >
-
-      <mat-hint
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('invalidISBN')
-        "
-      >
+      } @if ( externalIdForm.get('externalIdentifierId').hasError('invalidISBN')
+      ) {
+      <mat-icon matSuffix [matTooltip]="invalidISBNTooltip">warning</mat-icon>
+      } @if ( externalIdForm.get('externalIdentifierId').hasError('invalidISBN')
+      ) {
+      <mat-hint>
         <ng-container i18n="@@works.invalidISBN">
           We are unable to validate this identifier. Please check it is correct
           before saving.
         </ng-container>
       </mat-hint>
-
-      <mat-icon
-        matSuffix
-        [matTooltip]="unResolvedTooltip"
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('unResolved')
-        "
-        >warning</mat-icon
-      >
-
-      <mat-hint
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('unResolved')
-        "
-      >
+      } @if ( externalIdForm.get('externalIdentifierId').hasError('unResolved')
+      ) {
+      <mat-icon matSuffix [matTooltip]="unResolvedTooltip">warning</mat-icon>
+      } @if ( externalIdForm.get('externalIdentifierId').hasError('unResolved')
+      ) {
+      <mat-hint>
         <ng-container i18n="@@works.unResolved">
           We couldn't find a resource that matches the identifier you entered.
           Please check the value or enter a valid link to the resource.
         </ng-container>
       </mat-hint>
-
-      <mat-hint
-        *ngIf="
-          !externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
-          !externalIdForm.get('externalIdentifierId').hasError('invalidISBN')
-        "
-      >
+      } @if ( !externalIdForm.get('externalIdentifierId').hasError('unResolved')
+      && !externalIdForm.get('externalIdentifierId').hasError('invalidISBN') ) {
+      <mat-hint>
         <ng-container i18n="@@works.identifierAssociated"
           >The identifier associated with the work. The format will depend on
           the type of identifier selected.</ng-container
         >
       </mat-hint>
-      <mat-error
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('required') &&
-          externalIdForm.get('externalIdentifierId').touched
-        "
-        i18n="@@works.pleaseEnterExternalID"
+      } @if ( externalIdForm.get('externalIdentifierId').hasError('required') &&
+      externalIdForm.get('externalIdentifierId').touched ) {
+      <mat-error i18n="@@works.pleaseEnterExternalID"
         >Please enter an external ID</mat-error
       >
+      }
     </mat-form-field>
   </div>
   <!-- Work identifier url value -->
-
   <div>
     <div class="row">
       <label
@@ -190,22 +161,16 @@
         matInput
         formControlName="externalIdentifierUrl"
       />
-
       <mat-hint i18n="@@works.urlIdentifierHint">
         The URL that the identifier resolves to, for example
         https://doi.org/10.23640/07243.c.4232246
       </mat-hint>
-      <mat-error
-        *ngIf="externalIdForm.get('externalIdentifierUrl').hasError('pattern')"
-        i18n="@@works.invalidUrl"
-      >
-        Invalid url
-      </mat-error>
+      @if (externalIdForm.get('externalIdentifierUrl').hasError('pattern')) {
+      <mat-error i18n="@@works.invalidUrl"> Invalid url </mat-error>
+      }
     </mat-form-field>
   </div>
-
   <!-- Work identifier relationship -->
-
   <div>
     <div class="row">
       <strong
@@ -221,49 +186,48 @@
         >
       </strong>
     </div>
-
     <mat-radio-group
       [id]="'external-relationship-input-' + index"
       appearance="outline"
       class="mat-form-field-min"
       formControlName="externalRelationship"
     >
-      <ng-container *ngFor="let value of workRelationships">
-        <mat-radio-button
-          [value]="value"
-          [aria-label]="
-            setLabel +
-            ' ' +
-            externalIdForm.get('externalIdentifierType').value +
-            ' ' +
-            asLabel +
-            ' ' +
-            (value | recordWorkRelationshipLabel)
-          "
-          >{{ value | recordWorkRelationshipLabel }}
-        </mat-radio-button>
-        <mat-hint class="mat-caption"
-          >{{ value | recordWorkRelationshipHintLabel }}
-        </mat-hint>
-      </ng-container>
+      @for (value of workRelationships; track value) {
+      <mat-radio-button
+        [value]="value"
+        [aria-label]="
+          setLabel +
+          ' ' +
+          externalIdForm.get('externalIdentifierType').value +
+          ' ' +
+          asLabel +
+          ' ' +
+          (value | recordWorkRelationshipLabel)
+        "
+        >{{ value | recordWorkRelationshipLabel }}
+      </mat-radio-button>
+      <mat-hint class="mat-caption"
+        >{{ value | recordWorkRelationshipHintLabel }}
+      </mat-hint>
+      }
     </mat-radio-group>
-
+    @if (externalIdForm.hasError('funded_by_invalid')) {
     <mat-error
       class="mat-caption error-out-input-context fundingIdErrors"
       i18n="@@works.onlyIdentifierTypesFundedBy"
-      *ngIf="externalIdForm.hasError('funded_by_invalid')"
     >
       Only identifier types "grant number", "doi", "uri" or "proposal id" are
       allowed when using "funded-by" identifiers</mat-error
     >
-
+    } @if (externalIdForm.hasError('version_of_invalid')) {
     <mat-error
       class="mat-caption error-out-input-context fundingIdErrors"
       i18n="@@works.atLestOneSelfIdRequired"
-      *ngIf="externalIdForm.hasError('version_of_invalid')"
     >
       At least one "self" identifier is required when using "version-of"
       identifiers</mat-error
     >
+    }
   </div>
 </ng-container>
+}

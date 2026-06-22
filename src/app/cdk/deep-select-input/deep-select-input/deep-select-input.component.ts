@@ -7,6 +7,7 @@ import {
   Self,
   ViewChild,
   forwardRef,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   MAT_MENU_DEFAULT_OPTIONS,
@@ -50,6 +51,7 @@ export interface DeepSelectMenu {
       useValue: { overlayPanelClass: 'menu-overlay-pane-overwrite' },
     },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class DeepSelectInputComponent implements ControlValueAccessor {

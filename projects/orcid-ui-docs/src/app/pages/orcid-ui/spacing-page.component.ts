@@ -1,9 +1,10 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'orcid-spacing-page',
   standalone: true,
   templateUrl: './spacing-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './spacing-page.component.scss',
 })
 export class SpacingPageComponent {

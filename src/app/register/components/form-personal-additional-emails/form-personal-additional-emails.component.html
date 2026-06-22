@@ -1,11 +1,8 @@
 <ng-container [formGroup]="additionalEmails">
-  <div
-    class="input-container margin-top-12"
-    *ngFor="
-      let additionalEmailControl of additionalEmails?.controls | keyvalue;
-      index as i
-    "
-  >
+  @for ( additionalEmailControl of
+  $safeNavigationMigration(additionalEmails?.controls) | keyvalue; track
+  additionalEmailControl; let i = $index) {
+  <div class="input-container margin-top-12">
     <mat-label
       class="orc-font-small-print"
       id="additional-email-label"
@@ -32,55 +29,46 @@
         type="email"
       />
     </mat-form-field>
-    <mat-error
-      *ngIf="
-        additionalEmailsTouched &&
-        (additionalEmails.hasError('email', additionalEmailControl.key) ||
-          additionalEmails.hasError('pattern', additionalEmailControl.key))
-      "
-      i18n="@@register.invalidEmail2"
-    >
+    @if ( additionalEmailsTouched && (additionalEmails.hasError('email',
+    additionalEmailControl.key) || additionalEmails.hasError('pattern',
+    additionalEmailControl.key)) ) {
+    <mat-error i18n="@@register.invalidEmail2">
       Please enter a valid email address, for example joe&#64;institution.edu
     </mat-error>
-    <ng-container *ngIf="additionalEmailsTouched">
-      <mat-error
-        *ngFor="
-          let error of getControlErrorAtFormLevel(
-            additionalEmailControl.value,
-            'backendErrors'
-          )
-        "
-      >
-        <app-backend-error
-          [showEmailAlreadyExistUntilNextButtonWasClicked]="true"
-          [nextButtonWasClicked]="nextButtonWasClicked"
-          [errorCode]="error"
-          [value]="additionalEmailControl.value.value"
-        ></app-backend-error>
-      </mat-error>
-    </ng-container>
-
+    } @if (additionalEmailsTouched) { @for ( error of
+    getControlErrorAtFormLevel( additionalEmailControl.value, 'backendErrors' )
+    ; track error) {
+    <mat-error>
+      <app-backend-error
+        [showEmailAlreadyExistUntilNextButtonWasClicked]="true"
+        [nextButtonWasClicked]="nextButtonWasClicked"
+        [errorCode]="error"
+        [value]="additionalEmailControl.value.value"
+      ></app-backend-error>
+    </mat-error>
+    } }
     <!-- <button
-      *ngIf="i == 0"
-      mat-icon-button
-      [attr.aria-label]="labelInfoAboutEmails"
-      type="button"
-      [mdePopoverTriggerFor]="namesPopover"
-      mdePopoverTriggerOn="click"
-      #additionalEmailsPopoverTrigger="mdePopoverTrigger"
-    >
-      <mat-icon class="material-icons-outlined large-material-icon"
-        >help_outline</mat-icon
-      >
-    </button> -->
+        *ngIf="i == 0"
+        mat-icon-button
+        [attr.aria-label]="labelInfoAboutEmails"
+        type="button"
+        [mdePopoverTriggerFor]="namesPopover"
+        mdePopoverTriggerOn="click"
+        #additionalEmailsPopoverTrigger="mdePopoverTrigger"
+        >
+        <mat-icon class="material-icons-outlined large-material-icon"
+          >help_outline</mat-icon
+          >
+        </button> -->
     <!-- <button
-      *ngIf="i > 0"
-      mat-icon-button
-      [attr.aria-label]="labelDeleteEmail"
-      type="button"
-      (click)="deleteEmailInput(additionalEmailControl.key)"
-    >
-      <mat-icon>remove_circle_outline</mat-icon>
-    </button> -->
+        *ngIf="i > 0"
+        mat-icon-button
+        [attr.aria-label]="labelDeleteEmail"
+        type="button"
+        (click)="deleteEmailInput(additionalEmailControl.key)"
+        >
+        <mat-icon>remove_circle_outline</mat-icon>
+      </button> -->
   </div>
+  }
 </ng-container>

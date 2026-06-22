@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Config } from 'src/app/types/config.endpoint'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
@@ -7,6 +7,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class StatisticsComponent implements OnInit {

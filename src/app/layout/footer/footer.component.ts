@@ -1,4 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 
@@ -9,6 +14,7 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss-theme.scss', './footer.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FooterComponent implements OnInit {

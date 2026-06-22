@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
+
 import { FormsModule } from '@angular/forms'
 import { MatSelectModule } from '@angular/material/select'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -13,7 +13,6 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
   selector: 'orcid-alert-message-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -24,6 +23,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
     DocumentationPageComponent,
   ],
   styleUrls: ['./alert-message-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './alert-message-page.component.html',
 })
 export class AlertMessagePageComponent {

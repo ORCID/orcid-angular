@@ -214,9 +214,11 @@ export class UserService {
           // Take a lazy approach:
           // and empty trigger will be created, to not call the any endpoint until the next `userStatus` call responds.
           startWith(
-            !this.loggingStateComesFromTheServer
-              ? { loggedIn: true, checkTrigger: { timerUpdate: -1 } }
-              : {}
+            (
+              !this.loggingStateComesFromTheServer
+                ? { loggedIn: true, checkTrigger: { timerUpdate: -1 } }
+                : {}
+            ) as UserSessionUpdateParameters
           ),
           // Ignore empty triggers.
           filter(

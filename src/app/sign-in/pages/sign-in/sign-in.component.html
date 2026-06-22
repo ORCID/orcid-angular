@@ -6,17 +6,19 @@
           appearance="outlined"
           class="orcid-wizard sign-in-wrapper"
           [ngClass]="{
-            mobile: platform?.columns4
+            mobile: $safeNavigationMigration(platform?.columns4)
           }"
         >
+          @if (loading) {
           <mat-progress-bar
             role="heading"
             aria-level="2"
-            *ngIf="loading"
             mode="indeterminate"
           ></mat-progress-bar>
+          }
           <mat-card-header>
-            <mat-card-title role="heading" aria-level="1" *ngIf="!isOauthError">
+            @if (!isOauthError) {
+            <mat-card-title role="heading" aria-level="1">
               <div class="icon">
                 <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
               </div>
@@ -41,44 +43,44 @@
                 </div>
               </div>
             </mat-card-title>
+            }
           </mat-card-header>
           <mat-card-content>
-            <ng-container
-              *ngIf="(!isLoggedIn && !isOauthError) || isForceLogin"
+            @if ((!isLoggedIn && !isOauthError) || isForceLogin) {
+            <app-form-sign-in
+              (loading)="loading = $event"
+              [email]="email"
+              #formSignInComponent
+              [signInType]="signInType"
+              (show2FAEmitter)="show2FAEmitter($event)"
+              (isOauthError)="isOauthError = $event"
+              (errorDescription)="errorDescription = $event"
             >
-              <app-form-sign-in
-                (loading)="loading = $event"
-                [email]="email"
-                #formSignInComponent
-                [signInType]="signInType"
-                (show2FAEmitter)="show2FAEmitter($event)"
-                (isOauthError)="isOauthError = $event"
-                (errorDescription)="errorDescription = $event"
+              @if (!show2FA) {
+              <button
+                mat-raised-button
+                (click)="formSignInComponent.onSubmit()"
+                class="row sign-in-button sign-in-to-orcid-button mat-elevation-z0"
+                type="submit"
+                [disabled]="loading"
+                i18n="@@ngOrcid.signin.signInToOrcid"
+                id="signin-button"
               >
-                <button
-                  mat-raised-button
-                  (click)="formSignInComponent.onSubmit()"
-                  class="row sign-in-button sign-in-to-orcid-button mat-elevation-z0"
-                  type="submit"
-                  [disabled]="loading"
-                  *ngIf="!show2FA"
-                  i18n="@@ngOrcid.signin.signInToOrcid"
-                  id="signin-button"
-                >
-                  Sign in to ORCID
-                </button>
-              </app-form-sign-in>
-              <div class="separator orc-font-body">
-                {{ orLabel | uppercase }}
-              </div>
-              <app-social></app-social>
-            </ng-container>
+                Sign in to ORCID
+              </button>
+              }
+            </app-form-sign-in>
+            <div class="separator orc-font-body">
+              {{ orLabel | uppercase }}
+            </div>
+            <app-social></app-social>
+            } @if (isLoggedIn && !isForceLogin && !isOauthError) {
             <app-logged-in
-              *ngIf="isLoggedIn && !isForceLogin && !isOauthError"
               [displayName]="displayName"
               [realUserOrcid]="realUserOrcid"
             >
             </app-logged-in>
+            }
           </mat-card-content>
         </mat-card>
       </div>

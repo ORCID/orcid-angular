@@ -12,17 +12,16 @@
       <ng-container i18n="@@ngOrcid.search.advanceSearch"
         >ADVANCED SEARCH</ng-container
       >
-      <mat-icon aria-hidden="true" *ngIf="!showAdvanceSearch"
-        >expand_more</mat-icon
-      >
-      <mat-icon aria-hidden="true" *ngIf="showAdvanceSearch"
-        >expand_less</mat-icon
-      >
+      @if (!showAdvanceSearch) {
+      <mat-icon aria-hidden="true">expand_more</mat-icon>
+      } @if (showAdvanceSearch) {
+      <mat-icon aria-hidden="true">expand_less</mat-icon>
+      }
     </button>
   </div>
 
+  @if (showAdvanceSearch) {
   <form
-    *ngIf="showAdvanceSearch"
     [dir]="tempFixForOutlineFormInputCalculationIssue_Direction"
     [formGroup]="advanceSearch"
     (ngSubmit)="search()"
@@ -40,11 +39,11 @@
         <mat-label i18n="@@ngOrcid.search.institutionName"
           >Institution Name</mat-label
         >
-        <mat-hint
-          i18n="@@ngOrcid.search.institutionNamePlaceholder"
-          *ngIf="isAPhoneScreen"
+        @if (isAPhoneScreen) {
+        <mat-hint i18n="@@ngOrcid.search.institutionNamePlaceholder"
           >affiliation or organization ID</mat-hint
         >
+        }
         <input
           formControlName="institution"
           matInput
@@ -61,7 +60,6 @@
         <input matInput formControlName="keyword" />
       </mat-form-field>
     </div>
-
     <div class="row checkbox">
       <mat-checkbox
         class="col"
@@ -71,7 +69,6 @@
         >Also search other name fields</mat-checkbox
       >
     </div>
-
     <div class="row orcidInput">
       <mat-form-field appearance="outline" class="col l3 m4 s4 two-line-hint">
         <mat-label i18n="@@ngOrcid.search.orcidID">ORCID ID</mat-label>
@@ -81,7 +78,6 @@
         </mat-error>
       </mat-form-field>
     </div>
-
     <div class="row">
       <div class="col l3 m4 s4">
         <button
@@ -94,4 +90,5 @@
       </div>
     </div>
   </form>
+  }
 </div>

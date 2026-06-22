@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
+
 import { FormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -16,7 +16,6 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
   selector: 'orcid-action-surface-container-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -28,6 +27,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
     DocumentationPageComponent,
   ],
   styleUrls: ['./action-surface-container-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './action-surface-container-page.component.html',
 })
 export class ActionSurfaceContainerPageComponent {

@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core'
+
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { MatTooltipModule } from '@angular/material/tooltip'
@@ -15,13 +15,13 @@ import { AccentButtonDirective } from '@orcid/ui'
   selector: 'app-record-edit-button',
   standalone: true,
   imports: [
-    CommonModule,
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
     AccentButtonDirective,
   ],
   templateUrl: 'record-edit-button.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['record-edit-button.component.scss'],
 })
 export class RecordEditButtonComponent {

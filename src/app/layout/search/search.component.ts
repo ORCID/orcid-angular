@@ -4,6 +4,7 @@ import {
   Inject,
   ChangeDetectorRef,
   Input,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
 import { WINDOW } from 'src/app/cdk/window'
@@ -18,6 +19,7 @@ import { ApplicationRoutes } from '../../constants'
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SearchComponent implements OnInit {

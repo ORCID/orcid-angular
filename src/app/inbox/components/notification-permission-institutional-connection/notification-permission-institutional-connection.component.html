@@ -19,7 +19,7 @@
 <a
   target="_blank"
   rel="noopener noreferrer"
-  [href]="notification?.authorizationUrl.uri"
+  [href]="$safeNavigationMigration(notification?.authorizationUrl.uri)"
 >
   <button
     mat-raised-button

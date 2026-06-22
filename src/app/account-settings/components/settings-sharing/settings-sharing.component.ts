@@ -1,10 +1,16 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-settings-sharing',
   templateUrl: './settings-sharing.component.html',
   styleUrls: ['./settings-sharing.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsSharingComponent implements OnInit {

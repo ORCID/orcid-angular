@@ -1,4 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { listAnimation } from 'src/app/animations'
 import { NewsService } from 'src/app/core'
 
@@ -10,6 +15,7 @@ import { WINDOW } from 'src/app/cdk/window'
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss-theme.scss', './news.component.scss'],
   animations: [listAnimation],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NewsComponent implements OnInit {
@@ -27,8 +33,8 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._news.getNews().subscribe((data: any[]) => {
-      this.news = data.slice(0, 3)
+    this._news.getNews().subscribe((data) => {
+      this.news = (data as any[]).slice(0, 3)
     })
   }
 

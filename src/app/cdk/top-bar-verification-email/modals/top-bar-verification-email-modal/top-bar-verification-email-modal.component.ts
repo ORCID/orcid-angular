@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
@@ -14,6 +19,7 @@ import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.se
     './top-bar-verification-email-modal.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TopBarVerificationEmailModalComponent

@@ -4,6 +4,7 @@ import {
   Inject,
   OnDestroy,
   OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -30,6 +31,7 @@ import { WINDOW } from '../../../../../cdk/window'
     './modal-biography.component.scss-theme.scss',
     './modal-biography.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalBiographyComponent implements OnInit, OnDestroy {

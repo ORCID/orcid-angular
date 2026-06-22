@@ -5,6 +5,7 @@ import {
   Inject,
   Input,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
@@ -44,6 +45,7 @@ export interface ShareEmailsDomainsComponentDialogOutput
     '../interstitial-component/share-emails-domains.component.scss',
     '../interstitial-component/share-emails-domains.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsComponent {

@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { first, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
@@ -19,6 +24,7 @@ import { RecordResearchResourceService } from '../../../core/record-research-res
     './research-resource.component.scss',
     './research-resource.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ResearchResourceComponent implements OnInit {

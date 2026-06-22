@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core'
-import { NgIf } from '@angular/common'
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
 
 /**
  * Action surface for a compact message with projected actions.
@@ -22,8 +21,9 @@ import { NgIf } from '@angular/common'
 @Component({
   selector: 'orcid-action-surface',
   standalone: true,
-  imports: [NgIf],
+  imports: [],
   templateUrl: './action-surface.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./action-surface.component.scss'],
 })
 export class ActionSurfaceComponent {

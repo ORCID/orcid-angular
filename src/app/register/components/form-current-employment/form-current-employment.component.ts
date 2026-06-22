@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   FormBuilder,
@@ -13,6 +14,7 @@ import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NgForm,
+  AbstractControl,
   UntypedFormControl,
   UntypedFormGroup,
   ValidatorFn,
@@ -76,6 +78,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FormCurrentEmploymentComponent
@@ -301,7 +304,8 @@ export class FormCurrentEmploymentComponent
   }
 
   mustBeOrganizationType(): ValidatorFn {
-    return (formGroup: UntypedFormGroup) => {
+    return (control: AbstractControl) => {
+      const formGroup = control as UntypedFormGroup
       if (formGroup.value && typeof formGroup.value === 'string') {
         return { mustBeOrganizationType: true }
       }

@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import {
   InboxNotificationAmended,
@@ -11,6 +16,7 @@ import { chain } from 'lodash'
   templateUrl: './notification-your-record-amended.component.html',
   styleUrls: ['./notification-your-record-amended.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NotificationYourRecordAmendedComponent implements OnInit {

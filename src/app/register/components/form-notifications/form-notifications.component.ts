@@ -1,4 +1,9 @@
-import { Component, forwardRef, OnInit } from '@angular/core'
+import {
+  Component,
+  forwardRef,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -30,6 +35,7 @@ import { BaseForm } from '../BaseForm'
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FormNotificationsComponent extends BaseForm implements OnInit {

@@ -4,6 +4,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subject } from 'rxjs'
@@ -20,6 +21,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
     './settings-actions-deactivate.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {

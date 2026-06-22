@@ -1,4 +1,5 @@
-<div class="container" *ngIf="data && data.duplicateRecords">
+@if (data && data.duplicateRecords) {
+<div class="container">
   <h1 class="mat-headline-4 modal-title">
     {{ data.titleLabel || titleLabel }}
   </h1>
@@ -13,7 +14,6 @@
         {{ data.contactLabel || contactLabel }}
       </a>
     </p>
-
     <table class="mat-subtitle-1">
       <tr>
         <th>{{ data.firstNameLabel || firstNameLabel }}</th>
@@ -25,7 +25,8 @@
           {{ data.viewRecordLabel || viewRecordLabel }}
         </th>
       </tr>
-      <tr *ngFor="let record of data.duplicateRecords">
+      @for (record of data.duplicateRecords; track record) {
+      <tr>
         <td>{{ record['given-names'] }}</td>
         <td>{{ record['family-names'] }}</td>
         <td>{{ record['institution-name'].join(', ') }}</td>
@@ -39,6 +40,7 @@
           </button>
         </td>
       </tr>
+      }
     </table>
   </div>
   <div class="fixed-container">
@@ -60,3 +62,4 @@
     </button>
   </div>
 </div>
+}

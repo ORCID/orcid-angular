@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
 import { OrcidValidators } from 'src/app/validators'
@@ -9,6 +9,7 @@ import { PasswordRecoveryService } from 'src/app/core/password-recovery/password
   selector: 'app-password-recovery',
   standalone: false,
   templateUrl: './password-recovery.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     './password-recovery.component.scss',
     './password-recovery.component.scss-theme.scss',

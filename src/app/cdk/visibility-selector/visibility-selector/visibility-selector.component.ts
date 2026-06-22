@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnInit, forwardRef } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  forwardRef,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { WINDOW } from '../../window'
@@ -17,6 +24,7 @@ import { WINDOW } from '../../window'
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class VisibilitySelectorComponent
@@ -98,8 +106,8 @@ export class VisibilitySelectorComponent
 
   updateDisableOptions(value: VisibilityStrings[]) {
     Object.keys(this.disableOptions).forEach(
-      (visibility: VisibilityStrings) => {
-        value.includes(visibility)
+      (visibility) => {
+        value.includes(visibility as VisibilityStrings)
           ? (this.disableOptions[visibility] = true)
           : (this.disableOptions[visibility] = false)
       }

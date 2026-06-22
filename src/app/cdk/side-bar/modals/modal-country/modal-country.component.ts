@@ -6,6 +6,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
@@ -29,6 +30,7 @@ import {
     './modal-country.component.scss-theme.scss',
     './modal-country.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalCountryComponent implements OnInit, OnDestroy {

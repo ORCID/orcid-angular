@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -28,6 +35,7 @@ import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
   selector: 'app-research-resources',
   templateUrl: './research-resource-stacks-group.component.html',
   styleUrls: ['./research-resource-stacks-group.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ResearchResourceStacksGroupComponent implements OnInit {

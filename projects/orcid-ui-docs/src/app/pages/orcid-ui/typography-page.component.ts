@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
 
 export interface TypeScaleItem {
   sizeVar: string
@@ -17,6 +17,7 @@ export interface TypeScaleItem {
   standalone: true,
   imports: [],
   templateUrl: './typography-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './typography-page.component.scss',
 })
 export class TypographyPageComponent {

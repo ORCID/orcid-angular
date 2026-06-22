@@ -1,4 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import {
   UntypedFormControl,
   UntypedFormGroup,
@@ -13,6 +19,7 @@ import { OrcidValidators } from 'src/app/validators'
   templateUrl: './deactivated.component.html',
   styleUrls: ['./deactivated.component.scss'],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class DeactivatedComponent implements OnInit {

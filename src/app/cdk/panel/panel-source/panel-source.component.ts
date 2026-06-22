@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
 import {
@@ -23,6 +30,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './panel-source.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PanelSourceComponent implements OnInit {

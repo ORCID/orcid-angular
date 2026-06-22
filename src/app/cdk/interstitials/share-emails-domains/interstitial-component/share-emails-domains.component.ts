@@ -5,6 +5,7 @@ import {
   Input,
   OnDestroy,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
@@ -24,6 +25,7 @@ import { RecordService } from 'src/app/core/record/record.service'
     './share-emails-domains.component.scss',
     './share-emails-domains.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ShareEmailsDomainsComponent implements OnDestroy {

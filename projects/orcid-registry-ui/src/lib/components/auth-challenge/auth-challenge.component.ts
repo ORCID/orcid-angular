@@ -10,6 +10,7 @@ import {
   Output,
   Input,
   Optional,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -50,6 +51,7 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
     MatDialogModule,
   ],
   templateUrl: './auth-challenge.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     './auth-challenge.component.scss',
     './auth-challenge.component.scss-theme.scss',

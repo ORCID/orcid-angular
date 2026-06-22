@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { first } from 'rxjs/operators'
 import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'
@@ -24,6 +31,7 @@ import { ManageWorkFeaturedModalComponent } from 'src/app/record/components/work
   selector: 'app-panels',
   templateUrl: './panels.component.html',
   styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PanelsComponent implements OnInit {

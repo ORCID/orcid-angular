@@ -1,1 +1,3 @@
-<div [innerHTML]="messageBody?.innerHTML | safeHtml"></div>
+<div
+  [innerHTML]="$safeNavigationMigration(messageBody?.innerHTML) | safeHtml"
+></div>

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
+
 import { FormsModule } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
@@ -11,7 +11,6 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
   selector: 'orcid-text-with-tooltip-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     TextWithTooltipComponent,
     MatFormFieldModule,
@@ -20,6 +19,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
     DocumentationPageComponent,
   ],
   templateUrl: './text-with-tooltip-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./text-with-tooltip-page.component.scss'],
 })
 export class TextWithTooltipPageComponent {

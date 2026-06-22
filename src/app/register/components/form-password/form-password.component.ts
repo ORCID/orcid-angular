@@ -6,12 +6,14 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   FormsModule,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
+  AbstractControl,
   UntypedFormControl,
   UntypedFormGroup,
   ValidatorFn,
@@ -64,6 +66,7 @@ import { BackendErrorComponent } from '../backend-error/backend-error.component'
     },
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class FormPasswordComponent
@@ -147,7 +150,7 @@ export class FormPasswordComponent
   }
 
   passwordDoesNotContainUserEmails(): ValidatorFn {
-    return (control: UntypedFormControl) => {
+    return (control: AbstractControl) => {
       const password: string = control.value
       let hasError = false
 

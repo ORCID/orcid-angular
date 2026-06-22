@@ -1,4 +1,10 @@
-import { Component, HostBinding, HostListener, Inject } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  HostListener,
+  Inject,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { NavigationEnd, NavigationStart, Router } from '@angular/router'
 import { catchError, tap } from 'rxjs/operators'
 import {
@@ -22,6 +28,7 @@ import { OneTrustAccessibilityService } from './core/onetrust/onetrust-accessibi
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AppComponent {
@@ -149,7 +156,7 @@ export class AppComponent {
   }
 
   @HostListener('window:visibilitychange')
-  onVisibilityChange(value) {
+  onVisibilityChange() {
     this._userService.setTimerAsHiddenState(this._window.document.hidden)
   }
 

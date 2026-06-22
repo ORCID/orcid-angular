@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Observable, of, Subject } from 'rxjs'
 import { startWith, switchMap, takeUntil } from 'rxjs/operators'
@@ -17,6 +22,7 @@ import { DialogRevokeYourOwnPermissionsComponent } from '../dialog-revoke-your-o
     './settings-users-that-thrust-you.component.scss',
     './settings-users-that-thrust-you.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsUsersThatThrustYouComponent implements OnInit {

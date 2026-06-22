@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { BehaviorSubject, Observable, Subject } from 'rxjs'
@@ -25,6 +26,7 @@ import {
   selector: 'app-settings-security-alternate-sign-in',
   templateUrl: './settings-security-alternate-sign-in.component.html',
   styleUrls: ['./settings-security-alternate-sign-in.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsSecurityAlternateSignInComponent

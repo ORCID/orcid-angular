@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { WorkRelationships } from 'src/app/types/works.endpoint'
 import { UntypedFormGroup } from '@angular/forms'
 
@@ -6,6 +13,7 @@ import { UntypedFormGroup } from '@angular/forms'
   selector: 'app-work-external-identifiers-view-only',
   templateUrl: './work-external-identifiers-view-only.component.html',
   styleUrls: ['./work-external-identifiers-view-only.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkExternalIdentifiersViewOnlyComponent implements OnInit {

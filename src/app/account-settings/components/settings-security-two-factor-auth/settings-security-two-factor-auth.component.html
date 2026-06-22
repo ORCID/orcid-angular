@@ -63,7 +63,8 @@
           </p>
           <small>
             {{
-              twoFactorInfo?.twoFactorCreationDate | monthDayYearDateToString
+              $safeNavigationMigration(twoFactorInfo?.twoFactorCreationDate)
+                | monthDayYearDateToString
             }}
           </small>
         </div>
@@ -93,7 +94,8 @@
           </p>
           <small class="leading-4.5">
             {{
-              twoFactorInfo?.recoveryCodeCreationDate | monthDayYearDateToString
+              $safeNavigationMigration(twoFactorInfo?.recoveryCodeCreationDate)
+                | monthDayYearDateToString
             }}
           </small>
         </div>

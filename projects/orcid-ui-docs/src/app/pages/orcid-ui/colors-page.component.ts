@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
 
 interface ColorToken {
   name: string
@@ -11,6 +11,7 @@ interface ColorToken {
   selector: 'orcid-colors-page',
   standalone: true,
   templateUrl: './colors-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './colors-page.component.scss',
 })
 export class ColorsPageComponent {

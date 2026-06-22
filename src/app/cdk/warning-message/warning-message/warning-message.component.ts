@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../platform-info'
@@ -11,6 +17,7 @@ import { PlatformInfoService } from '../../platform-info'
     'warning-message.component.scss-theme.scss',
   ],
   preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WarningMessageComponent implements OnInit, OnDestroy {

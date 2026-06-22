@@ -8,6 +8,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -40,6 +41,7 @@ import { OrcidValidators } from 'src/app/validators'
   selector: 'app-modal-websites',
   templateUrl: './modal-websites.component.html',
   styleUrls: ['./modal-websites.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalWebsitesComponent implements OnInit, OnDestroy {

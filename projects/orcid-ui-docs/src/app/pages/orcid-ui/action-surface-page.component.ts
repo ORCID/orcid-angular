@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
+
 import { MatButtonModule } from '@angular/material/button'
 import {
   ActionSurfaceComponent,
@@ -12,7 +12,6 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
   selector: 'orcid-action-surface-page',
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     ActionSurfaceComponent,
     BrandSecondaryDarkButtonDirective,
@@ -20,6 +19,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
     DocumentationPageComponent,
   ],
   styleUrls: ['./action-surface-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './action-surface-page.component.html',
 })
 export class ActionSurfacePageComponent {}

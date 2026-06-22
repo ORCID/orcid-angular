@@ -7,6 +7,7 @@ import {
   Output,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { Observable } from 'rxjs'
 import { first } from 'rxjs/operators'
@@ -29,6 +30,7 @@ import { WorkModalComponent } from '../work-modal/work-modal.component'
     './work-stack.component.scss',
     './work-stack.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class WorkStackComponent implements OnInit {

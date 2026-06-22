@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   UntypedFormGroup,
@@ -42,6 +43,7 @@ import {
     './affiliations-interstitial.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {

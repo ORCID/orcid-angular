@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { MatDialogRef } from '@angular/material/dialog'
@@ -15,6 +20,7 @@ import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
     './modal-combine-works.component.scss',
     './modal-combine-works.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalCombineWorksComponent implements OnInit, OnDestroy {

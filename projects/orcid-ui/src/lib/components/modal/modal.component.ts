@@ -1,5 +1,11 @@
-import { Component, Input, Optional, ViewEncapsulation } from '@angular/core'
-import { NgIf } from '@angular/common'
+import {
+  Component,
+  Input,
+  Optional,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+} from '@angular/core'
+
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatDialogRef } from '@angular/material/dialog'
@@ -9,8 +15,9 @@ export const ORCID_MODAL_DIALOG_PANEL_CLASS = 'orcid-modal-dialog-panel'
 @Component({
   selector: 'orcid-modal',
   standalone: true,
-  imports: [NgIf, MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule],
   templateUrl: './modal.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./modal.component.scss'],
 })
 export class OrcidModalComponent {

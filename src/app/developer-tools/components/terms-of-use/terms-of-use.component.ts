@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { MatCheckbox } from '@angular/material/checkbox'
 import { MatDialog } from '@angular/material/dialog'
@@ -25,6 +26,7 @@ import { RecordService } from 'src/app/core/record/record.service'
     './terms-of-use.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TermsOfUseComponent implements OnInit, OnDestroy {

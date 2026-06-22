@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -10,6 +17,7 @@ import { UserStatus } from '../../../types/userStatus.endpoint'
   selector: 'app-top-bar-actions',
   templateUrl: './top-bar-actions.component.html',
   styleUrls: ['./top-bar-actions.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TopBarActionsComponent implements OnInit, OnDestroy {

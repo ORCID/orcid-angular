@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
+
 import { FormsModule } from '@angular/forms'
 import { of } from 'rxjs'
 import { delay } from 'rxjs/operators'
@@ -21,7 +21,6 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
   selector: 'orcid-registry-import-works-dialog-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -30,6 +29,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
     DocumentationPageComponent,
   ],
   templateUrl: './import-works-dialog-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./import-works-dialog-page.component.scss'],
 })
 export class ImportWorksDialogPageComponent {

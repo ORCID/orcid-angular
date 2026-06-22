@@ -1,4 +1,5 @@
-<form [formGroup]="workForm" *ngIf="workForm">
+@if (workForm) {
+<form [formGroup]="workForm">
   <section id="work-detail">
     <div class="title row">
       <h2
@@ -12,12 +13,14 @@
       >
         Work details
       </h2>
-      <p *ngIf="platform.columns12" class="required-information mat-caption">
+      @if (platform.columns12) {
+      <p class="required-information mat-caption">
         <span class="required">*</span>
         <ng-container i18n="@@shared.requiredInformation"
           >Required information</ng-container
         >
       </p>
+      }
     </div>
     <hr />
     <!-- Work Types -->
@@ -35,7 +38,6 @@
         <strong i18n="@@works.workType">Work type</strong>
         <span class="required">*</span>
       </label>
-
       <app-deep-select-input
         id="cy-work-types"
         aria-labelledby="work-type-label"
@@ -47,7 +49,6 @@
       </app-deep-select-input>
     </div>
     <!-- Title -->
-
     <div>
       <div class="row">
         <label
@@ -64,24 +65,18 @@
           <span class="required">*</span>
         </label>
       </div>
-
       <mat-form-field
         appearance="outline"
         class="mat-form-field-min input-container"
       >
         <input id="title-input" matInput formControlName="title" />
-        <mat-error
-          *ngIf="workForm.get('title').hasError('required')"
-          i18n="@@works.setAWorkTitle"
-        >
-          Set a work title
-        </mat-error>
-        <mat-error
-          *ngIf="workForm.get('title').errors?.maxlength"
-          i18n="@@works.titleMaxLength"
-        >
+        @if (workForm.get('title').hasError('required')) {
+        <mat-error i18n="@@works.setAWorkTitle"> Set a work title </mat-error>
+        } @if (workForm.get('title').errors?.maxlength) {
+        <mat-error i18n="@@works.titleMaxLength">
           Must be less than 1000 characters
         </mat-error>
+        }
       </mat-form-field>
     </div>
     <!-- SHOW-HIDE translated title button  -->
@@ -91,35 +86,28 @@
         (click)="showTranslationTitle = !showTranslationTitle"
         id="cy-translated-title-toggle-link"
       >
-        <mat-icon
-          *ngIf="!showTranslationTitle"
-          class="large-material-icon"
-          id="cy-add-translated-title-icon"
+        @if (!showTranslationTitle) {
+        <mat-icon class="large-material-icon" id="cy-add-translated-title-icon"
           >add_circle_outline</mat-icon
         >
-        <mat-icon
-          *ngIf="showTranslationTitle"
-          class="large-material-icon"
-          id="cy-hide-translated-title-icon"
+        } @if (showTranslationTitle) {
+        <mat-icon class="large-material-icon" id="cy-hide-translated-title-icon"
           >remove_circle_outline</mat-icon
         >
+        }
         <span class="mat-subtitle-2">
-          <ng-container
-            i18n="@@works.showTranslatedTitle"
-            *ngIf="!showTranslationTitle"
-          >
+          @if (!showTranslationTitle) {
+          <ng-container i18n="@@works.showTranslatedTitle">
             Show translated title
           </ng-container>
-          <ng-container
-            i18n="@@works.hideTranslatedTitle2"
-            *ngIf="showTranslationTitle"
-          >
+          } @if (showTranslationTitle) {
+          <ng-container i18n="@@works.hideTranslatedTitle2">
             Hide translated title
           </ng-container>
+          }
         </span>
       </a>
     </div>
-
     <!-- Work translations title -->
     <div
       [hidden]="!showTranslationTitle"
@@ -144,7 +132,6 @@
             >
           </label>
         </div>
-
         <mat-form-field
           appearance="outline"
           class="mat-form-field-min input-container"
@@ -156,30 +143,19 @@
             formControlName="translatedTitleContent"
           />
         </mat-form-field>
-        <mat-error
-          class="mat-caption"
-          *ngIf="
-            workForm.hasError(
-              'invalidTranslatedTitleContent',
-              'translatedTitleGroup'
-            )
-          "
-          i18n="@@shared.translatedTitleError"
-        >
+        @if ( workForm.hasError( 'invalidTranslatedTitleContent',
+        'translatedTitleGroup' ) ) {
+        <mat-error class="mat-caption" i18n="@@shared.translatedTitleError">
           Please enter a translated title
         </mat-error>
-        <mat-error
-          class="mat-caption"
-          *ngIf="
-            workForm.get('translatedTitleGroup.translatedTitleContent').errors
-              ?.maxlength
-          "
-          i18n="@@works.titleMaxLength"
-        >
+        } @if (
+        workForm.get('translatedTitleGroup.translatedTitleContent').errors
+        ?.maxlength ) {
+        <mat-error class="mat-caption" i18n="@@works.titleMaxLength">
           Must be less than 1000 characters
         </mat-error>
+        }
       </div>
-
       <!-- Language of this title -->
       <div>
         <div class="row">
@@ -210,32 +186,26 @@
               placeholder="{{ ngOrcidSelectLanguage }}"
               formControlName="translatedTitleLanguage"
             >
-              <mat-option
-                *ngFor="let item of languageMap | keyvalue"
-                [value]="item.value"
-              >
+              @for (item of languageMap | keyvalue; track item) {
+              <mat-option [value]="item.value">
                 {{ item.key }}
               </mat-option>
+              }
             </mat-select>
           </mat-form-field>
+          @if ( workForm.hasError( 'invalidTranslatedTitleLanguage',
+          'translatedTitleGroup' ) ) {
           <mat-error
             class="mat-caption"
-            *ngIf="
-              workForm.hasError(
-                'invalidTranslatedTitleLanguage',
-                'translatedTitleGroup'
-              )
-            "
             i18n="@@shared.translatedTitleLanguageError"
           >
             Please select a language
           </mat-error>
+          }
         </div>
       </div>
     </div>
-
     <!-- Work subtitle -->
-
     <div>
       <div class="row">
         <label
@@ -246,7 +216,6 @@
           <strong i18n="@@works.subtitle-2">Work subtitle</strong>
         </label>
       </div>
-
       <mat-form-field
         appearance="outline"
         class="mat-form-field-min input-container"
@@ -257,12 +226,11 @@
           formControlName="subtitle"
           aria-labelledby="work-subtitle-label"
         />
-        <mat-error
-          *ngIf="workForm.get('subtitle').errors?.maxlength"
-          i18n="@@shared.maxLength.less_than_one_thousand"
-        >
+        @if (workForm.get('subtitle').errors?.maxlength) {
+        <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
           Must be less than 1000 characters
         </mat-error>
+        }
       </mat-form-field>
     </div>
     <!-- Journal title -->
@@ -276,7 +244,6 @@
           <strong>{{ dynamicTitle | recordWorkTitleNameLabel }}</strong>
         </label>
       </div>
-
       <mat-form-field
         appearance="outline"
         class="mat-form-field-min input-container"
@@ -287,12 +254,11 @@
           id="cy-journal-title"
           aria-labelledby="journal-title-label"
         />
-        <mat-error
-          *ngIf="workForm.get('journalTitle').errors?.maxlength"
-          i18n="@@works.titleMaxLength"
-        >
+        @if (workForm.get('journalTitle').errors?.maxlength) {
+        <mat-error i18n="@@works.titleMaxLength">
           Must be less than 1000 characters
         </mat-error>
+        }
       </mat-form-field>
     </div>
     <!-- Publication date -->
@@ -338,9 +304,11 @@
                 id="publication-year-label"
                 >Year</mat-option
               >
-              <mat-option *ngFor="let year of yearOptions" [value]="year">
+              @for (year of yearOptions; track year) {
+              <mat-option [value]="year">
                 {{ year }}
               </mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </div>
@@ -369,9 +337,11 @@
                 id="publication-month-label"
                 >Month</mat-option
               >
-              <mat-option *ngFor="let month of monthOptions" [value]="month">
+              @for (month of monthOptions; track month) {
+              <mat-option [value]="month">
                 {{ month | trailingZeros }}
               </mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </div>
@@ -400,24 +370,22 @@
                 id="publication-day-label"
                 >Day</mat-option
               >
-              <mat-option *ngFor="let day of dayOptions" [value]="day">
+              @for (day of dayOptions; track day) {
+              <mat-option [value]="day">
                 {{ day | trailingZeros }}
               </mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </div>
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.invalidDate"
-          *ngIf="workForm.get('publicationDate').errors?.date"
-        >
+        @if (workForm.get('publicationDate').errors?.date) {
+        <mat-error class="mat-caption" i18n="@@shared.invalidDate">
           Invalid date
         </mat-error>
+        }
       </div>
     </ng-container>
-
     <!-- Work url -->
-
     <div>
       <div class="row">
         <label
@@ -432,7 +400,6 @@
           <strong i18n="@@works.link">Link</strong>
         </label>
       </div>
-
       <mat-form-field
         appearance="outline"
         class="mat-form-field-min two-line-hint input-container"
@@ -443,25 +410,19 @@
           matInput
           formControlName="url"
         />
-        <mat-error
-          *ngIf="workForm.get('url').hasError('pattern')"
-          i18n="@@works.invalidUrl"
-        >
-          Invalid url
-        </mat-error>
-        <mat-error
-          *ngIf="workForm.get('url').errors?.maxlength"
-          i18n="@@works.urlMaxLength"
-        >
+        @if (workForm.get('url').hasError('pattern')) {
+        <mat-error i18n="@@works.invalidUrl"> Invalid url </mat-error>
+        } @if (workForm.get('url').errors?.maxlength) {
+        <mat-error i18n="@@works.urlMaxLength">
           Must be less than 2000 characters
         </mat-error>
+        }
         <mat-hint i18n="@@works.linkMoreInformationAbout"
           >A link to more information about the work. Links should be in the
           full URL format e.g. http://www.website.com/page.html
         </mat-hint>
       </mat-form-field>
     </div>
-
     <!------------------->
     <!-- Work Citation -->
     <!------------------->
@@ -487,9 +448,7 @@
         Citation
       </h2>
     </div>
-
     <hr />
-
     <!-- Citation type -->
     <div formGroupName="citationGroup" id="cy-citation-group">
       <div class="row">
@@ -515,24 +474,20 @@
             formControlName="citationType"
             id="cy-citation-type"
           >
-            <mat-option
-              *ngFor="let item of citationTypes | keyvalue"
-              [value]="item.key"
-            >
+            @for (item of citationTypes | keyvalue; track item) {
+            <mat-option [value]="item.key">
               {{ item.value }}
             </mat-option>
+            }
           </mat-select>
         </mat-form-field>
-        <mat-error
-          class="mat-caption"
-          *ngIf="workForm.hasError('citationType', 'citationGroup')"
-          i18n="@@works.selectACitationType"
-        >
+        @if (workForm.hasError('citationType', 'citationGroup')) {
+        <mat-error class="mat-caption" i18n="@@works.selectACitationType">
           Select a citation type
         </mat-error>
+        }
       </div>
       <!-- Citation  -->
-
       <div>
         <div class="row">
           <label
@@ -560,16 +515,13 @@
             cdkAutosizeMaxRows="7"
           ></textarea>
         </mat-form-field>
-        <mat-error
-          class="mat-caption"
-          *ngIf="workForm.hasError('citation', 'citationGroup')"
-          i18n="@@works.selectACitation"
-        >
+        @if (workForm.hasError('citation', 'citationGroup')) {
+        <mat-error class="mat-caption" i18n="@@works.selectACitation">
           Select a citation
         </mat-error>
+        }
       </div>
       <!-- Description  -->
-
       <div>
         <div class="row">
           <label
@@ -596,15 +548,12 @@
             cdkAutosizeMaxRows="7"
           >
           </textarea>
-          <mat-error
-            class="mat-caption"
-            *ngIf="
-              workForm.get('citationGroup.shortDescription').errors?.maxlength
-            "
-            i18n="@@works.descriptionMaxLength"
-          >
+          @if ( workForm.get('citationGroup.shortDescription').errors?.maxlength
+          ) {
+          <mat-error class="mat-caption" i18n="@@works.descriptionMaxLength">
             Must be less than 5000 characters
           </mat-error>
+          }
         </mat-form-field>
       </div>
     </div>
@@ -613,7 +562,6 @@
     <!---------------------->
     <!-- Work Identifiers -->
     <!---------------------->
-
     <div
       class="title"
       id="work-identifiers"
@@ -635,20 +583,12 @@
       </h2>
     </div>
     <hr />
-
     <div formArrayName="workIdentifiers">
-      <div
-        class="externalIdBox"
-        *ngFor="
-          let workIdentifiersGroup of workIdentifiersFormArray.controls;
-          let i = index;
-          let last = last
-        "
-      >
-        <ng-container
-          *ngIf="workIdentifiersFormArrayDisplayState[i]"
-          [formGroupName]="i"
-        >
+      @for ( workIdentifiersGroup of workIdentifiersFormArray.controls; track
+      workIdentifiersGroup; let i = $index; let last = $last) {
+      <div class="externalIdBox">
+        @if (workIdentifiersFormArrayDisplayState[i]) {
+        <ng-container [formGroupName]="i">
           <app-work-external-identifiers-edit
             class="input-container"
             [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
@@ -658,17 +598,19 @@
             id="{{ 'cy-external-ids-edit' + i }}"
           ></app-work-external-identifiers-edit>
         </ng-container>
-        <ng-container *ngIf="!workIdentifiersFormArrayDisplayState[i]">
-          <app-work-external-identifiers-view-only
-            [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
-            [workIdentifier]="workIdentifiersFormArray.controls[i].value"
-            (edit)="workIdentifiersFormArrayDisplayState[i] = true"
-            (delete)="deleteWorkId(i)"
-          ></app-work-external-identifiers-view-only>
-        </ng-container>
+        } @if (!workIdentifiersFormArrayDisplayState[i]) {
+        <app-work-external-identifiers-view-only
+          [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
+          [workIdentifier]="workIdentifiersFormArray.controls[i].value"
+          (edit)="workIdentifiersFormArrayDisplayState[i] = true"
+          (delete)="deleteWorkId(i)"
+        ></app-work-external-identifiers-view-only>
+        }
       </div>
+      }
       <!-- Add other identifier  -->
-      <div class="row" *ngIf="workIdentifiersFormArray.length">
+      @if (workIdentifiersFormArray.length) {
+      <div class="row">
         <a
           class="col add-more no-gutters"
           (click)="addOtherWorkId()"
@@ -680,7 +622,8 @@
           </span>
         </a>
       </div>
-      <div class="row" *ngIf="!workIdentifiersFormArray.length">
+      } @if (!workIdentifiersFormArray.length) {
+      <div class="row">
         <a
           class="col add-more no-gutters"
           (click)="addOtherWorkId()"
@@ -692,13 +635,13 @@
           </span>
         </a>
       </div>
+      }
     </div>
   </section>
   <section id="work-contributors">
     <!---------------------->
     <!-- Contributors  -->
     <!---------------------->
-
     <div class="title">
       <h2
         [ngClass]="{
@@ -712,15 +655,17 @@
       </h2>
     </div>
     <hr />
-
     <app-work-contributor-roles
-      [contributors]="work?.contributorsGroupedByOrcid"
+      [contributors]="
+        $safeNavigationMigration(work?.contributorsGroupedByOrcid)
+      "
       [userRecord]="userRecord"
       [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
     ></app-work-contributor-roles>
-
     <app-work-contributors
-      [contributors]="work?.contributorsGroupedByOrcid"
+      [contributors]="
+        $safeNavigationMigration(work?.contributorsGroupedByOrcid)
+      "
       [userRecord]="userRecord"
       [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
     ></app-work-contributors>
@@ -729,7 +674,6 @@
     <!---------------------->
     <!-- Work Other Information -->
     <!---------------------->
-
     <div class="title" id="otherInformation">
       <h2
         [ngClass]="{
@@ -743,7 +687,6 @@
       </h2>
     </div>
     <hr />
-
     <!-- Language of this form -->
     <div>
       <div class="row title">
@@ -764,17 +707,15 @@
             formControlName="languageCode"
             [aria-label]="languageLabelAriaLabel"
           >
-            <mat-option
-              *ngFor="let item of languageMap | keyvalue"
-              [value]="item.value"
-            >
+            @for (item of languageMap | keyvalue; track item) {
+            <mat-option [value]="item.value">
               {{ item.key }}
             </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>
     </div>
-
     <!-- Country of publication -->
     <div>
       <div class="row">
@@ -799,12 +740,11 @@
             placeholder="{{ ngOrcidSelectACountryOrLocation }}"
             formControlName="countryCode"
           >
-            <mat-option
-              *ngFor="let item of countryCodes | sortBy : 'asc' : 'key'"
-              [value]="item.value"
-            >
+            @for (item of countryCodes | sortBy : 'asc' : 'key'; track item) {
+            <mat-option [value]="item.value">
               {{ item.key }}
             </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>
@@ -814,7 +754,6 @@
     <!---------------------->
     <!-- Work Visibility -->
     <!---------------------->
-
     <div class="title">
       <h2
         [ngClass]="{
@@ -828,7 +767,6 @@
       </h2>
     </div>
     <hr />
-
     <!-- Work Visibility -->
     <div>
       <p class="orc-font-body-small">
@@ -836,7 +774,6 @@
         <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
         >.
       </p>
-
       <div class="row visibility">
         <div class="col no-wrap actions-wrapper no-gutters">
           <app-visibility-selector
@@ -849,3 +786,4 @@
     </div>
   </section>
 </form>
+}

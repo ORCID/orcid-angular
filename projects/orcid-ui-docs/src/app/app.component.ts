@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
 import { DocsShellComponent } from './docs-shell.component'
 
 @Component({
@@ -6,6 +6,7 @@ import { DocsShellComponent } from './docs-shell.component'
   standalone: true,
   imports: [DocsShellComponent],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.component.scss',
 })
 export class AppComponent {}

@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
@@ -9,6 +14,7 @@ import { UserInfo } from 'src/app/types'
   selector: 'app-record-info',
   templateUrl: './record-info.component.html',
   styleUrls: ['./record-info.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class RecordInfoComponent implements OnInit {

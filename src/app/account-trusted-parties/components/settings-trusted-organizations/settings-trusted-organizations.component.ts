@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { AccountTrustedOrganizationsService } from 'src/app/core/account-trusted-organizations/account-trusted-organizations.service'
@@ -9,6 +9,7 @@ import { DialogRevokeTrustedOrganizationComponent } from '../dialog-revoke-trust
   selector: 'app-settings-trusted-organizations',
   templateUrl: './settings-trusted-organizations.component.html',
   styleUrls: ['./settings-trusted-organizations.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsTrustedOrganizationsComponent implements OnInit {

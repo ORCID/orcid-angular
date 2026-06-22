@@ -150,12 +150,9 @@
             <mat-hint i18n="@@account.enterTheCode">
               Enter the code from your two-factor authentication app
             </mat-hint>
-            }
-            <mat-error
-              *ngIf="
-                deactivationForm.get('twoFactorCode').hasError('backendInvalid')
-              "
-            >
+            } @if (
+            deactivationForm.get('twoFactorCode').hasError('backendInvalid') ) {
+            <mat-error>
               <p
                 i18n="@@ngOrcid.signin.2fa.badVerificationCode"
                 class="error-message"
@@ -163,12 +160,9 @@
                 Invalid authentication code
               </p>
             </mat-error>
-            <mat-error
-              *ngIf="
-                twoFactorCodeWasTouched &&
-                deactivationForm.get('twoFactorCode').hasError('required')
-              "
-            >
+            } @if ( twoFactorCodeWasTouched &&
+            deactivationForm.get('twoFactorCode').hasError('required') ) {
+            <mat-error>
               <p
                 i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
                 class="error-message"
@@ -176,13 +170,10 @@
                 Authentication code is required
               </p>
             </mat-error>
-            <mat-error
-              *ngIf="
-                twoFactorCodeWasTouched &&
-                (deactivationForm.get('twoFactorCode').hasError('minlength') ||
-                  deactivationForm.get('twoFactorCode').hasError('maxlength'))
-              "
-            >
+            } @if ( twoFactorCodeWasTouched &&
+            (deactivationForm.get('twoFactorCode').hasError('minlength') ||
+            deactivationForm.get('twoFactorCode').hasError('maxlength')) ) {
+            <mat-error>
               <p
                 i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
                 class="error-message"
@@ -190,6 +181,7 @@
                 Invalid authentication code length
               </p>
             </mat-error>
+            }
           </div>
           <mat-hint
             [ngClass]="{
@@ -255,14 +247,9 @@
             <mat-hint i18n="@@ngOrcid.signin.2fa.noDevice2"
               >Enter a recovery code</mat-hint
             >
-            }
-            <mat-error
-              *ngIf="
-                deactivationForm
-                  .get('twoFactorRecoveryCode')
-                  .hasError('backendInvalid')
-              "
-            >
+            } @if ( deactivationForm .get('twoFactorRecoveryCode')
+            .hasError('backendInvalid') ) {
+            <mat-error>
               <p
                 i18n="@@ngOrcid.signin.2fa.badRecoveryCode"
                 class="error-message"
@@ -270,14 +257,9 @@
                 Invalid recovery code
               </p>
             </mat-error>
-            <mat-error
-              *ngIf="
-                twoFactorRecoveryCodeWasTouched &&
-                deactivationForm
-                  .get('twoFactorRecoveryCode')
-                  .hasError('required')
-              "
-            >
+            } @if ( twoFactorRecoveryCodeWasTouched && deactivationForm
+            .get('twoFactorRecoveryCode') .hasError('required') ) {
+            <mat-error>
               <p
                 i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
                 class="error-message"
@@ -285,17 +267,11 @@
                 Recovery code is required
               </p>
             </mat-error>
-            <mat-error
-              *ngIf="
-                twoFactorRecoveryCodeWasTouched &&
-                (deactivationForm
-                  .get('twoFactorRecoveryCode')
-                  .hasError('minlength') ||
-                  deactivationForm
-                    .get('twoFactorRecoveryCode')
-                    .hasError('maxlength'))
-              "
-            >
+            } @if ( twoFactorRecoveryCodeWasTouched && (deactivationForm
+            .get('twoFactorRecoveryCode') .hasError('minlength') ||
+            deactivationForm .get('twoFactorRecoveryCode')
+            .hasError('maxlength')) ) {
+            <mat-error>
               <p
                 i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
                 class="error-message"
@@ -303,6 +279,7 @@
                 Invalid recovery code length
               </p>
             </mat-error>
+            }
           </div>
           <mat-hint
             [ngClass]="{

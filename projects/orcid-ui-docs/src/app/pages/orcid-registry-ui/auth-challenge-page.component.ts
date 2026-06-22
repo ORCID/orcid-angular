@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
+
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -23,7 +23,6 @@ import { takeUntil } from 'rxjs/operators'
   selector: 'auth-challenge-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -35,6 +34,7 @@ import { takeUntil } from 'rxjs/operators'
     ReactiveFormsModule,
   ],
   styleUrls: ['./auth-challenge-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './auth-challenge-page.component.html',
 })
 export class AuthChallengePageComponent implements OnInit {

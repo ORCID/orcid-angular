@@ -36,7 +36,9 @@
             <app-step-b
               #stepComponentB
               [(formGroup)]="FormGroupStepB"
-              [personalData]="FormGroupStepA?.value?.personal"
+              [personalData]="
+                $safeNavigationMigration(FormGroupStepA?.value?.personal)
+              "
               [reactivation]="reactivation"
             ></app-step-b>
           </mat-step>

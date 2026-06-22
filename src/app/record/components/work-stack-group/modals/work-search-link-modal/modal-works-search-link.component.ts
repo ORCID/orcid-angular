@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { takeUntil } from 'rxjs/operators'
@@ -11,6 +16,7 @@ import { sortBy } from 'lodash'
   selector: 'app-modal-works-search-link',
   templateUrl: './modal-works-search-link.component.html',
   styleUrls: ['./modal-works-search-link.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {

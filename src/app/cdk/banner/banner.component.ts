@@ -1,10 +1,18 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { CookieService } from 'ngx-cookie-service'
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class BannerComponent implements OnInit {

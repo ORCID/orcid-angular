@@ -1,11 +1,18 @@
 import { ViewportScroller } from '@angular/common'
-import { AfterViewInit, Component, Inject, OnInit } from '@angular/core'
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsComponent implements AfterViewInit {

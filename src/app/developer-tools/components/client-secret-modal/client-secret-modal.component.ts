@@ -1,11 +1,17 @@
 import { DialogRef } from '@angular/cdk/dialog'
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 
 @Component({
   selector: 'app-client-secret-modal',
   templateUrl: './client-secret-modal.component.html',
   styleUrls: ['./client-secret-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ClientSecretModalComponent implements OnInit {

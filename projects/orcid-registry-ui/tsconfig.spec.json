@@ -9,5 +9,13 @@
     "composite": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["../../out-tsc"]
+  "exclude": ["../../out-tsc"],
+  "angularCompilerOptions": {
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    }
+  }
 }

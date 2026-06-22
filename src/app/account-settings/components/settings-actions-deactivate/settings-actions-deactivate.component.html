@@ -99,7 +99,8 @@
       Send account deactivation email
     </button>
   </div>
-  <app-alert-message *ngIf="deactivatedEmail">
+  @if (deactivatedEmail) {
+  <app-alert-message>
     <div content>
       <ng-container i18n="@@account.andEmailDeactivateWasSend">
         An account deactivation email has been sent to
@@ -107,4 +108,5 @@
       <strong> {{ deactivatedEmail }} </strong>
     </div>
   </app-alert-message>
+  }
 </app-settings-panels-data>

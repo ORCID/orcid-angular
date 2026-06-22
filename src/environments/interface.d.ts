@@ -13,7 +13,7 @@ export interface EnvironmentInterface {
   HELP_HERO_ID: string
   ZENDESK: string | null
   SHOW_TEST_WARNING_BANNER: boolean
-  CAN_DISABLE_TEST_WARNING_BANNER: boolean
+  CAN_DISABLE_TEST_WARNING_BANNER: boolean | null
   INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: number
   VERBOSE_SNACKBAR_ERRORS_REPORTS: boolean
   WORDPRESS_S3: string
@@ -24,7 +24,7 @@ export interface EnvironmentInterface {
   LANGUAGE_MENU_OPTIONS: {
     [key: string]: string
   }
-  proxyMode: boolean
+  proxyMode: boolean | null
   ONE_TRUST: string
 }
 

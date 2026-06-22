@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'app-modal-title',
@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core'
     './modal-title.component.scss',
     './modal-title.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalTitleComponent {

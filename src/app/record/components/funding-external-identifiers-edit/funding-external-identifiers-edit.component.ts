@@ -8,6 +8,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
 import { FundingRelationships } from 'src/app/types/record-funding.endpoint'
@@ -20,6 +21,7 @@ import { WorkRelationships } from 'src/app/types/works.endpoint'
     './funding-external-identifiers-edit.component.scss',
     './funding-external-identifiers-edit.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FundingExternalIdentifiersEditComponent

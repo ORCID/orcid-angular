@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'app-modal-side-bar',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core'
     './modal-side-bar.component.scss',
     './modal-side-bar.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ModalSideBarComponent implements OnInit {

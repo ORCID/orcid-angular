@@ -103,15 +103,16 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.app.json",
             "crossOrigin": "use-credentials",
             "outputHashing": "all",
-            "outputPath": "dist",
+            "outputPath": {
+              "base": "dist"
+            },
             "i18nMissingTranslation": "warning",
             "assets": [
               {
@@ -151,7 +152,11 @@
             "scripts": [
               "/scripts/environment.runtime.js",
               "/scripts/onetrust.runtime.js"
-            ]
+            ],
+            "browser": "src/main.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": ["."]
+            }
           },
           "configurations": {
             "local": {
@@ -176,9 +181,9 @@
               },
               "namedChunks": true,
               "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false,
-              "outputPath": "dist"
+              "outputPath": {
+                "base": "dist"
+              }
             },
             "local-with-proxy": {
               "scripts": [
@@ -191,9 +196,9 @@
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false,
-              "outputPath": "dist",
+              "outputPath": {
+                "base": "dist"
+              },
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -213,9 +218,9 @@
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false,
-              "outputPath": "dist",
+              "outputPath": {
+                "base": "dist"
+              },
               "budgets": [
                 {
                   "type": "anyComponentStyle",

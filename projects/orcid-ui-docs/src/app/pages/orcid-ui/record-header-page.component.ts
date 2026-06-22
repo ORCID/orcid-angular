@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, ChangeDetectionStrategy } from '@angular/core'
+
 import { FormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
@@ -15,7 +15,6 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
   selector: 'orcid-record-header-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     HeaderBannerComponent,
     MatButtonModule,
@@ -29,6 +28,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
     DocumentationPageComponent,
   ],
   styleUrls: ['./record-header-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './record-header-page.component.html',
 })
 export class RecordHeaderPageComponent {

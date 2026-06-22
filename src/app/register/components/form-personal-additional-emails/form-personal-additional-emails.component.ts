@@ -6,6 +6,7 @@ import {
   Input,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -24,6 +25,7 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
     '../register.style.scss',
     '../register.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {

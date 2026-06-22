@@ -1,5 +1,9 @@
-import { CommonModule } from '@angular/common'
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Router } from '@angular/router'
 import { take } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -9,8 +13,9 @@ import { RegisterBackendErrors } from 'src/app/types/register.local'
   selector: 'app-backend-error',
   templateUrl: './backend-error.component.html',
   styleUrls: ['./backend-error.component.scss'],
-  imports: [CommonModule],
+  imports: [],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class BackendErrorComponent implements OnInit {

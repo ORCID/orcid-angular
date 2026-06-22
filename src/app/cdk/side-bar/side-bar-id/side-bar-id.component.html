@@ -29,15 +29,16 @@
       </h3>
     </div>
   </div>
+  @if (privateView) {
   <a
     [href]="id"
     [attr.aria-label]="labelPreviewRecord"
     target="_blank"
     rel="noopener noreferrer"
     class="preview orc-font-small-print"
-    *ngIf="privateView"
     i18n="@@record.previewPublicRecord"
     [attr.aria-label]="labelPreviewPublicRecord"
     >Preview public record</a
   >
+  }
 </div>

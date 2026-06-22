@@ -1,8 +1,8 @@
+@if (resultsContent && resultsContent.length) {
 <div
   role="main"
   [attr.aria-label]="ngOrcidSearchResults"
   class="row table-container"
-  *ngIf="resultsContent && resultsContent.length"
 >
   <table [attr.aria-label]="ngOrcidSearchResults">
     <thead>
@@ -28,7 +28,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let orcid of resultsContent">
+      @for (orcid of resultsContent; track orcid) {
+      <tr>
         <td class="orcid-id-column">
           <a [routerLink]="['/' + orcid['orcid-id']]">
             {{ orcid['orcid-id'] }}</a
@@ -39,9 +40,11 @@
         <td>{{ orcid['other-name'].join(', ') }}</td>
         <td>{{ orcid['institution-name'].join(', ') }}</td>
       </tr>
+      }
     </tbody>
   </table>
 </div>
+}
 
 <!-- Use hidden to allow image to be preloaded -->
 <section
@@ -63,9 +66,11 @@
   </p>
 </section>
 
-<section *ngIf="!searchResults">
+@if (!searchResults) {
+<section>
   <div class="row horizontal-center">
     <mat-progress-spinner color="primary" mode="indeterminate" class="col">
     </mat-progress-spinner>
   </div>
 </section>
+}

@@ -5,23 +5,26 @@
   [editable]="false"
   [userRecord]="userRecord"
   [elements]="work"
-  [putCode]="work?.putCode?.value"
+  [putCode]="$safeNavigationMigration(work?.putCode?.value)"
   [isPublicRecord]="isPublicRecord"
   #panelsComponent
   [type]="'featured-works'"
   [isFeatured]="true"
-  [panelTitle]="work?.title?.value"
+  [panelTitle]="$safeNavigationMigration(work?.title?.value)"
 >
   <h4
     header
     class="work-title orc-font-body"
-    [innerHTML]="work?.title?.value | searchTermHighlight : highlight"
+    [innerHTML]="
+      $safeNavigationMigration(work?.title?.value)
+        | searchTermHighlight : highlight
+    "
   ></h4>
   <!-- WORK BODY -->
   <app-work
     [work]="work"
     [panelDetailsState]="panelDetailsState[work?.putCode?.value]"
-    [id]="userInfo?.EFFECTIVE_USER_ORCID"
+    [id]="$safeNavigationMigration(userInfo?.EFFECTIVE_USER_ORCID)"
     [isPublicRecord]="isPublicRecord"
     [featured]="true"
     [minimized]="minimized"

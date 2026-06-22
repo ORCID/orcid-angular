@@ -6,6 +6,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { Params, Router } from '@angular/router'
 import { combineLatest, forkJoin, Observable, Subject, throwError } from 'rxjs'
@@ -54,6 +55,7 @@ import { OauthParameters } from 'src/app/types/oauth.locale'
     './form-authorize.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {

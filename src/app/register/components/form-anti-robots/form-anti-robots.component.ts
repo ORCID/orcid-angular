@@ -1,8 +1,16 @@
-import { Component, DoCheck, forwardRef, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  DoCheck,
+  forwardRef,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   UntypedFormControl,
+  AbstractControl,
   UntypedFormGroup,
   ValidatorFn,
   Validators,
@@ -30,6 +38,7 @@ import { RegisterStateService } from '../../register-state.service'
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FormAntiRobotsComponent extends BaseForm implements OnInit {
@@ -59,7 +68,7 @@ export class FormAntiRobotsComponent extends BaseForm implements OnInit {
 
   // Captcha must be clicked unless it was not loaded
   captchaValidator(): ValidatorFn {
-    return (control: UntypedFormControl) => {
+    return (control: AbstractControl) => {
       const hasError = Validators.required(control)
       if (
         hasError &&

@@ -1,103 +1,89 @@
-<ng-container
-  *ngFor="
-    let affiliation of affiliationStack?.affiliations;
-    let i = index;
-    let last = last;
-    trackBy: trackByAffiliationStack
-  "
+@for ( affiliation of affiliationStack?.affiliations; track
+trackByAffiliationStack(i, affiliation); let i = $index; let last = $last) {
+<!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
+@if (isPreferred(affiliation) || displayTheStack) {
+<orcid-panel
+  panelId="affiliation-stack-{{ i }}"
+  [isPreferred]="isPreferred(affiliation)"
+  [icon]="getAffiliationIcon(type)"
+  [iconClass]="getAffiliationIconClass(type)"
+  [title]="getAffiliationTitle(affiliation)"
+  [isMobile]="isMobile"
+  [startToggleOn]="affiliation.featured"
+  (toggleFeatured)="toggleFeatured(affiliation)"
+  [enableStartToggl]="getEnableStartToggl(affiliation)"
+  [startToggleDisabled]="isFeaturedToggleDisabled(affiliation)"
+  [startToggleTooltip]="getFeaturedToggleTooltip(affiliation)"
+  [startToggleViewOnly]="!!isPublicRecord"
+  id="{{ 'cy-affiliation-' + type + '-' + i }}"
 >
-  <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
-
-  <orcid-panel
-    panelId="affiliation-stack-{{ i }}"
-    [isPreferred]="isPreferred(affiliation)"
-    [icon]="getAffiliationIcon(type)"
-    [iconClass]="getAffiliationIconClass(type)"
-    [title]="getAffiliationTitle(affiliation)"
-    [isMobile]="isMobile"
-    [startToggleOn]="affiliation.featured"
-    (toggleFeatured)="toggleFeatured(affiliation)"
-    [enableStartToggl]="getEnableStartToggl(affiliation)"
-    [startToggleDisabled]="isFeaturedToggleDisabled(affiliation)"
-    [startToggleTooltip]="getFeaturedToggleTooltip(affiliation)"
-    [startToggleViewOnly]="!!isPublicRecord"
-    *ngIf="isPreferred(affiliation) || displayTheStack"
-    id="{{ 'cy-affiliation-' + type + '-' + i }}"
-  >
-    <!-- HEADER ACTIONS: visibility selector, etc. -->
-    <div panel-actions>
-      <ng-container
-        *ngIf="
-          affiliationStack.defaultAffiliation.visibility?.visibility &&
-          isPreferred(affiliation) &&
-          !isPublicRecord
-        "
-      >
-        <app-visibility-selector
-          (ngModelChange)="updateVisibility($event)"
-          [ngModel]="affiliationStack.defaultAffiliation.visibility.visibility"
-          [multiEdit]="
-            affiliationStack.affiliations.length > 1 ? 'multi' : 'single'
-          "
-          [visibilityError]="visibilityError"
-          [editable]="editableVisibilityControl"
-          [itemTitle]="affiliation.affiliationName.value"
-        ></app-visibility-selector>
-      </ng-container>
-    </div>
-
-    <!-- HEADER EDIT BUTTON -->
-    <div panel-edit>
-      <button
-        mat-icon-button
-        *ngIf="
-          isPreferred(affiliation) &&
-          userIsSource(affiliation) &&
-          !isPublicRecord
-        "
-        [matTooltip]="tooltipLabelEdit"
-        [attr.aria-label]="
-          type
-            | appPanelActivityActionAriaLabel
-              : 'edit'
-              : affiliation.affiliationName?.value
-        "
-        (click)="editAffiliation(affiliation)"
-      >
-        <mat-icon class="material-icons-outlined">edit</mat-icon>
-      </button>
-    </div>
-    <!-- AFFILIATION BODY -->
-    <app-affiliation
-      *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"
-      [affiliation]="affiliation"
-      [panelDetailsState]="panelDetailsState[affiliation.putCode.value]"
-      (toggleDetails)="toggleDetails($event)"
-      [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]"
-    >
-    </app-affiliation>
-    <!-- AFFILIATION SOURCE -->
-    <app-panel-source
-      panel-footer
-      [disablePadding]="true"
-      [userRecord]="userRecord"
-      [isPreferred]="isPreferred(affiliation)"
-      [sourceName]="affiliation.sourceName || affiliation.source"
-      [assertionOriginName]="affiliation.assertionOriginName"
-      [assertionOriginOrcid]="affiliation.assertionOriginOrcid"
-      [assertionOriginClientId]="affiliation.assertionOriginClientId"
-      [stackLength]="affiliationStack.affiliations.length"
-      [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard(affiliation)"
-      [topPanelOfTheStackMode]="
-        stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack
+  <!-- HEADER ACTIONS: visibility selector, etc. -->
+  <div panel-actions>
+    @if ( affiliationStack.defaultAffiliation.visibility?.visibility &&
+    isPreferred(affiliation) && !isPublicRecord ) {
+    <app-visibility-selector
+      (ngModelChange)="updateVisibility($event)"
+      [ngModel]="affiliationStack.defaultAffiliation.visibility.visibility"
+      [multiEdit]="
+        affiliationStack.affiliations.length > 1 ? 'multi' : 'single'
       "
-      [isPublicRecord]="isPublicRecord"
-      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
-      [type]="type"
-      [item]="affiliation"
-      [panelTitle]="affiliation.affiliationName.value"
+      [visibilityError]="visibilityError"
+      [editable]="editableVisibilityControl"
+      [itemTitle]="affiliation.affiliationName.value"
+    ></app-visibility-selector>
+    }
+  </div>
+  <!-- HEADER EDIT BUTTON -->
+  <div panel-edit>
+    @if ( isPreferred(affiliation) && userIsSource(affiliation) &&
+    !isPublicRecord ) {
+    <button
+      mat-icon-button
+      [matTooltip]="tooltipLabelEdit"
+      [attr.aria-label]="
+        type
+          | appPanelActivityActionAriaLabel
+            : 'edit'
+            : $safeNavigationMigration(affiliation.affiliationName?.value)
+      "
+      (click)="editAffiliation(affiliation)"
     >
-    </app-panel-source>
-  </orcid-panel>
-</ng-container>
+      <mat-icon class="material-icons-outlined">edit</mat-icon>
+    </button>
+    }
+  </div>
+  <!-- AFFILIATION BODY -->
+  @if (stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack) {
+  <app-affiliation
+    [affiliation]="affiliation"
+    [panelDetailsState]="panelDetailsState[affiliation.putCode.value]"
+    (toggleDetails)="toggleDetails($event)"
+    [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]"
+  >
+  </app-affiliation>
+  }
+  <!-- AFFILIATION SOURCE -->
+  <app-panel-source
+    panel-footer
+    [disablePadding]="true"
+    [userRecord]="userRecord"
+    [isPreferred]="isPreferred(affiliation)"
+    [sourceName]="affiliation.sourceName || affiliation.source"
+    [assertionOriginName]="affiliation.assertionOriginName"
+    [assertionOriginOrcid]="affiliation.assertionOriginOrcid"
+    [assertionOriginClientId]="affiliation.assertionOriginClientId"
+    [stackLength]="affiliationStack.affiliations.length"
+    [(displayTheStack)]="displayTheStack"
+    (makePrimary)="makePrimaryCard(affiliation)"
+    [topPanelOfTheStackMode]="
+      stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack
+    "
+    [isPublicRecord]="isPublicRecord"
+    (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
+    [type]="type"
+    [item]="affiliation"
+    [panelTitle]="affiliation.affiliationName.value"
+  >
+  </app-panel-source>
+</orcid-panel>
+} }

@@ -5,6 +5,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { Router } from '@angular/router'
 import { TrustedSummaryService } from 'src/app/core/trusted-summary/trusted-summary.service'
@@ -26,6 +27,7 @@ import { concat } from 'lodash'
     './trusted-summary.component.scss',
     './trusted-summary.component.scss-theme.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TrustedSummaryComponent implements OnInit, OnDestroy {
