@@ -21123,6 +21123,7 @@
       </trans-unit>
       <trans-unit id="printView.employments" datatype="html" resname="printView.employments">
         <source>Employments</source>
+        <target>Empregos</target>
       </trans-unit>
       <trans-unit id="printView.educationAndQualifications" datatype="html" resname="printView.educationAndQualifications">
         <source>Education and qualifications</source>
@@ -21134,9 +21135,11 @@
       </trans-unit>
       <trans-unit id="printView.fundings" datatype="html" resname="printView.fundings">
         <source>Fundings</source>
+        <target>Financiamentos</target>
       </trans-unit>
       <trans-unit id="printView.researchResources" datatype="html" resname="printView.researchResources">
         <source>Research Resources</source>
+        <target>Recursos de pesquisa</target>
       </trans-unit>
       <trans-unit id="printView.works" datatype="html" resname="printView.works">
         <source>Works</source>
@@ -21148,6 +21151,7 @@
       </trans-unit>
       <trans-unit id="printView.organizationAddress" datatype="html" resname="printView.organizationAddress">
         <source>Organization address</source>
+        <target>Nome da organização</target>
       </trans-unit>
       <trans-unit id="printView.startDate" datatype="html" resname="printView.startDate">
         <source>Start date</source>
@@ -21167,6 +21171,7 @@
       </trans-unit>
       <trans-unit id="printView.roleTitle" datatype="html" resname="printView.roleTitle">
         <source>Role title</source>
+        <target>Função/título</target>
       </trans-unit>
       <trans-unit id="printView.department" datatype="html" resname="printView.department">
         <source>Department</source>
@@ -21182,6 +21187,7 @@
       </trans-unit>
       <trans-unit id="printView.untitled" datatype="html" resname="printView.untitled">
         <source>Untitled</source>
+        <target>Sem título</target>
       </trans-unit>
       <trans-unit id="printView.identifier" datatype="html" resname="printView.identifier">
         <source>Identifier</source>
@@ -21189,21 +21195,27 @@
       </trans-unit>
       <trans-unit id="printView.loadingRecord" datatype="html" resname="printView.loadingRecord">
         <source>Loading ORCID record...</source>
+        <target>A carregar o registo ORCID...</target>
       </trans-unit>
       <trans-unit id="printView.recordNotFound" datatype="html" resname="printView.recordNotFound">
         <source>Record data was not found in ORCID response.</source>
+        <target>Não foram encontrados dados de registo na resposta do ORCID.</target>
       </trans-unit>
       <trans-unit id="printView.redirectingToPrimary" datatype="html" resname="printView.redirectingToPrimary">
         <source>Redirecting to primary ORCID record…</source>
+        <target>A redirecionar para o registo ORCID principal…</target>
       </trans-unit>
       <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
         <source>ORCID Print view</source>
+        <target>ORCID - Versão para impressão</target>
       </trans-unit>
       <trans-unit id="printView.printSaveAsPdf" datatype="html" resname="printView.printSaveAsPdf">
         <source>Print / Save as PDF</source>
+        <target>Imprimir / Guardar como PDF</target>
       </trans-unit>
       <trans-unit id="printView.printThisOrcidProfile" datatype="html" resname="printView.printThisOrcidProfile">
         <source>Print this ORCID profile</source>
+        <target>Imprimir este perfil ORCID</target>
       </trans-unit>
       <trans-unit id="printView.relSelf" datatype="html" resname="printView.relSelf">
         <source>Self</source>

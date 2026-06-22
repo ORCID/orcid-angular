@@ -21123,6 +21123,7 @@
       </trans-unit>
       <trans-unit id="printView.employments" datatype="html" resname="printView.employments">
         <source>Employments</source>
+        <target>就业状态</target>
       </trans-unit>
       <trans-unit id="printView.educationAndQualifications" datatype="html" resname="printView.educationAndQualifications">
         <source>Education and qualifications</source>
@@ -21134,9 +21135,11 @@
       </trans-unit>
       <trans-unit id="printView.fundings" datatype="html" resname="printView.fundings">
         <source>Fundings</source>
+        <target>资金</target>
       </trans-unit>
       <trans-unit id="printView.researchResources" datatype="html" resname="printView.researchResources">
         <source>Research Resources</source>
+        <target>研究资源</target>
       </trans-unit>
       <trans-unit id="printView.works" datatype="html" resname="printView.works">
         <source>Works</source>
@@ -21148,6 +21151,7 @@
       </trans-unit>
       <trans-unit id="printView.organizationAddress" datatype="html" resname="printView.organizationAddress">
         <source>Organization address</source>
+        <target>组织地址</target>
       </trans-unit>
       <trans-unit id="printView.startDate" datatype="html" resname="printView.startDate">
         <source>Start date</source>
@@ -21167,6 +21171,7 @@
       </trans-unit>
       <trans-unit id="printView.roleTitle" datatype="html" resname="printView.roleTitle">
         <source>Role title</source>
+        <target>职务头衔</target>
       </trans-unit>
       <trans-unit id="printView.department" datatype="html" resname="printView.department">
         <source>Department</source>
@@ -21182,6 +21187,7 @@
       </trans-unit>
       <trans-unit id="printView.untitled" datatype="html" resname="printView.untitled">
         <source>Untitled</source>
+        <target>无职称</target>
       </trans-unit>
       <trans-unit id="printView.identifier" datatype="html" resname="printView.identifier">
         <source>Identifier</source>
@@ -21189,21 +21195,27 @@
       </trans-unit>
       <trans-unit id="printView.loadingRecord" datatype="html" resname="printView.loadingRecord">
         <source>Loading ORCID record...</source>
+        <target>正在加载 ORCID 记录……</target>
       </trans-unit>
       <trans-unit id="printView.recordNotFound" datatype="html" resname="printView.recordNotFound">
         <source>Record data was not found in ORCID response.</source>
+        <target>ORCID 回传资料中未找到记录数据。</target>
       </trans-unit>
       <trans-unit id="printView.redirectingToPrimary" datatype="html" resname="printView.redirectingToPrimary">
         <source>Redirecting to primary ORCID record…</source>
+        <target>正在重新导向至主要 ORCID 记录……</target>
       </trans-unit>
       <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
         <source>ORCID Print view</source>
+        <target>ORCID 列印检视页</target>
       </trans-unit>
       <trans-unit id="printView.printSaveAsPdf" datatype="html" resname="printView.printSaveAsPdf">
         <source>Print / Save as PDF</source>
+        <target>列印/保存为 PDF 格式</target>
       </trans-unit>
       <trans-unit id="printView.printThisOrcidProfile" datatype="html" resname="printView.printThisOrcidProfile">
         <source>Print this ORCID profile</source>
+        <target>列印此 ORCID 个人档案</target>
       </trans-unit>
       <trans-unit id="printView.relSelf" datatype="html" resname="printView.relSelf">
         <source>Self</source>
