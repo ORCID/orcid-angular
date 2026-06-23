@@ -455,8 +455,7 @@ function otherIdsTextNode(label, value, url) {
     wrapper.appendChild(document.createTextNode(')'))
   } else {
     // Otherwise, render value as text,
-    if(value)
-      wrapper.appendChild(document.createTextNode(value))
+    if (value) wrapper.appendChild(document.createTextNode(value))
 
     // and optionally append a (url) link if provided and safe
     if (safeUrl) {
@@ -572,9 +571,7 @@ function composeActivityEntryFromJson(entry, opts = {}) {
         idRel && idRel.toLowerCase() !== 'self'
           ? `${localizedRel} ${idType}`.trim()
           : idType || STRINGS.identifier
-      wrapper.appendChild(
-        otherIdsTextNode(label, idValue, idUrl)
-      )
+      wrapper.appendChild(otherIdsTextNode(label, idValue, idUrl))
     })
   }
 
