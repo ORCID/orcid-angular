@@ -441,9 +441,10 @@ function otherIdsTextNode(label, value, url) {
     wrapper.appendChild(prefix)
   }
 
+  const safeUrl = sanitizeUrl(url)
   const valueAsUrl = sanitizeUrl(value)
-  if (valueAsUrl) {
-    // If the value itself is a URL, render it as a link and ignore the `url` parameter
+  if (safeUrl && valueAsUrl) {
+    // If both are provided and value is a URL, render value as the link
     wrapper.appendChild(document.createTextNode(' ('))
     const a = document.createElement('a')
     a.href = valueAsUrl
@@ -453,10 +454,11 @@ function otherIdsTextNode(label, value, url) {
     wrapper.appendChild(a)
     wrapper.appendChild(document.createTextNode(')'))
   } else {
-    // Otherwise, keep the existing behavior: render value as text,
+    // Otherwise, render value as text,
+    if(value)
+      wrapper.appendChild(document.createTextNode(value))
+
     // and optionally append a (url) link if provided and safe
-    wrapper.appendChild(document.createTextNode(value))
-    const safeUrl = sanitizeUrl(url)
     if (safeUrl) {
       wrapper.appendChild(document.createTextNode(' ('))
       const a = document.createElement('a')
@@ -571,7 +573,7 @@ function composeActivityEntryFromJson(entry, opts = {}) {
           ? `${localizedRel} ${idType}`.trim()
           : idType || STRINGS.identifier
       wrapper.appendChild(
-        otherIdsTextNode(label, idValue || idUrl || '', idUrl)
+        otherIdsTextNode(label, idValue, idUrl)
       )
     })
   }
