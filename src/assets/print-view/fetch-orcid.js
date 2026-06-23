@@ -927,9 +927,7 @@ async function fetchOrcidRecord(orcidId) {
     }
   }
   if (!response.ok) {
-    throw new Error(
-      `Failed to fetch ORCID record (${response.status}).`
-    )
+    throw new Error(`Failed to fetch ORCID record (${response.status}).`)
   }
 
   const recordJson = await response.json()
@@ -956,10 +954,7 @@ async function loadRecord(orcidId) {
     message.className = 'error'
     message.textContent = error.message
     cvRoot.appendChild(message)
-    showStatus(
-      `Could not load ${orcidId}.`,
-      'error'
-    )
+    showStatus(`Could not load ${orcidId}.`, 'error')
     cvRoot.setAttribute('aria-busy', 'false')
   }
 }
