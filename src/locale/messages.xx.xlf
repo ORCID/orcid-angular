@@ -21176,22 +21176,6 @@
         <source>Funded by</source>
         <target>X</target>
       </trans-unit>
-      <trans-unit id="printView.activityGroupHeading" datatype="html" resname="printView.activityGroupHeading">
-        <source>{$TITLE} ({$COUNT})</source>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="printView.peerReviewHeading" datatype="html" resname="printView.peerReviewHeading">
-        <source>Peer review ({$REVIEW_COUNT} reviews for {$PUBLICATION_COUNT} publications/grants)</source>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="printView.fetchFailed" datatype="html" resname="printView.fetchFailed">
-        <source>Failed to fetch ORCID record ({$STATUS}).</source>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="printView.couldNotLoad" datatype="html" resname="printView.couldNotLoad">
-        <source>Could not load {$ORCID_ID}.</source>
-        <target>X</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -706,9 +706,10 @@ function otherIdsTextNode(label, value, url) {
     wrapper.appendChild(prefix)
   }
 
+  const safeUrl = sanitizeUrl(url)
   const valueAsUrl = sanitizeUrl(value)
-  if (valueAsUrl) {
-    // If the value itself is a URL, render it as a link and ignore the `url` parameter
+  if (safeUrl && valueAsUrl) {
+    // If both are provided and value is a URL, render value as the link
     wrapper.appendChild(document.createTextNode(' ('))
     const a = document.createElement('a')
     a.href = valueAsUrl
@@ -718,10 +719,10 @@ function otherIdsTextNode(label, value, url) {
     wrapper.appendChild(a)
     wrapper.appendChild(document.createTextNode(')'))
   } else {
-    // Otherwise, keep the existing behavior: render value as text,
+    // Otherwise, render value as text,
+    if (value) wrapper.appendChild(document.createTextNode(value))
+
     // and optionally append a (url) link if provided and safe
-    wrapper.appendChild(document.createTextNode(value))
-    const safeUrl = sanitizeUrl(url)
     if (safeUrl) {
       wrapper.appendChild(document.createTextNode(' ('))
       const a = document.createElement('a')
@@ -746,7 +747,7 @@ function renderActivityGroupFromJson(section, title, items, renderItem) {
   const block = document.createElement('div')
   block.className = 'activity-group'
   const heading = document.createElement('h3')
-  heading.textContent = $localize`:@@printView.activityGroupHeading:${title}:TITLE: (${entries.length}:COUNT:)`
+  heading.textContent = `${title} (${entries.length})`
   block.appendChild(heading)
   const list = document.createElement('ul')
   entries.forEach((entry) => {
@@ -835,9 +836,7 @@ function composeActivityEntryFromJson(entry, opts = {}) {
         idRel && idRel.toLowerCase() !== 'self'
           ? `${localizedRel} ${idType}`.trim()
           : idType || STRINGS.identifier
-      wrapper.appendChild(
-        otherIdsTextNode(label, idValue || idUrl || '', idUrl)
-      )
+      wrapper.appendChild(otherIdsTextNode(label, idValue, idUrl))
     })
   }
 
@@ -1114,7 +1113,7 @@ function renderPeerReviews(activities, section) {
     const block = document.createElement('div')
     block.className = 'activity-group'
     const heading = document.createElement('h3')
-    heading.textContent = $localize`:@@printView.peerReviewHeading:Peer review (${reviews}:REVIEW_COUNT: reviews for ${sortedPublications.size}:PUBLICATION_COUNT: publications/grants)`
+    heading.textContent = `Peer review (${reviews} reviews for ${sortedPublications.size} publications/grants)`
     block.appendChild(heading)
     const list = document.createElement('ul')
     for (publication of sortedPublications || []) {
@@ -1192,9 +1191,7 @@ async function fetchOrcidRecord(orcidId) {
     }
   }
   if (!response.ok) {
-    throw new Error(
-      $localize`:@@printView.fetchFailed:Failed to fetch ORCID record (${response.status}:STATUS:).`
-    )
+    throw new Error(`Failed to fetch ORCID record (${response.status}).`)
   }
 
   const recordJson = await response.json()
@@ -1221,10 +1218,7 @@ async function loadRecord(orcidId) {
     message.className = 'error'
     message.textContent = error.message
     cvRoot.appendChild(message)
-    showStatus(
-      $localize`:@@printView.couldNotLoad:Could not load ${orcidId}:ORCID_ID:.`,
-      'error'
-    )
+    showStatus(`Could not load ${orcidId}.`, 'error')
     cvRoot.setAttribute('aria-busy', 'false')
   }
 }
