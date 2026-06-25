@@ -59,6 +59,10 @@ const STRINGS = {
   relFundedBy: $localize`:@@printView.relFundedBy:Funded by`,
 }
 
+function peerReviewHeadingText(reviewsCount, publicationsCount) {
+  return $localize`:@@printView.peerReviewSummary:Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)`
+}
+
 const ORCID_REGEX = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
 
 const cvRoot = document.getElementById('cv-root')
@@ -849,7 +853,7 @@ function renderPeerReviews(activities, section) {
     const block = document.createElement('div')
     block.className = 'activity-group'
     const heading = document.createElement('h3')
-    heading.textContent = `Peer review (${reviews} reviews for ${sortedPublications.size} publications/grants)`
+    heading.textContent = peerReviewHeadingText(reviews, sortedPublications.size)
     block.appendChild(heading)
     const list = document.createElement('ul')
     for (publication of sortedPublications || []) {

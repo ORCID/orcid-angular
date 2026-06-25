@@ -655,6 +655,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   private getMostPermissiveVisibility(
     visibilities: VisibilityStrings[]
   ): VisibilityStrings {
+    if (!visibilities.length) {
+      return null
+    }
     return visibilities.reduce((most, current) =>
       VisibilityWeightMap[current] > VisibilityWeightMap[most] ? current : most
     )
@@ -663,6 +666,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   private getLeastPermissiveVisibility(
     visibilities: VisibilityStrings[]
   ): VisibilityStrings {
+    if (!visibilities.length) {
+      return null
+    }
     return visibilities.reduce((least, current) =>
       VisibilityWeightMap[current] < VisibilityWeightMap[least]
         ? current
