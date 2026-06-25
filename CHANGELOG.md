@@ -1,3 +1,21 @@
+## v2.136.2 - 2026-06-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.1...v2.136.2)
+
+## v2.136.1 - 2026-06-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.0...v2.136.1)
+
+## v2.136.0 - 2026-06-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.14...v2.136.0)
+
+## v2.135.14 - 2026-06-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.13...v2.135.14)
+
+- [#2853](https://github.com/ORCID/orcid-angular/pull/2853): Transifex: update translations
+
 ## v2.135.13 - 2026-06-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.12...v2.135.13)
