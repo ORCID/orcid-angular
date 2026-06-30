@@ -86,12 +86,14 @@ export class RecordAffiliationsGroupingService {
                   .map((key) => value.affiliationGroups[key])
               })
               // Reduce all elements with different AffiliationGroupsTypeName on the same expectedUiOrderGroup
-              .reduce((accumulator, currentValue) =>
-                accumulator.concat(currentValue)
+              .reduce(
+                (accumulator, currentValue) => accumulator.concat(currentValue),
+                []
               )
               // Concatenates affiliations lists
-              .reduce((accumulator, currentValue) =>
-                accumulator.concat(currentValue)
+              .reduce(
+                (accumulator, currentValue) => accumulator.concat(currentValue),
+                []
               ),
           }
         }

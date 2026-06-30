@@ -15,6 +15,10 @@ declare function jsonText(value: any): string
 declare function jsonList(list: any): any[]
 declare function jsonDate(parts: any): string
 declare function jsonOrcidUri(orcidIdentifier: any): string
+declare function peerReviewHeadingText(
+  reviewsCount: number,
+  publicationsCount: number
+): string
 declare function renderOrcidPrompt(message?: string): void
 declare function makeSection(title: string): HTMLElement
 declare function textLineNode(
@@ -216,6 +220,16 @@ describe('fetch-orcid.js', () => {
     it('returns empty string when both are missing', () => {
       expect(jsonOrcidUri({})).toBe('')
       expect(jsonOrcidUri(null)).toBe('')
+    })
+  })
+
+  // ── peerReviewHeadingText ───────────────────────────────────────────────────
+
+  describe('peerReviewHeadingText', () => {
+    it('builds heading text including review and publication counts', () => {
+      expect(peerReviewHeadingText(7, 3)).toBe(
+        'Peer review (7 reviews for 3 publications/grants)'
+      )
     })
   })
 
