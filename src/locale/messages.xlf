@@ -18910,6 +18910,9 @@
       <trans-unit id="printView.relFundedBy" datatype="html" resname="printView.relFundedBy">
         <source>Funded by</source>
       </trans-unit>
+      <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
+        <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
+      </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>
       </trans-unit>
