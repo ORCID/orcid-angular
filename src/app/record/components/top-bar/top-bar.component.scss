@@ -11,21 +11,50 @@ app-panel {
   width: 100%;
   margin-top: 16px;
 
-  .name,
   p {
-    margin-top: 0;
+    margin: 0;
   }
 
-  p .published-name {
-    margin-bottom: 18px;
+  .mat-caption.description {
+    display: block;
+    margin: 16px 0 8px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .published-name {
+    margin: 0;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: bold;
+  }
+
+  .name-value {
+    margin: 0;
+    font-weight: bold;
   }
 
   .other-names-container {
-    margin-top: 18px;
+    margin-top: 16px;
 
     .other-names {
       margin-bottom: 0;
     }
+  }
+
+  // Scoped to the names panel only: centre the visibility icon against
+  // the block it belongs to instead of the default flex `stretch`, so it
+  // stays aligned when the block wraps published name + name onto several
+  // lines. `app-panel-element` is shared by other panels, so this is kept
+  // local rather than changed at the source.
+  ::ng-deep .row-with-privacy {
+    align-items: center;
+  }
+
+  ::ng-deep app-panel-privacy {
+    margin-top: 0;
   }
 }
 
