@@ -1,41 +1,36 @@
 <mat-card class="sms-poc-card max-w-[560px] sm:p-10! p-6!">
-  <h1 class="orc-font-heading-small font-normal mb-4">SMS POC</h1>
+  <h1 class="orc-font-heading-small font-normal mb-4">
+    Two-step verification by SMS
+  </h1>
   <p class="sms-poc-description orc-font-body-small mb-4">
-    Send a test SMS. Choose AWS or Twilio for each send.
+    Add a phone number to your ORCID account. We'll send a one-time
+    verification code by SMS to confirm the number.
   </p>
 
-  <app-alert-message type="warning" role="note" class="mb-6 block">
-    <div content>
-      <span>
-        This POC currently runs in SANDBOX mode. If you want to test actual SMS
-        delivery to your phone, please reach out to Leo on Slack to add your
-        phone number to our AWS SNS ORCID Friend Sandbox and the Twilio
-        accounts.
-      </span>
-    </div>
-  </app-alert-message>
-
+  @if (step === 'send') {
   <form [formGroup]="smsForm" (ngSubmit)="onSubmit()" class="grid gap-4">
+    @if (showProviderSelector) {
     <div class="provider-selection">
       <span class="orc-font-small-print leading-4.5 font-bold! block mb-2">
-        Provider
+        Provider (internal testing only)
       </span>
       <mat-radio-group
         formControlName="provider"
         color="primary"
         class="provider-group flex gap-4"
       >
-        <mat-radio-button value="aws"> AWS SNS </mat-radio-button>
-        <mat-radio-button value="twilio"> Twilio </mat-radio-button>
+        <mat-radio-button value="aws"> AWS End User Messaging </mat-radio-button>
+        <mat-radio-button value="twilio"> Twilio Verify </mat-radio-button>
       </mat-radio-group>
     </div>
+    }
 
     <div class="phone-field">
       <label
         class="orc-font-small-print leading-4.5 font-bold! block mb-2"
         for="sms-poc-phone"
       >
-        Phone number
+        Mobile phone number
       </label>
       <div class="phone-input-shell">
         <intl-tel-input
@@ -52,19 +47,74 @@
       }
     </div>
 
+    <div class="consent-field">
+      <mat-checkbox formControlName="consent" color="primary">
+        <span class="consent-text orc-font-small-print">
+          By entering my phone number and choosing "Send verification code," I
+          consent to receive an automated one-time verification code from ORCID
+          at the number provided. Messages are powered by AWS Notify. Message
+          and data rates may apply. Message frequency varies. Reply HELP for
+          help, STOP to cancel. See ORCID's
+          <a
+            href="https://info.orcid.org/terms-of-use/"
+            target="_blank"
+            rel="noopener"
+            (click)="$event.stopPropagation()"
+            >Terms and Conditions</a
+          >
+          and
+          <a
+            href="https://info.orcid.org/privacy-policy/"
+            target="_blank"
+            rel="noopener"
+            (click)="$event.stopPropagation()"
+            >Privacy Policy</a
+          >.
+        </span>
+      </mat-checkbox>
+      @if (consent?.invalid && consent?.touched) {
+      <mat-error class="orc-font-small-print mt-2 block">
+        You must agree to receive SMS messages to continue
+      </mat-error>
+      }
+    </div>
+
+    @if (backendError) {
+    <app-alert-message type="warning" role="alert" class="mb-2">
+      <div content>{{ backendError }}</div>
+    </app-alert-message>
+    } @if (loading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="loading"
+      [ngClass]="{ 'button-loading': loading }"
+    >
+      Send verification code
+    </button>
+  </form>
+  } @else {
+  <form [formGroup]="verifyForm" (ngSubmit)="onVerify()" class="grid gap-4">
+    <p class="orc-font-body-small mb-2">
+      Enter the 6-digit code we sent to
+      <strong>{{ verifiedPhoneNumber }}</strong>.
+    </p>
+
     <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-      <mat-label>Message</mat-label>
-      <textarea
+      <mat-label>Verification code</mat-label>
+      <input
         matInput
-        formControlName="message"
-        rows="4"
-        maxlength="1600"
-      ></textarea>
-      <mat-hint align="end">{{ message?.value?.length || 0 }}/1600</mat-hint>
-      @if (message?.hasError('required') && message?.touched) {
-      <mat-error>Message is required</mat-error>
-      } @if (message?.hasError('maxlength') && message?.touched) {
-      <mat-error> Message must be 1600 characters or fewer </mat-error>
+        formControlName="code"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        maxlength="8"
+      />
+      @if (code?.hasError('required') && code?.touched) {
+      <mat-error>Verification code is required</mat-error>
       }
     </mat-form-field>
 
@@ -72,14 +122,17 @@
     <app-alert-message type="warning" role="alert" class="mb-2">
       <div content>{{ backendError }}</div>
     </app-alert-message>
-    } @if (response?.success) {
+    } @if (verifyResponse?.verified) {
     <app-alert-message type="success" role="status" class="mb-2">
       <div content>
-        <span>SMS sent.</span>
-        <span>
-          {{ response.provider }}:
-          {{ response.providerMessageId || response.status }}
-        </span>
+        <span>Phone number verified.</span>
+      </div>
+    </app-alert-message>
+    } @else if (verifyResponse && verifyResponse.success &&
+    !verifyResponse.verified) {
+    <app-alert-message type="warning" role="alert" class="mb-2">
+      <div content>
+        <span>That code is not correct. Please try again.</span>
       </div>
     </app-alert-message>
     } @if (loading) {
@@ -93,7 +146,12 @@
       [disabled]="loading"
       [ngClass]="{ 'button-loading': loading }"
     >
-      Send SMS
+      Verify code
+    </button>
+
+    <button mat-button type="button" (click)="startOver()">
+      Use a different number
     </button>
   </form>
+  }
 </mat-card>
