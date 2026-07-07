@@ -84,23 +84,23 @@ export class SmsPocComponent implements OnInit {
     this._smsPocService
       .send({ provider, phoneNumber, locale: this._locale })
       .subscribe({
-      next: (response) => {
-        this.loading = false
-        this.response = response
-        if (response.success) {
-          this.verifiedPhoneNumber =
-            response.normalizedPhoneNumber || phoneNumber
-          this.step = 'verify'
-        } else {
-          this.backendError =
-            response.errorMessage || response.errorCode || null
-        }
-      },
-      error: () => {
-        this.loading = false
-        this.backendError = 'Verification code could not be sent'
-      },
-    })
+        next: (response) => {
+          this.loading = false
+          this.response = response
+          if (response.success) {
+            this.verifiedPhoneNumber =
+              response.normalizedPhoneNumber || phoneNumber
+            this.step = 'verify'
+          } else {
+            this.backendError =
+              response.errorMessage || response.errorCode || null
+          }
+        },
+        error: () => {
+          this.loading = false
+          this.backendError = 'Verification code could not be sent'
+        },
+      })
   }
 
   onVerify() {

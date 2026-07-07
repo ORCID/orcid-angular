@@ -3,8 +3,8 @@
     Two-step verification by SMS
   </h1>
   <p class="sms-poc-description orc-font-body-small mb-4">
-    Add a phone number to your ORCID account. We'll send a one-time
-    verification code by SMS to confirm the number.
+    Add a phone number to your ORCID account. We'll send a one-time verification
+    code by SMS to confirm the number.
   </p>
 
   @if (step === 'send') {
@@ -19,7 +19,9 @@
         color="primary"
         class="provider-group flex gap-4"
       >
-        <mat-radio-button value="aws"> AWS End User Messaging </mat-radio-button>
+        <mat-radio-button value="aws">
+          AWS End User Messaging
+        </mat-radio-button>
         <mat-radio-button value="twilio"> Twilio Verify </mat-radio-button>
       </mat-radio-group>
     </div>
@@ -101,7 +103,8 @@
   <form [formGroup]="verifyForm" (ngSubmit)="onVerify()" class="grid gap-4">
     <p class="orc-font-body-small mb-2">
       Enter the 6-digit code we sent to
-      <strong>{{ verifiedPhoneNumber }}</strong>.
+      <strong>{{ verifiedPhoneNumber }}</strong
+      >.
     </p>
 
     <mat-form-field appearance="outline" [hideRequiredMarker]="true">
