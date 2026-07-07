@@ -141,18 +141,21 @@
         <app-panel-element
           [visibility]="userRecord.names.visibility.visibility"
         >
-          <h1 class="name" *ngIf="creditName">
-            <span i18n="@@topBar.publishedName" class="mat-caption">
+          <ng-container *ngIf="creditName">
+            <span
+              i18n="@@topBar.publishedName"
+              class="mat-caption description"
+            >
               Published Name
             </span>
-            <p class="mat-card-title published-name" id="publishedName">
+            <h1 class="published-name" id="publishedName">
               {{ creditName }}
-            </p>
-          </h1>
+            </h1>
+          </ng-container>
           <span i18n="@@topBar.name" class="mat-caption description">
             Name
           </span>
-          <div id="givenAndFamilyNames" class="mat-subtitle-2">
+          <div id="givenAndFamilyNames" class="mat-subtitle-2 name-value">
             {{ givenNames + ' ' + familyName }}
           </div>
         </app-panel-element>
