@@ -711,23 +711,40 @@ function otherIdsTextNode(label, value, url) {
   }
 
   const safeUrl = sanitizeUrl(url)
-  const valueAsUrl = sanitizeUrl(value)
-  if (safeUrl && valueAsUrl) {
-    // If both are provided and value is a URL, render value as the link
-    wrapper.appendChild(document.createTextNode(' ('))
+  const safeValue = sanitizeUrl(value)
+
+  if (!value && safeUrl) {
+    // Requirement 1: value is empty and url is provided
     const a = document.createElement('a')
-    a.href = valueAsUrl
+    a.href = safeUrl
     a.target = '_blank'
     a.rel = 'noopener noreferrer'
-    a.textContent = value || valueAsUrl
+    a.textContent = safeUrl
     wrapper.appendChild(a)
-    wrapper.appendChild(document.createTextNode(')'))
+  } else if (value && safeUrl && value === url) {
+    // Requirement 2: value matches url
+    const a = document.createElement('a')
+    a.href = safeUrl
+    a.target = '_blank'
+    a.rel = 'noopener noreferrer'
+    a.textContent = value
+    wrapper.appendChild(a)
   } else {
-    // Otherwise, render value as text,
-    if (value) wrapper.appendChild(document.createTextNode(value))
+    // Requirement 3: value is not empty and does not match url
+    if (value) {
+      if (safeValue) {
+        const a = document.createElement('a')
+        a.href = safeValue
+        a.target = '_blank'
+        a.rel = 'noopener noreferrer'
+        a.textContent = value
+        wrapper.appendChild(a)
+      } else {
+        wrapper.appendChild(document.createTextNode(value))
+      }
+    }
 
-    // and optionally append a (url) link if provided and safe
-    if (safeUrl) {
+    if (safeUrl && value !== url) {
       wrapper.appendChild(document.createTextNode(' ('))
       const a = document.createElement('a')
       a.href = safeUrl
@@ -739,10 +756,6 @@ function otherIdsTextNode(label, value, url) {
     }
   }
   return wrapper
-}
-
-function safeTextNode(value) {
-  return (value || '').replace(/\s+/g, ' ').trim()
 }
 
 function renderActivityGroupFromJson(section, title, items, renderItem) {

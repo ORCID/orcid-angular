@@ -296,30 +296,45 @@ describe('fetch-orcid.js', () => {
         '12345',
         'https://scopus.com/12345'
       )
-      expect(node.textContent).toContain('Scopus ID: 12345')
+      expect(node.textContent).toBe('Scopus ID: 12345 (https://scopus.com/12345)')
       const anchor = node.querySelector('a')
       expect(anchor).not.toBeNull()
       expect(anchor!.href).toBe('https://scopus.com/12345')
       expect(anchor!.textContent).toBe('https://scopus.com/12345')
     })
 
-    it('renders value as a link and IGNORES url parameter when value IS a URL', () => {
+    it('renders value as a link and NO url in brackets when value IS a URL and matches url param', () => {
+      const node = otherIdsTextNode(
+        'ResearcherID',
+        'https://researcherid.com/rid/H-1234-2012',
+        'https://researcherid.com/rid/H-1234-2012'
+      )
+      expect(node.textContent).toBe('ResearcherID: https://researcherid.com/rid/H-1234-2012')
+      const anchor = node.querySelector('a')
+      expect(anchor).not.toBeNull()
+      expect(anchor!.href).toBe('https://researcherid.com/rid/H-1234-2012')
+    })
+
+    it('renders value as link and url in brackets when value is a URL but different from url param', () => {
       const node = otherIdsTextNode(
         'ResearcherID',
         'https://researcherid.com/rid/H-1234-2012',
         'https://some-other-url.com'
       )
-      // This is the NEW behavior we want.
-      // Currently it would probably render "ResearcherID: https://researcherid.com/rid/H-1234-2012 (https://some-other-url.com)"
+      expect(node.textContent).toContain('ResearcherID: https://researcherid.com/rid/H-1234-2012')
+      expect(node.textContent).toContain('(https://some-other-url.com')
+      const anchors = node.querySelectorAll('a')
+      expect(anchors.length).toBe(2)
+      expect(anchors[0].href).toBe('https://researcherid.com/rid/H-1234-2012')
+      expect(anchors[1].href).toContain('https://some-other-url.com')
+    })
+
+    it('renders only url when value is empty', () => {
+      const node = otherIdsTextNode('Label', '', 'https://example.com')
+      expect(node.textContent).toContain('Label: https://example.com')
       const anchor = node.querySelector('a')
       expect(anchor).not.toBeNull()
-      expect(anchor!.href).toBe('https://researcherid.com/rid/H-1234-2012')
-      expect(anchor!.textContent).toBe(
-        'https://researcherid.com/rid/H-1234-2012'
-      )
-
-      // Ensure the other URL is NOT present
-      expect(node.textContent).not.toContain('https://some-other-url.com')
+      expect(anchor!.href).toContain('https://example.com')
     })
   })
 
