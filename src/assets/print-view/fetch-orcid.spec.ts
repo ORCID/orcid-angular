@@ -296,7 +296,9 @@ describe('fetch-orcid.js', () => {
         '12345',
         'https://scopus.com/12345'
       )
-      expect(node.textContent).toBe('Scopus ID: 12345 (https://scopus.com/12345)')
+      expect(node.textContent).toBe(
+        'Scopus ID: 12345 (https://scopus.com/12345)'
+      )
       const anchor = node.querySelector('a')
       expect(anchor).not.toBeNull()
       expect(anchor!.href).toBe('https://scopus.com/12345')
@@ -309,7 +311,9 @@ describe('fetch-orcid.js', () => {
         'https://researcherid.com/rid/H-1234-2012',
         'https://researcherid.com/rid/H-1234-2012'
       )
-      expect(node.textContent).toBe('ResearcherID: https://researcherid.com/rid/H-1234-2012')
+      expect(node.textContent).toBe(
+        'ResearcherID: https://researcherid.com/rid/H-1234-2012'
+      )
       const anchor = node.querySelector('a')
       expect(anchor).not.toBeNull()
       expect(anchor!.href).toBe('https://researcherid.com/rid/H-1234-2012')
@@ -321,7 +325,9 @@ describe('fetch-orcid.js', () => {
         'https://researcherid.com/rid/H-1234-2012',
         'https://some-other-url.com'
       )
-      expect(node.textContent).toContain('ResearcherID: https://researcherid.com/rid/H-1234-2012')
+      expect(node.textContent).toContain(
+        'ResearcherID: https://researcherid.com/rid/H-1234-2012'
+      )
       expect(node.textContent).toContain('(https://some-other-url.com')
       const anchors = node.querySelectorAll('a')
       expect(anchors.length).toBe(2)
