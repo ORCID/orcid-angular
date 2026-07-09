@@ -152,7 +152,7 @@
           [visibility]="userRecord.names.visibility.visibility"
         >
           <h1 class="published-name" id="publishedName">
-            {{ creditName || (givenNames + ' ' + familyName) }}
+            {{ creditName || givenNames + ' ' + familyName }}
           </h1>
         </app-panel-element>
         <ng-container *ngIf="creditName">
