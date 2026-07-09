@@ -45,10 +45,12 @@ app-panel {
   }
 
   // Scoped to the names panel only: centre the visibility icon against
-  // the block it belongs to instead of the default flex `stretch`, so it
-  // stays aligned when the block wraps published name + name onto several
-  // lines. `app-panel-element` is shared by other panels, so this is kept
-  // local rather than changed at the source.
+  // the block it belongs to instead of the default flex `stretch`. The
+  // caption label above each value lives outside `app-panel-element` (see
+  // template), so `.line` here is always just the value itself and this
+  // centres correctly whether it's one line or wraps onto several.
+  // `app-panel-element` is shared by other panels, so this is kept local
+  // rather than changed at the source.
   ::ng-deep .row-with-privacy {
     align-items: center;
   }
