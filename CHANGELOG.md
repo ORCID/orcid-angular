@@ -1,3 +1,9 @@
+## v2.136.9 - 2026-07-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.8...v2.136.9)
+
+- [#2876](https://github.com/ORCID/orcid-angular/pull/2876): PD-3625 Align visibility icon with the name value, not the label
+
 ## v2.136.8 - 2026-07-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.7...v2.136.8)
