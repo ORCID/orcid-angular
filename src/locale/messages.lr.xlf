@@ -13727,11 +13727,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">202,204</context>
+          <context context-type="linenumber">209,211</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">253,255</context>
+          <context context-type="linenumber">260,262</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -13843,7 +13843,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">161,163</context>
+          <context context-type="linenumber">168,170</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13951,7 +13951,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">145,147</context>
+          <context context-type="linenumber">142,144</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -14275,7 +14275,11 @@
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">152,154</context>
+          <context context-type="linenumber">147,149</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">159,161</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
