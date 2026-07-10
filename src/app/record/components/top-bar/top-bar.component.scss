@@ -55,8 +55,15 @@ app-panel {
     align-items: center;
   }
 
+  // The header uses 8px right padding around a 48px edit button (12px
+  // icon inset each side), while the body uses 16px padding around a
+  // visibility icon with no inset of its own. Those two paddings don't
+  // cancel out, so without this the visibility icon glyph sits 4px
+  // further from the edge than the edit icon glyph. This nudges it back
+  // in line. Scoped locally for the same reason as above.
   ::ng-deep app-panel-privacy {
     margin-top: 0;
+    margin-inline-end: 4px;
   }
 }
 
