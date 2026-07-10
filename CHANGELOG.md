@@ -1,3 +1,9 @@
+## v2.136.10 - 2026-07-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.9...v2.136.10)
+
+- [#2877](https://github.com/ORCID/orcid-angular/pull/2877): PD-3625 Align visibility icon column with the edit button
+
 ## v2.136.9 - 2026-07-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.8...v2.136.9)
