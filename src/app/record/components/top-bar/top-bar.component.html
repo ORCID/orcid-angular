@@ -138,24 +138,31 @@
         Names
       </h2>
       <app-panel-data [deprecatedPadding]="true">
-        <app-panel-element
-          [visibility]="userRecord.names.visibility.visibility"
-        >
-          <h1 class="name" *ngIf="creditName">
-            <span i18n="@@topBar.publishedName" class="mat-caption">
-              Published Name
-            </span>
-            <p class="mat-card-title published-name" id="publishedName">
-              {{ creditName }}
-            </p>
-          </h1>
+        <ng-container *ngIf="creditName; else nameAsPrimaryLabel">
+          <span i18n="@@topBar.publishedName" class="mat-caption description">
+            Published Name
+          </span>
+        </ng-container>
+        <ng-template #nameAsPrimaryLabel>
           <span i18n="@@topBar.name" class="mat-caption description">
             Name
           </span>
-          <div id="givenAndFamilyNames" class="mat-subtitle-2">
+        </ng-template>
+        <app-panel-element
+          [visibility]="userRecord.names.visibility.visibility"
+        >
+          <h1 class="published-name" id="publishedName">
+            {{ creditName || givenNames + ' ' + familyName }}
+          </h1>
+        </app-panel-element>
+        <ng-container *ngIf="creditName">
+          <span i18n="@@topBar.name" class="mat-caption description">
+            Name
+          </span>
+          <div id="givenAndFamilyNames" class="mat-subtitle-2 name-value">
             {{ givenNames + ' ' + familyName }}
           </div>
-        </app-panel-element>
+        </ng-container>
         <ng-container *ngIf="userRecord?.otherNames?.otherNames?.length > 0">
           <div class="other-names-container">
             <span i18n="@@topBar.alsoKnowAs" class="mat-caption description">

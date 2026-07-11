@@ -1,3 +1,59 @@
+## v2.136.10 - 2026-07-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.9...v2.136.10)
+
+- [#2877](https://github.com/ORCID/orcid-angular/pull/2877): PD-3625 Align visibility icon column with the edit button
+
+## v2.136.9 - 2026-07-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.8...v2.136.9)
+
+- [#2876](https://github.com/ORCID/orcid-angular/pull/2876): PD-3625 Align visibility icon with the name value, not the label
+
+## v2.136.8 - 2026-07-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.7...v2.136.8)
+
+## v2.136.7 - 2026-07-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.6...v2.136.7)
+
+- [#2874](https://github.com/ORCID/orcid-angular/pull/2874): PD-3625 Fix spacing, alignment and typography in Names panel
+
+## v2.136.6 - 2026-07-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.5...v2.136.6)
+
+## v2.136.5 - 2026-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.4...v2.136.5)
+
+## v2.136.4 - 2026-06-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.3...v2.136.4)
+
+## v2.136.3 - 2026-06-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.2...v2.136.3)
+
+## v2.136.2 - 2026-06-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.1...v2.136.2)
+
+## v2.136.1 - 2026-06-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.0...v2.136.1)
+
+## v2.136.0 - 2026-06-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.14...v2.136.0)
+
+## v2.135.14 - 2026-06-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.13...v2.135.14)
+
+- [#2853](https://github.com/ORCID/orcid-angular/pull/2853): Transifex: update translations
+
 ## v2.135.13 - 2026-06-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.135.12...v2.135.13)
