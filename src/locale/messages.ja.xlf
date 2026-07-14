@@ -21239,6 +21239,7 @@
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
         <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
+        <target>ピアレビュー (レビュー ${reviewsCount}:reviewCount: 件、出版/助成 ${publicationsCount}:publicationCount: 件)</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>

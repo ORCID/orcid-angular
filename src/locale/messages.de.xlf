@@ -21239,6 +21239,7 @@
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
         <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
+        <target>Peer-Review (${reviewsCount}:reviewCount: Reviews für ${publicationsCount}:publicationCount: Veröffentlichungen/Förderungen)</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>
