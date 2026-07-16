@@ -13785,11 +13785,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">202,204</context>
+          <context context-type="linenumber">209,211</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">253,255</context>
+          <context context-type="linenumber">260,262</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -13901,7 +13901,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">161,163</context>
+          <context context-type="linenumber">168,170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.orcidHasANumber" datatype="html" resname="topBar.orcidHasANumber">
@@ -14009,7 +14009,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">145,147</context>
+          <context context-type="linenumber">142,144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.whoCanSeeYourNames" datatype="html" resname="topBar.whoCanSeeYourNames">
@@ -14333,7 +14333,11 @@
         <target>名前</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">152,154</context>
+          <context context-type="linenumber">147,149</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">159,161</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsTitle" datatype="html" resname="topBar.permissionNotificationsTitle">
@@ -21233,7 +21237,1010 @@
         <source>Funded by</source>
         <target>資金の提供：</target>
       </trans-unit>
-
+      <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
+        <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
+        <target>ピアレビュー (レビュー ${reviewsCount}:reviewCount: 件、出版/助成 ${publicationsCount}:publicationCount: 件)</target>
+      </trans-unit>
+      <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
+        <source>Afghanistan</source>
+        <target>アフガニスタン</target>
+      </trans-unit>
+      <trans-unit id="printView.AL" datatype="html" resname="printView.AL">
+        <source>Albania</source>
+        <target>アルバニア</target>
+      </trans-unit>
+      <trans-unit id="printView.DZ" datatype="html" resname="printView.DZ">
+        <source>Algeria</source>
+        <target>アルジェリア</target>
+      </trans-unit>
+      <trans-unit id="printView.AS" datatype="html" resname="printView.AS">
+        <source>American Samoa</source>
+        <target>アメリカ領サモア</target>
+      </trans-unit>
+      <trans-unit id="printView.AD" datatype="html" resname="printView.AD">
+        <source>Andorra</source>
+        <target>アンドラ</target>
+      </trans-unit>
+      <trans-unit id="printView.AO" datatype="html" resname="printView.AO">
+        <source>Angola</source>
+        <target>アンゴラ</target>
+      </trans-unit>
+      <trans-unit id="printView.AI" datatype="html" resname="printView.AI">
+        <source>Anguilla</source>
+        <target>アンギラ</target>
+      </trans-unit>
+      <trans-unit id="printView.AQ" datatype="html" resname="printView.AQ">
+        <source>Antarctica</source>
+        <target>南極</target>
+      </trans-unit>
+      <trans-unit id="printView.AG" datatype="html" resname="printView.AG">
+        <source>Antigua and Barbuda</source>
+        <target>アンティグア・バーブーダ</target>
+      </trans-unit>
+      <trans-unit id="printView.AR" datatype="html" resname="printView.AR">
+        <source>Argentina</source>
+        <target>アルゼンチン</target>
+      </trans-unit>
+      <trans-unit id="printView.AM" datatype="html" resname="printView.AM">
+        <source>Armenia</source>
+        <target>アルメニア</target>
+      </trans-unit>
+      <trans-unit id="printView.AW" datatype="html" resname="printView.AW">
+        <source>Aruba</source>
+        <target>アルバ</target>
+      </trans-unit>
+      <trans-unit id="printView.AU" datatype="html" resname="printView.AU">
+        <source>Australia</source>
+        <target>オーストラリア</target>
+      </trans-unit>
+      <trans-unit id="printView.AT" datatype="html" resname="printView.AT">
+        <source>Austria</source>
+        <target>オーストリア</target>
+      </trans-unit>
+      <trans-unit id="printView.AZ" datatype="html" resname="printView.AZ">
+        <source>Azerbaijan</source>
+        <target>アゼルバイジャン</target>
+      </trans-unit>
+      <trans-unit id="printView.BS" datatype="html" resname="printView.BS">
+        <source>Bahamas</source>
+        <target>バハマ</target>
+      </trans-unit>
+      <trans-unit id="printView.BH" datatype="html" resname="printView.BH">
+        <source>Bahrain</source>
+        <target>バーレーン</target>
+      </trans-unit>
+      <trans-unit id="printView.BD" datatype="html" resname="printView.BD">
+        <source>Bangladesh</source>
+        <target>バングラデシュ</target>
+      </trans-unit>
+      <trans-unit id="printView.BB" datatype="html" resname="printView.BB">
+        <source>Barbados</source>
+        <target>バルバドス</target>
+      </trans-unit>
+      <trans-unit id="printView.BY" datatype="html" resname="printView.BY">
+        <source>Belarus</source>
+        <target>ベラルーシ</target>
+      </trans-unit>
+      <trans-unit id="printView.BE" datatype="html" resname="printView.BE">
+        <source>Belgium</source>
+        <target>ベルギー</target>
+      </trans-unit>
+      <trans-unit id="printView.BZ" datatype="html" resname="printView.BZ">
+        <source>Belize</source>
+        <target>ベリーズ</target>
+      </trans-unit>
+      <trans-unit id="printView.BJ" datatype="html" resname="printView.BJ">
+        <source>Benin</source>
+        <target>ベナン</target>
+      </trans-unit>
+      <trans-unit id="printView.BM" datatype="html" resname="printView.BM">
+        <source>Bermuda</source>
+        <target>バミューダ</target>
+      </trans-unit>
+      <trans-unit id="printView.BT" datatype="html" resname="printView.BT">
+        <source>Bhutan</source>
+        <target>ブータン</target>
+      </trans-unit>
+      <trans-unit id="printView.BO" datatype="html" resname="printView.BO">
+        <source>Bolivia</source>
+        <target>ボリビア</target>
+      </trans-unit>
+      <trans-unit id="printView.BA" datatype="html" resname="printView.BA">
+        <source>Bosnia and Herzegovina</source>
+        <target>ボスニア・ヘルツェゴビナ</target>
+      </trans-unit>
+      <trans-unit id="printView.BW" datatype="html" resname="printView.BW">
+        <source>Botswana</source>
+        <target>ボツワナ</target>
+      </trans-unit>
+      <trans-unit id="printView.BV" datatype="html" resname="printView.BV">
+        <source>Bouvet Island</source>
+        <target>ブーベ島</target>
+      </trans-unit>
+      <trans-unit id="printView.BR" datatype="html" resname="printView.BR">
+        <source>Brazil</source>
+        <target>ブラジル</target>
+      </trans-unit>
+      <trans-unit id="printView.BQ" datatype="html" resname="printView.BQ">
+        <source>British Antarctic Territory</source>
+        <target>イギリス領南極地域</target>
+      </trans-unit>
+      <trans-unit id="printView.IO" datatype="html" resname="printView.IO">
+        <source>British Indian Ocean Territory</source>
+        <target>イギリス領インド洋地域</target>
+      </trans-unit>
+      <trans-unit id="printView.VG" datatype="html" resname="printView.VG">
+        <source>British Virgin Islands</source>
+        <target>イギリス領ヴァージン諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.BN" datatype="html" resname="printView.BN">
+        <source>Brunei</source>
+        <target>ブルネイ</target>
+      </trans-unit>
+      <trans-unit id="printView.BG" datatype="html" resname="printView.BG">
+        <source>Bulgaria</source>
+        <target>ブルガリア</target>
+      </trans-unit>
+      <trans-unit id="printView.BF" datatype="html" resname="printView.BF">
+        <source>Burkina Faso</source>
+        <target>ブルキナファソ</target>
+      </trans-unit>
+      <trans-unit id="printView.BI" datatype="html" resname="printView.BI">
+        <source>Burundi</source>
+        <target>ブルンジ</target>
+      </trans-unit>
+      <trans-unit id="printView.KH" datatype="html" resname="printView.KH">
+        <source>Cambodia</source>
+        <target>カンボジア</target>
+      </trans-unit>
+      <trans-unit id="printView.CM" datatype="html" resname="printView.CM">
+        <source>Cameroon</source>
+        <target>カメルーン</target>
+      </trans-unit>
+      <trans-unit id="printView.CA" datatype="html" resname="printView.CA">
+        <source>Canada</source>
+        <target>カナダ</target>
+      </trans-unit>
+      <trans-unit id="printView.CV" datatype="html" resname="printView.CV">
+        <source>Cape Verde</source>
+        <target>カーボヴェルデ</target>
+      </trans-unit>
+      <trans-unit id="printView.KY" datatype="html" resname="printView.KY">
+        <source>Cayman Islands</source>
+        <target>ケイマン諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.CF" datatype="html" resname="printView.CF">
+        <source>Central African Republic</source>
+        <target>中央アフリカ共和国</target>
+      </trans-unit>
+      <trans-unit id="printView.TD" datatype="html" resname="printView.TD">
+        <source>Chad</source>
+        <target>チャド</target>
+      </trans-unit>
+      <trans-unit id="printView.CL" datatype="html" resname="printView.CL">
+        <source>Chile</source>
+        <target>チリ</target>
+      </trans-unit>
+      <trans-unit id="printView.CN" datatype="html" resname="printView.CN">
+        <source>China</source>
+        <target>中国</target>
+      </trans-unit>
+      <trans-unit id="printView.CX" datatype="html" resname="printView.CX">
+        <source>Christmas Island</source>
+        <target>クリスマス島</target>
+      </trans-unit>
+      <trans-unit id="printView.CC" datatype="html" resname="printView.CC">
+        <source>Cocos [Keeling] Islands</source>
+        <target>ココス [キーリング] 諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.CO" datatype="html" resname="printView.CO">
+        <source>Colombia</source>
+        <target>コロンビア</target>
+      </trans-unit>
+      <trans-unit id="printView.KM" datatype="html" resname="printView.KM">
+        <source>Comoros</source>
+        <target>コモロ</target>
+      </trans-unit>
+      <trans-unit id="printView.CG" datatype="html" resname="printView.CG">
+        <source>Congo - Brazzaville</source>
+        <target>コンゴ - ブラザビル</target>
+      </trans-unit>
+      <trans-unit id="printView.CD" datatype="html" resname="printView.CD">
+        <source>Congo - Kinshasa</source>
+        <target>コンゴ - キンシャサ</target>
+      </trans-unit>
+      <trans-unit id="printView.CK" datatype="html" resname="printView.CK">
+        <source>Cook Islands</source>
+        <target>クック諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.CR" datatype="html" resname="printView.CR">
+        <source>Costa Rica</source>
+        <target>コスタリカ</target>
+      </trans-unit>
+      <trans-unit id="printView.HR" datatype="html" resname="printView.HR">
+        <source>Croatia</source>
+        <target>クロアチア</target>
+      </trans-unit>
+      <trans-unit id="printView.CU" datatype="html" resname="printView.CU">
+        <source>Cuba</source>
+        <target>キューバ</target>
+      </trans-unit>
+      <trans-unit id="printView.CW" datatype="html" resname="printView.CW">
+        <source>Curaçao</source>
+        <target>キュラソー</target>
+      </trans-unit>
+      <trans-unit id="printView.CY" datatype="html" resname="printView.CY">
+        <source>Cyprus</source>
+        <target>キプロス</target>
+      </trans-unit>
+      <trans-unit id="printView.CZ" datatype="html" resname="printView.CZ">
+        <source>Czech Republic</source>
+        <target>チェコ共和国</target>
+      </trans-unit>
+      <trans-unit id="printView.CI" datatype="html" resname="printView.CI">
+        <source>Côte d&apos;Ivoire</source>
+        <target>コートジボワール</target>
+      </trans-unit>
+      <trans-unit id="printView.DK" datatype="html" resname="printView.DK">
+        <source>Denmark</source>
+        <target>デンマーク</target>
+      </trans-unit>
+      <trans-unit id="printView.DJ" datatype="html" resname="printView.DJ">
+        <source>Djibouti</source>
+        <target>ジブチ</target>
+      </trans-unit>
+      <trans-unit id="printView.DM" datatype="html" resname="printView.DM">
+        <source>Dominica</source>
+        <target>ドミニカ</target>
+      </trans-unit>
+      <trans-unit id="printView.DO" datatype="html" resname="printView.DO">
+        <source>Dominican Republic</source>
+        <target>ドミニカ共和国</target>
+      </trans-unit>
+      <trans-unit id="printView.EC" datatype="html" resname="printView.EC">
+        <source>Ecuador</source>
+        <target>エクアドル</target>
+      </trans-unit>
+      <trans-unit id="printView.EG" datatype="html" resname="printView.EG">
+        <source>Egypt</source>
+        <target>エジプト</target>
+      </trans-unit>
+      <trans-unit id="printView.SV" datatype="html" resname="printView.SV">
+        <source>El Salvador</source>
+        <target>エルサルバドル</target>
+      </trans-unit>
+      <trans-unit id="printView.GQ" datatype="html" resname="printView.GQ">
+        <source>Equatorial Guinea</source>
+        <target>赤道ギニア</target>
+      </trans-unit>
+      <trans-unit id="printView.ER" datatype="html" resname="printView.ER">
+        <source>Eritrea</source>
+        <target>エリトリア</target>
+      </trans-unit>
+      <trans-unit id="printView.EE" datatype="html" resname="printView.EE">
+        <source>Estonia</source>
+        <target>エストニア</target>
+      </trans-unit>
+      <trans-unit id="printView.ET" datatype="html" resname="printView.ET">
+        <source>Ethiopia</source>
+        <target>エチオピア</target>
+      </trans-unit>
+      <trans-unit id="printView.FK" datatype="html" resname="printView.FK">
+        <source>Falkland Islands</source>
+        <target>フォークランド諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.FO" datatype="html" resname="printView.FO">
+        <source>Faroe Islands</source>
+        <target>フェロー諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.FJ" datatype="html" resname="printView.FJ">
+        <source>Fiji</source>
+        <target>フィジー</target>
+      </trans-unit>
+      <trans-unit id="printView.FI" datatype="html" resname="printView.FI">
+        <source>Finland</source>
+        <target>フィンランド</target>
+      </trans-unit>
+      <trans-unit id="printView.FR" datatype="html" resname="printView.FR">
+        <source>France</source>
+        <target>フランス</target>
+      </trans-unit>
+      <trans-unit id="printView.GF" datatype="html" resname="printView.GF">
+        <source>French Guiana</source>
+        <target>フランス領ギアナ</target>
+      </trans-unit>
+      <trans-unit id="printView.PF" datatype="html" resname="printView.PF">
+        <source>French Polynesia</source>
+        <target>フランス領ポリネシア</target>
+      </trans-unit>
+      <trans-unit id="printView.TF" datatype="html" resname="printView.TF">
+        <source>French Southern Territories</source>
+        <target>フランス領南方地域</target>
+      </trans-unit>
+      <trans-unit id="printView.GA" datatype="html" resname="printView.GA">
+        <source>Gabon</source>
+        <target>ガボン</target>
+      </trans-unit>
+      <trans-unit id="printView.GM" datatype="html" resname="printView.GM">
+        <source>Gambia</source>
+        <target>ガンビア</target>
+      </trans-unit>
+      <trans-unit id="printView.GE" datatype="html" resname="printView.GE">
+        <source>Georgia</source>
+        <target>ジョージア</target>
+      </trans-unit>
+      <trans-unit id="printView.DE" datatype="html" resname="printView.DE">
+        <source>Germany</source>
+        <target>ドイツ</target>
+      </trans-unit>
+      <trans-unit id="printView.GH" datatype="html" resname="printView.GH">
+        <source>Ghana</source>
+        <target>ガーナ</target>
+      </trans-unit>
+      <trans-unit id="printView.GI" datatype="html" resname="printView.GI">
+        <source>Gibraltar</source>
+        <target>ジブラルタル</target>
+      </trans-unit>
+      <trans-unit id="printView.GR" datatype="html" resname="printView.GR">
+        <source>Greece</source>
+        <target>ギリシャ</target>
+      </trans-unit>
+      <trans-unit id="printView.GL" datatype="html" resname="printView.GL">
+        <source>Greenland</source>
+        <target>グリーンランド</target>
+      </trans-unit>
+      <trans-unit id="printView.GD" datatype="html" resname="printView.GD">
+        <source>Grenada</source>
+        <target>グレナダ</target>
+      </trans-unit>
+      <trans-unit id="printView.GP" datatype="html" resname="printView.GP">
+        <source>Guadeloupe</source>
+        <target>グアドループ</target>
+      </trans-unit>
+      <trans-unit id="printView.GU" datatype="html" resname="printView.GU">
+        <source>Guam</source>
+        <target>グアム</target>
+      </trans-unit>
+      <trans-unit id="printView.GT" datatype="html" resname="printView.GT">
+        <source>Guatemala</source>
+        <target>グアテマラ</target>
+      </trans-unit>
+      <trans-unit id="printView.GG" datatype="html" resname="printView.GG">
+        <source>Guernsey</source>
+        <target>ガーンジー</target>
+      </trans-unit>
+      <trans-unit id="printView.GN" datatype="html" resname="printView.GN">
+        <source>Guinea</source>
+        <target>ギニア</target>
+      </trans-unit>
+      <trans-unit id="printView.GW" datatype="html" resname="printView.GW">
+        <source>Guinea-Bissau</source>
+        <target>ギニアビサウ</target>
+      </trans-unit>
+      <trans-unit id="printView.GY" datatype="html" resname="printView.GY">
+        <source>Guyana</source>
+        <target>ガイアナ</target>
+      </trans-unit>
+      <trans-unit id="printView.HT" datatype="html" resname="printView.HT">
+        <source>Haiti</source>
+        <target>ハイチ</target>
+      </trans-unit>
+      <trans-unit id="printView.HM" datatype="html" resname="printView.HM">
+        <source>Heard Island and McDonald Islands</source>
+        <target>ハード島およびマクドナルド諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.HN" datatype="html" resname="printView.HN">
+        <source>Honduras</source>
+        <target>ホンジュラス</target>
+      </trans-unit>
+      <trans-unit id="printView.HK" datatype="html" resname="printView.HK">
+        <source>Hong Kong SAR China</source>
+        <target>香港特別行政区 (中国)</target>
+      </trans-unit>
+      <trans-unit id="printView.HU" datatype="html" resname="printView.HU">
+        <source>Hungary</source>
+        <target>ハンガリー</target>
+      </trans-unit>
+      <trans-unit id="printView.IS" datatype="html" resname="printView.IS">
+        <source>Iceland</source>
+        <target>アイスランド</target>
+      </trans-unit>
+      <trans-unit id="printView.IN" datatype="html" resname="printView.IN">
+        <source>India</source>
+        <target>インド</target>
+      </trans-unit>
+      <trans-unit id="printView.ID" datatype="html" resname="printView.ID">
+        <source>Indonesia</source>
+        <target>インドネシア</target>
+      </trans-unit>
+      <trans-unit id="printView.IR" datatype="html" resname="printView.IR">
+        <source>Iran</source>
+        <target>イラン</target>
+      </trans-unit>
+      <trans-unit id="printView.IQ" datatype="html" resname="printView.IQ">
+        <source>Iraq</source>
+        <target>イラク</target>
+      </trans-unit>
+      <trans-unit id="printView.IE" datatype="html" resname="printView.IE">
+        <source>Ireland</source>
+        <target>アイルランド</target>
+      </trans-unit>
+      <trans-unit id="printView.IM" datatype="html" resname="printView.IM">
+        <source>Isle of Man</source>
+        <target>マン島</target>
+      </trans-unit>
+      <trans-unit id="printView.IL" datatype="html" resname="printView.IL">
+        <source>Israel</source>
+        <target>イスラエル</target>
+      </trans-unit>
+      <trans-unit id="printView.IT" datatype="html" resname="printView.IT">
+        <source>Italy</source>
+        <target>イタリア</target>
+      </trans-unit>
+      <trans-unit id="printView.JM" datatype="html" resname="printView.JM">
+        <source>Jamaica</source>
+        <target>ジャマイカ</target>
+      </trans-unit>
+      <trans-unit id="printView.JP" datatype="html" resname="printView.JP">
+        <source>Japan</source>
+        <target>日本</target>
+      </trans-unit>
+      <trans-unit id="printView.JE" datatype="html" resname="printView.JE">
+        <source>Jersey</source>
+        <target>ジャージー</target>
+      </trans-unit>
+      <trans-unit id="printView.JO" datatype="html" resname="printView.JO">
+        <source>Jordan</source>
+        <target>ヨルダン</target>
+      </trans-unit>
+      <trans-unit id="printView.KZ" datatype="html" resname="printView.KZ">
+        <source>Kazakhstan</source>
+        <target>カザフスタン</target>
+      </trans-unit>
+      <trans-unit id="printView.KE" datatype="html" resname="printView.KE">
+        <source>Kenya</source>
+        <target>ケニア</target>
+      </trans-unit>
+      <trans-unit id="printView.KI" datatype="html" resname="printView.KI">
+        <source>Kiribati</source>
+        <target>キリバス</target>
+      </trans-unit>
+      <trans-unit id="printView.XK" datatype="html" resname="printView.XK">
+        <source>Kosovo</source>
+        <target>コソボ</target>
+      </trans-unit>
+      <trans-unit id="printView.KW" datatype="html" resname="printView.KW">
+        <source>Kuwait</source>
+        <target>クウェート</target>
+      </trans-unit>
+      <trans-unit id="printView.KG" datatype="html" resname="printView.KG">
+        <source>Kyrgyzstan</source>
+        <target>キルギスタン</target>
+      </trans-unit>
+      <trans-unit id="printView.LA" datatype="html" resname="printView.LA">
+        <source>Laos</source>
+        <target>ラオス</target>
+      </trans-unit>
+      <trans-unit id="printView.LV" datatype="html" resname="printView.LV">
+        <source>Latvia</source>
+        <target>ラトビア</target>
+      </trans-unit>
+      <trans-unit id="printView.LB" datatype="html" resname="printView.LB">
+        <source>Lebanon</source>
+        <target>レバノン</target>
+      </trans-unit>
+      <trans-unit id="printView.LS" datatype="html" resname="printView.LS">
+        <source>Lesotho</source>
+        <target>レソト</target>
+      </trans-unit>
+      <trans-unit id="printView.LR" datatype="html" resname="printView.LR">
+        <source>Liberia</source>
+        <target>リベリア</target>
+      </trans-unit>
+      <trans-unit id="printView.LY" datatype="html" resname="printView.LY">
+        <source>Libya</source>
+        <target>リビア</target>
+      </trans-unit>
+      <trans-unit id="printView.LI" datatype="html" resname="printView.LI">
+        <source>Liechtenstein</source>
+        <target>リヒテンシュタイン</target>
+      </trans-unit>
+      <trans-unit id="printView.LT" datatype="html" resname="printView.LT">
+        <source>Lithuania</source>
+        <target>リトアニア</target>
+      </trans-unit>
+      <trans-unit id="printView.LU" datatype="html" resname="printView.LU">
+        <source>Luxembourg</source>
+        <target>ルクセンブルク</target>
+      </trans-unit>
+      <trans-unit id="printView.MO" datatype="html" resname="printView.MO">
+        <source>Macau SAR China</source>
+        <target>マカオ特別行政区 (中国)</target>
+      </trans-unit>
+      <trans-unit id="printView.MG" datatype="html" resname="printView.MG">
+        <source>Madagascar</source>
+        <target>マダガスカル</target>
+      </trans-unit>
+      <trans-unit id="printView.MW" datatype="html" resname="printView.MW">
+        <source>Malawi</source>
+        <target>マラウイ</target>
+      </trans-unit>
+      <trans-unit id="printView.MY" datatype="html" resname="printView.MY">
+        <source>Malaysia</source>
+        <target>マレーシア</target>
+      </trans-unit>
+      <trans-unit id="printView.MV" datatype="html" resname="printView.MV">
+        <source>Maldives</source>
+        <target>モルジブ</target>
+      </trans-unit>
+      <trans-unit id="printView.ML" datatype="html" resname="printView.ML">
+        <source>Mali</source>
+        <target>マリ</target>
+      </trans-unit>
+      <trans-unit id="printView.MT" datatype="html" resname="printView.MT">
+        <source>Malta</source>
+        <target>マルタ</target>
+      </trans-unit>
+      <trans-unit id="printView.MH" datatype="html" resname="printView.MH">
+        <source>Marshall Islands</source>
+        <target>マーシャル諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.MQ" datatype="html" resname="printView.MQ">
+        <source>Martinique</source>
+        <target>マルティニーク</target>
+      </trans-unit>
+      <trans-unit id="printView.MR" datatype="html" resname="printView.MR">
+        <source>Mauritania</source>
+        <target>モーリタニア</target>
+      </trans-unit>
+      <trans-unit id="printView.MU" datatype="html" resname="printView.MU">
+        <source>Mauritius</source>
+        <target>モーリシャス</target>
+      </trans-unit>
+      <trans-unit id="printView.YT" datatype="html" resname="printView.YT">
+        <source>Mayotte</source>
+        <target>マヨット</target>
+      </trans-unit>
+      <trans-unit id="printView.MX" datatype="html" resname="printView.MX">
+        <source>Mexico</source>
+        <target>メキシコ</target>
+      </trans-unit>
+      <trans-unit id="printView.FM" datatype="html" resname="printView.FM">
+        <source>Micronesia</source>
+        <target>ミクロネシア</target>
+      </trans-unit>
+      <trans-unit id="printView.MD" datatype="html" resname="printView.MD">
+        <source>Moldova</source>
+        <target>モルドバ</target>
+      </trans-unit>
+      <trans-unit id="printView.MC" datatype="html" resname="printView.MC">
+        <source>Monaco</source>
+        <target>モナコ</target>
+      </trans-unit>
+      <trans-unit id="printView.MN" datatype="html" resname="printView.MN">
+        <source>Mongolia</source>
+        <target>モンゴル</target>
+      </trans-unit>
+      <trans-unit id="printView.ME" datatype="html" resname="printView.ME">
+        <source>Montenegro</source>
+        <target>モンテネグロ</target>
+      </trans-unit>
+      <trans-unit id="printView.MS" datatype="html" resname="printView.MS">
+        <source>Montserrat</source>
+        <target>モントセラト</target>
+      </trans-unit>
+      <trans-unit id="printView.MA" datatype="html" resname="printView.MA">
+        <source>Morocco</source>
+        <target>モザンビーク</target>
+      </trans-unit>
+      <trans-unit id="printView.MZ" datatype="html" resname="printView.MZ">
+        <source>Mozambique</source>
+        <target>モザンビーク</target>
+      </trans-unit>
+      <trans-unit id="printView.MM" datatype="html" resname="printView.MM">
+        <source>Myanmar [Burma]</source>
+        <target>ミャンマー [ビルマ]</target>
+      </trans-unit>
+      <trans-unit id="printView.NA" datatype="html" resname="printView.NA">
+        <source>Namibia</source>
+        <target>ナミビア</target>
+      </trans-unit>
+      <trans-unit id="printView.NR" datatype="html" resname="printView.NR">
+        <source>Nauru</source>
+        <target>ナウル</target>
+      </trans-unit>
+      <trans-unit id="printView.NP" datatype="html" resname="printView.NP">
+        <source>Nepal</source>
+        <target>ネパール</target>
+      </trans-unit>
+      <trans-unit id="printView.NL" datatype="html" resname="printView.NL">
+        <source>Netherlands</source>
+        <target>オランダ</target>
+      </trans-unit>
+      <trans-unit id="printView.NC" datatype="html" resname="printView.NC">
+        <source>New Caledonia</source>
+        <target>ニューカレドニア</target>
+      </trans-unit>
+      <trans-unit id="printView.NZ" datatype="html" resname="printView.NZ">
+        <source>New Zealand</source>
+        <target>ニュージーランド</target>
+      </trans-unit>
+      <trans-unit id="printView.NI" datatype="html" resname="printView.NI">
+        <source>Nicaragua</source>
+        <target>ニカラグア</target>
+      </trans-unit>
+      <trans-unit id="printView.NE" datatype="html" resname="printView.NE">
+        <source>Niger</source>
+        <target>ニジェール</target>
+      </trans-unit>
+      <trans-unit id="printView.NG" datatype="html" resname="printView.NG">
+        <source>Nigeria</source>
+        <target>ナイジェリア</target>
+      </trans-unit>
+      <trans-unit id="printView.NU" datatype="html" resname="printView.NU">
+        <source>Niue</source>
+        <target>ニウエ</target>
+      </trans-unit>
+      <trans-unit id="printView.NF" datatype="html" resname="printView.NF">
+        <source>Norfolk Island</source>
+        <target>ノーフォーク島</target>
+      </trans-unit>
+      <trans-unit id="printView.KP" datatype="html" resname="printView.KP">
+        <source>North Korea</source>
+        <target>北朝鮮</target>
+      </trans-unit>
+      <trans-unit id="printView.MK" datatype="html" resname="printView.MK">
+        <source>North Macedonia</source>
+        <target>マケドニア</target>
+      </trans-unit>
+      <trans-unit id="printView.MP" datatype="html" resname="printView.MP">
+        <source>Northern Mariana Islands</source>
+        <target>北マリアナ諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.NO" datatype="html" resname="printView.NO">
+        <source>Norway</source>
+        <target>ノルウェー</target>
+      </trans-unit>
+      <trans-unit id="printView.OM" datatype="html" resname="printView.OM">
+        <source>Oman</source>
+        <target>オマーン</target>
+      </trans-unit>
+      <trans-unit id="printView.PK" datatype="html" resname="printView.PK">
+        <source>Pakistan</source>
+        <target>パキスタン</target>
+      </trans-unit>
+      <trans-unit id="printView.PW" datatype="html" resname="printView.PW">
+        <source>Palau</source>
+        <target>パラオ</target>
+      </trans-unit>
+      <trans-unit id="printView.PS" datatype="html" resname="printView.PS">
+        <source>Palestinian Territories</source>
+        <target>パレスチナ領</target>
+      </trans-unit>
+      <trans-unit id="printView.PA" datatype="html" resname="printView.PA">
+        <source>Panama</source>
+        <target>パナマ</target>
+      </trans-unit>
+      <trans-unit id="printView.PG" datatype="html" resname="printView.PG">
+        <source>Papua New Guinea</source>
+        <target>パプアニューギニア</target>
+      </trans-unit>
+      <trans-unit id="printView.PY" datatype="html" resname="printView.PY">
+        <source>Paraguay</source>
+        <target>パラグアイ</target>
+      </trans-unit>
+      <trans-unit id="printView.PE" datatype="html" resname="printView.PE">
+        <source>Peru</source>
+        <target>ペルー</target>
+      </trans-unit>
+      <trans-unit id="printView.PH" datatype="html" resname="printView.PH">
+        <source>Philippines</source>
+        <target>フィリピン</target>
+      </trans-unit>
+      <trans-unit id="printView.PN" datatype="html" resname="printView.PN">
+        <source>Pitcairn Islands</source>
+        <target>ピトケアン諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.PL" datatype="html" resname="printView.PL">
+        <source>Poland</source>
+        <target>ポーランド</target>
+      </trans-unit>
+      <trans-unit id="printView.PT" datatype="html" resname="printView.PT">
+        <source>Portugal</source>
+        <target>ポルトガル</target>
+      </trans-unit>
+      <trans-unit id="printView.PR" datatype="html" resname="printView.PR">
+        <source>Puerto Rico</source>
+        <target>プエルトリコ</target>
+      </trans-unit>
+      <trans-unit id="printView.QA" datatype="html" resname="printView.QA">
+        <source>Qatar</source>
+        <target>カタール</target>
+      </trans-unit>
+      <trans-unit id="printView.RO" datatype="html" resname="printView.RO">
+        <source>Romania</source>
+        <target>ルーマニア</target>
+      </trans-unit>
+      <trans-unit id="printView.RU" datatype="html" resname="printView.RU">
+        <source>Russia</source>
+        <target>ロシア</target>
+      </trans-unit>
+      <trans-unit id="printView.RW" datatype="html" resname="printView.RW">
+        <source>Rwanda</source>
+        <target>ルワンダ</target>
+      </trans-unit>
+      <trans-unit id="printView.RE" datatype="html" resname="printView.RE">
+        <source>Réunion</source>
+        <target>レユニオン</target>
+      </trans-unit>
+      <trans-unit id="printView.BL" datatype="html" resname="printView.BL">
+        <source>Saint Barthélemy</source>
+        <target>サン・バルテルミー島</target>
+      </trans-unit>
+      <trans-unit id="printView.SH" datatype="html" resname="printView.SH">
+        <source>Saint Helena</source>
+        <target>セントヘレナ</target>
+      </trans-unit>
+      <trans-unit id="printView.KN" datatype="html" resname="printView.KN">
+        <source>Saint Kitts and Nevis</source>
+        <target>セントクリストファー・ネイビス</target>
+      </trans-unit>
+      <trans-unit id="printView.LC" datatype="html" resname="printView.LC">
+        <source>Saint Lucia</source>
+        <target>セントルシア</target>
+      </trans-unit>
+      <trans-unit id="printView.MF" datatype="html" resname="printView.MF">
+        <source>Saint Martin</source>
+        <target>セント・マーチン島</target>
+      </trans-unit>
+      <trans-unit id="printView.PM" datatype="html" resname="printView.PM">
+        <source>Saint Pierre and Miquelon</source>
+        <target>サンピエール島およびミクロン島</target>
+      </trans-unit>
+      <trans-unit id="printView.VC" datatype="html" resname="printView.VC">
+        <source>Saint Vincent and the Grenadines</source>
+        <target>セントビンセントおよびグレナディーン諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.WS" datatype="html" resname="printView.WS">
+        <source>Samoa</source>
+        <target>サモア</target>
+      </trans-unit>
+      <trans-unit id="printView.SM" datatype="html" resname="printView.SM">
+        <source>San Marino</source>
+        <target>サンマリノ</target>
+      </trans-unit>
+      <trans-unit id="printView.SA" datatype="html" resname="printView.SA">
+        <source>Saudi Arabia</source>
+        <target>サウジアラビア</target>
+      </trans-unit>
+      <trans-unit id="printView.SN" datatype="html" resname="printView.SN">
+        <source>Senegal</source>
+        <target>セネガル</target>
+      </trans-unit>
+      <trans-unit id="printView.RS" datatype="html" resname="printView.RS">
+        <source>Serbia</source>
+        <target>セルビア</target>
+      </trans-unit>
+      <trans-unit id="printView.SC" datatype="html" resname="printView.SC">
+        <source>Seychelles</source>
+        <target>セーシェル</target>
+      </trans-unit>
+      <trans-unit id="printView.SL" datatype="html" resname="printView.SL">
+        <source>Sierra Leone</source>
+        <target>シエラレオネ</target>
+      </trans-unit>
+      <trans-unit id="printView.SG" datatype="html" resname="printView.SG">
+        <source>Singapore</source>
+        <target>シンガポール</target>
+      </trans-unit>
+      <trans-unit id="printView.SX" datatype="html" resname="printView.SX">
+        <source>Sint Maarten (Dutch Part)</source>
+        <target>シント・マールテン (オランダ領)</target>
+      </trans-unit>
+      <trans-unit id="printView.SK" datatype="html" resname="printView.SK">
+        <source>Slovakia</source>
+        <target>スロバキア</target>
+      </trans-unit>
+      <trans-unit id="printView.SI" datatype="html" resname="printView.SI">
+        <source>Slovenia</source>
+        <target>スロベニア</target>
+      </trans-unit>
+      <trans-unit id="printView.SB" datatype="html" resname="printView.SB">
+        <source>Solomon Islands</source>
+        <target>ソロモン諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.SO" datatype="html" resname="printView.SO">
+        <source>Somalia</source>
+        <target>ソマリア</target>
+      </trans-unit>
+      <trans-unit id="printView.ZA" datatype="html" resname="printView.ZA">
+        <source>South Africa</source>
+        <target>南アフリカ</target>
+      </trans-unit>
+      <trans-unit id="printView.GS" datatype="html" resname="printView.GS">
+        <source>South Georgia and the South Sandwich Islands</source>
+        <target>サウスジョージア・サウスサンドウィッチ諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.KR" datatype="html" resname="printView.KR">
+        <source>South Korea</source>
+        <target>韓国</target>
+      </trans-unit>
+      <trans-unit id="printView.SS" datatype="html" resname="printView.SS">
+        <source>South Sudan</source>
+        <target>南スーダン</target>
+      </trans-unit>
+      <trans-unit id="printView.ES" datatype="html" resname="printView.ES">
+        <source>Spain</source>
+        <target>スペイン</target>
+      </trans-unit>
+      <trans-unit id="printView.LK" datatype="html" resname="printView.LK">
+        <source>Sri Lanka</source>
+        <target>スリランカ</target>
+      </trans-unit>
+      <trans-unit id="printView.SD" datatype="html" resname="printView.SD">
+        <source>Sudan</source>
+        <target>スーダン</target>
+      </trans-unit>
+      <trans-unit id="printView.SR" datatype="html" resname="printView.SR">
+        <source>Suriname</source>
+        <target>スリナム</target>
+      </trans-unit>
+      <trans-unit id="printView.SJ" datatype="html" resname="printView.SJ">
+        <source>Svalbard and Jan Mayen</source>
+        <target>スヴァールバル諸島およびヤンマイエン島</target>
+      </trans-unit>
+      <trans-unit id="printView.SZ" datatype="html" resname="printView.SZ">
+        <source>Swaziland</source>
+        <target>スワジランド</target>
+      </trans-unit>
+      <trans-unit id="printView.SE" datatype="html" resname="printView.SE">
+        <source>Sweden</source>
+        <target>スウェーデン</target>
+      </trans-unit>
+      <trans-unit id="printView.CH" datatype="html" resname="printView.CH">
+        <source>Switzerland</source>
+        <target>スイス</target>
+      </trans-unit>
+      <trans-unit id="printView.SY" datatype="html" resname="printView.SY">
+        <source>Syria</source>
+        <target>シリア</target>
+      </trans-unit>
+      <trans-unit id="printView.ST" datatype="html" resname="printView.ST">
+        <source>São Tomé and Príncipe</source>
+        <target>サントメ・プリンシペ</target>
+      </trans-unit>
+      <trans-unit id="printView.TW" datatype="html" resname="printView.TW">
+        <source>Taiwan</source>
+        <target>台湾</target>
+      </trans-unit>
+      <trans-unit id="printView.TJ" datatype="html" resname="printView.TJ">
+        <source>Tajikistan</source>
+        <target>タジキスタン</target>
+      </trans-unit>
+      <trans-unit id="printView.TZ" datatype="html" resname="printView.TZ">
+        <source>Tanzania</source>
+        <target>タンザニア</target>
+      </trans-unit>
+      <trans-unit id="printView.TH" datatype="html" resname="printView.TH">
+        <source>Thailand</source>
+        <target>タイ</target>
+      </trans-unit>
+      <trans-unit id="printView.TL" datatype="html" resname="printView.TL">
+        <source>Timor-Leste</source>
+        <target>東ティモール</target>
+      </trans-unit>
+      <trans-unit id="printView.TG" datatype="html" resname="printView.TG">
+        <source>Togo</source>
+        <target>トーゴ</target>
+      </trans-unit>
+      <trans-unit id="printView.TK" datatype="html" resname="printView.TK">
+        <source>Tokelau</source>
+        <target>トケラウ</target>
+      </trans-unit>
+      <trans-unit id="printView.TO" datatype="html" resname="printView.TO">
+        <source>Tonga</source>
+        <target>トンガ</target>
+      </trans-unit>
+      <trans-unit id="printView.TT" datatype="html" resname="printView.TT">
+        <source>Trinidad and Tobago</source>
+        <target>トリニダード・トバゴ</target>
+      </trans-unit>
+      <trans-unit id="printView.TN" datatype="html" resname="printView.TN">
+        <source>Tunisia</source>
+        <target>チュニジア</target>
+      </trans-unit>
+      <trans-unit id="printView.TR" datatype="html" resname="printView.TR">
+        <source>Türkiye</source>
+        <target>トルコ</target>
+      </trans-unit>
+      <trans-unit id="printView.TM" datatype="html" resname="printView.TM">
+        <source>Turkmenistan</source>
+        <target>トルクメニスタン</target>
+      </trans-unit>
+      <trans-unit id="printView.TC" datatype="html" resname="printView.TC">
+        <source>Turks and Caicos Islands</source>
+        <target>タークス・カイコス諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.TV" datatype="html" resname="printView.TV">
+        <source>Tuvalu</source>
+        <target>ツバル</target>
+      </trans-unit>
+      <trans-unit id="printView.UM" datatype="html" resname="printView.UM">
+        <source>U.S. Minor Outlying Islands</source>
+        <target>合衆国領有 小離島</target>
+      </trans-unit>
+      <trans-unit id="printView.VI" datatype="html" resname="printView.VI">
+        <source>U.S. Virgin Islands</source>
+        <target>アメリカ領 ヴァージン諸島</target>
+      </trans-unit>
+      <trans-unit id="printView.UG" datatype="html" resname="printView.UG">
+        <source>Uganda</source>
+        <target>ウガンダ</target>
+      </trans-unit>
+      <trans-unit id="printView.UA" datatype="html" resname="printView.UA">
+        <source>Ukraine</source>
+        <target>ウクライナ</target>
+      </trans-unit>
+      <trans-unit id="printView.AE" datatype="html" resname="printView.AE">
+        <source>United Arab Emirates</source>
+        <target>アラブ首長国連邦</target>
+      </trans-unit>
+      <trans-unit id="printView.GB" datatype="html" resname="printView.GB">
+        <source>United Kingdom</source>
+        <target>英国</target>
+      </trans-unit>
+      <trans-unit id="printView.US" datatype="html" resname="printView.US">
+        <source>United States</source>
+        <target>米国</target>
+      </trans-unit>
+      <trans-unit id="printView.UY" datatype="html" resname="printView.UY">
+        <source>Uruguay</source>
+        <target>ウルグアイ</target>
+      </trans-unit>
+      <trans-unit id="printView.UZ" datatype="html" resname="printView.UZ">
+        <source>Uzbekistan</source>
+        <target>ウズベキスタン</target>
+      </trans-unit>
+      <trans-unit id="printView.VU" datatype="html" resname="printView.VU">
+        <source>Vanuatu</source>
+        <target>バヌアツ</target>
+      </trans-unit>
+      <trans-unit id="printView.VA" datatype="html" resname="printView.VA">
+        <source>Vatican City</source>
+        <target>バチカン市国</target>
+      </trans-unit>
+      <trans-unit id="printView.VE" datatype="html" resname="printView.VE">
+        <source>Venezuela</source>
+        <target>ベネズエラ</target>
+      </trans-unit>
+      <trans-unit id="printView.VN" datatype="html" resname="printView.VN">
+        <source>Vietnam</source>
+        <target>ベトナム</target>
+      </trans-unit>
+      <trans-unit id="printView.WF" datatype="html" resname="printView.WF">
+        <source>Wallis and Futuna</source>
+        <target>ウォリス・フツナ</target>
+      </trans-unit>
+      <trans-unit id="printView.EH" datatype="html" resname="printView.EH">
+        <source>Western Sahara</source>
+        <target>西サハラ</target>
+      </trans-unit>
+      <trans-unit id="printView.YE" datatype="html" resname="printView.YE">
+        <source>Yemen</source>
+        <target>イエメン</target>
+      </trans-unit>
+      <trans-unit id="printView.ZM" datatype="html" resname="printView.ZM">
+        <source>Zambia</source>
+        <target>ザンビア</target>
+      </trans-unit>
+      <trans-unit id="printView.ZW" datatype="html" resname="printView.ZW">
+        <source>Zimbabwe</source>
+        <target>ジンバブエ</target>
+      </trans-unit>
+      <trans-unit id="printView.AX" datatype="html" resname="printView.AX">
+        <source>Åland Islands</source>
+        <target>オーランド諸島</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
