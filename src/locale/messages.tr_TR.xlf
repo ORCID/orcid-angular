@@ -21239,7 +21239,7 @@
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
         <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
-        <target>Meslektaş değerlendirmesi (${reviewsCount}:reviewCount: ${publicationsCount}:publicationCount: yayın/hibe) için değerlendirmeler</target>
+        <target>Meslektaş değerlendirmesi (${publicationsCount}:publicationCount: yayın/hibe için ${reviewsCount}:reviewCount: değerlendirme)</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>
