@@ -58,6 +58,29 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     )
   }
 
+  // Helper method to safely get backend errors for this email
+  getBackendErrorsForAdditionalEmail(control: AbstractControl | null): string[] {
+    if (!control || !control.parent?.parent?.errors) {
+      return []
+    }
+    
+    const backendErrors = control.parent.parent.errors['backendErrors']
+    if (!backendErrors?.['additionalEmails']) {
+      return []
+    }
+    
+    // Try to match by email value (trim whitespace)
+    const emailValue = control.value?.trim() || ''
+    const errors = backendErrors['additionalEmails'][emailValue]
+    
+    // If not found, try without trimming
+    if (!errors) {
+      return backendErrors['additionalEmails'][control.value] || []
+    }
+    
+    return errors || []
+  }
+
   // deleteEmailInput(id: string): void {
   //   this.additionalEmails.removeControl(id)
   //   this._changeDetectorRef.detectChanges()
