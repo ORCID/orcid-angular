@@ -42,10 +42,18 @@
     >
       Please enter a valid email address, for example joe&#64;institution.edu
     </mat-error>
-    <ng-container *ngIf="additionalEmailsTouched || getBackendErrorsForAdditionalEmail(additionalEmailControl.value).length > 0">
+    <ng-container
+      *ngIf="
+        additionalEmailsTouched ||
+        getBackendErrorsForAdditionalEmail(additionalEmailControl.value)
+          .length > 0
+      "
+    >
       <mat-error
         *ngFor="
-          let error of getBackendErrorsForAdditionalEmail(additionalEmailControl.value)
+          let error of getBackendErrorsForAdditionalEmail(
+            additionalEmailControl.value
+          )
         "
       >
         <app-backend-error

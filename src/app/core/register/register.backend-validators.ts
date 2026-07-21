@@ -62,11 +62,12 @@ export function RegisterBackendValidatorMixin<
       value: RegisterForm
     ): Observable<RegisterForm> {
       // Map validationEndpoint (e.g., 'validatePassword') to endpoint (e.g., 'registerPasswordValidate.json')
-      const endpointSuffix = this.formInputs[controlName].validationEndpoint.replace('validate', '');
+      const endpointSuffix = this.formInputs[
+        controlName
+      ].validationEndpoint.replace('validate', '')
       return this._http
         .post<RegisterForm>(
-          runtimeEnvironment.API_WEB +
-            `register${endpointSuffix}Validate.json`,
+          runtimeEnvironment.API_WEB + `register${endpointSuffix}Validate.json`,
           value
         )
         .pipe(catchError((error) => this._errorHandler.handleError(error)))
