@@ -1,8 +1,10 @@
+import { inject } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { UserRecord } from 'src/app/types/record.local'
 import { MatDialog } from '@angular/material/dialog'
-import { map, switchMap, take } from 'rxjs/operators'
+import { catchError, map, switchMap, take, tap } from 'rxjs/operators'
+import { InterstitialObservabilityService } from '../interstitial-observability.service'
 import { MatDialogConfig } from '@angular/material/dialog'
 import { ComponentType } from '@angular/cdk/overlay'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
@@ -24,6 +26,10 @@ export abstract class LoginBaseInterstitialManagerService<
   abstract INTERSTITIAL_NAME: InterstitialType
   abstract INTERSTITIAL_TOGGLE: TogglzFlag[]
   abstract QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN: QaFlag
+
+  // Injected here rather than through the constructor so the existing
+  // subclasses keep their signatures
+  protected interstitialObservability = inject(InterstitialObservabilityService)
 
   // This will usually get updated on subscription to togglz
 
@@ -57,11 +63,19 @@ export abstract class LoginBaseInterstitialManagerService<
    *   1) Marks the interstitial as viewed
    *   2) Opens the dialog
    *   3) Returns whatever the dialog emits on close
+   *
+   * Recording the visit is bookkeeping, so a failure there must not stop the
+   * interstitial from opening. It used to: the flag POST is chained ahead of
+   * the dialog, and `setInterstitialsViewed` writes localStorage *before*
+   * calling it, so a transient failure (a 403 from a missing XSRF header, for
+   * one) left the user marked as having seen an interstitial that never
+   * appeared — and never would again.
    */
   showInterstitialAsDialog(userRecord: UserRecord): Observable<TOutput> {
     return this.interstitialsService
       .setInterstitialsViewed(this.INTERSTITIAL_NAME)
       .pipe(
+        catchError(() => of(null)),
         switchMap(() => {
           const data = this.getDialogDataToShow(userRecord)
           const dialogRef = this.matDialog.open<TOutput>(
@@ -70,7 +84,12 @@ export abstract class LoginBaseInterstitialManagerService<
               ...this.getDefaultDialogConfig(data),
             }
           )
-          return dialogRef.afterClosed()
+          // Single choke point, so every interstitial reports the same
+          // "shown" denominator and closes its journey
+          this.interstitialObservability.shown(this.INTERSTITIAL_NAME)
+          return dialogRef
+            .afterClosed()
+            .pipe(tap(() => this.interstitialObservability.closed()))
         })
       )
   }

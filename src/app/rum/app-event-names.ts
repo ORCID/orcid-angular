@@ -82,6 +82,18 @@ export enum AppEventName {
 
   // ─── Registration lifecycle / pipeline outcomes ────────────────────────────
   RegisterPipelineError = 'register_pipeline_error',
+
+  // ─── Sign-in interstitials (`interstitial` journey) ────────────────────────
+  /** An interstitial dialog was opened. Emitted for every interstitial. */
+  InterstitialShown = 'interstitial_shown',
+  /** Backup email interstitial: the user saved a backup email address. */
+  InterstitialBackupAdded = 'interstitial_backup_added',
+  /** The user chose the "continue without" option. */
+  InterstitialDismissed = 'interstitial_dismissed',
+  /** Submit was blocked by an inline validation error. Not terminal. */
+  InterstitialValidationError = 'interstitial_validation_error',
+  /** The save request failed and the interstitial closed. */
+  InterstitialSaveError = 'interstitial_save_error',
 }
 
 /** Event name for step back button: `step-${step}-back-button-clicked` */

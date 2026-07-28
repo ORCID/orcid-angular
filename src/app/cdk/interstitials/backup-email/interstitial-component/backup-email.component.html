@@ -1,0 +1,146 @@
+<mat-card-header class="authorize-header">
+  <mat-card-title role="heading" aria-level="1">
+    <mat-icon class="logo-icon"
+      ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+    </mat-icon>
+    <h1 class="orc-font-heading-small" i18n="@@interstitial.addABackupEmail">
+      Add a backup email address
+    </h1>
+  </mat-card-title>
+</mat-card-header>
+
+<mat-card-content class="authorize-content" *ngIf="form">
+  <app-info-panel>
+    <div i18n="@@interstitial.weHaveNoticedYouOnlyHaveOneEmail">
+      We’ve noticed you only have one email address associated with your ORCID
+      account. Adding a backup email will help you sign in to ORCID if you lose
+      access to your primary email address.
+    </div>
+  </app-info-panel>
+
+  <section class="primary-email">
+    <h2 class="orc-font-body" i18n="@@interstitial.yourPrimaryEmailAddress">
+      Your primary email address
+    </h2>
+    <mat-divider></mat-divider>
+    <div class="primary-email-row">
+      <strong class="orc-font-body-small">{{ primaryEmail?.value }}</strong>
+      <div
+        class="email-category"
+        *ngIf="primaryEmailCategory === 'PROFESSIONAL'"
+      >
+        <mat-icon class="material-icons-outlined">work</mat-icon>
+        <span class="orc-font-small-print" i18n="@@interstitial.professional"
+          >Professional</span
+        >
+      </div>
+      <div class="email-category" *ngIf="primaryEmailCategory === 'PERSONAL'">
+        <mat-icon class="material-icons-outlined">fingerprint</mat-icon>
+        <span class="orc-font-small-print" i18n="@@interstitial.personal"
+          >Personal</span
+        >
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </section>
+
+  <section class="backup-email">
+    <h2 class="orc-font-body" i18n="@@interstitial.yourBackupEmailAddress">
+      Your backup email address
+    </h2>
+    <p i18n="@@interstitial.addAnotherEmailToYourOrcidAccount">
+      Add another email to your ORCID account as a backup. A mix of personal and
+      professional email addresses works best.
+    </p>
+
+    <form [formGroup]="form">
+      <div class="input-container">
+        <mat-label
+          id="backup-email-input-label"
+          class="orc-font-small-print strong"
+          [ngClass]="{ error: hasVisibleError }"
+          i18n="@@interstitial.backupEmail"
+        >
+          Backup email
+        </mat-label>
+        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+          <input
+            aria-labelledby="backup-email-input-label"
+            id="backup-email-input"
+            formControlName="backupEmail"
+            matInput
+            type="email"
+            autocomplete="email"
+            placeholder="{{ backupEmailPlaceholder }}"
+            [attr.aria-invalid]="hasVisibleError"
+            [attr.aria-describedby]="visibleErrorId"
+          />
+        </mat-form-field>
+        <mat-error
+          *ngIf="showRequiredError"
+          id="backup-email-required-error"
+          role="alert"
+          class="orc-font-small-print"
+          i18n="@@interstitial.pleaseEnterYourEmail"
+        >
+          Please enter your email
+        </mat-error>
+        <mat-error
+          *ngIf="showInvalidEmailError"
+          id="backup-email-invalid-error"
+          role="alert"
+          class="orc-font-small-print"
+          i18n="@@side-bar.invalidEmailErrorMessage"
+        >
+          Please enter a valid email address, for example
+          joe&#64;institution.edu
+        </mat-error>
+        <mat-error
+          *ngIf="showEmailAlreadyInUseError"
+          id="backup-email-in-use-error"
+          role="alert"
+          class="orc-font-small-print"
+          i18n="@@interstitial.thisEmailIsAlreadyAssociatedWithAnExistingRecord"
+        >
+          This email is already associated with an existing ORCID record. Please
+          use a different email address.
+        </mat-error>
+      </div>
+    </form>
+  </section>
+
+  <mat-divider class="footer-divider"></mat-divider>
+
+  <button
+    class="authorize-button"
+    mat-raised-button
+    color="primary"
+    (click)="addBackupEmail()"
+    id="authorize-button"
+    [disabled]="saving"
+    i18n="@@interstitial.addBackupEmailAddress"
+  >
+    Add backup email address
+  </button>
+  <div class="row deny-button-wrapper">
+    <!-- A button, not an anchor: the dialog sets disableClose, so this is the
+         only way out and it has to be reachable by keyboard -->
+    <button
+      id="deny-button"
+      type="button"
+      class="link-button underline"
+      (click)="declineBackupEmail()"
+    >
+      <i i18n="@@interstitial.continueWithoutAddingABackupEmailAddress"
+        >Continue without adding a backup email address</i
+      >
+    </button>
+  </div>
+</mat-card-content>
+
+<mat-spinner
+  *ngIf="!form"
+  class="spinner"
+  [diameter]="80"
+  [strokeWidth]="5"
+></mat-spinner>
