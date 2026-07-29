@@ -21238,8 +21238,8 @@
         <target>Finanse eden:</target>
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
-        <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
-        <target>Meslektaş değerlendirmesi (${publicationsCount}:publicationCount: yayın/hibe için ${reviewsCount}:reviewCount: değerlendirme)</target>
+        <source>Peer review (<x id="reviewCount" equiv-text="${reviewsCount}"/> reviews for <x id="publicationCount" equiv-text="${publicationsCount}"/> publications/grants)</source>
+        <target>Meslektaş değerlendirmesi (<x id="publicationCount" equiv-text="${publicationsCount}"/> yayın/hibe için <x id="reviewCount" equiv-text="${reviewsCount}"/> değerlendirme)</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>

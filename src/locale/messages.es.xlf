@@ -21238,8 +21238,8 @@
         <target>Financiado por</target>
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
-        <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
-        <target>Revisión por pares (${reviewsCount}:reviewCount: revisiones de ${publicationsCount}:publicationCount: publicaciones/concesiones)</target>
+        <source>Peer review (<x id="reviewCount" equiv-text="${reviewsCount}"/> reviews for <x id="publicationCount" equiv-text="${publicationsCount}"/> publications/grants)</source>
+        <target>Revisión por pares (<x id="reviewCount" equiv-text="${reviewsCount}"/> revisiones de <x id="publicationCount" equiv-text="${publicationsCount}"/> publicaciones/concesiones)</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>
