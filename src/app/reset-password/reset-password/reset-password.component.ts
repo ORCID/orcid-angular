@@ -53,6 +53,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   token: string
   expiredPasswordResetToken: boolean
   invalidPasswordResetToken: boolean
+  alreadyUsedPasswordResetToken: boolean
   isMobile: boolean
   isOauthAuthorizationTogglzEnable: boolean
   showForm = true
@@ -99,6 +100,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         )
       ) {
         this.expiredPasswordResetToken = true
+      }
+      if (
+        data.tokenVerification.errors.find(
+          (x: string) => x === 'alreadyUsedPasswordResetToken'
+        )
+      ) {
+        this.alreadyUsedPasswordResetToken = true
       }
     })
 
@@ -203,6 +211,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
                 )
               ) {
                 this.expiredPasswordResetToken = true
+              }
+              if (
+                value.errors?.find(
+                  (x: string) => x === 'alreadyUsedPasswordResetToken'
+                )
+              ) {
+                this.alreadyUsedPasswordResetToken = true
               }
               if (
                 value.newPassword?.errors?.find(
