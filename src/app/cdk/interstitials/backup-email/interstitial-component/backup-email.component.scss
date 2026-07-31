@@ -50,14 +50,21 @@ mat-form-field {
   width: 100%;
 }
 
+// Figma stacks the label, the field and the message with an even 8px gap
 .input-container {
   margin-top: $spacing-base;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-small;
 }
 
 mat-label.orc-font-small-print {
   font-weight: bold;
-  display: block;
-  margin-bottom: $spacing-xsmall;
+  line-height: 18px; // Figma $body-xs 12/18
+}
+
+mat-error.orc-font-small-print {
+  line-height: 18px;
 }
 
 button.authorize-button {

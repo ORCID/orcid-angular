@@ -25,8 +25,12 @@
     }
   }
 
-  // Label and inline messages turn red while an error is displayed
-  .error,
+  // Figma uses two reds for the error state: the label and the field outline
+  // take the darker one, the message itself the lighter
+  .error {
+    color: map-get($foreground, 'state-warning-darkest');
+  }
+
   mat-error {
     color: map-get($foreground, 'state-warning-dark');
   }

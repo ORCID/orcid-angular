@@ -63,7 +63,13 @@
         >
           Backup email
         </mat-label>
-        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+        <!-- no-hint drops the reserved subscript space; the errors below are
+             siblings, so that space is only a gap -->
+        <mat-form-field
+          appearance="outline"
+          class="no-hint"
+          [hideRequiredMarker]="true"
+        >
           <input
             aria-labelledby="backup-email-input-label"
             id="backup-email-input"
