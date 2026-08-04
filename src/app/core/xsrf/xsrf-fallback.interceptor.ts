@@ -5,7 +5,8 @@ import {
   HttpRequest,
 } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { from, Observable, of } from 'rxjs'
+import { catchError, switchMap } from 'rxjs/operators'
 import { CookieService } from 'ngx-cookie-service'
 
 declare const runtimeEnvironment: any
@@ -28,6 +29,34 @@ declare const runtimeEnvironment: any
 export class XsrfFallbackInterceptor implements HttpInterceptor {
   constructor(private _cookie: CookieService) {}
 
+  private attachXsrf(req: HttpRequest<any>, token: string): HttpRequest<any> {
+    return req.clone({
+      withCredentials: true,
+      headers: req.headers.set('x-xsrf-token', token),
+    })
+  }
+
+  private toAbsoluteUrl(url: string): URL | null {
+    try {
+      if (!url) return null
+      if (url.startsWith('//')) {
+        return new URL(`${window.location.protocol}${url}`)
+      }
+      return new URL(url, window.location.origin)
+    } catch (_e) {
+      return null
+    }
+  }
+
+  private sameHost(left: string, right: string): boolean {
+    const leftUrl = this.toAbsoluteUrl(left)
+    const rightUrl = this.toAbsoluteUrl(right)
+    if (!leftUrl || !rightUrl) {
+      return false
+    }
+    return leftUrl.host === rightUrl.host
+  }
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -39,8 +68,9 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
       return next.handle(req)
     }
 
-    // If header already present (either manually or by Angular), leave as-is
-    if (req.headers.has('x-xsrf-token')) {
+    // If header is already present and non-empty (either manually or by Angular), leave as-is
+    const existingHeader = req.headers.get('x-xsrf-token')?.trim()
+    if (existingHeader) {
       return next.handle(req)
     }
 
@@ -48,11 +78,16 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
     const baseUrl = runtimeEnvironment.BASE_URL
     const authBase = runtimeEnvironment.AUTH_SERVER
 
+    const isRelativeRequest = req.url.startsWith('/')
+    const requestUrl = this.toAbsoluteUrl(req.url)
+    const isApiHostCall = this.sameHost(req.url, apiBase)
+    const isBaseHostCall = this.sameHost(req.url, baseUrl)
+    const isAuthHostCall = this.sameHost(req.url, authBase)
+    const isSameOriginCall =
+      isRelativeRequest || requestUrl?.host === window.location.host
+
     const isBackendHost =
-      req.url.startsWith(apiBase) ||
-      req.url.startsWith(baseUrl) ||
-      req.url.startsWith('/') ||
-      req.url.startsWith(authBase)
+      isRelativeRequest || isApiHostCall || isBaseHostCall || isAuthHostCall
 
     if (!isBackendHost) {
       return next.handle(req)
@@ -61,20 +96,34 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
     // Decide which cookie to use based on target *host*, not path.
     // Only the auth server (AUTH_SERVER origin) sets/expects AUTH-XSRF-TOKEN.
     // API_WEB / BASE_URL / relative URLs (e.g. /signin/auth.json) use XSRF-TOKEN.
-    const isAuthServerCall = req.url.startsWith(authBase)
+    const isAuthServerCall = isAuthHostCall
 
-    const cookieName = isAuthServerCall ? 'AUTH-XSRF-TOKEN' : 'XSRF-TOKEN'
-    const token = this._cookie.get(cookieName)
+    const primaryCookie = isAuthServerCall ? 'AUTH-XSRF-TOKEN' : 'XSRF-TOKEN'
+    const fallbackCookie = isAuthServerCall ? 'XSRF-TOKEN' : 'AUTH-XSRF-TOKEN'
+    const token =
+      this._cookie.get(primaryCookie) || this._cookie.get(fallbackCookie)
 
-    if (!token) {
-      return next.handle(req)
+    if (token) {
+      return next.handle(this.attachXsrf(req, token))
     }
 
-    const cloned = req.clone({
-      withCredentials: true,
-      headers: req.headers.set('x-xsrf-token', token),
-    })
+    // First mutating request can happen before token cookie is materialized.
+    // Bootstrap token with csrf.json and retry once with the fresh cookie.
+    if (!isAuthServerCall && isSameOriginCall) {
+      const csrfUrl = `${apiBase}csrf.json`
+      return from(fetch(csrfUrl, { credentials: 'include' })).pipe(
+        catchError(() => of(null)),
+        switchMap(() => {
+          const refreshedToken =
+            this._cookie.get('XSRF-TOKEN') || this._cookie.get('AUTH-XSRF-TOKEN')
+          if (!refreshedToken) {
+            return next.handle(req)
+          }
+          return next.handle(this.attachXsrf(req, refreshedToken))
+        })
+      )
+    }
 
-    return next.handle(cloned)
+    return next.handle(req)
   }
 }
