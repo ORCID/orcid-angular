@@ -132,7 +132,9 @@ describe('XsrfFallbackInterceptor', () => {
       name === 'XSRF-TOKEN' ? 'abs-api-xsrf-token' : ''
     )
 
-    http.post('https://api.example/account/revokeSocialAccount.json', {}).subscribe()
+    http
+      .post('https://api.example/account/revokeSocialAccount.json', {})
+      .subscribe()
 
     const req = httpMock.expectOne(
       'https://api.example/account/revokeSocialAccount.json'

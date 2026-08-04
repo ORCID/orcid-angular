@@ -115,7 +115,8 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
         catchError(() => of(null)),
         switchMap(() => {
           const refreshedToken =
-            this._cookie.get('XSRF-TOKEN') || this._cookie.get('AUTH-XSRF-TOKEN')
+            this._cookie.get('XSRF-TOKEN') ||
+            this._cookie.get('AUTH-XSRF-TOKEN')
           if (!refreshedToken) {
             return next.handle(req)
           }
