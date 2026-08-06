@@ -31,6 +31,7 @@ declare function otherIdsTextNode(
   value: string,
   url?: string
 ): HTMLElement
+declare function recordIssueFromRecordJson(recordJson: any): any
 declare const STRINGS: Record<string, string>
 
 describe('fetch-orcid.js', () => {
@@ -358,6 +359,10 @@ describe('fetch-orcid.js', () => {
         'employments',
         'activities',
         'loadingRecord',
+        'recordIsDeprecatedTitle',
+        'recordIsNotClaimedTitle',
+        'recordIsLockedTitle',
+        'recordIsDeactivatedTitle',
       ]
       requiredKeys.forEach((key) => {
         expect(STRINGS[key]).withContext(`STRINGS.${key}`).toBeTruthy()
@@ -373,6 +378,57 @@ describe('fetch-orcid.js', () => {
           .withContext(`STRINGS.${key} should not be empty`)
           .toBeGreaterThan(0)
       })
+    })
+  })
+
+  describe('recordIssueFromRecordJson', () => {
+    it('maps OrcidDeprecatedException to deprecated title and description', () => {
+      expect(
+        recordIssueFromRecordJson({
+          error_name: 'OrcidDeprecatedException',
+          deprecated_orcid: '0000-0001-1111-1111',
+          orcid: '0000-0002-2222-2222',
+        })
+      ).toEqual({
+        title: 'This record has been deprecated',
+        description:
+          'A deprecated record is a duplicate or unwanted ORCID record that has been merged with another owned by the same person.',
+        deprecated_orcid: '0000-0001-1111-1111',
+        orcid: '0000-0002-2222-2222',
+      })
+    })
+
+    it('maps OrcidNotClaimedException to not claimed title and description', () => {
+      expect(
+        recordIssueFromRecordJson({ error_name: 'OrcidNotClaimedException' })
+      ).toEqual({
+        title: 'This record has not been claimed',
+        description: 'This record has not been claimed yet',
+      })
+    })
+
+    it('maps LockedException to locked title and description', () => {
+      expect(recordIssueFromRecordJson({ error_name: 'LockedException' })).toEqual({
+        title: 'This record is locked',
+        description:
+          'We lock records when they violate conditions of our terms of service.',
+      })
+    })
+
+    it('maps DeactivatedException to deactivated title and description', () => {
+      expect(
+        recordIssueFromRecordJson({ error_name: 'DeactivatedException' })
+      ).toEqual({
+        title: 'This record has been deactivated',
+        description:
+          'When an ORCID record is deactivated all information in the record is deleted. Deactivated records are not shown in registry searches.',
+      })
+    })
+
+    it('returns null for unknown or missing error_name', () => {
+      expect(recordIssueFromRecordJson({ error_name: 'OtherException' })).toBeNull()
+      expect(recordIssueFromRecordJson({})).toBeNull()
+      expect(recordIssueFromRecordJson(null)).toBeNull()
     })
   })
 })
