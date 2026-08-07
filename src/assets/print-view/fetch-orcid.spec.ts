@@ -408,7 +408,9 @@ describe('fetch-orcid.js', () => {
     })
 
     it('maps LockedException to locked title and description', () => {
-      expect(recordIssueFromRecordJson({ error_name: 'LockedException' })).toEqual({
+      expect(
+        recordIssueFromRecordJson({ error_name: 'LockedException' })
+      ).toEqual({
         title: 'This record is locked',
         description:
           'We lock records when they violate conditions of our terms of service.',
@@ -426,7 +428,9 @@ describe('fetch-orcid.js', () => {
     })
 
     it('returns null for unknown or missing error_name', () => {
-      expect(recordIssueFromRecordJson({ error_name: 'OtherException' })).toBeNull()
+      expect(
+        recordIssueFromRecordJson({ error_name: 'OtherException' })
+      ).toBeNull()
       expect(recordIssueFromRecordJson({})).toBeNull()
       expect(recordIssueFromRecordJson(null)).toBeNull()
     })
