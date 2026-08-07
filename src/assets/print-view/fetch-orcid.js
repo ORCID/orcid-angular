@@ -1235,7 +1235,7 @@ function renderRecordIssueMessage(recordIssue) {
   issueContainer.appendChild(title)
 
   if (recordIssue.deprecated_orcid) {
-    const deprecatedIdUrl= sanitizeUrl(recordIssue.deprecated_orcid)
+    const deprecatedIdUrl = sanitizeUrl(recordIssue.deprecated_orcid)
     const redirectInfo = document.createElement('p')
     const deprecatedLink = document.createElement('a')
     deprecatedLink.href = deprecatedIdUrl
@@ -1247,14 +1247,16 @@ function renderRecordIssueMessage(recordIssue) {
     spacing1.textContent = ' '
     redirectInfo.appendChild(spacing1)
     const arrow = document.createElement('img')
-    arrow.src =
-      './assets/vectors/arrow-right.svg'
+    arrow.src = './assets/vectors/arrow-right.svg'
     arrow.alt = 'Arrow'
     redirectInfo.appendChild(arrow)
     const spacing2 = document.createElement('span')
     spacing2.textContent = ' '
     redirectInfo.appendChild(spacing2)
-    const orcidIdDiv = generateOrcidIdDiv(sanitizeUrl(recordIssue.orcid), recordIssue)
+    const orcidIdDiv = generateOrcidIdDiv(
+      sanitizeUrl(recordIssue.orcid),
+      recordIssue
+    )
     redirectInfo.appendChild(orcidIdDiv)
     issueContainer.appendChild(redirectInfo)
   } else {
@@ -1277,8 +1279,7 @@ function generateOrcidIdDiv(currentIdUrl, recordIssue) {
   const orcidIdDiv = document.createElement('div')
   orcidIdDiv.className = 'orcid-id'
   const orcidIcon = document.createElement('img')
-  orcidIcon.src =
-    'https://orcid.org/assets/vectors/orcid.logo.black.icon.svg'
+  orcidIcon.src = 'https://orcid.org/assets/vectors/orcid.logo.black.icon.svg'
   orcidIcon.alt = STRINGS.orcidIdAlt
   orcidIdDiv.appendChild(orcidIcon)
   const recordLink = document.createElement('a')
