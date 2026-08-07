@@ -1239,7 +1239,11 @@ function renderRecordIssueMessage(recordIssue) {
 
   if (recordIssue.deprecated_orcid) {
     const deprecatedIdUrl = sanitizeUrl(recordIssue.deprecated_orcid)
-    const redirectInfo = document.createElement('p')
+    const redirectInfo = document.createElement('div')
+    redirectInfo.style.display = 'flex'
+    redirectInfo.style.alignItems = 'center'
+    redirectInfo.style.flexWrap = 'wrap'
+    redirectInfo.style.gap = '4px'
     const deprecatedLink = document.createElement('a')
     deprecatedLink.href = deprecatedIdUrl
     deprecatedLink.target = '_blank'
@@ -1260,16 +1264,12 @@ function renderRecordIssueMessage(recordIssue) {
       sanitizeUrl(recordIssue.orcid),
       recordIssue
     )
+    orcidIdDiv.style.marginTop = '0'
     redirectInfo.appendChild(orcidIdDiv)
     issueContainer.appendChild(redirectInfo)
   } else {
     const location = window.location.origin
-    console.log('-------------------------------')
-    console.log(recordIssue)
-    console.log(location)
     const currentIdUrl = sanitizeUrl(location + '/' + recordIssue.orcid)
-    console.log(currentIdUrl)
-    console.log('-------------------------------')
     const recordParagraph = document.createElement('p')
     const orcidIdDiv = generateOrcidIdDiv(currentIdUrl, recordIssue)
     recordParagraph.appendChild(orcidIdDiv)
