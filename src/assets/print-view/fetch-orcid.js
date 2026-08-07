@@ -1208,16 +1208,19 @@ function recordIssueFromRecordJson(recordJson) {
       return {
         title: STRINGS.recordIsNotClaimedTitle,
         description: STRINGS.recordNotClaimedDescription,
+        orcid: jsonText(recordJson.orcid),
       }
     case 'LockedException':
       return {
         title: STRINGS.recordIsLockedTitle,
         description: STRINGS.lockedRecordDescription,
+        orcid: jsonText(recordJson.orcid),
       }
     case 'DeactivatedException':
       return {
         title: STRINGS.recordIsDeactivatedTitle,
         description: STRINGS.deactivatedRecordDescription,
+        orcid: jsonText(recordJson.orcid),
       }
     default:
       return null
@@ -1247,7 +1250,7 @@ function renderRecordIssueMessage(recordIssue) {
     spacing1.textContent = ' '
     redirectInfo.appendChild(spacing1)
     const arrow = document.createElement('img')
-    arrow.src = './assets/vectors/arrow-right.svg'
+    arrow.src = '../../assets/vectors/arrow-right.svg'
     arrow.alt = 'Arrow'
     redirectInfo.appendChild(arrow)
     const spacing2 = document.createElement('span')
@@ -1260,8 +1263,13 @@ function renderRecordIssueMessage(recordIssue) {
     redirectInfo.appendChild(orcidIdDiv)
     issueContainer.appendChild(redirectInfo)
   } else {
-    const location = window.location.href
-    const currentIdUrl = sanitizeUrl(location + recordIssue.orcid)
+    const location = window.location.origin
+    console.log('-------------------------------')
+    console.log(recordIssue)
+    console.log(location)
+    const currentIdUrl = sanitizeUrl(location + '/' + recordIssue.orcid)
+    console.log(currentIdUrl)
+    console.log('-------------------------------')
     const recordParagraph = document.createElement('p')
     const orcidIdDiv = generateOrcidIdDiv(currentIdUrl, recordIssue)
     recordParagraph.appendChild(orcidIdDiv)
