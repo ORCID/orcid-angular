@@ -1196,7 +1196,6 @@ function recordIssueFromRecordJson(recordJson) {
 
   const errorName = jsonText(recordJson.error_name)
   if (!errorName) return null
-
   switch (errorName) {
     case 'OrcidDeprecatedException':
       return {

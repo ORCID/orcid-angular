@@ -21152,6 +21152,14 @@
         <source>Redirecting to primary ORCID record…</source>
         <target>LR</target>
       </trans-unit>
+      <trans-unit id="printView.recordIsNotClaimedTitle" datatype="html" resname="printView.recordIsNotClaimedTitle">
+        <source>This record has not been claimed</source>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="printView.recordNotClaimedDescription" datatype="html" resname="printView.recordNotClaimedDescription">
+        <source>This record has not been claimed yet</source>
+        <target>LR</target>
+      </trans-unit>
       <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
         <source>ORCID Print view</source>
         <target>LR</target>
