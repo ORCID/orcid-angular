@@ -1204,21 +1204,33 @@ function recordIssueFromRecordJson(recordJson) {
         deprecated_orcid: jsonText(recordJson.deprecated_orcid),
         orcid: jsonText(recordJson.orcid),
       }
-    case 'OrcidNotClaimedException':
-      return {
+    case 'OrcidNotClaimedException': {
+      const result = {
         title: STRINGS.recordIsNotClaimedTitle,
         description: STRINGS.recordNotClaimedDescription,
       }
-    case 'LockedException':
-      return {
+      const orcid = jsonText(recordJson.orcid)
+      if (orcid) result.orcid = orcid
+      return result
+    }
+    case 'LockedException': {
+      const result = {
         title: STRINGS.recordIsLockedTitle,
         description: STRINGS.lockedRecordDescription,
       }
-    case 'DeactivatedException':
-      return {
+      const orcid = jsonText(recordJson.orcid)
+      if (orcid) result.orcid = orcid
+      return result
+    }
+    case 'DeactivatedException': {
+      const result = {
         title: STRINGS.recordIsDeactivatedTitle,
         description: STRINGS.deactivatedRecordDescription,
       }
+      const orcid = jsonText(recordJson.orcid)
+      if (orcid) result.orcid = orcid
+      return result
+    }
     default:
       return null
   }
@@ -1236,7 +1248,11 @@ function renderRecordIssueMessage(recordIssue) {
 
   if (recordIssue.deprecated_orcid) {
     const deprecatedIdUrl = sanitizeUrl(recordIssue.deprecated_orcid)
-    const redirectInfo = document.createElement('p')
+    const redirectInfo = document.createElement('div')
+    redirectInfo.style.display = 'flex'
+    redirectInfo.style.alignItems = 'center'
+    redirectInfo.style.flexWrap = 'wrap'
+    redirectInfo.style.gap = '4px'
     const deprecatedLink = document.createElement('a')
     deprecatedLink.href = deprecatedIdUrl
     deprecatedLink.target = '_blank'
@@ -1247,7 +1263,7 @@ function renderRecordIssueMessage(recordIssue) {
     spacing1.textContent = ' '
     redirectInfo.appendChild(spacing1)
     const arrow = document.createElement('img')
-    arrow.src = './assets/vectors/arrow-right.svg'
+    arrow.src = '../../assets/vectors/arrow-right.svg'
     arrow.alt = 'Arrow'
     redirectInfo.appendChild(arrow)
     const spacing2 = document.createElement('span')
@@ -1257,11 +1273,12 @@ function renderRecordIssueMessage(recordIssue) {
       sanitizeUrl(recordIssue.orcid),
       recordIssue
     )
+    orcidIdDiv.style.marginTop = '0'
     redirectInfo.appendChild(orcidIdDiv)
     issueContainer.appendChild(redirectInfo)
   } else {
-    const location = window.location.href
-    const currentIdUrl = sanitizeUrl(location + recordIssue.orcid)
+    const location = window.location.origin
+    const currentIdUrl = sanitizeUrl(location + '/' + recordIssue.orcid)
     const recordParagraph = document.createElement('p')
     const orcidIdDiv = generateOrcidIdDiv(currentIdUrl, recordIssue)
     recordParagraph.appendChild(orcidIdDiv)
