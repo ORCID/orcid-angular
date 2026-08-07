@@ -50,6 +50,14 @@ const STRINGS = {
   loadingRecord: $localize`:@@printView.loadingRecord:Loading ORCID record...`,
   recordNotFound: $localize`:@@printView.recordNotFound:Record data was not found in ORCID response.`,
   redirectingToPrimary: $localize`:@@printView.redirectingToPrimary:Redirecting to primary ORCID record…`,
+  recordIsDeprecatedTitle: $localize`:@@summary.recordIsDeprecated:This record has been deprecated`,
+  deprecatedRecordDescription: $localize`:@@topBar.deprecatedRecordIsDuplicate:A deprecated record is a duplicate or unwanted ORCID record that has been merged with another owned by the same person.`,
+  recordIsNotClaimedTitle: $localize`:@@printView.recordIsNotClaimedTitle:This record has not been claimed`,
+  recordNotClaimedDescription: $localize`:@@printView.recordNotClaimedDescription:This record has not been claimed yet`,
+  recordIsLockedTitle: $localize`:@@summary.recordIsLocked:This record is locked`,
+  lockedRecordDescription: `${$localize`:@@topBar.weLockRecords:We lock records when they violate conditions of our`} ${$localize`:@@topBar.termsOfService:terms of service.`}`,
+  recordIsDeactivatedTitle: $localize`:@@summary.recordIsDeactivated:This record has been deactivated`,
+  deactivatedRecordDescription: $localize`:@@topBar.whenOrcidDeactivated:When an ORCID record is deactivated all information in the record is deleted. Deactivated records are not shown in registry searches.`,
   orcidPrintView: $localize`:@@printView.orcidPrintView:ORCID Print view`,
   printSaveAsPdf: $localize`:@@printView.printSaveAsPdf:Print / Save as PDF`,
   printThisOrcidProfile: $localize`:@@printView.printThisOrcidProfile:Print this ORCID profile`,
@@ -1183,6 +1191,102 @@ function renderRecord(recordJson) {
   cvRoot.appendChild(container)
 }
 
+function recordIssueFromRecordJson(recordJson) {
+  if (!recordJson || typeof recordJson !== 'object') return null
+
+  const errorName = jsonText(recordJson.error_name)
+  if (!errorName) return null
+  console.log('Error found on record: ' + errorName)
+  switch (errorName) {
+    case 'OrcidDeprecatedException':
+      return {
+        title: STRINGS.recordIsDeprecatedTitle,
+        description: STRINGS.deprecatedRecordDescription,
+        deprecated_orcid: jsonText(recordJson.deprecated_orcid),
+        orcid: jsonText(recordJson.orcid),
+      }
+    case 'OrcidNotClaimedException':
+      return {
+        title: STRINGS.recordIsNotClaimedTitle,
+        description: STRINGS.recordNotClaimedDescription,
+      }
+    case 'LockedException':
+      return {
+        title: STRINGS.recordIsLockedTitle,
+        description: STRINGS.lockedRecordDescription,
+      }
+    case 'DeactivatedException':
+      return {
+        title: STRINGS.recordIsDeactivatedTitle,
+        description: STRINGS.deactivatedRecordDescription,
+      }
+    default:
+      return null
+  }
+}
+
+function renderRecordIssueMessage(recordIssue) {
+  clearNode(cvRoot)
+
+  const issueContainer = document.createElement('section')
+  issueContainer.className = 'error'
+
+  const title = document.createElement('h1')
+  title.textContent = recordIssue.title
+  issueContainer.appendChild(title)
+
+  if (recordIssue.deprecated_orcid) {
+    const deprecatedId = normalizeOrcidId(recordIssue.deprecated_orcid)
+    const currentId = normalizeOrcidId(recordIssue.orcid)
+    const deprecatedHref = deprecatedId
+      ? `https://orcid.org/${deprecatedId}`
+      : sanitizeUrl(recordIssue.deprecated_orcid)
+    const currentHref = currentId
+      ? `https://orcid.org/${currentId}`
+      : sanitizeUrl(recordIssue.orcid)
+
+    if (deprecatedHref && currentHref) {
+      const redirectInfo = document.createElement('p')
+
+      const deprecatedLink = document.createElement('a')
+      deprecatedLink.href = deprecatedHref
+      deprecatedLink.target = '_blank'
+      deprecatedLink.rel = 'noopener noreferrer'
+      deprecatedLink.textContent = deprecatedId || recordIssue.deprecated_orcid
+      redirectInfo.appendChild(deprecatedLink)
+
+      const arrow = document.createElement('span')
+      arrow.textContent = ' \u2192 '
+      redirectInfo.appendChild(arrow)
+
+      const orcidIcon = document.createElement('img')
+      orcidIcon.src =
+        'https://orcid.org/assets/vectors/orcid.logo.black.icon.svg'
+      orcidIcon.alt = 'ORCID iD'
+      redirectInfo.appendChild(orcidIcon)
+
+      const spacing = document.createElement('span')
+      spacing.textContent = ' '
+      redirectInfo.appendChild(spacing)
+
+      const currentLink = document.createElement('a')
+      currentLink.href = currentHref
+      currentLink.target = '_blank'
+      currentLink.rel = 'noopener noreferrer'
+      currentLink.textContent = currentId || recordIssue.orcid
+      redirectInfo.appendChild(currentLink)
+
+      issueContainer.appendChild(redirectInfo)
+    }
+  }
+
+  const description = document.createElement('p')
+  description.textContent = recordIssue.description
+  issueContainer.appendChild(description)
+
+  cvRoot.appendChild(issueContainer)
+}
+
 async function fetchOrcidRecord(orcidId) {
   /** Same-origin UI endpoint (e.g. org.orcid.frontend.web.api.v3.UiPublicV3RecordController). */
   const url = new URL(
@@ -1229,6 +1333,13 @@ async function loadRecord(orcidId) {
 
   try {
     const { recordJson } = await fetchOrcidRecord(orcidId)
+    const recordIssue = recordIssueFromRecordJson(recordJson)
+    if (recordIssue) {
+      renderRecordIssueMessage(recordIssue)
+      showStatus(recordIssue.title, 'error')
+      cvRoot.setAttribute('aria-busy', 'false')
+      return
+    }
     renderRecord(recordJson)
     clearStatus()
     cvRoot.setAttribute('aria-busy', 'false')
