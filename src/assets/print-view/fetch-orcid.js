@@ -1260,7 +1260,8 @@ function renderRecordIssueMessage(recordIssue) {
       redirectInfo.appendChild(arrow)
 
       const orcidIcon = document.createElement('img')
-      orcidIcon.src = 'https://orcid.org/assets/vectors/orcid.logo.black.icon.svg'
+      orcidIcon.src =
+        'https://orcid.org/assets/vectors/orcid.logo.black.icon.svg'
       orcidIcon.alt = 'ORCID iD'
       redirectInfo.appendChild(orcidIcon)
 
