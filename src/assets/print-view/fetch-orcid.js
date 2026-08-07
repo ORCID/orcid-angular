@@ -1204,24 +1204,33 @@ function recordIssueFromRecordJson(recordJson) {
         deprecated_orcid: jsonText(recordJson.deprecated_orcid),
         orcid: jsonText(recordJson.orcid),
       }
-    case 'OrcidNotClaimedException':
-      return {
+    case 'OrcidNotClaimedException': {
+      const result = {
         title: STRINGS.recordIsNotClaimedTitle,
         description: STRINGS.recordNotClaimedDescription,
-        orcid: jsonText(recordJson.orcid),
       }
-    case 'LockedException':
-      return {
+      const orcid = jsonText(recordJson.orcid)
+      if (orcid) result.orcid = orcid
+      return result
+    }
+    case 'LockedException': {
+      const result = {
         title: STRINGS.recordIsLockedTitle,
         description: STRINGS.lockedRecordDescription,
-        orcid: jsonText(recordJson.orcid),
       }
-    case 'DeactivatedException':
-      return {
+      const orcid = jsonText(recordJson.orcid)
+      if (orcid) result.orcid = orcid
+      return result
+    }
+    case 'DeactivatedException': {
+      const result = {
         title: STRINGS.recordIsDeactivatedTitle,
         description: STRINGS.deactivatedRecordDescription,
-        orcid: jsonText(recordJson.orcid),
       }
+      const orcid = jsonText(recordJson.orcid)
+      if (orcid) result.orcid = orcid
+      return result
+    }
     default:
       return null
   }
