@@ -1196,7 +1196,7 @@ function recordIssueFromRecordJson(recordJson) {
 
   const errorName = jsonText(recordJson.error_name)
   if (!errorName) return null
-  console.log('Error found on record: ' + errorName)
+
   switch (errorName) {
     case 'OrcidDeprecatedException':
       return {
@@ -1236,48 +1236,35 @@ function renderRecordIssueMessage(recordIssue) {
   issueContainer.appendChild(title)
 
   if (recordIssue.deprecated_orcid) {
-    const deprecatedId = normalizeOrcidId(recordIssue.deprecated_orcid)
-    const currentId = normalizeOrcidId(recordIssue.orcid)
-    const deprecatedHref = deprecatedId
-      ? `https://orcid.org/${deprecatedId}`
-      : sanitizeUrl(recordIssue.deprecated_orcid)
-    const currentHref = currentId
-      ? `https://orcid.org/${currentId}`
-      : sanitizeUrl(recordIssue.orcid)
-
-    if (deprecatedHref && currentHref) {
-      const redirectInfo = document.createElement('p')
-
-      const deprecatedLink = document.createElement('a')
-      deprecatedLink.href = deprecatedHref
-      deprecatedLink.target = '_blank'
-      deprecatedLink.rel = 'noopener noreferrer'
-      deprecatedLink.textContent = deprecatedId || recordIssue.deprecated_orcid
-      redirectInfo.appendChild(deprecatedLink)
-
-      const arrow = document.createElement('span')
-      arrow.textContent = ' \u2192 '
-      redirectInfo.appendChild(arrow)
-
-      const orcidIcon = document.createElement('img')
-      orcidIcon.src =
-        'https://orcid.org/assets/vectors/orcid.logo.black.icon.svg'
-      orcidIcon.alt = 'ORCID iD'
-      redirectInfo.appendChild(orcidIcon)
-
-      const spacing = document.createElement('span')
-      spacing.textContent = ' '
-      redirectInfo.appendChild(spacing)
-
-      const currentLink = document.createElement('a')
-      currentLink.href = currentHref
-      currentLink.target = '_blank'
-      currentLink.rel = 'noopener noreferrer'
-      currentLink.textContent = currentId || recordIssue.orcid
-      redirectInfo.appendChild(currentLink)
-
-      issueContainer.appendChild(redirectInfo)
-    }
+    const deprecatedIdUrl= sanitizeUrl(recordIssue.deprecated_orcid)
+    const redirectInfo = document.createElement('p')
+    const deprecatedLink = document.createElement('a')
+    deprecatedLink.href = deprecatedIdUrl
+    deprecatedLink.target = '_blank'
+    deprecatedLink.rel = 'noopener noreferrer'
+    deprecatedLink.textContent = deprecatedIdUrl || recordIssue.deprecated_orcid
+    redirectInfo.appendChild(deprecatedLink)
+    const spacing1 = document.createElement('span')
+    spacing1.textContent = ' '
+    redirectInfo.appendChild(spacing1)
+    const arrow = document.createElement('img')
+    arrow.src =
+      './assets/vectors/arrow-right.svg'
+    arrow.alt = 'Arrow'
+    redirectInfo.appendChild(arrow)
+    const spacing2 = document.createElement('span')
+    spacing2.textContent = ' '
+    redirectInfo.appendChild(spacing2)
+    const orcidIdDiv = generateOrcidIdDiv(sanitizeUrl(recordIssue.orcid), recordIssue)
+    redirectInfo.appendChild(orcidIdDiv)
+    issueContainer.appendChild(redirectInfo)
+  } else {
+    const location = window.location.href
+    const currentIdUrl = sanitizeUrl(location + recordIssue.orcid)
+    const recordParagraph = document.createElement('p')
+    const orcidIdDiv = generateOrcidIdDiv(currentIdUrl, recordIssue)
+    recordParagraph.appendChild(orcidIdDiv)
+    issueContainer.appendChild(recordParagraph)
   }
 
   const description = document.createElement('p')
@@ -1285,6 +1272,23 @@ function renderRecordIssueMessage(recordIssue) {
   issueContainer.appendChild(description)
 
   cvRoot.appendChild(issueContainer)
+}
+
+function generateOrcidIdDiv(currentIdUrl, recordIssue) {
+  const orcidIdDiv = document.createElement('div')
+  orcidIdDiv.className = 'orcid-id'
+  const orcidIcon = document.createElement('img')
+  orcidIcon.src =
+    'https://orcid.org/assets/vectors/orcid.logo.black.icon.svg'
+  orcidIcon.alt = STRINGS.orcidIdAlt
+  orcidIdDiv.appendChild(orcidIcon)
+  const recordLink = document.createElement('a')
+  recordLink.href = currentIdUrl
+  recordLink.target = '_blank'
+  recordLink.rel = 'noopener noreferrer'
+  recordLink.textContent = currentIdUrl || recordIssue.orcid
+  orcidIdDiv.appendChild(recordLink)
+  return orcidIdDiv
 }
 
 async function fetchOrcidRecord(orcidId) {
