@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
 import { Observable, of } from 'rxjs'
 
@@ -18,7 +18,6 @@ import {
   BackupEmailComponentDialogOutput,
   BackupEmailDialogComponent,
 } from 'src/app/cdk/interstitials/backup-email/interstitial-dialog-extend/backup-email-dialog.component'
-import { WINDOW } from 'src/app/cdk/window'
 
 @Injectable({
   providedIn: 'root',
@@ -31,18 +30,18 @@ export class LoginBackupEmailInterstitialManagerService extends LoginBaseInterst
   QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN =
     QaFlag.forceBackupEmailInterstitialNotSeem
   INTERSTITIAL_NAME: InterstitialType = 'BACKUP_EMAIL_INTERSTITIAL'
-  // Sign in flow only. Without an OAUTH_ entry getInterstitialTogglz('OAUTH')
-  // resolves to false, so the OAuth flow skips this interstitial.
+  // One entry per flow. getInterstitialTogglz() picks by LOGIN_/OAUTH_ prefix,
+  // so a missing entry silently disables the interstitial for that flow.
   INTERSTITIAL_TOGGLE: TogglzFlag[] = [
     TogglzFlag.LOGIN_BACKUP_EMAIL_INTERSTITIAL,
+    TogglzFlag.OAUTH_BACKUP_EMAIL_INTERSTITIAL,
   ]
 
   constructor(
     matDialog: MatDialog,
     interstitialsService: InterstitialsService,
     togglzService: TogglzService,
-    qaFlagService: QaFlagsService,
-    @Inject(WINDOW) private _window: Window
+    qaFlagService: QaFlagsService
   ) {
     // Pass dependencies to the parent
     super(matDialog, togglzService, interstitialsService, qaFlagService)
@@ -54,19 +53,8 @@ export class LoginBackupEmailInterstitialManagerService extends LoginBaseInterst
    */
   userIsElegibleForInterstitial(userRecord: UserRecord): Observable<boolean> {
     // Every email on the record counts, whether or not it has been verified
-    if (userRecord?.emails?.emails?.length !== 1) return of(false)
-
-    const isImpersonation = !(
-      userRecord?.userInfo?.REAL_USER_ORCID ===
-      userRecord?.userInfo?.EFFECTIVE_USER_ORCID
-    )
-
-    const insidePopUpWindows = !!this._window.opener
-
-    if (isImpersonation || insidePopUpWindows) {
-      return of(false)
-    }
-    return of(true)
+    const hasExactlyOneEmail = userRecord?.emails?.emails?.length === 1
+    return of(hasExactlyOneEmail && !this.isBlockedContext(userRecord))
   }
 
   // Return the dialog component that we want to display
@@ -74,10 +62,10 @@ export class LoginBackupEmailInterstitialManagerService extends LoginBaseInterst
     return BackupEmailDialogComponent
   }
 
-  // Build the data that goes into our dialog
+  // The component reads the record itself, so the dialog carries only its
+  // discriminator
   getDialogDataToShow(userRecord: UserRecord): BackupEmailComponentDialogInput {
     return {
-      userEmailsJson: userRecord.emails,
       type: 'backup-email-interstitial',
     }
   }

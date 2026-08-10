@@ -17,6 +17,7 @@ import { RegisterService } from 'src/app/core/register/register.service'
 import { Observable, of, Subject, throwError } from 'rxjs'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { EmailCategoryEndpoint } from 'src/app/types/register.email-category'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 describe('BackupEmailComponent', () => {
   let component: BackupEmailComponent
@@ -47,14 +48,7 @@ describe('BackupEmailComponent', () => {
       of({ category: 'PROFESSIONAL', rorId: null } as EmailCategoryEndpoint)
     observability = jasmine.createSpyObj<InterstitialObservabilityService>(
       'InterstitialObservabilityService',
-      [
-        'shown',
-        'backupEmailAdded',
-        'dismissed',
-        'validationError',
-        'saveError',
-        'closed',
-      ]
+      ['shown', 'outcome', 'closed']
     )
     postEmails = jasmine
       .createSpy('postEmails')
@@ -102,11 +96,11 @@ describe('BackupEmailComponent', () => {
   describe('inline errors', () => {
     it('should show the required error only after the user submits', () => {
       const finish = spyOn(component.finish, 'emit')
-      expect(component.showRequiredError).toBeFalse()
+      expect(component.isErrorVisible('required')).toBeFalse()
 
       component.addBackupEmail()
 
-      expect(component.showRequiredError).toBeTrue()
+      expect(component.isErrorVisible('required')).toBeTrue()
       expect(postEmails).not.toHaveBeenCalled()
       // The user cannot complete the action while an inline error is shown
       expect(finish).not.toHaveBeenCalled()
@@ -116,7 +110,7 @@ describe('BackupEmailComponent', () => {
       component.backupEmailControl.setValue('   ')
       component.addBackupEmail()
 
-      expect(component.showRequiredError).toBeTrue()
+      expect(component.isErrorVisible('required')).toBeTrue()
       expect(postEmails).not.toHaveBeenCalled()
     })
 
@@ -124,7 +118,7 @@ describe('BackupEmailComponent', () => {
       component.backupEmailControl.setValue('not-an-email')
       component.addBackupEmail()
 
-      expect(component.showInvalidEmailError).toBeTrue()
+      expect(component.isErrorVisible('invalid')).toBeTrue()
       expect(postEmails).not.toHaveBeenCalled()
     })
 
@@ -134,7 +128,7 @@ describe('BackupEmailComponent', () => {
       component.backupEmailControl.setValue('taken@example.com')
       component.addBackupEmail()
 
-      expect(component.showEmailAlreadyInUseError).toBeTrue()
+      expect(component.isErrorVisible('in_use')).toBeTrue()
       expect(postEmails).not.toHaveBeenCalled()
     })
 
@@ -144,7 +138,7 @@ describe('BackupEmailComponent', () => {
       component.addBackupEmail()
 
       expect(component.backupEmailControl.hasError('duplicated')).toBeTrue()
-      expect(component.showEmailAlreadyInUseError).toBeTrue()
+      expect(component.isErrorVisible('in_use')).toBeTrue()
       expect(postEmails).not.toHaveBeenCalled()
     })
   })
@@ -261,18 +255,23 @@ describe('BackupEmailComponent', () => {
   })
 
   describe('observability', () => {
+    const outcomeNames = () =>
+      observability.outcome.calls.allArgs().map(([name]) => name)
+
     it('should report the validation error that blocked the submit', () => {
       component.addBackupEmail()
 
-      expect(observability.validationError).toHaveBeenCalledWith('required')
-      expect(observability.backupEmailAdded).not.toHaveBeenCalled()
+      expect(observability.outcome).toHaveBeenCalledWith(
+        AppEventName.InterstitialValidationError,
+        { validationErrorKind: 'required', formValid: false }
+      )
+      expect(outcomeNames()).not.toContain(AppEventName.InterstitialCompleted)
     })
 
     it('should distinguish a dismissal from a failed save', () => {
       component.declineBackupEmail()
 
-      expect(observability.dismissed).toHaveBeenCalled()
-      expect(observability.saveError).not.toHaveBeenCalled()
+      expect(outcomeNames()).toEqual([AppEventName.InterstitialDismissed])
     })
 
     it('should report a failed save rather than a dismissal', () => {
@@ -281,15 +280,14 @@ describe('BackupEmailComponent', () => {
       component.backupEmailControl.setValue('backup@example.com')
       component.addBackupEmail()
 
-      expect(observability.saveError).toHaveBeenCalled()
-      expect(observability.dismissed).not.toHaveBeenCalled()
+      expect(outcomeNames()).toEqual([AppEventName.InterstitialSaveError])
     })
 
     it('should report a successful add', () => {
       component.backupEmailControl.setValue('backup@example.com')
       component.addBackupEmail()
 
-      expect(observability.backupEmailAdded).toHaveBeenCalled()
+      expect(outcomeNames()).toEqual([AppEventName.InterstitialCompleted])
     })
   })
 })

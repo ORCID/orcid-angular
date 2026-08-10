@@ -43,7 +43,7 @@ export function isTerminatingSimpleEvent(eventName: string): boolean {
  */
 const INTERSTITIAL_TERMINATING_JOURNEY_EVENT_NAMES: ReadonlySet<string> =
   new Set([
-    AppEventName.InterstitialBackupAdded,
+    AppEventName.InterstitialCompleted,
     AppEventName.InterstitialDismissed,
     AppEventName.InterstitialSaveError,
   ])

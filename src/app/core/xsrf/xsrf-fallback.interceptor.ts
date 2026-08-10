@@ -7,8 +7,11 @@ import {
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { CookieService } from 'ngx-cookie-service'
-
-declare const runtimeEnvironment: any
+import {
+  isOrcidBackendUrl,
+  XSRF_MUTATING_METHODS,
+  xsrfCookieNameFor,
+} from './xsrf-urls'
 
 /**
  * XsrfFallbackInterceptor
@@ -35,7 +38,7 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
     const method = (req.method ?? '').toUpperCase()
 
     // Only care about mutating requests
-    if (!method || !['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
+    if (!method || !XSRF_MUTATING_METHODS.includes(method)) {
       return next.handle(req)
     }
 
@@ -44,27 +47,12 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
       return next.handle(req)
     }
 
-    const apiBase = runtimeEnvironment.API_WEB
-    const baseUrl = runtimeEnvironment.BASE_URL
-    const authBase = runtimeEnvironment.AUTH_SERVER
-
-    const isBackendHost =
-      req.url.startsWith(apiBase) ||
-      req.url.startsWith(baseUrl) ||
-      req.url.startsWith('/') ||
-      req.url.startsWith(authBase)
-
-    if (!isBackendHost) {
+    if (!isOrcidBackendUrl(req.url)) {
       return next.handle(req)
     }
 
-    // Decide which cookie to use based on target *host*, not path.
-    // Only the auth server (AUTH_SERVER origin) sets/expects AUTH-XSRF-TOKEN.
-    // API_WEB / BASE_URL / relative URLs (e.g. /signin/auth.json) use XSRF-TOKEN.
-    const isAuthServerCall = req.url.startsWith(authBase)
-
-    const cookieName = isAuthServerCall ? 'AUTH-XSRF-TOKEN' : 'XSRF-TOKEN'
-    const token = this._cookie.get(cookieName)
+    // The cookie is chosen by target *host*, not path — see xsrf-urls.ts
+    const token = this._cookie.get(xsrfCookieNameFor(req.url))
 
     if (!token) {
       return next.handle(req)

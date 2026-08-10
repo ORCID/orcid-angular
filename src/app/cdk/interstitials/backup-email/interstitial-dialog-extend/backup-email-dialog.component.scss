@@ -1,4 +1,6 @@
-@import '../interstitial-component/backup-email.component.scss';
+// Only the spacing tokens: the component stylesheet itself is already listed in
+// this component's styleUrls, importing it here would emit it a second time
+@import '../../../../../assets/scss/orcid.spacing.scss';
 
 mat-card-header.authorize-header {
   mat-card-title {

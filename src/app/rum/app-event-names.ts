@@ -84,10 +84,10 @@ export enum AppEventName {
   RegisterPipelineError = 'register_pipeline_error',
 
   // ─── Sign-in interstitials (`interstitial` journey) ────────────────────────
-  /** An interstitial dialog was opened. Emitted for every interstitial. */
+  /** An interstitial was shown. Emitted for every interstitial, both flows. */
   InterstitialShown = 'interstitial_shown',
-  /** Backup email interstitial: the user saved a backup email address. */
-  InterstitialBackupAdded = 'interstitial_backup_added',
+  /** The user completed the interstitial's action. Facet by interstitialName. */
+  InterstitialCompleted = 'interstitial_completed',
   /** The user chose the "continue without" option. */
   InterstitialDismissed = 'interstitial_dismissed',
   /** Submit was blocked by an inline validation error. Not terminal. */

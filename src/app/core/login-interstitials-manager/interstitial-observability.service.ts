@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import { AppEventName } from '../../rum/app-event-names'
 import { RumJourneyEventService } from '../../rum/service/customEvent.service'
+import { InterstitialEventAttributes } from '../../rum/journeys/interstitial'
 
 /**
  * Funnel instrumentation for the sign-in interstitials.
@@ -29,37 +30,15 @@ export class InterstitialObservabilityService {
     )
   }
 
-  backupEmailAdded(): void {
-    this._observability.recordEvent(
-      'interstitial',
-      AppEventName.InterstitialBackupAdded,
-      { formValid: true }
-    )
-  }
-
-  dismissed(): void {
-    this._observability.recordEvent(
-      'interstitial',
-      AppEventName.InterstitialDismissed
-    )
-  }
-
   /**
-   * @param validationErrorKind `required` | `invalid` | `in_use`
+   * Any event between `shown` and `closed`. Kept generic so a new interstitial
+   * (or a new outcome) needs no method here and no extra spy in its specs.
    */
-  validationError(validationErrorKind: string): void {
-    this._observability.recordEvent(
-      'interstitial',
-      AppEventName.InterstitialValidationError,
-      { validationErrorKind, formValid: false }
-    )
-  }
-
-  saveError(): void {
-    this._observability.recordEvent(
-      'interstitial',
-      AppEventName.InterstitialSaveError
-    )
+  outcome(
+    eventName: AppEventName,
+    attrs?: InterstitialEventAttributes
+  ): void {
+    this._observability.recordEvent('interstitial', eventName, attrs)
   }
 
   /** Closes the journey once the dialog is gone, whatever the outcome was. */

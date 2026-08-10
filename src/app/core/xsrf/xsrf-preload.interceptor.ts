@@ -12,6 +12,7 @@ import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { WINDOW } from 'src/app/cdk/window'
 import { Platform } from '@angular/cdk/platform'
+import { isOrcidWebUrl } from './xsrf-urls'
 
 /**
  * XsrfPreloadInterceptor
@@ -53,18 +54,15 @@ export class XsrfPreloadInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const apiBase = runtimeEnvironment.API_WEB
-    const baseUrl = runtimeEnvironment.BASE_URL
 
     const isCorsJson = req.url.includes('cors.json')
     // csrf.json must never gate on itself
     const isCsrfJson = req.url.includes('csrf.json')
     const looksBackendJson = req.url.includes('.json')
-    const isBackendHost =
-      req.url.startsWith(apiBase) ||
-      req.url.startsWith(baseUrl) ||
-      req.url.startsWith('/')
+    // Auth-server calls are excluded on purpose: they need AUTH-XSRF-TOKEN, and
+    // csrf.json on API_WEB does not set it, so gating them would only add delay
     const isBackendCall =
-      (looksBackendJson || isBackendHost) && !isCorsJson && !isCsrfJson
+      (looksBackendJson || isOrcidWebUrl(req.url)) && !isCorsJson && !isCsrfJson
 
     // If cookie already present, no need to preload
     if (!this.loaded && this.hasXsrfCookie()) {

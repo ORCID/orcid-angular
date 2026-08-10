@@ -13,6 +13,7 @@ import {
 import { QaFlagsService } from '../../qa-flag/qa-flag.service'
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { TogglzService } from '../../togglz/togglz.service'
+import { BackupEmailComponent } from 'src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component'
 import { LoginBackupEmailInterstitialManagerService } from '../implementations/login-backup-email-interstitials-manager.service'
 import { BackupEmailDialogComponent } from 'src/app/cdk/interstitials/backup-email/interstitial-dialog-extend/backup-email-dialog.component'
 import { WINDOW, WINDOW_PROVIDERS } from 'src/app/cdk/window'
@@ -58,14 +59,7 @@ describe('LoginBackupEmailInterstitialManagerService', () => {
     )
     mockObservability = jasmine.createSpyObj<InterstitialObservabilityService>(
       'InterstitialObservabilityService',
-      [
-        'shown',
-        'backupEmailAdded',
-        'dismissed',
-        'validationError',
-        'saveError',
-        'closed',
-      ]
+      ['shown', 'outcome', 'closed']
     )
 
     TestBed.configureTestingModule({
@@ -93,9 +87,10 @@ describe('LoginBackupEmailInterstitialManagerService', () => {
       )
     })
 
-    it('should only declare the LOGIN togglz, this interstitial does not run on the OAuth flow', () => {
+    it('should declare a togglz per flow, a missing prefix silently disables that flow', () => {
       expect(service.INTERSTITIAL_TOGGLE).toEqual([
         TogglzFlag.LOGIN_BACKUP_EMAIL_INTERSTITIAL,
+        TogglzFlag.OAUTH_BACKUP_EMAIL_INTERSTITIAL,
       ])
     })
 
@@ -227,7 +222,6 @@ describe('LoginBackupEmailInterstitialManagerService', () => {
       ] as AssertionVisibilityString[])
 
       expect(service.getDialogDataToShow(userRecord)).toEqual({
-        userEmailsJson: userRecord.emails,
         type: 'backup-email-interstitial',
       })
     })
@@ -246,13 +240,14 @@ describe('LoginBackupEmailInterstitialManagerService', () => {
       })
     })
 
-    it('should resolve to false on the OAuth flow, where no togglz exists', (done) => {
-      // getStateOf returns false for an unknown flag, keeping the OAuth flow untouched
-      mockTogglzService.getStateOf.and.returnValue(of(false))
+    it('should resolve the OAuth togglz independently of the LOGIN one', (done) => {
+      mockTogglzService.getStateOf.and.returnValue(of(true))
 
       service.getInterstitialTogglz('OAUTH').subscribe((state) => {
-        expect(mockTogglzService.getStateOf).toHaveBeenCalledWith(undefined)
-        expect(state).toBeFalse()
+        expect(mockTogglzService.getStateOf).toHaveBeenCalledWith(
+          TogglzFlag.OAUTH_BACKUP_EMAIL_INTERSTITIAL
+        )
+        expect(state).toBeTrue()
         done()
       })
     })
@@ -365,6 +360,39 @@ describe('LoginBackupEmailInterstitialManagerService', () => {
         addedBackupEmail: 'backup@example.com',
       })
       afterClosed$.complete()
+    })
+  })
+
+  // The OAuth flow renders the interstitial inline instead of in a dialog. It
+  // shares markViewedAndTrackShown() with the dialog path, so these two
+  // guarantees hold for both without being re-implemented per flow.
+  describe('showInterstitialAsComponent', () => {
+    it('should record the visit and report shown before returning the component', (done) => {
+      mockInterstitialsService.setInterstitialsViewed.and.returnValue(of(null))
+
+      service.showInterstitialAsComponent().subscribe((component) => {
+        expect(component).toBe(BackupEmailComponent)
+        expect(
+          mockInterstitialsService.setInterstitialsViewed
+        ).toHaveBeenCalledWith('BACKUP_EMAIL_INTERSTITIAL')
+        // Outcome events are dropped unless the journey was started by `shown`
+        expect(mockObservability.shown).toHaveBeenCalledWith(
+          'BACKUP_EMAIL_INTERSTITIAL'
+        )
+        done()
+      })
+    })
+
+    it('should still return the component when recording the visit fails', (done) => {
+      mockInterstitialsService.setInterstitialsViewed.and.returnValue(
+        throwError(() => new Error('403 Forbidden'))
+      )
+
+      service.showInterstitialAsComponent().subscribe((component) => {
+        expect(component).toBe(BackupEmailComponent)
+        expect(mockObservability.shown).toHaveBeenCalled()
+        done()
+      })
     })
   })
 })

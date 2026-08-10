@@ -83,7 +83,7 @@
           />
         </mat-form-field>
         <mat-error
-          *ngIf="showRequiredError"
+          *ngIf="isErrorVisible('required')"
           id="backup-email-required-error"
           role="alert"
           class="orc-font-small-print"
@@ -92,7 +92,7 @@
           Please enter your email
         </mat-error>
         <mat-error
-          *ngIf="showInvalidEmailError"
+          *ngIf="isErrorVisible('invalid')"
           id="backup-email-invalid-error"
           role="alert"
           class="orc-font-small-print"
@@ -102,7 +102,7 @@
           joe&#64;institution.edu
         </mat-error>
         <mat-error
-          *ngIf="showEmailAlreadyInUseError"
+          *ngIf="isErrorVisible('in_use')"
           id="backup-email-in-use-error"
           role="alert"
           class="orc-font-small-print"

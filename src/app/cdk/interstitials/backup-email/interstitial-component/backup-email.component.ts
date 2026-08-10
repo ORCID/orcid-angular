@@ -1,7 +1,7 @@
 import {
   Component,
   EventEmitter,
-  Inject,
+  inject,
   OnDestroy,
   OnInit,
   Output,
@@ -23,6 +23,7 @@ import { WINDOW } from 'src/app/cdk/window/window.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
+import { AppEventName } from 'src/app/rum/app-event-names'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { EmailCategory } from 'src/app/types/register.email-category'
@@ -49,15 +50,16 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
 
   @Output() finish = new EventEmitter<void>()
 
-  constructor(
-    public platformInfo: PlatformInfoService,
-    private fb: FormBuilder,
-    private recordEmailsService: RecordEmailsService,
-    private _recordService: RecordService,
-    private _registerService: RegisterService,
-    private _interstitialObservability: InterstitialObservabilityService,
-    @Inject(WINDOW) private window: Window
-  ) {}
+  // Injected as fields so the dialog subclass only declares what is genuinely
+  // its own (MAT_DIALOG_DATA, MatDialogRef) instead of restating every
+  // dependency this component happens to have
+  public platformInfo = inject(PlatformInfoService)
+  private fb = inject(FormBuilder)
+  private recordEmailsService = inject(RecordEmailsService)
+  private _recordService = inject(RecordService)
+  private _registerService = inject(RegisterService)
+  private _interstitialObservability = inject(InterstitialObservabilityService)
+  private window = inject(WINDOW) as Window
 
   ngOnInit() {
     this.window.scrollTo(0, 0)
@@ -117,71 +119,57 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
       })
   }
 
+  /**
+   * The one description of an error: which control errors produce it, the id
+   * the input points at, and the kind reported to RUM. Order is display
+   * priority. Adding an error means one row here, not five members.
+   *
+   * `required` is submit-only: blurring an untouched empty field must not
+   * accuse the user of anything before they try to continue.
+   */
+  private static readonly ERRORS = [
+    {
+      kind: 'required',
+      keys: ['required'],
+      id: 'backup-email-required-error',
+      onSubmitOnly: true,
+    },
+    { kind: 'invalid', keys: ['email'], id: 'backup-email-invalid-error' },
+    {
+      kind: 'in_use',
+      keys: ['backendError', 'duplicated'],
+      id: 'backup-email-in-use-error',
+    },
+  ]
+
   get backupEmailControl(): AbstractControl {
     return this.form?.get('backupEmail')
   }
 
-  /**
-   * The required error is only surfaced once the user submits, the button click
-   * itself does not touch or dirty the control.
-   */
-  get showRequiredError(): boolean {
-    return (
-      !!this.backupEmailControl?.hasError('required') && this.submitAttempted
-    )
-  }
-
-  get showInvalidEmailError(): boolean {
-    return this.showErrorOnceInteracted('email')
-  }
-
-  get showEmailAlreadyInUseError(): boolean {
-    return (
-      this.showErrorOnceInteracted('backendError') ||
-      this.showErrorOnceInteracted('duplicated')
-    )
+  /** The errors sit outside mat-form-field, so the link has to be explicit. */
+  get visibleErrorId(): string | null {
+    return this.visibleError?.id ?? null
   }
 
   get hasVisibleError(): boolean {
-    return (
-      this.showRequiredError ||
-      this.showInvalidEmailError ||
-      this.showEmailAlreadyInUseError
-    )
+    return !!this.visibleError
   }
 
-  /** The errors sit outside mat-form-field, so the link has to be explicit. */
-  get visibleErrorId(): string | null {
-    if (this.showRequiredError) {
-      return 'backup-email-required-error'
-    }
-    if (this.showInvalidEmailError) {
-      return 'backup-email-invalid-error'
-    }
-    if (this.showEmailAlreadyInUseError) {
-      return 'backup-email-in-use-error'
-    }
-    return null
-  }
-
-  private get validationErrorKind(): string | null {
-    if (this.showRequiredError) {
-      return 'required'
-    }
-    if (this.showInvalidEmailError) {
-      return 'invalid'
-    }
-    if (this.showEmailAlreadyInUseError) {
-      return 'in_use'
-    }
-    return null
-  }
-
-  private showErrorOnceInteracted(error: string): boolean {
+  /** Template hook: `*ngIf="isErrorVisible('required')"`. */
+  isErrorVisible(kind: string): boolean {
     const control = this.backupEmailControl
-    return (
-      !!control?.hasError(error) && (control.touched || this.submitAttempted)
-    )
+    const error = BackupEmailComponent.ERRORS.find((e) => e.kind === kind)
+    if (!control || !error) {
+      return false
+    }
+    const interacted = error.onSubmitOnly
+      ? this.submitAttempted
+      : control.touched
+    return interacted && error.keys.some((key) => control.hasError(key))
+  }
+
+  private get visibleError(): (typeof BackupEmailComponent.ERRORS)[number] {
+    return BackupEmailComponent.ERRORS.find((e) => this.isErrorVisible(e.kind))
   }
 
   private notOnlyWhitespace(): ValidatorFn {
@@ -228,15 +216,18 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
 
   /** Distinct from the save-failure exit, so the two are separable in RUM. */
   declineBackupEmail(): void {
-    this._interstitialObservability.dismissed()
+    this._interstitialObservability.outcome(AppEventName.InterstitialDismissed)
     this.finishIntertsitial()
   }
 
   private saveBackupEmailIfValid(): void {
     if (!this.form.valid) {
-      const kind = this.validationErrorKind
+      const kind = this.visibleError?.kind
       if (kind) {
-        this._interstitialObservability.validationError(kind)
+        this._interstitialObservability.outcome(
+          AppEventName.InterstitialValidationError,
+          { validationErrorKind: kind, formValid: false }
+        )
       }
       return
     }
@@ -259,12 +250,15 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
       .pipe(take(1), takeUntil(this.$destroy))
       .subscribe(
         () => {
-          this.saving = false
-          this._interstitialObservability.backupEmailAdded()
-          this.afterSummit(newBackupEmail)
+          this._interstitialObservability.outcome(
+            AppEventName.InterstitialCompleted
+          )
+          this.finishIntertsitial(newBackupEmail)
         },
         () => {
-          this._interstitialObservability.saveError()
+          this._interstitialObservability.outcome(
+            AppEventName.InterstitialSaveError
+          )
           this.finishIntertsitial()
         }
       )
@@ -272,13 +266,11 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
 
   /**
    * There is no success state inside the panel, the confirmation is shown as a
-   * notice at the top of the record once the interstitial closes.
+   * notice at the top of the record once the interstitial closes. The dialog
+   * subclass overrides this to hand `email` back as the dialog result.
    */
-  afterSummit(email: string) {
-    this.finishIntertsitial(email)
-  }
-
   finishIntertsitial(email?: string) {
+    this.saving = false
     this.finish.emit()
   }
 
