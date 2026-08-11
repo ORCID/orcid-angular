@@ -78,7 +78,11 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
     const baseUrl = runtimeEnvironment.BASE_URL
     const authBase = runtimeEnvironment.AUTH_SERVER
 
-    const isRelativeRequest = req.url.startsWith('/')
+    // A protocol-relative URL (`//host/path`) also starts with `/` but resolves
+    // to a foreign origin, so it must not be treated as a relative request —
+    // otherwise the token below is handed to whatever host the attacker names.
+    const isRelativeRequest =
+      req.url.startsWith('/') && !req.url.startsWith('//')
     const requestUrl = this.toAbsoluteUrl(req.url)
     const isApiHostCall = this.sameHost(req.url, apiBase)
     const isBaseHostCall = this.sameHost(req.url, baseUrl)
