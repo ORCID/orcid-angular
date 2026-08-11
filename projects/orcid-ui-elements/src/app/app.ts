@@ -5,10 +5,7 @@ import {
   DoBootstrap,
   Injector,
 } from '@angular/core'
-import {
-  bootstrapApplication,
-  provideClientHydration,
-} from '@angular/platform-browser'
+import { bootstrapApplication } from '@angular/platform-browser'
 import { createCustomElement } from '@angular/elements'
 import { OrcidUi } from '@orcid/ui'
 
@@ -31,8 +28,12 @@ export class OrcidElementsBootstrapComponent implements DoBootstrap {
   }
 }
 
+// No project in angular.json is built with SSR or prerendering, so client
+// hydration has nothing to restore. Enabling it only activates the TransferState
+// lookup of the `ng-state` element, which is the DOM-clobbering sink behind
+// CVE-2026-54267 — bad trade for a bundle that embeds in third-party pages.
 export const appConfig: ApplicationConfig = {
-  providers: [provideClientHydration()],
+  providers: [],
 }
 
 export function bootstrapOrcidElements() {
