@@ -6,9 +6,11 @@ import { EmailsEndpoint, UserInfo } from 'src/app/types'
 import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
 import { LoginDomainInterstitialManagerService } from '../implementations/login-domain-interstitials-manager.service'
+import { LoginBackupEmailInterstitialManagerService } from '../implementations/login-backup-email-interstitials-manager.service'
 import { LoginMainInterstitialsManagerService } from '../login-main-interstitials-manager.service'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
+import { BackupEmailComponentDialogOutput } from 'src/app/cdk/interstitials/backup-email/interstitial-dialog-extend/backup-email-dialog.component'
 
 // Mock runtime environment for debugging logs if needed
 // (Remove or adapt if your environment differs)
@@ -22,6 +24,7 @@ describe('LoginMainInterstitialsManagerService', () => {
   let mockInterstitialsService: jasmine.SpyObj<InterstitialsService>
   let mockLoginDomainInterstitialManagerService: jasmine.SpyObj<LoginDomainInterstitialManagerService>
   let mockLoginAffiliationInterstitialManagerService: jasmine.SpyObj<LoginAffiliationInterstitialManagerService>
+  let mockLoginBackupEmailInterstitialManagerService: jasmine.SpyObj<LoginBackupEmailInterstitialManagerService>
 
   // Example valid user
   const validUserRecord: UserRecord = {
@@ -92,6 +95,25 @@ describe('LoginMainInterstitialsManagerService', () => {
         }
       )
 
+    mockLoginBackupEmailInterstitialManagerService =
+      jasmine.createSpyObj<LoginBackupEmailInterstitialManagerService>(
+        'LoginBackupEmailInterstitialManagerService',
+        [
+          'userIsElegibleForInterstitial',
+          'getInterstitialTogglz',
+          'getInterstitialViewed',
+          'showInterstitialAsDialog',
+        ],
+        {
+          INTERSTITIAL_NAME: 'BACKUP_EMAIL_INTERSTITIAL',
+        }
+      )
+    // The backup email interstitial runs first, tests that assert on the other
+    // two opt it out unless they are exercising the ordering itself
+    mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(false)
+    )
+
     // Provide the service along with its mocked dependencies
     TestBed.configureTestingModule({
       providers: [
@@ -104,6 +126,10 @@ describe('LoginMainInterstitialsManagerService', () => {
         {
           provide: LoginAffiliationInterstitialManagerService,
           useValue: mockLoginAffiliationInterstitialManagerService,
+        },
+        {
+          provide: LoginBackupEmailInterstitialManagerService,
+          useValue: mockLoginBackupEmailInterstitialManagerService,
         },
       ],
     })
@@ -124,6 +150,10 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginAffiliationInterstitialManagerService.getInterstitialTogglz.calls.reset()
     mockLoginAffiliationInterstitialManagerService.getInterstitialViewed.calls.reset()
     mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog.calls.reset()
+    mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial.calls.reset()
+    mockLoginBackupEmailInterstitialManagerService.getInterstitialTogglz.calls.reset()
+    mockLoginBackupEmailInterstitialManagerService.getInterstitialViewed.calls.reset()
+    mockLoginBackupEmailInterstitialManagerService.showInterstitialAsDialog.calls.reset()
   })
 
   it('should be created', () => {
@@ -255,6 +285,112 @@ describe('LoginMainInterstitialsManagerService', () => {
     expect(
       mockInterstitialsService.markCurrentSessionToNoCheckInterstitialsLogic
     ).toHaveBeenCalled()
+  }))
+
+  it('should show the backup email interstitial first when every interstitial is available', fakeAsync(() => {
+    mockInterstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic.and.returnValue(
+      false
+    )
+
+    mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(true)
+    )
+    mockLoginBackupEmailInterstitialManagerService.getInterstitialTogglz.and.returnValue(
+      of(true)
+    )
+    mockLoginBackupEmailInterstitialManagerService.getInterstitialViewed.and.returnValue(
+      of(false)
+    )
+    mockLoginBackupEmailInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
+      of({
+        type: 'backup-email-interstitial',
+      } as BackupEmailComponentDialogOutput)
+    )
+
+    // Both of these would also qualify, the ordering must keep them out
+    mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(true)
+    )
+    mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(true)
+    )
+
+    service
+      .checkLoginInterstitials(validUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: (result) => {
+          expect(result).toEqual({
+            type: 'backup-email-interstitial',
+          } as BackupEmailComponentDialogOutput)
+        },
+        complete: () => {
+          expect(
+            mockLoginBackupEmailInterstitialManagerService.showInterstitialAsDialog
+          ).toHaveBeenCalled()
+          expect(
+            mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
+          ).not.toHaveBeenCalled()
+        },
+      })
+    tick(1)
+
+    expect(
+      mockInterstitialsService.markCurrentSessionToNoCheckInterstitialsLogic
+    ).toHaveBeenCalled()
+  }))
+
+  it('should fall through to the domains interstitial when the backup email togglz is off', fakeAsync(() => {
+    mockInterstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic.and.returnValue(
+      false
+    )
+
+    mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(true)
+    )
+    mockLoginBackupEmailInterstitialManagerService.getInterstitialTogglz.and.returnValue(
+      of(false)
+    )
+
+    mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(true)
+    )
+    mockLoginDomainInterstitialManagerService.getInterstitialTogglz.and.returnValue(
+      of(true)
+    )
+    mockLoginDomainInterstitialManagerService.getInterstitialViewed.and.returnValue(
+      of(false)
+    )
+    mockLoginDomainInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
+      of({
+        type: 'domains-interstitial',
+      } as ShareEmailsDomainsComponentDialogOutput)
+    )
+
+    service
+      .checkLoginInterstitials(validUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: (result) => {
+          expect(result).toEqual({ type: 'domains-interstitial' })
+        },
+        complete: () => {
+          expect(
+            mockLoginBackupEmailInterstitialManagerService.showInterstitialAsDialog
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginDomainInterstitialManagerService.showInterstitialAsDialog
+          ).toHaveBeenCalled()
+        },
+      })
+    tick(1)
   }))
 
   it('should proceed to second service if first service is not eligible or togglz is off or was viewed already', fakeAsync(() => {

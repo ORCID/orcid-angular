@@ -1,0 +1,29 @@
+// Only the spacing tokens: the component stylesheet itself is already listed in
+// this component's styleUrls, importing it here would emit it a second time
+@import '../../../../../assets/scss/orcid.spacing.scss';
+
+mat-card-header.authorize-header {
+  mat-card-title {
+    margin: 0 0 $spacing-24 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+      text-align: center;
+    }
+  }
+  mat-icon {
+    margin-bottom: $spacing-small;
+  }
+}
+
+// Applied to the dialog surface rather than :host.columns-12, which is only set
+// on desktop and left the panel with no padding at all on mobile
+::ng-deep {
+  .interstitial-dialog {
+    .mat-mdc-dialog-surface {
+      padding: 40px;
+      display: block;
+    }
+  }
+}

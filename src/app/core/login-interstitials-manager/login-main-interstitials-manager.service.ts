@@ -11,6 +11,7 @@ import {
 import { UserRecord } from 'src/app/types/record.local'
 import { LoginDomainInterstitialManagerService } from './implementations/login-domain-interstitials-manager.service'
 import { LoginAffiliationInterstitialManagerService } from './implementations/login-affiliation-interstitials-manager.service'
+import { LoginBackupEmailInterstitialManagerService } from './implementations/login-backup-email-interstitials-manager.service'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { LoginBaseInterstitialManagerService } from './abstractions/login-abstract-interstitial-manager.service'
 import {
@@ -34,7 +35,8 @@ export class LoginMainInterstitialsManagerService {
   constructor(
     private interstitialsService: InterstitialsService,
     LoginDomainInterstitialManagerService: LoginDomainInterstitialManagerService,
-    LoginAffiliationInterstitialManagerService: LoginAffiliationInterstitialManagerService
+    LoginAffiliationInterstitialManagerService: LoginAffiliationInterstitialManagerService,
+    LoginBackupEmailInterstitialManagerService: LoginBackupEmailInterstitialManagerService
   ) {
     // Delare here all the interstitial services.
     // This are the entry points to add new interstitials.
@@ -42,6 +44,7 @@ export class LoginMainInterstitialsManagerService {
     // The first one that returns a component or a dialog subscription will be used.
     // The rest will be ignored.
     this.interstitialServices = [
+      LoginBackupEmailInterstitialManagerService,
       LoginDomainInterstitialManagerService,
       LoginAffiliationInterstitialManagerService,
     ]
