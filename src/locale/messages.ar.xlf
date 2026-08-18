@@ -21237,8 +21237,8 @@
         <target>ممول من</target>
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
-        <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
-        <target>مراجعة الأقران (${reviewsCount}:reviewCount: مراجعة لـ ${publicationsCount}:publicationCount: منشور/منحة)</target>
+        <source>Peer review (<x id="reviewCount" equiv-text="${reviewsCount}"/> reviews for <x id="publicationCount" equiv-text="${publicationsCount}"/> publications/grants)</source>
+        <target>مراجعة الأقران (<x id="reviewCount" equiv-text="${reviewsCount}"/> مراجعة لـ <x id="publicationCount" equiv-text="${publicationsCount}"/> منشور/منحة)</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>

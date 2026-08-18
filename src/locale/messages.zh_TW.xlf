@@ -21238,8 +21238,8 @@
         <target>資助人</target>
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
-        <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
-        <target>同儕審查 (${publicationsCount}:publicationCount: 份出版物/補助金的 ${reviewsCount}:reviewCount: 個審查)</target>
+        <source>Peer review (<x id="reviewCount" equiv-text="${reviewsCount}"/> reviews for <x id="publicationCount" equiv-text="${publicationsCount}"/> publications/grants)</source>
+        <target>同儕審查 (<x id="publicationCount" equiv-text="${publicationsCount}"/> 份出版物/補助金的 <x id="reviewCount" equiv-text="${reviewsCount}"/> 個審查)</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>
