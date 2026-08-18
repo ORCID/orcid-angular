@@ -37,6 +37,17 @@ export function isTerminatingSimpleEvent(eventName: string): boolean {
   return TERMINATING_SIMPLE_EVENT_NAMES.has(eventName)
 }
 
+/**
+ * Terminal outcomes of an interstitial. `interstitial_validation_error` is
+ * deliberately excluded, the user stays in the dialog after one.
+ */
+const INTERSTITIAL_TERMINATING_JOURNEY_EVENT_NAMES: ReadonlySet<string> =
+  new Set([
+    AppEventName.InterstitialCompleted,
+    AppEventName.InterstitialDismissed,
+    AppEventName.InterstitialSaveError,
+  ])
+
 const OAUTH_TERMINATING_JOURNEY_EVENT_NAMES: ReadonlySet<string> = new Set([
   AppEventName.OauthErrorPageLoaded,
   AppEventName.OauthAuthorizationSuccess,
@@ -51,6 +62,9 @@ export function isTerminatingJourneyEvent(
 ): boolean {
   if (journeyType === 'oauth_authorization') {
     return OAUTH_TERMINATING_JOURNEY_EVENT_NAMES.has(eventName)
+  }
+  if (journeyType === 'interstitial') {
+    return INTERSTITIAL_TERMINATING_JOURNEY_EVENT_NAMES.has(eventName)
   }
   if (journeyType === 'orcid_registration') {
     if (eventName === AppEventName.RegisterPipelineError) {

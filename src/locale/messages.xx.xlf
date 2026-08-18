@@ -3394,6 +3394,178 @@
         </context-group>
         <target>X</target>
       </trans-unit>
+      <trans-unit id="interstitial.addABackupEmail" datatype="html" resname="interstitial.addABackupEmail">
+        <source>Add a backup email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">6,8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">6,8</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.weHaveNoticedYouOnlyHaveOneEmail" datatype="html" resname="interstitial.weHaveNoticedYouOnlyHaveOneEmail">
+        <source>We’ve noticed you only have one email address associated with your ORCID account. Adding a backup email will help you sign in to ORCID if you lose access to your primary email address.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">14,18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">14,18</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.yourPrimaryEmailAddress" datatype="html" resname="interstitial.yourPrimaryEmailAddress">
+        <source>Your primary email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">22,24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">22,24</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.professional" datatype="html" resname="interstitial.professional">
+        <source>Professional</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.personal" datatype="html" resname="interstitial.personal">
+        <source>Personal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.yourBackupEmailAddress" datatype="html" resname="interstitial.yourBackupEmailAddress">
+        <source>Your backup email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">48,50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">48,50</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.addAnotherEmailToYourOrcidAccount" datatype="html" resname="interstitial.addAnotherEmailToYourOrcidAccount">
+        <source>Add another email to your ORCID account as a backup. A mix of personal and professional email addresses works best.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">51,54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">51,54</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.backupEmail" datatype="html" resname="interstitial.backupEmail">
+        <source>Backup email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">63,65</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">63,65</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.pleaseEnterYourEmail" datatype="html" resname="interstitial.pleaseEnterYourEmail">
+        <source>Please enter your email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">85,87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">85,87</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="side-bar.invalidEmailErrorMessage" datatype="html" resname="side-bar.invalidEmailErrorMessage">
+        <source>Please enter a valid email address, for example joe@institution.edu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">94,97</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">94,97</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
+          <context context-type="linenumber">225,228</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">143,145</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.thisEmailIsAlreadyAssociatedWithAnExistingRecord" datatype="html" resname="interstitial.thisEmailIsAlreadyAssociatedWithAnExistingRecord">
+        <source>This email is already associated with an existing ORCID record. Please use a different email address.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">104,107</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">104,107</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.addBackupEmailAddress" datatype="html" resname="interstitial.addBackupEmailAddress">
+        <source>Add backup email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">122,124</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">122,124</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.continueWithoutAddingABackupEmailAddress" datatype="html" resname="interstitial.continueWithoutAddingABackupEmailAddress">
+        <source>Continue without adding a backup email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="interstitial.addAnAdditionalEmailAsBackup" datatype="html" resname="interstitial.addAnAdditionalEmailAsBackup">
+        <source>Add an additional email as backup</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
       <trans-unit id="interstitial.shareYourVerified" datatype="html" resname="interstitial.shareYourVerified">
         <source>Share your verified email domains</source>
         <context-group purpose="location">
@@ -4451,18 +4623,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
           <context context-type="linenumber">215,217</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="side-bar.invalidEmailErrorMessage" datatype="html" resname="side-bar.invalidEmailErrorMessage">
-        <source>Please enter a valid email address, for example joe@institution.edu</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">225,228</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">143,145</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6604,6 +6764,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/announcer/announcer.service.ts</context>
           <context context-type="linenumber">15</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="shared.dialogAriaLabeledByBackupEmail" datatype="html" resname="shared.dialogAriaLabeledByBackupEmail">
+        <source>Add a backup email address dialog</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/login-interstitials-manager/implementations/login-backup-email-interstitials-manager.service.ts</context>
+          <context context-type="linenumber">99</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13375,11 +13543,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">137,139</context>
+          <context context-type="linenumber">158,160</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13727,15 +13895,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">209,211</context>
+          <context context-type="linenumber">230,232</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">260,262</context>
+          <context context-type="linenumber">281,283</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13843,7 +14011,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">168,170</context>
+          <context context-type="linenumber">189,191</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13951,7 +14119,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">142,144</context>
+          <context context-type="linenumber">163,165</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14247,11 +14415,43 @@
         </context-group>
         <target>X</target>
       </trans-unit>
+      <trans-unit id="topBar.backupEmailAddressAdded" datatype="html" resname="topBar.backupEmailAddressAdded">
+        <source>Backup email address added</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.youHaveSuccessfullyAdded" datatype="html" resname="topBar.youHaveSuccessfullyAdded">
+        <source>You have successfully added</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.asYourBackupEmailAddress" datatype="html" resname="topBar.asYourBackupEmailAddress">
+        <source>as your backup email address.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.manageYourEmailAddressesAndDomains" datatype="html" resname="topBar.manageYourEmailAddressesAndDomains">
+        <source>Manage your email addresses and domains</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
       <trans-unit id="topBar.employmentAffiliationAdded" datatype="html" resname="topBar.employmentAffiliationAdded">
         <source>Employment affiliation added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14259,7 +14459,7 @@
         <source>has been added to your ORCID record. Manage your existing employment affiliations or add new ones in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">107,109</context>
+          <context context-type="linenumber">128,130</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14267,7 +14467,7 @@
         <source>Employment section</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14275,11 +14475,11 @@
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">147,149</context>
+          <context context-type="linenumber">168,170</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">159,161</context>
+          <context context-type="linenumber">180,182</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14287,7 +14487,7 @@
         <source>Organizations want to connect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14295,7 +14495,7 @@
         <source>Connecting with trusted organizations helps keep your ORCID record up-to-date.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14303,7 +14503,7 @@
         <source>wants to add information to your ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">232</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14311,7 +14511,7 @@
         <source>Read</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">241</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14319,7 +14519,7 @@
         <source>Connect now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">246</context>
+          <context context-type="linenumber">247</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -16271,11 +16471,11 @@
         <source>Activities</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.html</context>
-          <context context-type="linenumber">121,123</context>
+          <context context-type="linenumber">122,124</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -16283,7 +16483,7 @@
         <source>Collapse all</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.html</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -16291,7 +16491,7 @@
         <source>Expand all</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.html</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -16299,7 +16499,7 @@
         <source>Collapse all activity sections</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -16307,7 +16507,7 @@
         <source>Expand all activity sections</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <target>X</target>
       </trans-unit>
