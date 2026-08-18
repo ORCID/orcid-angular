@@ -5,7 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { MatDialog } from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
-import { UntypedFormBuilder } from '@angular/forms'
+import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
 import { PlatformInfoService } from '../../cdk/platform-info'
 import { ErrorHandlerService } from '../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
@@ -17,6 +17,11 @@ import { MdePopoverModule } from '../../cdk/popover'
 import { ActivatedRoute } from '@angular/router'
 import { of } from 'rxjs'
 
+import { MatCardModule } from '@angular/material/card'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatIconModule } from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button'
+import { FormPasswordComponent } from '../../register/components/form-password/form-password.component'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 describe('ResetPasswordComponent', () => {
@@ -25,7 +30,17 @@ describe('ResetPasswordComponent', () => {
 
   async function setupWithTokenErrors(errors: string[]) {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MdePopoverModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        MdePopoverModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatProgressBarModule,
+        MatIconModule,
+        MatButtonModule,
+        FormPasswordComponent,
+      ],
       declarations: [ResetPasswordComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -83,8 +98,17 @@ describe('ResetPasswordComponent', () => {
 
   it('shows the expired panel when the token has expired', async () => {
     await setupWithTokenErrors(['expiredPasswordResetToken'])
+    expect(component.expiredPasswordResetToken).toBeTrue()
     expect(fixture.nativeElement.textContent).toContain(
       'Your password reset link has expired'
+    )
+  })
+
+  it('shows the invalid panel when the token is invalid', async () => {
+    await setupWithTokenErrors(['invalidPasswordResetToken'])
+    expect(component.invalidPasswordResetToken).toBeTrue()
+    expect(fixture.nativeElement.textContent).toContain(
+      'There is a problem with your password reset link'
     )
   })
 })
