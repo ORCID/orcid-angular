@@ -13,6 +13,11 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RouterTestingModule } from '@angular/router/testing'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { MatIconModule } from '@angular/material/icon'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 describe('SettingsSecurityPasswordComponent', () => {
   let component: SettingsSecurityPasswordComponent
@@ -20,7 +25,15 @@ describe('SettingsSecurityPasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+        RouterTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        NoopAnimationsModule,
+      ],
       declarations: [SettingsSecurityPasswordComponent],
       providers: [
         WINDOW_PROVIDERS,

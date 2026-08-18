@@ -2231,11 +2231,11 @@
         <source>Get your ORCID iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">295</context>
+          <context context-type="linenumber">310</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">299</context>
+          <context context-type="linenumber">314</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2246,7 +2246,7 @@
         <source>Add/update information about you (country, keywords, etc.)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">303</context>
+          <context context-type="linenumber">318</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2257,25 +2257,25 @@
         <source>Add/update your research activities (works, affiliations, etc.)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">307</context>
+          <context context-type="linenumber">322</context>
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.readInfomationVisibilityTrustedParties" datatype="html" resname="authorize.readInfomationVisibilityTrustedParties">
         <source>Read your information with visibility set to Trusted parties</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">311</context>
+          <context context-type="linenumber">326</context>
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.authenticateLongDescription" datatype="html" resname="authorize.authenticateLongDescription">
         <source>Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">322</context>
+          <context context-type="linenumber">337</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">326</context>
+          <context context-type="linenumber">341</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2286,7 +2286,7 @@
         <source>Allow this organization or application to add information about you (for example, your country, key words, other identifiers - but not your biography) that is stored in their system(s) to the lefthand section of your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">331</context>
+          <context context-type="linenumber">346</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2297,7 +2297,7 @@
         <source>Allow this organization or application to add information about your research activities (for example, works, affiliations) that is stored in their system(s) to your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">336</context>
+          <context context-type="linenumber">351</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2308,7 +2308,7 @@
         <source>Allow this organization or application to read any information from your record you have marked as limited access. They cannot read information you have marked as private.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">341</context>
+          <context context-type="linenumber">356</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2607,10 +2607,6 @@
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.html</context>
           <context context-type="linenumber">142,145</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">145,148</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="register.pleaseEnterAnOrganizationName" datatype="html" resname="register.pleaseEnterAnOrganizationName">
         <source>Please enter an organization name</source>
@@ -2624,7 +2620,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">158,160</context>
+          <context context-type="linenumber">204,206</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.department" datatype="html" resname="register.department">
@@ -2639,7 +2635,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">217</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.optional" datatype="html" resname="register.optional">
@@ -2670,11 +2666,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">218</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">251</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html</context>
@@ -2683,6 +2679,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
           <context context-type="linenumber">63</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.maxLength.less_than_one_thousand" datatype="html" resname="shared.maxLength.less_than_one_thousand">
@@ -2753,11 +2753,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">190,192</context>
+          <context context-type="linenumber">236,238</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">223,225</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.roleJobTitle" datatype="html" resname="register.roleJobTitle">
@@ -2772,7 +2772,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">249</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.startDate" datatype="html" resname="shared.startDate">
@@ -2807,11 +2807,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">285</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.year" datatype="html" resname="shared.year">
@@ -2866,11 +2866,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">257</context>
+          <context context-type="linenumber">303</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">114</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.month" datatype="html" resname="shared.month">
@@ -2925,11 +2925,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">277</context>
+          <context context-type="linenumber">323</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.invalidDate" datatype="html" resname="shared.invalidDate">
@@ -2964,7 +2964,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">290,292</context>
+          <context context-type="linenumber">336,338</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.addThisAffiliation" datatype="html" resname="interstitial.addThisAffiliation">
@@ -3049,7 +3049,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.organizationPlaceholder" datatype="html" resname="register.organizationPlaceholder">
@@ -3060,7 +3060,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.departmentPlaceholder" datatype="html" resname="register.departmentPlaceholder">
@@ -3071,7 +3071,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.rolePlaceholder" datatype="html" resname="register.rolePlaceholder">
@@ -3082,7 +3082,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.organization" datatype="html" resname="register.organization">
@@ -3093,7 +3093,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.prefilledOrganization" datatype="html" resname="register.prefilledOrganization">
@@ -3104,7 +3104,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.addABackupEmail" datatype="html" resname="interstitial.addABackupEmail">
@@ -10827,7 +10827,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.journal" datatype="html" resname="shared.journal">
@@ -14869,38 +14869,77 @@
         </context-group>
       </trans-unit>
       <trans-unit id="register.basedOnYourEmailWeThink" datatype="html" resname="register.basedOnYourEmailWeThink">
-        <source>Based on your emails we think you are currently affiliated with</source>
+        <source>Based on your email address we think you are currently affiliated with</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">21,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.webePreselectedThisOrganizationForYouInTheFormBelow" datatype="html" resname="register.webePreselectedThisOrganizationForYouInTheFormBelow">
         <source>We’ve pre-selected this organization for you in the form below.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">29,31</context>
+          <context context-type="linenumber">31,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.whenYouCompleteRegistrationAnEmployment" datatype="html" resname="register.whenYouCompleteRegistrationAnEmployment">
-        <source>When you complete registration an employment affiliation will be automatically added to your new ORCID record.</source>
+        <source>When you complete registration your affiliation will be automatically added to your new ORCID record.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">35,38</context>
+          <context context-type="linenumber">38,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.notReadyToAddYourAffiliation" datatype="html" resname="register.notReadyToAddYourAffiliation">
+        <source>Not ready to add your affiliation?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">53,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.youDontNeedToAddAnAffiliation" datatype="html" resname="register.youDontNeedToAddAnAffiliation">
+        <source>You don’t need to add an affiliation to complete registration and get your ORCID record and iD.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">61,64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.skipThisStepAndContinueRegistration" datatype="html" resname="register.skipThisStepAndContinueRegistration">
+        <source>Skip this step and continue registration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.thisOrganizationIsNotInOurDatabase" datatype="html" resname="register.thisOrganizationIsNotInOurDatabase">
+        <source>This organization is not in our database. Please try entering the name again. If you cannot find your organization you can</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">183,184</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.skipThisStep" datatype="html" resname="register.skipThisStep">
+        <source>skip this step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.yearPlaceholder" datatype="html" resname="register.yearPlaceholder">
         <source>Year</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.monthPlaceholder" datatype="html" resname="register.monthPlaceholder">
         <source>Month</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">112</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.tipsFeaturesEmail" datatype="html" resname="register.tipsFeaturesEmail">
@@ -15670,7 +15709,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.cancelRegistration" datatype="html" resname="register.cancelRegistration">
@@ -15716,7 +15755,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
@@ -15727,14 +15766,14 @@
         <source>Step 3 of 5 - Current employment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
-          <context context-type="linenumber">32,34</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="shared.skipThisStepWithoutAddingAnAffiliation" datatype="html" resname="shared.skipThisStepWithoutAddingAnAffiliation">
-        <source>Skip this step without adding an affiliation</source>
+      <trans-unit id="register.addingACurrentEmploymentAffiliationHelps" datatype="html" resname="register.addingACurrentEmploymentAffiliationHelps">
+        <source>Adding a current employment affiliation helps distinguish you from other researchers with a similar name.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
-          <context context-type="linenumber">68,69</context>
+          <context context-type="linenumber">44,47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.step5.3" datatype="html" resname="register.step5.3">
@@ -19074,6 +19113,12 @@
       </trans-unit>
       <trans-unit id="printView.redirectingToPrimary" datatype="html" resname="printView.redirectingToPrimary">
         <source>Redirecting to primary ORCID record…</source>
+      </trans-unit>
+      <trans-unit id="printView.recordIsNotClaimedTitle" datatype="html" resname="printView.recordIsNotClaimedTitle">
+        <source>This record has not been claimed</source>
+      </trans-unit>
+      <trans-unit id="printView.recordNotClaimedDescription" datatype="html" resname="printView.recordNotClaimedDescription">
+        <source>This record has not been claimed yet</source>
       </trans-unit>
       <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
         <source>ORCID Print view</source>
