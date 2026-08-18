@@ -30,6 +30,8 @@ export enum AppEventName {
   StepBNextButtonClicked = 'step-b-next-button-clicked',
   StepC2NextButtonClicked = 'step-c2-next-button-clicked',
   StepC2SkipButtonClicked = 'step-c2-skip-button-clicked',
+  StepC2NoticeSkipLinkClicked = 'step-c2-notice-skip-link-clicked',
+  StepC2ErrorSkipLinkClicked = 'step-c2-error-skip-link-clicked',
   StepCNextButtonClicked = 'step-c-next-button-clicked',
   StepDNextButtonClicked = 'step-d-next-button-clicked',
   JourneyComplete = 'journey-complete',
