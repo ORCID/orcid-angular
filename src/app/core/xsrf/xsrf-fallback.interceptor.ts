@@ -5,8 +5,16 @@ import {
   HttpRequest,
 } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { from, Observable, of } from 'rxjs'
+import { catchError, switchMap } from 'rxjs/operators'
 import { CookieService } from 'ngx-cookie-service'
+import {
+  isAuthServerUrl,
+  isOrcidBackendUrl,
+  isSameOriginUrl,
+  XSRF_MUTATING_METHODS,
+  xsrfCookieNamesFor,
+} from './xsrf-urls'
 
 declare const runtimeEnvironment: any
 
@@ -23,10 +31,23 @@ declare const runtimeEnvironment: any
  *   - Otherwise, read the appropriate cookie and set `x-xsrf-token`:
  *     - For requests to AUTH_SERVER origin → `AUTH-XSRF-TOKEN`
  *     - For API_WEB / BASE_URL / relative (e.g. /signin/auth.json) → `XSRF-TOKEN`
+ *   - If no cookie exists yet, bootstrap one from csrf.json and retry once.
  */
 @Injectable()
 export class XsrfFallbackInterceptor implements HttpInterceptor {
   constructor(private _cookie: CookieService) {}
+
+  private attachXsrf(req: HttpRequest<any>, token: string): HttpRequest<any> {
+    return req.clone({
+      withCredentials: true,
+      headers: req.headers.set('x-xsrf-token', token),
+    })
+  }
+
+  private readToken(url: string): string {
+    const [primary, fallback] = xsrfCookieNamesFor(url)
+    return this._cookie.get(primary) || this._cookie.get(fallback)
+  }
 
   intercept(
     req: HttpRequest<any>,
@@ -35,46 +56,45 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
     const method = (req.method ?? '').toUpperCase()
 
     // Only care about mutating requests
-    if (!method || !['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
+    if (!method || !XSRF_MUTATING_METHODS.includes(method)) {
       return next.handle(req)
     }
 
-    // If header already present (either manually or by Angular), leave as-is
-    if (req.headers.has('x-xsrf-token')) {
+    // If header is already present and non-empty (either manually or by Angular), leave as-is
+    const existingHeader = req.headers.get('x-xsrf-token')?.trim()
+    if (existingHeader) {
       return next.handle(req)
     }
 
-    const apiBase = runtimeEnvironment.API_WEB
-    const baseUrl = runtimeEnvironment.BASE_URL
-    const authBase = runtimeEnvironment.AUTH_SERVER
-
-    const isBackendHost =
-      req.url.startsWith(apiBase) ||
-      req.url.startsWith(baseUrl) ||
-      req.url.startsWith('/') ||
-      req.url.startsWith(authBase)
-
-    if (!isBackendHost) {
+    if (!isOrcidBackendUrl(req.url)) {
       return next.handle(req)
     }
 
-    // Decide which cookie to use based on target *host*, not path.
-    // Only the auth server (AUTH_SERVER origin) sets/expects AUTH-XSRF-TOKEN.
-    // API_WEB / BASE_URL / relative URLs (e.g. /signin/auth.json) use XSRF-TOKEN.
-    const isAuthServerCall = req.url.startsWith(authBase)
+    // Which cookie belongs on this request is a question about the target
+    // backend, not about the endpoint — see xsrf-urls.ts
+    const token = this.readToken(req.url)
 
-    const cookieName = isAuthServerCall ? 'AUTH-XSRF-TOKEN' : 'XSRF-TOKEN'
-    const token = this._cookie.get(cookieName)
-
-    if (!token) {
-      return next.handle(req)
+    if (token) {
+      return next.handle(this.attachXsrf(req, token))
     }
 
-    const cloned = req.clone({
-      withCredentials: true,
-      headers: req.headers.set('x-xsrf-token', token),
-    })
+    // First mutating request can happen before token cookie is materialized.
+    // Bootstrap token with csrf.json and retry once with the fresh cookie.
+    // The auth server is skipped: csrf.json cannot establish AUTH-XSRF-TOKEN.
+    if (!isAuthServerUrl(req.url) && isSameOriginUrl(req.url)) {
+      const csrfUrl = `${runtimeEnvironment.API_WEB}csrf.json`
+      return from(fetch(csrfUrl, { credentials: 'include' })).pipe(
+        catchError(() => of(null)),
+        switchMap(() => {
+          const refreshedToken = this.readToken(req.url)
+          if (!refreshedToken) {
+            return next.handle(req)
+          }
+          return next.handle(this.attachXsrf(req, refreshedToken))
+        })
+      )
+    }
 
-    return next.handle(cloned)
+    return next.handle(req)
   }
 }
