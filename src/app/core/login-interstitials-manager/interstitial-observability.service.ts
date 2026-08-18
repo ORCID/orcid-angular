@@ -34,10 +34,7 @@ export class InterstitialObservabilityService {
    * Any event between `shown` and `closed`. Kept generic so a new interstitial
    * (or a new outcome) needs no method here and no extra spy in its specs.
    */
-  outcome(
-    eventName: AppEventName,
-    attrs?: InterstitialEventAttributes
-  ): void {
+  outcome(eventName: AppEventName, attrs?: InterstitialEventAttributes): void {
     this._observability.recordEvent('interstitial', eventName, attrs)
   }
 
