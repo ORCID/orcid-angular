@@ -342,6 +342,33 @@ describe('AuthorizeComponent', () => {
     expect(interstitialObservabilitySpy.closed).toHaveBeenCalled()
   })
 
+  it('handleRedirect: keeps the card mounted so the attached interstitial survives', () => {
+    // showInterstitial() attaches the portal and then clears
+    // showAuthorizationComponent. The outlet lives inside the card, so if the
+    // card's *ngIf does not also test showInterstital the interstitial is
+    // destroyed in the same tick and the user is left on a blank page.
+    createComponent()
+    component.loading = false
+    component.showAuthorizationComponent = true
+    fixture.detectChanges()
+    expect(fixture.nativeElement.querySelector('mat-card')).toBeTruthy()
+
+    ;(component as any).interstitialComponent = DummyInterstitialComponent as any
+    ;(component as any).outlet = {
+      attachComponentPortal: () => ({
+        instance: { finish: new Subject<void>().asObservable() },
+        changeDetectorRef: { detectChanges: () => {} },
+      }),
+    }
+
+    component.handleRedirect('/x')
+    fixture.detectChanges()
+
+    expect(component.showAuthorizationComponent).toBeFalse()
+    expect(component.showInterstital).toBeTrue()
+    expect(fixture.nativeElement.querySelector('mat-card')).toBeTruthy()
+  })
+
   it('handleRedirect: with interstitial -> shows interstitial instead of redirect', () => {
     createComponent()
     ;(component as any).interstitialComponent =
