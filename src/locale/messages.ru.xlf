@@ -21238,8 +21238,8 @@
         <target>Источник финансирования</target>
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
-        <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
-        <target>Рецензии (${reviewsCount}:reviewCount: для стольких публикаций/грантов: ${publicationsCount}:publicationCount:)</target>
+        <source>Peer review (<x id="reviewCount" equiv-text="${reviewsCount}"/> reviews for <x id="publicationCount" equiv-text="${publicationsCount}"/> publications/grants)</source>
+        <target>Рецензии (<x id="reviewCount" equiv-text="${reviewsCount}"/> для стольких публикаций/грантов: <x id="publicationCount" equiv-text="${publicationsCount}"/>)</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>

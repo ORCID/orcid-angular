@@ -21238,8 +21238,8 @@
         <target>資金の提供：</target>
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
-        <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
-        <target>ピアレビュー (レビュー ${reviewsCount}:reviewCount: 件、出版/助成 ${publicationsCount}:publicationCount: 件)</target>
+        <source>Peer review (<x id="reviewCount" equiv-text="${reviewsCount}"/> reviews for <x id="publicationCount" equiv-text="${publicationsCount}"/> publications/grants)</source>
+        <target>ピアレビュー (レビュー <x id="reviewCount" equiv-text="${reviewsCount}"/> 件、出版/助成 <x id="publicationCount" equiv-text="${publicationsCount}"/> 件)</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
         <source>Afghanistan</source>

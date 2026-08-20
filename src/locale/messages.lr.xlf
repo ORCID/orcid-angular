@@ -3494,11 +3494,11 @@
         <source>Please enter your email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">85,87</context>
+          <context context-type="linenumber">91,93</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">85,87</context>
+          <context context-type="linenumber">91,93</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -3506,11 +3506,11 @@
         <source>Please enter a valid email address, for example joe@institution.edu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">94,97</context>
+          <context context-type="linenumber">100,103</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">94,97</context>
+          <context context-type="linenumber">100,103</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
@@ -3526,11 +3526,11 @@
         <source>This email is already associated with an existing ORCID record. Please use a different email address.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">104,107</context>
+          <context context-type="linenumber">110,113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">104,107</context>
+          <context context-type="linenumber">110,113</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -3538,11 +3538,11 @@
         <source>Add backup email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">122,124</context>
+          <context context-type="linenumber">128,130</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">122,124</context>
+          <context context-type="linenumber">128,130</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -3550,11 +3550,11 @@
         <source>Continue without adding a backup email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -3562,7 +3562,7 @@
         <source>Add an additional email as backup</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6771,7 +6771,7 @@
         <source>Add a backup email address dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/login-interstitials-manager/implementations/login-backup-email-interstitials-manager.service.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">87</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -11583,11 +11583,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -17667,11 +17667,19 @@
         </context-group>
         <target>LR</target>
       </trans-unit>
+      <trans-unit id="reset.hasAlreadyBeenUsed" datatype="html" resname="reset.hasAlreadyBeenUsed">
+        <source>This password reset link has already been used</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
       <trans-unit id="reset.invalidLink" datatype="html" resname="reset.invalidLink">
         <source>There is a problem with your password reset link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">92</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -17679,7 +17687,7 @@
         <source>You can request a new link from</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">101</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -17687,7 +17695,7 @@
         <source>Please try the link again. If this does not work you can request a new password reset link from</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">109,110</context>
+          <context context-type="linenumber">113,114</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -21433,7 +21441,7 @@
         <target>LR</target>
       </trans-unit>
       <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
-        <source>Peer review (${reviewsCount}:reviewCount: reviews for ${publicationsCount}:publicationCount: publications/grants)</source>
+        <source>Peer review (<x id="reviewCount" equiv-text="${reviewsCount}"/> reviews for <x id="publicationCount" equiv-text="${publicationsCount}"/> publications/grants)</source>
         <target>LR</target>
       </trans-unit>
       <trans-unit id="printView.AF" datatype="html" resname="printView.AF">

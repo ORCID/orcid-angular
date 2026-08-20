@@ -50,9 +50,10 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   loading = false
   errors: string[]
   $destroy = new Subject<void>()
-  emailKey: string
+  token: string
   expiredPasswordResetToken: boolean
   invalidPasswordResetToken: boolean
+  alreadyUsedPasswordResetToken: boolean
   isMobile: boolean
   isOauthAuthorizationTogglzEnable: boolean
   showForm = true
@@ -83,7 +84,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
       this.isMobile = platform.columns4 || platform.columns8
     })
 
-    this.emailKey = this._route.snapshot.params.key
+    this.token = this._route.snapshot.params.key
 
     this._route.data.subscribe((data) => {
       if (
@@ -99,6 +100,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         )
       ) {
         this.expiredPasswordResetToken = true
+      }
+      if (
+        data.tokenVerification.errors.find(
+          (x: string) => x === 'alreadyUsedPasswordResetToken'
+        )
+      ) {
+        this.alreadyUsedPasswordResetToken = true
       }
     })
 
@@ -116,7 +124,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     return {
       newPassword: this.form.value.passwordGroup.password,
       retypedPassword: this.form.value.passwordGroup.passwordConfirm,
-      encryptedEmail: this.emailKey,
+      token: this.token,
       successRedirectLocation: null,
       twoFactorCode: this.form.value.twoFactorCode,
       twoFactorRecoveryCode: this.form.value.twoFactorRecoveryCode,
@@ -203,6 +211,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
                 )
               ) {
                 this.expiredPasswordResetToken = true
+              }
+              if (
+                value.errors?.find(
+                  (x: string) => x === 'alreadyUsedPasswordResetToken'
+                )
+              ) {
+                this.alreadyUsedPasswordResetToken = true
               }
               if (
                 value.newPassword?.errors?.find(

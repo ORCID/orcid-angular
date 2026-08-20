@@ -48,13 +48,13 @@ flowchart TD
 
 ## Key events and where they fire
 
-| Event | Fires when | Terminal |
-|---|---|---|
-| `interstitial_shown` | The dialog is opened, from the shared manager | no |
-| `interstitial_backup_added` | `postEmails` succeeded | yes |
-| `interstitial_dismissed` | "Continue without adding a backup email address" | yes |
-| `interstitial_validation_error` | Submit blocked by an inline error; `validationErrorKind` is `required`, `invalid`, or `in_use` | no |
-| `interstitial_save_error` | The save request failed and the dialog closed | yes |
+| Event                           | Fires when                                                                                     | Terminal |
+| ------------------------------- | ---------------------------------------------------------------------------------------------- | -------- |
+| `interstitial_shown`            | The dialog is opened, from the shared manager                                                  | no       |
+| `interstitial_backup_added`     | `postEmails` succeeded                                                                         | yes      |
+| `interstitial_dismissed`        | "Continue without adding a backup email address"                                               | yes      |
+| `interstitial_validation_error` | Submit blocked by an inline error; `validationErrorKind` is `required`, `invalid`, or `in_use` | no       |
+| `interstitial_save_error`       | The save request failed and the dialog closed                                                  | yes      |
 
 Dismissal and save-failure are emitted at separate call sites on purpose — both funnel into the same `finishIntertsitial()` exit and would otherwise be indistinguishable.
 
@@ -119,7 +119,7 @@ Open DevTools, **set the log level to `Verbose`** (`console.debug` is hidden oth
 
 ## Gotchas
 
-- **Attribute keys are redacted if they contain `orcid`, `email`, `pid`, or `delegator`** (`BLOCKED_RUM_KEY_PATTERN` in [`service/customEvent.service.ts`](./service/customEvent.service.ts)). An attribute named `backupEmail` or `emailValid` arrives as a `[PID_HINT:…]` string and is useless for faceting. Use `interstitialName`, `validationErrorKind`, `formValid`. String *values* matching an address are redacted too — never send one.
+- **Attribute keys are redacted if they contain `orcid`, `email`, `pid`, or `delegator`** (`BLOCKED_RUM_KEY_PATTERN` in [`service/customEvent.service.ts`](./service/customEvent.service.ts)). An attribute named `backupEmail` or `emailValid` arrives as a `[PID_HINT:…]` string and is useless for faceting. Use `interstitialName`, `validationErrorKind`, `formValid`. String _values_ matching an address are redacted too — never send one.
 - `recordEvent` before `startJourney` is **silently dropped**, and a second `startJourney` for the same type is a no-op. Since only one interstitial shows per session (`take(1)` in the main manager), overlapping journeys should not occur.
 - Everything here is gated on the `RUM` togglz. With it off, no events are emitted at all.
-- `interstitial_shown` counts dialogs *opened*, not users *eligible*. Users who were eligible but blocked earlier in the chain (togglz off, already seen, session already checked) never reach it. For an eligibility denominator use `profile_interstitial_flag` in the warehouse.
+- `interstitial_shown` counts dialogs _opened_, not users _eligible_. Users who were eligible but blocked earlier in the chain (togglz off, already seen, session already checked) never reach it. For an eligibility denominator use `profile_interstitial_flag` in the warehouse.
