@@ -3033,6 +3033,14 @@
           <context context-type="linenumber">380,382</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">209</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">209</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
           <context context-type="linenumber">136,138</context>
         </context-group>
@@ -3111,110 +3119,110 @@
         <source>Add a backup email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">6,8</context>
+          <context context-type="linenumber">7,9</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">6,8</context>
+          <context context-type="linenumber">7,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.weHaveNoticedYouOnlyHaveOneEmail" datatype="html" resname="interstitial.weHaveNoticedYouOnlyHaveOneEmail">
         <source>We’ve noticed you only have one email address associated with your ORCID account. Adding a backup email will help you sign in to ORCID if you lose access to your primary email address.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">14,18</context>
+          <context context-type="linenumber">15,19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">14,18</context>
+          <context context-type="linenumber">15,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.yourPrimaryEmailAddress" datatype="html" resname="interstitial.yourPrimaryEmailAddress">
         <source>Your primary email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="linenumber">23,25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="linenumber">23,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.professional" datatype="html" resname="interstitial.professional">
         <source>Professional</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.personal" datatype="html" resname="interstitial.personal">
         <source>Personal</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.yourBackupEmailAddress" datatype="html" resname="interstitial.yourBackupEmailAddress">
         <source>Your backup email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">48,50</context>
+          <context context-type="linenumber">49,51</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">48,50</context>
+          <context context-type="linenumber">49,51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.addAnotherEmailToYourOrcidAccount" datatype="html" resname="interstitial.addAnotherEmailToYourOrcidAccount">
         <source>Add another email to your ORCID account as a backup. A mix of personal and professional email addresses works best.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">51,54</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">51,54</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.backupEmail" datatype="html" resname="interstitial.backupEmail">
         <source>Backup email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.pleaseEnterYourEmail" datatype="html" resname="interstitial.pleaseEnterYourEmail">
         <source>Please enter your email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">91,93</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">91,93</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.invalidEmailErrorMessage" datatype="html" resname="side-bar.invalidEmailErrorMessage">
         <source>Please enter a valid email address, for example joe@institution.edu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">100,103</context>
+          <context context-type="linenumber">101,104</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">100,103</context>
+          <context context-type="linenumber">101,104</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
@@ -3229,40 +3237,92 @@
         <source>This email is already associated with an existing ORCID record. Please use a different email address.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">110,113</context>
+          <context context-type="linenumber">112,115</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">110,113</context>
+          <context context-type="linenumber">112,115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.addBackupEmailAddress" datatype="html" resname="interstitial.addBackupEmailAddress">
         <source>Add backup email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">128,130</context>
+          <context context-type="linenumber">130,132</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">128,130</context>
+          <context context-type="linenumber">130,132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.continueWithoutAddingABackupEmailAddress" datatype="html" resname="interstitial.continueWithoutAddingABackupEmailAddress">
         <source>Continue without adding a backup email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.backupEmailAddressAdded" datatype="html" resname="interstitial.backupEmailAddressAdded">
+        <source>Backup email address added</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">168,170</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">168,170</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.youHaveSuccessfullyAddedTheFollowingEmail" datatype="html" resname="interstitial.youHaveSuccessfullyAddedTheFollowingEmail">
+        <source>You have successfully added the following email address as your backup email.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">175,178</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">175,178</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.visitYourOrcidRecord" datatype="html" resname="interstitial.visitYourOrcidRecord">
+        <source>Visit your ORCID record to manage your email addresses, domains, affiliations, works and more.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">193,196</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">193,196</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
+          <context context-type="linenumber">122,125</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
+          <context context-type="linenumber">122,125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.continue" datatype="html" resname="interstitial.continue">
+        <source>Continue</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">214</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">214</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.addAnAdditionalEmailAsBackup" datatype="html" resname="interstitial.addAnAdditionalEmailAsBackup">
         <source>Add an additional email as backup</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.shareYourVerified" datatype="html" resname="interstitial.shareYourVerified">
@@ -3362,17 +3422,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
           <context context-type="linenumber">102,104</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="interstitial.visitYourOrcidRecord" datatype="html" resname="interstitial.visitYourOrcidRecord">
-        <source>Visit your ORCID record to manage your email addresses, domains, affiliations, works and more.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
-          <context context-type="linenumber">122,125</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
-          <context context-type="linenumber">122,125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.almostDone" datatype="html" resname="ngOrcid.signin.almostDone">
