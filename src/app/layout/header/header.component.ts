@@ -30,6 +30,19 @@ import { of, Observable } from 'rxjs'
 import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 
+/**
+ * Pages that follow the sign-in page pattern, where the account action is not
+ * offered in the header. Matched against the first path segment.
+ */
+const AUTH_PATTERN_ROUTES = [
+  ApplicationRoutes.signin,
+  ApplicationRoutes.register,
+  ApplicationRoutes.resetPassword,
+  ApplicationRoutes.myOrcid,
+  'members',
+  'orcid-search',
+]
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -38,6 +51,7 @@ import { RecordHeaderStateService } from 'src/app/core/record-header-state/recor
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   hideMainMenu = false
+  isAuthPatternPage = false
   _currentRoute: string
   notWordpressDisplay: boolean
   /** Shown as .active immediately after click until navigation completes. */
@@ -118,10 +132,19 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       (active) => (this.isCompactActive = active)
     )
 
-    _router.events.subscribe(() => {
-      const path = location.path()
-      this.hideMainMenu = path.indexOf(`/${ApplicationRoutes.home}`) !== -1
-    })
+    _router.events.subscribe(() => this.updateRouteFlags(location.path()))
+    this.updateRouteFlags(location.path())
+  }
+
+  /**
+   * The main menu is only offered on the homepage, and the account action is
+   * hidden on the sign-in pattern pages.
+   */
+  updateRouteFlags(rawPath: string) {
+    const path = rawPath.split('?')[0].split('#')[0]
+    this.hideMainMenu = !(path === '' || path === '/')
+    const firstSegment = path.split('/')[1] || ''
+    this.isAuthPatternPage = AUTH_PATTERN_ROUTES.includes(firstSegment)
   }
 
   ngOnInit() {}

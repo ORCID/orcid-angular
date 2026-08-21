@@ -71,22 +71,80 @@ describe('HeaderComponent', () => {
     expect(fixture.nativeElement.querySelector('app-search')).toBeFalsy()
   })
 
+  function mobileNavButtonLabels(): string[] {
+    const navButtons = fixture.nativeElement.querySelectorAll(
+      'nav button'
+    ) as NodeListOf<HTMLButtonElement>
+    return Array.from(navButtons).map((button: HTMLButtonElement) =>
+      button.textContent?.replace(/\s+/g, ' ').trim()
+    )
+  }
+
   it('renders public nav items without a sign-in/register action', () => {
     component.platform = mobilePlatform
     component.mobileMenuState = true
     component.user = undefined
     fixture.detectChanges()
 
-    const navButtons = fixture.nativeElement.querySelectorAll(
-      'nav button'
-    ) as NodeListOf<HTMLButtonElement>
-    const buttonLabels = Array.from(navButtons).map(
-      (button: HTMLButtonElement) =>
-        button.textContent?.replace(/\s+/g, ' ').trim()
-    )
+    const buttonLabels = mobileNavButtonLabels()
 
     expect(buttonLabels[0]).toBe('ABOUT')
     expect(buttonLabels.some((label) => label?.includes('Sign in'))).toBe(false)
+  })
+
+  it('shows the main menu only on the homepage', () => {
+    component.updateRouteFlags('')
+    expect(component.hideMainMenu).toBe(false)
+
+    component.updateRouteFlags('/')
+    expect(component.hideMainMenu).toBe(false)
+
+    // Query strings and fragments must not be mistaken for a route
+    component.updateRouteFlags('/?lang=es')
+    expect(component.hideMainMenu).toBe(false)
+
+    component.updateRouteFlags('/signin')
+    expect(component.hideMainMenu).toBe(true)
+
+    component.updateRouteFlags('/0000-0001-5727-2427')
+    expect(component.hideMainMenu).toBe(true)
+  })
+
+  it('flags the sign-in pattern pages so the account action is hidden', () => {
+    component.updateRouteFlags('/signin')
+    expect(component.isAuthPatternPage).toBe(true)
+
+    component.updateRouteFlags('/register')
+    expect(component.isAuthPatternPage).toBe(true)
+
+    component.updateRouteFlags('/orcid-search/search?searchQuery=test')
+    expect(component.isAuthPatternPage).toBe(true)
+
+    component.updateRouteFlags('/')
+    expect(component.isAuthPatternPage).toBe(false)
+
+    component.updateRouteFlags('/0000-0001-5727-2427')
+    expect(component.isAuthPatternPage).toBe(false)
+  })
+
+  it('renders the menu icon only when the main menu is available', () => {
+    component.platform = mobilePlatform
+    component.hideMainMenu = false
+    fixture.detectChanges()
+    expect(fixture.nativeElement.querySelector('app-menu-icon')).toBeTruthy()
+
+    component.hideMainMenu = true
+    fixture.detectChanges()
+    expect(fixture.nativeElement.querySelector('app-menu-icon')).toBeFalsy()
+  })
+
+  it('keeps the account and language actions visible while the menu is open', () => {
+    component.platform = mobilePlatform
+    component.mobileMenuState = true
+    fixture.detectChanges()
+
+    expect(fixture.nativeElement.querySelector('app-user-menu')).toBeTruthy()
+    expect(fixture.nativeElement.querySelector('app-language')).toBeTruthy()
   })
 
   it('sets active menu item id when a navigable item is clicked', () => {

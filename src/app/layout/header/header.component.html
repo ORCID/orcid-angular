@@ -29,18 +29,17 @@
         </div>
       </a>
       <div class="col no-gutters" role="navigation">
-        <div *ngIf="!platform.columns12" class="row middle no-gutters">
-          <div *ngIf="mobileMenuState" class="col no-gutters">
-            <app-language
-              class="col no-gutters"
-              id="cy-language-mob"
-            ></app-language>
-          </div>
-          <div *ngIf="!mobileMenuState" class="col no-gutters">
-            <app-user-menu></app-user-menu>
-          </div>
+        <div
+          *ngIf="!platform.columns12"
+          class="row middle no-gutters header-actions"
+        >
+          <app-user-menu
+            [hideSignedOutAccount]="isAuthPatternPage"
+          ></app-user-menu>
+          <app-language id="cy-language-mob"></app-language>
 
           <app-menu-icon
+            *ngIf="!hideMainMenu"
             (click)="toggleMobileMenu()"
             [isOpen]="mobileMenuState"
           ></app-menu-icon>
