@@ -1,3 +1,9 @@
+## v3.0.12 - 2026-08-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.11...v3.0.12)
+
+- [#2907](https://github.com/ORCID/orcid-angular/pull/2907): PD-5900
+
 ## v3.0.11 - 2026-08-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.10...v3.0.11)
