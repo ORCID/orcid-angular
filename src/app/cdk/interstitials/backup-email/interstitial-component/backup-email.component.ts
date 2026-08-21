@@ -22,6 +22,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info/platform-info.ser
 import { WINDOW } from 'src/app/cdk/window/window.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { RecordService } from 'src/app/core/record/record.service'
+import { UserService } from 'src/app/core'
 import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { RegisterService } from 'src/app/core/register/register.service'
@@ -48,6 +49,17 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
   form: FormGroup
   $destroy: Subject<void> = new Subject<void>()
 
+  /**
+   * The OAuth flow renders this component inline and then sends the user
+   * straight on to the client, so the "added" notice at the top of the record
+   * is never seen. The confirmation below is that missing surface. The dialog
+   * subclass overrides afterSummit() and keeps relying on the record notice.
+   */
+  afterSummitStatus = false
+  addedBackupEmail: string
+  /** Client the user is authorizing, for "Continue to <client>". */
+  organizationName: string
+
   @Output() finish = new EventEmitter<void>()
 
   // Injected as fields so the dialog subclass only declares what is genuinely
@@ -59,10 +71,12 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
   private _recordService = inject(RecordService)
   private _registerService = inject(RegisterService)
   private _interstitialObservability = inject(InterstitialObservabilityService)
+  private _userService = inject(UserService)
   private window = inject(WINDOW) as Window
 
   ngOnInit() {
     this.window.scrollTo(0, 0)
+    this.loadOrganizationName()
     this._recordService
       .getRecord()
       .pipe(
@@ -95,6 +109,19 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
             updateOn: 'change',
           }),
         })
+      })
+  }
+
+  /**
+   * Only set on the OAuth flow; the sign in flow has no oauthSession, so the
+   * confirmation button falls back to a generic label.
+   */
+  private loadOrganizationName(): void {
+    this._userService
+      .getUserSession()
+      .pipe(take(1), takeUntil(this.$destroy))
+      .subscribe((session) => {
+        this.organizationName = session?.oauthSession?.clientName
       })
   }
 
@@ -253,7 +280,8 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
           this._interstitialObservability.outcome(
             AppEventName.InterstitialCompleted
           )
-          this.finishIntertsitial(newBackupEmail)
+          this.saving = false
+          this.afterSummit(newBackupEmail)
         },
         () => {
           this._interstitialObservability.outcome(
@@ -265,9 +293,18 @@ export class BackupEmailComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * There is no success state inside the panel, the confirmation is shown as a
-   * notice at the top of the record once the interstitial closes. The dialog
-   * subclass overrides this to hand `email` back as the dialog result.
+   * Swap the form for the confirmation. Overridden by the dialog subclass,
+   * which closes instead and lets the record show its own notice.
+   */
+  afterSummit(email?: string) {
+    this.addedBackupEmail = email
+    this.afterSummitStatus = true
+    this.window.scrollTo(0, 0)
+  }
+
+  /**
+   * Ends the interstitial. The dialog subclass overrides this to hand `email`
+   * back as the dialog result.
    */
   finishIntertsitial(email?: string) {
     this.saving = false

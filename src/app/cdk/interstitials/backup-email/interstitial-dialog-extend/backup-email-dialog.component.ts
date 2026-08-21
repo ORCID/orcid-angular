@@ -32,6 +32,15 @@ export class BackupEmailDialogComponent extends BackupEmailComponent {
       MatDialogRef<BackupEmailDialogComponent, BackupEmailComponentDialogOutput>
     >(MatDialogRef)
 
+  /**
+   * The dialog keeps the original behaviour: close straight away and let the
+   * record show its own "added" notice, so the confirmation screen is only
+   * used by the inline OAuth flow, which has no such notice.
+   */
+  override afterSummit(email?: string) {
+    this.finishIntertsitial(email)
+  }
+
   override finishIntertsitial(email?: string) {
     this.dialogRef.close({
       type: 'backup-email-interstitial',
