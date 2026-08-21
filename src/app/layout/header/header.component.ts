@@ -381,6 +381,11 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       : 'null'
   }
 
+  onNavClick(route: string, menuItemId: string) {
+    this.activeMenuItemId = menuItemId
+    this.goto(route)
+  }
+
   goto(route: string) {
     if (route === 'signin') {
       this._router.navigate([ApplicationRoutes.signin])

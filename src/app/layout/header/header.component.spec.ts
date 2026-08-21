@@ -80,7 +80,7 @@ describe('HeaderComponent', () => {
     )
   }
 
-  it('renders public nav items without a sign-in/register action', () => {
+  it('renders a sign-in/register action above the public nav items', () => {
     component.platform = mobilePlatform
     component.mobileMenuState = true
     component.user = undefined
@@ -88,8 +88,20 @@ describe('HeaderComponent', () => {
 
     const buttonLabels = mobileNavButtonLabels()
 
-    expect(buttonLabels[0]).toBe('ABOUT')
+    expect(buttonLabels[0]).toBe('Sign in / Register')
+    expect(buttonLabels[1]).toBe('ABOUT')
+  })
+
+  it('hides the sign-in/register action when the user is signed in', () => {
+    component.platform = mobilePlatform
+    component.mobileMenuState = true
+    component.user = {} as any
+    fixture.detectChanges()
+
+    const buttonLabels = mobileNavButtonLabels()
+
     expect(buttonLabels.some((label) => label?.includes('Sign in'))).toBe(false)
+    expect(buttonLabels[0]).toBe('ABOUT')
   })
 
   it('shows the main menu only on the homepage', () => {
