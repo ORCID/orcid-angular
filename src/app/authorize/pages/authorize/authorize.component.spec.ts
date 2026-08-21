@@ -352,8 +352,8 @@ describe('AuthorizeComponent', () => {
     component.showAuthorizationComponent = true
     fixture.detectChanges()
     expect(fixture.nativeElement.querySelector('mat-card')).toBeTruthy()
-
-    ;(component as any).interstitialComponent = DummyInterstitialComponent as any
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
     ;(component as any).outlet = {
       attachComponentPortal: () => ({
         instance: { finish: new Subject<void>().asObservable() },
