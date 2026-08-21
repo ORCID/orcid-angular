@@ -67,6 +67,25 @@ mat-error.orc-font-small-print {
   line-height: 18px;
 }
 
+// Confirmation screen: Figma sets a 16px gap between the icon and the address,
+// with the icon at its natural 24px
+.published-email-container {
+  display: flex;
+  align-items: center;
+  gap: $spacing-base;
+
+  .added-email-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .published-email {
+    font-weight: 700;
+    line-height: 21px; // Figma $body-s 14/21 bold
+  }
+}
+
 button.authorize-button {
   width: 100%;
   margin-bottom: $spacing-base;
