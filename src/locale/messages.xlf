@@ -13562,7 +13562,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
+        <source>Only identifier types "grant number", "doi", "RRID", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">255,257</context>
