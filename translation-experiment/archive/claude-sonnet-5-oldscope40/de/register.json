@@ -1,0 +1,15 @@
+{
+  "register.yourNames": "Ihr Name",
+  "register.givenNames": "Vorname(n)",
+  "register.familyName": "Nachname",
+  "register.firstNameError": "Bitte geben Sie Ihren Vornamen ein",
+  "register.invalidName": "Ungültige Namenszeichen oder ungültiges Format",
+  "register.yourEmailAddresses": "Ihre E-Mail-Adressen",
+  "register.primaryEmail": "Primäre E-Mail-Adresse",
+  "register.primaryEmailRequired2": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+  "register.invalidEmail2": "Bitte geben Sie eine gültige E-Mail-Adresse ein, zum Beispiel joe@institution.edu",
+  "register.confirmEmailRequired2": "Bitte bestätigen Sie Ihre E-Mail-Adresse",
+  "register.confirmationEmailNotMatch2": "Die E-Mail-Adressen stimmen nicht überein",
+  "topBar.keywordMaxLength": "Muss weniger als 100 Zeichen umfassen",
+  "register.optional": "(Optional)"
+}

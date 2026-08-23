@@ -1,0 +1,178 @@
+{
+  "register.create": {
+    "source": "Create your ORCID iD",
+    "human": "创建自己 ORCID iD 号"
+  },
+  "register.reactivateYourOrcidAccount": {
+    "source": "Reactivate your ORCID account",
+    "human": "重新激活您的 ORCID 帐户"
+  },
+  "register.step1.3": {
+    "source": "Step 1 of 5 - Names and emails",
+    "human": "步骤 1（共 5 步）- 名称和电子邮件"
+  },
+  "register.orcids": {
+    "source": "Per ORCID&apos;s",
+    "human": "按照ORCID的"
+  },
+  "register.terms": {
+    "source": "terms of use",
+    "human": "使用条款"
+  },
+  "register.only": {
+    "source": ", you may only register for an ORCID iD for yourself. Already have an ORCID iD?",
+    "human": "，您只能为自己注册一个 ORCID iD 号。您是否已经有一个 ORCID iD 号？"
+  },
+  "register.sign": {
+    "source": "Sign In",
+    "human": "请登录"
+  },
+  "register.nextStep": {
+    "source": "Next Step",
+    "human": "下一步"
+  },
+  "register.cancelRegistration": {
+    "source": "Cancel registration",
+    "human": "取消注册"
+  },
+  "register.cancelReactivation": {
+    "source": "Cancel reactivation",
+    "human": "取消重新激活"
+  },
+  "register.yourNames": {
+    "source": "Your names",
+    "human": "您的姓名"
+  },
+  "register.givenNames": {
+    "source": "Given names",
+    "human": "名字"
+  },
+  "register.familyName": {
+    "source": "Family names",
+    "human": "姓氏"
+  },
+  "register.optional": {
+    "source": "(Optional)",
+    "human": "(非必填)"
+  },
+  "register.firstNameError": {
+    "source": "Please enter your given names",
+    "human": "请输入您的名字"
+  },
+  "register.invalidName": {
+    "source": "Invalid name characters or format",
+    "human": "无效的名字字符或格式"
+  },
+  "topBar.keywordMaxLength": {
+    "source": "Must be less than 100 characters",
+    "human": "必须少于 100 个字符"
+  },
+  "register.yourEmailAddresses": {
+    "source": "Your email addresses",
+    "human": "您的电子邮件地址"
+  },
+  "register.primaryEmail": {
+    "source": "Primary email",
+    "human": "主电子邮件地址"
+  },
+  "register.primaryEmailRequired2": {
+    "source": "Please enter your email",
+    "human": "请输入您的电子邮件"
+  },
+  "register.invalidEmail2": {
+    "source": "Please enter a valid email address, for example joe@institution.edu",
+    "human": "请输入有效的电子邮件地址，例如：joe@institution.edu"
+  },
+  "register.confirmEmail": {
+    "source": "Confirm primary email",
+    "human": "确认主电子邮箱"
+  },
+  "register.confirmEmailRequired2": {
+    "source": "Please confirm your email address",
+    "human": "请确认您的地址邮件地址"
+  },
+  "register.confirmationEmailNotMatch2": {
+    "source": "Email addresses do not match",
+    "human": "电子邮件地址不符"
+  },
+  "register.theEmailAddress": {
+    "source": "The email address",
+    "human": "电子邮件地址"
+  },
+  "register.isAssociatedWith": {
+    "source": "is already associated with",
+    "human": "已关联"
+  },
+  "register.anExisting": {
+    "source": "an existing",
+    "human": "现有"
+  },
+  "register.anUnclaimed": {
+    "source": "an unclaimed",
+    "human": "未认领"
+  },
+  "register.aDeactivated": {
+    "source": "a deactivated",
+    "human": "已停用"
+  },
+  "register.orcidRecord": {
+    "source": "ORCID record.",
+    "human": "ORCID 记录。"
+  },
+  "register.youCannotUseThisEmail": {
+    "source": "You cannot use this email address when creating a new ORCID iD.",
+    "human": "无法使用该电子邮件创建新的 ORCID iD 号。"
+  },
+  "register.signInToOrcidUsingThisEmail": {
+    "source": "Sign in to ORCID using this email address",
+    "human": "使用此电子邮件地址登录 ORCID"
+  },
+  "register.resendClaimAddress": {
+    "source": "Resend a claim email to this email address",
+    "human": "再次发送认领邮件至该邮件地址"
+  },
+  "register.reactivateOrcidAssociated": {
+    "source": "Reactivate the ORCID record associated with this email address",
+    "human": "重新激活与该电子邮件关联的 ORCID 记录"
+  },
+  "register.thisLooksLikeAPersonalEmail": {
+    "source": "This looks like a personal email",
+    "human": "这似乎是个人电子邮件"
+  },
+  "register.addA": {
+    "source": "Add an additional",
+    "human": "新增其他"
+  },
+  "register.professionalEmail": {
+    "source": "professional email",
+    "human": "工作电子邮件"
+  },
+  "register.asBackupSoWeCanBetter": {
+    "source": "as backup so we can better recommend affiliations and other related data to you.",
+    "human": "作为备份，以便我们更好地向您推荐附属机构和其他相关数据。"
+  },
+  "register.addAnotherEmailToSecure": {
+    "source": "Add an additional email to secure your account",
+    "human": "新增另一个电子邮件以确保帐户安全"
+  },
+  "register.addingAnAddiotionalEmailAsBackup": {
+    "source": "Adding an additional email as backup helps secure your account and makes sure you can always sign in.",
+    "human": "新增一个额外的电子邮件作为备份有助于确保账户安全，并确保您可以随时登录。"
+  },
+  "regiser.thisLooksLikeAProffessional": {
+    "source": "This looks like a professional email",
+    "human": "这似乎是工作电子邮件"
+  },
+  "register.weRecommendAdding": {
+    "source": "We recommend adding an additional",
+    "human": "我们建议新增一个"
+  },
+  "register.personalEmail": {
+    "source": "personal email",
+    "human": "个人电子邮件"
+  },
+  "register.asBackupSoYouAlways": {
+    "source": "as backup so you always have access to your ORCID account if you change jobs or roles.",
+    "human": "作为备份，这样即使您更换工作或角色，也能随时访问您的 ORCID 账户。"
+  }
+}

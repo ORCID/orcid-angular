@@ -1,0 +1,17 @@
+{
+  "developerTools.developerTools": "Entwicklertools",
+  "developerTools.applicationName": "Anwendungsname",
+  "developerTools.applicationUrl": "Anwendungs-URL",
+  "developerTools.applicationDescription": "Anwendungsbeschreibung",
+  "developerTools.redirectUris": "Weiterleitungs-URIs",
+  "developerTools.nameShownToUsers": "Der Name, der Benutzern auf dem OAuth-Autorisierungsbildschirm angezeigt wird",
+  "developerTools.theDescriptionShown": "Die Beschreibung, die Benutzern auf dem OAuth-Autorisierungsbildschirm angezeigt wird. Maximal 1000 Zeichen.",
+  "developerTools.applicationNameCannotBeEmpty": "Anwendungsname darf nicht leer sein",
+  "developerTools.websiteNameCannotBeEmpty": "Website-Name darf nicht leer sein",
+  "developerTools.invalidWebsite": "Ungültige Website",
+  "developerTools.invalidRedirectUrl": "Ungültige Weiterleitungs-URL",
+  "developerTools.changesHaveBeenSavedSuccessfully": "Die Änderungen wurden erfolgreich gespeichert.",
+  "developerTools.redirectUrisMustBeUnique": "Weiterleitungs-URIs müssen eindeutig sein",
+  "developerTools.saveApplication": "Anwendung speichern",
+  "developerTools.onceTheUserHasAuthorized": "Sobald der Benutzer Ihre Anwendung autorisiert hat, wird er zu einer von Ihnen angegebenen URI zurückgeleitet. Sie müssen diese URIs im Voraus angeben, andernfalls tritt bei Ihren Integrationsbenutzern ein Fehler auf."
+}

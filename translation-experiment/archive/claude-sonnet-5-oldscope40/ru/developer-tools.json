@@ -1,0 +1,17 @@
+{
+  "developerTools.developerTools": "Инструменты разработчика",
+  "developerTools.applicationName": "Название приложения",
+  "developerTools.applicationUrl": "URL-адрес приложения",
+  "developerTools.applicationDescription": "Описание приложения",
+  "developerTools.redirectUris": "URI перенаправления",
+  "developerTools.nameShownToUsers": "Название, отображаемое пользователям на экране авторизации OAuth",
+  "developerTools.theDescriptionShown": "Описание, отображаемое пользователям на экране авторизации OAuth. Максимум 1000 символов.",
+  "developerTools.applicationNameCannotBeEmpty": "Название приложения не может быть пустым",
+  "developerTools.websiteNameCannotBeEmpty": "Название сайта не может быть пустым",
+  "developerTools.invalidWebsite": "Недопустимый сайт",
+  "developerTools.invalidRedirectUrl": "Недопустимый URL перенаправления",
+  "developerTools.changesHaveBeenSavedSuccessfully": "Изменения успешно сохранены.",
+  "developerTools.redirectUrisMustBeUnique": "URI перенаправления должны быть уникальными",
+  "developerTools.saveApplication": "Сохранить приложение",
+  "developerTools.onceTheUserHasAuthorized": "После того как пользователь авторизует ваше приложение, он будет перенаправлен на указанный вами URI. Вы должны указать эти URI заранее, иначе пользователи вашей интеграции столкнутся с ошибкой."
+}

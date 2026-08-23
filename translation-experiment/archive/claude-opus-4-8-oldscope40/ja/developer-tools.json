@@ -1,0 +1,17 @@
+{
+  "developerTools.developerTools": "開発者ツール",
+  "developerTools.applicationName": "アプリケーション名",
+  "developerTools.applicationUrl": "アプリケーション URL",
+  "developerTools.applicationDescription": "アプリケーションの説明",
+  "developerTools.redirectUris": "リダイレクト URI",
+  "developerTools.nameShownToUsers": "OAuth 認可画面でユーザーに表示される名前",
+  "developerTools.theDescriptionShown": "OAuth 認可画面でユーザーに表示される説明。最大 1000 文字。",
+  "developerTools.applicationNameCannotBeEmpty": "アプリケーション名を空にすることはできません",
+  "developerTools.websiteNameCannotBeEmpty": "ウェブサイト名を空にすることはできません",
+  "developerTools.invalidWebsite": "無効なウェブサイト",
+  "developerTools.invalidRedirectUrl": "無効なリダイレクト URL",
+  "developerTools.changesHaveBeenSavedSuccessfully": "変更が正常に保存されました。",
+  "developerTools.redirectUrisMustBeUnique": "リダイレクト URI は一意である必要があります",
+  "developerTools.saveApplication": "アプリケーションを保存",
+  "developerTools.onceTheUserHasAuthorized": "ユーザーがアプリケーションを認可すると、指定した URI に戻されます。これらの URI を事前に指定する必要があります。指定しない場合、統合を利用するユーザーにエラーが発生します。"
+}

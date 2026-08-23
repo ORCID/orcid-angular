@@ -1,0 +1,15 @@
+{
+  "account.enableTwoFactorAuth": "二段階認証を有効にする",
+  "account.step1AuthenticationApp": "ステップ1/2 - 認証アプリ",
+  "account.nextStepRecoveryCodes": "次のステップ - 2FA復旧コード",
+  "account.scanQrCodeWithAuthApp": "認証アプリでQRコードをスキャンしてください。",
+  "account.qrCodeAltText": "QRコード",
+  "account.cantScanQrCodePrefix": "QRコードをスキャンできませんか？",
+  "account.getSetupCodeInstead": "代わりに設定コードを取得する",
+  "account.copySetupCode": "設定コードをコピー",
+  "account.copySetupCodeToClipboard": "設定コードをクリップボードにコピー",
+  "account.enterVerificationCodeFromAuthApp": "認証アプリに表示された6桁の確認コードを入力してください",
+  "ngOrcid.signin.2fa.verificationCodeRequired": "確認コードが必要です",
+  "ngOrcid.signin.2fa.badVerificationCodeLength": "確認コードの長さが無効です",
+  "ngOrcid.signin.2fa.badVerificationCode": "確認コードが無効です"
+}

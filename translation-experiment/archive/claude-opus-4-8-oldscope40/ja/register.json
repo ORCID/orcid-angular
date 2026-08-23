@@ -1,0 +1,15 @@
+{
+  "register.yourNames": "お名前",
+  "register.givenNames": "名",
+  "register.familyName": "姓",
+  "register.firstNameError": "名を入力してください",
+  "register.invalidName": "名前の文字または形式が無効です",
+  "register.yourEmailAddresses": "メールアドレス",
+  "register.primaryEmail": "プライマリメール",
+  "register.primaryEmailRequired2": "メールアドレスを入力してください",
+  "register.invalidEmail2": "有効なメールアドレスを入力してください（例: joe@institution.edu）",
+  "register.confirmEmailRequired2": "メールアドレスを確認してください",
+  "register.confirmationEmailNotMatch2": "メールアドレスが一致しません",
+  "topBar.keywordMaxLength": "100 文字未満である必要があります",
+  "register.optional": "（任意）"
+}

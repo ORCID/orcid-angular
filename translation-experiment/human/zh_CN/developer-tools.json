@@ -1,0 +1,126 @@
+{
+  "developerTools.developerTools": {
+    "source": "Developer tools",
+    "human": "开发人员工具"
+  },
+  "developerTools.backToMyRecod": {
+    "source": "Back to my record",
+    "human": "返回我的记录"
+  },
+  "developerTools.thisSectionIsIntended": {
+    "source": "This section is intended for developers who plan to integrate ORCID into their system using the ORCID Public API.",
+    "human": "本区段是为那些计划使用 ORCID 公共应用程序接口（API）将 ORCID 集成到自己系统中的开发人员准备的。"
+  },
+  "developerTools.gettingStarted": {
+    "source": "Getting started with the free ORCID Public API",
+    "human": "开始使用免费的 ORCID 公共应用程序接口（API）"
+  },
+  "developerTools.orcidOffersAnApi": {
+    "source": "ORCID offers a free Public API (Application Programming Interface) that allows your systems and applications to connect to the ORCID registry for non-commercial use.",
+    "human": "ORCID 提供了一个免费的公共应用程序接口（API），允许您的系统和应用程序连接到 ORCID 注册数据库，作为非商业用途。"
+  },
+  "developerTools.orcidOffersAnApi2": {
+    "source": "By registering for Public API Credentials, your system or application can:",
+    "human": "通过注册公共应用程序接口（API）证书，您的系统或应用程序可以"
+  },
+  "developerTools.allowUserToSignInto": {
+    "source": "Allow users to sign into your system/application with their ORCID account",
+    "human": "允许用户登录到您的系统/应用程序与他们的 ORCID 帐户"
+  },
+  "developerTools.getAUserAuthenticated": {
+    "source": "Obtain users&apos; authenticated ORCID iDs",
+    "human": "获取用户已认证的 ORCID 号"
+  },
+  "developerTools.retrieveMachineReadable": {
+    "source": "Read public information from ORCID records in machine-readable format",
+    "human": "从 ORCID 记录中读取机器可读格式的公共信息"
+  },
+  "developerTools.performMachineSearch": {
+    "source": "Search public data in the ORCID Registry",
+    "human": "在 ORCID 注册数据库中搜索公共数据"
+  },
+  "developerTools.obtainHigher": {
+    "source": "Obtain a higher usage quota than the ORCID Anonymous API",
+    "human": "获取比 ORCID 匿名应用程序接口（API）更高的使用配额"
+  },
+  "developerTools.orcidApiResful": {
+    "source": "The ORCID Public API is RESTful and uses",
+    "human": "ORCID 应用程序接口（API）是 RESTful 的，并使用"
+  },
+  "developerTools.oauth20": {
+    "source": "OAuth",
+    "human": "OAuth"
+  },
+  "developerTools.wellEstablishedStandard": {
+    "source": ", a well-established, standard protocol for user-based permissions.",
+    "human": "，这是一个完善、基于用户权限的标准协议。"
+  },
+  "developerTools.publicClientApplicationsAreGranted": {
+    "source": "Public API Credentials are granted to individuals and not organizations, and your Public API Credentials are personal to you (even if being used in connection with your work for an organization).",
+    "human": "公共应用程序接口（API）证书是授予个人而非组织的，您的公共应用程序接口（API）证书是您个人的（即使是在您为组织工作时使用）。"
+  },
+  "developerTools.publicClientApplicationsAreGranted2": {
+    "source": "If you need access to an ORCID API for commercial use, need a higher usage quota, organizational administration of your API credentials, or the ability to write data to or access Trusted Party data in ORCID records, our",
+    "human": "如果您需要访问 ORCID 应用程序接口（API）以用于商业用途，需要更高的使用配额，需要对您的应用程序接口（API）凭据进行组织管理，或需要能够向 ORCID 记录中的受托方数据写入数据或访问受托方数据，我们的"
+  },
+  "developerTools.theOrcidPublicApiAllowsYouToRequestPermission": {
+    "source": "The ORCID Public API is free for non-commercial use by individuals as stated in the",
+    "human": "ORCID公共应用程序接口（API）是免费的，供个人非商业使用，如"
+  },
+  "developerTools.mayBeMoreAppropriate": {
+    "source": "is available to ORCID member organizations.",
+    "human": "可供 ORCID 会员组织使用。"
+  },
+  "developerTools.memberApi": {
+    "source": "Member API",
+    "human": "应用程序接口（API）会员"
+  },
+  "developerTools.additionalResources": {
+    "source": "Additional resources",
+    "human": "其他资源"
+  },
+  "developerTools.readThePublicApisDocumentation": {
+    "source": "Read the Public API documentation",
+    "human": "阅读公共应用程序接口（API）文档"
+  },
+  "developerTools.fillOutMoreAobutTheDifferences": {
+    "source": "Find out more about the differences between the Public and Member APIs",
+    "human": "了解更多关于公共应用程序接口（API）和成员应用程序接口（API）之间的差异"
+  },
+  "developerTools.orcidPublicClientTermsOfService": {
+    "source": "ORCID Public APIs Terms of Service",
+    "human": "ORCID 公共应用程序接口（API）服务条款"
+  },
+  "developerTools.byRegisteringForPublicApi": {
+    "source": "By “non-commercial” we mean that you may not charge any re-use fees for the Public API, and you may not make use of the Public API in connection with any revenue-generating product or service.",
+    "human": "我们所说的“非商业性”是指您不得对公共应用程序接口（API）的再使用收取任何费用，且不得将公共应用程序接口（API）用于任何创收产品或服务。"
+  },
+  "developerTools.publicClientTermsOfService": {
+    "source": "Public APIs Terms of Service.",
+    "human": "公共应用程序接口（API）服务条款。"
+  },
+  "developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService": {
+    "source": "I have read and agree to the ORCID Public APIs Terms of Service",
+    "human": "我已阅读并同意 ORCID 公共应用程序接口服务条款"
+  },
+  "developerTools.registerForYourOrcidPublicApiCredentials": {
+    "source": "Register for your ORCID Public API credentials",
+    "human": "注册您的 ORCID 公共应用程序接口（API）认证"
+  },
+  "developerTools.youMustAcceptThePublicClientTermsOfService": {
+    "source": "You must accept the Public Client Terms of Service before you can register for your Public API credentials.",
+    "human": "您必须先接受公共客户端服务条款，才能注册您的公共应用程序接口（API）认证。"
+  },
+  "developerTools.youMustHaveAtLeastOneVerifiedEmail": {
+    "source": "You must have at least one verified email address in your ORCID account to register for your Public API credentials. Manage your email addresses in the",
+    "human": "您的 ORCID 帐户中必须至少有一个已验证的电子邮件地址才能注册您的公开应用程序接口（API） 凭证。在以下管理您的电子邮件地址："
+  },
+  "developerTools.emailsAndDomainsSection": {
+    "source": "Emails and domains section of your ORCID record",
+    "human": "您的 ORCID 记录中的电子邮件和网域区段"
+  },
+  "developerTools.noVerifiedEmailAddresses": {
+    "source": "No verified email addresses found",
+    "human": "未找到已验证的电子邮件地址"
+  }
+}

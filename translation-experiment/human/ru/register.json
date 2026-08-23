@@ -1,0 +1,178 @@
+{
+  "register.create": {
+    "source": "Create your ORCID iD",
+    "human": "Создайте свой ORCID iD"
+  },
+  "register.reactivateYourOrcidAccount": {
+    "source": "Reactivate your ORCID account",
+    "human": "Восстановите аккаунт ORCID"
+  },
+  "register.step1.3": {
+    "source": "Step 1 of 5 - Names and emails",
+    "human": "Шаг 1 из 5: имена и адреса"
+  },
+  "register.orcids": {
+    "source": "Per ORCID&apos;s",
+    "human": "Следуя"
+  },
+  "register.terms": {
+    "source": "terms of use",
+    "human": "условиям использования ORCID"
+  },
+  "register.only": {
+    "source": ", you may only register for an ORCID iD for yourself. Already have an ORCID iD?",
+    "human": ", Вы можете зарегистрировать ORCID iD только для себя. У вас уже есть ORCID iD?"
+  },
+  "register.sign": {
+    "source": "Sign In",
+    "human": "Войти в систему"
+  },
+  "register.nextStep": {
+    "source": "Next Step",
+    "human": "Следующий шаг"
+  },
+  "register.cancelRegistration": {
+    "source": "Cancel registration",
+    "human": "Отменить регистрацию"
+  },
+  "register.cancelReactivation": {
+    "source": "Cancel reactivation",
+    "human": "Отменить восстановление"
+  },
+  "register.yourNames": {
+    "source": "Your names",
+    "human": "Ваши имена"
+  },
+  "register.givenNames": {
+    "source": "Given names",
+    "human": "Имена"
+  },
+  "register.familyName": {
+    "source": "Family names",
+    "human": "Фамилии"
+  },
+  "register.optional": {
+    "source": "(Optional)",
+    "human": "(Необязательно)"
+  },
+  "register.firstNameError": {
+    "source": "Please enter your given names",
+    "human": "Укажите свое имя"
+  },
+  "register.invalidName": {
+    "source": "Invalid name characters or format",
+    "human": "Недопустимые символы в имени или формат"
+  },
+  "topBar.keywordMaxLength": {
+    "source": "Must be less than 100 characters",
+    "human": "Должно быть менее 100 символов"
+  },
+  "register.yourEmailAddresses": {
+    "source": "Your email addresses",
+    "human": "Ваши адреса эл. почты"
+  },
+  "register.primaryEmail": {
+    "source": "Primary email",
+    "human": "Основной адрес электронной почты"
+  },
+  "register.primaryEmailRequired2": {
+    "source": "Please enter your email",
+    "human": "Укажите адрес эл. почты"
+  },
+  "register.invalidEmail2": {
+    "source": "Please enter a valid email address, for example joe@institution.edu",
+    "human": "Укажите действительный адрес эл. почты, например ivanov@institution.edu"
+  },
+  "register.confirmEmail": {
+    "source": "Confirm primary email",
+    "human": "Подтвердите основной адрес электронной почты"
+  },
+  "register.confirmEmailRequired2": {
+    "source": "Please confirm your email address",
+    "human": "Подтвердите адрес эл. почты"
+  },
+  "register.confirmationEmailNotMatch2": {
+    "source": "Email addresses do not match",
+    "human": "Адреса электронной почты не совпадают"
+  },
+  "register.theEmailAddress": {
+    "source": "The email address",
+    "human": "Адрес электронной почты"
+  },
+  "register.isAssociatedWith": {
+    "source": "is already associated with",
+    "human": "уже привязан к"
+  },
+  "register.anExisting": {
+    "source": "an existing",
+    "human": "существующему"
+  },
+  "register.anUnclaimed": {
+    "source": "an unclaimed",
+    "human": "неподтвержденному"
+  },
+  "register.aDeactivated": {
+    "source": "a deactivated",
+    "human": "деактивированному"
+  },
+  "register.orcidRecord": {
+    "source": "ORCID record.",
+    "human": "профилю ORCID."
+  },
+  "register.youCannotUseThisEmail": {
+    "source": "You cannot use this email address when creating a new ORCID iD.",
+    "human": "Вы не можете использовать этот адрес для создания нового ORCID iD."
+  },
+  "register.signInToOrcidUsingThisEmail": {
+    "source": "Sign in to ORCID using this email address",
+    "human": "Войти в ORCID с помощью указанного адреса эл. почты"
+  },
+  "register.resendClaimAddress": {
+    "source": "Resend a claim email to this email address",
+    "human": "Отправить письмо-подтверждение на этот адрес электронной почты"
+  },
+  "register.reactivateOrcidAssociated": {
+    "source": "Reactivate the ORCID record associated with this email address",
+    "human": "Восстановить профиль ORCID, связанный с этим адресом электронной почты"
+  },
+  "register.thisLooksLikeAPersonalEmail": {
+    "source": "This looks like a personal email",
+    "human": "Похоже, вы указали личный адрес эл. почты"
+  },
+  "register.addA": {
+    "source": "Add an additional",
+    "human": "Укажите дополнительный"
+  },
+  "register.professionalEmail": {
+    "source": "professional email",
+    "human": "рабочий адрес электронной почты"
+  },
+  "register.asBackupSoWeCanBetter": {
+    "source": "as backup so we can better recommend affiliations and other related data to you.",
+    "human": "в качестве резервного. Это поможет нам более точно находить аффилиации и другую информацию, связанную с вами."
+  },
+  "register.addAnotherEmailToSecure": {
+    "source": "Add an additional email to secure your account",
+    "human": "Чтобы защитить аккаунт, добавьте дополнительный адрес электронной почты"
+  },
+  "register.addingAnAddiotionalEmailAsBackup": {
+    "source": "Adding an additional email as backup helps secure your account and makes sure you can always sign in.",
+    "human": "Дополнительный адрес можно использовать в качестве резервного, поэтому у вас всегда будет доступ к аккаунту."
+  },
+  "regiser.thisLooksLikeAProffessional": {
+    "source": "This looks like a professional email",
+    "human": "Похоже, вы указали рабочий адрес эл. почты"
+  },
+  "register.weRecommendAdding": {
+    "source": "We recommend adding an additional",
+    "human": "Рекомендуем указать дополнительный"
+  },
+  "register.personalEmail": {
+    "source": "personal email",
+    "human": "личный адрес электронной почты"
+  },
+  "register.asBackupSoYouAlways": {
+    "source": "as backup so you always have access to your ORCID account if you change jobs or roles.",
+    "human": "в качестве резервного. Так вы сможете сохранить доступ к аккаунту ORCID, даже если перейдете на новую должность или место работы."
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "register.create": {
+    "source": "Create your ORCID iD",
+    "human": "Crea il tuo iD ORCID"
+  },
+  "register.reactivateYourOrcidAccount": {
+    "source": "Reactivate your ORCID account",
+    "human": "Riattiva il tuo account ORCID"
+  },
+  "register.step1.3": {
+    "source": "Step 1 of 5 - Names and emails",
+    "human": "Passaggio 1 di 5 - Nomi ed email"
+  },
+  "register.orcids": {
+    "source": "Per ORCID&apos;s",
+    "human": "di ORCID"
+  },
+  "register.terms": {
+    "source": "terms of use",
+    "human": "termini di uso"
+  },
+  "register.only": {
+    "source": ", you may only register for an ORCID iD for yourself. Already have an ORCID iD?",
+    "human": ", puoi registrarti per un iD ORCID soltanto a tuo nome. Hai già un ORCID iD?"
+  },
+  "register.sign": {
+    "source": "Sign In",
+    "human": "Registrati"
+  },
+  "register.nextStep": {
+    "source": "Next Step",
+    "human": "Passaggio successivo"
+  },
+  "register.cancelRegistration": {
+    "source": "Cancel registration",
+    "human": "Annulla la registrazione"
+  },
+  "register.cancelReactivation": {
+    "source": "Cancel reactivation",
+    "human": "Annulla la riattivazione"
+  },
+  "register.yourNames": {
+    "source": "Your names",
+    "human": "I tuoi nomi"
+  },
+  "register.givenNames": {
+    "source": "Given names",
+    "human": "Nome"
+  },
+  "register.familyName": {
+    "source": "Family names",
+    "human": "Cognomi"
+  },
+  "register.optional": {
+    "source": "(Optional)",
+    "human": "(Opzionale)"
+  },
+  "register.firstNameError": {
+    "source": "Please enter your given names",
+    "human": "Inserisci il tuo nome"
+  },
+  "register.invalidName": {
+    "source": "Invalid name characters or format",
+    "human": "Caratteri o formato del nome non validi"
+  },
+  "topBar.keywordMaxLength": {
+    "source": "Must be less than 100 characters",
+    "human": "Deve contenere meno di 100 caratteri"
+  },
+  "register.yourEmailAddresses": {
+    "source": "Your email addresses",
+    "human": "I tuoi indirizzi email"
+  },
+  "register.primaryEmail": {
+    "source": "Primary email",
+    "human": "Email principale"
+  },
+  "register.primaryEmailRequired2": {
+    "source": "Please enter your email",
+    "human": "Inserisci la tua email"
+  },
+  "register.invalidEmail2": {
+    "source": "Please enter a valid email address, for example joe@institution.edu",
+    "human": "Inserisci un indirizzo email valido, ad esempio: giuseppe@istituzione.edu"
+  },
+  "register.confirmEmail": {
+    "source": "Confirm primary email",
+    "human": "Conferma l&apos;email principale"
+  },
+  "register.confirmEmailRequired2": {
+    "source": "Please confirm your email address",
+    "human": "Conferma il tuo indirizzo email"
+  },
+  "register.confirmationEmailNotMatch2": {
+    "source": "Email addresses do not match",
+    "human": "Gli indirizzi email non corrispondono"
+  },
+  "register.theEmailAddress": {
+    "source": "The email address",
+    "human": "L’indirizzo email"
+  },
+  "register.isAssociatedWith": {
+    "source": "is already associated with",
+    "human": "ha già un’affiliazione con"
+  },
+  "register.anExisting": {
+    "source": "an existing",
+    "human": "un tipo preesistente di"
+  },
+  "register.anUnclaimed": {
+    "source": "an unclaimed",
+    "human": "un tipo non utilizzato di"
+  },
+  "register.aDeactivated": {
+    "source": "a deactivated",
+    "human": "un tipo disattivato di"
+  },
+  "register.orcidRecord": {
+    "source": "ORCID record.",
+    "human": "record ORCID."
+  },
+  "register.youCannotUseThisEmail": {
+    "source": "You cannot use this email address when creating a new ORCID iD.",
+    "human": "Non è possibile utilizzare questo indirizzo email quando si crea un nuovo iD ORCID."
+  },
+  "register.signInToOrcidUsingThisEmail": {
+    "source": "Sign in to ORCID using this email address",
+    "human": "Accedi a ORCID con questo indirizzo email"
+  },
+  "register.resendClaimAddress": {
+    "source": "Resend a claim email to this email address",
+    "human": "Rispedisci un’email di attivazione a questo indirizzo email"
+  },
+  "register.reactivateOrcidAssociated": {
+    "source": "Reactivate the ORCID record associated with this email address",
+    "human": "Riattiva il record ORCID associato a questo indirizzo email"
+  },
+  "register.thisLooksLikeAPersonalEmail": {
+    "source": "This looks like a personal email",
+    "human": "Questa sembra un’email personale"
+  },
+  "register.addA": {
+    "source": "Add an additional",
+    "human": "Aggiungi un elemento ulteriore:"
+  },
+  "register.professionalEmail": {
+    "source": "professional email",
+    "human": "email professionale"
+  },
+  "register.asBackupSoWeCanBetter": {
+    "source": "as backup so we can better recommend affiliations and other related data to you.",
+    "human": "come backup così potremo consigliarti affiliazioni e relative informazioni al meglio."
+  },
+  "register.addAnotherEmailToSecure": {
+    "source": "Add an additional email to secure your account",
+    "human": "Aggiungi un’email ulteriore per proteggere il tuo account."
+  },
+  "register.addingAnAddiotionalEmailAsBackup": {
+    "source": "Adding an additional email as backup helps secure your account and makes sure you can always sign in.",
+    "human": "L’aggiunta di un’altra email come backup ti consente di proteggere l’account e ti assicura l’accesso in ogni momento."
+  },
+  "regiser.thisLooksLikeAProffessional": {
+    "source": "This looks like a professional email",
+    "human": "Questa sembra un’email professionale"
+  },
+  "register.weRecommendAdding": {
+    "source": "We recommend adding an additional",
+    "human": "Consigliamo di aggiungere un elemento ulteriore:"
+  },
+  "register.personalEmail": {
+    "source": "personal email",
+    "human": "email personale"
+  },
+  "register.asBackupSoYouAlways": {
+    "source": "as backup so you always have access to your ORCID account if you change jobs or roles.",
+    "human": "come backup così avrai sempre accesso all’account ORCID se cambi lavoro o ruolo."
+  }
+}

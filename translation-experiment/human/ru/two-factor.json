@@ -1,0 +1,50 @@
+{
+  "account.enableTwoFactorAuth": {
+    "source": "Enable two-factor authentication",
+    "human": "Включить двухфакторную аутентификацию"
+  },
+  "account.step1AuthenticationApp": {
+    "source": "Step 1 of 2 - Authentication app",
+    "human": "Шаг 1 из 2 — приложение для аутентификации"
+  },
+  "account.nextStepRecoveryCodes": {
+    "source": "Next step - 2FA recovery codes",
+    "human": "Следующий шаг — коды восстановления 2FA"
+  },
+  "account.scanQrCodeWithAuthApp": {
+    "source": "Scan the QR code with your authentication app.",
+    "human": "Отсканируйте QR-код с помощью приложения для аутентификации."
+  },
+  "account.qrCodeAltText": {
+    "source": "qr code",
+    "human": "QR-код"
+  },
+  "account.cantScanQrCodePrefix": {
+    "source": "Can&apos;t scan the QR code?",
+    "human": "Не удалось отсканировать QR-код?"
+  },
+  "account.getSetupCodeInstead": {
+    "source": "Get a setup code instead",
+    "human": "Запросите секретный ключ."
+  },
+  "account.copySetupCode": {
+    "source": "Copy setup code",
+    "human": "Скопировать секретный ключ"
+  },
+  "account.enterVerificationCodeFromAuthApp": {
+    "source": "Enter the 6-digit verification code from your authentication app",
+    "human": "Введите 6-значный код подтверждения из приложения для аутентификации"
+  },
+  "ngOrcid.signin.2fa.verificationCodeRequired": {
+    "source": "Authentication code is required",
+    "human": "Требуется код аутентификации"
+  },
+  "ngOrcid.signin.2fa.badVerificationCodeLength": {
+    "source": "Invalid authentication code length",
+    "human": "Недопустимая длина кода аутентификации"
+  },
+  "ngOrcid.signin.2fa.badVerificationCode": {
+    "source": "Invalid authentication code",
+    "human": "Недопустимый код аутентификации"
+  }
+}

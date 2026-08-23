@@ -1,0 +1,17 @@
+{
+  "developerTools.developerTools": "Ferramentas de programador",
+  "developerTools.applicationName": "Nome da aplicação",
+  "developerTools.applicationUrl": "URL da aplicação",
+  "developerTools.applicationDescription": "Descrição da aplicação",
+  "developerTools.redirectUris": "URIs de redirecionamento",
+  "developerTools.nameShownToUsers": "O nome apresentado aos utilizadores no ecrã de autorização OAuth",
+  "developerTools.theDescriptionShown": "A descrição apresentada aos utilizadores no ecrã de autorização OAuth. Máximo de 1000 carateres.",
+  "developerTools.applicationNameCannotBeEmpty": "O nome da aplicação não pode estar vazio",
+  "developerTools.websiteNameCannotBeEmpty": "O nome do site não pode estar vazio",
+  "developerTools.invalidWebsite": "Site inválido",
+  "developerTools.invalidRedirectUrl": "URL de redirecionamento inválido",
+  "developerTools.changesHaveBeenSavedSuccessfully": "As alterações foram guardadas com sucesso.",
+  "developerTools.redirectUrisMustBeUnique": "Os URIs de redirecionamento têm de ser únicos",
+  "developerTools.saveApplication": "Guardar aplicação",
+  "developerTools.onceTheUserHasAuthorized": "Depois de o utilizador autorizar a sua aplicação, este será redirecionado para um URI que especificar. Deve fornecer estes URIs com antecedência, caso contrário os utilizadores da sua integração terão um erro."
+}

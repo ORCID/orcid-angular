@@ -1,0 +1,17 @@
+{
+  "developerTools.developerTools": "Outils pour développeurs",
+  "developerTools.applicationName": "Nom de l&apos;application",
+  "developerTools.applicationUrl": "URL de l&apos;application",
+  "developerTools.applicationDescription": "Description de l&apos;application",
+  "developerTools.redirectUris": "URI de redirection",
+  "developerTools.nameShownToUsers": "Le nom affiché aux utilisateurs sur l&apos;écran d&apos;autorisation OAuth",
+  "developerTools.theDescriptionShown": "La description affichée aux utilisateurs sur l&apos;écran d&apos;autorisation OAuth. 1 000 caractères maximum.",
+  "developerTools.applicationNameCannotBeEmpty": "Le nom de l&apos;application ne peut pas être vide",
+  "developerTools.websiteNameCannotBeEmpty": "Le nom du site web ne peut pas être vide",
+  "developerTools.invalidWebsite": "Site web invalide",
+  "developerTools.invalidRedirectUrl": "URL de redirection invalide",
+  "developerTools.changesHaveBeenSavedSuccessfully": "Les modifications ont été enregistrées avec succès.",
+  "developerTools.redirectUrisMustBeUnique": "Les URI de redirection doivent être uniques",
+  "developerTools.saveApplication": "Enregistrer l&apos;application",
+  "developerTools.onceTheUserHasAuthorized": "Une fois que l&apos;utilisateur a autorisé votre application, il sera redirigé vers un URI que vous spécifiez. Vous devez fournir ces URI à l&apos;avance, sinon les utilisateurs de votre intégration rencontreront une erreur."
+}

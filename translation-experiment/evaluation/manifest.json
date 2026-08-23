@@ -1,0 +1,146 @@
+{
+  "seed": "orcid-translation-experiment-2026-08-20",
+  "sources": [
+    "human",
+    "claude-sonnet-5",
+    "claude-opus-4-8"
+  ],
+  "assignments": {
+    "de": {
+      "register": {
+        "A": "human",
+        "B": "claude-sonnet-5",
+        "C": "claude-opus-4-8"
+      },
+      "two-factor": {
+        "A": "human",
+        "B": "claude-opus-4-8",
+        "C": "claude-sonnet-5"
+      },
+      "developer-tools": {
+        "A": "claude-sonnet-5",
+        "B": "claude-opus-4-8",
+        "C": "human"
+      }
+    },
+    "es": {
+      "register": {
+        "A": "claude-sonnet-5",
+        "B": "claude-opus-4-8",
+        "C": "human"
+      },
+      "two-factor": {
+        "A": "human",
+        "B": "claude-sonnet-5",
+        "C": "claude-opus-4-8"
+      },
+      "developer-tools": {
+        "A": "human",
+        "B": "claude-opus-4-8",
+        "C": "claude-sonnet-5"
+      }
+    },
+    "fr": {
+      "register": {
+        "A": "claude-sonnet-5",
+        "B": "claude-opus-4-8",
+        "C": "human"
+      },
+      "two-factor": {
+        "A": "human",
+        "B": "claude-sonnet-5",
+        "C": "claude-opus-4-8"
+      },
+      "developer-tools": {
+        "A": "claude-opus-4-8",
+        "B": "claude-sonnet-5",
+        "C": "human"
+      }
+    },
+    "it": {
+      "register": {
+        "A": "claude-opus-4-8",
+        "B": "human",
+        "C": "claude-sonnet-5"
+      },
+      "two-factor": {
+        "A": "human",
+        "B": "claude-opus-4-8",
+        "C": "claude-sonnet-5"
+      },
+      "developer-tools": {
+        "A": "claude-opus-4-8",
+        "B": "claude-sonnet-5",
+        "C": "human"
+      }
+    },
+    "ja": {
+      "register": {
+        "A": "human",
+        "B": "claude-sonnet-5",
+        "C": "claude-opus-4-8"
+      },
+      "two-factor": {
+        "A": "human",
+        "B": "claude-opus-4-8",
+        "C": "claude-sonnet-5"
+      },
+      "developer-tools": {
+        "A": "claude-sonnet-5",
+        "B": "human",
+        "C": "claude-opus-4-8"
+      }
+    },
+    "pt": {
+      "register": {
+        "A": "claude-opus-4-8",
+        "B": "human",
+        "C": "claude-sonnet-5"
+      },
+      "two-factor": {
+        "A": "claude-sonnet-5",
+        "B": "human",
+        "C": "claude-opus-4-8"
+      },
+      "developer-tools": {
+        "A": "claude-opus-4-8",
+        "B": "human",
+        "C": "claude-sonnet-5"
+      }
+    },
+    "ru": {
+      "register": {
+        "A": "human",
+        "B": "claude-sonnet-5",
+        "C": "claude-opus-4-8"
+      },
+      "two-factor": {
+        "A": "claude-opus-4-8",
+        "B": "claude-sonnet-5",
+        "C": "human"
+      },
+      "developer-tools": {
+        "A": "claude-opus-4-8",
+        "B": "claude-sonnet-5",
+        "C": "human"
+      }
+    },
+    "zh_CN": {
+      "register": {
+        "A": "claude-sonnet-5",
+        "B": "claude-opus-4-8",
+        "C": "human"
+      },
+      "two-factor": {
+        "A": "claude-opus-4-8",
+        "B": "human",
+        "C": "claude-sonnet-5"
+      },
+      "developer-tools": {
+        "A": "claude-sonnet-5",
+        "B": "human",
+        "C": "claude-opus-4-8"
+      }
+    }
+  }
+}

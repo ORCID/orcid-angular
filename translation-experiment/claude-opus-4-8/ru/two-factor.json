@@ -1,0 +1,14 @@
+{
+  "account.enableTwoFactorAuth": "Включить двухфакторную аутентификацию",
+  "account.step1AuthenticationApp": "Шаг 1 из 2 — Приложение для аутентификации",
+  "account.nextStepRecoveryCodes": "Следующий шаг — Резервные коды 2FA",
+  "account.scanQrCodeWithAuthApp": "Отсканируйте QR-код с помощью приложения для аутентификации.",
+  "account.qrCodeAltText": "QR-код",
+  "account.cantScanQrCodePrefix": "Не удаётся отсканировать QR-код?",
+  "account.getSetupCodeInstead": "Получить код настройки вместо этого",
+  "account.copySetupCode": "Копировать код настройки",
+  "account.enterVerificationCodeFromAuthApp": "Введите 6-значный проверочный код из приложения для аутентификации",
+  "ngOrcid.signin.2fa.verificationCodeRequired": "Требуется проверочный код",
+  "ngOrcid.signin.2fa.badVerificationCodeLength": "Недопустимая длина проверочного кода",
+  "ngOrcid.signin.2fa.badVerificationCode": "Недопустимый проверочный код"
+}

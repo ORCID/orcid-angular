@@ -1,0 +1,28 @@
+Hi! Thanks for helping with this.
+
+We're doing a blind check of the ORCID interface translations in German,
+and we'd really value your eye on it.
+
+I'm sending 3 images, one per screen: the registration form, the two-factor
+authentication setup, and the developer tools page. Each image shows the same
+screen four times - the English source on the left, then three different
+German translations labelled A, B and C.
+
+For each image, just two questions:
+
+1. Which one reads the most natural and correct? Pick one, or two if you
+   can't separate them - or none, if none of them feel right.
+2. Which one feels wrong? Same again: one, two, or none.
+
+That's the whole task. No scoring, no rubric.
+
+Beyond that, please add any comment you want - a word that's off, a term that
+doesn't match how we normally say it, tone, formatting, anything at all.
+Everything you mention goes into the final report we're putting together, with
+your name on it.
+
+Two small notes: the grey square is just a placeholder where a QR code was, so
+there's nothing to review there; and the A/B/C labels are shuffled differently
+on every image, so A on one image is not the same as A on another.
+
+Thanks so much!

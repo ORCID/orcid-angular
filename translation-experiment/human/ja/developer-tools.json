@@ -1,0 +1,126 @@
+{
+  "developerTools.developerTools": {
+    "source": "Developer tools",
+    "human": "開発者ツール"
+  },
+  "developerTools.backToMyRecod": {
+    "source": "Back to my record",
+    "human": "レコードに戻る"
+  },
+  "developerTools.thisSectionIsIntended": {
+    "source": "This section is intended for developers who plan to integrate ORCID into their system using the ORCID Public API.",
+    "human": "このセクションは、ORCID Public APIを使用してORCIDをシステムに統合する予定の開発者を対象としています。"
+  },
+  "developerTools.gettingStarted": {
+    "source": "Getting started with the free ORCID Public API",
+    "human": "無料のORCID Public APIを使い始める"
+  },
+  "developerTools.orcidOffersAnApi": {
+    "source": "ORCID offers a free Public API (Application Programming Interface) that allows your systems and applications to connect to the ORCID registry for non-commercial use.",
+    "human": "ORCIDは無料のPublic API (Application Programming Interface) を提供しており、お客様のシステムやアプリケーションを非商用目的でORCIDレジストリに接続することができます。"
+  },
+  "developerTools.orcidOffersAnApi2": {
+    "source": "By registering for Public API Credentials, your system or application can:",
+    "human": "Public APIの認証情報を登録することで、システムまたはアプリケーションに以下の権限が付与されます:"
+  },
+  "developerTools.allowUserToSignInto": {
+    "source": "Allow users to sign into your system/application with their ORCID account",
+    "human": "ユーザーがORCIDのユーザー名とパスワードを使ってシステム/アプリケーションにサインインできるようにする"
+  },
+  "developerTools.getAUserAuthenticated": {
+    "source": "Obtain users&apos; authenticated ORCID iDs",
+    "human": "ユーザーの認証済みORCID iDを取得する"
+  },
+  "developerTools.retrieveMachineReadable": {
+    "source": "Read public information from ORCID records in machine-readable format",
+    "human": "ORCIDレコードから公開情報を機械可読形式で読み取る"
+  },
+  "developerTools.performMachineSearch": {
+    "source": "Search public data in the ORCID Registry",
+    "human": "ORCIDレジストリの公開データを検索"
+  },
+  "developerTools.obtainHigher": {
+    "source": "Obtain a higher usage quota than the ORCID Anonymous API",
+    "human": "匿名のORCID Anonymous APIよりも利用容量が増加"
+  },
+  "developerTools.orcidApiResful": {
+    "source": "The ORCID Public API is RESTful and uses",
+    "human": "ORCID Public APIはRESTfulであり、次を使用します:"
+  },
+  "developerTools.oauth20": {
+    "source": "OAuth",
+    "human": "OAuth"
+  },
+  "developerTools.wellEstablishedStandard": {
+    "source": ", a well-established, standard protocol for user-based permissions.",
+    "human": "を使用します。これは、ユーザーベースの権限のための、確立された標準プロトコルです。"
+  },
+  "developerTools.publicClientApplicationsAreGranted": {
+    "source": "Public API Credentials are granted to individuals and not organizations, and your Public API Credentials are personal to you (even if being used in connection with your work for an organization).",
+    "human": "Public APIの認証情報は組織ではなく個人に対して付与され、その個人専用でご利用いただけます (組織での業務に関連して使用している場合でも同様です) 。"
+  },
+  "developerTools.publicClientApplicationsAreGranted2": {
+    "source": "If you need access to an ORCID API for commercial use, need a higher usage quota, organizational administration of your API credentials, or the ability to write data to or access Trusted Party data in ORCID records, our",
+    "human": "ORCID APIを商用利用したい、利用容量を増やしたい、API認証情報を組織的に管理したい、またORCIDレコードの「信頼できる個人・組織」データへのアクセスや書き込み権限が必要な場合は、"
+  },
+  "developerTools.theOrcidPublicApiAllowsYouToRequestPermission": {
+    "source": "The ORCID Public API is free for non-commercial use by individuals as stated in the",
+    "human": "ORCID Public APIは、個人による非商用目的の利用については無料です。"
+  },
+  "developerTools.mayBeMoreAppropriate": {
+    "source": "is available to ORCID member organizations.",
+    "human": "をご利用いただけます (ORCID会員組織向け) 。"
+  },
+  "developerTools.memberApi": {
+    "source": "Member API",
+    "human": "Member API"
+  },
+  "developerTools.additionalResources": {
+    "source": "Additional resources",
+    "human": "その他のリソース"
+  },
+  "developerTools.readThePublicApisDocumentation": {
+    "source": "Read the Public API documentation",
+    "human": "Public APIのドキュメントを読む"
+  },
+  "developerTools.fillOutMoreAobutTheDifferences": {
+    "source": "Find out more about the differences between the Public and Member APIs",
+    "human": "Public APIとMember APIの違いの詳細を確認する"
+  },
+  "developerTools.orcidPublicClientTermsOfService": {
+    "source": "ORCID Public APIs Terms of Service",
+    "human": "ORCID Public API利用規約"
+  },
+  "developerTools.byRegisteringForPublicApi": {
+    "source": "By “non-commercial” we mean that you may not charge any re-use fees for the Public API, and you may not make use of the Public API in connection with any revenue-generating product or service.",
+    "human": "「非商用」とは、Public APIに対していかなる再利用料も請求せず、収益を生み出す製品やサービスに関連してPublic APIを利用できないことを意味します。"
+  },
+  "developerTools.publicClientTermsOfService": {
+    "source": "Public APIs Terms of Service.",
+    "human": "ご利用に際してはPublic APIの利用規約が適用されます。"
+  },
+  "developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService": {
+    "source": "I have read and agree to the ORCID Public APIs Terms of Service",
+    "human": "ORCID Public API利用規約を読み、同意します"
+  },
+  "developerTools.registerForYourOrcidPublicApiCredentials": {
+    "source": "Register for your ORCID Public API credentials",
+    "human": "ORCID Public API認証情報の登録"
+  },
+  "developerTools.youMustAcceptThePublicClientTermsOfService": {
+    "source": "You must accept the Public Client Terms of Service before you can register for your Public API credentials.",
+    "human": "Public API認証情報を登録する前に、パブリッククライアント利用規約に同意する必要があります。"
+  },
+  "developerTools.youMustHaveAtLeastOneVerifiedEmail": {
+    "source": "You must have at least one verified email address in your ORCID account to register for your Public API credentials. Manage your email addresses in the",
+    "human": "パブリックAPI資格情報を登録するには、ORCIDアカウントに少なくとも1つの確認済みメールアドレスが必要です。以下でメールアドレスを管理してください:"
+  },
+  "developerTools.emailsAndDomainsSection": {
+    "source": "Emails and domains section of your ORCID record",
+    "human": "ORCIDレコードの「メールとドメイン」セクション"
+  },
+  "developerTools.noVerifiedEmailAddresses": {
+    "source": "No verified email addresses found",
+    "human": "確認済みのメールアドレスが見つかりませんでした"
+  }
+}

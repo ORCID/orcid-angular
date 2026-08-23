@@ -1,0 +1,73 @@
+lang,language,feature,letter,source
+de,German,register,A,human
+de,German,register,B,claude-sonnet-5
+de,German,register,C,claude-opus-4-8
+de,German,two-factor,A,human
+de,German,two-factor,B,claude-opus-4-8
+de,German,two-factor,C,claude-sonnet-5
+de,German,developer-tools,A,claude-sonnet-5
+de,German,developer-tools,B,claude-opus-4-8
+de,German,developer-tools,C,human
+es,Spanish,register,A,claude-sonnet-5
+es,Spanish,register,B,claude-opus-4-8
+es,Spanish,register,C,human
+es,Spanish,two-factor,A,human
+es,Spanish,two-factor,B,claude-sonnet-5
+es,Spanish,two-factor,C,claude-opus-4-8
+es,Spanish,developer-tools,A,human
+es,Spanish,developer-tools,B,claude-opus-4-8
+es,Spanish,developer-tools,C,claude-sonnet-5
+fr,French,register,A,claude-sonnet-5
+fr,French,register,B,claude-opus-4-8
+fr,French,register,C,human
+fr,French,two-factor,A,human
+fr,French,two-factor,B,claude-sonnet-5
+fr,French,two-factor,C,claude-opus-4-8
+fr,French,developer-tools,A,claude-opus-4-8
+fr,French,developer-tools,B,claude-sonnet-5
+fr,French,developer-tools,C,human
+it,Italian,register,A,claude-opus-4-8
+it,Italian,register,B,human
+it,Italian,register,C,claude-sonnet-5
+it,Italian,two-factor,A,human
+it,Italian,two-factor,B,claude-opus-4-8
+it,Italian,two-factor,C,claude-sonnet-5
+it,Italian,developer-tools,A,claude-opus-4-8
+it,Italian,developer-tools,B,claude-sonnet-5
+it,Italian,developer-tools,C,human
+ja,Japanese,register,A,human
+ja,Japanese,register,B,claude-sonnet-5
+ja,Japanese,register,C,claude-opus-4-8
+ja,Japanese,two-factor,A,human
+ja,Japanese,two-factor,B,claude-opus-4-8
+ja,Japanese,two-factor,C,claude-sonnet-5
+ja,Japanese,developer-tools,A,claude-sonnet-5
+ja,Japanese,developer-tools,B,human
+ja,Japanese,developer-tools,C,claude-opus-4-8
+pt,Portuguese,register,A,claude-opus-4-8
+pt,Portuguese,register,B,human
+pt,Portuguese,register,C,claude-sonnet-5
+pt,Portuguese,two-factor,A,claude-sonnet-5
+pt,Portuguese,two-factor,B,human
+pt,Portuguese,two-factor,C,claude-opus-4-8
+pt,Portuguese,developer-tools,A,claude-opus-4-8
+pt,Portuguese,developer-tools,B,human
+pt,Portuguese,developer-tools,C,claude-sonnet-5
+ru,Russian,register,A,human
+ru,Russian,register,B,claude-sonnet-5
+ru,Russian,register,C,claude-opus-4-8
+ru,Russian,two-factor,A,claude-opus-4-8
+ru,Russian,two-factor,B,claude-sonnet-5
+ru,Russian,two-factor,C,human
+ru,Russian,developer-tools,A,claude-opus-4-8
+ru,Russian,developer-tools,B,claude-sonnet-5
+ru,Russian,developer-tools,C,human
+zh_CN,Chinese (Simplified),register,A,claude-sonnet-5
+zh_CN,Chinese (Simplified),register,B,claude-opus-4-8
+zh_CN,Chinese (Simplified),register,C,human
+zh_CN,Chinese (Simplified),two-factor,A,claude-opus-4-8
+zh_CN,Chinese (Simplified),two-factor,B,human
+zh_CN,Chinese (Simplified),two-factor,C,claude-sonnet-5
+zh_CN,Chinese (Simplified),developer-tools,A,claude-sonnet-5
+zh_CN,Chinese (Simplified),developer-tools,B,human
+zh_CN,Chinese (Simplified),developer-tools,C,claude-opus-4-8

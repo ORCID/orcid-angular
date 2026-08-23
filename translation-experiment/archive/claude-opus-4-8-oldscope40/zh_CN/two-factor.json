@@ -1,0 +1,14 @@
+{
+  "account.enableTwoFactorAuth": "启用双重身份验证",
+  "account.step1AuthenticationApp": "第 1 步，共 2 步 - 身份验证应用",
+  "account.nextStepRecoveryCodes": "下一步 - 2FA 恢复代码",
+  "account.scanQrCodeWithAuthApp": "使用您的身份验证应用扫描 QR code。",
+  "account.qrCodeAltText": "QR code",
+  "account.cantScanQrCodePrefix": "无法扫描 QR code？",
+  "account.getSetupCodeInstead": "改为获取设置代码",
+  "account.copySetupCode": "复制设置代码",
+  "account.enterVerificationCodeFromAuthApp": "输入您身份验证应用中的 6 位验证码",
+  "ngOrcid.signin.2fa.verificationCodeRequired": "需要输入身份验证代码",
+  "ngOrcid.signin.2fa.badVerificationCodeLength": "身份验证代码长度无效",
+  "ngOrcid.signin.2fa.badVerificationCode": "身份验证代码无效"
+}

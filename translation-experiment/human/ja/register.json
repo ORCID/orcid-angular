@@ -1,0 +1,178 @@
+{
+  "register.create": {
+    "source": "Create your ORCID iD",
+    "human": "ORCID idを作成"
+  },
+  "register.reactivateYourOrcidAccount": {
+    "source": "Reactivate your ORCID account",
+    "human": "ORCIDアカウントを再度アクティブにする"
+  },
+  "register.step1.3": {
+    "source": "Step 1 of 5 - Names and emails",
+    "human": "ステップ 1/5 - 名前とメールアドレス"
+  },
+  "register.orcids": {
+    "source": "Per ORCID&apos;s",
+    "human": "ORCIDの"
+  },
+  "register.terms": {
+    "source": "terms of use",
+    "human": "利用規約により"
+  },
+  "register.only": {
+    "source": ", you may only register for an ORCID iD for yourself. Already have an ORCID iD?",
+    "human": "ご自身でのみORCID iDに登録できます。すでにORCID iDをお持ちですか？"
+  },
+  "register.sign": {
+    "source": "Sign In",
+    "human": "サインイン"
+  },
+  "register.nextStep": {
+    "source": "Next Step",
+    "human": "次のステップ"
+  },
+  "register.cancelRegistration": {
+    "source": "Cancel registration",
+    "human": "登録をキャンセル"
+  },
+  "register.cancelReactivation": {
+    "source": "Cancel reactivation",
+    "human": "再アクティブ化をキャンセル"
+  },
+  "register.yourNames": {
+    "source": "Your names",
+    "human": "あなたの名前"
+  },
+  "register.givenNames": {
+    "source": "Given names",
+    "human": "名"
+  },
+  "register.familyName": {
+    "source": "Family names",
+    "human": "名字"
+  },
+  "register.optional": {
+    "source": "(Optional)",
+    "human": "（オプション）"
+  },
+  "register.firstNameError": {
+    "source": "Please enter your given names",
+    "human": "名を入力してください"
+  },
+  "register.invalidName": {
+    "source": "Invalid name characters or format",
+    "human": "名前の文字またはフォーマットが不正です"
+  },
+  "topBar.keywordMaxLength": {
+    "source": "Must be less than 100 characters",
+    "human": "100文字未満である必要があります"
+  },
+  "register.yourEmailAddresses": {
+    "source": "Your email addresses",
+    "human": "あなたのメールアドレス"
+  },
+  "register.primaryEmail": {
+    "source": "Primary email",
+    "human": "主要電子メール"
+  },
+  "register.primaryEmailRequired2": {
+    "source": "Please enter your email",
+    "human": "メールアドレスを入力してください"
+  },
+  "register.invalidEmail2": {
+    "source": "Please enter a valid email address, for example joe@institution.edu",
+    "human": "有効なメールアドレスを入力してください。例：joe@institution.edu"
+  },
+  "register.confirmEmail": {
+    "source": "Confirm primary email",
+    "human": "メインのメールを確認"
+  },
+  "register.confirmEmailRequired2": {
+    "source": "Please confirm your email address",
+    "human": "メールアドレスを確認してください"
+  },
+  "register.confirmationEmailNotMatch2": {
+    "source": "Email addresses do not match",
+    "human": "メールアドレスが一致しません"
+  },
+  "register.theEmailAddress": {
+    "source": "The email address",
+    "human": "このメールアドレス"
+  },
+  "register.isAssociatedWith": {
+    "source": "is already associated with",
+    "human": "すでに関連付けられています"
+  },
+  "register.anExisting": {
+    "source": "an existing",
+    "human": "既存"
+  },
+  "register.anUnclaimed": {
+    "source": "an unclaimed",
+    "human": "未登録"
+  },
+  "register.aDeactivated": {
+    "source": "a deactivated",
+    "human": "非アクティブ"
+  },
+  "register.orcidRecord": {
+    "source": "ORCID record.",
+    "human": "ORCIDレコード"
+  },
+  "register.youCannotUseThisEmail": {
+    "source": "You cannot use this email address when creating a new ORCID iD.",
+    "human": "新しいORCID iDを作成する際に、このメールアドレスを使用することはできません。"
+  },
+  "register.signInToOrcidUsingThisEmail": {
+    "source": "Sign in to ORCID using this email address",
+    "human": "このメールアドレスでORCIDにサインイン"
+  },
+  "register.resendClaimAddress": {
+    "source": "Resend a claim email to this email address",
+    "human": "このメールアドレスにクレームメールを再送する"
+  },
+  "register.reactivateOrcidAssociated": {
+    "source": "Reactivate the ORCID record associated with this email address",
+    "human": "このメールアドレスに関連付けられているORCIDレコードを再アクティブ化する"
+  },
+  "register.thisLooksLikeAPersonalEmail": {
+    "source": "This looks like a personal email",
+    "human": "個人的なメールのようです"
+  },
+  "register.addA": {
+    "source": "Add an additional",
+    "human": "追加"
+  },
+  "register.professionalEmail": {
+    "source": "professional email",
+    "human": "仕事用のメール"
+  },
+  "register.asBackupSoWeCanBetter": {
+    "source": "as backup so we can better recommend affiliations and other related data to you.",
+    "human": "をバックアップとして追加することで、あなたに所属や関連するデータをより適切に推薦できるようになります。"
+  },
+  "register.addAnotherEmailToSecure": {
+    "source": "Add an additional email to secure your account",
+    "human": "アカウントを保護するために別のメールアドレスを追加してください"
+  },
+  "register.addingAnAddiotionalEmailAsBackup": {
+    "source": "Adding an additional email as backup helps secure your account and makes sure you can always sign in.",
+    "human": "バックアップとして別のメールアドレスを追加することで、アカウントの保護が可能となり、いつでもサインインできます。"
+  },
+  "regiser.thisLooksLikeAProffessional": {
+    "source": "This looks like a professional email",
+    "human": "仕事用のメールのようです"
+  },
+  "register.weRecommendAdding": {
+    "source": "We recommend adding an additional",
+    "human": "追加することをおすすめします"
+  },
+  "register.personalEmail": {
+    "source": "personal email",
+    "human": "個人的なメール"
+  },
+  "register.asBackupSoYouAlways": {
+    "source": "as backup so you always have access to your ORCID account if you change jobs or roles.",
+    "human": "をバックアップとして追加することで、仕事や役割が変わってもORCIDアカウントにアクセスできるようになります。"
+  }
+}

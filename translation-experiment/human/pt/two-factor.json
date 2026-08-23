@@ -1,0 +1,50 @@
+{
+  "account.enableTwoFactorAuth": {
+    "source": "Enable two-factor authentication",
+    "human": "Ativar a autenticação de dois fatores"
+  },
+  "account.step1AuthenticationApp": {
+    "source": "Step 1 of 2 - Authentication app",
+    "human": "Passo 1 de 2 - Aplicação de autenticação"
+  },
+  "account.nextStepRecoveryCodes": {
+    "source": "Next step - 2FA recovery codes",
+    "human": "Próximo passo - Códigos de recuperação da autenticação de 2FA"
+  },
+  "account.scanQrCodeWithAuthApp": {
+    "source": "Scan the QR code with your authentication app.",
+    "human": "Leia o código QR com a sua aplicação de autenticação."
+  },
+  "account.qrCodeAltText": {
+    "source": "qr code",
+    "human": "código qr"
+  },
+  "account.cantScanQrCodePrefix": {
+    "source": "Can&apos;t scan the QR code?",
+    "human": "Não é possível digitalizar o código QR?"
+  },
+  "account.getSetupCodeInstead": {
+    "source": "Get a setup code instead",
+    "human": "Obter um código de configuração"
+  },
+  "account.copySetupCode": {
+    "source": "Copy setup code",
+    "human": "Copiar código de configuração"
+  },
+  "account.enterVerificationCodeFromAuthApp": {
+    "source": "Enter the 6-digit verification code from your authentication app",
+    "human": "Introduza o código de verificação de 6 dígitos da sua aplicação de autenticação"
+  },
+  "ngOrcid.signin.2fa.verificationCodeRequired": {
+    "source": "Authentication code is required",
+    "human": "Um código de autenticação é necessário"
+  },
+  "ngOrcid.signin.2fa.badVerificationCodeLength": {
+    "source": "Invalid authentication code length",
+    "human": "Comprimento do código de autenticação inválido"
+  },
+  "ngOrcid.signin.2fa.badVerificationCode": {
+    "source": "Invalid authentication code",
+    "human": "Código de autenticação inválido"
+  }
+}

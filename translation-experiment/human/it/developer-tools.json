@@ -1,0 +1,126 @@
+{
+  "developerTools.developerTools": {
+    "source": "Developer tools",
+    "human": "Strumenti di sviluppo"
+  },
+  "developerTools.backToMyRecod": {
+    "source": "Back to my record",
+    "human": "Torna al mio record"
+  },
+  "developerTools.thisSectionIsIntended": {
+    "source": "This section is intended for developers who plan to integrate ORCID into their system using the ORCID Public API.",
+    "human": "Questa sezione è destinata agli sviluppatori che intendono integrare ORCID nel proprio sistema utilizzando l’API pubblica di ORCID."
+  },
+  "developerTools.gettingStarted": {
+    "source": "Getting started with the free ORCID Public API",
+    "human": "Come iniziare con l’API pubblica di ORCID gratuita"
+  },
+  "developerTools.orcidOffersAnApi": {
+    "source": "ORCID offers a free Public API (Application Programming Interface) that allows your systems and applications to connect to the ORCID registry for non-commercial use.",
+    "human": "ORCID offre un’API (Application Programming Interface) pubblica e gratuita che consente ai sistemi e alle applicazioni di connettersi al registro di ORCID per un uso non commerciale."
+  },
+  "developerTools.orcidOffersAnApi2": {
+    "source": "By registering for Public API Credentials, your system or application can:",
+    "human": "Registrando le credenziali dell’API pubblica, il sistema o l’applicazione possono:"
+  },
+  "developerTools.allowUserToSignInto": {
+    "source": "Allow users to sign into your system/application with their ORCID account",
+    "human": "Consentire agli utenti di accedere al sistema/all’applicazione con il loro account ORCID"
+  },
+  "developerTools.getAUserAuthenticated": {
+    "source": "Obtain users&apos; authenticated ORCID iDs",
+    "human": "Ottenere gli ID ORCID autenticati degli utenti"
+  },
+  "developerTools.retrieveMachineReadable": {
+    "source": "Read public information from ORCID records in machine-readable format",
+    "human": "Leggere le informazioni pubbliche dai record ORCID in formato leggibile da dispositivi"
+  },
+  "developerTools.performMachineSearch": {
+    "source": "Search public data in the ORCID Registry",
+    "human": "Cercare i dati pubblici nel registro di ORCID"
+  },
+  "developerTools.obtainHigher": {
+    "source": "Obtain a higher usage quota than the ORCID Anonymous API",
+    "human": "Ottenere una quota di utilizzo più alta rispetto all’API anonima di ORCID"
+  },
+  "developerTools.orcidApiResful": {
+    "source": "The ORCID Public API is RESTful and uses",
+    "human": "L’API pubblica di ORCID è RESTful e utilizza"
+  },
+  "developerTools.oauth20": {
+    "source": "OAuth",
+    "human": "OAuth"
+  },
+  "developerTools.wellEstablishedStandard": {
+    "source": ", a well-established, standard protocol for user-based permissions.",
+    "human": ", un protocollo standard e consolidato per le autorizzazioni basate sull’utente."
+  },
+  "developerTools.publicClientApplicationsAreGranted": {
+    "source": "Public API Credentials are granted to individuals and not organizations, and your Public API Credentials are personal to you (even if being used in connection with your work for an organization).",
+    "human": "Le credenziali dell’API pubblica sono concesse a singoli individui e non a organizzazioni, e le tue credenziali dell’API pubblica sono personali (anche se le utilizzi in relazione al lavoro che fai per un’organizzazione)."
+  },
+  "developerTools.publicClientApplicationsAreGranted2": {
+    "source": "If you need access to an ORCID API for commercial use, need a higher usage quota, organizational administration of your API credentials, or the ability to write data to or access Trusted Party data in ORCID records, our",
+    "human": "Se hai bisogno di accedere a un’API di ORCID per uso commerciale, di una quota di utilizzo più elevata, di un’amministrazione organizzativa delle tue credenziali dell’API o della possibilità di scrivere dati o di accedere ai dati di parti fidate nei record ORCID, la nostra"
+  },
+  "developerTools.theOrcidPublicApiAllowsYouToRequestPermission": {
+    "source": "The ORCID Public API is free for non-commercial use by individuals as stated in the",
+    "human": "L’API pubblica di ORCID è gratuita per l’uso non commerciale da parte di singoli individui, come indicato nei"
+  },
+  "developerTools.mayBeMoreAppropriate": {
+    "source": "is available to ORCID member organizations.",
+    "human": "è disponibile per le organizzazioni affiliate a ORCID."
+  },
+  "developerTools.memberApi": {
+    "source": "Member API",
+    "human": "API dei membri"
+  },
+  "developerTools.additionalResources": {
+    "source": "Additional resources",
+    "human": "Risorse aggiuntive"
+  },
+  "developerTools.readThePublicApisDocumentation": {
+    "source": "Read the Public API documentation",
+    "human": "Leggi la documentazione relativa all’API pubblica"
+  },
+  "developerTools.fillOutMoreAobutTheDifferences": {
+    "source": "Find out more about the differences between the Public and Member APIs",
+    "human": "Maggiori informazioni sulle differenze tra l’API pubblica e quella dei membri"
+  },
+  "developerTools.orcidPublicClientTermsOfService": {
+    "source": "ORCID Public APIs Terms of Service",
+    "human": "Termini di servizio dell’API pubblica di ORCID"
+  },
+  "developerTools.byRegisteringForPublicApi": {
+    "source": "By “non-commercial” we mean that you may not charge any re-use fees for the Public API, and you may not make use of the Public API in connection with any revenue-generating product or service.",
+    "human": "Per “non commerciale” si intende che non puoi addebitare alcun costo di riutilizzo per l’API pubblica e non puoi utilizzare l’API pubblica in relazione a prodotti o servizi lucrativi."
+  },
+  "developerTools.publicClientTermsOfService": {
+    "source": "Public APIs Terms of Service.",
+    "human": "Termini di servizio dell’API pubblica."
+  },
+  "developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService": {
+    "source": "I have read and agree to the ORCID Public APIs Terms of Service",
+    "human": "Ho letto e accetto i Termini di servizio dell’API pubblica di ORCID"
+  },
+  "developerTools.registerForYourOrcidPublicApiCredentials": {
+    "source": "Register for your ORCID Public API credentials",
+    "human": "Registrati per ottenere le credenziali dell’API pubblica di ORCID"
+  },
+  "developerTools.youMustAcceptThePublicClientTermsOfService": {
+    "source": "You must accept the Public Client Terms of Service before you can register for your Public API credentials.",
+    "human": "Devi accettare i Termini di servizio del client pubblico prima di poterti registrare per ottenere le credenziali dell’API pubblica."
+  },
+  "developerTools.youMustHaveAtLeastOneVerifiedEmail": {
+    "source": "You must have at least one verified email address in your ORCID account to register for your Public API credentials. Manage your email addresses in the",
+    "human": "Per richiedere le tue credenziali dell’API pubblica, nell’account ORCID devi avere almeno un indirizzo email verificato. Gestisci i tuoi indirizzi email nella"
+  },
+  "developerTools.emailsAndDomainsSection": {
+    "source": "Emails and domains section of your ORCID record",
+    "human": "sezione “Indirizzi email e domini” del tuo record ORCID"
+  },
+  "developerTools.noVerifiedEmailAddresses": {
+    "source": "No verified email addresses found",
+    "human": "Non abbiamo trovato indirizzi email verificati"
+  }
+}

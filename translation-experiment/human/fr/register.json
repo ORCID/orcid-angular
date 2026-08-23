@@ -1,0 +1,178 @@
+{
+  "register.create": {
+    "source": "Create your ORCID iD",
+    "human": "Créez votre iD ORCID"
+  },
+  "register.reactivateYourOrcidAccount": {
+    "source": "Reactivate your ORCID account",
+    "human": "Réactiver votre compte ORCID"
+  },
+  "register.step1.3": {
+    "source": "Step 1 of 5 - Names and emails",
+    "human": "Étape 1 sur 5 : noms et adresses e-mail"
+  },
+  "register.orcids": {
+    "source": "Per ORCID&apos;s",
+    "human": "Par ORCID"
+  },
+  "register.terms": {
+    "source": "terms of use",
+    "human": "conditions d&apos;utilisation d&apos;ORCID"
+  },
+  "register.only": {
+    "source": ", you may only register for an ORCID iD for yourself. Already have an ORCID iD?",
+    "human": ", vous ne pouvez vous enregistrer pour un iD ORCID que pour vous-même. Avez vous déjà un iD ORCID?"
+  },
+  "register.sign": {
+    "source": "Sign In",
+    "human": "S&apos;identifier"
+  },
+  "register.nextStep": {
+    "source": "Next Step",
+    "human": "Étape suivante"
+  },
+  "register.cancelRegistration": {
+    "source": "Cancel registration",
+    "human": "Annuler l&apos;inscription"
+  },
+  "register.cancelReactivation": {
+    "source": "Cancel reactivation",
+    "human": "Annuler la réactivation"
+  },
+  "register.yourNames": {
+    "source": "Your names",
+    "human": "Vos noms"
+  },
+  "register.givenNames": {
+    "source": "Given names",
+    "human": "Prénoms"
+  },
+  "register.familyName": {
+    "source": "Family names",
+    "human": "Noms de famille"
+  },
+  "register.optional": {
+    "source": "(Optional)",
+    "human": "(Facultatif)"
+  },
+  "register.firstNameError": {
+    "source": "Please enter your given names",
+    "human": "Saisissez vos prénoms"
+  },
+  "register.invalidName": {
+    "source": "Invalid name characters or format",
+    "human": "Format ou caractères de nom invalides"
+  },
+  "topBar.keywordMaxLength": {
+    "source": "Must be less than 100 characters",
+    "human": "Doit compter moins de 100 caractères"
+  },
+  "register.yourEmailAddresses": {
+    "source": "Your email addresses",
+    "human": "Vos adresses e-mail"
+  },
+  "register.primaryEmail": {
+    "source": "Primary email",
+    "human": "Adresse email principal"
+  },
+  "register.primaryEmailRequired2": {
+    "source": "Please enter your email",
+    "human": "Saisissez votre adresse e-mail"
+  },
+  "register.invalidEmail2": {
+    "source": "Please enter a valid email address, for example joe@institution.edu",
+    "human": "Saisissez une adresse e-mail valide, par exemple joe@institution.edu"
+  },
+  "register.confirmEmail": {
+    "source": "Confirm primary email",
+    "human": "Confirmer l&apos;email principal"
+  },
+  "register.confirmEmailRequired2": {
+    "source": "Please confirm your email address",
+    "human": "Confirmez votre adresse e-mail"
+  },
+  "register.confirmationEmailNotMatch2": {
+    "source": "Email addresses do not match",
+    "human": "Les adresses e-mail ne correspondent pas"
+  },
+  "register.theEmailAddress": {
+    "source": "The email address",
+    "human": "L&apos;adresse e-mail"
+  },
+  "register.isAssociatedWith": {
+    "source": "is already associated with",
+    "human": "est déjà associée à"
+  },
+  "register.anExisting": {
+    "source": "an existing",
+    "human": "un dossier ORCID existant"
+  },
+  "register.anUnclaimed": {
+    "source": "an unclaimed",
+    "human": "un dossier ORCID non réclamé"
+  },
+  "register.aDeactivated": {
+    "source": "a deactivated",
+    "human": "un dossier ORCID désactivé"
+  },
+  "register.orcidRecord": {
+    "source": "ORCID record.",
+    "human": "."
+  },
+  "register.youCannotUseThisEmail": {
+    "source": "You cannot use this email address when creating a new ORCID iD.",
+    "human": "Vous ne pouvez pas utiliser cette adresse e-mail lors de la création d&apos;un nouvel identifiant ORCID."
+  },
+  "register.signInToOrcidUsingThisEmail": {
+    "source": "Sign in to ORCID using this email address",
+    "human": "Connexion à ORCID avec cette adresse e-mail"
+  },
+  "register.resendClaimAddress": {
+    "source": "Resend a claim email to this email address",
+    "human": "Renvoyer un e-mail de réclamation à cette adresse"
+  },
+  "register.reactivateOrcidAssociated": {
+    "source": "Reactivate the ORCID record associated with this email address",
+    "human": "Réactiver le dossier ORCID associé à cette adresse e-mail"
+  },
+  "register.thisLooksLikeAPersonalEmail": {
+    "source": "This looks like a personal email",
+    "human": "Cela ressemble à une adresse e-mail personnelle"
+  },
+  "register.addA": {
+    "source": "Add an additional",
+    "human": "Ajoutez une autre"
+  },
+  "register.professionalEmail": {
+    "source": "professional email",
+    "human": "adresse e-mail professionnelle"
+  },
+  "register.asBackupSoWeCanBetter": {
+    "source": "as backup so we can better recommend affiliations and other related data to you.",
+    "human": "comme adresse de secours afin que nous puissions au mieux vous recommander des affiliations et d&apos;autres données associées."
+  },
+  "register.addAnotherEmailToSecure": {
+    "source": "Add an additional email to secure your account",
+    "human": "Ajoutez une autre adresse e-mail pour sécuriser votre compte"
+  },
+  "register.addingAnAddiotionalEmailAsBackup": {
+    "source": "Adding an additional email as backup helps secure your account and makes sure you can always sign in.",
+    "human": "L&apos;ajout d&apos;une adresse e-mail supplémentaire comme adresse de secours vous permet de sécuriser votre compte et de toujours pouvoir vous connecter."
+  },
+  "regiser.thisLooksLikeAProffessional": {
+    "source": "This looks like a professional email",
+    "human": "Cela ressemble à une adresse e-mail professionnelle"
+  },
+  "register.weRecommendAdding": {
+    "source": "We recommend adding an additional",
+    "human": "Nous vous conseillons d&apos;ajouter une"
+  },
+  "register.personalEmail": {
+    "source": "personal email",
+    "human": "adresse e-mail personnelle"
+  },
+  "register.asBackupSoYouAlways": {
+    "source": "as backup so you always have access to your ORCID account if you change jobs or roles.",
+    "human": "comme adresse de secours afin de toujours pouvoir accéder à votre compte ORCID si vous changez de poste."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "account.enableTwoFactorAuth": {
+    "source": "Enable two-factor authentication",
+    "human": "启用双重身份验证"
+  },
+  "account.step1AuthenticationApp": {
+    "source": "Step 1 of 2 - Authentication app",
+    "human": "步骤 2 之 1 - 验证应用程序"
+  },
+  "account.nextStepRecoveryCodes": {
+    "source": "Next step - 2FA recovery codes",
+    "human": "下一步 - 2FA 恢復代码"
+  },
+  "account.scanQrCodeWithAuthApp": {
+    "source": "Scan the QR code with your authentication app.",
+    "human": "使用您的验证应用程序扫描二维码。"
+  },
+  "account.qrCodeAltText": {
+    "source": "qr code",
+    "human": "二维码"
+  },
+  "account.cantScanQrCodePrefix": {
+    "source": "Can&apos;t scan the QR code?",
+    "human": "无法扫描二维码？"
+  },
+  "account.getSetupCodeInstead": {
+    "source": "Get a setup code instead",
+    "human": "获取其他安装代码"
+  },
+  "account.copySetupCode": {
+    "source": "Copy setup code",
+    "human": "复制安装代码"
+  },
+  "account.enterVerificationCodeFromAuthApp": {
+    "source": "Enter the 6-digit verification code from your authentication app",
+    "human": "输入您的验证应用程序中的 6 位数验证码"
+  },
+  "ngOrcid.signin.2fa.verificationCodeRequired": {
+    "source": "Authentication code is required",
+    "human": "需要验证码"
+  },
+  "ngOrcid.signin.2fa.badVerificationCodeLength": {
+    "source": "Invalid authentication code length",
+    "human": "验证码长度无效"
+  },
+  "ngOrcid.signin.2fa.badVerificationCode": {
+    "source": "Invalid authentication code",
+    "human": "验证代码无效"
+  }
+}

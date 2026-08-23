@@ -128,7 +128,9 @@
               {
                 "glob": "**/*",
                 "input": "src/assets/print-view/",
-                "ignore": ["**/*.spec.ts"],
+                "ignore": [
+                  "**/*.spec.ts"
+                ],
                 "output": "/print-view/"
               },
               {
@@ -207,7 +209,9 @@
                 "/scripts/onetrust.runtime.js",
                 "/scripts/new-relic.runtime.js"
               ],
-              "localize": ["en"],
+              "localize": [
+                "en"
+              ],
               "optimization": false,
               "outputHashing": "none",
               "sourceMap": true,
@@ -229,7 +233,9 @@
                 "/scripts/onetrust.runtime.js",
                 "/scripts/new-relic.runtime.js"
               ],
-              "localize": ["fr"]
+              "localize": [
+                "fr"
+              ]
             },
             "local-with-proxy-localize-ar": {
               "scripts": [
@@ -237,7 +243,9 @@
                 "/scripts/onetrust.runtime.js",
                 "/scripts/new-relic.runtime.js"
               ],
-              "localize": ["ar"]
+              "localize": [
+                "ar"
+              ]
             },
             "local-with-proxy-localize-xx": {
               "scripts": [
@@ -245,7 +253,9 @@
                 "/scripts/onetrust.runtime.js",
                 "/scripts/new-relic.runtime.js"
               ],
-              "localize": ["xx"]
+              "localize": [
+                "xx"
+              ]
             },
             "production": {
               "budgets": [
@@ -256,58 +266,164 @@
               ]
             },
             "en": {
-              "localize": ["en"]
+              "localize": [
+                "en"
+              ]
             },
             "fr": {
-              "localize": ["fr"]
+              "localize": [
+                "fr"
+              ]
             },
             "ar": {
-              "localize": ["ar"]
+              "localize": [
+                "ar"
+              ]
             },
             "ca": {
-              "localize": ["ca"]
+              "localize": [
+                "ca"
+              ]
             },
             "cs": {
-              "localize": ["cs"]
+              "localize": [
+                "cs"
+              ]
             },
             "es": {
-              "localize": ["es"]
+              "localize": [
+                "es"
+              ]
             },
             "it": {
-              "localize": ["it"]
+              "localize": [
+                "it"
+              ]
             },
             "ja": {
-              "localize": ["ja"]
+              "localize": [
+                "ja"
+              ]
             },
             "ko": {
-              "localize": ["ko"]
+              "localize": [
+                "ko"
+              ]
             },
             "lr": {
-              "localize": ["lr"]
+              "localize": [
+                "lr"
+              ]
             },
             "pt": {
-              "localize": ["pt"]
+              "localize": [
+                "pt"
+              ]
             },
             "rl": {
-              "localize": ["rl"]
+              "localize": [
+                "rl"
+              ]
             },
             "ru": {
-              "localize": ["ru"]
+              "localize": [
+                "ru"
+              ]
             },
             "uk": {
-              "localize": ["uk"]
+              "localize": [
+                "uk"
+              ]
             },
             "xx": {
-              "localize": ["xx"]
+              "localize": [
+                "xx"
+              ]
             },
             "src": {
-              "localize": ["src"]
+              "localize": [
+                "src"
+              ]
             },
             "zh-CN": {
-              "localize": ["zh-CN"]
+              "localize": [
+                "zh-CN"
+              ]
             },
             "zh-TW": {
-              "localize": ["zh-TW"]
+              "localize": [
+                "zh-TW"
+              ]
+            },
+            "local-with-proxy-localize-de": {
+              "scripts": [
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
+              ],
+              "localize": [
+                "de"
+              ]
+            },
+            "local-with-proxy-localize-pt": {
+              "scripts": [
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
+              ],
+              "localize": [
+                "pt"
+              ]
+            },
+            "local-with-proxy-localize-es": {
+              "scripts": [
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
+              ],
+              "localize": [
+                "es"
+              ]
+            },
+            "local-with-proxy-localize-it": {
+              "scripts": [
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
+              ],
+              "localize": [
+                "it"
+              ]
+            },
+            "local-with-proxy-localize-ja": {
+              "scripts": [
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
+              ],
+              "localize": [
+                "ja"
+              ]
+            },
+            "local-with-proxy-localize-ru": {
+              "scripts": [
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
+              ],
+              "localize": [
+                "ru"
+              ]
+            },
+            "local-with-proxy-localize-zh_CN": {
+              "scripts": [
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
+              ],
+              "localize": [
+                "zh-CN"
+              ]
             }
           },
           "defaultConfiguration": ""
@@ -353,7 +469,6 @@
             "production": {
               "buildTarget": "ng-orcid:build:production"
             },
-
             "en": {
               "buildTarget": "ng-orcid:build:en"
             },
@@ -407,6 +522,34 @@
             },
             "zh-TW": {
               "buildTarget": "ng-orcid:build:zh-TW"
+            },
+            "local-qa-de": {
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-de"
+            },
+            "local-qa-pt": {
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-pt"
+            },
+            "local-qa-es": {
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-es"
+            },
+            "local-qa-it": {
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-it"
+            },
+            "local-qa-ja": {
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-ja"
+            },
+            "local-qa-ru": {
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-ru"
+            },
+            "local-qa-zh_CN": {
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-zh_CN"
             }
           }
         },
@@ -419,7 +562,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["src/polyfills.ts", "zone.js/testing"],
+            "polyfills": [
+              "src/polyfills.ts",
+              "zone.js/testing"
+            ],
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
@@ -433,7 +579,11 @@
               "/scripts/onetrust.runtime.js",
               "src/assets/print-view/fetch-orcid.js"
             ],
-            "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.json"
+            ],
             "sourceMap": true
           }
         }
@@ -479,7 +629,10 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/orcid-ui/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
@@ -506,7 +659,10 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/orcid-registry-ui/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
@@ -533,7 +689,10 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/orcid-tokens/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
@@ -554,7 +713,9 @@
           "options": {
             "outputPath": "dist/orcid-ui-docs",
             "browser": "projects/orcid-ui-docs/src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/orcid-ui-docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -610,7 +771,10 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "projects/orcid-ui-docs/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -619,7 +783,9 @@
                 "input": "projects/orcid-ui-docs/public"
               }
             ],
-            "styles": ["projects/orcid-ui-docs/src/styles.scss"]
+            "styles": [
+              "projects/orcid-ui-docs/src/styles.scss"
+            ]
           }
         }
       }
@@ -639,7 +805,9 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "projects/orcid-ui-elements/src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/orcid-ui-elements/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -648,7 +816,9 @@
                 "input": "projects/orcid-ui-elements/public"
               }
             ],
-            "styles": ["projects/orcid-ui-elements/src/styles.scss"]
+            "styles": [
+              "projects/orcid-ui-elements/src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
@@ -692,7 +862,10 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "projects/orcid-ui-elements/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -701,7 +874,9 @@
                 "input": "projects/orcid-ui-elements/public"
               }
             ],
-            "styles": ["projects/orcid-ui-elements/src/styles.scss"]
+            "styles": [
+              "projects/orcid-ui-elements/src/styles.scss"
+            ]
           }
         }
       }

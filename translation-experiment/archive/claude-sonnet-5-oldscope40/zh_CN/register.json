@@ -1,0 +1,15 @@
+{
+  "register.yourNames": "您的姓名",
+  "register.givenNames": "名字",
+  "register.familyName": "姓氏",
+  "register.firstNameError": "请输入您的名字",
+  "register.invalidName": "姓名字符或格式无效",
+  "register.yourEmailAddresses": "您的电子邮件地址",
+  "register.primaryEmail": "主要电子邮件",
+  "register.primaryEmailRequired2": "请输入您的电子邮件",
+  "register.invalidEmail2": "请输入有效的电子邮件地址，例如 joe@institution.edu",
+  "register.confirmEmailRequired2": "请确认您的电子邮件地址",
+  "register.confirmationEmailNotMatch2": "电子邮件地址不匹配",
+  "topBar.keywordMaxLength": "字符数须少于 100 个",
+  "register.optional": "（可选）"
+}

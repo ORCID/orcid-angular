@@ -1,0 +1,275 @@
+================================================================================
+ORCID ANGULAR — AI TRANSLATION TASK
+================================================================================
+
+This prompt is REUSABLE. To translate a different set of features next time, edit
+ONLY the "INPUTS" block below. The rest of the prompt is written generically and
+references those inputs — you should not need to change anything outside INPUTS.
+
+================================================================================
+INPUTS — EDIT THIS BLOCK ONLY
+================================================================================
+
+REPO:
+  /Users/l.mendoza/code/orcid/orcid-angular
+
+FEATURES TO TRANSLATE (feature-slug → template files whose i18n text is on the page):
+  - two-factor
+      src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html
+  - developer-tools   (the intro / Terms-of-Service view of the page)
+      src/app/developer-tools/components/terms-of-use/terms-of-use.component.html
+      src/app/developer-tools/pages/developer-tools/developer-tools.component.html  (page header only: title + "Back to my record")
+  - register          (Step 1 of the wizard: names + emails)
+      src/app/register/components/step-a/step-a.component.html
+      src/app/register/components/form-personal/form-personal.component.html
+
+  Also read each feature's .component.ts (same folder) for context.
+
+  (To reuse this prompt for other features, replace the list above. Each entry is
+   a short "feature slug" you choose — used as the output filename — plus the
+   template file(s) that render that feature's visible text. A feature/page is
+   often built from SEVERAL component templates; list them all. The slug must
+   match the corresponding backup filename in
+   translation-experiment/human/{lang}/{feature-slug}.json — see Step 1d, which is
+   the authoritative list of exactly which keys to translate.)
+
+TARGET LANGUAGES (locale code → human-readable name; use the codes as JSON keys):
+  - zh_CN  → Chinese Simplified
+  - de     → German
+  - pt     → Portuguese (European / Portugal)
+  - es     → Spanish
+  - fr     → French
+  - it     → Italian
+  - ja     → Japanese
+  - ru     → Russian
+
+SCOPE SOURCE (where the exact list of keys per feature comes from):
+  translation-experiment/human/{lang}/{feature-slug}.json
+  → the JSON keys are the i18n key IDs to translate; the "source" field is the
+    English string. (Do NOT read the "human" field — see Step 1d.)
+
+OUTPUT BASE:
+  translation-experiment/{MODEL_NAME}/{lang}/{feature-slug}.json
+
+================================================================================
+STEP 0 — IDENTIFY YOURSELF FIRST
+================================================================================
+
+Before doing anything else, state your model name in this exact format:
+  MODEL: <your-model-name>
+  (e.g. "MODEL: gpt-4o-mini" or "MODEL: claude-haiku-3-5" or "MODEL: gemini-flash-2-0")
+Use lowercase and hyphens. This becomes the output folder name (MODEL_NAME).
+
+================================================================================
+STEP 1 — EXPLORE THE REPOSITORY AND WRITE A PLAN
+================================================================================
+
+You have full read access to the REPO listed in INPUTS. Before translating
+anything, explore the codebase and produce a written plan that covers:
+
+a) What ORCID is and who its users are (read README.md and any docs you find)
+
+b) How Angular i18n works in this project:
+   - Translation file format and location
+   - How keys are referenced in templates (i18n attribute syntax)
+   - Which language files you will be editing (one per TARGET LANGUAGE in INPUTS)
+
+c) For EACH feature listed in INPUTS, find and read (use the path hint):
+   - The HTML template (.component.html)
+   - The TypeScript component (.component.ts)
+   - Document: what the feature does, who uses it, and what tone the strings require
+
+d) For each feature, extract the exact list of i18n key IDs you will translate.
+   Find them by scanning the template for i18n="@@..." and i18n-{attr}="@@..."
+   attributes. Cross-reference the English source strings from:
+     src/locale/messages.xlf   (the source XLIFF file)
+
+   The keys to translate are ONLY the ones that appear in the SCOPE SOURCE file
+   (see INPUTS): translation-experiment/human/{lang}/{feature-slug}.json
+   Read one of these files (any language) to get the exact key list. The "source"
+   field in each entry is the English string. Do NOT read or use the "human"
+   field — that is the blinded comparison data.
+
+   PITFALL — DO NOT WHOLESALE-READ THE BACKUP JSON FILE: a naive file read of
+   translation-experiment/human/{lang}/{feature-slug}.json (e.g. reading the
+   first N lines with a generic file-viewing tool) will render BOTH the
+   "source" and "human" fields on screen, contaminating you with the human
+   reference translation before you've written a single word yourself — even
+   if you never intend to use it. This has actually happened in a prior run
+   (a Spanish two-factor.json read leaked 5 "human" values before the mistake
+   was caught). Instead, extract ONLY the key names and "source" strings using
+   a text/regex search restricted to lines matching `"source":` and the
+   `"<keyId>": {` key-opening lines (e.g. a grep-style tool with a pattern like
+   `"source":|^\s*"[a-zA-Z0-9_.]+"\s*:\s*\{`), so the "human" line is never
+   pulled into context in the first place. Verify you got every key by also
+   counting matches for `"source":` alone and cross-checking against the
+   number of keys you found.
+
+   Translate ONLY these listed keys. While reading the templates you will see
+   other translatable strings nearby (other i18n attributes in the same file) —
+   do NOT translate or output those extra keys, even if you think it would be
+   helpful. Stick strictly to the scoped key list.
+
+d.1) IMPORTANT — DO NOT LOOK AT ANY EXISTING TRANSLATIONS, HUMAN OR AI:
+   - Do NOT read the "human" field in the backup JSON files (as stated above).
+   - Do NOT open, read, or reference any other folder under translation-experiment/
+     other than "human/" (for keys/source only) and "english/" (if present). In
+     particular, do NOT read sibling folders that may already exist there from
+     other AI models (e.g. translation-experiment/claude-sonnet-5/,
+     translation-experiment/gpt-4o-mini/, or any similarly named folder) — those
+     contain other models' translation attempts and must stay unseen so the
+     comparison study remains valid.
+   - Do NOT open the <target> elements of src/locale/messages.*.xlf for any
+     language. You may read <source> elements (English) only.
+   - Do NOT search the web, GitHub, or any external source for existing ORCID
+     translations in any language.
+   Translate independently, from your own language knowledge plus the HTML/TS
+   context provided. If you cannot find or are unsure about a translation,
+   make your best independent judgment — do not go looking for a reference
+   answer anywhere in this repository or online.
+
+e) Write your translation strategy:
+   - Which technical terms to keep in English (OAuth, HTTPS, URI, QR code, etc.)
+   - Tone guidelines for each feature (error messages vs. button labels vs. hints)
+   - Any language-specific notes (e.g. German capitalisation, Japanese formality)
+
+Only proceed to Step 2 after you have written this full plan.
+
+================================================================================
+STEP 1.5 — COMMON PITFALL: SENTENCES SPLIT ACROSS MULTIPLE i18n FRAGMENTS
+================================================================================
+
+Some sentences in this app are NOT a single translatable string. They are built
+from several separate i18n fragments placed side by side in the template, often
+because a clickable link or button sits in the middle of the sentence. Real
+example from the register page — and these four keys ARE in your scope, so you
+must get them right:
+
+  Template structure (simplified, from step-a.component.html):
+    <ng-container i18n="@@register.orcids">Per ORCID's</ng-container>
+    <a i18n="@@register.terms">terms of use</a>
+    <ng-container i18n="@@register.only">, you may only register for an
+      ORCID iD for yourself. Already have an ORCID iD?</ng-container>
+    <a i18n="@@register.sign">Sign In</a>
+
+  Rendered in English (reads perfectly, because fragment order matches English
+  grammar):
+    "Per ORCID's [terms of use], you may only register for an ORCID iD for
+    yourself. Already have an ORCID iD? [Sign In]"
+
+  What actually shipped in Spanish (broken — translated fragment-by-fragment
+  without checking how they concatenate):
+    "DE ORCID [términos de uso de ORCID], solo puede registrar un ORCID iD
+    para usted. ¿Ya tiene un ORCID iD? [Iniciar sesión]"
+    → Reads as fragmented, ungrammatical Spanish. "DE ORCID" dangles with no
+      verb or preposition connecting it to what follows; a native reader has
+      to reparse the sentence to understand it.
+
+WHY THIS HAPPENS: each fragment was translated as if it were a complete,
+independent sentence, without checking what comes immediately before or after
+it in the rendered page. The fragment order and count is FIXED by the HTML
+template (you cannot move the link or reorder fragments) — but within each
+fragment's text, you have full freedom to phrase things however is needed so
+the FULL CONCATENATED SENTENCE reads naturally in the target language.
+
+WHAT TO DO INSTEAD, whenever you see 2+ adjacent i18n fragments (ng-container,
+span, a, strong, etc.) that clearly form one sentence together:
+  1. Read all the fragments in template order and mentally render the full
+     English sentence exactly as a user would see it.
+  2. Draft the FULL sentence, correctly and naturally, in the target language —
+     as if you were translating one sentence, not four disconnected phrases.
+  3. Now split your natural translation back into the same number of pieces,
+     in the SAME fixed order as the English template. It's OK — expected,
+     even — for an individual fragment's translation to look incomplete or
+     grammatically odd in isolation, AS LONG AS the full concatenation reads
+     naturally. E.g., a fragment that was "Per ORCID's" in English might need
+     to become something like "De acuerdo con los" or similar connective
+     phrasing in Spanish so that it flows into the following link text.
+  4. Before finalizing, mentally concatenate all fragments in order one more
+     time and read the whole sentence in the target language. If it reads
+     awkwardly, dangling, or requires the reader to reparse it — revise.
+
+This applies to ANY of your scoped keys that appear as multi-fragment sentences
+(check each feature's template carefully for this pattern) as well as any similar
+pattern you might notice while exploring nearby out-of-scope strings for context.
+
+================================================================================
+STEP 2 — TRANSLATE
+================================================================================
+
+Using everything you learned in Step 1, produce translations for every scoped key
+of every feature, across every TARGET LANGUAGE in INPUTS.
+
+Rules:
+- DO NOT read, use, or reference the "human" field from the backup files.
+  Translate purely from your own language knowledge and the HTML/TS context.
+- DO NOT read any other model's output folder under translation-experiment/
+  (anything besides human/ and english/), and DO NOT read any <target> element
+  in any messages.*.xlf file for any language.
+- DO NOT look up existing ORCID translations from any external source (web,
+  GitHub, etc.).
+- Translate every scoped key. Do not skip, rename, or add any (see Step 1d).
+- Preserve HTML entities where present (e.g. &apos;).
+- Keep technical terms in English: OAuth, HTTPS URIs, URI, QR code, ORCID,
+  ORCID iD, client_id, client_secret, Public API, 2FA.
+- Match the UI element type: errors sound like errors, buttons are imperative
+  verbs, hints are helpful hints, section headings are nouns.
+- Watch for multi-fragment sentences (see Step 1.5) — verify the full
+  concatenated sentence reads naturally in the target language, not just each
+  fragment in isolation.
+
+Output format — a single JSON object, keyed first by language code, then by
+feature slug, then by key ID (use the exact codes/slugs from INPUTS):
+
+{
+  "<langCode>": {
+    "<feature-slug>": { "<keyId>": "<translation>", ... },
+    ...one object per feature...
+  },
+  ...one object per target language...
+}
+
+Every language must contain every feature. Every feature must contain every
+scoped key. No comments inside the JSON.
+
+================================================================================
+STEP 3 — SAVE THE FILES
+================================================================================
+
+After producing the JSON, save it to disk using this Node.js script. It is fully
+generic — it writes whatever languages/features/keys your JSON contains, so it
+needs no changes when the INPUTS change. Fill in MODEL_NAME and paste your JSON:
+
+--- save-translations.js ---
+
+const fs = require('fs')
+const path = require('path')
+
+const MODEL_NAME = 'YOUR-MODEL-NAME-HERE'  // match what you stated in STEP 0
+const BASE = path.resolve('/Users/l.mendoza/code/orcid/orcid-angular/translation-experiment')
+
+const translations = /* PASTE YOUR FULL JSON HERE */
+
+let count = 0
+for (const [lang, features] of Object.entries(translations)) {
+  for (const [feature, strings] of Object.entries(features)) {
+    const dir = path.join(BASE, MODEL_NAME, lang)
+    fs.mkdirSync(dir, { recursive: true })
+    const outPath = path.join(dir, `${feature}.json`)
+    fs.writeFileSync(outPath, JSON.stringify(strings, null, 2) + '\n')
+    console.log(`✓ ${MODEL_NAME}/${lang}/${feature}.json`)
+    count++
+  }
+}
+console.log(`Done. Wrote ${count} files.`)
+
+--- end ---
+
+Run with:  node save-translations.js
+
+Expected output — one file per (language × feature) under:
+  translation-experiment/{MODEL_NAME}/{lang}/{feature-slug}.json
+
+================================================================================
+END OF PROMPT
+================================================================================

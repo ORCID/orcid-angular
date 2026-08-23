@@ -1,0 +1,17 @@
+{
+  "developerTools.developerTools": "开发者工具",
+  "developerTools.applicationName": "应用程序名称",
+  "developerTools.applicationUrl": "应用程序 URL",
+  "developerTools.applicationDescription": "应用程序描述",
+  "developerTools.redirectUris": "重定向 URI",
+  "developerTools.nameShownToUsers": "在 OAuth 授权屏幕上向用户显示的名称",
+  "developerTools.theDescriptionShown": "在 OAuth 授权屏幕上向用户显示的描述。最多 1000 个字符。",
+  "developerTools.applicationNameCannotBeEmpty": "应用程序名称不能为空",
+  "developerTools.websiteNameCannotBeEmpty": "网站名称不能为空",
+  "developerTools.invalidWebsite": "无效的网站",
+  "developerTools.invalidRedirectUrl": "无效的重定向 URL",
+  "developerTools.changesHaveBeenSavedSuccessfully": "更改已成功保存。",
+  "developerTools.redirectUrisMustBeUnique": "重定向 URI 必须唯一",
+  "developerTools.saveApplication": "保存应用程序",
+  "developerTools.onceTheUserHasAuthorized": "用户授权您的应用程序后，他们将被返回到您指定的 URI。您必须提前提供这些 URI，否则您的集成用户将遇到错误。"
+}

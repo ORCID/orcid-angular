@@ -1,0 +1,15 @@
+{
+  "register.yourNames": "Os seus nomes",
+  "register.givenNames": "Nomes próprios",
+  "register.familyName": "Apelidos",
+  "register.firstNameError": "Introduza os seus nomes próprios",
+  "register.invalidName": "Caracteres ou formato de nome inválidos",
+  "register.yourEmailAddresses": "Os seus endereços de e-mail",
+  "register.primaryEmail": "E-mail principal",
+  "register.primaryEmailRequired2": "Introduza o seu e-mail",
+  "register.invalidEmail2": "Introduza um endereço de e-mail válido, por exemplo joe@institution.edu",
+  "register.confirmEmailRequired2": "Confirme o seu endereço de e-mail",
+  "register.confirmationEmailNotMatch2": "Os endereços de e-mail não coincidem",
+  "topBar.keywordMaxLength": "Tem de ter menos de 100 caracteres",
+  "register.optional": "(Opcional)"
+}

@@ -1,0 +1,15 @@
+{
+  "register.yourNames": "Ваше имя",
+  "register.givenNames": "Имя",
+  "register.familyName": "Фамилия",
+  "register.firstNameError": "Пожалуйста, введите ваше имя",
+  "register.invalidName": "Недопустимые символы или формат имени",
+  "register.yourEmailAddresses": "Ваши адреса электронной почты",
+  "register.primaryEmail": "Основной адрес электронной почты",
+  "register.primaryEmailRequired2": "Пожалуйста, введите ваш адрес электронной почты",
+  "register.invalidEmail2": "Пожалуйста, введите действительный адрес электронной почты, например joe@institution.edu",
+  "register.confirmEmailRequired2": "Пожалуйста, подтвердите ваш адрес электронной почты",
+  "register.confirmationEmailNotMatch2": "Адреса электронной почты не совпадают",
+  "topBar.keywordMaxLength": "Должно быть менее 100 символов",
+  "register.optional": "(Необязательно)"
+}

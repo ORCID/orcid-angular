@@ -1,0 +1,15 @@
+{
+  "account.enableTwoFactorAuth": "Activar la autenticación de dos factores",
+  "account.step1AuthenticationApp": "Paso 1 de 2 - Aplicación de autenticación",
+  "account.nextStepRecoveryCodes": "Siguiente paso: códigos de recuperación de 2FA",
+  "account.scanQrCodeWithAuthApp": "Escanea el código QR con tu aplicación de autenticación.",
+  "account.qrCodeAltText": "código QR",
+  "account.cantScanQrCodePrefix": "¿No puedes escanear el código QR?",
+  "account.getSetupCodeInstead": "Obtener un código de configuración",
+  "account.copySetupCode": "Copiar código de configuración",
+  "account.copySetupCodeToClipboard": "Copiar código de configuración al portapapeles",
+  "account.enterVerificationCodeFromAuthApp": "Introduce el código de verificación de 6 dígitos de tu aplicación de autenticación",
+  "ngOrcid.signin.2fa.verificationCodeRequired": "Se requiere un código de verificación",
+  "ngOrcid.signin.2fa.badVerificationCodeLength": "Longitud de código de verificación no válida",
+  "ngOrcid.signin.2fa.badVerificationCode": "Código de verificación no válido"
+}
