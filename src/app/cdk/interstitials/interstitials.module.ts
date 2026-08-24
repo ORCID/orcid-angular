@@ -22,6 +22,8 @@ import { AffiliationsInterstitialComponent } from './affiliations-interstitial/i
 import { AffiliationsInterstitialDialogComponent } from './affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 import { ShareEmailsDomainsDialogComponent } from './share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial-component/share-emails-domains.component'
+import { BackupEmailComponent } from './backup-email/interstitial-component/backup-email.component'
+import { BackupEmailDialogComponent } from './backup-email/interstitial-dialog-extend/backup-email-dialog.component'
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial
     ShareEmailsDomainsDialogComponent,
     AffiliationsInterstitialComponent,
     AffiliationsInterstitialDialogComponent,
+    BackupEmailComponent,
+    BackupEmailDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +59,8 @@ import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial
     ShareEmailsDomainsDialogComponent,
     AffiliationsInterstitialComponent,
     AffiliationsInterstitialDialogComponent,
+    BackupEmailComponent,
+    BackupEmailDialogComponent,
   ],
 })
 export class InterstitialsModule {}

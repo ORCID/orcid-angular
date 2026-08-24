@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/overlay'
-import { Component, Inject, ViewChild } from '@angular/core'
+import { Component, Inject, inject, ViewChild } from '@angular/core'
 import { Observable, forkJoin, of } from 'rxjs'
 import {
   filter,
@@ -14,6 +14,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
+import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
@@ -50,6 +51,7 @@ export class AuthorizeComponent {
   redirectByReportAlreadyAuthorize: boolean
   OAUTH2_AUTHORIZATION_ENABLE: boolean
   private log: ReturnType<FeatureLoggerService['scoped']>
+  private interstitialObservability = inject(InterstitialObservabilityService)
 
   constructor(
     private userService: UserService,
@@ -183,8 +185,13 @@ export class AuthorizeComponent {
 
     const componentRef = this.outlet.attachComponentPortal(portal)
 
+    // The dialog path closes the journey on afterClosed(); here the host owns
+    // the component's lifetime, so `finish` is the equivalent end point
     componentRef.instance.finish
-      .pipe(switchMap(() => this.finishRedirect()))
+      .pipe(
+        tap(() => this.interstitialObservability.closed()),
+        switchMap(() => this.finishRedirect())
+      )
       .subscribe()
 
     componentRef.changeDetectorRef.detectChanges()

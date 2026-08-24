@@ -36,6 +36,7 @@ describe('FormAuthorizeComponent', () => {
   let userService: jasmine.SpyObj<UserService>
   let togglzService: jasmine.SpyObj<TogglzService>
   let platformInfoService: jasmine.SpyObj<PlatformInfoService>
+  let oauthURLSessionManagerService: jasmine.SpyObj<OauthURLSessionManagerService>
   let mockWindow: jasmine.SpyObj<Window>
 
   beforeEach(waitForAsync(() => {
@@ -66,7 +67,7 @@ describe('FormAuthorizeComponent', () => {
     ])
     const oauthURLSessionManagerServiceSpy = jasmine.createSpyObj(
       'OauthURLSessionManagerService',
-      ['getOauthUrlSession', 'consumeJustRegistered']
+      ['getOauthUrlSession', 'consumeJustRegistered', 'set']
     )
     const mockWindowSpy = jasmine.createSpyObj('Window', ['location'])
 
@@ -118,6 +119,9 @@ describe('FormAuthorizeComponent', () => {
     platformInfoService = TestBed.inject(
       PlatformInfoService
     ) as jasmine.SpyObj<PlatformInfoService>
+    oauthURLSessionManagerService = TestBed.inject(
+      OauthURLSessionManagerService
+    ) as jasmine.SpyObj<OauthURLSessionManagerService>
     mockWindow = TestBed.inject(WINDOW) as jasmine.SpyObj<Window>
     ;(mockWindow as any).outOfRouterNavigation = (value: string) => {
       mockWindow.location.href = value
@@ -391,6 +395,80 @@ describe('FormAuthorizeComponent', () => {
       component.logout()
 
       expect(mockWindow.location.href).toBe('/signin')
+    })
+  })
+
+  describe('preserving the OAuth URL across logout', () => {
+    const authorizeUrl =
+      'https://orcid.org/oauth/authorize?client_id=APP-123&response_type=code&scope=%2Fauthenticate&redirect_uri=https%3A%2F%2Fapp.example.com%2Fcallback'
+
+    beforeEach(() => {
+      component.OAUTH_AUTHORIZATION = true
+      component.platformInfo = {
+        queryParameters: { client_id: 'APP-123' },
+      } as unknown as PlatformInfo
+      mockWindow.location.href = authorizeUrl
+    })
+
+    // The first sign in consumes and clears the stored URL, and logging out
+    // navigates straight to /signin without crossing the AuthorizeGuard. Unless
+    // logout stores it again, a later institutional sign in has nothing to
+    // return to and the user lands on my-orcid instead of the authorize screen.
+    it('should store the current authorize URL before logging out', () => {
+      userService.noRedirectLogout.and.returnValue(
+        of(new HttpResponse({ body: 'OK' }))
+      )
+
+      component.logout()
+
+      expect(oauthURLSessionManagerService.set).toHaveBeenCalledWith(
+        authorizeUrl
+      )
+    })
+
+    it('should store the authorize URL before the logout request is made', () => {
+      userService.noRedirectLogout.and.returnValue(
+        of(new HttpResponse({ body: 'OK' }))
+      )
+
+      component.logout()
+
+      expect(oauthURLSessionManagerService.set).toHaveBeenCalledBefore(
+        userService.noRedirectLogout
+      )
+    })
+
+    it('should store the authorize URL even when the logout request fails', () => {
+      userService.noRedirectLogout.and.returnValue(
+        throwError(() => new Error('Logout failed'))
+      )
+
+      component.logout()
+
+      expect(oauthURLSessionManagerService.set).toHaveBeenCalledWith(
+        authorizeUrl
+      )
+      expect(mockWindow.location.href).toBe('/signin?client_id=APP-123')
+    })
+
+    it('should not store an OAuth URL when OAUTH_AUTHORIZATION is false', () => {
+      component.OAUTH_AUTHORIZATION = false
+
+      component.logout()
+
+      expect(oauthURLSessionManagerService.set).not.toHaveBeenCalled()
+      expect(mockWindow.location.href).toBe('/signout')
+    })
+
+    it('should not store an empty OAuth URL', () => {
+      mockWindow.location.href = ''
+      userService.noRedirectLogout.and.returnValue(
+        of(new HttpResponse({ body: 'OK' }))
+      )
+
+      component.logout()
+
+      expect(oauthURLSessionManagerService.set).not.toHaveBeenCalled()
     })
   })
 })

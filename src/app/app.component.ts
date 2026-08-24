@@ -66,21 +66,9 @@ export class AppComponent {
           )
           this.setPlatformClasses(platformInfo)
           this.screenDirection = platformInfo.screenDirection
-          if (
-            !platformInfo.hasOauthParameters &&
-            !this.currentlyDisplayingZendesk
-          ) {
-            _zendesk.show()
-            _zendesk.adaptPluginToPlatform(platformInfo)
-            this.currentlyDisplayingZendesk = true
-          } else if (
-            platformInfo.hasOauthParameters &&
-            this.currentlyDisplayingZendesk
-          ) {
-            _zendesk.hide()
-
-            this.currentlyDisplayingZendesk = false
-          }
+          _zendesk.hide()
+          _zendesk.adaptPluginToPlatform(platformInfo)
+          this.currentlyDisplayingZendesk = false
         })
       )
       .subscribe()

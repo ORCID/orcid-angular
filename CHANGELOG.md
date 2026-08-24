@@ -1,3 +1,49 @@
+## v3.0.12 - 2026-08-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.11...v3.0.12)
+
+- [#2907](https://github.com/ORCID/orcid-angular/pull/2907): PD-5900
+
+## v3.0.11 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.10...v3.0.11)
+
+## v3.0.10 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.9...v3.0.10)
+
+## v3.0.9 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.8...v3.0.9)
+
+## v3.0.8 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.7...v3.0.8)
+
+## v3.0.7 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.6...v3.0.7)
+
+## v3.0.6 - 2026-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.5...v3.0.6)
+
+## v3.0.5 - 2026-08-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.4...v3.0.5)
+
+## v3.0.4 - 2026-08-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.3...v3.0.4)
+
+## v3.0.3 - 2026-08-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.2...v3.0.3)
+
+## v3.0.2 - 2026-08-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.1...v3.0.2)
+
 ## v3.0.1 - 2026-07-21
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.0...v3.0.1)

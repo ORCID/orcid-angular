@@ -18,6 +18,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
 
 import { AuthorizeComponent } from './authorize.component'
 
@@ -38,6 +39,7 @@ describe('AuthorizeComponent', () => {
   let togglzSpy: jasmine.SpyObj<TogglzService>
   let oauthUrlSessionSpy: jasmine.SpyObj<OauthURLSessionManagerService>
   let rumSpy: jasmine.SpyObj<RumJourneyEventService>
+  let interstitialObservabilitySpy: jasmine.SpyObj<InterstitialObservabilityService>
   let windowMock: any
 
   beforeEach(() => {
@@ -57,6 +59,11 @@ describe('AuthorizeComponent', () => {
     rumSpy = jasmine.createSpyObj('RumJourneyEventService', [
       'recordSimpleEvent',
     ])
+    interstitialObservabilitySpy =
+      jasmine.createSpyObj<InterstitialObservabilityService>(
+        'InterstitialObservabilityService',
+        ['shown', 'outcome', 'closed']
+      )
 
     windowMock = {
       outOfRouterNavigation: jasmine.createSpy('outOfRouterNavigation'),
@@ -95,6 +102,10 @@ describe('AuthorizeComponent', () => {
           useValue: oauthUrlSessionSpy,
         },
         { provide: RumJourneyEventService, useValue: rumSpy },
+        {
+          provide: InterstitialObservabilityService,
+          useValue: interstitialObservabilitySpy,
+        },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
@@ -326,6 +337,36 @@ describe('AuthorizeComponent', () => {
     finish$.next()
 
     expect(finishSpy).toHaveBeenCalled()
+    // The dialog path closes on afterClosed(); here `finish` is the only signal
+    // the interstitial is over, so without this the journey never ends
+    expect(interstitialObservabilitySpy.closed).toHaveBeenCalled()
+  })
+
+  it('handleRedirect: keeps the card mounted so the attached interstitial survives', () => {
+    // showInterstitial() attaches the portal and then clears
+    // showAuthorizationComponent. The outlet lives inside the card, so if the
+    // card's *ngIf does not also test showInterstital the interstitial is
+    // destroyed in the same tick and the user is left on a blank page.
+    createComponent()
+    component.loading = false
+    component.showAuthorizationComponent = true
+    fixture.detectChanges()
+    expect(fixture.nativeElement.querySelector('mat-card')).toBeTruthy()
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
+    ;(component as any).outlet = {
+      attachComponentPortal: () => ({
+        instance: { finish: new Subject<void>().asObservable() },
+        changeDetectorRef: { detectChanges: () => {} },
+      }),
+    }
+
+    component.handleRedirect('/x')
+    fixture.detectChanges()
+
+    expect(component.showAuthorizationComponent).toBeFalse()
+    expect(component.showInterstital).toBeTrue()
+    expect(fixture.nativeElement.querySelector('mat-card')).toBeTruthy()
   })
 
   it('handleRedirect: with interstitial -> shows interstitial instead of redirect', () => {

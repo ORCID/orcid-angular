@@ -2,8 +2,16 @@
   <div class="container">
     <div class="row space-around">
       <div class="col m6 s4 l6">
+        <!-- showInterstital keeps this card mounted after showInterstitial()
+             clears showAuthorizationComponent. The portal outlet below lives
+             inside the card, so without it the interstitial is attached and
+             then destroyed in the same tick, leaving a blank page. -->
         <mat-card
-          *ngIf="showAuthorizationComponent || showAuthorizationError"
+          *ngIf="
+            showAuthorizationComponent ||
+            showAuthorizationError ||
+            showInterstital
+          "
           appearance="outlined"
           class="orcid-wizard authorize-wrapper"
           [ngClass]="{
