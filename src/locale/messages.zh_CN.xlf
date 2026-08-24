@@ -19743,7 +19743,7 @@
       </trans-unit>
       <trans-unit id="works.journalArticle" datatype="html" resname="works.journalArticle">
         <source>Journal article</source>
-        <target>学术论文</target>
+        <target>期刊文章</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">105</context>
