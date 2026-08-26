@@ -207,6 +207,33 @@ describe('BackupEmailComponent', () => {
       expect(component.primaryEmailCategory).toBe('PROFESSIONAL')
     })
 
+    // The outlined look comes from the Material Symbols font. The
+    // `material-icons-outlined` class these used to carry matches no loaded
+    // stylesheet, so it silently fell back to the filled font (PD-6198).
+    it('should draw the professional category icon in the outlined font', () => {
+      const icon = fixture.nativeElement.querySelector(
+        '.email-category mat-icon'
+      )
+
+      expect(icon.textContent.trim()).toBe('work')
+      expect(icon.classList).toContain('material-symbols-outlined')
+    })
+
+    it('should draw the personal category icon in the outlined font', () => {
+      emailCategory = () =>
+        of({ category: 'PERSONAL', rorId: null } as EmailCategoryEndpoint)
+
+      const newFixture = TestBed.createComponent(BackupEmailComponent)
+      newFixture.detectChanges()
+
+      const icon = newFixture.nativeElement.querySelector(
+        '.email-category mat-icon'
+      )
+
+      expect(icon.textContent.trim()).toBe('fingerprint')
+      expect(icon.classList).toContain('material-symbols-outlined')
+    })
+
     it('should leave the category out when the lookup fails', () => {
       emailCategory = () => throwError(() => new Error('lookup failed'))
 
