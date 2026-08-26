@@ -13,7 +13,6 @@ import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affi
 import { BackupEmailComponentDialogOutput } from 'src/app/cdk/interstitials/backup-email/interstitial-dialog-extend/backup-email-dialog.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { PlatformInfo } from 'src/app/cdk/platform-info/platform-info.type'
-import { OauthURLSessionManagerService } from '../../oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 // Mock runtime environment for debugging logs if needed
 // (Remove or adapt if your environment differs)
@@ -29,7 +28,6 @@ describe('LoginMainInterstitialsManagerService', () => {
   let mockLoginAffiliationInterstitialManagerService: jasmine.SpyObj<LoginAffiliationInterstitialManagerService>
   let mockLoginBackupEmailInterstitialManagerService: jasmine.SpyObj<LoginBackupEmailInterstitialManagerService>
   let mockPlatformInfoService: jasmine.SpyObj<PlatformInfoService>
-  let mockOauthURLSessionManagerService: jasmine.SpyObj<OauthURLSessionManagerService>
 
   // Example valid user
   const validUserRecord: UserRecord = {
@@ -128,23 +126,12 @@ describe('LoginMainInterstitialsManagerService', () => {
       of({ queryParameters: {} } as unknown as PlatformInfo)
     )
 
-    mockOauthURLSessionManagerService =
-      jasmine.createSpyObj<OauthURLSessionManagerService>(
-        'OauthURLSessionManagerService',
-        ['isJustRegistered']
-      )
-    mockOauthURLSessionManagerService.isJustRegistered.and.returnValue(false)
-
     // Provide the service along with its mocked dependencies
     TestBed.configureTestingModule({
       providers: [
         LoginMainInterstitialsManagerService,
         { provide: InterstitialsService, useValue: mockInterstitialsService },
         { provide: PlatformInfoService, useValue: mockPlatformInfoService },
-        {
-          provide: OauthURLSessionManagerService,
-          useValue: mockOauthURLSessionManagerService,
-        },
         {
           provide: LoginDomainInterstitialManagerService,
           useValue: mockLoginDomainInterstitialManagerService,
@@ -641,35 +628,7 @@ describe('LoginMainInterstitialsManagerService', () => {
         })
     })
 
-    it('shows no interstitial in the OAuth flow, where the flag replaces the query parameter', (done) => {
-      mockInterstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic.and.returnValue(
-        false
-      )
-      mockOauthURLSessionManagerService.isJustRegistered.and.returnValue(true)
-      mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
-        of(true)
-      )
-
-      service
-        .checkLoginInterstitials(validUserRecord, {
-          returnType: 'component',
-          togglzPrefix: 'OAUTH',
-        })
-        .subscribe({
-          next: () => fail('Should not emit any value'),
-          complete: () => {
-            expect(
-              mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial
-            ).not.toHaveBeenCalled()
-            expect(
-              mockInterstitialsService.markCurrentSessionToNoCheckInterstitialsLogic
-            ).toHaveBeenCalled()
-            done()
-          },
-        })
-    })
-
-    it('still shows the interstitial when neither signal is present', fakeAsync(() => {
+    it('still shows the interstitial without the query parameter', fakeAsync(() => {
       mockInterstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic.and.returnValue(
         false
       )

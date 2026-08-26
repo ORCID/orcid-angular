@@ -20,7 +20,6 @@ import {
 } from './abstractions/dialog-interface'
 import { ComponentType } from '@angular/cdk/overlay'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { OauthURLSessionManagerService } from '../oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +36,6 @@ export class LoginMainInterstitialsManagerService {
   constructor(
     private interstitialsService: InterstitialsService,
     private _platform: PlatformInfoService,
-    private _oauthUrlSession: OauthURLSessionManagerService,
     LoginDomainInterstitialManagerService: LoginDomainInterstitialManagerService,
     LoginAffiliationInterstitialManagerService: LoginAffiliationInterstitialManagerService,
     LoginBackupEmailInterstitialManagerService: LoginBackupEmailInterstitialManagerService
@@ -189,20 +187,20 @@ export class LoginMainInterstitialsManagerService {
   /**
    * A user who has just finished registering has already been through a long
    * form and is being shown the verify your email banner, so no interstitial
-   * should interrupt that. The sign in flow carries a `justRegistered` query
-   * parameter; the OAuth flow carries a localStorage flag instead, because the
-   * backend only appends the parameter when there is no saved request target.
+   * should interrupt that. Registration lands here with `justRegistered` on the
+   * URL; the OAuth branch goes to the authorize page instead and never reaches
+   * my-orcid carrying the parameter.
    */
   private userJustRegistered(): boolean {
-    let fromQueryParameter = false
+    let justRegistered = false
     this._platform
       .get()
       .pipe(take(1))
       .subscribe((platform) => {
-        fromQueryParameter =
+        justRegistered =
           platform.queryParameters.hasOwnProperty('justRegistered')
       })
-    return fromQueryParameter || this._oauthUrlSession.isJustRegistered()
+    return justRegistered
   }
 
   isAccountOwner(userRecord: UserRecord): boolean {

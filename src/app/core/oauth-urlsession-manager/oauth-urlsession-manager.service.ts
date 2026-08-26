@@ -30,14 +30,6 @@ interface StoredBooleanFlag {
 })
 export class OauthURLSessionManagerService {
   /**
-   * Latches once `consumeJustRegistered()` has taken the stored flag away, so
-   * later non-destructive readers still see it. A registration always crosses
-   * a full page navigation, so this can only ever mean "this page load
-   * followed a registration".
-   */
-  private justRegisteredThisPageLoad = false
-
-  /**
    * Persist the OAuth URL with a 30‑minute TTL.
    */
   set(url: string): void {
@@ -96,8 +88,7 @@ export class OauthURLSessionManagerService {
   }
 
   /**
-   * Remove the redirect entry from storage. Only storage is cleared —
-   * `justRegisteredThisPageLoad` is page-load scoped on purpose.
+   * Remove the redirect entry from storage.
    */
   clear(): void {
     localStorage.removeItem(LOCALSTORAGE_KEY)
@@ -108,22 +99,6 @@ export class OauthURLSessionManagerService {
    * Read and clear one-time post-registration flag.
    */
   consumeJustRegistered(): boolean {
-    const value = this.readJustRegisteredFlag()
-    this.justRegisteredThisPageLoad = this.justRegisteredThisPageLoad || value
-    localStorage.removeItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
-    return value
-  }
-
-  /**
-   * Non-destructive read. Stays true for the rest of this page load even after
-   * `consumeJustRegistered()` has cleared storage, so readers do not have to
-   * race each other for a one-time flag.
-   */
-  isJustRegistered(): boolean {
-    return this.justRegisteredThisPageLoad || this.readJustRegisteredFlag()
-  }
-
-  private readJustRegisteredFlag(): boolean {
     const raw = localStorage.getItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
     if (!raw) {
       return false
@@ -135,6 +110,8 @@ export class OauthURLSessionManagerService {
       }
     } catch {
       // Ignore malformed payload and return false.
+    } finally {
+      localStorage.removeItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
     }
     return false
   }
