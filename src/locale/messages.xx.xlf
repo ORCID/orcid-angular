@@ -11083,11 +11083,35 @@
         </context-group>
         <target>X</target>
       </trans-unit>
+      <trans-unit id="header.signin" datatype="html" resname="header.signin">
+        <source>Sign in</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="header.register" datatype="html" resname="header.register">
+        <source>Register</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
       <trans-unit id="layout.ariaLabelConnectingResearchers" datatype="html" resname="layout.ariaLabelConnectingResearchers">
         <source>Connecting research and researchers</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11095,11 +11119,11 @@
         <source>main menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/menu-icon/menu-icon.component.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11187,7 +11211,7 @@
         <source>Select your preferred language. Current language is</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/language/language.component.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11279,27 +11303,11 @@
         </context-group>
         <target>X</target>
       </trans-unit>
-      <trans-unit id="header.signin" datatype="html" resname="header.signin">
-        <source>Sign in</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="header.register" datatype="html" resname="header.register">
-        <source>Register</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
       <trans-unit id="ngOrcid.viewMyOrcid" datatype="html" resname="ngOrcid.viewMyOrcid">
         <source>View my ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">75,77</context>
+          <context context-type="linenumber">106,108</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11307,7 +11315,7 @@
         <source>Notifications inbox</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11319,7 +11327,7 @@
         <source>Account settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11327,7 +11335,7 @@
         <source>Trusted parties</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11335,7 +11343,7 @@
         <source>Developer tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">159</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11347,7 +11355,7 @@
         <source>Member tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">168</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11355,7 +11363,7 @@
         <source>Logout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">172</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11363,7 +11371,7 @@
         <source>Sign in to ORCID or register for your ORCID iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11371,7 +11379,7 @@
         <source>User menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11379,7 +11387,7 @@
         <source>You have unread notifications</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11387,7 +11395,7 @@
         <source>Notifications inbox</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11395,7 +11403,7 @@
         <source>Open notification inbox</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11403,7 +11411,7 @@
         <source>You have unread notifications. Open notification inbox</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -20876,7 +20884,7 @@
         <target>X</target>
       </trans-unit>
       <trans-unit id="works.fundedByDescription" datatype="html" resname="works.fundedByDescription">
-        <source>The identifier applies to the funding for the work.</source>
+        <source>The identifier applies to the grant or other funding awarded for the work. For example, a DOI for the funding or an internal grant number.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">633</context>
