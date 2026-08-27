@@ -112,6 +112,10 @@ export const ApplicationRoutes = {
   selfService: 'self-service',
   developerTools: 'developer-tools',
   smsPoc: 'sms-poc',
+  recordCorrections: 'record-corrections',
+  // Pre-migration URL, still linked from the info site. TitleService matches on
+  // the requested URL rather than the redirected one, so it needs its own label.
+  recordCorrectionsLegacy: 'about/trust/integrity/record-corrections',
   home: '',
 }
 
@@ -138,6 +142,8 @@ export const ApplicationRoutesLabels = {
   [ApplicationRoutes.selfService]: $localize`:@@share.selfService:Self Service - ORCID`,
   [ApplicationRoutes.developerTools]: $localize`:@@share.developerTools:Developer tools - ORCID`,
   [ApplicationRoutes.smsPoc]: 'SMS POC - ORCID',
+  [ApplicationRoutes.recordCorrections]: $localize`:@@share.recordCorrections:Record corrections - ORCID`,
+  [ApplicationRoutes.recordCorrectionsLegacy]: $localize`:@@share.recordCorrections:Record corrections - ORCID`,
 }
 
 export const ApplicationDynamicRoutesLabels = {
