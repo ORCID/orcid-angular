@@ -6431,7 +6431,7 @@
         <source>ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6439,11 +6439,11 @@
         <source>2FA - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6451,7 +6451,7 @@
         <source>Institutional linking - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6459,7 +6459,7 @@
         <source>Social linking - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6467,7 +6467,7 @@
         <source>Institutional sign in - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6475,7 +6475,7 @@
         <source>Notifications inbox - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6483,15 +6483,15 @@
         <source>Sign in - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">130</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">131</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6499,7 +6499,7 @@
         <source>Oauth - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6507,7 +6507,7 @@
         <source>Search - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">133</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6515,7 +6515,7 @@
         <source>Account reactivation - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6523,7 +6523,7 @@
         <source>Reset password - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6531,7 +6531,7 @@
         <source>Register - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6539,7 +6539,7 @@
         <source>Account settings - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6547,7 +6547,7 @@
         <source>Deactivate account - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6555,7 +6555,7 @@
         <source>Trusted parties - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6563,7 +6563,7 @@
         <source>Reset password - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6571,7 +6571,7 @@
         <source>Self Service - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6579,7 +6579,19 @@
         <source>Developer tools - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="share.recordCorrections" datatype="html" resname="share.recordCorrections">
+        <source>Record corrections - ORCID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants.ts</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants.ts</context>
+          <context context-type="linenumber">146</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6587,7 +6599,7 @@
         <source>- ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6595,7 +6607,7 @@
         <source>- My ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6603,7 +6615,7 @@
         <source>Manage employment dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">370</context>
+          <context context-type="linenumber">376</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6611,7 +6623,7 @@
         <source>Manage education dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">378</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6619,7 +6631,7 @@
         <source>Manage qualification dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">380</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6627,7 +6639,7 @@
         <source>Manage distinction dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">376</context>
+          <context context-type="linenumber">382</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6635,7 +6647,7 @@
         <source>Manage invited position dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">384</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6643,7 +6655,7 @@
         <source>Manage membership dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">386</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6651,7 +6663,7 @@
         <source>Manage service dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">382</context>
+          <context context-type="linenumber">388</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6659,7 +6671,7 @@
         <source>Manage editorial service dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">384</context>
+          <context context-type="linenumber">390</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6667,7 +6679,7 @@
         <source>Manage bibtex dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">387</context>
+          <context context-type="linenumber">393</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6675,7 +6687,7 @@
         <source>Manage external identifier dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">395</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6683,7 +6695,7 @@
         <source>Manage your names dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">391</context>
+          <context context-type="linenumber">397</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6691,7 +6703,7 @@
         <source>Manage your biography dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">399</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6699,7 +6711,7 @@
         <source>Manage your emails dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">395</context>
+          <context context-type="linenumber">401</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6707,7 +6719,7 @@
         <source>Manage your countries dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">403</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6715,7 +6727,7 @@
         <source>Manage your keywords dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">405</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6723,7 +6735,7 @@
         <source>Manage your other IDs dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">407</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6731,7 +6743,7 @@
         <source>Manage your websites &amp; social links dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">403</context>
+          <context context-type="linenumber">409</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6739,7 +6751,7 @@
         <source>Manage funding dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">411</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6747,7 +6759,7 @@
         <source>Manage funding search dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">407</context>
+          <context context-type="linenumber">413</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6755,7 +6767,7 @@
         <source>Manage work dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">409</context>
+          <context context-type="linenumber">415</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6763,7 +6775,7 @@
         <source>Manage work search dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">411</context>
+          <context context-type="linenumber">417</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6771,7 +6783,7 @@
         <source>Manage peer review dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">413</context>
+          <context context-type="linenumber">419</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -11832,6 +11844,134 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
           <context context-type="linenumber">24</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.heading" datatype="html" resname="recordCorrections.heading">
+        <source>Invalid Data Record Corrections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.p1.1" datatype="html" resname="recordCorrections.p1.1">
+        <source>A core</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.p1.2" datatype="html" resname="recordCorrections.p1.2">
+        <source>ORCID Trust principle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.p1.3" datatype="html" resname="recordCorrections.p1.3">
+        <source>is “Individual Control”; this means that your data is controlled by you. However, in limited circumstances, ORCID may proactively correct data in a record where system errors have resulted in invalid data. We will not correct incorrect data. All corrections of invalid data are listed below.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">26,30</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.loading" datatype="html" resname="recordCorrections.loading">
+        <source>Loading record corrections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.retry" datatype="html" resname="recordCorrections.retry">
+        <source>Try again</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">73,75</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.caption" datatype="html" resname="recordCorrections.caption">
+        <source>Invalid data record corrections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">89,91</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.executedDate" datatype="html" resname="recordCorrections.executedDate">
+        <source>Executed date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">98,100</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.description" datatype="html" resname="recordCorrections.description">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">105,107</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.updatedRecords" datatype="html" resname="recordCorrections.updatedRecords">
+        <source>Updated records</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">112,114</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.previous" datatype="html" resname="recordCorrections.previous">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">140,142</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.next" datatype="html" resname="recordCorrections.next">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">150,152</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.itemType" datatype="html" resname="recordCorrections.itemType">
+        <source>record corrections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.noCorrections" datatype="html" resname="recordCorrections.noCorrections">
+        <source>No corrections to report</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.error" datatype="html" resname="recordCorrections.error">
+        <source>The list of record corrections could not be loaded.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="recordCorrections.pagination" datatype="html" resname="recordCorrections.pagination">
+        <source>Record corrections pagination</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <target>LR</target>
       </trans-unit>

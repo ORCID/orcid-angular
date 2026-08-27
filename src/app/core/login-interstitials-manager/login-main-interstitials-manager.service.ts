@@ -19,6 +19,7 @@ import {
   BaseInterstitialDialogOutput,
 } from './abstractions/dialog-interface'
 import { ComponentType } from '@angular/cdk/overlay'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,7 @@ export class LoginMainInterstitialsManagerService {
 
   constructor(
     private interstitialsService: InterstitialsService,
+    private _platform: PlatformInfoService,
     LoginDomainInterstitialManagerService: LoginDomainInterstitialManagerService,
     LoginAffiliationInterstitialManagerService: LoginAffiliationInterstitialManagerService,
     LoginBackupEmailInterstitialManagerService: LoginBackupEmailInterstitialManagerService
@@ -81,6 +83,18 @@ export class LoginMainInterstitialsManagerService {
           '[Interstitial Manager] Impersoation, not checking interstitials'
         )
       }
+      return EMPTY
+    }
+
+    if (this.userJustRegistered()) {
+      if (runtimeEnvironment.debugger) {
+        console.info(
+          '[Interstitial Manager] Just registered, not checking interstitials'
+        )
+      }
+      // Suppress for this session only. The viewed flags are left untouched on
+      // purpose, so the interstitial still shows on the next sign in.
+      this.interstitialsService.markCurrentSessionToNoCheckInterstitialsLogic()
       return EMPTY
     }
 
@@ -168,6 +182,25 @@ export class LoginMainInterstitialsManagerService {
           : ''
       )
     }
+  }
+
+  /**
+   * A user who has just finished registering has already been through a long
+   * form and is being shown the verify your email banner, so no interstitial
+   * should interrupt that. Registration lands here with `justRegistered` on the
+   * URL; the OAuth branch goes to the authorize page instead and never reaches
+   * my-orcid carrying the parameter.
+   */
+  private userJustRegistered(): boolean {
+    let justRegistered = false
+    this._platform
+      .get()
+      .pipe(take(1))
+      .subscribe((platform) => {
+        justRegistered =
+          platform.queryParameters.hasOwnProperty('justRegistered')
+      })
+    return justRegistered
   }
 
   isAccountOwner(userRecord: UserRecord): boolean {
