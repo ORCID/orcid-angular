@@ -4,6 +4,10 @@ import { Observable } from 'rxjs/internal/Observable'
 
 import {
   QrCode,
+  RecoveryPhoneSaveRequest,
+  RecoveryPhoneSaveResponse,
+  RecoveryPhoneSendCodeRequest,
+  RecoveryPhoneSendCodeResponse,
   Status,
   TwoFactor,
   TwoFactorSetup,
@@ -35,6 +39,40 @@ export class TwoFactorAuthenticationService {
   disable(data: AuthChallenge): Observable<Status> {
     return this._http.post<Status>(
       runtimeEnvironment.BASE_URL + '2FA/disable.json',
+      data,
+      { headers: this.headers }
+    )
+  }
+
+  /**
+   * Proves the user is who they say they are before they add or change their
+   * recovery phone number. A passed challenge elevates the session for a short
+   * window, since confirming the number by text takes longer than a 2FA code
+   * stays valid.
+   */
+  verifyRecoveryPhoneChallenge(data: AuthChallenge): Observable<AuthChallenge> {
+    return this._http.post<AuthChallenge>(
+      runtimeEnvironment.BASE_URL + '2FA/recoveryPhone/verifyAuthChallenge.json',
+      data,
+      { headers: this.headers }
+    )
+  }
+
+  sendRecoveryPhoneCode(
+    data: RecoveryPhoneSendCodeRequest
+  ): Observable<RecoveryPhoneSendCodeResponse> {
+    return this._http.post<RecoveryPhoneSendCodeResponse>(
+      runtimeEnvironment.BASE_URL + '2FA/recoveryPhone/sendCode.json',
+      data,
+      { headers: this.headers }
+    )
+  }
+
+  saveRecoveryPhone(
+    data: RecoveryPhoneSaveRequest
+  ): Observable<RecoveryPhoneSaveResponse> {
+    return this._http.post<RecoveryPhoneSaveResponse>(
+      runtimeEnvironment.BASE_URL + '2FA/recoveryPhone/save.json',
       data,
       { headers: this.headers }
     )

@@ -1,0 +1,178 @@
+<main id="main">
+  <div class="recovery-phone-page">
+    @if (!loadingState && translationsReady) {
+    <orcid-step-view
+      [title]="title"
+      [primaryLabel]="primaryLabel"
+      [primaryDisabled]="saving || !codeSent"
+      [secondaryLabel]="cancelLabel"
+      (primaryAction)="save()"
+      (secondaryAction)="cancel()"
+    >
+      <div class="recovery-phone-notice" role="note">
+        <mat-icon class="recovery-phone-notice__icon" aria-hidden="true"
+          >error_outline</mat-icon
+        >
+        <div>
+          <p
+            class="orc-font-body-small"
+            i18n="@@account.recoveryPhoneNoticeUse"
+          >
+            Your recovery phone number can be used to access your ORCID account
+            if you don't have your authentication app or recovery codes.
+          </p>
+          <p
+            class="orc-font-body-small recovery-phone-notice__emphasis"
+            i18n="@@account.recoveryPhoneNoticeOnce"
+          >
+            Your recovery phone number can only be used once. Using it will
+            disable two-factor authentication and reset your 2FA backup
+            options.
+          </p>
+        </div>
+      </div>
+
+      <h2
+        class="orc-font-body recovery-phone-subheading"
+        i18n="@@account.yourRecoveryPhoneNumber"
+      >
+        Your recovery phone number
+      </h2>
+
+      @if (managingExistingNumber) {
+      <p class="orc-font-body-small recovery-phone-current">
+        <span i18n="@@account.recoveryPhoneCurrentNumber"
+          >Your current recovery phone number is</span
+        >
+        <span class="recovery-phone-current__value">{{
+          maskedRecoveryPhoneNumber
+        }}</span>
+      </p>
+      }
+
+      <p
+        class="orc-font-body-small recovery-phone-help"
+        i18n="@@account.selectCountryAndEnterNumber"
+      >
+        Select a country or location and enter your phone number.
+      </p>
+
+      <form [formGroup]="form" class="recovery-phone-form">
+        <div class="phone-field">
+          <div
+            class="phone-input-shell"
+            [class.phone-input-shell--invalid]="phoneErrorMessage"
+          >
+            <intl-tel-input
+              formControlName="phoneNumber"
+              [inputAttributes]="{
+                id: 'recovery-phone-number',
+                autocomplete: 'tel-national'
+              }"
+              [loadUtils]="loadUtils"
+              [initialCountry]="$any(initialCountry)"
+              [separateDialCode]="true"
+              [countrySearch]="true"
+              [countryNameLocale]="countryNameLocale"
+              [uiTranslations]="$any(uiTranslations)"
+            />
+          </div>
+          @if (phoneErrorMessage) {
+          <mat-error class="orc-font-small-print recovery-phone-error">{{
+            phoneErrorMessage
+          }}</mat-error>
+          }
+        </div>
+
+        <p
+          class="orc-font-small-print recovery-phone-consent"
+          i18n="@@account.recoveryPhoneConsent"
+        >
+          By entering my phone number and clicking 'Send verification code', I
+          consent to receive an automated one-time verification code from ORCID
+          at the number provided. Message and data rates may apply.
+        </p>
+        <p class="orc-font-small-print recovery-phone-consent-links">
+          <a
+            href="https://orcid.org/content/orcid-terms-use"
+            target="_blank"
+            rel="noopener noreferrer"
+            i18n="@@account.termsOfUse"
+            >Terms of use</a
+          >
+          <span aria-hidden="true"> | </span>
+          <a
+            href="https://orcid.org/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            i18n="@@account.privacyPolicy"
+            >Privacy policy</a
+          >
+        </p>
+
+        <div class="send-code">
+          <button
+            mat-flat-button
+            type="button"
+            id="cy-send-verification-code"
+            class="send-code__button"
+            [disabled]="sending || resendCountdown > 0"
+            (click)="sendCode()"
+            i18n="@@account.sendVerificationCode"
+          >
+            Send verification code
+          </button>
+          @if (resendCountdown > 0) {
+          <p class="orc-font-small-print send-code__helper" aria-live="polite">
+            <ng-container i18n="@@account.recoveryPhoneResendIn"
+              >You can resend in</ng-container
+            >
+            <strong> {{ resendCountdown }} </strong>
+            <ng-container i18n="@@account.seconds">seconds</ng-container>
+          </p>
+          }
+        </div>
+
+        <div class="verification-field">
+          <label
+            class="orc-font-small-print verification-field__label"
+            for="recovery-phone-code"
+            i18n="@@account.verificationCode"
+            >Verification code</label
+          >
+          <input
+            id="recovery-phone-code"
+            class="verification-field__input"
+            type="text"
+            inputmode="numeric"
+            maxlength="6"
+            autocomplete="one-time-code"
+            formControlName="verificationCode"
+          />
+          <div class="verification-field__helper">
+            <span
+              class="orc-font-small-print"
+              i18n="@@account.enterSixDigitCodeSentToDevice"
+              >Enter the 6-digit verification code sent to your device</span
+            >
+            <span class="orc-font-small-print" aria-hidden="true"
+              >{{ verificationCodeControl?.value?.length || 0 }}/6</span
+            >
+          </div>
+          @if (codeErrorMessage) {
+          <mat-error class="orc-font-small-print recovery-phone-error">{{
+            codeErrorMessage
+          }}</mat-error>
+          }
+        </div>
+
+        @if (generalErrorMessage) {
+        <app-alert-message type="warning">
+          <div content>{{ generalErrorMessage }}</div>
+        </app-alert-message>
+        }
+      </form>
+    </orcid-step-view>
+    }
+  </div>
+</main>

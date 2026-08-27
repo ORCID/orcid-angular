@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin recovery-phone-theme($theme) {
+  $primary: map-get($theme, primary);
+  $config: mat.m2-define-typography-config();
+
+  .send-code__button {
+    background-color: var(--orcid-color-brand-secondary-dark, #085c77);
+    color: #ffffff;
+  }
+
+  .recovery-phone-error {
+    color: var(--orcid-color-state-warning-darkest, #b71c1c);
+  }
+}
+@include recovery-phone-theme($orcid-app-theme);

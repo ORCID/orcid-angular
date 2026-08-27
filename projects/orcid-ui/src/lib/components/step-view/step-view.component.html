@@ -24,12 +24,22 @@
       <button
         *ngIf="primaryLabel"
         mat-flat-button
+        id="cy-step-view-primary-action"
         class="orcid-step-view__primary-action"
         type="button"
         [disabled]="primaryDisabled"
         (click)="primaryAction.emit()"
       >
         {{ primaryLabel }}
+      </button>
+      <button
+        *ngIf="secondaryLabel"
+        id="cy-step-view-secondary-action"
+        class="orcid-step-view__secondary-action"
+        type="button"
+        (click)="secondaryAction.emit()"
+      >
+        {{ secondaryLabel }}
       </button>
     </div>
   </footer>

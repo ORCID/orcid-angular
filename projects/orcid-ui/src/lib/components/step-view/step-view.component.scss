@@ -62,7 +62,9 @@
 
 .orcid-step-view__actions {
   display: flex;
-  gap: var(--orcid-space-4, 16px);
+  flex-direction: column;
+  align-items: center;
+  gap: var(--orcid-space-m, 24px);
   justify-content: center;
 }
 
@@ -70,8 +72,8 @@
   width: 100%;
 }
 
-.orcid-step-view__actions--full button {
-  flex: 1 1 auto;
+.orcid-step-view__actions--full .orcid-step-view__primary-action {
+  width: 100%;
 }
 
 .orcid-step-view__primary-action {
@@ -81,6 +83,16 @@
 
 .orcid-step-view__primary-action[disabled] {
   opacity: 0.6;
+}
+
+.orcid-step-view__secondary-action {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--orcid-color-brand-secondary-dark, #085c77);
+  font: inherit;
 }
 
 @media (max-width: 767px) {

@@ -73,6 +73,41 @@
   font-size: 24px;
 }
 
+.two-factor-panel__disable-heading {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.two-factor-panel__requirement-icon--unmet {
+  color: var(--orcid-color-border-subtle, #bdbdbd);
+}
+
+/* The row holding the number and its add/manage link */
+.two-factor-panel__requirement-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--orcid-space-s, 8px);
+  width: 100%;
+}
+
+.two-factor-panel__requirement-value {
+  margin-left: var(--orcid-space-xs, 4px);
+}
+
+.two-factor-panel__requirement-action {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--orcid-color-brand-secondary-dark, #085c77);
+  font: inherit;
+  text-align: left;
+}
+
 .two-factor-panel__disable-button {
   align-self: flex-start;
   background: var(--orcid-color-state-warning-dark, #d32f2f) !important;
