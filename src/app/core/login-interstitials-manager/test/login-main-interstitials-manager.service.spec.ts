@@ -11,6 +11,8 @@ import { LoginMainInterstitialsManagerService } from '../login-main-interstitial
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 import { BackupEmailComponentDialogOutput } from 'src/app/cdk/interstitials/backup-email/interstitial-dialog-extend/backup-email-dialog.component'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { PlatformInfo } from 'src/app/cdk/platform-info/platform-info.type'
 
 // Mock runtime environment for debugging logs if needed
 // (Remove or adapt if your environment differs)
@@ -25,6 +27,7 @@ describe('LoginMainInterstitialsManagerService', () => {
   let mockLoginDomainInterstitialManagerService: jasmine.SpyObj<LoginDomainInterstitialManagerService>
   let mockLoginAffiliationInterstitialManagerService: jasmine.SpyObj<LoginAffiliationInterstitialManagerService>
   let mockLoginBackupEmailInterstitialManagerService: jasmine.SpyObj<LoginBackupEmailInterstitialManagerService>
+  let mockPlatformInfoService: jasmine.SpyObj<PlatformInfoService>
 
   // Example valid user
   const validUserRecord: UserRecord = {
@@ -114,11 +117,21 @@ describe('LoginMainInterstitialsManagerService', () => {
       of(false)
     )
 
+    mockPlatformInfoService = jasmine.createSpyObj<PlatformInfoService>(
+      'PlatformInfoService',
+      ['get']
+    )
+    // No `justRegistered` parameter unless a test says otherwise
+    mockPlatformInfoService.get.and.returnValue(
+      of({ queryParameters: {} } as unknown as PlatformInfo)
+    )
+
     // Provide the service along with its mocked dependencies
     TestBed.configureTestingModule({
       providers: [
         LoginMainInterstitialsManagerService,
         { provide: InterstitialsService, useValue: mockInterstitialsService },
+        { provide: PlatformInfoService, useValue: mockPlatformInfoService },
         {
           provide: LoginDomainInterstitialManagerService,
           useValue: mockLoginDomainInterstitialManagerService,
@@ -571,5 +584,81 @@ describe('LoginMainInterstitialsManagerService', () => {
       ).toHaveBeenCalled()
       done()
     }, 0)
+  })
+
+  describe('a user who just registered', () => {
+    it('shows no interstitial when the justRegistered query parameter is present', (done) => {
+      mockInterstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic.and.returnValue(
+        false
+      )
+      mockPlatformInfoService.get.and.returnValue(
+        of({
+          queryParameters: { justRegistered: 'true' },
+        } as unknown as PlatformInfo)
+      )
+      // Would otherwise qualify
+      mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+        of(true)
+      )
+
+      service
+        .checkLoginInterstitials(validUserRecord, {
+          returnType: 'dialog',
+          togglzPrefix: 'LOGIN',
+        })
+        .subscribe({
+          next: () => fail('Should not emit any value'),
+          complete: () => {
+            expect(
+              mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial
+            ).not.toHaveBeenCalled()
+            expect(
+              mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
+            ).not.toHaveBeenCalled()
+            expect(
+              mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
+            ).not.toHaveBeenCalled()
+            // Suppressed for this session, but never marked as viewed, so it
+            // still shows on the next sign in
+            expect(
+              mockInterstitialsService.markCurrentSessionToNoCheckInterstitialsLogic
+            ).toHaveBeenCalled()
+            done()
+          },
+        })
+    })
+
+    it('still shows the interstitial without the query parameter', fakeAsync(() => {
+      mockInterstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic.and.returnValue(
+        false
+      )
+
+      mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+        of(true)
+      )
+      mockLoginBackupEmailInterstitialManagerService.getInterstitialTogglz.and.returnValue(
+        of(true)
+      )
+      mockLoginBackupEmailInterstitialManagerService.getInterstitialViewed.and.returnValue(
+        of(false)
+      )
+      mockLoginBackupEmailInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
+        of({
+          type: 'backup-email-interstitial',
+        } as BackupEmailComponentDialogOutput)
+      )
+
+      service
+        .checkLoginInterstitials(validUserRecord, {
+          returnType: 'dialog',
+          togglzPrefix: 'LOGIN',
+        })
+        .subscribe()
+      tick(1)
+
+      expect(
+        mockLoginBackupEmailInterstitialManagerService.showInterstitialAsDialog
+      ).toHaveBeenCalled()
+    }))
   })
 })
