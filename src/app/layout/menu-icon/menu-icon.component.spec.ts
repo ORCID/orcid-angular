@@ -24,4 +24,19 @@ describe('MenuIconComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
+
+  it('toggles between the menu and close icons', () => {
+    const button = () => fixture.nativeElement.querySelector('button')
+    const iconName = () =>
+      fixture.nativeElement.querySelector('mat-icon').textContent.trim()
+
+    expect(iconName()).toBe('menu')
+    expect(button().getAttribute('aria-expanded')).toBe('false')
+
+    component.isOpen = true
+    fixture.detectChanges()
+
+    expect(iconName()).toBe('close')
+    expect(button().getAttribute('aria-expanded')).toBe('true')
+  })
 })

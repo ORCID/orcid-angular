@@ -1,5 +1,7 @@
+@import '../header-action-button';
+
 :host {
-  > button {
+  > button.orcid-button-light-grey {
     padding: 0 7px 0 12px;
     p {
       margin: 0;
@@ -9,5 +11,12 @@
       height: auto;
       width: auto;
     }
+  }
+
+  > button.header-action-button {
+    @include header-action-button;
+
+    height: 40px;
+    line-height: 40px;
   }
 }
