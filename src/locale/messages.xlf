@@ -10675,49 +10675,49 @@
         <source>Try again</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
-          <context context-type="linenumber">53,55</context>
+          <context context-type="linenumber">73,75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recordCorrections.caption" datatype="html" resname="recordCorrections.caption">
         <source>Invalid data record corrections</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
-          <context context-type="linenumber">66,68</context>
+          <context context-type="linenumber">89,91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recordCorrections.executedDate" datatype="html" resname="recordCorrections.executedDate">
         <source>Executed date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
-          <context context-type="linenumber">75,77</context>
+          <context context-type="linenumber">98,100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recordCorrections.description" datatype="html" resname="recordCorrections.description">
         <source>Description</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
-          <context context-type="linenumber">82,84</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recordCorrections.updatedRecords" datatype="html" resname="recordCorrections.updatedRecords">
         <source>Updated records</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
-          <context context-type="linenumber">89,91</context>
+          <context context-type="linenumber">112,114</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recordCorrections.previous" datatype="html" resname="recordCorrections.previous">
         <source>Previous</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
-          <context context-type="linenumber">117,119</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recordCorrections.next" datatype="html" resname="recordCorrections.next">
         <source>Next</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
-          <context context-type="linenumber">127,129</context>
+          <context context-type="linenumber">150,152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recordCorrections.itemType" datatype="html" resname="recordCorrections.itemType">
