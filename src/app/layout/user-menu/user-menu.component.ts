@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, Input } from '@angular/core'
 import { UserService } from 'src/app/core'
 
 import { UserInfo } from 'src/app/types'
@@ -23,6 +23,8 @@ import { JourneyType } from 'src/app/rum/journeys/types'
   standalone: false,
 })
 export class UserMenuComponent implements OnInit {
+  /** Hides the signed-out account action on the sign-in pattern pages. */
+  @Input() hideSignedOutAccount = false
   state = false
   userInfo: UserInfo
   displayName: string
