@@ -197,6 +197,12 @@ describe('AuthorizeComponent', () => {
 
     expect(loginInterstitialsSpy.isUserFullyLoaded).toHaveBeenCalled()
     expect(loginInterstitialsSpy.checkLoginInterstitials).toHaveBeenCalled()
+    // The manager only consults the post-registration OAuth flag when it is
+    // told it is on the OAuth surface, so this prefix is load bearing (PD-12904)
+    expect(loginInterstitialsSpy.checkLoginInterstitials).toHaveBeenCalledWith(
+      jasmine.anything(),
+      { returnType: 'component', togglzPrefix: 'OAUTH' }
+    )
     expect((component as any).interstitialComponent).toBe(
       DummyInterstitialComponent as any
     )

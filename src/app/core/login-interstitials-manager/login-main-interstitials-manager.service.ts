@@ -20,6 +20,7 @@ import {
 } from './abstractions/dialog-interface'
 import { ComponentType } from '@angular/cdk/overlay'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { OauthURLSessionManagerService } from '../oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +37,7 @@ export class LoginMainInterstitialsManagerService {
   constructor(
     private interstitialsService: InterstitialsService,
     private _platform: PlatformInfoService,
+    private _oauthUrlSession: OauthURLSessionManagerService,
     LoginDomainInterstitialManagerService: LoginDomainInterstitialManagerService,
     LoginAffiliationInterstitialManagerService: LoginAffiliationInterstitialManagerService,
     LoginBackupEmailInterstitialManagerService: LoginBackupEmailInterstitialManagerService
@@ -86,7 +88,7 @@ export class LoginMainInterstitialsManagerService {
       return EMPTY
     }
 
-    if (this.userJustRegistered()) {
+    if (this.userJustRegistered(opts.togglzPrefix)) {
       if (runtimeEnvironment.debugger) {
         console.info(
           '[Interstitial Manager] Just registered, not checking interstitials'
@@ -186,12 +188,24 @@ export class LoginMainInterstitialsManagerService {
 
   /**
    * A user who has just finished registering has already been through a long
-   * form and is being shown the verify your email banner, so no interstitial
-   * should interrupt that. Registration lands here with `justRegistered` on the
-   * URL; the OAuth branch goes to the authorize page instead and never reaches
-   * my-orcid carrying the parameter.
+   * form, so no interstitial should interrupt them — in either flow.
+   *
+   * Registration signals this two different ways, because the backend only
+   * appends the query parameter when there is no saved request target:
+   *  - direct registration lands on my-orcid with `justRegistered` on the URL
+   *  - registering inside an OAuth request goes to the authorize page instead,
+   *    carrying the `oauthJustRegistered` localStorage flag
+   *
+   * The localStorage flag is only consulted on the OAuth surface. On my-orcid
+   * the query parameter already covers the case and that branch never sets the
+   * flag, so reading it there could only ever act on one left behind by an
+   * unrelated OAuth flow — suppressing an interstitial that should have shown.
+   *
+   * The flag is read non-destructively: `consumeJustRegistered()` is the
+   * one-time read owned by the RUM journey callers, and the authorize page
+   * mounts those only after this check, so consuming here would race them.
    */
-  private userJustRegistered(): boolean {
+  private userJustRegistered(toggglzPrefix: 'OAUTH' | 'LOGIN'): boolean {
     let justRegistered = false
     this._platform
       .get()
@@ -200,7 +214,10 @@ export class LoginMainInterstitialsManagerService {
         justRegistered =
           platform.queryParameters.hasOwnProperty('justRegistered')
       })
-    return justRegistered
+    if (justRegistered) {
+      return true
+    }
+    return toggglzPrefix === 'OAUTH' && this._oauthUrlSession.isJustRegistered()
   }
 
   isAccountOwner(userRecord: UserRecord): boolean {
