@@ -424,12 +424,13 @@ export class RecordWorksService {
     }
 
     return this._http
-      .get(
+      .post(
         runtimeEnvironment.API_WEB +
           'works/' +
           putCode +
           '/visibility/' +
-          visibility
+          visibility,
+        null
       )
       .pipe(
         retryTransient(),
@@ -525,12 +526,13 @@ export class RecordWorksService {
     visibility: VisibilityStrings
   ): Observable<any> {
     return this._http
-      .get(
+      .post(
         runtimeEnvironment.API_WEB +
           'works/' +
           putCodes.join(',') +
           '/visibility/' +
-          visibility
+          visibility,
+        null
       )
       .pipe(
         retryTransient(),

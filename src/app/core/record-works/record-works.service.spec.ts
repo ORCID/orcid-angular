@@ -65,6 +65,43 @@ describe('RecordWorksService', () => {
     expect(service).toBeTruthy()
   })
 
+  // Changing visibility is a state change. Over GET it needs no CSRF token, so a link or an
+  // image tag on any page could trigger it for a signed-in reader.
+  describe('visibility changes', () => {
+    // the service reloads the works list once the change lands; drain those so verify() passes
+    function drainPendingRequests(): void {
+      for (let i = 0; i < 5; i++) {
+        const pending = httpTestingController.match(() => true)
+        if (pending.length === 0) {
+          return
+        }
+        pending.forEach((r) => r.flush({}))
+      }
+    }
+
+    it('sends updateVisibility as a POST', () => {
+      service.updateVisibility('123', 'PRIVATE').subscribe()
+
+      const req = httpTestingController.expectOne(
+        runtimeEnvironment.API_WEB + 'works/123/visibility/PRIVATE'
+      )
+      expect(req.request.method).toEqual('POST')
+      req.flush({})
+      drainPendingRequests()
+    })
+
+    it('sends the bulk visibility change as a POST', () => {
+      service.visibility(['123', '456'], 'PUBLIC').subscribe()
+
+      const req = httpTestingController.expectOne(
+        runtimeEnvironment.API_WEB + 'works/123,456/visibility/PUBLIC'
+      )
+      expect(req.request.method).toEqual('POST')
+      req.flush({})
+      drainPendingRequests()
+    })
+  })
+
   it('should call the method `save` 5 times and only `getWorks` and `getWorksGroupingSuggestions` once', () => {
     const works: Work[] = getNumberOfWorks(5)
 
