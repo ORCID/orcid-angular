@@ -72,6 +72,20 @@ jobs:
           # NOTE: history does not include tags!
           fetch-depth: 100
 
+      # Build the Angular app here rather than letting frontend-maven-plugin do
+      # it: this reuses the yarn cache and the runner's Node instead of
+      # downloading Node and installing from cold inside maven. The maven build
+      # below skips the plugin's node/yarn goals and just packages ./dist.
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - run: yarn --frozen-lockfile
+
+      - name: build the Angular app (prebuild + postbuild included)
+        run: yarn build
+
       - name: find next version
         id: version
         uses: ORCID/version-bump-action@main
@@ -117,10 +131,15 @@ jobs:
 
       - name: build our project
         run: |
+          # skip.installyarn skips the install-node-and-yarn goal and skip.yarn
+          # skips both `yarn` goals of frontend-maven-plugin: ./dist was already
+          # built by the `yarn build` step above. pom.xml is left untouched so
+          # local `mvn` builds still run the full frontend chain.
           mvn -T 1C --batch-mode \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
               --file "pom.xml" \
               --activate-profiles prod -Dnodejs.workingDirectory=. \
+              -Dskip.installyarn=true -Dskip.yarn=true \
               package -Dmaven.test.skip
 
           echo "------------------------------------------------------"

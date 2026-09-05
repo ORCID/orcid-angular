@@ -6,3 +6,23 @@ dist
 .angular/*
 .github/*
 src/assets/css/tailwind.css
+
+# Generated at build time (gitignored). `prettier --write .` used to rewrite
+# this on every run, which the old format_prettier job then committed.
+scripts/environment.runtime.js
+
+# Byte-stable test fixtures: reformatting them would invalidate the golden
+# layout manifests in scripts/__fixtures__/golden.
+scripts/__fixtures__
+
+# Generated translation artifacts (gitignored, see .gitignore)
+src/locale/messages.xlf
+src/locale/messages.xx.xlf
+src/locale/messages.lr.xlf
+src/locale/messages.rl.xlf
+
+# Local scratch / tooling directories that are not part of the app
+**/.venv
+coverage
+temp
+out-tsc

@@ -20,7 +20,12 @@ jobs:
   test_yarn:
     uses: ./.github/workflows/test_yarn.yml
 
-  # NOTE: this is just to test
+  # Prettier gate. Previously an auto-committing job on main, which cancelled
+  # and re-ran the whole release pipeline whenever it had to fix something.
+  format_check:
+    uses: ./.github/workflows/format_check.yml
+
+  # Full production build: the only place the postbuild layout is exercised.
   bld_yarn:
     uses: ./.github/workflows/bld_yarn.yml
 #   NOTE: codeql is only available on public repos or enterprise github accounts

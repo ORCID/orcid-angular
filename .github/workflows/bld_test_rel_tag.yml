@@ -69,27 +69,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  format_i18n:
-    uses: ./.github/workflows/format_i18n.yml
-    secrets: inherit # pass all secrets for pushing
-
-  format_prettier:
-    uses: ./.github/workflows/format_prettier.yml
-    secrets: inherit # pass all secrets for pushing
+  # Extract messages.xlf from the code and push it to Transifex. Off the
+  # critical path: nothing downstream depends on it.
+  # Formatting and unit tests are PR gates (pr.yml), not main gates: branch
+  # protection requires an up-to-date, green branch, so main re-tests a tree
+  # that has already passed.
+  push_i18n_source:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/push_i18n_source.yml
+    secrets: inherit # pass all secrets for Transifex
 
 ##############################################################################
 
   lint:
     uses: ./.github/workflows/lint.yml
-    needs:
-      - format_i18n
-      - format_prettier
-
-  test_yarn:
-    uses: ./.github/workflows/test_yarn.yml
-    needs:
-      - format_i18n
-      - format_prettier
 
 ##############################################################################
   # uses maven to build via yarn into a war file
@@ -98,8 +91,6 @@ jobs:
     secrets: inherit # pass all secrets for uploading assets
     needs:
       - lint
-      - format_i18n
-      - format_prettier
     permissions:
       checks: write
       contents: read
@@ -116,8 +107,6 @@ jobs:
     secrets: inherit # pass all secrets for uploading assets
     needs:
       - lint
-      - format_i18n
-      - format_prettier
     permissions:
       checks: write
       contents: read

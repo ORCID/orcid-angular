@@ -1,0 +1,68 @@
+name: push_i18n_source
+
+# Extract the i18n source (src/locale/messages.xlf) from the code and push it to
+# Transifex, so new/changed strings reach translators.
+#
+# messages.xlf is generated, not committed (see .gitignore). Translations come
+# back through pull-translations.yml, which opens a PR from the `transifex`
+# branch.
+#
+# Runs on main only, from bld_test_rel_tag.yml.
+
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  push_i18n_source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - run: yarn --frozen-lockfile
+
+      # ng extract-i18n + scripts/normalize-xlf.prebuild.ts.
+      # Writes src/locale/messages.xlf and the xx/lr/rl test languages.
+      - run: yarn build:i18n
+
+      - name: Install Transifex CLI
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+          mkdir -p "$HOME/bin"
+          install -m 0755 ./tx "$HOME/bin/tx"
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/bin:$PATH"
+          tx --version
+
+      - name: Configure Transifex credentials
+        run: |
+          if [ -z "${TX_TOKEN:-}" ]; then
+            echo "TRANSIFEX_TOKEN secret is not set" >&2
+            exit 1
+          fi
+          mkdir -p "$HOME"
+          printf "%s\n" \
+            "[https://app.transifex.com]" \
+            "hostname = https://app.transifex.com" \
+            "api_hostname = https://api.transifex.com" \
+            "token = ${TX_TOKEN}" > "$HOME/.transifexrc"
+          chmod 600 "$HOME/.transifexrc"
+          echo "Created ~/.transifexrc"
+
+      - name: Push source file to Transifex
+        run: TX_CONFIG=.tx/config tx push -s -r orcid-angular.messages-xlf
