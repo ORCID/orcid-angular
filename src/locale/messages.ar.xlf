@@ -666,8 +666,7 @@
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
           <x id="INTERPOLATION" equiv-text="{{ orcidToDeprecate }}"/>
-          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong
-      &gt;"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong       &gt;"/>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </target>
@@ -1240,8 +1239,7 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="ount
-      }}"/>
+          <x id="INTERPOLATION" equiv-text="ount       }}"/>
           <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
@@ -1267,8 +1265,7 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="ount
-      }}"/>
+          <x id="INTERPOLATION" equiv-text="ount       }}"/>
           <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>

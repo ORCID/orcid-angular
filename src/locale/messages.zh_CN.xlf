@@ -666,8 +666,7 @@
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
           <x id="INTERPOLATION" equiv-text="{{ orcidToDeprecate }}"/>
-          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong
-      &gt;"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong       &gt;"/>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </target>
@@ -1241,8 +1240,7 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="ount
-      }}"/>
+          <x id="INTERPOLATION" equiv-text="ount       }}"/>
           <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
@@ -1268,8 +1266,7 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="ount
-      }}"/>
+          <x id="INTERPOLATION" equiv-text="ount       }}"/>
           <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
@@ -19746,7 +19743,7 @@
       </trans-unit>
       <trans-unit id="works.journalArticle" datatype="html" resname="works.journalArticle">
         <source>Journal article</source>
-        <target>学术论文</target>
+        <target>期刊文章</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">105</context>
