@@ -1,0 +1,105 @@
+name: ci_only
+
+# Dry run for pushes to main that only touch CI configuration.
+#
+# pushmain.yml has `paths-ignore: ['.github/**']`, so a merge that only changes
+# workflows runs nothing: a broken bld_mvn.yml would first surface on the next
+# feature merge, which would then fail to release. That ignore is worth keeping
+# (a workflow tweak should not cut a release), so this runs the same pipeline
+# with the side effects turned off:
+#
+#   - pr.yml           test_yarn, bld_yarn, format (check-only: no PR branch)
+#   - bld_test_rel_tag rel_tag: false  -> no tag, no GitHub release, no Slack
+#                      deploy:  false  -> no WAR upload, no Transifex push
+#
+# A push that mixes workflow and source changes is already handled by pushmain,
+# so `detect` runs this only when EVERY changed path is under .github/.
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/**'
+
+concurrency:
+  group: ci-only-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      ci_only: ${{ steps.check.outputs.ci_only }}
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          fetch-depth: 0
+
+      - name: Is every changed path under .github/?
+        id: check
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          # A branch's first push, or a force push past a pruned commit, reports
+          # an unusable `before`. Fall back to the push's own commit list.
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            changed=$(git show --name-only --format= "$AFTER")
+          else
+            changed=$(git diff --name-only "$BEFORE" "$AFTER")
+          fi
+
+          echo "Changed paths:"
+          echo "$changed" | while IFS= read -r p; do echo "  $p"; done
+
+          if [ -z "$changed" ]; then
+            echo "No changed paths; nothing to dry run."
+            echo "ci_only=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if echo "$changed" | grep -qv '^\.github/'; then
+            echo "Push also changes non-CI files; pushmain covers it."
+            echo "ci_only=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "CI-only push: running the pipeline as a dry run."
+            echo "ci_only=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  # Same jobs a pull request runs.
+  pr_checks:
+    needs: detect
+    if: needs.detect.outputs.ci_only == 'true'
+    uses: ./.github/workflows/pr.yml
+    secrets: inherit
+    permissions:
+      contents: write
+      pull-requests: read
+
+  # The release pipeline with every side effect disabled: proves lint and the
+  # maven WAR packaging still work.
+  release_dry_run:
+    needs: detect
+    if: needs.detect.outputs.ci_only == 'true'
+    uses: ./.github/workflows/bld_test_rel_tag.yml
+    secrets: inherit
+    permissions:
+      checks: write
+      contents: read
+      issues: read
+      pull-requests: write
+    with:
+      ref: main
+      rel_tag: false
+      deploy: false

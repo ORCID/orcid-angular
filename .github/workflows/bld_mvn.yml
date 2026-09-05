@@ -24,6 +24,11 @@ on:
         required: false
         default: "default"
         type: string
+      deploy:
+        description: 'Whether to upload the WAR to the artifact repository. Set false for a dry run.'
+        required: false
+        default: true
+        type: boolean
 
   workflow_dispatch:
     inputs:
@@ -48,6 +53,11 @@ on:
         required: false
         default: "default"
         type: string
+      deploy:
+        description: 'Whether to upload the WAR to the artifact repository. Set false for a dry run.'
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   bld_mvn:
@@ -85,6 +95,10 @@ jobs:
 
       - name: build the Angular app (prebuild + postbuild included)
         run: yarn build
+
+      # The WAR is a verbatim copy of ./dist, so validate it before packaging.
+      - run: yarn build:manifest:check
+      - run: yarn build:verify
 
       - name: find next version
         id: version
@@ -148,7 +162,10 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
+      # Skipped by the ci_only dry run: it proves the WAR still builds without
+      # publishing an artifact nobody asked for.
       - name: deploy same artifact for all environments
+        if: ${{ inputs.deploy }}
         run: |
           WAR_FILE="target/orcid-web-frontend-prod.war"
           REPO_URL="${ARTIFACT_URL}${ARTIFACT_REPO_PATH}"

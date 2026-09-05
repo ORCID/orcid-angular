@@ -1,93 +1,56 @@
 /**
- * Proxy configuration to hit a local orcid-web backend at http://localhost:8080/orcid-web
- * - Rewrites cookie domains to localhost
- * - Strips `secure` so cookies work over http
- * - Proxies only API calls (not the Angular app shell)
+ * `ng serve --configuration=local-orcid-web`: the app is served locally and API
+ * calls go to a local orcid-web backend at http://localhost:8080/orcid-web.
+ *
+ * Object form keyed by path prefix. See ./proxy.conf.shared.mjs for why the
+ * webpack array form with function contexts no longer works and how the hooks
+ * translate to Vite.
  */
 
-const ORCID_PATH_REGEX = /^\/(\d{4}-\d{4}-\d{4}-\d{3}[\dX])\/print\/?$/i
+import { devOrigin, isRedirect, rootBypass } from './proxy.conf.shared.mjs'
 
+const BACKEND = 'http://localhost:8080/orcid-web'
+
+/**
+ * The local backend issues cookies for its own host and context path, over
+ * plain http. Reshape them so the browser on localhost keeps them.
+ */
 function rewriteCookies(proxyRes) {
   const cookies = proxyRes.headers['set-cookie']
   if (!cookies) return
 
-  const rewrite = (cookie) => {
-    let rewritten = cookie
-    // Force cookies to localhost domain
-    rewritten = rewritten.replace(/Domain=[^;]+/gi, 'Domain=localhost')
-    // Normalize path to root
-    rewritten = rewritten.replace(/Path=\/orcid-web/gi, 'Path=/')
-    // Remove secure for http local dev
-    rewritten = rewritten.replace(/;\s*secure/gi, '')
-    return rewritten.trim()
-  }
+  const rewrite = (cookie) =>
+    cookie
+      .replace(/Domain=[^;]+/gi, 'Domain=localhost')
+      .replace(/Path=\/orcid-web/gi, 'Path=/')
+      // no TLS in local dev, so a Secure cookie would never be sent back
+      .replace(/;\s*secure/gi, '')
+      .trim()
 
   proxyRes.headers['set-cookie'] = Array.isArray(cookies)
     ? cookies.map(rewrite)
     : rewrite(cookies)
 }
 
-function responseOverridesGeneric() {
-  return (proxyRes, req, res) => {
-    rewriteCookies(proxyRes)
-    if (proxyRes.statusCode >= 300 && proxyRes.statusCode < 400) {
-      const location = proxyRes.headers['location']
-      if (typeof location === 'string') {
-        proxyRes.headers['location'] = location.replace(
-          'http://localhost:8080/orcid-web',
-          'http://localhost:4200'
-        )
-      }
-    }
-  }
-}
-
-const shouldProxyRootApi = (pathname, req) => {
-  const accept = req.headers.accept || ''
-
-  // Do NOT proxy SPA navigations or dev-server internals
-  if (accept.includes('text/html')) return false
-  if (
-    pathname.startsWith('/assets') ||
-    pathname.startsWith('/print-view') ||
-    pathname.startsWith('/favicon.ico') ||
-    pathname.startsWith('/ng-cli-ws') ||
-    pathname.startsWith('/sockjs-node') ||
-    pathname === '/' ||
-    pathname === '/index.html'
-  ) {
-    return false
-  }
-
-  // Everything else at root (your API calls without a prefix) → proxy
-  return true
-}
-
-export default [
-  {
-    // Simulate nginx rewrite: /:orcid/print → /print-view/index.html?orcid=:orcid
-    context: (pathname, req) => ORCID_PATH_REGEX.test(pathname),
-    target: 'http://localhost:8080', // unused when bypass returns a path
+export default {
+  // http-proxy keeps the target's /orcid-web prefix (prependPath defaults to
+  // true), so no path rewrite is needed. The old `pathRewrite: { '^/': '/' }`
+  // was an identity and is dropped.
+  '/': {
+    target: BACKEND,
     secure: false,
     changeOrigin: true,
-    logLevel: 'debug',
-    bypass: (req) => {
-      const path = (req.url || '').split('?')[0] || ''
-      const match = path.match(ORCID_PATH_REGEX)
-      if (!match) return
-      const orcid = match[1]
-      return `/print-view/index.html?orcid=${encodeURIComponent(orcid)}`
+    cookieDomainRewrite: 'localhost',
+    bypass: rootBypass,
+    configure(proxy) {
+      proxy.on('proxyRes', (proxyRes, req) => {
+        rewriteCookies(proxyRes)
+        if (!isRedirect(proxyRes)) return
+        proxyRes.headers.location = proxyRes.headers.location.replace(
+          BACKEND,
+          devOrigin(req)
+        )
+      })
     },
   },
-  {
-    // Proxy root-level API calls to local orcid-web
-    context: shouldProxyRootApi,
-    target: 'http://localhost:8080/orcid-web',
-    secure: false,
-    changeOrigin: true,
-    logLevel: 'debug',
-    cookieDomainRewrite: 'localhost',
-    onProxyRes: responseOverridesGeneric(),
-    pathRewrite: { '^/': '/' },
-  },
-]
+}

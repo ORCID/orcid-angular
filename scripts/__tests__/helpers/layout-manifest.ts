@@ -14,6 +14,8 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
+import { NON_LOCALE_DIRS } from '../../dist-layout'
+
 export type LayoutManifest = Record<string, number>
 
 // `.` or `-` then exactly 16 lowercase hex: a webpack content hash, as in
@@ -84,10 +86,12 @@ function normalizeRelativePath(relativePath: string): string {
  *
  * `@angular/build:karma` writes its compiled specs to `dist/test-out/<uuid>/`,
  * so running `yarn test-headless` before `yarn build:manifest:check` would
- * otherwise report hundreds of phantom additions. postbuild skips the same
- * directory for the same reason.
+ * otherwise report hundreds of phantom additions. Shared with postbuild so the
+ * two cannot drift.
  */
-const NOT_DEPLOYED = new Set(['test-out'])
+const NOT_DEPLOYED = new Set(
+  NON_LOCALE_DIRS.filter((d) => d !== 'share-assets')
+)
 
 // Paths are joined with '/' as we descend rather than reconstructed with
 // path.relative, so the keys are forward-slashed on Windows too and the golden

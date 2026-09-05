@@ -28,6 +28,11 @@ on:
         type: boolean
         required: false
         default: false
+      deploy:
+        description: 'Whether to upload the WAR and push the i18n source. Set false for a dry run.'
+        type: boolean
+        required: false
+        default: true
 
   workflow_dispatch:
     inputs:
@@ -62,6 +67,11 @@ on:
         type: boolean
         required: false
         default: false
+      deploy:
+        description: 'Whether to upload the WAR and push the i18n source. Set false for a dry run.'
+        type: boolean
+        required: false
+        default: true
 
 # cancel running job if another commit comes in
 concurrency:
@@ -75,7 +85,7 @@ jobs:
   # protection requires an up-to-date, green branch, so main re-tests a tree
   # that has already passed.
   push_i18n_source:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' && inputs.deploy }}
     uses: ./.github/workflows/push_i18n_source.yml
     secrets: inherit # pass all secrets for Transifex
 
@@ -100,6 +110,7 @@ jobs:
       version_tag: ${{ inputs.version_tag }}
       bump: ${{ inputs.bump }}
       ref: ${{ inputs.ref }}
+      deploy: ${{ inputs.deploy }}
 
   bld_docker:
     if: ${{ inputs.run_docker }}

@@ -1,46 +1,40 @@
+/**
+ * `ng serve --configuration=local-sandbox`: the app is served locally,
+ * everything else is proxied to sandbox.
+ *
+ * Object form keyed by path prefix. See ./proxy.conf.shared.mjs for why the
+ * hooks and the print-view rewrite look the way they do.
+ *
+ * ORDER MATTERS. Vite matches keys with `url.startsWith(key)` and the first
+ * match wins. This file previously listed '/' first, which made the '/v3.0'
+ * entry unreachable, so public-API calls went to sandbox.orcid.org instead of
+ * pub.sandbox.orcid.org. That was true under webpack-dev-server too (same
+ * prefix semantics, handlers mounted in order), so it has never worked.
+ */
+
+import { rootBypass } from './proxy.conf.shared.mjs'
+
 export default {
-  '/': {
-    target: 'https://sandbox.orcid.org',
-    secure: false,
-    logLevel: 'debug',
-    changeOrigin: true,
-    bypass: function (req, res, proxyOptions) {
-      const match = (req.url || '').match(
-        /^\/(\d{4}-\d{4}-\d{4}-\d{3}[\dX])\/print\/?$/i
-      )
-      if (match) {
-        return `/print-view/index.html?orcid=${encodeURIComponent(match[1])}`
-      }
-      // Keep /print-view fully local so Angular is never involved.
-      if (req.url?.startsWith('/print-view/')) {
-        return req.url
-      }
-      if (req.headers.accept && req.headers.accept.includes('html')) {
-        return '/index.html'
-      }
-      req.headers['X-Dev-Header'] = 'local-host-proxy-call'
-    },
-  },
+  // Public API. Must precede '/'.
   '/v3.0': {
     target: 'https://pub.sandbox.orcid.org',
     secure: false,
-    logLevel: 'debug',
     changeOrigin: true,
-    bypass: function (req, res, proxyOptions) {
-      const match = (req.url || '').match(
-        /^\/(\d{4}-\d{4}-\d{4}-\d{3}[\dX])\/print\/?$/i
-      )
-      if (match) {
-        return `/print-view/index.html?orcid=${encodeURIComponent(match[1])}`
-      }
-      // Keep /print-view fully local so Angular is never involved.
-      if (req.url?.startsWith('/print-view/')) {
-        return req.url
-      }
-      if (req.headers.accept && req.headers.accept.includes('html')) {
-        return '/index.html'
-      }
+    cookieDomainRewrite: 'localhost',
+  },
+
+  '/': {
+    target: 'https://sandbox.orcid.org',
+    secure: false,
+    changeOrigin: true,
+    cookieDomainRewrite: 'localhost',
+    bypass: (req, res, options) => {
+      const local = rootBypass(req, res, options)
+      if (local !== undefined) return local
+      // Marks proxied traffic for the backend; bypass runs before proxy.web,
+      // so the header is forwarded.
       req.headers['X-Dev-Header'] = 'local-host-proxy-call'
+      return undefined
     },
   },
 }

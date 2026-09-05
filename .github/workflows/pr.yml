@@ -1,7 +1,7 @@
 name: pr
 
-# read-only repo token
-# no access to secrets
+# The `format` job needs RELEASE_TOKEN to push a formatting fix back to the PR
+# branch; the rest of the jobs use the default read-only token.
 
 on:
   pull_request:
@@ -20,10 +20,16 @@ jobs:
   test_yarn:
     uses: ./.github/workflows/test_yarn.yml
 
-  # Prettier gate. Previously an auto-committing job on main, which cancelled
-  # and re-ran the whole release pipeline whenever it had to fix something.
-  format_check:
-    uses: ./.github/workflows/format_check.yml
+  # Prettier gate. Applies the fix to the PR branch rather than asking the
+  # author to. The push starts a new run on the formatted commit and the
+  # concurrency group above cancels this one, so nothing is tested twice.
+  # Must be a required status check; see .github/workflows/format.yml.
+  format:
+    uses: ./.github/workflows/format.yml
+    secrets: inherit
+    permissions:
+      contents: write
+      pull-requests: read
 
   # Full production build: the only place the postbuild layout is exercised.
   bld_yarn:

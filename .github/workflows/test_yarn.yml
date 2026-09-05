@@ -19,10 +19,19 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .angular/cache
+          key: ${{ runner.os }}-ng-cache-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-ng-cache-${{ hashFiles('yarn.lock') }}-
+
       - run: yarn --frozen-lockfile
 
       # Characterization tests for scripts/postbuild.ts. Node-only and a couple
       # of seconds, so they run before the browser suite.
       - run: yarn test:scripts
+      - run: yarn typecheck:scripts
 
       - run: yarn test-headless:ci

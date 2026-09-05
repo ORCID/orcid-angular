@@ -20,5 +20,5 @@
     "skipLibCheck": true,
     "experimentalDecorators": true
   },
-  "include": ["./*", "../environments/environment.*.ts"]
+  "include": ["./*", "./__tests__/**/*.ts", "../environments/environment.*.ts"]
 }

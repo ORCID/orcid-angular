@@ -1,0 +1,108 @@
+name: format
+
+# Formatting gate for pull requests.
+#
+# On a same-repo PR this job APPLIES prettier and pushes the result to the PR
+# branch, so nobody has to fix whitespace by hand. The push starts a new PR run
+# on the formatted commit and pr.yml's concurrency group cancels this one, so
+# the heavy jobs run once, on the commit that actually merges.
+#
+# It must be a required status check. Because required checks are evaluated on
+# the PR's latest commit, the formatted commit is the one that gets tested, and
+# a PR cannot merge until formatting has been applied.
+#
+# Two cases cannot push and fall back to a plain check that fails on drift:
+#   - PRs from forks (the token is read-only)
+#   - non-pull_request callers, i.e. the ci_only dry run on main
+#
+# Nothing formats main any more; there are no bot commits on the default branch.
+
+permissions:
+  contents: write
+  pull-requests: read
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
+      - name: Decide whether this run can push a fix
+        id: mode
+        env:
+          EVENT: ${{ github.event_name }}
+          IS_FORK: ${{ github.event.pull_request.head.repo.fork }}
+        run: |
+          if [ "$EVENT" = "pull_request" ] && [ "$IS_FORK" != "true" ]; then
+            echo "can_push=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "can_push=false" >> "$GITHUB_OUTPUT"
+            echo "Cannot push a fix (event=$EVENT, fork=$IS_FORK); checking only."
+          fi
+
+      # Check out the PR BRANCH, not the merge ref, so a commit can be pushed
+      # back to it. RELEASE_TOKEN rather than GITHUB_TOKEN: a push made with the
+      # default token does not trigger workflows, which would leave the new head
+      # commit with no status checks and block the merge.
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        if: steps.mode.outputs.can_push == 'true'
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.RELEASE_TOKEN }}
+
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        if: steps.mode.outputs.can_push != 'true'
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - run: yarn --frozen-lockfile
+
+      # Check-only path: fork PRs and the ci_only dry run.
+      - name: Check formatting
+        if: steps.mode.outputs.can_push != 'true'
+        run: |
+          if ! yarn format:check; then
+            echo "::error::Formatting issues found. Run 'yarn format' and push."
+            exit 1
+          fi
+
+      - name: Apply formatting
+        if: steps.mode.outputs.can_push == 'true'
+        run: yarn format
+
+      - name: Commit and push the fix
+        id: fix
+        if: steps.mode.outputs.can_push == 'true'
+        uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9.1.4
+        with:
+          message: '🤖 GITHUB ACTIONS prettier'
+          default_author: github_actions
+          push: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+      - name: Report
+        if: steps.mode.outputs.can_push == 'true'
+        run: |
+          if [ "${{ steps.fix.outputs.committed }}" = "true" ]; then
+            echo "Formatting was applied and pushed as ${{ steps.fix.outputs.commit_long_sha }}."
+            echo "This run is superseded by the run on that commit."
+            {
+              echo "### Formatting applied"
+              echo ""
+              echo "prettier changed one or more files. The fix was pushed as \`${{ steps.fix.outputs.commit_long_sha }}\`; CI is running on that commit."
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Formatting already clean."
+          fi

@@ -246,6 +246,9 @@
               ],
               "localize": ["xx"]
             },
+            "i18n-extract": {
+              "scripts": []
+            },
             "production": {
               "budgets": [
                 {
@@ -314,7 +317,8 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "buildTarget": "ng-orcid:build:local"
+            "buildTarget": "ng-orcid:build:local",
+            "allowedHosts": true
           },
           "configurations": {
             "local-qa": {
@@ -412,7 +416,7 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
-            "buildTarget": "ng-orcid:build"
+            "buildTarget": "ng-orcid:build:i18n-extract"
           }
         },
         "test": {

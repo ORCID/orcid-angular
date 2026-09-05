@@ -125,6 +125,17 @@ function assetRefs(html: string): string[] {
 function compareGolden(name: string, actual: Record<string, number>): void {
   const file = path.join(GOLDEN_DIR, name)
 
+  // Auto-recording a missing golden is a convenience for the first local run.
+  // In CI it would turn the strongest assertion in this file into a no-op if
+  // the golden were ever deleted, so there it is a failure.
+  if (!UPDATE_GOLDEN && !fs.existsSync(file) && process.env.CI) {
+    assert.fail(
+      `Golden manifest ${name} is missing. It is committed on purpose: without ` +
+        `it this test cannot detect a layout change. Run ` +
+        `\`yarn test:scripts:update\` locally and commit the result.`
+    )
+  }
+
   if (UPDATE_GOLDEN || !fs.existsSync(file)) {
     fs.mkdirSync(GOLDEN_DIR, { recursive: true })
     fs.writeFileSync(file, JSON.stringify(actual, null, 2) + '\n')
@@ -211,6 +222,36 @@ for (const fixture of FIXTURES) {
             '(RewriteRule ^/orcid-web-frontend/([a-z]{2}(_[A-Za-z]{2})?)/.*). ' +
             'Add to UNROUTABLE_LOCALE_DIRS only if that is deliberate.'
         )
+      })
+
+      it('loads the application from every index.html', () => {
+        // The assertions below all check that what IS referenced resolves. This
+        // one checks that something is referenced at all: an index.html reduced
+        // to a comment would otherwise pass the whole file.
+        for (const { dir } of FIXTURE_LOCALES) {
+          const html = readText(path.join(dist, dir, 'index.html'))
+          const refs = assetRefs(html)
+
+          for (const [label, pattern] of [
+            ['entry point', /^main[-.]/],
+            ['polyfills', /^polyfills[-.]/],
+            ['stylesheet', /^styles[-.].*\.css$/],
+          ] as [string, RegExp][]) {
+            assert.ok(
+              refs.some((ref) => pattern.test(ref)),
+              `dist/${dir}/index.html references no ${label} (refs: ${
+                refs.join(', ') || 'none'
+              })`
+            )
+          }
+
+          const scriptTags = html.match(/<script\b[^>]*\ssrc=/g) || []
+          assert.ok(
+            scriptTags.length >= 3,
+            `dist/${dir}/index.html has ${scriptTags.length} script tag(s) with a src; ` +
+              `a real build emits at least main, polyfills and new-relic`
+          )
+        }
       })
 
       it('references only files that exist, flat in share-assets', () => {

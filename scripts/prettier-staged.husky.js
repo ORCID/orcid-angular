@@ -2,11 +2,15 @@
 
 // - Runs `prettier --check` over the staged files only
 // - Silent on success
-// - Prints the offending files and exits 1 on failure
+// - Prints the offending files and ALWAYS exits 0
 //
-// Formatting used to be fixed after the fact by a job on main
-// (format_prettier.yml), which committed and cancelled its own run. It is now
-// a PR gate (format_check.yml); this hook catches it one step earlier.
+// This is a heads-up, never a blocker. The enforcement point is the `format`
+// job on the pull request (.github/workflows/format.yml), which applies
+// prettier and pushes the fix to the PR branch. Failing the commit here would
+// just be a second gate for something CI fixes on its own.
+//
+// It does not auto-fix either: `prettier --write` plus `git add` would stage
+// unstaged hunks of a partially staged file.
 
 const { spawnSync } = require('child_process')
 const fs = require('fs')
@@ -44,16 +48,20 @@ function main() {
   )
 
   if (res.error) {
-    console.error('Could not run prettier.')
+    // Not fatal: prettier being unavailable must not block a commit.
+    console.error('Could not run prettier (skipping the formatting check).')
     console.error(res.error.message)
-    process.exit(1)
+    process.exit(0)
   }
 
   if (res.status !== 0) {
     console.error('')
-    console.error('Formatting issues found. Fix them with:')
-    console.error('  yarn format')
-    process.exit(res.status || 1)
+    console.error('Heads up, this is not a blocker.')
+    console.error('Formatting issues were found in the files above.')
+    console.error('Run `yarn format` to fix them now, or leave them: the')
+    console.error('format job on the pull request applies prettier and pushes')
+    console.error('the fix to your branch.')
+    console.error('')
   }
 
   process.exit(0)

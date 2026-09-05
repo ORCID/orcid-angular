@@ -24,18 +24,9 @@ import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
 import { addOneTrustNotAutoBlockForAppScripts } from './onetrust.postbuild'
 import { newRelic } from './new-relic.postbuild'
 import { localizeAndWritePrintViewScript } from './print-view-localize.postbuild'
+import { isLocaleIndexFile } from './dist-layout'
 
 const glob = require('glob')
-
-/**
- * Directories under dist/ that are not locale output.
- *
- * `share-assets` is created by the last step of a previous run; `test-out` is
- * written by @angular/build:karma; `browser` would mean outputPath.browser was
- * not set to "" and the whole tree is one level deeper than every glob here
- * assumes.
- */
-const NON_LOCALE_DIRS = ['share-assets', 'test-out', 'browser']
 
 if (existsSync('./dist/browser')) {
   throw new Error(
@@ -48,7 +39,14 @@ if (existsSync('./dist/browser')) {
 /** `./dist/<locale>/index.html` for each real locale. */
 const localeIndexFiles: string[] = glob
   .sync('./dist/*/index.html')
-  .filter((file: string) => !NON_LOCALE_DIRS.includes(file.split('/')[2]))
+  .filter(isLocaleIndexFile)
+
+if (localeIndexFiles.length === 0) {
+  throw new Error(
+    'postbuild: no ./dist/<locale>/index.html found. Did `ng build` run, and ' +
+      'did it write to ./dist? Silently doing nothing here would ship an empty WAR.'
+  )
+}
 
 // ---------------------------------------------------------------------------
 // 1. index.html rewrites
@@ -113,9 +111,16 @@ localeIndexFiles.forEach((indexFile) => {
 
   // Rewrite references before renaming, so a partial failure leaves the tree
   // internally consistent rather than pointing at files that no longer exist.
+  //
+  // Every .js in the directory is rewritten, not just the ones being renamed:
+  // an already-suffixed file (new-relic writes its own name) can still import a
+  // file that IS being renamed, and skipping it would leave a dangling
+  // specifier that nothing reports.
   const filesToRewrite = [
     indexFile,
-    ...[...renames.keys()].map((n) => join(localeDir, n)),
+    ...readdirSync(localeDir, { withFileTypes: true })
+      .filter((entry) => entry.isFile() && entry.name.endsWith('.js'))
+      .map((entry) => join(localeDir, entry.name)),
   ]
 
   for (const file of filesToRewrite) {

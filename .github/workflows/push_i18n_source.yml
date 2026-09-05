@@ -36,15 +36,28 @@ jobs:
 
       - run: yarn --frozen-lockfile
 
+      # scripts/environment.runtime.js is generated and gitignored. The
+      # extract-i18n build configuration blanks the global scripts so extraction
+      # no longer needs it, but generating it here keeps this job working if that
+      # configuration is ever changed. Two seconds.
+      - run: yarn build-runtime-env
+
       # ng extract-i18n + scripts/normalize-xlf.prebuild.ts.
       # Writes src/locale/messages.xlf and the xx/lr/rl test languages.
       - run: yarn build:i18n
 
       - name: Install Transifex CLI
+        env:
+          # Pinned: the upstream install.sh always fetches the newest release, so
+          # an unrelated tx release could change behaviour on any run. This job
+          # holds a token with push rights.
+          TX_CLI_VERSION: '1.6.17'
         run: |
-          curl -sSfL https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
           mkdir -p "$HOME/bin"
-          install -m 0755 ./tx "$HOME/bin/tx"
+          curl -sSfL -o /tmp/tx.tar.gz \
+            "https://github.com/transifex/cli/releases/download/v${TX_CLI_VERSION}/tx-linux-amd64.tar.gz"
+          tar -xzf /tmp/tx.tar.gz -C /tmp tx
+          install -m 0755 /tmp/tx "$HOME/bin/tx"
           echo "$HOME/bin" >> "$GITHUB_PATH"
           export PATH="$HOME/bin:$PATH"
           tx --version
