@@ -16,6 +16,11 @@ on:
 
 jobs:
   build-and-deploy-preview:
+    # Skipped for pull requests from a fork. GitHub caps those runs at a
+    # read-only token, so the gh-pages push and the PR comment below would both
+    # 403 after burning a couple of minutes, and show an external contributor a
+    # red X they cannot act on. Not a required check, so skipping is safe.
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
 
     permissions:

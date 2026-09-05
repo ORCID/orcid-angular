@@ -1,9 +1,8 @@
 name: bld_yarn
 
+# The job only builds; it calls no GitHub API.
 permissions:
-  checks: write
   contents: read
-  issues: read
 
 on:
   workflow_call:

@@ -96,7 +96,7 @@ jobs:
 
 ##############################################################################
   # uses maven to build via yarn into a war file
-  # No `needs: lint`. lint is a required check on the pull request (commit.yml
+  # No `needs: lint`. lint is a required check on the pull request (pr.yml
   # produces `lint / pre-commit`), so main is re-running something the merge
   # already gated on. Running it in parallel takes ~40s off the critical path;
   # rel_tag still waits for it, so nothing is tagged or released on a lint failure.

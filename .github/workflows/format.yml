@@ -11,15 +11,20 @@ name: format
 # the PR's latest commit, the formatted commit is the one that gets tested, and
 # a PR cannot merge until formatting has been applied.
 #
-# Two cases cannot push and fall back to a plain check that fails on drift:
-#   - PRs from forks (the token is read-only)
+# Three cases cannot push and fall back to a plain check that fails on drift:
+#   - PRs from forks (no write access to the contributor's branch)
+#   - Dependabot PRs (its runs get no repository secrets)
 #   - non-pull_request callers, i.e. the ci_only dry run on main
+# For Dependabot the check passes anyway: prettier ignores package.json and has
+# no parser for yarn.lock, which is all it changes.
 #
 # Nothing formats main any more; there are no bot commits on the default branch.
 
+# read only on purpose. The push below authenticates with secrets.RELEASE_TOKEN,
+# a PAT, so GITHUB_TOKEN never needed write; requesting it would exceed the
+# read-only ceiling GitHub applies to a fork pull request.
 permissions:
-  contents: write
-  pull-requests: read
+  contents: read
 
 on:
   workflow_call:
@@ -35,17 +40,28 @@ jobs:
         with:
           egress-policy: audit
 
+      # Three conditions, because three different situations cannot push:
+      # a fork (no write access to someone else's branch), Dependabot (its
+      # pull_request runs get no repository secrets, and this repo configures
+      # none in the Dependabot store), and the ci_only dry run (a push event,
+      # so there is no PR branch to push to).
       - name: Decide whether this run can push a fix
         id: mode
         env:
           EVENT: ${{ github.event_name }}
-          IS_FORK: ${{ github.event.pull_request.head.repo.fork }}
+          # Not head.repo.fork: that asks "is the head repo a fork of anything",
+          # which only coincides with what we mean while this repo is not itself
+          # a fork. Comparing names asks the actual question.
+          SAME_REPO: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+          # The condition that really decides it. Empty for forks and Dependabot,
+          # and for a rotated or removed secret.
+          HAS_TOKEN: ${{ secrets.RELEASE_TOKEN != '' }}
         run: |
-          if [ "$EVENT" = "pull_request" ] && [ "$IS_FORK" != "true" ]; then
+          if [ "$EVENT" = "pull_request" ] && [ "$SAME_REPO" = "true" ] && [ "$HAS_TOKEN" = "true" ]; then
             echo "can_push=true" >> "$GITHUB_OUTPUT"
           else
             echo "can_push=false" >> "$GITHUB_OUTPUT"
-            echo "Cannot push a fix (event=$EVENT, fork=$IS_FORK); checking only."
+            echo "Checking only (event=$EVENT same_repo=$SAME_REPO has_token=$HAS_TOKEN)."
           fi
 
       # Check out the PR BRANCH, not the merge ref, so a commit can be pushed
@@ -58,8 +74,14 @@ jobs:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.RELEASE_TOKEN }}
 
+      # The PR's own head, not the default merge ref. Otherwise a fork PR is
+      # judged on its branch merged into main, and drift on main would fail an
+      # innocent PR with a message telling the author to format files they never
+      # touched. Falls back to the default ref on a push event.
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         if: steps.mode.outputs.can_push != 'true'
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:

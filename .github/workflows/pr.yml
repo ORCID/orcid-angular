@@ -1,7 +1,19 @@
 name: pr
 
-# The `format` job needs RELEASE_TOKEN to push a formatting fix back to the PR
-# branch; the rest of the jobs use the default read-only token.
+# Nothing in this chain asks for more than a fork pull request is granted.
+#
+# On a `pull_request` whose head is a fork, GitHub caps the run at read-only.
+# Requesting `contents: write` on a reusable-workflow call (`uses:`) exceeds that
+# ceiling, and for `uses:` jobs GitHub validates the request when the run is
+# created rather than capping it, which can fail the whole workflow with
+# startup_failure. That would leave every required check stuck on "Expected"
+# with no red X to explain it.
+#
+# The `format` job pushes with secrets.RELEASE_TOKEN, a PAT handed to
+# actions/checkout and add-and-commit, so GITHUB_TOKEN's contents permission
+# never gated that push anyway.
+permissions:
+  contents: read
 
 on:
   pull_request:
@@ -17,6 +29,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Produces the required `lint / pre-commit` context. It lives here rather than
+  # in a push-triggered workflow so it also reports on pull requests from a fork,
+  # whose pushes fire in the fork and never reach this repository's check runs.
+  lint:
+    uses: ./.github/workflows/lint.yml
+
   test_yarn:
     uses: ./.github/workflows/test_yarn.yml
 
@@ -27,9 +45,6 @@ jobs:
   format:
     uses: ./.github/workflows/format.yml
     secrets: inherit
-    permissions:
-      contents: write
-      pull-requests: read
 
   # Full production build: the only place the postbuild layout is exercised.
   bld_yarn:
