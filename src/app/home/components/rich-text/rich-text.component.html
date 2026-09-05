@@ -1,0 +1,13 @@
+<p *ngFor="let paragraph of paragraphs" class="rich-text-paragraph">
+  <ng-container *ngFor="let node of paragraph">
+    <strong *ngIf="node.type === 'bold'">{{ node.text }}</strong>
+    <a
+      *ngIf="asLink(node) as link"
+      [href]="link.href"
+      rel="noopener noreferrer"
+      [attr.target]="isExternal(link) ? '_blank' : null"
+      >{{ link.text }}</a
+    >
+    <ng-container *ngIf="node.type === 'text'">{{ node.text }}</ng-container>
+  </ng-container>
+</p>

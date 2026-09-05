@@ -1,4 +1,31 @@
 <main @enterAnimation id="main">
+  <ng-container *ngIf="jsonMode">
+    <ng-container *ngIf="jsonContent; else homepageContentLoading">
+      <app-homepage-hero
+        [title]="jsonContent.hero.title"
+        [audiences]="jsonContent.audiences"
+      ></app-homepage-hero>
+      <app-homepage-featured-news
+        [featuredNews]="jsonContent.featuredNews"
+      ></app-homepage-featured-news>
+      <app-homepage-integrate
+        [integrate]="jsonContent.integrate"
+      ></app-homepage-integrate>
+      <app-news></app-news>
+    </ng-container>
+
+    <ng-template #homepageContentLoading>
+      <div class="container homepage-content-loading">
+        <mat-progress-spinner
+          mode="indeterminate"
+          diameter="48"
+          i18n-aria-label="@@ngOrcid.loading"
+          aria-label="Loading"
+        ></mat-progress-spinner>
+      </div>
+    </ng-template>
+  </ng-container>
+
   <div class="container">
     <div
       id="main"
@@ -20,7 +47,7 @@
             class="col l12 m8 s4 horizontal-center hero-title"
             [ngClass]="{
               'mat-display-3': platform.columns12,
-              'mat-display-1': platform.columns8 || platform.columns4
+              'mat-display-1': platform.columns8 || platform.columns4,
             }"
           >
             <ng-container i18n="#sentenceCase@@home.distinguish_yourself">

@@ -1,0 +1,27 @@
+<section class="featured-news" *ngIf="news">
+  <div class="container">
+    <div class="row middle">
+      <div class="col l6 m8 s4">
+        <p class="featured-news-kicker mat-subtitle-2">{{ news.kicker }}</p>
+        <h2 class="featured-news-title mat-headline-5">{{ news.title }}</h2>
+        <app-rich-text
+          class="mat-body-1"
+          [markdown]="news.body"
+        ></app-rich-text>
+      </div>
+      <div class="col l6 m8 s4">
+        <div class="featured-news-video" *ngIf="videoUrl">
+          <iframe
+            [src]="videoUrl"
+            [title]="news.title"
+            frameborder="0"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

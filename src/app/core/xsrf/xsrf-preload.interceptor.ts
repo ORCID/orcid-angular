@@ -58,11 +58,14 @@ export class XsrfPreloadInterceptor implements HttpInterceptor {
     const isCorsJson = req.url.includes('cors.json')
     // csrf.json must never gate on itself
     const isCsrfJson = req.url.includes('csrf.json')
-    const looksBackendJson = req.url.includes('.json')
+    // Classified by host, not by filename. A `.json` on someone else's host is
+    // never one of our endpoints: it cannot use our XSRF cookie, so gating it
+    // behind csrf.json would delay it for nothing and, worse, could trip the
+    // reload below on any page that fetches third-party JSON, such as the
+    // homepage content bundle.
     // Auth-server calls are excluded on purpose: they need AUTH-XSRF-TOKEN, and
     // csrf.json on API_WEB does not set it, so gating them would only add delay
-    const isBackendCall =
-      (looksBackendJson || isOrcidWebUrl(req.url)) && !isCorsJson && !isCsrfJson
+    const isBackendCall = isOrcidWebUrl(req.url) && !isCorsJson && !isCsrfJson
 
     // If cookie already present, no need to preload
     if (!this.loaded && this.hasXsrfCookie()) {

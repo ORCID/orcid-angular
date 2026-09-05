@@ -1,0 +1,20 @@
+<section class="integrate" *ngIf="integrate">
+  <div class="container">
+    <div class="row">
+      <div class="col l12 m8 s4">
+        <h2 class="integrate-title mat-headline-5">{{ integrate.title }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        class="col l4 m8 s4 integrate-paragraph"
+        *ngFor="let paragraph of integrate.paragraphs"
+      >
+        <app-rich-text
+          class="mat-body-1"
+          [markdown]="paragraph.body"
+        ></app-rich-text>
+      </div>
+    </div>
+  </div>
+</section>

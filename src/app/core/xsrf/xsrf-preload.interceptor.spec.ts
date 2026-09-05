@@ -158,4 +158,39 @@ describe('XsrfPreloadInterceptor', () => {
 
     expect(fetchSpy).not.toHaveBeenCalled()
   })
+
+  it('lets JSON on another host through without a preload', () => {
+    // The homepage content bundle is a `.json` file on a static host. It cannot
+    // use our XSRF cookie, so gating it would delay the page and could trip the
+    // recovery reload for a request that was never ours to protect.
+    cookieGetSpy.and.returnValue('')
+    const fetchSpy = spyOn(window as any, 'fetch')
+    const contentUrl =
+      'https://orcid.github.io/orcid-homepage-decap-cms/qa/content/home.en.json'
+
+    let received: unknown
+    http.get(contentUrl).subscribe((body) => (received = body))
+    httpMock.expectOne(contentUrl).flush({ schemaVersion: 1 })
+
+    expect(received).toEqual({ schemaVersion: 1 })
+    expect(fetchSpy).not.toHaveBeenCalled()
+    expect(reloadSpy).not.toHaveBeenCalled()
+  })
+
+  it('still gates our own JSON endpoints', fakeAsync(() => {
+    cookieGetSpy.and.returnValue('')
+    const fetchSpy = spyOn(window as any, 'fetch').and.returnValue(
+      Promise.resolve({} as Response)
+    )
+
+    http.get(apiBase + 'foo.json').subscribe()
+    httpMock.expectNone(apiBase + 'foo.json')
+
+    flushMicrotasks()
+    expect(fetchSpy).toHaveBeenCalledWith(
+      apiBase + 'csrf.json',
+      jasmine.objectContaining({ credentials: 'include' })
+    )
+    httpMock.expectOne(apiBase + 'foo.json').flush({ ok: true })
+  }))
 })
