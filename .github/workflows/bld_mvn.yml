@@ -93,6 +93,14 @@ jobs:
 
       - run: yarn --frozen-lockfile
 
+      # The WAR must be built from formatted source. That is already guaranteed
+      # by construction: the `format` job applies prettier on the PR branch and
+      # is a required check, so the commit that merges is the formatted one.
+      # This asserts it anyway, and fails fast if anything ever reaches main
+      # without passing that gate (an admin bypass, a direct push).
+      - name: assert the source is formatted
+        run: yarn format:check
+
       - name: build the Angular app (prebuild + postbuild included)
         run: yarn build
 

@@ -96,11 +96,13 @@ jobs:
 
 ##############################################################################
   # uses maven to build via yarn into a war file
+  # No `needs: lint`. lint is a required check on the pull request (commit.yml
+  # produces `lint / pre-commit`), so main is re-running something the merge
+  # already gated on. Running it in parallel takes ~40s off the critical path;
+  # rel_tag still waits for it, so nothing is tagged or released on a lint failure.
   bld_mvn:
     uses: ./.github/workflows/bld_mvn.yml
     secrets: inherit # pass all secrets for uploading assets
-    needs:
-      - lint
     permissions:
       checks: write
       contents: read
@@ -116,8 +118,6 @@ jobs:
     if: ${{ inputs.run_docker }}
     uses: ./.github/workflows/bld_docker.yml
     secrets: inherit # pass all secrets for uploading assets
-    needs:
-      - lint
     permissions:
       checks: write
       contents: read
@@ -130,10 +130,15 @@ jobs:
 
 ##############################################################################
 
+  # Gated on lint as well as the WAR: the build can run in parallel, but nothing
+  # gets tagged or released while lint is red. lint (~30s) always finishes long
+  # before bld_mvn (~4min), so this adds no latency.
   rel_tag:
     uses: ./.github/workflows/rel_tag.yml
     if: ${{ inputs.rel_tag }}
-    needs: bld_mvn
+    needs:
+      - bld_mvn
+      - lint
     with:
       version_tag: ${{ inputs.version_tag }}
       bump: ${{ inputs.bump }}
