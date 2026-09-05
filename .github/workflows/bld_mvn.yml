@@ -83,15 +83,10 @@ jobs:
           fetch-depth: 100
 
       # Build the Angular app here rather than letting frontend-maven-plugin do
-      # it: this reuses the yarn cache and the runner's Node instead of
+      # it: this reuses the runner's Node and the cached node_modules instead of
       # downloading Node and installing from cold inside maven. The maven build
       # below skips the plugin's node/yarn goals and just packages ./dist.
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-
-      - run: yarn --frozen-lockfile
+      - uses: ./.github/actions/yarn-install
 
       # The WAR must be built from formatted source. That is already guaranteed
       # by construction: the `format` job applies prettier on the PR branch and

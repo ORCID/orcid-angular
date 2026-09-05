@@ -15,10 +15,7 @@ jobs:
           egress-policy: audit
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
+      - uses: ./.github/actions/yarn-install
 
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
@@ -26,8 +23,6 @@ jobs:
           key: ${{ runner.os }}-ng-cache-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-ng-cache-${{ hashFiles('yarn.lock') }}-
-
-      - run: yarn --frozen-lockfile
 
       # Characterization tests for scripts/postbuild.ts. Node-only and a couple
       # of seconds, so they run before the browser suite.
