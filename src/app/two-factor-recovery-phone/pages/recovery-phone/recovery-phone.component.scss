@@ -1,0 +1,249 @@
+/*
+ * The router container is a flex row, so the host has to be told to fill it.
+ * Left to size itself the page is only as wide as the card and the centring
+ * below has nothing to centre within.
+ */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.recovery-phone-page {
+  display: flex;
+  justify-content: center;
+  padding: var(--orcid-space-l, 32px) var(--orcid-space-base, 16px);
+}
+
+.recovery-phone-page orcid-step-view {
+  display: block;
+  width: 100%;
+  max-width: 580px;
+}
+
+.recovery-phone-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--orcid-space-base, 16px);
+  border: 2px solid var(--orcid-color-notice-important, #ff9c00);
+  border-radius: 4px;
+  background-color: rgba(255, 236, 171, 0.05);
+  padding: var(--orcid-space-base, 16px);
+  margin-bottom: var(--orcid-space-l, 32px);
+  text-align: left;
+
+  p {
+    margin: 0;
+  }
+
+  p + p {
+    margin-top: var(--orcid-space-base, 16px);
+  }
+}
+
+.recovery-phone-notice__icon {
+  color: var(--orcid-color-notice-important, #ff9c00);
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.recovery-phone-notice__emphasis {
+  font-style: italic;
+}
+
+.recovery-phone-subheading {
+  font-weight: bold;
+  margin: 0 0 var(--orcid-space-base, 16px);
+  text-align: left;
+}
+
+.recovery-phone-current {
+  margin: 0 0 var(--orcid-space-base, 16px);
+  text-align: left;
+}
+
+.recovery-phone-current__value {
+  font-weight: bold;
+  margin-left: var(--orcid-space-xs, 4px);
+}
+
+.recovery-phone-help {
+  margin: 0 0 var(--orcid-space-base, 16px);
+  text-align: left;
+}
+
+.recovery-phone-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--orcid-space-m, 24px);
+  text-align: left;
+}
+
+/*
+ * The design draws the country selector and the number as one bordered field:
+ * a grey segment holding the flag and its chevron, then the dial code, then the
+ * number itself, all inside a single 40px box. The library renders the pieces
+ * but styles them as a plain input, so the border moves out to the container
+ * and the inner input gives up its own.
+ */
+.phone-input-shell {
+  display: block;
+
+  /*
+   * The library exposes these, so the flag size and the tint behind it are set
+   * through its own variables rather than by overriding the elements: it keeps
+   * the flag sprite sharp and leaves hover and focus to the library.
+   */
+  --iti-flag-width: 28px;
+  --iti-country-selector-bg: var(--orcid-color-background-lightest, #fafafa);
+  --iti-border-color: var(--orcid-color-border-subtle, #bdbdbd);
+  --iti-spacer-horizontal: 8px;
+
+  ::ng-deep .iti {
+    display: block;
+    width: 100%;
+  }
+
+  /*
+   * Never set padding-left here. The library measures the flag chip and the
+   * dial code and writes the left padding itself; overriding it puts the
+   * number on top of the dial code.
+   */
+  ::ng-deep .iti__tel-input,
+  ::ng-deep input[type='tel'] {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid var(--orcid-color-border-subtle, #bdbdbd);
+    border-radius: 2px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.25px;
+    color: var(--orcid-color-text-dark-high, #000000);
+  }
+
+  ::ng-deep .iti__tel-input::placeholder {
+    color: var(--orcid-color-text-placeholder, #707070);
+  }
+
+  /*
+   * The flag and its chevron sit on a tinted segment, divided from the number
+   * by a hairline; the dial code then reads as the start of the number itself.
+   * The tint goes on the primary block rather than the button, which the
+   * library paints white on hover and focus.
+   */
+  ::ng-deep .iti__country-container {
+    padding: 1px;
+    height: 38px;
+  }
+
+  ::ng-deep .iti__selected-country {
+    border-radius: 2px 0 0 2px;
+    height: 100%;
+  }
+
+  ::ng-deep .iti__selected-country-primary {
+    border-right: 1px solid var(--orcid-color-border-subtle, #bdbdbd);
+    border-radius: 2px 0 0 2px;
+    height: 100%;
+    padding: 0 6px 0 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* the dial code is set like the rest of the number, not emphasised */
+  ::ng-deep .iti__selected-dial-code {
+    padding-left: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0.25px;
+    color: var(--orcid-color-text-dark-high, #000000);
+  }
+
+  /*
+   * The library writes an inline height on the open list, measured before its
+   * own stylesheet has capped the list, so the panel comes out as tall as all
+   * 240-odd countries laid end to end. Letting it size to its content puts it
+   * back to the search box plus the scrollable list it already renders.
+   */
+  ::ng-deep .iti__country-selector {
+    height: auto !important;
+  }
+}
+
+/* a rejected number turns the whole field red, not just the message below it */
+.phone-input-shell--invalid {
+  ::ng-deep .iti__tel-input,
+  ::ng-deep input[type='tel'] {
+    border-color: var(--orcid-color-state-warning-darkest, #b71c1c);
+  }
+}
+
+.recovery-phone-consent {
+  margin: 0;
+}
+
+.recovery-phone-consent-links {
+  margin: var(--orcid-space-xs, 4px) 0 0;
+}
+
+.recovery-phone-error {
+  display: block;
+  margin-top: var(--orcid-space-s, 8px);
+}
+
+.send-code {
+  display: flex;
+  flex-direction: column;
+  gap: var(--orcid-space-s, 8px);
+}
+
+.send-code__button {
+  width: 100%;
+}
+
+.send-code__helper {
+  margin: 0;
+  text-align: center;
+}
+
+.verification-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--orcid-space-s, 8px);
+}
+
+.verification-field__label {
+  font-weight: bold;
+}
+
+.verification-field__input {
+  height: 40px;
+  border: 1px solid var(--orcid-color-border-subtle, #bdbdbd);
+  border-radius: 2px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.verification-field__input:disabled {
+  background-color: var(--orcid-color-background-light, #eeeeee);
+}
+
+.verification-field__helper {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--orcid-space-s, 8px);
+}
+
+@media (max-width: 767px) {
+  .recovery-phone-page {
+    padding: 0;
+  }
+}
