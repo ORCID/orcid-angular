@@ -170,8 +170,16 @@ export class AppComponent {
     const isOauth =
       (platformInfo.hasOauthParameters || oauthSessionFound) &&
       this.currentRouteIsHeadlessOnOauthPage
-    this.headlessMode = isOauth || platformInfo.summaryScreen
-    this.footerlessMode = platformInfo.summaryScreen
+    // The homepage preview is embedded in the content editor, which is showing
+    // the visitor's own header and footer around it already.
+    const isHomepagePreview = (platformInfo.currentRoute || '')
+      .split('?')[0]
+      .split('#')[0]
+      .replace(/\/+$/, '')
+      .endsWith('/homepage-preview')
+    this.headlessMode =
+      isOauth || platformInfo.summaryScreen || isHomepagePreview
+    this.footerlessMode = platformInfo.summaryScreen || isHomepagePreview
     this.ie = platformInfo.ie
     this.edge = platformInfo.edge
     this.tabletOrHandset = platformInfo.tabletOrHandset

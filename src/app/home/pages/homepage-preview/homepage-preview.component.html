@@ -1,0 +1,20 @@
+<main class="homepage-preview">
+  <ng-container *ngIf="content; else notRenderable">
+    <app-homepage-hero
+      [title]="content.hero.title"
+      [audiences]="content.audiences"
+    ></app-homepage-hero>
+    <app-homepage-featured-news
+      [featuredNews]="content.featuredNews"
+    ></app-homepage-featured-news>
+    <app-homepage-integrate
+      [integrate]="content.integrate"
+    ></app-homepage-integrate>
+  </ng-container>
+
+  <ng-template #notRenderable>
+    <p class="homepage-preview-message">
+      {{ problem || 'Waiting for the editor…' }}
+    </p>
+  </ng-template>
+</main>

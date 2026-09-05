@@ -14,6 +14,7 @@ import { HomepageIntegrateComponent } from './components/homepage-integrate/home
 import { RichTextComponent } from './components/rich-text/rich-text.component'
 import { HomeRoutingModule } from './home-routing.module'
 import { HomeComponent } from './pages/home/home.component'
+import { HomepagePreviewComponent } from './pages/homepage-preview/homepage-preview.component'
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { HomeComponent } from './pages/home/home.component'
   ],
   declarations: [
     HomeComponent,
+    HomepagePreviewComponent,
     NewsComponent,
     HomepageHeroComponent,
     HomepageFeatureCardComponent,

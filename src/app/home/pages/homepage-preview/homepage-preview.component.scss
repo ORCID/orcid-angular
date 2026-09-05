@@ -1,0 +1,27 @@
+.homepage-preview {
+  display: block;
+}
+
+.homepage-preview-message {
+  margin: 0;
+  padding: 24px;
+  color: #6b7b86;
+  font-size: 14px;
+}
+
+// The preview is a picture of the page, so nothing that belongs to the running
+// application should appear over it: the help launcher, and the error
+// notifications that a locally served build raises for backend calls this route
+// never makes. Anchored on the class this component puts on the body, and
+// removed with it, so the rest of the app is untouched.
+::ng-deep body.homepage-preview-body {
+  .mat-mdc-snack-bar-container,
+  .mat-snack-bar-container,
+  #launcher,
+  iframe#launcher,
+  iframe[title='Launcher'],
+  iframe[data-product='web_widget'],
+  .zEWidget-launcher {
+    display: none !important;
+  }
+}
