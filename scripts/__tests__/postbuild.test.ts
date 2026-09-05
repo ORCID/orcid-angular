@@ -12,13 +12,12 @@
  *   - Cloudflare, which caches every asset by URL alone with no cookie in the
  *     key, so each locale's copy of a file must have a distinct URL
  *
- * The assertions below are split in two. GROUP A is the deployed contract: it
- * must hold no matter which bundler produced the input, so it is the thing that
- * makes a bundler migration safe. GROUP B characterises webpack specifics
- * (a runtime.js chunk manifest, numeric chunk ids) and is expected to be
- * replaced when the app moves to the esbuild application builder.
+ * The assertions are split in two. GROUP A is the deployed contract: it holds
+ * regardless of which bundler produced the input, which is what made the move
+ * from the webpack browser builder to the esbuild application builder safe to
+ * attempt. GROUP B covers what is specific to the current bundler's output.
  *
- * Each fixture is copied into a throwaway workspace and the REAL postbuild is
+ * The fixture is copied into a throwaway workspace and the REAL postbuild is
  * spawned against it, so this exercises production code with no refactor.
  *
  * Run: yarn test:scripts        Re-record goldens: yarn test:scripts:update
@@ -86,20 +85,13 @@ function splitLocaleSuffix(
   return null
 }
 
-/** Fixtures to run the contract group against. `dist-esbuild` is added when the
- *  app build migrates to the application builder; until then only the webpack
- *  shape exists and the esbuild entry is skipped rather than failing. */
+/**
+ * A miniature of what `ng build --localize` emits: four locales sharing the same
+ * hashed filenames with different contents, plus the root-level artifacts the
+ * application builder writes alongside them.
+ */
 const FIXTURES = [
-  {
-    name: 'dist-webpack',
-    golden: 'postbuild-webpack.manifest.json',
-    webpack: true,
-  },
-  {
-    name: 'dist-esbuild',
-    golden: 'postbuild-esbuild.manifest.json',
-    webpack: false,
-  },
+  { name: 'dist-esbuild', golden: 'postbuild-esbuild.manifest.json' },
 ]
 
 /** Reference values a page can legitimately carry that are not asset requests. */
@@ -517,100 +509,35 @@ for (const fixture of FIXTURES) {
       // ---------------------------------------------------------------- GROUP B
       // Bundler-specific characterization.
 
-      it(
-        'rewrites the webpack runtime chunk manifest for the locale',
-        { skip: fixture.webpack ? false : 'webpack-only' },
-        () => {
-          const shareAssets = new Set(
-            listFiles(path.join(dist, 'share-assets'))
-          )
+      it('resolves every chunk reference embedded in emitted JS', () => {
+        // esbuild has no runtime manifest: lazy chunks are plain quoted ESM
+        // specifiers inside main/chunk files, so the suffixing has to rewrite
+        // them in place.
+        const dir = path.join(dist, 'share-assets')
+        const files = listFiles(dir).filter(
+          (f) => f.endsWith('.js') && !f.includes('/')
+        )
+        const present = new Set(files)
 
-          for (const { suffix } of FIXTURE_LOCALES) {
-            const runtime = [...shareAssets].find(
-              (f) => f.startsWith('runtime.') && f.endsWith(`-${suffix}.js`)
-            )
-            assert.ok(runtime, `no runtime chunk for ${suffix}`)
-
-            const src = readText(path.join(dist, 'share-assets', runtime!))
-
-            // Post-rewrite the manifest reads {44:"aaaa...-fr", ...}: the suffix
-            // lands INSIDE the quoted hash, because webpack rebuilds the filename
-            // as <id> + "." + <hash> + ".js".
-            const entries = [...src.matchAll(/(\d+):"([a-f0-9]{16})([^"]*)"/g)]
+        for (const file of files) {
+          const locale = file.match(/-([A-Za-z_]+)\.js$/)?.[1]
+          if (!locale) continue
+          const src = readText(path.join(dir, file))
+          for (const m of src.matchAll(
+            /["'](?:\.\/)?((?:chunk|main|polyfills|scripts)-[^"'/]+\.js)["']/g
+          )) {
             assert.ok(
-              entries.length > 0,
-              `${runtime} carries no chunk manifest`
+              present.has(m[1]),
+              `share-assets/${file} imports "${m[1]}", which does not exist. ` +
+                `The locale suffixing must rewrite import specifiers too.`
             )
-
-            for (const [, id, hash, tail] of entries) {
-              assert.equal(
-                tail,
-                `-${suffix}`,
-                `${runtime} points chunk ${id} at "${hash}${tail}" instead of ` +
-                  `"${hash}-${suffix}", so that lazy chunk would 404`
-              )
-              assert.ok(
-                [...shareAssets].some((f) => f.includes(`${hash}-${suffix}`)),
-                `${runtime} names ${hash}-${suffix} but no such file was emitted`
-              )
-            }
+            assert.ok(
+              m[1].endsWith(`-${locale}.js`),
+              `share-assets/${file} (locale ${locale}) imports "${m[1]}" from another locale`
+            )
           }
         }
-      )
-
-      it(
-        'suffixes chunks the index.html regex never sees',
-        { skip: fixture.webpack ? false : 'webpack-only' },
-        () => {
-          // `44.<hash>.js` has a 2-char base name, below the {4,10} the index.html
-          // rewrite requires, so only the on-disk rename covers it.
-          const files = listFiles(path.join(dist, 'share-assets'))
-          for (const base of ['44.', 'common.']) {
-            for (const { suffix } of FIXTURE_LOCALES) {
-              assert.ok(
-                files.some(
-                  (f) => f.startsWith(base) && f.endsWith(`-${suffix}.js`)
-                ),
-                `no ${base}* chunk for ${suffix} in share-assets`
-              )
-            }
-          }
-        }
-      )
-
-      it(
-        'resolves every chunk reference embedded in emitted JS',
-        { skip: fixture.webpack ? true : false },
-        () => {
-          // esbuild has no runtime manifest: lazy chunks are plain quoted ESM
-          // specifiers inside main/chunk files, so the suffixing has to rewrite
-          // them in place.
-          const dir = path.join(dist, 'share-assets')
-          const files = listFiles(dir).filter(
-            (f) => f.endsWith('.js') && !f.includes('/')
-          )
-          const present = new Set(files)
-
-          for (const file of files) {
-            const locale = file.match(/-([A-Za-z_]+)\.js$/)?.[1]
-            if (!locale) continue
-            const src = readText(path.join(dir, file))
-            for (const m of src.matchAll(
-              /["'](?:\.\/)?((?:chunk|main|polyfills|scripts)-[^"'/]+\.js)["']/g
-            )) {
-              assert.ok(
-                present.has(m[1]),
-                `share-assets/${file} imports "${m[1]}", which does not exist. ` +
-                  `The locale suffixing must rewrite import specifiers too.`
-              )
-              assert.ok(
-                m[1].endsWith(`-${locale}.js`),
-                `share-assets/${file} (locale ${locale}) imports "${m[1]}" from another locale`
-              )
-            }
-          }
-        }
-      )
+      })
     }
   )
 }

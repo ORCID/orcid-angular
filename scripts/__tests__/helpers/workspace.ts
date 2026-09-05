@@ -33,6 +33,14 @@ const POSTBUILD_SCRIPT = path.join(REPO_ROOT, 'scripts', 'postbuild.ts')
 const WORKSPACE_PREFIX = 'orcid-postbuild-'
 
 /**
+ * Files that can appear inside a fixture directory without being part of the
+ * simulated build output: OS metadata, editor backups, and documentation.
+ * README.md is here because one already leaked into a golden manifest.
+ */
+const IGNORED_FIXTURE_FILES =
+  /^(\.DS_Store|Thumbs\.db|\.gitkeep|README\.md|.*~|.*\.swp)$/
+
+/**
  * Copies `scripts/__fixtures__/<fixtureName>/` into a throwaway `<ws>/dist/`
  * and stages the two `src/` inputs postbuild reads from cwd.
  *
@@ -67,7 +75,14 @@ export function createWorkspace(fixtureName: string): string {
     fs.mkdtempSync(path.join(os.tmpdir(), WORKSPACE_PREFIX))
   )
 
-  fs.cpSync(fixtureDir, path.join(ws, 'dist'), { recursive: true })
+  // Filtered, not a plain recursive copy: anything present in the fixture tree
+  // reaches postbuild as if the build had emitted it, so a stray .DS_Store or
+  // an editor backup on one developer's machine would show up as two extra
+  // keys in the layout manifest and fail the golden on their machine only.
+  fs.cpSync(fixtureDir, path.join(ws, 'dist'), {
+    recursive: true,
+    filter: (src) => !IGNORED_FIXTURE_FILES.test(path.basename(src)),
+  })
 
   // print-view-localize.postbuild.ts reads both of these cwd-relative:
   // './src/assets/print-view/fetch-orcid.js' and './src/locale/messages.*.xlf'.

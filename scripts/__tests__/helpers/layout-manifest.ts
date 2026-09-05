@@ -22,9 +22,9 @@ export type LayoutManifest = Record<string, number>
 const WEBPACK_HASH_RE = /[.-][0-9a-f]{16}(?![0-9a-f])/g
 
 // `-` then exactly 8 uppercase alphanumerics: an esbuild content hash, as in
-// chunk-QW4K7ZP2.js. The repo still builds with the webpack browser builder, so
-// this matches nothing today; normalizing it now means the golden survives the
-// esbuild migration instead of turning into one enormous diff on that day.
+// chunk-QW4K7ZP2.js. This is what the application builder emits today. The
+// webpack rule above is kept because a few names still carry the older shape:
+// new-relic.runtime.<16 hex>.js is written by postbuild, not by the bundler.
 const ESBUILD_HASH_RE = /-[0-9A-Z]{8}(?![0-9A-Z])/g
 
 // What both hash rules collapse to. Deliberately a shape no real filename can
@@ -33,9 +33,9 @@ const ESBUILD_HASH_RE = /-[0-9A-Z]{8}(?![0-9A-Z])/g
 const HASH_MARKER = '-<h>'
 
 // A leading numeric webpack chunk id, but only when the hash marker follows it
-// immediately: 105-<h>-en.js -> chunk-<h>-en.js. Webpack numbers lazy chunks by
-// build order, so the ids churn whenever an unrelated lazy route is added and
-// carry nothing the golden should be pinned to. The lookahead is what keeps
+// immediately: 105-<h>-en.js -> chunk-<h>-en.js. esbuild names lazy chunks
+// `chunk-<hash>` already, so this now only normalizes output from an older
+// build; it is cheap to keep and makes the two shapes comparable. The lookahead keeps
 // ordinary names that merely start with a digit intact: 3rdpartylicenses.txt
 // must not become chunkrdpartylicenses.txt.
 const LEADING_CHUNK_ID_RE = /^\d+(?=-<h>)/
@@ -79,6 +79,16 @@ function normalizeRelativePath(relativePath: string): string {
   return dir + normalizeBasename(relativePath.slice(lastSlash + 1))
 }
 
+/**
+ * Top-level directories under dist/ that are not part of the deployed tree.
+ *
+ * `@angular/build:karma` writes its compiled specs to `dist/test-out/<uuid>/`,
+ * so running `yarn test-headless` before `yarn build:manifest:check` would
+ * otherwise report hundreds of phantom additions. postbuild skips the same
+ * directory for the same reason.
+ */
+const NOT_DEPLOYED = new Set(['test-out'])
+
 // Paths are joined with '/' as we descend rather than reconstructed with
 // path.relative, so the keys are forward-slashed on Windows too and the golden
 // stays comparable across machines.
@@ -87,6 +97,9 @@ function walk(dir: string, prefix: string, counts: Map<string, number>): void {
   for (const entry of entries) {
     const relativePath = prefix + entry.name
     if (entry.isDirectory()) {
+      if (prefix === '' && NOT_DEPLOYED.has(entry.name)) {
+        continue
+      }
       walk(path.join(dir, entry.name), relativePath + '/', counts)
       continue
     }
