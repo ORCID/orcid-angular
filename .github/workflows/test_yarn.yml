@@ -20,4 +20,9 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
       - run: yarn --frozen-lockfile
+
+      # Characterization tests for scripts/postbuild.ts. Node-only and a couple
+      # of seconds, so they run before the browser suite.
+      - run: yarn test:scripts
+
       - run: yarn test-headless:ci

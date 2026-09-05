@@ -26,3 +26,9 @@ jobs:
           cache: 'yarn'
       - run: yarn --frozen-lockfile
       - run: yarn build
+
+      # Fails when the real build changes the shape of the deployed tree (a
+      # locale that stopped being emitted, a bundle that lost its locale
+      # suffix, a file that moved out of share-assets). Lazy-chunk count
+      # changes are reported but do not fail; see the helper for why.
+      - run: yarn build:manifest:check
