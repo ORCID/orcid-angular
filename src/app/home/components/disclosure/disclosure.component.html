@@ -1,0 +1,14 @@
+<button
+  type="button"
+  class="disclosure-toggle"
+  [attr.aria-expanded]="open"
+  [attr.aria-controls]="regionId"
+  (click)="toggle()"
+>
+  <span class="disclosure-marker" aria-hidden="true"></span>
+  <span class="disclosure-label">{{ label }}</span>
+</button>
+
+<div class="disclosure-region" [id]="regionId" [hidden]="!open">
+  <ng-content></ng-content>
+</div>

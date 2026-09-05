@@ -1,0 +1,82 @@
+// The four homepage tone pairs, driven by `[data-tone]`.
+//
+// THIS IS THE ONLY FILE UNDER src/app/home/** ALLOWED TO CONTAIN HEX COLOUR
+// LITERALS. The CI grep (spec-v2 D8) exempts this path and no other, so a
+// colour that is needed anywhere else in the homepage arrives either as an
+// ORCID token or as a tone declared here.
+//
+// A tone is a contrast-verified background/foreground PAIR, never a free
+// colour (spec-v2 1.0). tone-contrast.spec.ts recomputes each ratio from the
+// colours the browser actually resolves, so a token change that drops a pair
+// below 4.5:1 fails that spec instead of shipping unreadable text.
+//
+// The literals below are only the fallback half of `var(--token, literal)`.
+// They are here because a custom property that is not defined resolves to
+// "unset" rather than to nothing — background and text would both collapse to
+// the initial value, which is black on transparent. The fallback keeps the
+// pair legible if tokens.css is ever missing (unit tests, the CMS preview
+// iframe), and it can never disagree with the token when the token is present.
+
+// #ffffff has no token: projects/orcid-tokens has no pure white. Declared once.
+$tone-paper: #ffffff;
+// Fallback mirrors of projects/orcid-tokens/tokens.css. Keep in sync with it.
+$tone-ink: #222222; // --orcid-color-text
+$tone-surface: #eeeeee; // --orcid-color-ui-background-light
+$tone-brand-dark: #003449; // --orcid-color-brand-secondary-darkest
+$tone-brand-tint: #f5f9e8; // --orcid-color-brand-primary-lightest
+
+// Every tone paints from the pair, so a section can never set one half of it.
+// The custom properties inherit, which is how a section's own children (cards,
+// borders, rules) tint themselves without knowing which tone they are inside.
+[data-tone] {
+  background-color: var(--home-tone-bg);
+  color: var(--home-tone-fg);
+}
+
+// The focus ring rides along with the tone: 3px of --orcid-focus-ring on a
+// background chosen for it. It is never the brand green (#A6CE39 is 1.82:1 on
+// white), and never the mid brand blue (4.51:1 on white, no margin) — the two
+// mistakes spec-v2 5.6 names by hand.
+[data-tone='default'] {
+  --home-tone-bg: #{$tone-paper};
+  --home-tone-fg: var(--orcid-color-text, #{$tone-ink});
+  --orcid-focus-ring: var(
+    --orcid-color-brand-secondary-darkest,
+    #{$tone-brand-dark}
+  );
+}
+
+[data-tone='surface'] {
+  --home-tone-bg: var(--orcid-color-ui-background-light, #{$tone-surface});
+  --home-tone-fg: var(--orcid-color-text, #{$tone-ink});
+  --orcid-focus-ring: var(
+    --orcid-color-brand-secondary-darkest,
+    #{$tone-brand-dark}
+  );
+}
+
+[data-tone='brand-dark'] {
+  --home-tone-bg: var(
+    --orcid-color-brand-secondary-darkest,
+    #{$tone-brand-dark}
+  );
+  --home-tone-fg: #{$tone-paper};
+  // A dark-blue ring on a dark-blue band is invisible; white is the only ring
+  // that survives here (spec-v2 5.6).
+  --orcid-focus-ring: #{$tone-paper};
+}
+
+[data-tone='brand-tint'] {
+  --home-tone-bg: var(
+    --orcid-color-brand-primary-lightest,
+    #{$tone-brand-tint}
+  );
+  --home-tone-fg: var(
+    --orcid-color-brand-secondary-darkest,
+    #{$tone-brand-dark}
+  );
+  --orcid-focus-ring: var(
+    --orcid-color-brand-secondary-darkest,
+    #{$tone-brand-dark}
+  );
+}

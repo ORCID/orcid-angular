@@ -1,0 +1,54 @@
+<div [class]="bandClasses">
+  <app-heading
+    [level]="headingLevel"
+    [id]="titleId"
+    visualClass="orc-font-heading-small cta-band__title"
+  >
+    {{ section.title }}
+  </app-heading>
+
+  @if (section.body) {
+  <app-rich-text class="cta-band__body" [markdown]="section.body" />
+  }
+
+  <!--
+    A plain container, not a <nav> and not a list: two links are not a set of
+    navigation landmarks, and wrapping them in <ul> makes a screen reader
+    announce "list, 2 items" before a call to action that reads perfectly well
+    as two links.
+  -->
+  <div class="cta-band__actions">
+    @for (action of actions; track action.id) {
+    <a
+      class="cta-band__action"
+      [class.cta-band__action--primary]="action.primary"
+      [class.cta-band__action--secondary]="!action.primary"
+      [class.cta-band__action--inverse]="action.inverse"
+      [orcidBrandSecondaryDarkButton]="action.brandFill"
+      [href]="action.href"
+      [attr.target]="action.external ? '_blank' : null"
+      [attr.rel]="action.external ? 'noopener noreferrer' : null"
+    >
+      <!--
+        <bdi> so a Latin-script label inside an Arabic band cannot reorder the
+        text around it (spec-v2 7.5).
+      -->
+      <bdi>{{ action.label }}</bdi>
+      @if (action.external) {
+      <svg
+        class="cta-band__external-icon"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"></path>
+        <path
+          d="M19 19H5V5h6V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-2v6z"
+        ></path>
+      </svg>
+      <span class="cdk-visually-hidden">{{ opensInNewTab }}</span>
+      }
+    </a>
+    }
+  </div>
+</div>

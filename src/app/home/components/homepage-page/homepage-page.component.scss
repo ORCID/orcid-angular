@@ -1,0 +1,36 @@
+@use '../../sections/tone';
+
+:host {
+  display: block;
+}
+
+.homepage-page__banner {
+  // The page heading sits on the same dark band the audience selector opens
+  // with, so the two read as one masthead rather than two stacked bars. The
+  // pair comes from the tone system; this file names no colour of its own.
+  background: var(--home-tone-bg);
+  color: var(--home-tone-fg);
+}
+
+.homepage-page__container {
+  max-width: 1304px;
+  margin: 0 auto;
+  padding: 24px 16px 16px;
+}
+
+.homepage-page__title {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+@media only screen and (min-width: 840px) {
+  .homepage-page__container {
+    padding: 32px 24px 20px;
+  }
+
+  .homepage-page__title {
+    font-size: 2.5rem;
+  }
+}

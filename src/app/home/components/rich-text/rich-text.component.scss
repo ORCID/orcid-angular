@@ -1,7 +1,52 @@
+:host {
+  // grid.scss sets `.col { display: flex; flex-wrap: wrap }`, and a host with
+  // no display of its own collapses to zero height inside one.
+  display: block;
+}
+
 .rich-text-paragraph {
   margin: 0 0 16px;
 
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.rich-text-link {
+  // SC 1.4.1: colour alone must never be what marks a link, so the underline
+  // is permanent rather than appearing on hover.
+  text-decoration: underline;
+}
+
+.rich-text-external-icon {
+  width: 0.75em;
+  height: 0.75em;
+  margin-inline-start: 0.25em;
+
+  // currentColor inherits the link's contrast rather than introducing a colour
+  // of its own, which is also why there is no token to reference here.
+  fill: currentColor;
+}
+
+// The glyph points away from the text, so it has to point the other way when
+// the text runs the other way. Mirroring an icon is safe; §9 forbids it only
+// for photographs.
+:host-context([dir='rtl']) .rich-text-external-icon {
+  transform: scaleX(-1);
+}
+
+// Angular Material 20's prebuilt theme no longer ships the CDK's
+// `.cdk-visually-hidden` rule and nothing in src/assets/scss defines it, so
+// without this the "(opens in a new tab)" text would be visible on the page.
+.cdk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

@@ -8,38 +8,42 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { WordpressService } from 'src/app/core/wordpress/wordpress.service'
 import { HomepageContentService } from 'src/app/core/homepage-content/homepage-content.service'
-import { HomepageContent } from 'src/app/types/homepage-content'
+import { HomepageContent } from 'src/app/types/homepage-content.v2'
 import { of, Subject, throwError } from 'rxjs'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 function homepageContent(): HomepageContent {
   return {
-    schemaVersion: 1,
-    hero: { title: 'ORCID is for…' },
-    audiences: [
+    schemaVersion: 2,
+    catalogueVersion: 1,
+    page: { title: 'ORCID is for…', description: 'One sentence.' },
+    sections: [
       {
-        id: 'researchers',
-        label: 'Researchers',
-        background: 'https://content.example/assets/bg.png',
-        intro: 'Intro',
-        features: [
+        id: 'who-we-serve',
+        type: 'audience-selector',
+        variant: 'tabs-photo',
+        layout: { span: 'full', spacing: 'normal', tone: 'brand-dark' },
+        audiences: [
           {
-            id: 'uniquely-yours',
-            icon: 'https://content.example/assets/icon.png',
-            title: 'Uniquely Yours',
-            body: 'Body',
+            id: 'researchers',
+            label: 'Researchers',
+            intro: 'Intro',
+            features: [
+              { id: 'uniquely-yours', title: 'Uniquely Yours', body: 'Body' },
+            ],
           },
         ],
       },
+      {
+        id: 'closing',
+        type: 'prose',
+        variant: 'default',
+        layout: { span: 'full', spacing: 'normal', tone: 'default' },
+        title: 'Integrate',
+        body: 'Closing words.',
+      },
     ],
-    featuredNews: {
-      kicker: 'FEATURED NEWS',
-      title: 'News',
-      body: 'Body',
-      vimeoId: '1198760040',
-    },
-    integrate: { title: 'Integrate', paragraphs: [{ id: 'hub', body: 'Hub' }] },
   }
 }
 
@@ -166,15 +170,13 @@ describe('HomeComponent', () => {
       createWithJsonContent()
 
       expect(component.jsonMode).toBeTrue()
-      expect(component.jsonContent?.hero.title).toBe('ORCID is for…')
+      expect(component.jsonContent?.page.title).toBe('ORCID is for…')
       expect(component.notWordpressDisplay).toBeFalsy()
       expect(wordpressService.getHomePagePost).not.toHaveBeenCalled()
       expect(wordpressService.getHomePageCSS).not.toHaveBeenCalled()
 
       const element = fixture.nativeElement as HTMLElement
-      expect(element.querySelector('app-homepage-hero')).toBeTruthy()
-      expect(element.querySelector('app-homepage-featured-news')).toBeTruthy()
-      expect(element.querySelector('app-homepage-integrate')).toBeTruthy()
+      expect(element.querySelector('app-homepage-page')).toBeTruthy()
     })
 
     it('falls back to the static homepage when the content cannot be read', () => {
@@ -190,7 +192,7 @@ describe('HomeComponent', () => {
 
       fixture.detectChanges()
       const element = fixture.nativeElement as HTMLElement
-      expect(element.querySelector('app-homepage-hero')).toBeNull()
+      expect(element.querySelector('app-homepage-page')).toBeNull()
       expect(element.querySelector('.hero-header')).toBeTruthy()
     })
 

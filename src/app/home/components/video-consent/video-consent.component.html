@@ -1,0 +1,28 @@
+<div class="consent-frame" [style.aspect-ratio]="aspectRatio">
+  <img
+    class="consent-poster"
+    [src]="video.poster.src"
+    [alt]="video.poster.alt"
+    loading="lazy"
+  />
+</div>
+
+<div class="consent-note">
+  <p class="consent-explain">{{ explanation }}</p>
+
+  <div class="consent-actions">
+    @if (canOpenPreferences) {
+    <button type="button" class="consent-settings" (click)="allow.emit()">
+      {{ preferencesLabel }}
+    </button>
+    } @if (watchHref) {
+    <a
+      class="consent-watch"
+      [href]="watchHref"
+      target="_blank"
+      rel="noopener noreferrer"
+      >{{ watchLabel }}</a
+    >
+    }
+  </div>
+</div>

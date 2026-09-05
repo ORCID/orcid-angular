@@ -1,0 +1,26 @@
+<!--
+  The body is declared once and rendered by whichever wrapper wins. Two
+  <ng-content> slots, one per branch, does NOT work: Angular fills only the
+  last declared slot, so the landmark branch renders an empty <section>
+  (observed, not assumed - it is what the first draft of this template did).
+-->
+<ng-template #body>
+  <div class="section__container">
+    <ng-content></ng-content>
+  </div>
+</ng-template>
+
+@if (isLandmark) {
+<section
+  [id]="anchorId"
+  [class]="chromeClasses"
+  [attr.data-tone]="tone"
+  [attr.aria-labelledby]="labelledByOrNull"
+>
+  <ng-container [ngTemplateOutlet]="body"></ng-container>
+</section>
+} @else {
+<div [id]="anchorId" [class]="chromeClasses" [attr.data-tone]="tone">
+  <ng-container [ngTemplateOutlet]="body"></ng-container>
+</div>
+}

@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { WINDOW } from 'src/app/cdk/window'
-import { HomepageContent } from 'src/app/types/homepage-content'
+import { HomepageContent } from 'src/app/types/homepage-content.v2'
 import { HomepagePreviewComponent } from './homepage-preview.component'
 
 describe('HomepagePreviewComponent', () => {
@@ -16,31 +16,27 @@ describe('HomepagePreviewComponent', () => {
 
   function content(): HomepageContent {
     return {
-      schemaVersion: 1,
-      hero: { title: 'ORCID is for…' },
-      audiences: [
+      schemaVersion: 2,
+      catalogueVersion: 1,
+      page: { title: 'ORCID is for…', description: 'One sentence.' },
+      sections: [
         {
-          id: 'researchers',
-          label: 'Researchers',
-          background: 'https://content.example/bg.png',
-          intro: 'Intro',
-          features: [
+          id: 'who-we-serve',
+          type: 'audience-selector',
+          variant: 'tabs-photo',
+          layout: { span: 'full', spacing: 'normal', tone: 'brand-dark' },
+          audiences: [
             {
-              id: 'uniquely-yours',
-              icon: 'https://content.example/icon.png',
-              title: 'Uniquely Yours',
-              body: 'Body',
+              id: 'researchers',
+              label: 'Researchers',
+              intro: 'Intro',
+              features: [
+                { id: 'uniquely-yours', title: 'Uniquely Yours', body: 'Body' },
+              ],
             },
           ],
         },
       ],
-      featuredNews: {
-        kicker: 'FEATURED NEWS',
-        title: 'News',
-        body: 'Body',
-        vimeoId: '1198760040',
-      },
-      integrate: { title: 'Integrate', paragraphs: [{ id: 'hub', body: 'Hub' }] },
     }
   }
 
@@ -59,7 +55,8 @@ describe('HomepagePreviewComponent', () => {
         posted.push({ target: 'parent', message }),
     } as unknown as Window
     topWindow = {
-      postMessage: (message: unknown) => posted.push({ target: 'top', message }),
+      postMessage: (message: unknown) =>
+        posted.push({ target: 'top', message }),
     } as unknown as Window
 
     windowStub = {
@@ -68,7 +65,10 @@ describe('HomepagePreviewComponent', () => {
       addEventListener: (name: string, handler: (e: MessageEvent) => void) => {
         if (name === 'message') listeners.push(handler)
       },
-      removeEventListener: (name: string, handler: (e: MessageEvent) => void) => {
+      removeEventListener: (
+        name: string,
+        handler: (e: MessageEvent) => void
+      ) => {
         if (name === 'message') {
           listeners = listeners.filter((l) => l !== handler)
         }
@@ -88,9 +88,9 @@ describe('HomepagePreviewComponent', () => {
 
   it('waits for the editor before rendering anything', () => {
     expect(component.content).toBeUndefined()
-    expect(
-      (fixture.nativeElement as HTMLElement).textContent
-    ).toContain('Waiting for the editor')
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain(
+      'Waiting for the editor'
+    )
   })
 
   it('announces itself to the embedder so it is sent the current draft', () => {
@@ -103,11 +103,9 @@ describe('HomepagePreviewComponent', () => {
   it('renders a draft that arrives from the parent frame', () => {
     send({ type: 'orcid-homepage-preview', content: content() }, parentWindow)
 
-    expect(component.content?.hero.title).toBe('ORCID is for…')
+    expect(component.content?.page.title).toBe('ORCID is for…')
     const element = fixture.nativeElement as HTMLElement
-    expect(element.querySelector('app-homepage-hero')).toBeTruthy()
-    expect(element.querySelector('app-homepage-featured-news')).toBeTruthy()
-    expect(element.querySelector('app-homepage-integrate')).toBeTruthy()
+    expect(element.querySelector('app-homepage-page')).toBeTruthy()
   })
 
   it('renders a draft that arrives from the outermost window', () => {
@@ -116,10 +114,9 @@ describe('HomepagePreviewComponent', () => {
   })
 
   it('ignores a message from anywhere else', () => {
-    send(
-      { type: 'orcid-homepage-preview', content: content() },
-      { postMessage: () => undefined } as unknown as Window
-    )
+    send({ type: 'orcid-homepage-preview', content: content() }, {
+      postMessage: () => undefined,
+    } as unknown as Window)
     expect(component.content).toBeUndefined()
   })
 
@@ -132,13 +129,13 @@ describe('HomepagePreviewComponent', () => {
 
   it('explains itself rather than rendering a draft it cannot use', () => {
     const unusable = content() as any
-    unusable.audiences = []
+    unusable.page = undefined
     send({ type: 'orcid-homepage-preview', content: unusable }, parentWindow)
 
     expect(component.content).toBeUndefined()
     expect(component.problem).toContain('cannot be shown')
     expect(
-      (fixture.nativeElement as HTMLElement).querySelector('app-homepage-hero')
+      (fixture.nativeElement as HTMLElement).querySelector('app-homepage-page')
     ).toBeNull()
   })
 
@@ -146,10 +143,10 @@ describe('HomepagePreviewComponent', () => {
     send({ type: 'orcid-homepage-preview', content: content() }, parentWindow)
 
     const updated = content()
-    updated.hero.title = 'ORCID is for everyone'
+    updated.page.title = 'ORCID is for everyone'
     send({ type: 'orcid-homepage-preview', content: updated }, parentWindow)
 
-    expect(component.content?.hero.title).toBe('ORCID is for everyone')
+    expect(component.content?.page.title).toBe('ORCID is for everyone')
   })
 
   it('stops listening once it goes away', () => {

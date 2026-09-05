@@ -1,0 +1,88 @@
+<!--
+  DOM order is prose then media in EVERY variant, and the variant only ever
+  changes the class on this element. Nothing below is reordered by CSS: see the
+  stylesheet, and `media-section.component.spec.ts`, which fails if `order:` or
+  a `*-reverse` flex direction ever appears in the compiled rules.
+-->
+<div [class]="rootClasses">
+  @if (hasProse) {
+  <div class="media__prose">
+    <!--
+      The kicker is a styled <p>. It is not a heading: it labels the block
+      visually but adds nothing to the outline, and an h-tag here would put a
+      40-character fragment into the document's navigation structure.
+    -->
+    @if (section.kicker) {
+    <p class="media__kicker">{{ section.kicker }}</p>
+    } @if (section.title) {
+    <app-heading
+      class="media__title"
+      [level]="headingLevel"
+      [id]="titleId"
+      visualClass="orc-font-heading"
+      >{{ section.title }}</app-heading
+    >
+    } @if (section.body) {
+    <app-rich-text
+      class="media__body"
+      [markdown]="section.body"
+    ></app-rich-text>
+    } @if (actions.length) {
+    <div class="media__actions">
+      @for (action of actions; track action.id) {
+      <a
+        class="media__action"
+        [class.media__action--primary]="action.primary"
+        [class.media__action--secondary]="!action.primary"
+        [class.media__action--inverse]="action.inverse"
+        [href]="action.href"
+        [orcidBrandSecondaryDarkButton]="action.brandFill"
+        [attr.target]="action.external ? '_blank' : null"
+        [attr.rel]="action.external ? 'noopener noreferrer' : null"
+      >
+        {{ action.label }}
+        <!--
+          An anchor that opens a new tab says so in its accessible name. The
+          text is hidden from sight, not from assistive technology, so the
+          visual design is unchanged and SC 3.2.2 is still satisfied.
+        -->
+        @if (action.external) {
+        <span class="cdk-visually-hidden"> {{ opensInNewTab }}</span>
+        }
+      </a>
+      }
+    </div>
+    }
+  </div>
+  }
+
+  <!--
+    The @if is on the COLUMN. Testing an inner div instead would leave an empty,
+    padded half-row at the wide tier whenever a section carries no media.
+  -->
+  @if (hasMedia) {
+  <div class="media__media">
+    @if (video; as currentVideo) {
+    <app-video-embed [video]="currentVideo"></app-video-embed>
+    }
+    <!--
+      A second primary @if rather than an @else: `as` is only allowed on the
+      primary block, and the two are mutually exclusive anyway - `video` and
+      `image` each read `mediaKind` before returning anything.
+    -->
+    @if (image; as currentImage) {
+    <!--
+      mediaKind: image is an INFORMATIVE slot (spec-v2 1.2): the picture carries
+      the section's meaning, so `alt` is required and `app-content-image`
+      refuses to emit an unlabelled <img>.
+    -->
+    <app-content-image
+      class="media__image"
+      [image]="currentImage"
+      [informative]="true"
+      [itemId]="section.id"
+    ></app-content-image>
+    }
+  </div>
+  }
+</div>

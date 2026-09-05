@@ -1,0 +1,67 @@
+:host {
+  // `.col { display: flex }` in grid.scss collapses any host that does not
+  // declare its own display.
+  display: block;
+  max-width: 720px;
+}
+
+.consent-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--orcid-color-ui-background-light);
+}
+
+.consent-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// The explanation sits under the poster rather than over it. Text on an
+// author-chosen photograph needs a scrim to reach 4.5:1 and can still fail on
+// one; a solid surface cannot.
+.consent-note {
+  padding: var(--orcid-space-base);
+  border: 1px solid var(--orcid-color-border-subtle);
+  border-top: 0;
+  background: var(--orcid-color-ui-background-lightest);
+  color: var(--orcid-color-text);
+  font-family: var(--orcid-font-family-sans);
+  font-size: var(--orcid-font-size-body-small);
+  line-height: var(--orcid-line-height-body-small);
+}
+
+.consent-explain {
+  margin: 0 0 var(--orcid-space-s);
+}
+
+.consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--orcid-space-base);
+}
+
+.consent-settings {
+  padding: var(--orcid-space-s) var(--orcid-space-base);
+  border: 1px solid var(--orcid-color-border-container);
+  border-radius: 2px;
+  background: var(--orcid-color-brand-white);
+  color: var(--orcid-color-text);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.consent-settings:focus-visible,
+.consent-watch:focus-visible {
+  outline: 2px solid var(--orcid-color-ui-focus);
+  outline-offset: 2px;
+}
+
+.consent-watch {
+  color: var(--orcid-color-brand-secondary-dark);
+}

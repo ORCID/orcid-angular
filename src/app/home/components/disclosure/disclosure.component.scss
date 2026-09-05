@@ -1,0 +1,61 @@
+:host {
+  // `.col { display: flex }` in grid.scss collapses any host that does not
+  // declare its own display.
+  display: block;
+}
+
+.disclosure-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--orcid-space-s);
+  padding: var(--orcid-space-s) 0;
+  border: 0;
+  background: none;
+  color: var(--orcid-color-brand-secondary-dark);
+  font-family: var(--orcid-font-family-sans);
+  font-size: var(--orcid-font-size-body);
+  font-weight: var(--orcid-font-weight-semibold);
+  text-align: start;
+  cursor: pointer;
+
+  &:hover .disclosure-label {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--orcid-color-ui-focus);
+    outline-offset: 2px;
+  }
+}
+
+// A triangle, not a character, so it does not depend on a font and does not
+// need a text direction: it points down when closed and rotates when open.
+.disclosure-marker {
+  flex: none;
+  width: 0;
+  height: 0;
+  border-inline-start: 6px solid transparent;
+  border-inline-end: 6px solid transparent;
+  border-top: 8px solid currentColor;
+  transition: transform 120ms ease-in-out;
+}
+
+.disclosure-toggle[aria-expanded='true'] .disclosure-marker {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .disclosure-marker {
+    transition: none;
+  }
+}
+
+.disclosure-region {
+  padding-block-start: var(--orcid-space-s);
+
+  // A layout `display` on this element would beat the `hidden` attribute, so
+  // the attribute is restated as the winning rule rather than trusted.
+  &[hidden] {
+    display: none;
+  }
+}

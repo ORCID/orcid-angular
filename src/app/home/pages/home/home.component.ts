@@ -8,7 +8,7 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { switchMap, tap } from 'rxjs/operators'
 import { WordpressService } from 'src/app/core/wordpress/wordpress.service'
 import { HomepageContentService } from 'src/app/core/homepage-content/homepage-content.service'
-import { HomepageContent } from 'src/app/types/homepage-content'
+import { HomepageContent } from 'src/app/types/homepage-content.v2'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 import { EMPTY } from 'rxjs'

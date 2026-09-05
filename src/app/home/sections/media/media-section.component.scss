@@ -1,0 +1,183 @@
+// The CDK owns the visually-hidden recipe (clip rect, 1px box, the RTL flip,
+// the Chrome wrapping workaround). `.cdk-visually-hidden` is defined NOWHERE in
+// this workspace's global styles today - Material 20's prebuilt theme no longer
+// ships the CDK core rule and `@angular/cdk/a11y-prebuilt.css` is not in the
+// `styles` arrays - so without this include the "(opens in a new tab)" text
+// would be visible on the page.
+@use '@angular/cdk' as cdk;
+
+@include cdk.a11y-visually-hidden();
+
+// The `l` tier boundary, copied from `$size8-up-breakpoint` in
+// src/assets/scss/grid.scss (and from _section.scss, which copied it for the
+// same reason): `@use`ing either file from a component stylesheet would emit
+// the whole grid, or the whole section chrome, into this component's bundle.
+// Same number, so a media section lines up with the rest of the page.
+$media-tier-l-and-up: 'only screen and (min-width: 839.99px)';
+
+// 7/12 and 5/12 - the 58/42 split spec-v2 1.2 writes as `col l7` / `col l5`.
+// Expressed as flex bases rather than by borrowing the global grid classes,
+// because `.col` only takes a width inside a `.row` and carries a `float`
+// that fights this layout.
+$media-prose-basis: 58.3333%;
+$media-media-basis: 41.6667%;
+
+:host {
+  // grid.scss:115 sets `.col { display: flex; flex-wrap: wrap }`; a host with no
+  // display of its own is inline there and its block children collapse.
+  display: block;
+}
+
+// Stacked by default, at every tier, in every variant. Only `media-end` opts
+// into two columns, and only from `l` up. There is no `order`, no
+// `row-reverse` and no `column-reverse` anywhere in this file: they would put
+// the media ahead of the heading that explains it for a sighted user while
+// leaving it behind for a keyboard or screen-reader user, and a video iframe
+// is focusable (spec-v2 1.2, which is why the `media-start` variant does not
+// exist).
+.media {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.media__prose,
+.media__media {
+  // `min-width: 0` so a long word or a wide iframe shrinks with the column
+  // instead of pushing the row past the 320px reflow floor.
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+// Measure, at every tier and in every variant (spec-v2 5.1).
+.media__prose {
+  max-width: 68ch;
+}
+
+.media__media {
+  width: 100%;
+}
+
+@media #{$media-tier-l-and-up} {
+  .media--media-end {
+    // The two columns share one line here; `wrap` would send the media to a
+    // second row because the bases plus the gap exceed 100%.
+    flex-wrap: nowrap;
+  }
+
+  .media--media-end .media__prose {
+    flex: 0 1 $media-prose-basis;
+  }
+
+  .media--media-end .media__media {
+    flex: 0 1 $media-media-basis;
+    max-width: 720px;
+  }
+}
+
+// `media-below` centres the media under the prose; `media-only` is the same
+// shape with nothing above it.
+.media--media-below .media__media,
+.media--media-only .media__media {
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.media__kicker {
+  margin: 0 0 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+
+  // Deliberately NOT `text-transform: uppercase`. Uppercasing is locale
+  // sensitive and CSS applies the rules of the element's language: Turkish
+  // "i" must uppercase to "İ", which is what a page with lang="tr" would get
+  // wrong here. The source string carries its own casing (spec-v2 1.2).
+  text-transform: none;
+
+  // Letter-spacing forces apart letters that must join in Arabic-script
+  // languages, turning connected words into disconnected glyphs.
+  &:lang(ar),
+  &:lang(fa),
+  &:lang(ur) {
+    letter-spacing: normal;
+  }
+}
+
+.media__title {
+  display: block;
+  margin: 0 0 8px;
+}
+
+.media__body {
+  display: block;
+}
+
+.media__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.media__action {
+  // SC 2.5.8: the target is at least 44x44 even when the label is one short
+  // word, which padding alone does not guarantee.
+  min-height: 44px;
+  min-width: 44px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 700;
+  // The box IS the affordance here, so the underline would be redundant. It is
+  // not colour alone: a bordered or filled rectangle is a non-colour cue.
+  text-decoration: none;
+
+  // The homepage focus ring lives in sections/_a11y.scss, which does not apply
+  // page-wide yet (emulated encapsulation confines it to the shell's own
+  // template). Repeating it here means these anchors have a visible ring today;
+  // the rule is identical, so promoting the partial later changes nothing.
+  &:focus-visible {
+    outline: 3px solid var(--orcid-focus-ring, currentColor);
+    outline-offset: 2px;
+  }
+}
+
+.media__action--secondary {
+  background: transparent;
+  border: 2px solid currentColor;
+  color: inherit;
+}
+
+// The `brand-dark` case. The tone pair is contrast-verified, and contrast is
+// symmetric, so painting the button with the pair reversed is verified too -
+// and it keeps a 4.5:1 boundary against the band, well past the 3:1 SC 1.4.11
+// asks of a control's edge.
+.media__action--inverse {
+  background: var(--home-tone-fg);
+  color: var(--home-tone-bg);
+  border: 2px solid var(--home-tone-fg);
+}
+
+// `app-content-image` puts `object-fit: cover; height: 100%` on its <img>, so
+// the HOST owns the box. Left auto here on purpose: an editor's picture is
+// shown at its own proportions rather than cropped to a shape this section
+// invented for it.
+.media__image {
+  display: block;
+  width: 100%;
+}
+
+@media print {
+  // Two columns of a printed page is one column too many at this measure.
+  .media {
+    display: block;
+  }
+
+  .media__media {
+    margin-top: 16px;
+  }
+}

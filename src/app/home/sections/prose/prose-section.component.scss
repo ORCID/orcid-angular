@@ -1,0 +1,68 @@
+// Tier boundary copied from src/assets/scss/grid.scss ($size4-up-breakpoint)
+// rather than `@use`d from it: that file emits the whole grid as CSS, so
+// importing it here would duplicate the grid into this component's bundle.
+$tier-m-and-up: 'only screen and (min-width: 599.99px)';
+
+:host {
+  // grid.scss sets `.col { display: flex; flex-wrap: wrap }`, and a host with
+  // no display of its own collapses to zero height inside one.
+  display: block;
+}
+
+.prose {
+  // The measure is carried as a custom property, not written straight into
+  // `max-width`, so a spec can read back the declared value (`68ch`) as well
+  // as the pixels it resolves to. Both matter: the first is the rule, the
+  // second is what the reader gets.
+  --prose-measure: 68ch;
+
+  max-width: var(--prose-measure);
+
+  // Unitless, not --orcid-line-height-body. That token is a fixed 20px, which
+  // is a 1.25 ratio at the 16px body size and only 1.11 at `lead`'s 18px -
+  // below the 1.5 that SC 1.4.12 requires a user to be able to reach.
+  line-height: 1.5;
+
+  // The `s` step of the scale. Mobile-first, so the smaller size is the base
+  // rule and the wider tiers step it back up; that is how "the type scale
+  // steps down one step at `s`" (spec-v2 1.5) is expressed without a
+  // max-width query that would leave 320px uncovered.
+  font-size: var(--orcid-font-size-body-small, 14px);
+
+  @media #{$tier-m-and-up} {
+    font-size: var(--orcid-font-size-body, 16px);
+  }
+}
+
+.prose__title {
+  display: block;
+  margin-block-end: var(--orcid-space-m, 24px);
+}
+
+.prose__body {
+  display: block;
+}
+
+// ---------------------------------------------------------------------------
+// Variants - measure and type scale only (spec-v2 1.5)
+// ---------------------------------------------------------------------------
+
+// A larger introduction. The measure narrows with the type rather than staying
+// at 68ch: `ch` already scales with the font, and 68 of the larger character
+// still overshoots the ~66-character line the measure exists to hold.
+.prose--lead,
+.prose--centered {
+  --prose-measure: 56ch;
+
+  font-size: var(--orcid-font-size-body, 16px);
+
+  @media #{$tier-m-and-up} {
+    font-size: var(--orcid-font-size-body-large, 18px);
+  }
+}
+
+.prose--centered {
+  // Logical, so the block still centres in an RTL locale.
+  margin-inline: auto;
+  text-align: center;
+}

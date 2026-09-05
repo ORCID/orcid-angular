@@ -1,0 +1,91 @@
+@use './tone';
+
+// Homepage-wide accessibility rules (spec-v2 5.6).
+//
+// These are written as GLOBAL rules on purpose: `:focus-visible` has to reach
+// every focusable element on the page, including elements a section projects
+// into <ng-content>, and Angular's emulated encapsulation rewrites a selector
+// so it only matches the template it was declared in. Imported from
+// _section.scss, the rules therefore only bind inside the section shell's own
+// template. To take effect page-wide they must be promoted — either into a
+// global stylesheet (src/styles.scss / the homepage theme) or into a component
+// declared with ViewEncapsulation.None. That promotion is the integrator's
+// call, which is why this partial edits no global file.
+
+// Focus, one rule, no exceptions in homepage scope. `outline: none` is
+// grep-banned; the ring colour comes from the tone (see _tone.scss).
+:where(a, button, [tabindex], iframe, summary, [role='tab']):focus-visible {
+  outline: 3px solid var(--orcid-focus-ring, currentColor);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+// SC 2.4.11: a focused element, or an in-page anchor target, must not end up
+// under the sticky header. --orcid-header-height has no token today; the 64px
+// fallback is the current header height.
+:where(a, button, [tabindex], iframe, summary, [role='tab']),
+:where(h1, h2, h3, h4, h5, h6)[id] {
+  scroll-margin-top: calc(var(--orcid-header-height, 64px) + 8px);
+}
+
+// SC 2.3.3. Angular animations are NOT covered by this — a component that uses
+// one binds [@.disabled] to a matchMedia signal instead (spec-v2 5.6).
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Borders that are decorative at default contrast become the only thing
+// separating two regions once a user asks for more.
+@media (prefers-contrast: more) {
+  :where(a, button, [tabindex], iframe, summary, [role='tab']):focus-visible {
+    outline-width: 4px;
+  }
+
+  .section {
+    --home-border-width: 2px;
+    --home-scrim-alpha: 0.92;
+  }
+
+  // A purely atmospheric photograph is noise at high contrast; the tone shows
+  // through instead.
+  .section [data-decorative='true'] {
+    display: none;
+  }
+}
+
+// Forced colors replaces every colour we set, including the ones that were
+// carrying meaning. Borders are what survive, so they are declared here rather
+// than left to a background that will be repainted.
+@media (forced-colors: active) {
+  .section {
+    border-color: CanvasText;
+  }
+
+  :where(a, button, [tabindex], iframe, summary, [role='tab']):focus-visible {
+    outline-color: Highlight;
+  }
+}
+
+@media print {
+  // A dark band costs a page of toner and prints white text invisibly on many
+  // drivers, so every tone drops to ink on paper. The two values come from
+  // _tone.scss rather than being written here, because that file is the only
+  // one in src/app/home/** permitted a colour literal.
+  .section,
+  .section[data-tone] {
+    background: tone.$tone-paper !important;
+    color: var(--orcid-color-text, #{tone.$tone-ink}) !important;
+  }
+
+  .section {
+    // Never split a section across a page break if it can be avoided.
+    break-inside: avoid;
+  }
+}

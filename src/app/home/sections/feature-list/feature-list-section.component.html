@@ -1,0 +1,85 @@
+<div [class]="rootClasses">
+  @if (hasTitle) {
+  <app-heading
+    class="feature-list__title"
+    [level]="headingLevel"
+    [id]="titleId"
+    visualClass="orc-font-heading"
+    >{{ section.title }}</app-heading
+  >
+  } @if (section.intro) {
+  <app-rich-text class="feature-list__intro" [markdown]="section.intro" />
+  }
+
+  <!--
+    role="list" is not redundant: WebKit drops list semantics from a <ul> whose
+    list-style is none, so VoiceOver would stop announcing "list, 3 items" —
+    which for the checklist variant is most of the information.
+  -->
+  <ul class="feature-list__items" role="list">
+    @for (item of items; track item.id; let last = $last) {
+    <li class="feature-item">
+      @if (item.icon) {
+      <span
+        class="feature-item__icon"
+        data-decorative="true"
+        aria-hidden="true"
+      >
+        <app-content-image
+          [image]="item.icon"
+          [decorative]="true"
+          [itemId]="item.id"
+        />
+      </span>
+      }
+      <div class="feature-item__content">
+        @if (hasItemTitle(item)) {
+        <app-heading
+          class="feature-item__title"
+          [level]="itemLevel"
+          [id]="itemTitleId(item)"
+          visualClass="orc-font-heading-small"
+          >{{ item.title }}</app-heading
+        >
+        }
+        <app-rich-text class="feature-item__body" [markdown]="item.body" />
+        @if (item.link) {
+        <!--
+          The label is the whole link text and the URL is bound separately, so
+          a translator never has to carry a URL inside a translated string —
+          which is how the live page acquired links pointing at the wrong host
+          in some locales.
+        -->
+        <a
+          class="feature-item__link"
+          [href]="item.link.href"
+          [attr.target]="isExternal(item.link.href) ? '_blank' : null"
+          [attr.rel]="isExternal(item.link.href) ? 'noopener noreferrer' : null"
+        >
+          <bdi>{{ item.link.label }}</bdi>
+          @if (isExternal(item.link.href)) {
+          <!--
+            The leading space is written into the binding, not left to the
+            template: Angular strips whitespace-only text nodes, and without it
+            the accessible name a screen reader announces runs the two strings
+            together as "documentation(opens in a new tab)".
+          -->
+          <span class="cdk-visually-hidden">{{ ' ' + opensInNewTab }}</span>
+          }
+        </a>
+        }
+      </div>
+
+      <!--
+        The separator lives inside the <li> because <ul> admits only <li>: an
+        <hr> as a direct child of the list is invalid and browsers reparent it.
+        It is present in every variant and shown by CSS in `panel` only, so the
+        DOM stays identical across variants (spec-v2 4.5).
+      -->
+      @if (!last) {
+      <hr class="feature-list__rule" />
+      }
+    </li>
+    }
+  </ul>
+</div>

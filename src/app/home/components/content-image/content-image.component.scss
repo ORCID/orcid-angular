@@ -1,0 +1,15 @@
+:host {
+  // grid.scss sets `.col { display: flex; flex-wrap: wrap }`, and a host with
+  // no display of its own collapses to zero height inside one.
+  display: block;
+}
+
+.content-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  // The focal point decides which part of the crop survives; `object-position`
+  // is set per element because it depends on the writing direction.
+  object-fit: cover;
+}

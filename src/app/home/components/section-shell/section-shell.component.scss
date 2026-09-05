@@ -1,0 +1,16 @@
+@use '../../sections/section';
+@use '../../sections/tone';
+
+// grid.scss:115 sets `.col { display: flex; flex-wrap: wrap }`. A custom
+// element inside a `.col` with no display of its own is inline, so its block
+// children collapse to zero height and the section disappears.
+:host {
+  display: block;
+}
+
+.section {
+  // SC 2.4.11: following an in-page anchor to `#section-<id>` must not park the
+  // section under the sticky header. --orcid-header-height has no token today;
+  // 64px is the header's current height.
+  scroll-margin-top: calc(var(--orcid-header-height, 64px) + 8px);
+}

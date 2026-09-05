@@ -1,0 +1,85 @@
+@use './a11y';
+
+// Chrome shared by every homepage section: the container measure, the three
+// spacing steps, and the responsive rhythm between them (spec-v2 1.0, 5.1).
+// A section type imports this and gets all three; none of them is re-decided
+// per type, which is the point of the shell.
+
+// The tier boundaries and the container geometry are copied from
+// src/assets/scss/grid.scss (`$size4-up-breakpoint`, `$size8-up-breakpoint`,
+// `$size12-maxwidth`, the 8/8/12px margins) rather than `@use`d from it: that
+// file emits the whole grid as CSS, so importing it into a component
+// stylesheet would duplicate the grid into every section's bundle. Same
+// numbers, so a section lines up with the rest of the page exactly.
+$home-tier-m: 599.99px;
+$home-tier-l: 839.99px;
+$home-tier-m-and-up: 'only screen and (min-width: #{$home-tier-m})';
+$home-tier-l-and-up: 'only screen and (min-width: #{$home-tier-l})';
+
+$home-container-max: 1304px;
+$home-container-pad-s: 8px;
+$home-container-pad-l: 12px;
+
+// Vertical rhythm. 16/24/40 at the narrow tiers, 24/40/64 from `l` up.
+// spec-v2 1.0 names values for `s` and `l` only; `m` takes the narrow set,
+// because at 600-839px a 64px band on a single column reads as a gap rather
+// than as separation.
+$home-spacing-compact-s: 16px;
+$home-spacing-normal-s: 24px;
+$home-spacing-loose-s: 40px;
+$home-spacing-compact-l: 24px;
+$home-spacing-normal-l: 40px;
+$home-spacing-loose-l: 64px;
+
+.section {
+  // Block padding only. Horizontal room belongs to the container, so a tone's
+  // background always runs the full width of the viewport.
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section__container {
+  width: 100%;
+  max-width: $home-container-max;
+  margin: 0 auto;
+  // Logical padding: the page is rendered in RTL locales and the gutter has to
+  // follow the writing direction.
+  padding-inline: $home-container-pad-s;
+  box-sizing: border-box;
+
+  @media #{$home-tier-l-and-up} {
+    padding-inline: $home-container-pad-l;
+  }
+}
+
+.spacing--compact {
+  padding-top: $home-spacing-compact-s;
+  padding-bottom: $home-spacing-compact-s;
+
+  @media #{$home-tier-l-and-up} {
+    padding-top: $home-spacing-compact-l;
+    padding-bottom: $home-spacing-compact-l;
+  }
+}
+
+.spacing--normal {
+  padding-top: $home-spacing-normal-s;
+  padding-bottom: $home-spacing-normal-s;
+
+  @media #{$home-tier-l-and-up} {
+    padding-top: $home-spacing-normal-l;
+    padding-bottom: $home-spacing-normal-l;
+  }
+}
+
+.spacing--loose {
+  padding-top: $home-spacing-loose-s;
+  padding-bottom: $home-spacing-loose-s;
+
+  @media #{$home-tier-l-and-up} {
+    padding-top: $home-spacing-loose-l;
+    padding-bottom: $home-spacing-loose-l;
+  }
+}

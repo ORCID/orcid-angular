@@ -1,0 +1,170 @@
+// Tier boundaries copied from src/assets/scss/grid.scss ($size4-up-breakpoint,
+// $size8-up-breakpoint) rather than @use'd from it: that file emits the entire
+// grid as CSS, so importing it into a component stylesheet would duplicate the
+// grid into this section's bundle. Same numbers, so the section lines up with
+// the rest of the page.
+$tier-m-and-up: 'only screen and (min-width: 599.99px)';
+
+:host {
+  // grid.scss:115 sets `.col { display: flex; flex-wrap: wrap }`, and a host
+  // with no display of its own collapses to zero height inside one.
+  display: block;
+}
+
+.cta-band__title {
+  margin: 0 0 8px;
+}
+
+.cta-band__body {
+  // SC 1.4.8 / spec-v2 5.1: prose never runs wider than the eye can track back.
+  max-width: 68ch;
+  margin-bottom: 24px;
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  // At `s` the actions stack and fill the column; from `m` up they sit side by
+  // side (spec-v2 5.2). `stretch` is what makes a stacked action full width
+  // without a width declaration that would then have to be undone.
+  flex-direction: column;
+  align-items: stretch;
+
+  @media #{$tier-m-and-up} {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.cta-band__action {
+  // SC 2.5.8 asks for 24x24 and the ORCID bar is 44x44, which is also what
+  // spec-v2 1.6 states. Both dimensions are floors, not fixed sizes, so a long
+  // translated label grows the control instead of clipping it.
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 24px;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: var(--home-border-width, 1px);
+  font-family: var(--orcid-font-family-sans, inherit);
+  font-size: var(--orcid-font-size-body, 16px);
+  font-weight: var(--orcid-font-weight-semibold, 600);
+  // A control is not a body link, so it is the one place the permanent
+  // underline of spec-v2 7.5 would be misleading: fill and border already
+  // carry the affordance.
+  text-decoration: none;
+  text-align: center;
+
+  @media #{$tier-m-and-up} {
+    // Stops one action growing to fill the row when the other is short.
+    flex: 0 0 auto;
+  }
+}
+
+// The two roles differ by FILL first, then by border, then by text contrast -
+// never by hue alone (spec-v2 1.6, SC 1.4.1). Turn every colour on this page
+// to greyscale and a filled control is still visibly the primary one.
+.cta-band__action--primary {
+  // The brand fill, its matching border and its label colour all arrive from
+  // `orcidBrandSecondaryDarkButton` as inline styles, so nothing is restated
+  // here; restating it would be a second source of truth for a brand colour.
+  border-color: transparent;
+}
+
+.cta-band__action--inverse {
+  // On the `brand-dark` tone the brand fill sits at ~1.7:1 against the band
+  // and would have no perceivable boundary (SC 1.4.11 asks 3:1). The tone's
+  // own pair is already contrast-proved, so the control borrows it inverted.
+  background-color: var(--home-tone-fg);
+  color: var(--home-tone-bg);
+  border-color: var(--home-tone-fg);
+}
+
+.cta-band__action--secondary {
+  // No fill at all, and a border in the tone's foreground - which is the same
+  // colour the surrounding text already proved against this background.
+  background-color: transparent;
+  color: inherit;
+  border-color: currentColor;
+}
+
+.cta-band__external-icon {
+  width: 0.75em;
+  height: 0.75em;
+  margin-inline-start: 0.25em;
+  // currentColor inherits the control's own contrast rather than introducing a
+  // colour of its own, which is also why no token is referenced here.
+  fill: currentColor;
+}
+
+// The glyph points away from the label, so it has to point the other way when
+// the text runs the other way. Mirroring an icon is safe; spec-v2 9 forbids it
+// only for photographs.
+:host-context([dir='rtl']) .cta-band__external-icon {
+  transform: scaleX(-1);
+}
+
+// _a11y.scss carries the page-wide focus rule, but emulated encapsulation
+// keeps it inside the section shell's own template, so it does not reach an
+// action projected from here. Until that partial is promoted to a global
+// stylesheet this is what gives the CTA a ring that survives a dark band.
+.cta-band__action:focus-visible {
+  outline: 3px solid var(--orcid-focus-ring, currentColor);
+  outline-offset: 2px;
+}
+
+// --- variants: chrome only, identical DOM and identical outline ------------
+
+.cta-band--band {
+  // The tone band itself is painted by app-section-shell across the full
+  // viewport; this variant only centres its contents inside that band.
+  text-align: center;
+
+  .cta-band__body {
+    margin-inline: auto;
+  }
+
+  .cta-band__actions {
+    @media #{$tier-m-and-up} {
+      justify-content: center;
+    }
+  }
+}
+
+.cta-band--panel {
+  padding: 24px;
+  border-radius: 8px;
+  // A card on the same tone as its surroundings is only perceivable because of
+  // this border, so it is currentColor at full strength rather than a tint
+  // that would vanish under forced-colors. --home-border-width is raised to
+  // 2px by _a11y.scss under prefers-contrast: more.
+  border: var(--home-border-width, 1px) solid currentColor;
+}
+
+.cta-band--inline {
+  // No chrome at all: the section reads as part of the text flow around it.
+  .cta-band__actions {
+    gap: 12px;
+  }
+}
+
+// Angular Material 20's prebuilt theme no longer ships the CDK's
+// `.cdk-visually-hidden` rule and nothing in src/assets/scss defines it, so
+// without this the "(opens in a new tab)" text would be visible on the page.
+.cdk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

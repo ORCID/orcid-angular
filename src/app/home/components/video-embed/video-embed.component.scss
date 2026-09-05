@@ -1,0 +1,110 @@
+:host {
+  // `.col { display: flex }` in grid.scss collapses any host that does not
+  // declare its own display.
+  display: block;
+}
+
+.video {
+  margin: 0;
+}
+
+// The shape is a real rule rather than a lucky pair of width/height attributes.
+// The inline `aspect-ratio` binding overrides this default per video.
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 720px;
+  background: var(--orcid-color-ui-background-light);
+
+  .video-player,
+  .video-poster,
+  .video-play {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.video-player {
+  border: 0;
+}
+
+.video-poster {
+  object-fit: cover;
+}
+
+.video-play {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--orcid-color-brand-white);
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 3px solid var(--orcid-color-ui-focus);
+    outline-offset: 2px;
+  }
+}
+
+// Centred by geometry, not by text direction: the glyph points at the video,
+// not at the reading order, so it must not mirror under RTL.
+.play-glyph {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68px;
+  height: 48px;
+  margin: -24px 0 0 -34px;
+  opacity: 0.85;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.video-play:hover .play-glyph {
+  opacity: 1;
+}
+
+.video-duration {
+  position: absolute;
+  right: var(--orcid-space-s);
+  bottom: var(--orcid-space-s);
+  padding: var(--orcid-space-xxs) var(--orcid-space-xs);
+  border-radius: 2px;
+  background: var(--orcid-color-ui-background-darkest);
+  color: var(--orcid-color-brand-white);
+  font-family: var(--orcid-font-family-sans);
+  font-size: var(--orcid-font-size-small-print);
+  line-height: var(--orcid-line-height-small-print);
+}
+
+.video-caption {
+  max-width: 720px;
+  padding-block-start: var(--orcid-space-s);
+  color: var(--orcid-color-text-muted);
+  font-family: var(--orcid-font-family-sans);
+  font-size: var(--orcid-font-size-body-small);
+  line-height: var(--orcid-line-height-body-small);
+}
+
+.video-transcript {
+  max-width: 720px;
+  color: var(--orcid-color-text);
+  font-family: var(--orcid-font-family-sans);
+  font-size: var(--orcid-font-size-body);
+  line-height: var(--orcid-line-height-body-small);
+}
+
+.video-transcript-paragraph {
+  margin: 0 0 var(--orcid-space-base);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

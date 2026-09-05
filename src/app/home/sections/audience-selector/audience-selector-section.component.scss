@@ -1,0 +1,352 @@
+@use '@angular/cdk' as cdk;
+
+// Tier boundaries, copied from src/assets/scss/grid.scss rather than @use'd
+// from it: that file emits the whole grid as CSS, so importing it here would
+// duplicate the grid into this component's bundle. Same numbers, so the cards
+// line up with everything else on the page.
+$tier-m: 599.99px;
+$tier-l: 839.99px;
+$tier-m-and-up: 'only screen and (min-width: #{$tier-m})';
+
+// MUST equal AUDIENCE_TABS_MIN_WIDTH in audience-selector.constants.ts. Sass
+// cannot read a TypeScript module, so the number is duplicated once and then
+// published as a custom property that a spec reads back and compares with the
+// constant - the two copies cannot drift without a red test.
+$tabs-min-width: 1024px;
+
+// spec-v2 7.2. Only the alpha lives here; the colour is the ORCID token, so
+// this file needs no colour literal of its own.
+$scrim-alpha: 0.75;
+$scrim-alpha-more-contrast: 0.92;
+
+// A touch target, not a decoration: spec-v2 1.1 sets the floor at 48px and
+// SC 2.5.8 at 24px. 56 is the live page's row height and clears both.
+$row-min-height: 56px;
+
+:host {
+  // grid.scss sets `.col { display: flex; flex-wrap: wrap }`, and a host with
+  // no display of its own collapses inside one.
+  display: block;
+
+  // Read back by audience-selector-section.component.spec.ts.
+  --audience-tabs-min-width: #{$tabs-min-width};
+}
+
+// The visually-hidden recipe is the CDK's, included here because nothing in
+// this application's global styles defines `.cdk-visually-hidden`: Angular
+// Material 20's prebuilt theme no longer carries the CDK core rule, and
+// a11y-prebuilt.css is not in any `styles` array. Without this, the
+// "(opens in a new tab)" text would be visible on the page.
+@include cdk.a11y-visually-hidden();
+
+.audience-selector__title {
+  margin: 0 0 16px;
+}
+
+// ---------------------------------------------------------------------------
+// The tab strip (>= 1024px, tabs-photo and tabs-flat)
+// ---------------------------------------------------------------------------
+
+.audience-tabs__list {
+  display: flex;
+  // Labels wrap; the strip gets taller and never scrolls sideways. A label that
+  // does not fit is a design problem, not a reason to hide four of six
+  // audiences behind pagination arrows.
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--orcid-color-border-subtle, currentColor);
+}
+
+.audience-tabs__tab {
+  flex: 1 1 auto;
+  min-height: $row-min-height;
+  padding: 12px 16px;
+  border: 0;
+  // The selected marker is a border, not a box-shadow: forced-colors mode drops
+  // box-shadow entirely and would leave selection carried by colour alone.
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: inherit;
+  font: inherit;
+  white-space: normal;
+  text-align: center;
+  cursor: pointer;
+}
+
+// Three signals, never colour alone: the border, the weight, and aria-selected.
+.audience-tabs__tab--selected {
+  border-bottom-color: currentColor;
+  font-weight: 600;
+}
+
+// ---------------------------------------------------------------------------
+// The accordion (< 1024px)
+// ---------------------------------------------------------------------------
+
+.audience-accordion__heading {
+  // A heading that exists to carry a button contributes no space of its own.
+  margin: 0;
+  font: inherit;
+}
+
+.audience-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: $row-min-height;
+  padding: 12px 16px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+  // Logical, so the label sits at the reader's starting edge in Arabic.
+  text-align: start;
+  cursor: pointer;
+
+  &[aria-expanded='true'] {
+    border-bottom-color: currentColor;
+    font-weight: 600;
+  }
+}
+
+.audience-accordion__chevron {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  // currentColor, never a hex: in forced-colors mode a hardcoded fill is the
+  // one thing the user's palette cannot repaint.
+  color: currentColor;
+  // Points along the inline axis when closed, downwards when open.
+  transform: rotate(0deg);
+}
+
+.audience-accordion__trigger[aria-expanded='true']
+  .audience-accordion__chevron {
+  transform: rotate(90deg);
+}
+
+// A chevron is a direction, so it mirrors for a right-to-left reader. (A
+// photograph never does - that is why focalPoint uses object-position.)
+:host-context([dir='rtl']) .audience-accordion__chevron {
+  transform: scaleX(-1);
+}
+
+:host-context([dir='rtl'])
+  .audience-accordion__trigger[aria-expanded='true']
+  .audience-accordion__chevron {
+  transform: scaleX(-1) rotate(90deg);
+}
+
+// SC 2.3.3: the rotation still happens, only the animation of it is opt-in.
+@media (prefers-reduced-motion: no-preference) {
+  .audience-accordion__chevron {
+    transition: transform 150ms ease;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Panels
+// ---------------------------------------------------------------------------
+
+.audience-panel {
+  display: block;
+  position: relative;
+  // A new stacking context, so the scrim can never be painted over by
+  // something outside this panel.
+  isolation: isolate;
+
+  // `hidden` has to beat the display above, or an unselected panel stays
+  // visible. The attribute is the whole hiding mechanism here - the content
+  // stays in the DOM so that print, reader mode and a crawler still see it.
+  &[hidden] {
+    display: none;
+  }
+}
+
+.audience-panel__inner {
+  position: relative;
+  z-index: 2;
+  padding: 24px 0 32px;
+}
+
+.audience-panel--accordion .audience-panel__inner {
+  padding: 8px 16px 24px;
+}
+
+.audience-panel__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+
+  app-content-image {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// tabs-photo: white text over an editor's photograph. The scrim is what makes
+// that safe, and its alpha is a component constant no content field can lower
+// (spec-v2 7.2). hero-scrim.spec.ts does the compositing arithmetic, because
+// axe returns "incomplete" - never "fail" - for text over an image.
+.audience-panel--photo {
+  // Also the floor if the photograph 404s: white on brand-dark is 13.2:1.
+  background-color: var(--orcid-color-brand-secondary-darkest);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-color: var(--orcid-color-brand-secondary-darkest);
+    // A separate solid layer at an alpha, never `opacity` on the photograph
+    // (unpredictable against whatever is behind it) and never
+    // `filter: brightness()` (unbounded, and dropped in forced-colors). The
+    // fallback rather than a declaration on :host, so that _a11y.scss's
+    // `prefers-contrast: more` value can inherit in when it is promoted.
+    opacity: var(--home-scrim-alpha, #{$scrim-alpha});
+  }
+
+  .audience-panel__inner {
+    // The tone cannot be trusted to be brand-dark here: the scrim guarantees
+    // contrast against white specifically, so the text is white specifically.
+    color: var(--orcid-color-brand-white);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .audience-panel--photo::before {
+    opacity: var(--home-scrim-alpha, #{$scrim-alpha-more-contrast});
+  }
+}
+
+// Belt and braces for the moment between a resize and the next change
+// detection pass: the photograph is not rendered at all below the flip point,
+// and if one ever is, it is not painted.
+@media only screen and (max-width: #{$tabs-min-width - 0.02px}) {
+  .audience-panel__media {
+    display: none;
+  }
+}
+
+.audience__intro {
+  display: block;
+  // spec-v2 5.1: a line of prose stops being readable past about 68 characters.
+  max-width: 68ch;
+  margin-bottom: 24px;
+}
+
+// ---------------------------------------------------------------------------
+// Feature cards
+// ---------------------------------------------------------------------------
+
+.audience__features {
+  display: grid;
+  // 1-up at `s`, 2-up from `m` (spec-v2 5.2).
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media #{$tier-m-and-up} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  // --home-border-width is raised to 2px by _a11y.scss under
+  // `prefers-contrast: more`.
+  border: var(--home-border-width, 1px) solid
+    var(--orcid-color-border-subtle, currentColor);
+  border-radius: 4px;
+}
+
+.feature-card__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.feature-card__title {
+  margin: 0;
+}
+
+.feature-card__external-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
+:host-context([dir='rtl']) .feature-card__external-icon {
+  transform: scaleX(-1);
+}
+
+// ---------------------------------------------------------------------------
+// Stacked
+// ---------------------------------------------------------------------------
+
+.audience-stack__item + .audience-stack__item {
+  margin-top: 40px;
+}
+
+// ---------------------------------------------------------------------------
+// Focus, forced colors
+// ---------------------------------------------------------------------------
+
+// Duplicated from sections/_a11y.scss on purpose: that partial's rules are
+// written as global ones but are rewritten by emulated encapsulation to match
+// only the section shell's own template, so until it is promoted to a global
+// stylesheet the controls in here would fall back to the UA ring - which is
+// invisible on the brand-dark tone. `outline: none` appears nowhere.
+.audience-tabs__tab:focus-visible,
+.audience-accordion__trigger:focus-visible,
+.audience-panel:focus-visible,
+.feature-card__link:focus-visible {
+  outline: 3px solid var(--orcid-focus-ring, currentColor);
+  outline-offset: -3px;
+}
+
+@media (forced-colors: active) {
+  // Every colour we set is repainted, so the selected marker has to be a
+  // border in a system colour or selection stops being visible at all.
+  .audience-tabs__tab--selected,
+  .audience-accordion__trigger[aria-expanded='true'] {
+    border-bottom-color: Highlight;
+  }
+
+  .feature-card {
+    border-color: CanvasText;
+  }
+
+  .audience-tabs__tab:focus-visible,
+  .audience-accordion__trigger:focus-visible,
+  .audience-panel:focus-visible,
+  .feature-card__link:focus-visible {
+    outline-color: Highlight;
+  }
+}
+
+@media print {
+  // spec-v2 5.6: printing gives every audience, whatever the variant and
+  // whatever was open on screen.
+  .audience-panel[hidden] {
+    display: block !important;
+  }
+
+  .audience-panel__media,
+  .audience-panel--photo::before {
+    display: none;
+  }
+}

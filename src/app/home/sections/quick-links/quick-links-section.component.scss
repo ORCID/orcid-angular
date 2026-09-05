@@ -1,0 +1,210 @@
+// Tier boundaries copied from src/assets/scss/grid.scss ($size4-up-breakpoint,
+// $size8-up-breakpoint) rather than `@use`d from it: that file emits the whole
+// grid as CSS, so importing it here would duplicate the grid into this
+// component's bundle. Same numbers, so a quick-links row lines up with the
+// rest of the page. sections/_section.scss restates them for the same reason.
+$tier-m-and-up: 'only screen and (min-width: 599.99px)';
+$tier-l-and-up: 'only screen and (min-width: 839.99px)';
+
+:host {
+  // grid.scss sets `.col { display: flex; flex-wrap: wrap }`, and a host with
+  // no display of its own collapses to zero height inside one.
+  display: block;
+}
+
+.quick-links {
+  // One gap value for the whole component so the `bar` width arithmetic below
+  // can subtract it without restating it.
+  --quick-links-gap: var(--orcid-space-base, 16px);
+  --quick-links-icon-size: 40px;
+}
+
+.quick-links__title {
+  display: block;
+  margin-block-end: var(--orcid-space-m, 24px);
+}
+
+// A visually hidden heading occupies no space, so it must not contribute a
+// margin either - otherwise `bar` gains 24px of nothing above the strip.
+.quick-links__title--hidden {
+  margin-block-end: 0;
+}
+
+.quick-links__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--quick-links-gap);
+}
+
+.quick-links__item {
+  display: flex;
+}
+
+.quick-links__link {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--orcid-space-s, 8px);
+  box-sizing: border-box;
+  padding: var(--orcid-space-s, 8px) var(--orcid-space-base, 16px);
+
+  // SC 2.5.8. The floor is declared once, in the base rule, and no tier ever
+  // lowers it - which is also what lets a unit test assert it at whatever
+  // width the karma window happens to be.
+  min-block-size: 44px;
+  min-inline-size: 44px;
+
+  // Split rather than written as the `border` shorthand on purpose: an
+  // undefined custom property makes the whole declaration invalid at
+  // computed-value time, so a shorthand would drop the border entirely when
+  // tokens.css is absent. Split, only the colour falls back - to currentColor,
+  // which is still a visible box.
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--orcid-color-border-subtle);
+  border-radius: 4px;
+
+  // The row is not distinguished from its surroundings by colour at all: the
+  // affordance is the bordered box, the icon and the focus ring. That is why
+  // there is no underline here and no link colour - SC 1.4.1 is about colour
+  // being the *only* cue, and here it is not a cue in the first place.
+  color: inherit;
+  text-decoration: none;
+}
+
+.quick-links__icon {
+  flex: 0 0 auto;
+  // Kept identical to `iconSize` in the component, which is what the <img>'s
+  // width/height attributes carry.
+  inline-size: var(--quick-links-icon-size);
+  block-size: var(--quick-links-icon-size);
+}
+
+.quick-links__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--orcid-space-xxs, 2px);
+  min-inline-size: 0;
+}
+
+.quick-links__label {
+  font-weight: var(--orcid-font-weight-semibold, 600);
+}
+
+.quick-links__description {
+  font-size: var(--orcid-font-size-body-small, 14px);
+  line-height: 1.4;
+}
+
+// ---------------------------------------------------------------------------
+// bar - spec-v2 5.2
+// ---------------------------------------------------------------------------
+
+.quick-links--bar {
+  .quick-links__link {
+    // The `s` row floor, and 16px labels so the strip is legible at 320px.
+    min-block-size: 48px;
+    font-size: var(--orcid-font-size-body, 16px);
+    justify-content: flex-start;
+  }
+
+  // `m`: three across, so the six links of the live bar wrap to exactly two
+  // rows. Two gaps sit between three columns, hence the `2 *` below.
+  @media #{$tier-m-and-up} {
+    .quick-links__list {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .quick-links__item {
+      flex: 1 1 calc((100% - 2 * var(--quick-links-gap)) / 3);
+    }
+  }
+
+  // `l`: one row. `flex-wrap: wrap`, NOT the live page's `nowrap` - German
+  // labels are roughly a third longer than English and `nowrap` guarantees
+  // they overflow the strip rather than taking a second line.
+  @media #{$tier-l-and-up} {
+    .quick-links__list {
+      justify-content: space-around;
+    }
+
+    .quick-links__item {
+      flex: 0 1 auto;
+    }
+
+    .quick-links__link {
+      justify-content: center;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// grid and list - 1-up, 2-up, 3-up (spec-v2 5.2)
+// ---------------------------------------------------------------------------
+
+.quick-links--grid,
+.quick-links--list {
+  .quick-links__list {
+    display: grid;
+    // `minmax(0, 1fr)` rather than `1fr`: a grid track's default minimum is
+    // its content, so one long unbreakable label would otherwise push the
+    // whole row past the viewport instead of wrapping.
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media #{$tier-m-and-up} {
+    .quick-links__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media #{$tier-l-and-up} {
+    .quick-links__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+}
+
+// A card: icon above the label, and every card in a row the same height
+// because the anchor stretches rather than being given a fixed height.
+.quick-links--grid {
+  .quick-links__link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--orcid-space-s, 8px);
+    padding: var(--orcid-space-base, 16px);
+  }
+}
+
+.quick-links--list {
+  .quick-links__link {
+    align-items: flex-start;
+    padding: var(--orcid-space-base, 16px);
+  }
+
+  .quick-links__icon {
+    // The icon sits beside a two-line block, so it aligns with the label
+    // rather than with the centre of the row.
+    align-self: flex-start;
+  }
+}
+
+// Angular Material 20's prebuilt theme no longer ships the CDK's
+// `.cdk-visually-hidden` rule and nothing in src/assets/scss defines it, so
+// without this the "(opens in a new tab)" text would be visible on the page.
+.cdk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,13 @@
+<!--
+  The measure lives on this one element so the heading and the body are capped
+  by the same rule; `centered` centres the block by centring this element,
+  never by centring each paragraph independently.
+-->
+<div [class]="rootClass">
+  @if (hasTitle) {
+  <app-heading class="prose__title" [level]="headingLevel" [id]="titleId">{{
+    section.title
+  }}</app-heading>
+  }
+  <app-rich-text class="prose__body" [markdown]="section.body" />
+</div>

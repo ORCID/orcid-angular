@@ -1,0 +1,14 @@
+// The CDK owns the visually-hidden recipe (clip rect, 1px box, RTL `right`
+// flip, the Chrome wrapping crash workaround). Pulling in the mixin rather than
+// hand-rolling those rules keeps this component correct without depending on
+// `@angular/cdk/a11y-prebuilt.css` being added to the global styles, which it
+// is not today.
+@use '@angular/cdk' as cdk;
+
+@include cdk.a11y-visually-hidden();
+
+// `.col` in src/assets/scss/grid.scss is `display: flex; flex-wrap: wrap`, and
+// a host with no display of its own collapses inside it.
+:host {
+  display: block;
+}

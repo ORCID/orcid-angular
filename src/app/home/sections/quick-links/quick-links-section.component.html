@@ -1,0 +1,61 @@
+<!--
+  <nav> rather than a bare <ul>: this is a set of destinations, and naming it
+  gives it a place in the landmark rota a screen-reader user tabs through.
+  aria-labelledby points at the heading rather than repeating its text in an
+  aria-label, so the name is translated with everything else.
+-->
+<nav [class]="rootClass" [attr.aria-labelledby]="titleId">
+  <app-heading
+    class="quick-links__title"
+    [class.quick-links__title--hidden]="titleHidden"
+    [level]="headingLevel"
+    [id]="titleId"
+    [hidden]="titleHidden"
+    >{{ section.title }}</app-heading
+  >
+
+  <ul class="quick-links__list">
+    @for (link of section.links; track link.id) {
+    <li class="quick-links__item">
+      <!--
+        The whole row is one anchor, so there is never a second tab stop
+        inside it and the target is the full 44x44 the stylesheet reserves.
+        A real <a href>, never a <div (click)> - middle-click, ctrl-click and
+        "open in new tab" all have to keep working.
+      -->
+      <a
+        class="quick-links__link"
+        [href]="link.href"
+        [attr.target]="isExternal(link) ? '_blank' : null"
+        [attr.rel]="isExternal(link) ? 'noopener noreferrer' : null"
+      >
+        @if (link.icon; as icon) {
+        <app-content-image
+          class="quick-links__icon"
+          [image]="icon"
+          [decorative]="true"
+          [width]="iconSize"
+          [height]="iconSize"
+        />
+        }
+        <span class="quick-links__text">
+          <!--
+            dir="auto" is the backstop of 7.6: for any string the build could
+            not classify, the browser takes the direction from the first
+            strong character instead of inheriting the page's.
+          -->
+          <span class="quick-links__label" dir="auto">{{ link.label }}</span>
+          @if (showDescriptions && link.description) {
+          <span class="quick-links__description" dir="auto">{{
+            link.description
+          }}</span>
+          }
+        </span>
+        @if (isExternal(link)) {
+        <span class="cdk-visually-hidden">{{ opensInNewTab }}</span>
+        }
+      </a>
+    </li>
+    }
+  </ul>
+</nav>

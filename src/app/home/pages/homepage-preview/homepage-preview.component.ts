@@ -11,7 +11,7 @@ import { WINDOW } from 'src/app/cdk/window'
 import {
   HomepageContent,
   isSupportedHomepageContent,
-} from 'src/app/types/homepage-content'
+} from 'src/app/types/homepage-content.v2'
 
 const READY_MESSAGE = 'orcid-homepage-preview-ready'
 

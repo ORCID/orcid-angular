@@ -1,0 +1,15 @@
+@if (renders) {
+<img
+  class="content-image"
+  [src]="src"
+  [attr.alt]="alt"
+  [attr.aria-hidden]="ariaHidden"
+  [attr.srcset]="srcset || null"
+  [attr.sizes]="sizes || null"
+  [attr.width]="width ?? null"
+  [attr.height]="height ?? null"
+  [attr.loading]="priority ? 'eager' : 'lazy'"
+  [attr.fetchpriority]="priority ? 'high' : null"
+  [style.object-position]="objectPosition"
+/>
+}

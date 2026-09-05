@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+.sections__row {
+  display: block;
+}
+
+// Two half-width sections share a row only where there is room for both to
+// keep a readable measure. Below that they simply stack, in document order.
+@media only screen and (min-width: 840px) {
+  .sections__row--paired {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+}

@@ -1,0 +1,24 @@
+<app-section-shell
+  [sectionId]="section.id"
+  [tone]="section.layout.tone"
+  [spacing]="section.layout.spacing"
+  [labelledBy]="labelledBy"
+  [sectionType]="section.type"
+  [sectionVariant]="section.variant"
+>
+  @switch (section.type) { @case ('audience-selector') {
+  <app-audience-selector-section [section]="section" [headingLevel]="level" />
+  } @case ('media') {
+  <app-media-section [section]="section" [headingLevel]="level" />
+  } @case ('feature-list') {
+  <app-feature-list-section [section]="section" [headingLevel]="level" />
+  } @case ('quick-links') {
+  <app-quick-links-section [section]="section" [headingLevel]="level" />
+  } @case ('prose') {
+  <app-prose-section [section]="section" [headingLevel]="level" />
+  } @case ('cta-band') {
+  <app-cta-band-section [section]="section" [headingLevel]="level" />
+  } @case ('news-feed') {
+  <app-news-feed-section [section]="section" [headingLevel]="level" />
+  } }
+</app-section-shell>

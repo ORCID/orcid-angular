@@ -1,0 +1,240 @@
+// `feature-list` — four variants, one DOM, one heading outline (spec-v2 1.3).
+//
+// No hex literal appears here: `sections/_tone.scss` is the only file under
+// src/app/home/** allowed one, and the CI grep enforces that. Every colour
+// below is either an ORCID token or the tone's own inherited pair.
+
+// The tier boundaries are copied from src/assets/scss/grid.scss and restated
+// here for the same reason sections/_section.scss restates them: `@use`-ing
+// grid.scss from a component stylesheet would emit the entire grid into this
+// component's bundle. Same numbers, so a feature list lines up with the rest of
+// the page.
+$tier-m: 599.99px;
+$tier-l: 839.99px;
+$tier-m-and-up: 'only screen and (min-width: #{$tier-m})';
+$tier-l-and-up: 'only screen and (min-width: #{$tier-l})';
+$tier-below-m: 'only screen and (max-width: #{$tier-m})';
+
+:host {
+  // grid.scss sets `.col { display: flex; flex-wrap: wrap }`, and a host with
+  // no display of its own collapses to zero height inside one.
+  display: block;
+}
+
+.feature-list {
+  // The rule/border colour, derived rather than chosen.
+  //
+  // spec-v2 1.3 suggests `--orcid-color-border-subtle` (#dddddd), but that is
+  // 1.36:1 on white — barely better than the 1.16:1 rule it is meant to
+  // replace, and short of the 3:1 SC 1.4.11 asks of a boundary that carries
+  // meaning. Mixing the tone's own foreground into the tone's own background
+  // instead gives a rule whose contrast is a function of the tone pair, which
+  // tone-contrast has already verified at 4.5:1 or better. 70% measures
+  // 5.1:1 (brand-tint) to 7.2:1 (brand-dark) and is asserted, per tone, in
+  // feature-list-section.component.spec.ts.
+  --home-rule-color: color-mix(
+    in srgb,
+    currentColor 70%,
+    var(--home-tone-bg, transparent)
+  );
+
+  // 16px at the narrow tiers, 24px from `m` up. Also the grid gap, so the
+  // column arithmetic below subtracts the right amount.
+  --home-feature-gap: 16px;
+
+  @media #{$tier-m-and-up} {
+    --home-feature-gap: 24px;
+  }
+}
+
+.feature-list__title,
+.feature-list__intro {
+  display: block;
+  margin-bottom: 16px;
+}
+
+// spec-v2 5.1: every prose block is held to a readable measure.
+.feature-list__intro {
+  max-width: 68ch;
+}
+
+.feature-list__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-item {
+  margin: 0;
+}
+
+.feature-item__body {
+  display: block;
+  max-width: 68ch;
+}
+
+.feature-item__title {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.feature-item__link {
+  display: inline-block;
+  margin-top: 8px;
+  // SC 1.4.1: colour alone must never be what marks a link, so the underline
+  // is permanent rather than appearing on hover.
+  text-decoration: underline;
+}
+
+.feature-item__icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.feature-item__icon app-content-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+// -- the separator ----------------------------------------------------------
+
+.feature-list__rule {
+  // Present in every variant, painted in `panel` only. Keeping it in the DOM
+  // is what lets all four variants share one template and one outline.
+  display: none;
+  margin: 24px 0 0;
+  border: 0;
+  border-top: var(--home-border-width, 1px) solid var(--home-rule-color);
+}
+
+// -- cards / columns --------------------------------------------------------
+
+.feature-list--cards .feature-list__items,
+.feature-list--columns .feature-list__items {
+  display: grid;
+  // Cards in a row are the same height because the row stretches them, never
+  // because a height was set (spec-v2 1.3).
+  align-items: stretch;
+  gap: var(--home-feature-gap);
+
+  // The plain form first, as the fallback any engine understands. It is also
+  // exactly what spec-v2 1.3 prescribes: `auto-fit` collapses the empty tracks
+  // of a short last row and the surviving items stretch across it, so a ragged
+  // last row is impossible.
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+  // The same rule with an upper bound, so the tier table in spec-v2 5.2 holds:
+  // the track floor is the LARGER of 240px and an exact 1/N share, which caps
+  // the count at N while never letting a track go below 240px. 1-up at `s`.
+  --home-feature-cols: 1;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      max(
+        240px,
+        (100% - (var(--home-feature-cols) - 1) * var(--home-feature-gap)) /
+          var(--home-feature-cols)
+      ),
+      1fr
+    )
+  );
+
+  // 2-up at `m` for both variants.
+  @media #{$tier-m-and-up} {
+    --home-feature-cols: 2;
+  }
+}
+
+// `columns`-up at `l`, where `columns` is the editor's 2 or 3.
+@media #{$tier-l-and-up} {
+  .feature-list--cols-2 .feature-list__items {
+    --home-feature-cols: 2;
+  }
+
+  .feature-list--cols-3 .feature-list__items {
+    --home-feature-cols: 3;
+  }
+}
+
+.feature-list--cards .feature-item {
+  box-sizing: border-box;
+  border: var(--home-border-width, 1px) solid var(--home-rule-color);
+  border-radius: 8px;
+  padding: 16px;
+  // A floor, not a ceiling. `height` is deliberately absent: a fixed height
+  // clips the longer string a translation almost always is, which is the
+  // failure spec-v2 1.3 calls out by name.
+  min-height: 120px;
+}
+
+// The live page hides feature icons below 767px. spec-v2 1.3 keeps that rule
+// for `columns` only — there the icon is ornament beside dense prose, whereas
+// in `cards` and `checklist` it is part of how the item is recognised.
+@media #{$tier-below-m} {
+  .feature-list--columns .feature-item__icon {
+    display: none;
+  }
+}
+
+// -- panel ------------------------------------------------------------------
+
+.feature-list--panel .feature-list__items {
+  // Single column at every tier, so no grid at all.
+  box-sizing: border-box;
+  border: var(--home-border-width, 1px) solid var(--home-rule-color);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.feature-list--panel .feature-item + .feature-item {
+  margin-top: 24px;
+}
+
+.feature-list--panel .feature-list__rule {
+  display: block;
+}
+
+// -- checklist --------------------------------------------------------------
+
+.feature-list--checklist .feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.feature-list--checklist .feature-item + .feature-item {
+  // Dense: the checklist is scanned, not read.
+  margin-top: 12px;
+}
+
+.feature-list--checklist .feature-item__icon {
+  width: 24px;
+  height: 24px;
+  // Inline-start, and logical so it follows the writing direction in RTL.
+  margin-bottom: 0;
+}
+
+.feature-list--checklist .feature-item__content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// Angular Material 20's prebuilt theme no longer ships the CDK's
+// `.cdk-visually-hidden` rule and nothing in src/assets/scss defines it, so
+// without this the "(opens in a new tab)" text would be visible on the page.
+.cdk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

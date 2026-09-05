@@ -1,26 +1,18 @@
 <main @enterAnimation id="main">
   <ng-container *ngIf="jsonMode">
-    <ng-container *ngIf="jsonContent; else homepageContentLoading">
-      <app-homepage-hero
-        [title]="jsonContent.hero.title"
-        [audiences]="jsonContent.audiences"
-      ></app-homepage-hero>
-      <app-homepage-featured-news
-        [featuredNews]="jsonContent.featuredNews"
-      ></app-homepage-featured-news>
-      <app-homepage-integrate
-        [integrate]="jsonContent.integrate"
-      ></app-homepage-integrate>
-      <app-news></app-news>
-    </ng-container>
+    <app-homepage-page
+      *ngIf="jsonContent; else homepageContentLoading"
+      [content]="jsonContent"
+    ></app-homepage-page>
 
     <ng-template #homepageContentLoading>
-      <div class="container homepage-content-loading">
+      <div class="container homepage-content-loading" role="status">
+        <span i18n="@@ngOrcid.loading" class="cdk-visually-hidden"
+          >Loading</span
+        >
         <mat-progress-spinner
           mode="indeterminate"
           diameter="48"
-          i18n-aria-label="@@ngOrcid.loading"
-          aria-label="Loading"
         ></mat-progress-spinner>
       </div>
     </ng-template>

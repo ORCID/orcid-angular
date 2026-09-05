@@ -4,10 +4,10 @@ import { Observable, throwError } from 'rxjs'
 import { catchError, map, shareReplay } from 'rxjs/operators'
 
 import {
-  HOMEPAGE_CONTENT_SCHEMA_MAJOR,
   HomepageContent,
+  SUPPORTED_SCHEMA_MAJORS,
   isSupportedHomepageContent,
-} from 'src/app/types/homepage-content'
+} from 'src/app/types/homepage-content.v2'
 
 /**
  * Fetches the homepage content published by orcid-homepage-decap-cms.
@@ -76,7 +76,9 @@ export class HomepageContentService {
       map((document) => {
         if (!isSupportedHomepageContent(document)) {
           throw new Error(
-            `${url} is not homepage content this version can render (expected schemaVersion ${HOMEPAGE_CONTENT_SCHEMA_MAJOR})`
+            `${url} is not homepage content this version can render (this build reads schemaVersion ${SUPPORTED_SCHEMA_MAJORS.join(
+              ' and '
+            )})`
           )
         }
         return this.withAbsoluteAssets(document, url)
@@ -101,17 +103,7 @@ export class HomepageContentService {
       }
     }
 
-    return {
-      ...content,
-      audiences: content.audiences.map((audience) => ({
-        ...audience,
-        background: resolve(audience.background),
-        features: audience.features.map((feature) => ({
-          ...feature,
-          icon: resolve(feature.icon),
-        })),
-      })),
-    }
+    return absolutise(content, resolve) as HomepageContent
   }
 
   private baseUrl(): string {
@@ -130,4 +122,31 @@ export class HomepageContentService {
   private contentLocaleCode(): string {
     return this.locale.startsWith('en') ? 'en' : this.locale
   }
+}
+
+/** Anything that looks like a path into the published asset folder. */
+const ASSET_PATH = /^assets\/[A-Za-z0-9._-]+\.(png|jpe?g|svg|webp)$/
+
+/**
+ * Rewrite every asset path in the document to an absolute URL.
+ *
+ * Matched by value rather than by field name: in a composable page an image can
+ * sit under any field of any section type, and a list of names silently misses
+ * the ones nobody thought of.
+ */
+function absolutise(node: unknown, resolve: (path: string) => string): unknown {
+  if (typeof node === 'string') {
+    return ASSET_PATH.test(node) ? resolve(node) : node
+  }
+  if (Array.isArray(node)) {
+    return node.map((item) => absolutise(item, resolve))
+  }
+  if (node && typeof node === 'object') {
+    const out: Record<string, unknown> = {}
+    for (const [key, value] of Object.entries(node)) {
+      out[key] = absolutise(value, resolve)
+    }
+    return out
+  }
+  return node
 }

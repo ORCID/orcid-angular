@@ -1,0 +1,103 @@
+<!--
+  spec-v2 1.7: a failed or empty feed renders nothing at all - no title, no
+  empty region, and nothing announced to a visitor who never asked for news.
+  The `hasContent` output tells the host to drop the section shell too.
+-->
+@if (state !== 'empty') {
+<div [class]="feedClasses">
+  <!--
+    The schema requires a title and `isRenderableSection` rejects an empty one,
+    so this branch is a backstop rather than a feature: without it an untitled
+    section would emit a heading element with no text in it, which a screen
+    reader announces as an empty heading.
+  -->
+  @if (hasTitle) {
+  <app-heading
+    [level]="headingLevel"
+    [id]="titleId"
+    visualClass="orc-font-heading-small news-feed__title"
+  >
+    {{ section.title }}
+  </app-heading>
+  } @if (state === 'loading') {
+  <!--
+    role="status" is what the v1 spinner was missing: the load finishing was
+    a silent DOM change. The skeletons are aria-hidden because their shape is
+    decoration - the sentence beside them is the whole message.
+  -->
+  <div class="news-feed__loading" role="status">
+    <span class="cdk-visually-hidden">{{ loadingLabel }}</span>
+    <div class="news-feed__items" aria-hidden="true">
+      @for (placeholder of placeholders; track placeholder) {
+      <div class="news-feed__item">
+        <orcid-skeleton-placeholder
+          class="news-feed__skeleton news-feed__skeleton--title"
+          height="24px"
+          [accentBackground]="false"
+        />
+        <orcid-skeleton-placeholder
+          class="news-feed__skeleton news-feed__skeleton--line"
+          height="16px"
+          [accentBackground]="false"
+        />
+        <orcid-skeleton-placeholder
+          class="news-feed__skeleton news-feed__skeleton--date"
+          height="14px"
+          width="40%"
+          [accentBackground]="false"
+        />
+      </div>
+      }
+    </div>
+  </div>
+  } @else {
+  <ul class="news-feed__items">
+    @for (article of articles; track article.key) {
+    <li class="news-feed__item">
+      <article class="news-feed__card">
+        <!--
+          Every feed link leaves orcid.org, so the new-tab treatment is
+          unconditional here rather than computed (spec-v2 7.5). `title`
+          carries the untruncated headline and is set ONLY when the headline
+          was cut, so it never repeats text already on screen.
+        -->
+        <a
+          class="news-feed__link"
+          [href]="article.href"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.title]="article.fullTitle ?? null"
+        >
+          <app-heading
+            [level]="articleLevel"
+            visualClass="orc-font-body-large news-feed__article-title"
+          >
+            {{ article.title }}
+          </app-heading>
+          <svg
+            class="news-feed__external-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"
+            ></path>
+            <path
+              d="M19 19H5V5h6V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-2v6z"
+            ></path>
+          </svg>
+          <span class="cdk-visually-hidden">{{ opensInNewTab }}</span>
+        </a>
+        @if (article.isoDate) {
+        <time class="news-feed__date" [attr.datetime]="article.isoDate">{{
+          article.displayDate
+        }}</time>
+        }
+      </article>
+    </li>
+    }
+  </ul>
+  }
+</div>
+}

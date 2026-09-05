@@ -15,34 +15,33 @@ describe('HomepageContentService', () => {
 
   function validContent(overrides: Record<string, unknown> = {}) {
     return {
-      schemaVersion: 1,
-      hero: { title: 'ORCID is for…' },
-      audiences: [
+      schemaVersion: 2,
+      catalogueVersion: 1,
+      page: { title: 'ORCID is for…', description: 'One sentence.' },
+      sections: [
         {
-          id: 'researchers',
-          label: 'Researchers',
-          background: 'assets/kaya-abc1234567.png',
-          intro: 'Intro text',
-          features: [
+          id: 'who-we-serve',
+          type: 'audience-selector',
+          variant: 'tabs-photo',
+          layout: { span: 'full', spacing: 'normal', tone: 'brand-dark' },
+          audiences: [
             {
-              id: 'uniquely-yours',
-              icon: 'assets/icon-abc1234567.png',
-              title: 'Uniquely Yours',
-              body: 'Feature text',
+              id: 'researchers',
+              label: 'Researchers',
+              intro: 'Intro text',
+              background: { src: 'assets/kaya-abc1234567.png' },
+              features: [
+                {
+                  id: 'uniquely-yours',
+                  title: 'Uniquely Yours',
+                  body: 'Feature text',
+                  icon: { src: 'assets/icon-abc1234567.png' },
+                },
+              ],
             },
           ],
         },
       ],
-      featuredNews: {
-        kicker: 'FEATURED NEWS',
-        title: 'News title',
-        body: 'News body',
-        vimeoId: '1198760040',
-      },
-      integrate: {
-        title: 'Integrate',
-        paragraphs: [{ id: 'hub', body: 'Paragraph' }],
-      },
       ...overrides,
     }
   }
@@ -162,7 +161,7 @@ describe('HomepageContentService', () => {
 
     httpMock
       .expectOne(`${BASE}/home.en.json`)
-      .flush(validContent({ schemaVersion: 2 }))
+      .flush(validContent({ schemaVersion: 9 }))
 
     expect(failure?.message).toContain('schemaVersion')
   })
@@ -175,7 +174,7 @@ describe('HomepageContentService', () => {
 
     httpMock
       .expectOne(`${BASE}/home.en.json`)
-      .flush(validContent({ audiences: [] }))
+      .flush(validContent({ page: undefined }))
 
     expect(failure).toBeTruthy()
   })
@@ -187,10 +186,10 @@ describe('HomepageContentService', () => {
     service.getContent().subscribe((content) => (received = content))
     httpMock.expectOne(`${BASE}/home.en.json`).flush(validContent())
 
-    expect(received.audiences[0].background).toBe(
+    expect(received.sections[0].audiences[0].background.src).toBe(
       `${BASE}/assets/kaya-abc1234567.png`
     )
-    expect(received.audiences[0].features[0].icon).toBe(
+    expect(received.sections[0].audiences[0].features[0].icon.src).toBe(
       `${BASE}/assets/icon-abc1234567.png`
     )
   })
@@ -205,7 +204,7 @@ describe('HomepageContentService', () => {
       .flush('missing', { status: 404, statusText: 'Not Found' })
     httpMock.expectOne(`${BASE}/home.en.json`).flush(validContent())
 
-    expect(received.audiences[0].features[0].icon).toBe(
+    expect(received.sections[0].audiences[0].features[0].icon.src).toBe(
       `${BASE}/assets/icon-abc1234567.png`
     )
   })

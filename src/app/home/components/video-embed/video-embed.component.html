@@ -1,0 +1,75 @@
+<figure class="video">
+  @if (consented) {
+  <div class="video-frame" [style.aspect-ratio]="aspectRatio">
+    @if (playing && playerUrl) {
+    <iframe
+      #player
+      class="video-player"
+      [src]="playerUrl"
+      [title]="frameTitle"
+      allow="fullscreen; picture-in-picture; encrypted-media"
+      referrerpolicy="strict-origin-when-cross-origin"
+      loading="lazy"
+      allowfullscreen
+    ></iframe>
+    } @else if (playable) {
+    <button
+      type="button"
+      class="video-play"
+      [attr.aria-label]="playLabel"
+      (click)="play()"
+    >
+      <img
+        class="video-poster"
+        [src]="video.poster.src"
+        [alt]="video.poster.alt"
+        loading="lazy"
+      />
+      <span class="play-glyph" aria-hidden="true">
+        <svg viewBox="0 0 68 48" focusable="false" fill="currentColor">
+          <path
+            d="M34 0a34 34 0 1 0 0 68 34 34 0 0 0 0-68zm-7 49V19l26 15-26 15z"
+          ></path>
+        </svg>
+      </span>
+      @if (durationLabel) {
+      <span class="video-duration">{{ durationLabel }}</span>
+      }
+    </button>
+    } @else {
+    <img
+      class="video-poster"
+      [src]="video.poster.src"
+      [alt]="video.poster.alt"
+      loading="lazy"
+    />
+    }
+  </div>
+  } @else {
+  <app-video-consent
+    [video]="video"
+    [canOpenPreferences]="canOpenPreferences"
+    (allow)="openPreferenceCentre()"
+  ></app-video-consent>
+  }
+
+  <figcaption class="video-caption">{{ video.title }}</figcaption>
+
+  <app-disclosure [label]="transcriptLabel">
+    <div class="video-transcript">
+      @for (paragraph of transcript; track $index) {
+      <p class="video-transcript-paragraph">
+        @for (node of paragraph; track $index) { @if (node.type === 'bold') {
+        <strong>{{ node.text }}</strong>
+        } @if (asLink(node); as link) {
+        <a [href]="link.href" rel="noopener noreferrer" target="_blank">{{
+          link.text
+        }}</a>
+        } @if (node.type === 'text') {
+        {{ node.text }}
+        } }
+      </p>
+      }
+    </div>
+  </app-disclosure>
+</figure>

@@ -1,0 +1,7 @@
+@for (row of rows; track trackRow($index, row)) {
+<div class="sections__row" [class.sections__row--paired]="row.length > 1">
+  @for (section of row; track trackSection($index, section)) {
+  <app-homepage-section [section]="section" [level]="level" />
+  }
+</div>
+}
