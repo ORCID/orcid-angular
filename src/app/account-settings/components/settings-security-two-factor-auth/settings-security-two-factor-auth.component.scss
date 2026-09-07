@@ -61,6 +61,17 @@
   padding-top: 16px;
 }
 
+/*
+ * A row holds its content 16px below the rule it draws. The space underneath
+ * comes from whatever follows: the section's own padding for the last row, and
+ * for any other row only the section's 8px gap, which left the rule between
+ * two rows sitting closer to the one above it than the one below. The other
+ * 8px goes here, so a rule has 16px on both sides wherever rows are stacked.
+ */
+.two-factor-panel__requirement + .two-factor-panel__requirement {
+  margin-top: 8px;
+}
+
 .two-factor-panel__requirement-title {
   margin: 0;
   font-weight: 700;
@@ -71,6 +82,41 @@
   width: 25px;
   height: 25px;
   font-size: 24px;
+}
+
+.two-factor-panel__disable-heading {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.two-factor-panel__requirement-icon--unmet {
+  color: var(--orcid-color-border-subtle, #bdbdbd);
+}
+
+/* The row holding the number and its add/manage link */
+.two-factor-panel__requirement-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--orcid-space-s, 8px);
+  width: 100%;
+}
+
+.two-factor-panel__requirement-value {
+  margin-left: var(--orcid-space-xs, 4px);
+}
+
+.two-factor-panel__requirement-action {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--orcid-color-brand-secondary-dark, #085c77);
+  font: inherit;
+  text-align: left;
 }
 
 .two-factor-panel__disable-button {
