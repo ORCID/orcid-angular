@@ -2787,7 +2787,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
@@ -2826,7 +2826,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
@@ -2885,7 +2885,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
@@ -3053,7 +3053,7 @@
         <source>Clear organization</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
@@ -3064,7 +3064,7 @@
         <source>Type your organization name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
@@ -3075,7 +3075,7 @@
         <source>School, college or department</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
@@ -3086,7 +3086,7 @@
         <source>Your role or job in the organization</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
@@ -3097,7 +3097,7 @@
         <source>Organization</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
@@ -3108,7 +3108,7 @@
         <source>Organization - We've added an organization based on your email domain</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
