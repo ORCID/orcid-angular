@@ -10,7 +10,9 @@
     color: #ffffff;
   }
 
-  .recovery-phone-error {
+  .recovery-phone-error,
+  .verification-field--invalid .verification-field__label,
+  .verification-field--invalid .verification-field__helper {
     color: var(--orcid-color-state-warning-darkest, #b71c1c);
   }
 }

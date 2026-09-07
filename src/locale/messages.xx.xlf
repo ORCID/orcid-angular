@@ -1738,7 +1738,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19523,7 +19523,7 @@
         <source>Your recovery phone number can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">27,31</context>
+          <context context-type="linenumber">27,30</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19531,7 +19531,7 @@
         <source>Your recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">38,40</context>
+          <context context-type="linenumber">37,39</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19539,7 +19539,7 @@
         <source>Your current recovery phone number is</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19547,7 +19547,7 @@
         <source>Select a country or location and enter your phone number.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">56,58</context>
+          <context context-type="linenumber">55,57</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19555,7 +19555,7 @@
         <source>By entering my phone number and clicking 'Send verification code', I consent to receive an automated one-time verification code from ORCID at the number provided. Message and data rates may apply.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">90,94</context>
+          <context context-type="linenumber">87,91</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19563,7 +19563,7 @@
         <source>Terms of use</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">98</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19571,7 +19571,7 @@
         <source>Privacy policy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">106</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19579,15 +19579,23 @@
         <source>Send verification code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">122,124</context>
+          <context context-type="linenumber">120,122</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="account.recoveryPhoneCodeSentTo" datatype="html" resname="account.recoveryPhoneCodeSentTo">
+        <source>Verification code sent to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <target>X</target>
       </trans-unit>
       <trans-unit id="account.recoveryPhoneResendIn" datatype="html" resname="account.recoveryPhoneResendIn">
-        <source>You can resend in</source>
+        <source>Resend in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">130</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19595,7 +19603,7 @@
         <source>seconds</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19603,7 +19611,7 @@
         <source>Verification code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19611,7 +19619,7 @@
         <source>Enter the 6-digit verification code sent to your device</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">175</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19619,7 +19627,7 @@
         <source>Cancel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19627,7 +19635,7 @@
         <source>Manage your recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19635,7 +19643,7 @@
         <source>Add a recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19643,7 +19651,7 @@
         <source>Update recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19651,7 +19659,7 @@
         <source>to manage your recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">156</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19659,7 +19667,7 @@
         <source>to add a recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19667,7 +19675,7 @@
         <source>We could not send a verification code. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">301</context>
+          <context context-type="linenumber">319</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19675,7 +19683,7 @@
         <source>A verification code is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">312</context>
+          <context context-type="linenumber">330</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19683,7 +19691,7 @@
         <source>Invalid verification code length</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">317</context>
+          <context context-type="linenumber">335</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19691,7 +19699,7 @@
         <source>Phone number is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">383</context>
+          <context context-type="linenumber">401</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19699,11 +19707,11 @@
         <source>Phone number is too short</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">387</context>
+          <context context-type="linenumber">409</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">433</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19711,11 +19719,11 @@
         <source>Phone number is too long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">390</context>
+          <context context-type="linenumber">412</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">404</context>
+          <context context-type="linenumber">436</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19723,11 +19731,11 @@
         <source>Phone number is invalid</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">392</context>
+          <context context-type="linenumber">414</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">407</context>
+          <context context-type="linenumber">439</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19735,7 +19743,7 @@
         <source>This code was sent to a different number. Send a new code to this number.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">410</context>
+          <context context-type="linenumber">442</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19743,7 +19751,7 @@
         <source>Invalid verification code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">416</context>
+          <context context-type="linenumber">448</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19751,7 +19759,7 @@
         <source>That code is no longer valid. Send a new code.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">421</context>
+          <context context-type="linenumber">453</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19759,7 +19767,7 @@
         <source>Something went wrong. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">433</context>
+          <context context-type="linenumber">465</context>
         </context-group>
         <target>X</target>
       </trans-unit>

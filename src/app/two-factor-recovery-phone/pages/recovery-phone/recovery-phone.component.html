@@ -26,8 +26,7 @@
             i18n="@@account.recoveryPhoneNoticeOnce"
           >
             Your recovery phone number can only be used once. Using it will
-            disable two-factor authentication and reset your 2FA backup
-            options.
+            disable two-factor authentication and reset your 2FA backup options.
           </p>
         </div>
       </div>
@@ -84,31 +83,30 @@
           }
         </div>
 
-        <p
-          class="orc-font-small-print recovery-phone-consent"
-          i18n="@@account.recoveryPhoneConsent"
-        >
-          By entering my phone number and clicking 'Send verification code', I
-          consent to receive an automated one-time verification code from ORCID
-          at the number provided. Message and data rates may apply.
-        </p>
-        <p class="orc-font-small-print recovery-phone-consent-links">
-          <a
-            href="https://orcid.org/content/orcid-terms-use"
-            target="_blank"
-            rel="noopener noreferrer"
-            i18n="@@account.termsOfUse"
-            >Terms of use</a
-          >
-          <span aria-hidden="true"> | </span>
-          <a
-            href="https://orcid.org/privacy-policy"
-            target="_blank"
-            rel="noopener noreferrer"
-            i18n="@@account.privacyPolicy"
-            >Privacy policy</a
-          >
-        </p>
+        <div class="recovery-phone-consent">
+          <p class="orc-font-small-print" i18n="@@account.recoveryPhoneConsent">
+            By entering my phone number and clicking 'Send verification code', I
+            consent to receive an automated one-time verification code from
+            ORCID at the number provided. Message and data rates may apply.
+          </p>
+          <p class="orc-font-small-print">
+            <a
+              href="https://orcid.org/content/orcid-terms-use"
+              target="_blank"
+              rel="noopener noreferrer"
+              i18n="@@account.termsOfUse"
+              >Terms of use</a
+            >
+            <span aria-hidden="true"> | </span>
+            <a
+              href="https://orcid.org/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              i18n="@@account.privacyPolicy"
+              >Privacy policy</a
+            >
+          </p>
+        </div>
 
         <div class="send-code">
           <button
@@ -122,18 +120,28 @@
           >
             Send verification code
           </button>
-          @if (resendCountdown > 0) {
+          @if (codeSent) {
           <p class="orc-font-small-print send-code__helper" aria-live="polite">
-            <ng-container i18n="@@account.recoveryPhoneResendIn"
-              >You can resend in</ng-container
+            <ng-container i18n="@@account.recoveryPhoneCodeSentTo"
+              >Verification code sent to</ng-container
             >
-            <strong> {{ resendCountdown }} </strong>
-            <ng-container i18n="@@account.seconds">seconds</ng-container>
+            {{ sentToNumber }}. @if (resendCountdown > 0) {
+            <ng-container i18n="@@account.recoveryPhoneResendIn"
+              >Resend in</ng-container
+            >&nbsp;<strong
+              >{{ resendCountdown }}&nbsp;<ng-container i18n="@@account.seconds"
+                >seconds</ng-container
+              ></strong
+            >
+            }
           </p>
           }
         </div>
 
-        <div class="verification-field">
+        <div
+          class="verification-field"
+          [class.verification-field--invalid]="codeErrorMessage"
+        >
           <label
             class="orc-font-small-print verification-field__label"
             for="recovery-phone-code"
@@ -147,23 +155,29 @@
             inputmode="numeric"
             maxlength="6"
             autocomplete="one-time-code"
+            aria-describedby="recovery-phone-code-helper"
+            [attr.aria-invalid]="codeErrorMessage ? 'true' : null"
             formControlName="verificationCode"
           />
-          <div class="verification-field__helper">
+          <div
+            id="recovery-phone-code-helper"
+            class="verification-field__helper"
+          >
+            @if (codeErrorMessage) {
+            <span class="orc-font-small-print" role="alert">{{
+              codeErrorMessage
+            }}</span>
+            } @else {
             <span
               class="orc-font-small-print"
               i18n="@@account.enterSixDigitCodeSentToDevice"
               >Enter the 6-digit verification code sent to your device</span
             >
+            }
             <span class="orc-font-small-print" aria-hidden="true"
               >{{ verificationCodeControl?.value?.length || 0 }}/6</span
             >
           </div>
-          @if (codeErrorMessage) {
-          <mat-error class="orc-font-small-print recovery-phone-error">{{
-            codeErrorMessage
-          }}</mat-error>
-          }
         </div>
 
         @if (generalErrorMessage) {

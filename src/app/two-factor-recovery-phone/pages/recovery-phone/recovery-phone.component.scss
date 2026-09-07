@@ -185,12 +185,14 @@
   }
 }
 
-.recovery-phone-consent {
+/*
+ * The consent copy and the two links it ends with are one run of text in the
+ * design, so the links follow on the next line with nothing but the line
+ * height between them: as separate children of the form they would be pushed
+ * apart by its 24px gap.
+ */
+.recovery-phone-consent p {
   margin: 0;
-}
-
-.recovery-phone-consent-links {
-  margin: var(--orcid-space-xs, 4px) 0 0;
 }
 
 .recovery-phone-error {
@@ -234,6 +236,15 @@
 
 .verification-field__input:disabled {
   background-color: var(--orcid-color-background-light, #eeeeee);
+}
+
+/*
+ * A rejected code turns the whole field red and the message takes the
+ * microcopy's place below it rather than stacking under it, which is how the
+ * code field on the sign-in page behaves.
+ */
+.verification-field--invalid .verification-field__input {
+  border-color: var(--orcid-color-state-warning-darkest, #b71c1c);
 }
 
 .verification-field__helper {

@@ -13,7 +13,10 @@ import { first, takeUntil } from 'rxjs/operators'
 import { ApplicationRoutes } from '../../../constants'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
-import { AuthChallenge, AuthChallengeFormData } from '../../../types/common.endpoint'
+import {
+  AuthChallenge,
+  AuthChallengeFormData,
+} from '../../../types/common.endpoint'
 import { TogglzFlag } from '../../../types/config.endpoint'
 import {
   RecoveryPhoneErrorCode,
@@ -46,6 +49,15 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
   resendCountdown = 0
   sending = false
   saving = false
+
+  /**
+   * The number the outstanding code was sent to, held from the moment it was
+   * sent: the field can be edited again once the resend delay is over, and the
+   * confirmation still has to name the number the code actually went to. It is
+   * shown in full - it is what the user just typed into the field above, not
+   * anything the registry read back.
+   */
+  sentToNumber: string | undefined
 
   phoneErrorMessage: string | null = null
   codeErrorMessage: string | null = null
@@ -290,10 +302,14 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
           this.sending = false
           if (response.success) {
             this.codeSent = true
+            this.sentToNumber = this.phoneNumberControl?.value
             this.verificationCodeControl?.enable()
             this.startResendCountdown(response.resendAfterSeconds)
           } else {
-            this.handleErrorCode(response.errorCode, response.resendAfterSeconds)
+            this.handleErrorCode(
+              response.errorCode,
+              response.resendAfterSeconds
+            )
           }
         },
         error: () => {
@@ -383,7 +399,11 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
       return $localize`:@@account.recoveryPhoneRequired:Phone number is required`
     }
     const reason = String(control.errors?.['invalidPhone'] ?? '')
-    if (reason.includes('TOO_SHORT') || reason.includes('LOCAL_ONLY') || reason.includes('INVALID_LENGTH')) {
+    if (
+      reason.includes('TOO_SHORT') ||
+      reason.includes('LOCAL_ONLY') ||
+      reason.includes('INVALID_LENGTH')
+    ) {
       return $localize`:@@account.recoveryPhoneTooShort:Phone number is too short`
     }
     if (reason.includes('TOO_LONG')) {
@@ -436,6 +456,7 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
 
   private resetCodeEntry(): void {
     this.codeSent = false
+    this.sentToNumber = undefined
     this.resendCountdown = 0
     this.verificationCodeControl?.reset('')
     this.verificationCodeControl?.disable()
@@ -448,7 +469,9 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
     this.generalErrorMessage = null
   }
 
-  private returnToAccountSettings(outcome?: 'added' | 'updated' | 'failed'): void {
+  private returnToAccountSettings(
+    outcome?: 'added' | 'updated' | 'failed'
+  ): void {
     this._router.navigate([ApplicationRoutes.account], {
       queryParams: outcome ? { recoveryPhone: outcome } : {},
       fragment: '2FA',

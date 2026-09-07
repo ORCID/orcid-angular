@@ -61,6 +61,17 @@
   padding-top: 16px;
 }
 
+/*
+ * A row holds its content 16px below the rule it draws. The space underneath
+ * comes from whatever follows: the section's own padding for the last row, and
+ * for any other row only the section's 8px gap, which left the rule between
+ * two rows sitting closer to the one above it than the one below. The other
+ * 8px goes here, so a rule has 16px on both sides wherever rows are stacked.
+ */
+.two-factor-panel__requirement + .two-factor-panel__requirement {
+  margin-top: 8px;
+}
+
 .two-factor-panel__requirement-title {
   margin: 0;
   font-weight: 700;
