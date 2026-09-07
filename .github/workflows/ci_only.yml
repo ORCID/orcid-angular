@@ -95,12 +95,11 @@ jobs:
     needs: detect
     if: needs.detect.outputs.ci_only == 'true'
     uses: ./.github/workflows/bld_test_rel_tag.yml
-    # Still `inherit`. This chain fans out to bld_mvn, bld_docker and rel_tag,
-    # which between them read ten secrets across two levels of workflow_call.
-    # Enumerating them here would mean declaring each one in four more
-    # workflows, on the release path, for no gain: every callee is in this
-    # repository at this commit, so there is no trust boundary being crossed.
-    secrets: inherit
+    # No secrets. With rel_tag, deploy and run_docker all false below, every job
+    # in that chain that reads one is gated off: push_i18n_source and bld_mvn's
+    # upload step both need `deploy`, bld_docker needs `run_docker`, rel_tag
+    # needs `rel_tag`. What actually runs is lint and the maven packaging, and
+    # the only secret they touch is the automatic GITHUB_TOKEN.
     permissions:
       checks: write
       contents: read
