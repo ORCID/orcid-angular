@@ -1,3 +1,9 @@
+## v3.0.22 - 2026-09-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.21...v3.0.22)
+
+- [#2925](https://github.com/ORCID/orcid-angular/pull/2925): PD-13050 don't show the affiliation interstitial without a matching ROR
+
 ## v3.0.21 - 2026-09-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.20...v3.0.21)
