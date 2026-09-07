@@ -40,7 +40,6 @@ import { Observable } from 'rxjs/internal/Observable'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { WorkRelationships } from 'src/app/types/works.endpoint'
-import { normalize } from 'path'
 
 @Component({
   selector: 'app-modal-affiliations',

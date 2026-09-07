@@ -103,16 +103,29 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "browser": "src/main.ts",
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.app.json",
             "crossOrigin": "use-credentials",
             "outputHashing": "all",
-            "outputPath": "dist",
+            "outputPath": {
+              "base": "dist",
+              "browser": "",
+              "media": "assets"
+            },
             "i18nMissingTranslation": "warning",
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "xml2js",
+              "bowser",
+              "helphero",
+              "intl-tel-input",
+              "@orcid/bibtex-parse-js",
+              "buffer"
+            ],
             "assets": [
               {
                 "glob": "**/*",
@@ -123,18 +136,13 @@
                   "**/*.spec.ts",
                   "print-view/**"
                 ],
-                "output": "/assets/"
+                "output": "assets/"
               },
               {
                 "glob": "**/*",
                 "input": "src/assets/print-view/",
                 "ignore": ["**/*.spec.ts"],
-                "output": "/print-view/"
-              },
-              {
-                "glob": "src/favicon.ico",
-                "input": "src/",
-                "output": "/assets/"
+                "output": "print-view/"
               }
             ],
             "styles": [
@@ -149,16 +157,16 @@
               "src/assets/scss/grid.scss"
             ],
             "scripts": [
-              "/scripts/environment.runtime.js",
-              "/scripts/onetrust.runtime.js"
+              "scripts/environment.runtime.js",
+              "scripts/onetrust.runtime.js"
             ]
           },
           "configurations": {
             "local": {
               "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
+                "scripts/environment.runtime.js",
+                "scripts/onetrust.runtime.js",
+                "scripts/new-relic.runtime.js"
               ],
               "budgets": [
                 {
@@ -175,25 +183,19 @@
                 "hidden": false
               },
               "namedChunks": true,
-              "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false,
-              "outputPath": "dist"
+              "extractLicenses": false
             },
             "local-with-proxy": {
               "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
+                "scripts/environment.runtime.js",
+                "scripts/onetrust.runtime.js",
+                "scripts/new-relic.runtime.js"
               ],
               "optimization": false,
               "outputHashing": "none",
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false,
-              "outputPath": "dist",
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -203,9 +205,9 @@
             },
             "local-with-proxy-localize-en": {
               "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
+                "scripts/environment.runtime.js",
+                "scripts/onetrust.runtime.js",
+                "scripts/new-relic.runtime.js"
               ],
               "localize": ["en"],
               "optimization": false,
@@ -213,9 +215,6 @@
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false,
-              "outputPath": "dist",
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -225,27 +224,30 @@
             },
             "local-with-proxy-localize-fr": {
               "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
+                "scripts/environment.runtime.js",
+                "scripts/onetrust.runtime.js",
+                "scripts/new-relic.runtime.js"
               ],
               "localize": ["fr"]
             },
             "local-with-proxy-localize-ar": {
               "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
+                "scripts/environment.runtime.js",
+                "scripts/onetrust.runtime.js",
+                "scripts/new-relic.runtime.js"
               ],
               "localize": ["ar"]
             },
             "local-with-proxy-localize-xx": {
               "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
+                "scripts/environment.runtime.js",
+                "scripts/onetrust.runtime.js",
+                "scripts/new-relic.runtime.js"
               ],
               "localize": ["xx"]
+            },
+            "i18n-extract": {
+              "scripts": []
             },
             "production": {
               "budgets": [
@@ -313,9 +315,10 @@
           "defaultConfiguration": ""
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
-            "buildTarget": "ng-orcid:build:local"
+            "buildTarget": "ng-orcid:build:local",
+            "allowedHosts": true
           },
           "configurations": {
             "local-qa": {
@@ -411,13 +414,13 @@
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
-            "buildTarget": "ng-orcid:build"
+            "buildTarget": "ng-orcid:build:i18n-extract"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "polyfills": ["src/polyfills.ts", "zone.js/testing"],
             "tsConfig": "src/tsconfig.spec.json",
@@ -429,30 +432,12 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "/scripts/environment.runtime.js",
-              "/scripts/onetrust.runtime.js",
+              "scripts/environment.runtime.js",
+              "scripts/onetrust.runtime.js",
               "src/assets/print-view/fetch-orcid.js"
             ],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
             "sourceMap": true
-          }
-        }
-      }
-    },
-    "ng-orcid-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ng-orcid:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ng-orcid:serve:production"
-            }
           }
         }
       }
@@ -709,7 +694,12 @@
   },
   "cli": {
     "analytics": "5a5330f1-74b5-403d-bd97-0318d391a33a",
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "cache": {
+      "enabled": true,
+      "environment": "all",
+      "path": ".angular/cache"
+    }
   },
   "schematics": {
     "@schematics/angular:component": {

@@ -1,9 +1,8 @@
 name: bld_yarn
 
+# The job only builds; it calls no GitHub API.
 permissions:
-  checks: write
   contents: read
-  issues: read
 
 on:
   workflow_call:
@@ -20,9 +19,23 @@ jobs:
           egress-policy: audit
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: ./.github/actions/yarn-install
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          node-version: 'v20.x'
-          cache: 'yarn'
-      - run: yarn
+          path: .angular/cache
+          key: ${{ runner.os }}-ng-cache-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-ng-cache-${{ hashFiles('yarn.lock') }}-
+
       - run: yarn build
+
+      # Fails when the real build changes the shape of the deployed tree (a
+      # locale that stopped being emitted, a bundle that lost its locale
+      # suffix, a file that moved out of share-assets). Lazy-chunk count
+      # changes are reported but do not fail; see the helper for why.
+      - run: yarn build:manifest:check
+
+      # Resolves every asset URL and every chunk import in the real 21-locale
+      # tree through the production nginx rules. Catches what the fixture cannot.
+      - run: yarn build:verify

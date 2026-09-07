@@ -1,0 +1,68 @@
+name: 'Install dependencies'
+description: >
+  Set up the Node version from .nvmrc and get node_modules in place, restoring
+  it from cache when nothing that shapes the tree has changed.
+
+runs:
+  using: composite
+  steps:
+    # The runner's OS release, not just `runner.os`. Both ubuntu-22.04 and
+    # ubuntu-24.04 report "Linux", and this repo uses both, so keying on
+    # runner.os alone would let a tree installed on one be restored on the
+    # other. The prebuilt native binaries we pull (rollup, lmdb, lightningcss,
+    # esbuild) target an old glibc and would survive that today, but nothing
+    # guarantees the next dependency will.
+    - id: os
+      shell: bash
+      run: |
+        if [ -r /etc/os-release ]; then
+          . /etc/os-release
+          echo "id=${ID}${VERSION_ID}" >> "$GITHUB_OUTPUT"
+        else
+          echo "id=${RUNNER_OS}" >> "$GITHUB_OUTPUT"
+        fi
+
+    # First, because whether this hits decides if restoring the ~480 MB yarn
+    # download cache below is worth doing at all.
+    - id: node_modules
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: node_modules
+        # .nvmrc is in the key because the tree records the Node ABI it was
+        # built for, and yarn.lock because it is what the tree must match.
+        #
+        # No restore-keys on purpose. A tree from a different lockfile is not a
+        # useful starting point: yarn has to reconcile it, and an optional
+        # dependency that is no longer selected can survive the reconcile.
+        # Exact match or a clean install; there is no useful middle.
+        key: ${{ steps.os.outputs.id }}-${{ runner.arch }}-node-modules-${{ hashFiles('.nvmrc', 'yarn.lock') }}
+
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      with:
+        node-version-file: '.nvmrc'
+        # Deliberately no `cache: yarn`; the two steps below do it conditionally.
+
+    # The yarn download cache only speeds up an install that actually downloads.
+    # It is ~480 MB in this repo, so restoring it on a run whose node_modules
+    # already hit costs more than the 2s install it would be accelerating.
+    - id: yarn_cache_dir
+      if: steps.node_modules.outputs.cache-hit != 'true'
+      shell: bash
+      run: echo "path=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
+
+    - if: steps.node_modules.outputs.cache-hit != 'true'
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ${{ steps.yarn_cache_dir.outputs.path }}
+        key: ${{ steps.os.outputs.id }}-${{ runner.arch }}-yarn-${{ hashFiles('yarn.lock') }}
+        # Here restore-keys IS right: a partial download cache is still a
+        # head start, and yarn verifies every package against the lockfile.
+        restore-keys: |
+          ${{ steps.os.outputs.id }}-${{ runner.arch }}-yarn-
+
+    # Always, hit or miss. On a hit yarn checks node_modules/.yarn-integrity
+    # against the lockfile and exits in about two seconds with "Already
+    # up-to-date", and the `prepare` script still runs. The cache is an
+    # accelerator; yarn stays the source of truth.
+    - shell: bash
+      run: yarn --frozen-lockfile

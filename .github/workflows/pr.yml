@@ -1,13 +1,31 @@
 name: pr
 
-# read-only repo token
-# no access to secrets
+# Nothing in this chain asks for more than a fork pull request is granted.
+#
+# On a `pull_request` whose head is a fork, GitHub caps the run at read-only.
+# Requesting `contents: write` on a reusable-workflow call (`uses:`) exceeds that
+# ceiling, and for `uses:` jobs GitHub validates the request when the run is
+# created rather than capping it, which can fail the whole workflow with
+# startup_failure. That would leave every required check stuck on "Expected"
+# with no red X to explain it.
+#
+# The `format` job pushes with secrets.RELEASE_TOKEN, a PAT handed to
+# actions/checkout and add-and-commit, so GITHUB_TOKEN's contents permission
+# never gated that push anyway.
+permissions:
+  contents: read
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
   workflow_call:
+    secrets:
+      RELEASE_TOKEN:
+        required: false
+        description: >-
+          Forwarded to the format job. The ci_only dry run does not pass it:
+          that runs on a push event, where format only ever checks.
 
   workflow_dispatch:
 
@@ -17,10 +35,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Produces the required `lint / pre-commit` context. It lives here rather than
+  # in a push-triggered workflow so it also reports on pull requests from a fork,
+  # whose pushes fire in the fork and never reach this repository's check runs.
+  lint:
+    uses: ./.github/workflows/lint.yml
+
   test_yarn:
     uses: ./.github/workflows/test_yarn.yml
 
-  # NOTE: this is just to test
+  # Prettier gate. Applies the fix to the PR branch rather than asking the
+  # author to. The push starts a new run on the formatted commit and the
+  # concurrency group above cancels this one, so nothing is tested twice.
+  # Must be a required status check; see .github/workflows/format.yml.
+  format:
+    uses: ./.github/workflows/format.yml
+    # Only the token this job uses, rather than `secrets: inherit`. The set is
+    # knowable here: format.yml pushes with a PAT and reads nothing else.
+    secrets:
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+  # Full production build: the only place the postbuild layout is exercised.
   bld_yarn:
     uses: ./.github/workflows/bld_yarn.yml
 #   NOTE: codeql is only available on public repos or enterprise github accounts

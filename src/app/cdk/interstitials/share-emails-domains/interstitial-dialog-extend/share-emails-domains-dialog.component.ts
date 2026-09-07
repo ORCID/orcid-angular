@@ -9,7 +9,6 @@ import {
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { error } from 'console'
 import {
   MAT_DIALOG_DATA,
   MatDialogRef,

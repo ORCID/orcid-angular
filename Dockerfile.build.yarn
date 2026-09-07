@@ -12,6 +12,9 @@ COPY src/ src/
 
 COPY scripts/ scripts/
 
+# the app imports projects/orcid-tokens/tokens.css and the orcid-ui libraries
+COPY projects/ projects/
+
 # RUN apk add gettext
 
 RUN yarn build

@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
-@import 'src/assets/scss/material.typography';
+@import 'src/assets/scss/material.typography.scss';
 
 @mixin model-biography-theme($theme) {
   $primary: map-get($theme, primary);

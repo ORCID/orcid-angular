@@ -16,6 +16,11 @@ on:
 
 jobs:
   build-and-deploy-preview:
+    # Skipped for pull requests from a fork. GitHub caps those runs at a
+    # read-only token, so the gh-pages push and the PR comment below would both
+    # 403 after burning a couple of minutes, and show an external contributor a
+    # red X they cannot act on. Not a required check, so skipping is safe.
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
 
     permissions:
@@ -54,14 +59,8 @@ jobs:
           echo "ticket_id=$TICKET_ID" >> "$GITHUB_OUTPUT"
           echo "Extracted ticket ID: $TICKET_ID"
       
-      - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version: '20'
-          cache: 'yarn'
-      
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        uses: ./.github/actions/yarn-install
       
       - name: Build orcid-ui-docs with dynamic base-href
         run: |
