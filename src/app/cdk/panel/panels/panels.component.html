@@ -54,15 +54,12 @@
               <ng-container
                 *ngIf="reviewsNumber > 1"
                 i18n="@@peerReview.reviews"
-              >
-                reviews
-              </ng-container>
+              >reviews</ng-container>
               <ng-container
                 *ngIf="reviewsNumber === 1"
                 i18n="@@peerReview.review"
-              >
-                review </ng-container
-              >&nbsp;<ng-container i18n="@@peerReview.for"> for </ng-container>
+              >review</ng-container
+              >&nbsp;<ng-container i18n="@@peerReview.for">for</ng-container>
               {{ currentAmount }}
               <ng-container
                 *ngIf="currentAmount > 1"
