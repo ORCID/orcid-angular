@@ -20,6 +20,12 @@ on:
     types: [opened, synchronize, reopened]
 
   workflow_call:
+    secrets:
+      RELEASE_TOKEN:
+        required: false
+        description: >-
+          Forwarded to the format job. The ci_only dry run does not pass it:
+          that runs on a push event, where format only ever checks.
 
   workflow_dispatch:
 
@@ -44,7 +50,10 @@ jobs:
   # Must be a required status check; see .github/workflows/format.yml.
   format:
     uses: ./.github/workflows/format.yml
-    secrets: inherit
+    # Only the token this job uses, rather than `secrets: inherit`. The set is
+    # knowable here: format.yml pushes with a PAT and reads nothing else.
+    secrets:
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
   # Full production build: the only place the postbuild layout is exercised.
   bld_yarn:

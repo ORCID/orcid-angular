@@ -87,7 +87,8 @@ jobs:
   push_i18n_source:
     if: ${{ github.ref == 'refs/heads/main' && inputs.deploy }}
     uses: ./.github/workflows/push_i18n_source.yml
-    secrets: inherit # pass all secrets for Transifex
+    secrets:
+      TRANSIFEX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
 
 ##############################################################################
 

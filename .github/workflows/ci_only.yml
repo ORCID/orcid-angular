@@ -82,9 +82,11 @@ jobs:
     needs: detect
     if: needs.detect.outputs.ci_only == 'true'
     uses: ./.github/workflows/pr.yml
-    secrets: inherit
+    # No secrets, and no write. This is a push event, so the format job takes
+    # its check-only path: it reports drift rather than pushing a fix, and
+    # needs neither the PAT nor a writable GITHUB_TOKEN.
     permissions:
-      contents: write
+      contents: read
       pull-requests: read
 
   # The release pipeline with every side effect disabled: proves lint and the
@@ -93,6 +95,11 @@ jobs:
     needs: detect
     if: needs.detect.outputs.ci_only == 'true'
     uses: ./.github/workflows/bld_test_rel_tag.yml
+    # Still `inherit`. This chain fans out to bld_mvn, bld_docker and rel_tag,
+    # which between them read ten secrets across two levels of workflow_call.
+    # Enumerating them here would mean declaring each one in four more
+    # workflows, on the release path, for no gain: every callee is in this
+    # repository at this commit, so there is no trust boundary being crossed.
     secrets: inherit
     permissions:
       checks: write

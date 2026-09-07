@@ -28,6 +28,14 @@ permissions:
 
 on:
   workflow_call:
+    secrets:
+      RELEASE_TOKEN:
+        required: false
+        description: >-
+          PAT used to push the formatting fix back to the pull request branch.
+          Optional: it is absent for fork pull requests and for Dependabot, and
+          the job checks formatting instead of applying it when it is missing.
+
   workflow_dispatch:
 
 jobs:
