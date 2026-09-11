@@ -3458,6 +3458,7 @@
       </trans-unit>
       <trans-unit id="interstitial.addABackupEmail" datatype="html" resname="interstitial.addABackupEmail">
         <source>Add a backup email address</source>
+        <target>Přidat záložní e-mailovou adresu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">7,9</context>
@@ -3469,6 +3470,7 @@
       </trans-unit>
       <trans-unit id="interstitial.weHaveNoticedYouOnlyHaveOneEmail" datatype="html" resname="interstitial.weHaveNoticedYouOnlyHaveOneEmail">
         <source>We’ve noticed you only have one email address associated with your ORCID account. Adding a backup email will help you sign in to ORCID if you lose access to your primary email address.</source>
+        <target>Všimli jsme si, že máte ke svému účtu ORCID přidruženou pouze jednu e-mailovou adresu. Přidání záložního e-mailu vám pomůže se přihlásit k ORCID, pokud ztratíte přístup ke své hlavní e-mailové adrese.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">15,19</context>
