@@ -1,0 +1,158 @@
+<main id="main">
+  <div
+    class="container"
+    [ngClass]="{
+      mobile: !platform?.columns12
+    }"
+  >
+    <div class="row space-around">
+      <div class="col l12 m6 s4 no-gutters">
+        <div class="title-container">
+          <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
+          <h1 class="orc-font-heading-small" i18n="@@recordCorrections.heading">
+            Invalid Data Record Corrections
+          </h1>
+        </div>
+
+        <p class="intro orc-font-body-small">
+          <ng-container i18n="@@recordCorrections.p1.1">A core</ng-container>
+          <a
+            class="underline"
+            href="/about/trust/home"
+            i18n="@@recordCorrections.p1.2"
+            >ORCID Trust principle</a
+          >
+          <ng-container i18n="@@recordCorrections.p1.3"
+            >is “Individual Control”; this means that your data is controlled by
+            you. However, in limited circumstances, ORCID may proactively
+            correct data in a record where system errors have resulted in
+            invalid data. We will not correct incorrect data. All corrections of
+            invalid data are listed below.</ng-container
+          >
+        </p>
+
+        <div class="corrections">
+          <div *ngIf="loading" class="loading" aria-busy="true">
+            <span class="visually-hidden" i18n="@@recordCorrections.loading"
+              >Loading record corrections</span
+            >
+            <div
+              class="skeleton-row"
+              aria-hidden="true"
+              *ngFor="let placeholder of skeletonRows"
+            >
+              <div class="date-column">
+                <orcid-skeleton-placeholder
+                  height="14px"
+                  [accentBackground]="false"
+                ></orcid-skeleton-placeholder>
+              </div>
+              <div class="description-column">
+                <orcid-skeleton-placeholder
+                  height="14px"
+                  [accentBackground]="false"
+                ></orcid-skeleton-placeholder>
+              </div>
+              <div class="records-column">
+                <orcid-skeleton-placeholder
+                  height="14px"
+                  width="40px"
+                  [accentBackground]="false"
+                ></orcid-skeleton-placeholder>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!loading && error" class="message" role="alert">
+            <p class="orc-font-body-small">{{ errorLabel }}</p>
+            <button
+              type="button"
+              class="orcid-button"
+              (click)="retry()"
+              i18n="@@recordCorrections.retry"
+            >
+              Try again
+            </button>
+          </div>
+
+          <p
+            *ngIf="!loading && !error && isEmpty"
+            class="orc-font-body-small empty-message"
+          >
+            {{ noCorrectionsLabel }}
+          </p>
+
+          <table
+            *ngIf="!loading && !error && !isEmpty"
+            class="corrections-table orc-font-body-small"
+          >
+            <caption class="visually-hidden" i18n="@@recordCorrections.caption">
+              Invalid data record corrections
+            </caption>
+            <thead>
+              <tr>
+                <th
+                  scope="col"
+                  class="date-column"
+                  i18n="@@recordCorrections.executedDate"
+                >
+                  Executed date
+                </th>
+                <th
+                  scope="col"
+                  class="description-column"
+                  i18n="@@recordCorrections.description"
+                >
+                  Description
+                </th>
+                <th
+                  scope="col"
+                  class="records-column"
+                  i18n="@@recordCorrections.updatedRecords"
+                >
+                  Updated records
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let correction of corrections">
+                <td class="date-column">
+                  {{ correction.dateCreated | date : 'yyyy-MM-dd HH:mm:ss' }}
+                </td>
+                <td class="description-column">{{ correction.description }}</td>
+                <td class="records-column">{{ correction.numChanged }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <nav
+            *ngIf="!error && !isEmpty"
+            class="pagination"
+            [attr.aria-label]="paginationLabel"
+          >
+            <button
+              type="button"
+              class="orcid-button"
+              id="previous"
+              [disabled]="loading || !hasPrevious"
+              (click)="previous()"
+              i18n="@@recordCorrections.previous"
+            >
+              Previous
+            </button>
+            <button
+              type="button"
+              class="orcid-button"
+              id="next"
+              [disabled]="loading || !hasNext"
+              (click)="next()"
+              i18n="@@recordCorrections.next"
+            >
+              Next
+            </button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

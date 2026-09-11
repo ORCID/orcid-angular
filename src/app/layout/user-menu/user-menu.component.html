@@ -1,6 +1,6 @@
 <section role="navigation">
   <button
-    *ngIf="userInfo"
+    *ngIf="userInfo && platform.columns12"
     class="user-menu-button"
     mat-button
     color="primary"
@@ -12,19 +12,41 @@
   >
     <div class="user-menu-container">
       <img src="./assets/vectors/profile-icon.svg" alt="" />
-      <span *ngIf="platform.columns12" class="name-text-container">{{
-        displayName
-      }}</span>
+      <span class="name-text-container">{{ displayName }}</span>
 
-      <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
+      <mat-icon>expand_more</mat-icon>
     </div>
+  </button>
+  <button
+    *ngIf="userInfo && !platform.columns12"
+    mat-stroked-button
+    class="header-action-button"
+    [matMenuTriggerFor]="menu"
+    (menuOpened)="state = true"
+    (menuClosed)="state = false"
+    [attr.aria-label]="labelUserMenu + ' ' + displayName"
+    id="cy-user-info-mobile"
+  >
+    <mat-icon class="material-symbols-outlined filled signed-in"
+      >account_circle</mat-icon
+    >
+  </button>
+  <button
+    (click)="goto('signin')"
+    mat-stroked-button
+    class="header-action-button"
+    *ngIf="!userInfo && !platform.columns12 && !hideSignedOutAccount"
+    [attr.aria-label]="labelSigninRegister"
+    id="cy-mobile-signin-button"
+  >
+    <mat-icon class="material-symbols-outlined filled">account_circle</mat-icon>
   </button>
   <button
     (click)="goto('signin')"
     mat-button
     color="primary"
     class="user-menu-button"
-    *ngIf="!userInfo && !platform.columns4"
+    *ngIf="!userInfo && platform.columns12"
     [attr.aria-label]="labelSigninRegister"
     id="menu-signin-button"
   >
@@ -45,6 +67,7 @@
     "
   >
     <mat-icon
+      *ngIf="platform.columns12"
       matBadgeSize="small"
       matBadgeColor="warn"
       class="material-icons-outlined"
@@ -59,6 +82,14 @@
         alt=""
       />
     </mat-icon>
+    <mat-icon
+      *ngIf="!platform.columns12"
+      class="material-symbols-outlined"
+      [class.unread]="inboxUnread > 0"
+      >{{
+        inboxUnread > 0 ? 'notifications_unread' : 'notifications'
+      }}</mat-icon
+    >
   </button>
 </section>
 <mat-menu #menu="matMenu" class="user-menu" id="cy-user-menu">

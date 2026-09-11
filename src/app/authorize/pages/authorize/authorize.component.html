@@ -2,10 +2,12 @@
   <div class="container">
     <div class="row space-around">
       <div class="col m6 s4 l6">
-        <!-- showInterstital keeps this card mounted after showInterstitial()
-             clears showAuthorizationComponent. The portal outlet below lives
-             inside the card, so without it the interstitial is attached and
-             then destroyed in the same tick, leaving a blank page. -->
+        <!-- The portal outlet below lives inside this card, so showInterstitial()
+             sets showInterstital to mount it before attaching, and this keeps the
+             card mounted afterwards when showAuthorizationComponent is cleared.
+             Without it the interstitial has nowhere to attach on the already
+             authorized path, and is destroyed in the same tick on the other one —
+             both leaving a blank page. -->
         <mat-card
           *ngIf="
             showAuthorizationComponent ||

@@ -1,6 +1,43 @@
+@import '../header-action-button';
+
 section {
   display: flex;
   flex-wrap: nowrap;
+}
+
+// Breakpoint-scoped rules must be nested inside `:host`. Written at the top
+// level, Angular's emulated encapsulation appends this component's content
+// attribute to `.columns-4` itself, which lives on `app-root`, and the rule
+// silently never matches.
+:host {
+  .columns-4 &,
+  .columns-8 & {
+    section {
+      // Spacing between the action buttons.
+      gap: 16px;
+    }
+
+    // The desktop bell carries a 16px side margin; on mobile the row gap owns
+    // the spacing instead.
+    [mat-stroked-button] {
+      margin: 0;
+    }
+  }
+
+  .header-action-button {
+    @include header-action-button;
+
+    &.mat-mdc-outlined-button {
+      // The stroked button ships its own metrics; the action buttons are a
+      // fixed 40px square with the border inside the hit area.
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .signed-in {
+      color: var(--orcid-color-brand-secondary-dark, #085c77);
+    }
+  }
 }
 
 .main-button {
@@ -108,6 +145,25 @@ span.name-text-container {
         height: unset;
         margin-left: 7px;
         overflow: visible;
+      }
+    }
+
+    .columns-4 &,
+    .columns-8 & {
+      @include header-action-button;
+
+      height: 40px;
+      line-height: 40px;
+
+      ::ng-deep {
+        mat-icon {
+          height: 24px;
+          margin-left: 0;
+        }
+      }
+
+      .unread {
+        color: var(--orcid-color-state-warning-dark, #d32f2f);
       }
     }
   }

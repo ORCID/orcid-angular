@@ -175,6 +175,20 @@ const routes: Routes = [
       import('./sms-poc/sms-poc.module').then((m) => m.SmsPocModule),
   },
   {
+    // Legacy URL kept alive: the reverse proxy deliberately excludes it from the
+    // /about redirect to the info site.
+    path: ApplicationRoutes.recordCorrectionsLegacy,
+    redirectTo: '/' + ApplicationRoutes.recordCorrections,
+    pathMatch: 'full',
+  },
+  {
+    path: ApplicationRoutes.recordCorrections,
+    loadChildren: () =>
+      import('./record-corrections/record-corrections.module').then(
+        (m) => m.RecordCorrectionsModule
+      ),
+  },
+  {
     path: '404',
     loadChildren: () =>
       import('./page-not-found-404/page-not-found-404.module').then(

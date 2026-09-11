@@ -25,7 +25,12 @@ import { OneTrustAccessibilityService } from './core/onetrust/onetrust-accessibi
   standalone: false,
 })
 export class AppComponent {
-  currentlyDisplayingZendesk = true
+  /**
+   * The last visibility AppComponent requested from ZendeskService - not a
+   * claim about the widget's actual state. Starts `true` because the snippet
+   * in index.html renders the launcher by default.
+   */
+  private zendeskDisplayRequested = true
   headlessMode = false
   footerlessMode = false
   spacing: boolean
@@ -47,7 +52,7 @@ export class AppComponent {
     _platformInfo: PlatformInfoService,
     _router: Router,
     _googleTagManagerService: GoogleTagManagerService,
-    _zendesk: ZendeskService,
+    private _zendesk: ZendeskService,
     private _userService: UserService,
     private _errorHandler: ErrorHandlerService,
     @Inject(WINDOW) private _window: Window,
@@ -66,9 +71,7 @@ export class AppComponent {
           )
           this.setPlatformClasses(platformInfo)
           this.screenDirection = platformInfo.screenDirection
-          _zendesk.hide()
-          _zendesk.adaptPluginToPlatform(platformInfo)
-          this.currentlyDisplayingZendesk = false
+          this.updateZendeskVisibility(platformInfo)
         })
       )
       .subscribe()
@@ -108,6 +111,50 @@ export class AppComponent {
       }
     })
   }
+
+  /**
+   * Routes that must never surface the Zendesk help widget.
+   *
+   * An empty `currentRoute` means PlatformInfoService has not seen a
+   * NavigationEnd yet. Treat it as hidden, so landing on the homepage hides the
+   * widget at bootstrap instead of after the router resolves the first route.
+   */
+  private isZendeskFreeRoute(currentRoute: string): boolean {
+    const path = (currentRoute || '').split('?')[0].split('#')[0]
+    if (!path) {
+      return true // the router has not resolved a route yet
+    }
+    if (path === '/') {
+      return true // PD-5715: no help widget on the ORCID homepage
+    }
+    if (path.endsWith('/summary')) {
+      return true // the trusted summary screen hides the widget itself
+    }
+    return false
+  }
+
+  private updateZendeskVisibility(platformInfo: PlatformInfo) {
+    const shouldDisplay =
+      !platformInfo.hasOauthParameters &&
+      !this.isZendeskFreeRoute(platformInfo.currentRoute)
+
+    // platformSubject also fires on breakpoint and query parameter changes.
+    // Act only on an actual transition, so a window resize does not clobber
+    // out-of-band callers such as OauthErrorComponent's show() or
+    // TrustedSummaryComponent's hide().
+    if (shouldDisplay === this.zendeskDisplayRequested) {
+      return
+    }
+    this.zendeskDisplayRequested = shouldDisplay
+
+    if (shouldDisplay) {
+      this._zendesk.show()
+      this._zendesk.adaptPluginToPlatform(platformInfo)
+    } else {
+      this._zendesk.hide()
+    }
+  }
+
   showHeadlessOnOauthPage(currentRoute: string): boolean {
     if (currentRoute) {
       const value = HeadlessOnOauthRoutes.filter(
