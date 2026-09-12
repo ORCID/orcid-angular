@@ -3482,6 +3482,7 @@
       </trans-unit>
       <trans-unit id="interstitial.yourPrimaryEmailAddress" datatype="html" resname="interstitial.yourPrimaryEmailAddress">
         <source>Your primary email address</source>
+        <target>Vaše primární e-mailová adresa</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">23,25</context>
@@ -3493,6 +3494,7 @@
       </trans-unit>
       <trans-unit id="interstitial.professional" datatype="html" resname="interstitial.professional">
         <source>Professional</source>
+        <target>Pracovní</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">35</context>
@@ -3504,6 +3506,7 @@
       </trans-unit>
       <trans-unit id="interstitial.personal" datatype="html" resname="interstitial.personal">
         <source>Personal</source>
+        <target>Soukromá</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">41</context>
@@ -3515,6 +3518,7 @@
       </trans-unit>
       <trans-unit id="interstitial.yourBackupEmailAddress" datatype="html" resname="interstitial.yourBackupEmailAddress">
         <source>Your backup email address</source>
+        <target>Vaše záložní e-mailová adresa</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">49,51</context>
@@ -3526,6 +3530,7 @@
       </trans-unit>
       <trans-unit id="interstitial.addAnotherEmailToYourOrcidAccount" datatype="html" resname="interstitial.addAnotherEmailToYourOrcidAccount">
         <source>Add another email to your ORCID account as a backup. A mix of personal and professional email addresses works best.</source>
+        <target>Přidejte si ke svému účtu ORCID další e-mailovou adresu, která bude záložní. Nejlépe funguje kombinace soukromého a pracovního e-mailu.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">52,55</context>
@@ -3537,6 +3542,7 @@
       </trans-unit>
       <trans-unit id="interstitial.backupEmail" datatype="html" resname="interstitial.backupEmail">
         <source>Backup email</source>
+        <target>Záložní e-mail</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">64,66</context>
@@ -3592,6 +3598,7 @@
       </trans-unit>
       <trans-unit id="interstitial.addBackupEmailAddress" datatype="html" resname="interstitial.addBackupEmailAddress">
         <source>Add backup email address</source>
+        <target>Přidat záložní e-mailovou adresu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">130,132</context>
@@ -3603,6 +3610,7 @@
       </trans-unit>
       <trans-unit id="interstitial.continueWithoutAddingABackupEmailAddress" datatype="html" resname="interstitial.continueWithoutAddingABackupEmailAddress">
         <source>Continue without adding a backup email address</source>
+        <target>Pokračovat bez přidání záložní e-mailové adresy</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">143</context>
@@ -3614,6 +3622,7 @@
       </trans-unit>
       <trans-unit id="interstitial.backupEmailAddressAdded" datatype="html" resname="interstitial.backupEmailAddressAdded">
         <source>Backup email address added</source>
+        <target>Záložní e-mailová adresa byla přidána</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">168,170</context>
@@ -3625,6 +3634,7 @@
       </trans-unit>
       <trans-unit id="interstitial.youHaveSuccessfullyAddedTheFollowingEmail" datatype="html" resname="interstitial.youHaveSuccessfullyAddedTheFollowingEmail">
         <source>You have successfully added the following email address as your backup email.</source>
+        <target>Následující e-mailovou adresu jste úspěšně přidali jako váš záložní e-mail.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">175,178</context>
@@ -3668,6 +3678,7 @@
       </trans-unit>
       <trans-unit id="interstitial.addAnAdditionalEmailAsBackup" datatype="html" resname="interstitial.addAnAdditionalEmailAsBackup">
         <source>Add an additional email as backup</source>
+        <target>Přidat další e-mail jako záložní e-mail</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.ts</context>
           <context context-type="linenumber">43</context>
@@ -14650,6 +14661,7 @@
       </trans-unit>
       <trans-unit id="topBar.backupEmailAddressAdded" datatype="html" resname="topBar.backupEmailAddressAdded">
         <source>Backup email address added</source>
+        <target>Záložní e-mailová adresa byla přidána</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">103</context>
