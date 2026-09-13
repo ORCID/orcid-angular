@@ -11943,7 +11943,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.p1.3" datatype="html" resname="recordCorrections.p1.3">
         <source>is “Individual Control”; this means that your data is controlled by you. However, in limited circumstances, ORCID may proactively correct data in a record where system errors have resulted in invalid data. We will not correct incorrect data. All corrections of invalid data are listed below.</source>
-        <target>личный контроль. Это значит, что своей информацией управляете вы сами. При этом ORCID оставляет за собой право профилактически исправлять некорректные данные, которые появляются в профиле из-за системных ошибок. Мы не собираем такие данные. Все исправления перечислены ниже.</target>
+        <target>личный контроль. Это значит, что своей информацией управляете вы сами. Однако иногда ORCID может профилактически исправлять данные в профиле, которые появились из-за системных ошибок. Мы не исправляем неверные данные. Все исправления перечислены ниже.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">26,30</context>
@@ -16855,7 +16855,7 @@
       </trans-unit>
       <trans-unit id="register.youDontNeedToAddAnAffiliation" datatype="html" resname="register.youDontNeedToAddAnAffiliation">
         <source>You don’t need to add an affiliation to complete registration and get your ORCID record and iD.</source>
-        <target>Чтобы завершить регистрацию, создать профиль и получить ORCID ID, указывать аффилиацию не обязательно.</target>
+        <target>Чтобы завершить регистрацию, создать профиль и получить ORCID iD, указывать аффилиацию не обязательно.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">61,64</context>
