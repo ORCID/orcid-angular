@@ -3458,6 +3458,7 @@
       </trans-unit>
       <trans-unit id="interstitial.addABackupEmail" datatype="html" resname="interstitial.addABackupEmail">
         <source>Add a backup email address</source>
+        <target>バックアップ用のメールアドレスを追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">7,9</context>
@@ -3469,6 +3470,7 @@
       </trans-unit>
       <trans-unit id="interstitial.weHaveNoticedYouOnlyHaveOneEmail" datatype="html" resname="interstitial.weHaveNoticedYouOnlyHaveOneEmail">
         <source>We’ve noticed you only have one email address associated with your ORCID account. Adding a backup email will help you sign in to ORCID if you lose access to your primary email address.</source>
+        <target>お客様のORCIDアカウントには、1つのメールアドレスのみ登録されています。バックアップ用のメールアドレスを追加しておくと、メインのメールアドレスにアクセスできなくなった場合でも、ORCIDにログインできるようになります。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">15,19</context>
@@ -3480,6 +3482,7 @@
       </trans-unit>
       <trans-unit id="interstitial.yourPrimaryEmailAddress" datatype="html" resname="interstitial.yourPrimaryEmailAddress">
         <source>Your primary email address</source>
+        <target>メインのメールアドレス</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">23,25</context>
@@ -3491,6 +3494,7 @@
       </trans-unit>
       <trans-unit id="interstitial.professional" datatype="html" resname="interstitial.professional">
         <source>Professional</source>
+        <target>仕事用</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">35</context>
@@ -3502,6 +3506,7 @@
       </trans-unit>
       <trans-unit id="interstitial.personal" datatype="html" resname="interstitial.personal">
         <source>Personal</source>
+        <target>個人用</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">41</context>
@@ -3513,6 +3518,7 @@
       </trans-unit>
       <trans-unit id="interstitial.yourBackupEmailAddress" datatype="html" resname="interstitial.yourBackupEmailAddress">
         <source>Your backup email address</source>
+        <target>バックアップ用メールアドレス</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">49,51</context>
@@ -3524,6 +3530,7 @@
       </trans-unit>
       <trans-unit id="interstitial.addAnotherEmailToYourOrcidAccount" datatype="html" resname="interstitial.addAnotherEmailToYourOrcidAccount">
         <source>Add another email to your ORCID account as a backup. A mix of personal and professional email addresses works best.</source>
+        <target>バックアップとして、ORCIDアカウントに別のメールアドレスを追加してください。個人用と仕事用のメールアドレスを組み合わせて登録いただくことをおすすめします。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">52,55</context>
@@ -3535,6 +3542,7 @@
       </trans-unit>
       <trans-unit id="interstitial.backupEmail" datatype="html" resname="interstitial.backupEmail">
         <source>Backup email</source>
+        <target>バックアップ用メールアドレス</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">64,66</context>
@@ -3590,6 +3598,7 @@
       </trans-unit>
       <trans-unit id="interstitial.addBackupEmailAddress" datatype="html" resname="interstitial.addBackupEmailAddress">
         <source>Add backup email address</source>
+        <target>バックアップ用のメールアドレスを追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">130,132</context>
@@ -3601,6 +3610,7 @@
       </trans-unit>
       <trans-unit id="interstitial.continueWithoutAddingABackupEmailAddress" datatype="html" resname="interstitial.continueWithoutAddingABackupEmailAddress">
         <source>Continue without adding a backup email address</source>
+        <target>バックアップ用メールを追加せずに続行</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">143</context>
@@ -3612,6 +3622,7 @@
       </trans-unit>
       <trans-unit id="interstitial.backupEmailAddressAdded" datatype="html" resname="interstitial.backupEmailAddressAdded">
         <source>Backup email address added</source>
+        <target>バックアップ用のメールアドレスを追加しました</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">168,170</context>
@@ -3623,6 +3634,7 @@
       </trans-unit>
       <trans-unit id="interstitial.youHaveSuccessfullyAddedTheFollowingEmail" datatype="html" resname="interstitial.youHaveSuccessfullyAddedTheFollowingEmail">
         <source>You have successfully added the following email address as your backup email.</source>
+        <target>以下のメールアドレスを、バックアップ用メールアドレスとして追加しました。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">175,178</context>
@@ -3666,6 +3678,7 @@
       </trans-unit>
       <trans-unit id="interstitial.addAnAdditionalEmailAsBackup" datatype="html" resname="interstitial.addAnAdditionalEmailAsBackup">
         <source>Add an additional email as backup</source>
+        <target>別のメールをバックアップとして追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.ts</context>
           <context context-type="linenumber">43</context>
@@ -6626,6 +6639,7 @@
       </trans-unit>
       <trans-unit id="share.recordCorrections" datatype="html" resname="share.recordCorrections">
         <source>Record corrections - ORCID</source>
+        <target>レコードの修正 - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
           <context context-type="linenumber">145</context>
@@ -6873,6 +6887,7 @@
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByBackupEmail" datatype="html" resname="shared.dialogAriaLabeledByBackupEmail">
         <source>Add a backup email address dialog</source>
+        <target>バックアップメールアドレスのダイアログを追加</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/login-interstitials-manager/implementations/login-backup-email-interstitials-manager.service.ts</context>
           <context context-type="linenumber">87</context>
@@ -11872,6 +11887,7 @@
       </trans-unit>
       <trans-unit id="recovery.andAnyOtherVerifiedEmails" datatype="html" resname="recovery.andAnyOtherVerifiedEmails">
         <source>and any other verified email addresses on your account</source>
+        <target>および、アカウントに追加したその他の認証済みメールアドレス</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">168</context>
@@ -11903,6 +11919,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.heading" datatype="html" resname="recordCorrections.heading">
         <source>Invalid Data Record Corrections</source>
+        <target>データレコードの修正が無効です</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">12,14</context>
@@ -11910,6 +11927,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.p1.1" datatype="html" resname="recordCorrections.p1.1">
         <source>A core</source>
+        <target>コア</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">18</context>
@@ -11917,6 +11935,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.p1.2" datatype="html" resname="recordCorrections.p1.2">
         <source>ORCID Trust principle</source>
+        <target>ORCID Trust原則</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">23</context>
@@ -11924,6 +11943,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.p1.3" datatype="html" resname="recordCorrections.p1.3">
         <source>is “Individual Control”; this means that your data is controlled by you. However, in limited circumstances, ORCID may proactively correct data in a record where system errors have resulted in invalid data. We will not correct incorrect data. All corrections of invalid data are listed below.</source>
+        <target>は「個人による管理」をうたうものです。これは、データはユーザー自身によって管理されることを意味します。ただし、限られた状況下において、システムエラーにより無効なデータが発生した場合には、ORCIDが自発的にレコード内のデータを修正することがあります。なお、不正確なデータをORCIDが修正することはありません。無効なデータに対する修正内容は以下の通りです。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">26,30</context>
@@ -11931,6 +11951,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.loading" datatype="html" resname="recordCorrections.loading">
         <source>Loading record corrections</source>
+        <target>レコードの修正を読み込み中</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">37</context>
@@ -11938,6 +11959,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.retry" datatype="html" resname="recordCorrections.retry">
         <source>Try again</source>
+        <target>再試行</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">73,75</context>
@@ -11945,6 +11967,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.caption" datatype="html" resname="recordCorrections.caption">
         <source>Invalid data record corrections</source>
+        <target>データレコードの修正が無効です</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">89,91</context>
@@ -11952,6 +11975,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.executedDate" datatype="html" resname="recordCorrections.executedDate">
         <source>Executed date</source>
+        <target>実行日</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">98,100</context>
@@ -11967,6 +11991,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.updatedRecords" datatype="html" resname="recordCorrections.updatedRecords">
         <source>Updated records</source>
+        <target>更新済みレコード</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">112,114</context>
@@ -11974,6 +11999,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.previous" datatype="html" resname="recordCorrections.previous">
         <source>Previous</source>
+        <target>前へ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">140,142</context>
@@ -11981,6 +12007,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.next" datatype="html" resname="recordCorrections.next">
         <source>Next</source>
+        <target>次へ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">150,152</context>
@@ -11988,6 +12015,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.itemType" datatype="html" resname="recordCorrections.itemType">
         <source>record corrections</source>
+        <target>レコードの修正</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
           <context context-type="linenumber">30</context>
@@ -11995,6 +12023,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.noCorrections" datatype="html" resname="recordCorrections.noCorrections">
         <source>No corrections to report</source>
+        <target>報告対象の修正はありません</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
           <context context-type="linenumber">31</context>
@@ -12002,6 +12031,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.error" datatype="html" resname="recordCorrections.error">
         <source>The list of record corrections could not be loaded.</source>
+        <target>レコードの修正一覧を読み込めませんでした。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
           <context context-type="linenumber">32</context>
@@ -12009,6 +12039,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.pagination" datatype="html" resname="recordCorrections.pagination">
         <source>Record corrections pagination</source>
+        <target>レコード修正のページ送り</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
           <context context-type="linenumber">33</context>
@@ -14648,6 +14679,7 @@
       </trans-unit>
       <trans-unit id="topBar.backupEmailAddressAdded" datatype="html" resname="topBar.backupEmailAddressAdded">
         <source>Backup email address added</source>
+        <target>バックアップ用のメールアドレスを追加しました</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">103</context>
@@ -14655,6 +14687,7 @@
       </trans-unit>
       <trans-unit id="topBar.youHaveSuccessfullyAdded" datatype="html" resname="topBar.youHaveSuccessfullyAdded">
         <source>You have successfully added</source>
+        <target>追加済み:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">107</context>
@@ -14662,6 +14695,7 @@
       </trans-unit>
       <trans-unit id="topBar.asYourBackupEmailAddress" datatype="html" resname="topBar.asYourBackupEmailAddress">
         <source>as your backup email address.</source>
+        <target>(バックアップ用メールアドレス)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">111</context>
@@ -14669,6 +14703,7 @@
       </trans-unit>
       <trans-unit id="topBar.manageYourEmailAddressesAndDomains" datatype="html" resname="topBar.manageYourEmailAddressesAndDomains">
         <source>Manage your email addresses and domains</source>
+        <target>メールアドレスとドメインを管理</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">117</context>
@@ -16788,6 +16823,7 @@
       </trans-unit>
       <trans-unit id="register.basedOnYourEmailWeThink" datatype="html" resname="register.basedOnYourEmailWeThink">
         <source>Based on your email address we think you are currently affiliated with</source>
+        <target>メールアドレスに基づき、現在以下の機関に所属していると推測されます:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">21,24</context>
@@ -16803,6 +16839,7 @@
       </trans-unit>
       <trans-unit id="register.whenYouCompleteRegistrationAnEmployment" datatype="html" resname="register.whenYouCompleteRegistrationAnEmployment">
         <source>When you complete registration your affiliation will be automatically added to your new ORCID record.</source>
+        <target>登録が完了すると、所属機関の情報が新しいORCIDレコードに自動的に追加されます。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">38,41</context>
@@ -16810,6 +16847,7 @@
       </trans-unit>
       <trans-unit id="register.notReadyToAddYourAffiliation" datatype="html" resname="register.notReadyToAddYourAffiliation">
         <source>Not ready to add your affiliation?</source>
+        <target>所属の追加を希望しない場合</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">53,55</context>
@@ -16817,6 +16855,7 @@
       </trans-unit>
       <trans-unit id="register.youDontNeedToAddAnAffiliation" datatype="html" resname="register.youDontNeedToAddAnAffiliation">
         <source>You don’t need to add an affiliation to complete registration and get your ORCID record and iD.</source>
+        <target>なお、登録を完了し、ORCIDレコードおよびiDを取得するために、所属機関を追加する必要はありません。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">61,64</context>
@@ -16824,6 +16863,7 @@
       </trans-unit>
       <trans-unit id="register.skipThisStepAndContinueRegistration" datatype="html" resname="register.skipThisStepAndContinueRegistration">
         <source>Skip this step and continue registration</source>
+        <target>この手順をスキップして登録を続行</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">70</context>
@@ -16835,6 +16875,7 @@
       </trans-unit>
       <trans-unit id="register.thisOrganizationIsNotInOurDatabase" datatype="html" resname="register.thisOrganizationIsNotInOurDatabase">
         <source>This organization is not in our database. Please try entering the name again. If you cannot find your organization you can</source>
+        <target>この組織はデータベースに存在しません。名前を再度入力してください。組織が見つからない場合は、</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">183,184</context>
@@ -16842,6 +16883,7 @@
       </trans-unit>
       <trans-unit id="register.skipThisStep" datatype="html" resname="register.skipThisStep">
         <source>skip this step</source>
+        <target>この手順をスキップできます</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">190</context>
@@ -17789,6 +17831,7 @@
       </trans-unit>
       <trans-unit id="register.addingACurrentEmploymentAffiliationHelps" datatype="html" resname="register.addingACurrentEmploymentAffiliationHelps">
         <source>Adding a current employment affiliation helps distinguish you from other researchers with a similar name.</source>
+        <target>現在の所属機関を追加することで、似た名前の他の研究者と区別しやすくなります。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
           <context context-type="linenumber">44,47</context>
@@ -17888,6 +17931,7 @@
       </trans-unit>
       <trans-unit id="reset.hasAlreadyBeenUsed" datatype="html" resname="reset.hasAlreadyBeenUsed">
         <source>This password reset link has already been used</source>
+        <target>このパスワードリセットリンクはすでに使用済みです</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">88</context>
@@ -20903,6 +20947,7 @@
       </trans-unit>
       <trans-unit id="works.fundedByDescription" datatype="html" resname="works.fundedByDescription">
         <source>The identifier applies to the grant or other funding awarded for the work. For example, a DOI for the funding or an internal grant number.</source>
+        <target>この識別子は、対象となる研究に対して授与された助成金やその他の資金を指します。たとえば、資金提供のDOIや組織内の助成金番号などが該当します。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">633</context>
@@ -21623,9 +21668,11 @@
       </trans-unit>
       <trans-unit id="printView.recordIsNotClaimedTitle" datatype="html" resname="printView.recordIsNotClaimedTitle">
         <source>This record has not been claimed</source>
+        <target>このレコードは申請されていません</target>
       </trans-unit>
       <trans-unit id="printView.recordNotClaimedDescription" datatype="html" resname="printView.recordNotClaimedDescription">
         <source>This record has not been claimed yet</source>
+        <target>このレコードはまだ申請されていません</target>
       </trans-unit>
       <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
         <source>ORCID Print view</source>
