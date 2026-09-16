@@ -34,7 +34,14 @@ import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { OauthService } from '../../../core/oauth/oauth.service'
-import { combineLatest, forkJoin, Observable, Subject } from 'rxjs'
+import {
+  combineLatest,
+  forkJoin,
+  interval,
+  Observable,
+  Subject,
+  Subscription,
+} from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
 import { ERROR_REPORT } from 'src/app/errors'
 import { ErrorStateMatcherForPasswordField } from '../../ErrorStateMatcherForPasswordField'
@@ -45,6 +52,8 @@ import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-man
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
+import { RecoveryPhoneSignInState } from '../../../cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component'
+import { RecoveryPhoneNoticeService } from '../../../core/two-factor-authentication/recovery-phone-notice.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -65,6 +74,15 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   @Output() show2FAEmitter = new EventEmitter<object>()
   @Output() loading = new EventEmitter<boolean>()
   @Output() errorDescription = new EventEmitter<string>()
+  /**
+   * The user signed in with their recovery phone number while answering an
+   * OAuth request. They are not sent back to the client straight away: the
+   * page shows them what just happened to their account first (R4.2), and
+   * carries this url when they continue.
+   */
+  @Output() twoFactorDisabledByRecoveryPhone = new EventEmitter<{
+    url: string
+  }>()
   @Input() showForgotYourPassword = true
 
   badCredentials = false
@@ -87,6 +105,24 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   emailVerified: boolean
   invalidVerifyUrl: boolean
   private oauthRedirectTriggered = false
+
+  /** TWO_FACTOR_RECOVERY_PHONE, resolved once and passed to the 2FA form. */
+  recoveryPhoneOptionAvailable = false
+
+  /** Everything the 2FA form needs to know about the code we asked for. */
+  recoveryPhoneState: RecoveryPhoneSignInState = {
+    codeSent: false,
+    resendSeconds: 0,
+    sending: false,
+  }
+
+  /**
+   * Set the moment the registry accepts a recovery number code, so the sign-in
+   * that follows knows it is the second half of that flow rather than an
+   * ordinary one.
+   */
+  private twoFactorDisabledByRecoveryPhoneFlow = false
+  private recoveryPhoneCountdown: Subscription
 
   placeholderUsername = $localize`:@@ngOrcid.signin.username:Email or 16-digit ORCID iD`
   placeholderPassword = $localize`:@@ngOrcid.signin.yourOrcidPassword:Your ORCID password`
@@ -116,7 +152,8 @@ export class FormSignInComponent implements OnInit, OnDestroy {
     private _snackBar: SnackbarService,
     private _togglzService: TogglzService,
     private _oauthUrlSessionManager: OauthURLSessionManagerService,
-    private _observability: RumJourneyEventService
+    private _observability: RumJourneyEventService,
+    private _recoveryPhoneNotice: RecoveryPhoneNoticeService
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -172,6 +209,13 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationTogglzEnable
       })
 
+    this._togglzService
+      .getStateOf(TogglzFlag.TWO_FACTOR_RECOVERY_PHONE)
+      .pipe(take(1))
+      .subscribe((recoveryPhoneOptionAvailable) => {
+        this.recoveryPhoneOptionAvailable = recoveryPhoneOptionAvailable
+      })
+
     this.authorizationForm = new UntypedFormGroup({
       username: new UntypedFormControl(),
       password: new UntypedFormControl('', {
@@ -192,6 +236,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.recoveryPhoneCountdown?.unsubscribe()
     this.$destroy.next(true)
     this.$destroy.complete()
   }
@@ -221,6 +266,21 @@ export class FormSignInComponent implements OnInit, OnDestroy {
             isOauth: !!isOauth,
             signInType: this.signInLocal.type || 'regular',
           })
+          // The OAuth half of the recovery number flow stops here: the user is
+          // told 2FA is off before they are handed back to the client (R4.2).
+          // This form has more than one host - link-account hosts it too - and
+          // only a host that binds the output can show that panel, so check
+          // somebody is listening before holding the navigation back. Emitting
+          // into nothing would strand the user on a dead sign-in card.
+          if (
+            this.twoFactorDisabledByRecoveryPhoneFlow &&
+            isOauth &&
+            this.twoFactorDisabledByRecoveryPhone.observed
+          ) {
+            this.loading.next(false)
+            this.twoFactorDisabledByRecoveryPhone.emit({ url: data.url })
+            return
+          }
           if (
             this.isOauthAuthorizationTogglzEnable &&
             this._oauthUrlSessionManager.get()
@@ -285,7 +345,9 @@ export class FormSignInComponent implements OnInit, OnDestroy {
 
   authenticate($event) {
     this.resetTwoFactor()
-    if ($event.recoveryCode) {
+    if ($event.recoveryPhoneCode) {
+      this.verifyRecoveryPhoneCode($event.recoveryPhoneCode)
+    } else if ($event.recoveryCode) {
       this.authorizationForm.patchValue({
         recoveryCode: $event.recoveryCode,
       })
@@ -296,6 +358,151 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       })
       this.onSubmit()
     }
+  }
+
+  /**
+   * Asks the registry to text a code to the number on the account. The
+   * password goes with it: the registry checks it through the ordinary
+   * authentication manager, so a wrong one counts toward the sign-in lockout
+   * exactly as a sign-in attempt does (R3.2).
+   */
+  onRequestRecoveryPhoneCode(): void {
+    if (this.recoveryPhoneState.sending) {
+      return
+    }
+    const { username, password } = this.authorizationForm.getRawValue()
+    this.recoveryPhoneState = {
+      ...this.recoveryPhoneState,
+      sending: true,
+      errorCode: undefined,
+    }
+
+    this._signIn
+      .sendRecoveryPhoneCode({ username, password })
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          if (response?.success) {
+            this.recoveryPhoneState = {
+              codeSent: true,
+              maskedNumber: response.maskedRecoveryPhoneNumber,
+              resendSeconds: 0,
+              sending: false,
+              errorCode: undefined,
+            }
+            this.startRecoveryPhoneCountdown(response.resendAfterSeconds)
+            this._observability.recordSimpleEvent(
+              AppEventName.SignInRecoveryPhoneCodeSent,
+              { isOauth: !!this.signInLocal.isOauth }
+            )
+          } else if (response?.errorCode === 'RESEND_TOO_SOON') {
+            // A code is already in flight: show the field and count the
+            // registry's own buffer down rather than calling this an error
+            this.recoveryPhoneState = {
+              ...this.recoveryPhoneState,
+              codeSent: true,
+              sending: false,
+              errorCode: undefined,
+            }
+            this.startRecoveryPhoneCountdown(response.resendAfterSeconds)
+          } else {
+            this.recoveryPhoneState = {
+              ...this.recoveryPhoneState,
+              sending: false,
+              errorCode: response?.errorCode || 'HTTP',
+            }
+          }
+        },
+        error: () => {
+          this.recoveryPhoneState = {
+            ...this.recoveryPhoneState,
+            sending: false,
+            errorCode: 'HTTP',
+          }
+        },
+      })
+  }
+
+  /**
+   * Posts the texted code. On success the registry has already disabled 2FA,
+   * deleted the number and invalidated the backup codes, so the ordinary
+   * sign-in is submitted again with no code at all and now succeeds (R3.5).
+   */
+  private verifyRecoveryPhoneCode(verificationCode: string): void {
+    const { username, password } = this.authorizationForm.getRawValue()
+    this.hideErrors()
+    this.recoveryPhoneState = {
+      ...this.recoveryPhoneState,
+      errorCode: undefined,
+    }
+    this.loading.next(true)
+
+    this._signIn
+      .verifyRecoveryPhoneCode({ username, password, verificationCode })
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          if (response?.success) {
+            const isOauth = !!this.signInLocal.isOauth
+            this._observability.recordSimpleEvent(
+              AppEventName.SignInRecoveryPhoneUsed,
+              { isOauth }
+            )
+            if (!isOauth) {
+              // The OAuth flow shows its own panel and may never reach the
+              // record, so it queues no notice (R4.3)
+              this._recoveryPhoneNotice.markTwoFactorDisabled(response.orcid)
+            }
+            this.twoFactorDisabledByRecoveryPhoneFlow = true
+            this.recoveryPhoneCountdown?.unsubscribe()
+            this.resetTwoFactor()
+            this.onSubmit()
+          } else {
+            this.loading.next(false)
+            this.recoveryPhoneState = {
+              ...this.recoveryPhoneState,
+              errorCode: response?.errorCode || 'HTTP',
+            }
+          }
+        },
+        error: () => {
+          this.loading.next(false)
+          this.recoveryPhoneState = {
+            ...this.recoveryPhoneState,
+            errorCode: 'HTTP',
+          }
+        },
+      })
+  }
+
+  /**
+   * Counts the registry's resend buffer down a second at a time, so the resend
+   * control comes back at the moment another send would be accepted.
+   */
+  private startRecoveryPhoneCountdown(seconds: number): void {
+    // Drop any countdown still running, or two of them would race and the
+    // control would come back early
+    this.recoveryPhoneCountdown?.unsubscribe()
+    const from = Math.max(0, seconds || 0)
+    this.recoveryPhoneState = {
+      ...this.recoveryPhoneState,
+      resendSeconds: from,
+    }
+    if (from <= 0) {
+      return
+    }
+    this.recoveryPhoneCountdown = interval(1000)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => {
+        const remaining = this.recoveryPhoneState.resendSeconds - 1
+        this.recoveryPhoneState = {
+          ...this.recoveryPhoneState,
+          resendSeconds: remaining > 0 ? remaining : 0,
+        }
+        if (remaining <= 0) {
+          this.recoveryPhoneCountdown?.unsubscribe()
+        }
+      })
   }
 
   hideErrors() {

@@ -119,6 +119,9 @@
     *ngIf="show2FA"
     [showBadVerificationCode]="showBadVerificationCode"
     [showBadRecoveryCode]="showBadRecoveryCode"
+    [recoveryPhoneOptionAvailable]="recoveryPhoneOptionAvailable"
+    [recoveryPhoneState]="recoveryPhoneState"
+    (requestRecoveryPhoneCode)="onRequestRecoveryPhoneCode()"
     (authenticate)="authenticate($event)"
   >
   </app-two-factor-authentication-form>

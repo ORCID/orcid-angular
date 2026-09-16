@@ -7,13 +7,13 @@
       [ngClass]="{
         error: isVerificationCodeInvalid
       }"
-      *ngIf="!recoveryCode"
+      *ngIf="authenticationCodeMode"
       >Two-factor authentication code
     </mat-label>
     <mat-form-field
       appearance="outline"
       class="row deactivate"
-      *ngIf="!recoveryCode"
+      *ngIf="authenticationCodeMode"
     >
       <input
         matInput
@@ -28,7 +28,7 @@
         type="text"
       />
     </mat-form-field>
-    <ng-container *ngIf="!recoveryCode">
+    <ng-container *ngIf="authenticationCodeMode">
       <mat-hint
         class="orc-font-small-print error-length"
         *ngIf="!isVerificationCodeInvalid"
@@ -69,49 +69,83 @@
       </mat-error>
     </ng-container>
   </div>
-  <p
-    [ngClass]="{
-      'enter-code': isVerificationCodeInvalid
-    }"
-  >
-    <a
-      class="underline orc-font-body-small"
-      (click)="showAuthenticationCode()"
-      i18n="@@ngOrcid.signin.2fa.instructionsPart1"
-      >Enter a code
-    </a>
-    <ng-container i18n="@@ngOrcid.signin.2fa.instructionsPart2">
-      from your two-factor authentication app
-    </ng-container>
-  </p>
-  <p>
-    <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1">
-      Don't have your device?
-    </ng-container>
-    <a
-      class="underline orc-font-body-small"
-      (click)="showRecoveryCode()"
-      i18n="@@ngOrcid.signin.2fa.noDevice2"
-      >Enter a recovery code
-    </a>
-  </p>
-  <p>
-    <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
-      Don't have your device or recovery code?
-    </ng-container>
-    <a
-      class="underline orc-font-body-small"
-      (click)="
-        navigateTo(
-          'https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication'
-        )
-      "
-      rel="noopener noreferrer"
-      target="_blank"
-      i18n="@@shared.orcidHelpCenter"
-      >ORCID Help Center
-    </a>
-  </p>
+  <ng-container *ngIf="!recoveryPhoneMode">
+    <p
+      [ngClass]="{
+        'enter-code': isVerificationCodeInvalid
+      }"
+    >
+      <a
+        class="underline orc-font-body-small"
+        (click)="showAuthenticationCode()"
+        i18n="@@ngOrcid.signin.2fa.instructionsPart1"
+        >Enter a code
+      </a>
+      <ng-container i18n="@@ngOrcid.signin.2fa.instructionsPart2">
+        from your two-factor authentication app
+      </ng-container>
+    </p>
+    <p>
+      <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1">
+        Don't have your device?
+      </ng-container>
+      <!--
+        R3.1 respells this option only when the flag is on, so the flag-off
+        wording - and the translations it already has - is left alone. The
+        flag-on control is a button rather than an anchor with no href,
+        because an anchor with no href is not reachable by keyboard.
+      -->
+      <a
+        *ngIf="!recoveryPhoneOptionAvailable"
+        class="underline orc-font-body-small"
+        (click)="showRecoveryCode()"
+        i18n="@@ngOrcid.signin.2fa.noDevice2"
+        >Enter a recovery code
+      </a>
+      <button
+        *ngIf="recoveryPhoneOptionAvailable"
+        type="button"
+        id="cy-use-a-recovery-code"
+        class="link-button orc-font-body-small"
+        (click)="showRecoveryCode()"
+        i18n="@@account.useARecoveryCode"
+      >
+        Use a recovery code instead
+      </button>
+    </p>
+    <p *ngIf="!recoveryPhoneOptionAvailable">
+      <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
+        Don't have your device or recovery code?
+      </ng-container>
+      <a
+        class="underline orc-font-body-small"
+        (click)="
+          navigateTo(
+            'https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication'
+          )
+        "
+        rel="noopener noreferrer"
+        target="_blank"
+        i18n="@@shared.orcidHelpCenter"
+        >ORCID Help Center
+      </a>
+    </p>
+    <p *ngIf="recoveryPhoneOptionAvailable">
+      <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecoveryCodes">
+        Don't have your device or your recovery codes?
+      </ng-container>
+      <button
+        type="button"
+        id="cy-send-recovery-phone-code"
+        class="link-button orc-font-body-small"
+        [disabled]="recoveryPhoneSending"
+        (click)="showRecoveryPhoneCode()"
+        i18n="@@ngOrcid.signin.2fa.sendCodeToRecoveryNumber"
+      >
+        Send a code to your recovery number and disable 2FA
+      </button>
+    </p>
+  </ng-container>
   <div class="input-container">
     <mat-label
       class="orc-font-small-print"
@@ -176,10 +210,138 @@
     </ng-container>
   </div>
 
+  <ng-container *ngIf="recoveryPhoneMode">
+    <div class="input-container" *ngIf="recoveryPhoneCodeSent">
+      <!--
+        mat-label is a directive, not a <label>, so "for" associates nothing
+        and MatFormField wires no aria-labelledby of its own: the input has
+        to name this element itself.
+      -->
+      <mat-label
+        class="orc-font-small-print"
+        id="recovery-phone-signin-code-label"
+        i18n="@@ngOrcid.signin.2fa.recoveryNumberCode"
+        [ngClass]="{
+          error: isRecoveryPhoneCodeInvalid
+        }"
+        >Recovery number code
+      </mat-label>
+      <mat-form-field appearance="outline" class="row">
+        <input
+          matInput
+          #inputRecoveryPhoneCode
+          formControlName="recoveryPhoneCode"
+          appTrim
+          autocomplete="one-time-code"
+          aria-labelledby="recovery-phone-signin-code-label"
+          aria-describedby="recovery-phone-signin-code-helper recovery-phone-signin-code-error"
+          [attr.aria-invalid]="isRecoveryPhoneCodeInvalid ? 'true' : null"
+          id="recovery-phone-signin-code"
+          inputmode="numeric"
+          maxlength="6"
+          name="recoveryPhoneCode"
+          type="text"
+        />
+      </mat-form-field>
+      <div
+        id="recovery-phone-signin-code-helper"
+        class="recovery-phone-code-helper"
+        *ngIf="!isRecoveryPhoneCodeInvalid"
+      >
+        <p
+          class="orc-font-small-print error-message"
+          i18n="@@account.enterSixDigitCodeSentToDevice"
+        >
+          Enter the 6-digit verification code sent to your device
+        </p>
+        <p class="orc-font-small-print error-length" aria-hidden="true">
+          {{ recoveryPhoneCodeFormControl.value?.length || 0 }}/6
+        </p>
+      </div>
+      <div
+        id="recovery-phone-signin-code-error"
+        class="recovery-phone-code-helper"
+        role="alert"
+        *ngIf="isRecoveryPhoneCodeInvalid"
+      >
+        <p
+          class="orc-font-small-print error-message"
+          *ngIf="recoveryPhoneCodeFormControl.hasError('required')"
+          i18n="@@ngOrcid.signin.2fa.recoveryNumberCodeRequired"
+        >
+          A recovery number code is required
+        </p>
+        <p
+          class="orc-font-small-print error-message"
+          *ngIf="
+            recoveryPhoneCodeFormControl.hasError('minlength') ||
+            recoveryPhoneCodeFormControl.hasError('maxlength')
+          "
+          i18n="@@ngOrcid.signin.2fa.recoveryNumberCodeLength"
+        >
+          Invalid recovery number code length
+        </p>
+        <p class="orc-font-small-print error-length" aria-hidden="true">
+          {{ recoveryPhoneCodeFormControl.value?.length || 0 }}/6
+        </p>
+      </div>
+    </div>
+    <div
+      class="orcid-error recovery-phone-error"
+      role="alert"
+      *ngIf="recoveryPhoneErrorMessage"
+    >
+      <mat-icon class="recovery-phone-error__icon" inline="true"
+        >error</mat-icon
+      >
+      <span class="orc-font-body-small">{{ recoveryPhoneErrorMessage }}</span>
+    </div>
+    <p>
+      <ng-container i18n="@@account.dontHaveYourRecoveryCodes">
+        Don't have your recovery codes?
+      </ng-container>
+      <button
+        type="button"
+        class="link-button orc-font-body-small"
+        (click)="showAuthenticationCode()"
+        i18n="@@account.useYourAuthenticationAppInstead"
+      >
+        Use your authentication app instead
+      </button>
+    </p>
+    <p *ngIf="recoveryPhoneCodeSent" class="recovery-phone-resend">
+      <ng-container i18n="@@account.didntGetTheCode">
+        Didn't get the code?
+      </ng-container>
+      <ng-container *ngIf="recoveryPhoneResendSeconds > 0">
+        <ng-container i18n="@@account.youCanResendIn"
+          >You can resend in</ng-container
+        >&nbsp;<strong
+          >{{ recoveryPhoneResendSeconds }}&nbsp;<ng-container
+            i18n="@@account.seconds"
+            >seconds</ng-container
+          ></strong
+        >
+      </ng-container>
+      <button
+        *ngIf="recoveryPhoneResendSeconds === 0"
+        type="button"
+        id="cy-resend-recovery-phone-code"
+        class="link-button orc-font-body-small"
+        [disabled]="recoveryPhoneSending"
+        (click)="resendRecoveryPhoneCode()"
+        i18n="@@account.resendCode"
+      >
+        Resend code
+      </button>
+    </p>
+  </ng-container>
+
   <button
     mat-raised-button
     class="row mat-elevation-z0 two-factor authenticate-button-new-signin"
     type="submit"
+    [disabled]="recoveryPhoneMode && !recoveryPhoneCodeSent"
     i18n="@@ngOrcid.signin.2fa.authenticate"
     id="authenticateButton"
   >

@@ -12,6 +12,12 @@ export interface FormSignIn {
   password: string
   verificationCode: string
   recoveryCode: string
+  /**
+   * The code texted to the account's recovery phone number. It never reaches
+   * the ordinary sign-in endpoint: it is verified on its own (R3.5), and the
+   * sign-in that follows carries no code at all.
+   */
+  recoveryPhoneCode?: string
   oauthRequest: string
 }
 

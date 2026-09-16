@@ -19,6 +19,15 @@
   .error {
     color: map-get($foreground, 'state-warning-dark');
   }
+
+  /* The link-shaped buttons take the colour a.underline would have given them */
+  .link-button {
+    color: mat.m2-get-color-from-palette($primary, 700);
+  }
+
+  .recovery-phone-error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
 }
 
 @include two-factor-authentication-form-theme($orcid-app-theme);

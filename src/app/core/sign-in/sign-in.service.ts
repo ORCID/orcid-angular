@@ -5,13 +5,17 @@ import {
   HttpParams,
 } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { of } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { catchError, map, switchMap, first, take } from 'rxjs/operators'
 
 import { getOrcidNumber, isValidOrcidFormat } from '../../constants'
 import { Claim } from '../../types/claim.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
-import { SignIn } from '../../types/sign-in.endpoint'
+import {
+  RecoveryPhoneSignInSendResponse,
+  RecoveryPhoneSignInVerifyResponse,
+  SignIn,
+} from '../../types/sign-in.endpoint'
 import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
 import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -128,6 +132,75 @@ export class SignInService {
           )
       })
     )
+  }
+
+  /**
+   * Texts a verification code to the recovery phone number stored on the
+   * account, after the registry has checked the password itself (R3.2).
+   *
+   * This and {@link verifyRecoveryPhoneCode} always talk to the Registry
+   * (`API_WEB`), whichever way OAUTH_SIGNIN is set and whichever screen the
+   * user is on: only the Registry holds `profile_recovery_phone`, so the auth
+   * server has no number to send a code to and nothing to verify one against.
+   * The ordinary sign-in below is the only call that moves between the two.
+   *
+   * Posted as JSON rather than form-encoded because these are new endpoints,
+   * unbound by the form post the legacy sign-in has always used.
+   */
+  sendRecoveryPhoneCode(request: {
+    username: string
+    password: string
+  }): Observable<RecoveryPhoneSignInSendResponse> {
+    return this._http
+      .post<RecoveryPhoneSignInSendResponse>(
+        runtimeEnvironment.API_WEB + 'signin/recoveryPhone/sendCode.json',
+        {
+          // Same normalisation the sign-in post applies, so an iD typed with
+          // or without the https://orcid.org/ prefix reaches the same account
+          username: getOrcidNumber(request.username),
+          password: request.password,
+        },
+        {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        retryTransient(),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  /**
+   * Posts the texted code. On success the registry has already disabled 2FA,
+   * deleted the number and invalidated the unused backup codes in one
+   * transaction (R3.5); the caller then submits the ordinary sign-in with no
+   * code at all, which now succeeds.
+   *
+   * Goes to the Registry for the reason given on {@link sendRecoveryPhoneCode}.
+   */
+  verifyRecoveryPhoneCode(request: {
+    username: string
+    password: string
+    verificationCode: string
+  }): Observable<RecoveryPhoneSignInVerifyResponse> {
+    return this._http
+      .post<RecoveryPhoneSignInVerifyResponse>(
+        runtimeEnvironment.API_WEB + 'signin/recoveryPhone/verify.json',
+        {
+          username: getOrcidNumber(request.username),
+          password: request.password,
+          verificationCode: request.verificationCode,
+        },
+        {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        retryTransient(),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   /**

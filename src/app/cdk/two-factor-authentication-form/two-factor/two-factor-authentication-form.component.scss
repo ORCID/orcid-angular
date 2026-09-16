@@ -1,3 +1,5 @@
+@import '../../../../assets/scss/orcid.spacing.scss';
+
 :host {
   width: 100%;
 }
@@ -38,4 +40,74 @@ mat-label.orc-font-small-print {
   label {
     font-weight: normal;
   }
+}
+
+/*
+ * The recovery number option and the field it opens. The orc-font-* classes
+ * carry a size and a letter-spacing and nothing else, so every line-height and
+ * weight below is spelled out.
+ */
+
+/*
+ * A link that does something rather than going somewhere. An <a> with no href
+ * is not reachable by keyboard, so these are buttons wearing the link's
+ * clothes - including the house focus ring, which Material buttons do not
+ * ship.
+ */
+.link-button {
+  display: inline;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-weight: normal;
+  line-height: 20px; // Figma body-S 14/20
+  text-align: inherit;
+  cursor: pointer;
+  /* a.underline only ever matches an anchor, so say it here */
+  text-decoration: underline;
+
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+.recovery-phone-code-helper {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $spacing-small;
+
+  p {
+    margin: 0;
+    font-weight: normal;
+    line-height: 16px; // Figma small-print 12/16
+  }
+}
+
+.recovery-phone-error {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-small;
+  line-height: 20px; // Figma body-S 14/20
+
+  /* a direct flex child, so it has to be told not to be squeezed to a sliver */
+  .recovery-phone-error__icon {
+    flex-shrink: 0;
+  }
+
+  span {
+    font-weight: normal;
+    line-height: 20px;
+  }
+}
+
+.recovery-phone-resend {
+  margin-top: $spacing-base;
 }
