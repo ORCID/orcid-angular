@@ -1,11 +1,10 @@
 <form [formGroup]="twoFactorForm">
   <orcid-step-view
     i18n-title="@@account.enableTwoFactorAuth"
-    i18n-subtitle="@@account.step2RecoveryCodes"
     i18n-primaryLabel="@@account.enableTwoFactorAuth"
     title="Enable two-factor authentication"
-    subtitle="Step 2 of 2 - 2FA recovery codes"
     primaryLabel="Enable two-factor authentication"
+    [subtitle]="subtitle"
     [primaryDisabled]="!canCompleteSetup"
     (primaryAction)="completeSetup()"
   >

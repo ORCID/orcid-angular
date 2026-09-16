@@ -1,5 +1,7 @@
 <main id="main">
+  <!-- Held until the flag is in: see flagResolved on the component. -->
   <div
+    *ngIf="flagResolved"
     class="container"
     [ngClass]="{
       mobile: !platform.columns12
@@ -12,12 +14,21 @@
         }"
       >
         <app-two-factor-enable
-          *ngIf="!showBackupCodes"
+          *ngIf="step === 'enable'"
+          [subtitle]="enableSubtitle"
           (twoFactorEnabled)="twoFactorEnabled($event)"
         >
         </app-two-factor-enable>
+        <app-two-factor-recovery-phone
+          *ngIf="step === 'recoveryPhone'"
+          [subtitle]="recoveryPhoneSubtitle"
+          (completed)="recoveryPhoneCompleted()"
+          (failed)="recoveryPhoneFailed($event)"
+        >
+        </app-two-factor-recovery-phone>
         <app-two-factor-recovery-codes
-          *ngIf="showBackupCodes"
+          *ngIf="step === 'recoveryCodes'"
+          [subtitle]="recoveryCodesSubtitle"
           [backupCodes]="backupCodes"
           [backupCodesClipboard]="backupCodesClipboard"
         >
