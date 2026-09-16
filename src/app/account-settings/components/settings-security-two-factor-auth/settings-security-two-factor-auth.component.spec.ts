@@ -11,9 +11,14 @@ import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
+import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authentication/recovery-phone-challenge.service'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { ActivatedRoute, Router } from '@angular/router'
-import { of } from 'rxjs'
+import { Subject, of } from 'rxjs'
+import {
+  AUTH_CHALLENGE_HEADING_ID,
+  AuthChallengeRecoveryPhone,
+} from '@orcid/registry-ui'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { Status } from '../../../types/two-factor.endpoint'
@@ -24,7 +29,47 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
   let component: SettingsSecurityTwoFactorAuthComponent
   let fixture: ComponentFixture<SettingsSecurityTwoFactorAuthComponent>
   let togglzService: jasmine.SpyObj<TogglzService>
+  let recoveryPhoneChallengeService: jasmine.SpyObj<RecoveryPhoneChallengeService>
+  let recoveryPhone: AuthChallengeRecoveryPhone
   let queryParams: Record<string, string> = {}
+
+  /** A stand-in for the object the factory hands the challenge. */
+  function buildRecoveryPhoneHandle(): AuthChallengeRecoveryPhone {
+    return {
+      available: true,
+      maskedNumber: '***********1234',
+      codeSent: false,
+      resendSeconds: 0,
+      sending: false,
+      errorCode: undefined,
+      used: false,
+      sendCode: jasmine.createSpy('sendCode'),
+      verify: jasmine.createSpy('verify').and.returnValue(of('passed')),
+      dispose: jasmine.createSpy('dispose'),
+    }
+  }
+
+  /**
+   * Stands in for the challenge dialog so the panel's own branching can be
+   * driven directly: emit `submitAttempt`, then close with a result.
+   */
+  function stubChallengeDialog() {
+    const submitAttempt = new Subject<void>()
+    const cancelAttempt = new Subject<void>()
+    const closed = new Subject<any>()
+    const dialogRef = {
+      componentInstance: {
+        submitAttempt,
+        cancelAttempt,
+        loading: true,
+        processBackendResponse: jasmine.createSpy('processBackendResponse'),
+      },
+      afterClosed: () => closed.asObservable(),
+      close: jasmine.createSpy('close'),
+    }
+    spyOn(TestBed.inject(MatDialog), 'open').and.returnValue(dialogRef as any)
+    return { dialogRef, submitAttempt, closed }
+  }
 
   const enabledStatus = (overrides: Partial<Status> = {}): Status =>
     ({
@@ -32,7 +77,7 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
       twoFactorCreationDate: { year: '2026', month: '04', day: '15' },
       recoveryCodeCreationDate: { year: '2026', month: '04', day: '15' },
       ...overrides,
-    }) as Status
+    } as Status)
 
   function build(flagEnabled: boolean, params: Record<string, string> = {}) {
     togglzService.getStateOf.and.returnValue(of(flagEnabled))
@@ -46,6 +91,12 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
   beforeEach(async () => {
     togglzService = jasmine.createSpyObj('TogglzService', ['getStateOf'])
     togglzService.getStateOf.and.returnValue(of(false))
+    recoveryPhone = buildRecoveryPhoneHandle()
+    recoveryPhoneChallengeService = jasmine.createSpyObj(
+      'RecoveryPhoneChallengeService',
+      ['create']
+    )
+    recoveryPhoneChallengeService.create.and.callFake(() => recoveryPhone)
     queryParams = {}
 
     await TestBed.configureTestingModule({
@@ -64,6 +115,10 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
         MatDialog,
         Overlay,
         { provide: TogglzService, useValue: togglzService },
+        {
+          provide: RecoveryPhoneChallengeService,
+          useValue: recoveryPhoneChallengeService,
+        },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -173,5 +228,71 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
     component.manageRecoveryPhone()
 
     expect(navigate).toHaveBeenCalledWith([ApplicationRoutes.recoveryPhone])
+  })
+
+  describe('a challenge answered with a recovery phone number code', () => {
+    it('offers the option to the challenge it opens', () => {
+      build(true)
+      const { dialogRef } = stubChallengeDialog()
+
+      component.openAuthChallenge()
+
+      expect(recoveryPhoneChallengeService.create).toHaveBeenCalled()
+      const open = TestBed.inject(MatDialog).open as jasmine.Spy
+      const config = open.calls.mostRecent().args[1] as any
+      expect(config.data.recoveryPhone).toBe(recoveryPhone)
+      // the account password is the one the challenge collects itself here
+      expect(config.data.passwordControlName).toBe('password')
+      // named from the challenge's own heading rather than a second copy of it
+      expect(config.ariaLabelledBy).toBe(AUTH_CHALLENGE_HEADING_ID)
+      expect(config.ariaLabel).toBeUndefined()
+      expect(dialogRef.close).not.toHaveBeenCalled()
+    })
+
+    it('does not disable 2FA a second time (R5.3)', () => {
+      build(true)
+      component.twoFactorInfo = enabledStatus({
+        maskedRecoveryPhoneNumber: '***********1234',
+        recoveryPhoneCreationDate: { year: '2026', month: '04', day: '15' },
+      })
+      const twoFactorService = TestBed.inject(TwoFactorAuthenticationService)
+      const disable = spyOn(twoFactorService, 'disable').and.returnValue(
+        of({} as any)
+      )
+      const stateOutput = spyOn(component.twoFactorStateOutput, 'emit')
+      const { dialogRef, submitAttempt, closed } = stubChallengeDialog()
+
+      component.openAuthChallenge()
+      recoveryPhone.used = true
+      submitAttempt.next()
+
+      expect(disable).not.toHaveBeenCalled()
+      expect(component.twoFactorInfo?.enabled).toBeFalse()
+      expect(component.twoFactorInfo?.maskedRecoveryPhoneNumber).toBeUndefined()
+      expect(stateOutput).toHaveBeenCalledWith(false)
+      expect(dialogRef.close).toHaveBeenCalledWith(true)
+
+      closed.next(true)
+      fixture.detectChanges()
+      expect(component.success).toBeTrue()
+      expect(fixture.nativeElement.textContent).toContain(
+        'Two-factor authentication has been disabled'
+      )
+    })
+
+    it('still posts the ordinary disable when the option was not used', () => {
+      build(true)
+      const twoFactorService = TestBed.inject(TwoFactorAuthenticationService)
+      const disable = spyOn(twoFactorService, 'disable').and.returnValue(
+        of({ success: true, enabled: false } as any)
+      )
+      const { dialogRef, submitAttempt } = stubChallengeDialog()
+
+      component.openAuthChallenge()
+      submitAttempt.next()
+
+      expect(disable).toHaveBeenCalled()
+      expect(dialogRef.close).toHaveBeenCalledWith(true)
+    })
   })
 })

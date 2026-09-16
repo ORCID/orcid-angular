@@ -25,6 +25,12 @@
     background-color: white !important;
     color: $brand-secondary-dark !important;
   }
+  // The blanket button rule above paints every button as a solid block, which
+  // is wrong for a control that has to read as a link.
+  .link-button {
+    background: none !important;
+    color: $brand-secondary-dark !important;
+  }
 }
 
 @include auth-challenge-theme($orcid-app-theme);

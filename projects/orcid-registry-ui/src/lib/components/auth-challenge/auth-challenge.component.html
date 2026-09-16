@@ -15,7 +15,11 @@
   >
     <mat-icon class="material-symbols-outlined">person_check</mat-icon>
   </div>
-  <h1 class="orc-font-heading-small text-center font-normal" i18n>
+  <h1
+    [id]="headingId"
+    class="orc-font-heading-small text-center font-normal"
+    i18n
+  >
     Verify your ORCID account
   </h1>
   <p class="orc-font-body-small text-center mb-8">
@@ -75,7 +79,111 @@
     </mat-error>
     }
   </div>
-  } @if (showTwoFactorField) { @if (!showRecoveryCode) {
+  } @if (showTwoFactorField) { @if (showRecoveryPhoneCode) {
+  <!--
+    The third mode (R5.2): a code the registry has just sent by text. Accepting
+    it turns 2FA off, so it is deliberately the last option offered.
+  -->
+  <div>
+    <mat-label
+      class="orc-font-small-print font-bold! block mb-2! text-left"
+      id="recovery-phone-input-label"
+      i18n="@@account.recoveryPhoneNumberCode"
+      [ngClass]="{
+        error:
+          twoFactorRecoveryPhoneCodeWasTouched &&
+          parentForm.get(recoveryPhoneControlName)?.invalid
+      }"
+    >
+      Recovery phone number code
+    </mat-label>
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      class="no-hint w-full"
+    >
+      <input
+        id="twoFactorRecoveryPhoneCode"
+        type="text"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        aria-labelledby="recovery-phone-input-label"
+        [attr.aria-describedby]="
+          recoveryPhone?.errorCode
+            ? 'twoFactorRecoveryPhoneCode-helper twoFactorRecoveryPhoneCode-send-error'
+            : 'twoFactorRecoveryPhoneCode-helper'
+        "
+        [formControlName]="recoveryPhoneControlName"
+        #twoFactorRecoveryPhoneCodeInput
+        [errorStateMatcher]="errorMatcher"
+        matInput
+        [ngClass]="{
+          error:
+            twoFactorRecoveryPhoneCodeWasTouched &&
+            parentForm.get(recoveryPhoneControlName)?.invalid
+        }"
+      />
+    </mat-form-field>
+    <div class="flex orc-font-small-print">
+      <div id="twoFactorRecoveryPhoneCode-helper" class="mt-2 grow text-left">
+        @if (!parentForm.get(recoveryPhoneControlName)?.invalid ||
+        !twoFactorRecoveryPhoneCodeWasTouched) {
+        <mat-hint
+          class="leading-6"
+          i18n="@@account.enterSixDigitCodeSentToYourDevice"
+        >
+          Enter the 6-digit code sent to your device
+        </mat-hint>
+        } @if (parentForm.get(recoveryPhoneControlName)?.hasError('invalid')) {
+        <mat-error>
+          <ng-container i18n="@@account.badRecoveryPhoneNumberCode">
+            Invalid recovery phone number code
+          </ng-container>
+        </mat-error>
+        } @if (twoFactorRecoveryPhoneCodeWasTouched &&
+        parentForm.get(recoveryPhoneControlName)?.hasError('required')) {
+        <mat-error>
+          <ng-container i18n="@@account.recoveryPhoneNumberCodeRequired">
+            A recovery phone number code is required
+          </ng-container>
+        </mat-error>
+        } @if (twoFactorRecoveryPhoneCodeWasTouched &&
+        (parentForm.get(recoveryPhoneControlName)?.hasError('minlength') ||
+        parentForm.get(recoveryPhoneControlName)?.hasError('maxlength'))) {
+        <mat-error>
+          <ng-container i18n="@@account.recoveryPhoneNumberCodeLength">
+            Invalid recovery phone number code length
+          </ng-container>
+        </mat-error>
+        }
+      </div>
+      <mat-hint
+        [ngClass]="{
+          error:
+            twoFactorRecoveryPhoneCodeWasTouched &&
+            parentForm.get(recoveryPhoneControlName)?.invalid
+        }"
+        class="mt-2 self-center leading-6"
+      >
+        {{ parentForm.get(recoveryPhoneControlName)?.value?.length || 0 }}/6
+      </mat-hint>
+    </div>
+    @if (recoveryPhone?.errorCode) {
+    <!--
+      This error belongs to the send, not to the field, so it sits outside the
+      form field and has to announce itself.
+    -->
+    <mat-error
+      id="twoFactorRecoveryPhoneCode-send-error"
+      role="alert"
+      class="w-full orc-font-small-print mt-2 leading-6"
+      i18n="@@account.recoveryPhoneChallengeCodeNotSent"
+    >
+      We could not send a code to your recovery phone number. Please try again.
+    </mat-error>
+    }
+  </div>
+  } @else if (!showRecoveryCode) {
   <div>
     <mat-label
       class="orc-font-small-print font-bold! block mb-2! text-left"
@@ -226,7 +334,63 @@
       </mat-hint>
     </div>
   </div>
-  } @if (!showRecoveryCode) {
+  } @if (showRecoveryPhoneCode) {
+  <div class="text-center orc-font-body-small mt-6">
+    <!--
+      The one thing worth announcing, announced once. The countdown below is
+      deliberately not in here: it changes every second, and a live region
+      would read the whole sentence over a user trying to type the code. The
+      region itself is always rendered so that the message lands in it rather
+      than arriving with it.
+    -->
+    <p class="visually-hidden" aria-live="polite">
+      @if (recoveryPhone?.codeSent && recoveryPhone?.maskedNumber) {
+      <ng-container i18n="@@account.recoveryPhoneCodeSentTo"
+        >Verification code sent to</ng-container
+      >&nbsp;{{ recoveryPhone?.maskedNumber }}
+      }
+    </p>
+    <p i18n="@@account.didntGetTheCode" class="m-0 leading-6">
+      Didn't get the code?
+    </p>
+    @if (recoveryPhone?.resendSeconds) {
+    <p class="m-0 leading-6" aria-hidden="true">
+      <ng-container i18n="@@account.youCanResendIn"
+        >You can resend in</ng-container
+      >&nbsp;<strong
+        >{{ recoveryPhone?.resendSeconds }}&nbsp;<ng-container
+          i18n="@@account.seconds"
+          >seconds</ng-container
+        ></strong
+      >
+    </p>
+    } @else {
+    <button
+      type="button"
+      id="cy-challenge-resend-recovery-phone-code"
+      class="link-button"
+      data-testid="recovery-phone-resend"
+      [disabled]="recoveryPhone?.sending"
+      (click)="resendRecoveryPhoneCode($event)"
+      i18n="@@account.resendCode"
+    >
+      Resend code
+    </button>
+    }
+    <p i18n="@@account.dontHaveYourRecoveryCodes" class="m-0 leading-6 mt-4!">
+      Don't have your recovery codes?
+    </p>
+    <button
+      type="button"
+      class="link-button"
+      data-testid="recovery-phone-back-toggle"
+      (click)="useAuthenticationApp($event)"
+      i18n="@@account.useYourAuthenticationAppInstead"
+    >
+      Use your authentication app instead
+    </button>
+  </div>
+  } @else { @if (!showRecoveryCode) {
   <div class="text-center orc-font-body-small mt-6">
     <p i18n="@@ngOrcid.signin.2fa.noDevice1" class="m-0 leading-6">
       Don't have your device?
@@ -256,7 +420,32 @@
       Use your authentication app instead
     </a>
   </div>
-  }
+  } @if (recoveryPhoneAvailable) {
+  <!--
+    R5.1: only offered when the account can actually use it - the flag is on,
+    2FA is active and a number is stored. Otherwise the help centre link that
+    has always been here is what the user gets.
+  -->
+  <div class="text-center orc-font-body-small mt-4!">
+    <p
+      i18n="@@account.dontHaveYourDeviceOrYourRecoveryCodes"
+      class="m-0 leading-6"
+    >
+      Don't have your device or your recovery codes?
+    </p>
+    <button
+      type="button"
+      id="cy-challenge-send-recovery-phone-code"
+      class="link-button"
+      data-testid="recovery-phone-toggle"
+      [disabled]="recoveryPhone?.sending"
+      (click)="sendRecoveryPhoneCode($event)"
+      i18n="@@account.sendCodeToRecoveryPhoneNumber"
+    >
+      Send a code to your recovery phone number and disable 2FA
+    </button>
+  </div>
+  } @else {
   <div class="text-center orc-font-body-small mt-4!">
     <p i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery" class="m-0 leading-6">
       Don't have your device or recovery code?
@@ -271,7 +460,7 @@
       ORCID help centre
     </a>
   </div>
-  }
+  } } }
   <hr />
   <button
     mat-raised-button
@@ -293,6 +482,7 @@
     type="button"
     id="cy-cancel-account-verification"
     (click)="onCancel()"
+    [disabled]="verifying"
     class="text-center orc-font-body-small h-10! w-full block content-center cancel font-normal!"
     i18n
   >

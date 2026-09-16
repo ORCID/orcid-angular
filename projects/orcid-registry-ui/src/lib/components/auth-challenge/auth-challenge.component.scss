@@ -72,6 +72,54 @@ mat-icon {
   text-decoration-line: underline;
 }
 
+/*
+  For text that belongs in the accessibility tree and nowhere else - the live
+  region that says the code went out. Off the screen rather than display:none,
+  which would take it out of the tree as well.
+*/
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+  The toggles that are anchors elsewhere in this panel are buttons here: they
+  run an action rather than going anywhere, and an anchor with no href is not
+  reachable by keyboard. Material ships no focus ring, so the house one is
+  written out below.
+*/
+.link-button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: var(--orcid-font-size-body-small, 14px);
+  line-height: 21px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  text-decoration-line: underline;
+  cursor: pointer;
+
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
+    outline: none;
+  }
+
+  &[disabled] {
+    cursor: default;
+    opacity: 50%;
+    text-decoration-line: none;
+  }
+}
+
 mat-progress-bar {
   margin-top: -64px;
   margin-left: -64px;

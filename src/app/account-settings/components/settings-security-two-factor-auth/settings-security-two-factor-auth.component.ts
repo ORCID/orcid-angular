@@ -14,7 +14,10 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
 import { TogglzFlag } from '../../../types/config.endpoint'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { MatDialog } from '@angular/material/dialog'
-import { AuthChallengeComponent } from '@orcid/registry-ui'
+import {
+  AUTH_CHALLENGE_HEADING_ID,
+  AuthChallengeComponent,
+} from '@orcid/registry-ui'
 import { AuthChallengeFormData } from '../../../types/common.endpoint'
 import {
   UntypedFormBuilder,
@@ -22,6 +25,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { Status } from '../../../types/two-factor.endpoint'
+import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authentication/recovery-phone-challenge.service'
 
 @Component({
   selector: 'app-settings-security-two-factor-auth',
@@ -32,7 +36,9 @@ import { Status } from '../../../types/two-factor.endpoint'
   ],
   standalone: false,
 })
-export class SettingsSecurityTwoFactorAuthComponent implements OnInit, OnDestroy {
+export class SettingsSecurityTwoFactorAuthComponent
+  implements OnInit, OnDestroy
+{
   @Input() twoFactorInfo: Status | undefined
   @Output() twoFactorStateOutput = new EventEmitter<any>()
 
@@ -54,7 +60,8 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit, OnDestroy
     private twoFactorAuthenticationService: TwoFactorAuthenticationService,
     private _fb: UntypedFormBuilder,
     private _dialog: MatDialog,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private _recoveryPhoneChallenge: RecoveryPhoneChallengeService
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +71,10 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit, OnDestroy
       twoFactorRecoveryCode: [
         null,
         [Validators.minLength(10), Validators.maxLength(10)],
+      ],
+      twoFactorRecoveryPhoneCode: [
+        null,
+        [Validators.minLength(6), Validators.maxLength(6)],
       ],
     })
 
@@ -117,19 +128,37 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit, OnDestroy
   }
 
   openAuthChallenge() {
+    const recoveryPhone = this._recoveryPhoneChallenge.create()
     const dialogRef = this._dialog.open<AuthChallengeComponent>(
       AuthChallengeComponent,
       {
+        ariaLabelledBy: AUTH_CHALLENGE_HEADING_ID,
         data: {
-          parentForm: this.form,
-          actionDescription: this.authChallengeLabel,
-        } as AuthChallengeFormData,
+          ...({
+            parentForm: this.form,
+            // The challenge collects it into this control itself; named all
+            // the same, so the credential it posts is never a guess.
+            passwordControlName: 'password',
+            actionDescription: this.authChallengeLabel,
+          } as AuthChallengeFormData),
+          recoveryPhone,
+        },
       }
     )
 
     dialogRef.componentInstance.submitAttempt
       .pipe(takeUntil(dialogRef.afterClosed()))
       .subscribe(() => {
+        if (recoveryPhone.used) {
+          // The recovery phone number code has already done the disabling
+          // (R5.3): the registry turned 2FA off, deleted the number and reset
+          // the backup codes before it answered. Posting to disable.json now
+          // would be asking it to disable something that is already off.
+          this.onTwoFactorDisabledByRecoveryPhone()
+          dialogRef.close(true)
+          return
+        }
+
         this.twoFactorAuthenticationService
           .disable(this.form.value)
           .pipe(first())
@@ -156,6 +185,22 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit, OnDestroy
         this.cancel = true
       }
     })
+  }
+
+  /**
+   * Brings the panel back in line with an account whose 2FA was turned off
+   * inside the challenge. The number and the backup codes went with it, so
+   * everything the panel was showing about them is now wrong.
+   */
+  private onTwoFactorDisabledByRecoveryPhone(): void {
+    if (this.twoFactorInfo) {
+      this.twoFactorInfo.enabled = false
+      this.twoFactorInfo.maskedRecoveryPhoneNumber = undefined
+      this.twoFactorInfo.recoveryPhoneCreationDate = undefined
+      this.twoFactorInfo.recoveryPhoneLastModifiedDate = undefined
+      this.twoFactorInfo.recoveryPhoneModified = false
+    }
+    this.twoFactorStateOutput.emit(false)
   }
 
   twoFactor() {

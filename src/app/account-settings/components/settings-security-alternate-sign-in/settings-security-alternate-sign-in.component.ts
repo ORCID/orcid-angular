@@ -12,7 +12,10 @@ import { first, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountSecurityAlternateSignInService } from 'src/app/core/account-security-alternate-sign-in/account-security-alternate-sign-in.service'
 import { SocialAccount } from 'src/app/types/account-alternate-sign-in.endpoint'
-import { AuthChallengeComponent } from '@orcid/registry-ui'
+import {
+  AUTH_CHALLENGE_HEADING_ID,
+  AuthChallengeComponent,
+} from '@orcid/registry-ui'
 
 import { AuthChallengeFormData } from '../../../types/common.endpoint'
 import {
@@ -20,6 +23,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
+import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authentication/recovery-phone-challenge.service'
 
 @Component({
   selector: 'app-settings-security-alternate-sign-in',
@@ -49,7 +53,8 @@ export class SettingsSecurityAlternateSignInComponent
     private _accountSettingAlternate: AccountSecurityAlternateSignInService,
     private _fb: UntypedFormBuilder,
     private _matDialog: MatDialog,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _recoveryPhoneChallenge: RecoveryPhoneChallengeService
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +65,10 @@ export class SettingsSecurityAlternateSignInComponent
       twoFactorRecoveryCode: [
         null,
         [Validators.minLength(10), Validators.maxLength(10)],
+      ],
+      twoFactorRecoveryPhoneCode: [
+        null,
+        [Validators.minLength(6), Validators.maxLength(6)],
       ],
     })
     this.accounts$ = this.refreshAccounts$.pipe(
@@ -76,15 +85,26 @@ export class SettingsSecurityAlternateSignInComponent
   }
 
   openAuthChallenge(memberName: string) {
+    // A challenge answered with a recovery phone number code has already left
+    // 2FA off (R5.3), so the unlink below runs exactly as it does for a
+    // challenge that was passed the ordinary way.
+    const recoveryPhone = this._recoveryPhoneChallenge.create()
     const dialogRef = this._matDialog.open<AuthChallengeComponent>(
       AuthChallengeComponent,
       {
+        ariaLabelledBy: AUTH_CHALLENGE_HEADING_ID,
         data: {
-          parentForm: this.form,
-          actionDescription: this.authChallengeLabel,
-          boldText: memberName,
-          showTwoFactorField: this.twoFactorState,
-        } as AuthChallengeFormData,
+          ...({
+            parentForm: this.form,
+            // The challenge collects it into this control itself; named all
+            // the same, so the credential it posts is never a guess.
+            passwordControlName: 'password',
+            actionDescription: this.authChallengeLabel,
+            boldText: memberName,
+            showTwoFactorField: this.twoFactorState,
+          } as AuthChallengeFormData),
+          recoveryPhone,
+        },
       }
     )
 

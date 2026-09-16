@@ -10,18 +10,25 @@ import { AuthChallengeComponent } from './auth-challenge.component'
 import { By } from '@angular/platform-browser'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import '@angular/localize/init'
+import { Subject } from 'rxjs'
+import {
+  AuthChallengeRecoveryPhone,
+  AuthChallengeRecoveryPhoneVerification,
+} from './auth-challenge.types'
 
 describe('AuthChallengeComponent', () => {
   let fixture: ComponentFixture<AuthChallengeComponent>
   let component: AuthChallengeComponent
   let form: FormGroup
   let mockDialogRef: any
+  let mockDialogData: any
 
   beforeEach(async () => {
     form = new FormGroup({
       passwordControl: new FormControl(''),
       twoFactorCode: new FormControl(''),
       twoFactorRecoveryCode: new FormControl(''),
+      twoFactorRecoveryPhoneCode: new FormControl(''),
     })
 
     mockDialogRef = {
@@ -29,7 +36,7 @@ describe('AuthChallengeComponent', () => {
       close: jasmine.createSpy('close'),
     }
 
-    const mockDialogData = {
+    mockDialogData = {
       parentForm: form,
       showPasswordField: true,
       showTwoFactorField: true,
@@ -186,5 +193,345 @@ describe('AuthChallengeComponent', () => {
       expect(codeControl?.hasValidator(Validators.required)).toBeFalse()
       expect(recoveryControl?.hasValidator(Validators.required)).toBeFalse()
     })
+  })
+
+  describe('Recovery phone number mode', () => {
+    const SEND_TOGGLE = '#cy-challenge-send-recovery-phone-code'
+    const PHONE_CODE_INPUT = '#twoFactorRecoveryPhoneCode'
+
+    let verifyAnswer: Subject<AuthChallengeRecoveryPhoneVerification>
+    let recoveryPhone: AuthChallengeRecoveryPhone
+
+    beforeEach(() => {
+      verifyAnswer = new Subject<AuthChallengeRecoveryPhoneVerification>()
+      recoveryPhone = {
+        available: true,
+        maskedNumber: '***********1234',
+        codeSent: false,
+        resendSeconds: 0,
+        sending: false,
+        errorCode: undefined,
+        used: false,
+        sendCode: jasmine.createSpy('sendCode'),
+        verify: jasmine
+          .createSpy('verify')
+          .and.returnValue(verifyAnswer.asObservable()),
+        dispose: jasmine.createSpy('dispose'),
+      }
+    })
+
+    /** Hands the component the option, the way a host's dialog data would. */
+    function offer(available = true): void {
+      recoveryPhone.available = available
+      component.recoveryPhone = recoveryPhone
+      fixture.detectChanges()
+    }
+
+    function enterPhoneMode(): void {
+      offer()
+      component.sendRecoveryPhoneCode(new Event('click'))
+      fixture.detectChanges()
+    }
+
+    function text(): string {
+      return fixture.nativeElement.textContent
+    }
+
+    it('says nothing about a recovery phone number when there is no option', () => {
+      expect(fixture.debugElement.query(By.css(SEND_TOGGLE))).toBeFalsy()
+      expect(text()).toContain('ORCID help centre')
+    })
+
+    it('stays silent when the account cannot use the option', () => {
+      offer(false)
+
+      expect(fixture.debugElement.query(By.css(SEND_TOGGLE))).toBeFalsy()
+      expect(text()).toContain('ORCID help centre')
+    })
+
+    it('offers the option in place of the help centre link once it is available', () => {
+      offer()
+
+      expect(fixture.debugElement.query(By.css(SEND_TOGGLE))).toBeTruthy()
+      expect(text()).toContain("Don't have your device or your recovery codes?")
+      expect(text()).toContain(
+        'Send a code to your recovery phone number and disable 2FA'
+      )
+      expect(text()).not.toContain('ORCID help centre')
+    })
+
+    it('asks for a text and swaps the authentication app field for the code field', fakeAsync(() => {
+      offer()
+
+      fixture.debugElement.query(By.css(SEND_TOGGLE)).nativeElement.click()
+      fixture.detectChanges()
+      tick()
+
+      expect(recoveryPhone.sendCode).toHaveBeenCalled()
+      expect(fixture.debugElement.query(By.css(PHONE_CODE_INPUT))).toBeTruthy()
+      expect(fixture.debugElement.query(By.css('#twoFactorCode'))).toBeFalsy()
+      expect(text()).toContain('Recovery phone number code')
+      expect(text()).toContain('Enter the 6-digit code sent to your device')
+      expect(form.get('twoFactorCode')?.hasError('required')).toBeFalse()
+      expect(
+        form.get('twoFactorRecoveryPhoneCode')?.hasError('required')
+      ).toBeTrue()
+    }))
+
+    it('holds submitAttempt back until the registry has accepted the code', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      const emit = spyOn(component.submitAttempt, 'emit')
+      form.get('passwordControl')?.setValue('a-password')
+      form.get('twoFactorRecoveryPhoneCode')?.setValue('123456')
+
+      component.onSubmit()
+
+      // The guarded action must not run on a code that has not been checked
+      expect(recoveryPhone.verify).toHaveBeenCalledWith('a-password', '123456')
+      expect(emit).not.toHaveBeenCalled()
+
+      verifyAnswer.next('passed')
+      verifyAnswer.complete()
+
+      // 2FA is off from here, which is the only reason the host may now
+      // proceed on the password alone
+      expect(recoveryPhone.used).toBeTrue()
+      expect(emit).toHaveBeenCalled()
+      expect(form.get('twoFactorRecoveryPhoneCode')?.value).toBeNull()
+      expect(form.get('twoFactorCode')?.value).toBeNull()
+    }))
+
+    it('keeps the challenge open and marks the code invalid when it is refused', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      const emit = spyOn(component.submitAttempt, 'emit')
+      form.get('passwordControl')?.setValue('a-password')
+      form.get('twoFactorRecoveryPhoneCode')?.setValue('000000')
+
+      component.onSubmit()
+      verifyAnswer.next('invalidCode')
+      fixture.detectChanges()
+
+      expect(emit).not.toHaveBeenCalled()
+      expect(recoveryPhone.used).toBeFalse()
+      expect(component.loading).toBeFalse()
+      expect(
+        form.get('twoFactorRecoveryPhoneCode')?.hasError('invalid')
+      ).toBeTrue()
+      expect(text()).toContain('Invalid recovery phone number code')
+    }))
+
+    it('reports a send that never got through', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      recoveryPhone.errorCode = 'SMS_SEND_FAILED'
+      fixture.detectChanges()
+
+      const error = fixture.debugElement.query(
+        By.css('#twoFactorRecoveryPhoneCode-send-error')
+      )
+      expect(error).toBeTruthy()
+      expect(error.nativeElement.getAttribute('role')).toBe('alert')
+    }))
+
+    it('counts the resend buffer down and offers a resend when it runs out', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      recoveryPhone.resendSeconds = 12
+      fixture.detectChanges()
+
+      expect(text()).toContain('You can resend in')
+      expect(text()).toContain('12')
+      expect(
+        fixture.debugElement.query(
+          By.css('[data-testid="recovery-phone-resend"]')
+        )
+      ).toBeFalsy()
+
+      recoveryPhone.resendSeconds = 0
+      fixture.detectChanges()
+
+      const resend = fixture.debugElement.query(
+        By.css('[data-testid="recovery-phone-resend"]')
+      )
+      expect(resend).toBeTruthy()
+      resend.nativeElement.click()
+      expect(recoveryPhone.sendCode).toHaveBeenCalledTimes(2)
+    }))
+
+    it('blames the password rather than the code when the password was wrong (R5.2)', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      const emit = spyOn(component.submitAttempt, 'emit')
+      form.get('passwordControl')?.setValue('not-the-password')
+      form.get('twoFactorRecoveryPhoneCode')?.setValue('123456')
+
+      component.onSubmit()
+      verifyAnswer.next('invalidPassword')
+      fixture.detectChanges()
+
+      // The registry checks the password first, so no attempt was spent and
+      // the code the user typed is still the right one
+      expect(form.get('passwordControl')?.hasError('invalid')).toBeTrue()
+      expect(
+        form.get('twoFactorRecoveryPhoneCode')?.hasError('invalid')
+      ).toBeFalse()
+      expect(form.get('twoFactorRecoveryPhoneCode')?.value).toBe('123456')
+      expect(component.loading).toBeFalse()
+      expect(emit).not.toHaveBeenCalled()
+      expect(text()).toContain('The password does not match our records')
+    }))
+
+    it('holds the challenge shut while the registry is deciding (R5.4)', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      form.get('passwordControl')?.setValue('a-password')
+      form.get('twoFactorRecoveryPhoneCode')?.setValue('123456')
+
+      component.onSubmit()
+      fixture.detectChanges()
+
+      // A pass has already disabled 2FA and deleted the number by the time it
+      // answers; walking away aborts the request and undoes none of it
+      expect(component.verifying).toBeTrue()
+      expect(
+        fixture.debugElement.query(By.css('#cy-cancel-account-verification'))
+          .nativeElement.disabled
+      ).toBeTrue()
+      expect(mockDialogRef.disableClose).toBeTrue()
+
+      component.onCancel()
+      expect(mockDialogRef.close).not.toHaveBeenCalled()
+
+      verifyAnswer.next('passed')
+      verifyAnswer.complete()
+      fixture.detectChanges()
+
+      expect(component.verifying).toBeFalse()
+      expect(mockDialogRef.disableClose).toBeFalse()
+    }))
+
+    it('stops whatever the handle was running when the challenge closes', () => {
+      offer()
+
+      component.ngOnDestroy()
+
+      expect(recoveryPhone.dispose).toHaveBeenCalled()
+    })
+
+    it('announces the send once and leaves the countdown out of the live region', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      recoveryPhone.codeSent = true
+      // the announcement names the number the code went to, so the template
+      // deliberately says nothing until it has one -- announcing "sent to"
+      // with nothing after it would be worse than staying quiet
+      recoveryPhone.maskedNumber = '***********0123'
+      recoveryPhone.resendSeconds = 12
+      fixture.detectChanges()
+
+      // Scoped to OUR region on purpose: Angular Material's form-field renders
+      // its own aria-live="polite" hint wrapper earlier in the DOM, so a bare
+      // [aria-live] query returns that one, and every assertion below would
+      // then pass or fail for reasons nothing to do with this component.
+      const live = fixture.debugElement.query(
+        By.css('p.visually-hidden[aria-live="polite"]')
+      )
+      expect(live.nativeElement.textContent).toContain(
+        'Verification code sent to'
+      )
+      // the number changes every second: re-reading the sentence each tick
+      // would talk over the user typing the code
+      expect(live.nativeElement.textContent).not.toContain('You can resend in')
+      expect(live.nativeElement.textContent).not.toContain('seconds')
+
+      const counter = fixture.debugElement
+        .queryAll(By.css('p'))
+        .find((p) => p.nativeElement.textContent.includes('You can resend in'))
+      expect(counter).toBeTruthy()
+      expect(counter!.nativeElement.getAttribute('aria-hidden')).toBe('true')
+    }))
+
+    describe('which control holds the account password', () => {
+      /**
+       * The change-password form: `password` is the *new* password the user is
+       * choosing, and the account password is `oldPassword`.
+       */
+      let changePasswordForm: FormGroup
+
+      function rebuildWith(data: Record<string, unknown>): {
+        fixture: ComponentFixture<AuthChallengeComponent>
+        component: AuthChallengeComponent
+      } {
+        Object.assign(mockDialogData, data)
+        const rebuilt = TestBed.createComponent(AuthChallengeComponent)
+        rebuilt.componentInstance.recoveryPhone = recoveryPhone
+        rebuilt.detectChanges()
+        return { fixture: rebuilt, component: rebuilt.componentInstance }
+      }
+
+      beforeEach(() => {
+        changePasswordForm = new FormGroup({
+          oldPassword: new FormControl('the-account-password'),
+          password: new FormControl('the-new-password'),
+          twoFactorCode: new FormControl(''),
+          twoFactorRecoveryCode: new FormControl(''),
+          twoFactorRecoveryPhoneCode: new FormControl(''),
+        })
+      })
+
+      it('does not offer the option when no host has said which one it is', () => {
+        const rebuilt = rebuildWith({
+          parentForm: changePasswordForm,
+          showPasswordField: false,
+          passwordControlName: undefined,
+        })
+
+        // `password` exists here, so the default would have been read happily
+        expect(rebuilt.component.recoveryPhoneAvailable).toBeFalse()
+        expect(
+          rebuilt.fixture.debugElement.query(By.css(SEND_TOGGLE))
+        ).toBeFalsy()
+      })
+
+      it('posts the account password once the host has named it', fakeAsync(() => {
+        const rebuilt = rebuildWith({
+          parentForm: changePasswordForm,
+          showPasswordField: false,
+          passwordControlName: 'oldPassword',
+        })
+        expect(rebuilt.component.recoveryPhoneAvailable).toBeTrue()
+
+        rebuilt.component.sendRecoveryPhoneCode(new Event('click'))
+        rebuilt.fixture.detectChanges()
+        tick()
+        changePasswordForm.get('twoFactorRecoveryPhoneCode')?.setValue('123456')
+
+        rebuilt.component.onSubmit()
+
+        expect(recoveryPhone.verify).toHaveBeenCalledWith(
+          'the-account-password',
+          '123456'
+        )
+      }))
+    })
+
+    it('goes back to the authentication app', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+
+      fixture.debugElement
+        .query(By.css('[data-testid="recovery-phone-back-toggle"]'))
+        .nativeElement.click()
+      fixture.detectChanges()
+      tick()
+
+      expect(component.showRecoveryPhoneCode).toBeFalse()
+      expect(fixture.debugElement.query(By.css('#twoFactorCode'))).toBeTruthy()
+      expect(fixture.debugElement.query(By.css(PHONE_CODE_INPUT))).toBeFalsy()
+      expect(form.get('twoFactorRecoveryPhoneCode')?.value).toBeNull()
+      expect(form.get('twoFactorCode')?.hasError('required')).toBeTrue()
+    }))
   })
 })
