@@ -24,6 +24,20 @@ export enum AppEventName {
   TwoFactorSetupFinalButtonClicked = 'two_factor_setup_final_button_clicked',
   TwoFactorSetupFinalCompleted = 'two_factor_setup_final_completed',
 
+  // ─── 2FA recovery phone number ─────────────────────────────────────────────
+  /** The recovery phone step of 2FA setup was shown. */
+  TwoFactorSetupRecoveryPhoneLoaded = 'two_factor_setup_recovery_phone_loaded',
+  /** A recovery phone number was stored from the 2FA setup step. */
+  TwoFactorSetupRecoveryPhoneSaved = 'two_factor_setup_recovery_phone_saved',
+  /** The user moved past the recovery phone step without adding a number. */
+  TwoFactorSetupRecoveryPhoneSkipped = 'two_factor_setup_recovery_phone_skipped',
+  /** Sign in: a code was sent to the stored recovery number. */
+  SignInRecoveryPhoneCodeSent = 'sign_in_recovery_phone_code_sent',
+  /** Sign in: the recovery number code was accepted, so 2FA is now off. */
+  SignInRecoveryPhoneUsed = 'sign_in_recovery_phone_used',
+  /** An authentication challenge was passed with a recovery number code. */
+  AuthChallengeRecoveryPhoneUsed = 'auth_challenge_recovery_phone_used',
+
   // ─── Orcid registration journey events ─────────────────────────────────────
   StepASignInButtonClicked = 'step-a-sign-in-button-clicked',
   StepANextButtonClicked = 'step-a-next-button-clicked',

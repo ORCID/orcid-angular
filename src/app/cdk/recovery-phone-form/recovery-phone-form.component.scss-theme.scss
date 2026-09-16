@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin recovery-phone-form-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .send-code__button {
+    background-color: var(--orcid-color-brand-secondary-dark, #085c77);
+    color: #ffffff;
+  }
+
+  .recovery-phone-error,
+  .verification-field--invalid .verification-field__label,
+  .verification-field--invalid .verification-field__helper {
+    color: var(--orcid-color-state-warning-darkest, #b71c1c);
+  }
+}
+@include recovery-phone-form-theme($orcid-app-theme);

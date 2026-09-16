@@ -45,10 +45,21 @@ export type RecoveryPhoneErrorCode =
   | 'CHALLENGE_REQUIRED'
   | '2FA_DISABLED'
   | 'FEATURE_DISABLED'
+  | 'BAD_CREDENTIALS'
+  | 'NO_RECOVERY_PHONE'
+
+/**
+ * Which flow asked for the number. The registry reads it to decide what it
+ * demands before it will send or save: a password challenge in account
+ * settings, a 2FA registration that has just completed during onboarding, or a
+ * fresh login behind the sign-in interstitial. Absent means SETTINGS.
+ */
+export type RecoveryPhoneContext = 'SETTINGS' | 'ONBOARDING' | 'INTERSTITIAL'
 
 export interface RecoveryPhoneSendCodeRequest {
   phoneNumber: string
   locale?: string
+  context?: RecoveryPhoneContext
 }
 
 export interface RecoveryPhoneSendCodeResponse {
@@ -60,6 +71,7 @@ export interface RecoveryPhoneSendCodeResponse {
 export interface RecoveryPhoneSaveRequest {
   phoneNumber: string
   verificationCode: string
+  context?: RecoveryPhoneContext
 }
 
 export interface RecoveryPhoneSaveResponse {

@@ -1,14 +1,16 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing'
+import { CUSTOM_ELEMENTS_SCHEMA, EventEmitter } from '@angular/core'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog'
+import { MatIconModule } from '@angular/material/icon'
+import { By } from '@angular/platform-browser'
 import { Router } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
-import { EventEmitter } from '@angular/core'
-import { Subject, of, throwError } from 'rxjs'
-import IntlTelInput from '@intl-tel-input/angular'
+import { OrcidStepViewComponent } from '@orcid/ui'
+import { Subject, of } from 'rxjs'
 
 import { RecoveryPhoneComponent } from './recovery-phone.component'
+import { RecoveryPhoneFormComponent } from '../../../cdk/recovery-phone-form/recovery-phone-form.component'
 import { ApplicationRoutes } from '../../../constants'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
@@ -30,7 +32,7 @@ describe('RecoveryPhoneComponent', () => {
   let dialogRef: any
 
   const status = (overrides: Partial<Status> = {}): Status =>
-    ({ enabled: true, ...overrides }) as Status
+    ({ enabled: true, ...overrides } as Status)
 
   function build(flagEnabled = true, statusValue: Status = status()) {
     togglzService.getStateOf.and.returnValue(of(flagEnabled))
@@ -48,6 +50,13 @@ describe('RecoveryPhoneComponent', () => {
     submitAttempt.emit()
     afterClosed.next(true)
     fixture.detectChanges()
+  }
+
+  /** The form the page hosts, once the status call has let it render. */
+  function hostedForm(): RecoveryPhoneFormComponent {
+    const form = component.recoveryPhoneForm
+    expect(form).withContext('the form should be rendered').toBeTruthy()
+    return form as RecoveryPhoneFormComponent
   }
 
   beforeEach(async () => {
@@ -79,7 +88,13 @@ describe('RecoveryPhoneComponent', () => {
     dialog.open.and.returnValue(dialogRef)
 
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, RouterTestingModule, IntlTelInput],
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule,
+        MatIconModule,
+        OrcidStepViewComponent,
+        RecoveryPhoneFormComponent,
+      ],
       declarations: [RecoveryPhoneComponent],
       providers: [
         { provide: TwoFactorAuthenticationService, useValue: twoFactorService },
@@ -117,6 +132,15 @@ describe('RecoveryPhoneComponent', () => {
     expect(component.title).toBe('Add a recovery phone number')
   })
 
+  it('names the challenge dialog and marks it modal', () => {
+    build()
+
+    const config = dialog.open.calls.mostRecent().args[1] as any
+    expect(config.ariaModal).toBeTrue()
+    expect(config.ariaLabel).toBe('Add a recovery phone number')
+    expect(config.disableClose).toBeTrue()
+  })
+
   it('treats an existing number as a change rather than an addition', () => {
     build(true, status({ maskedRecoveryPhoneNumber: '***********1234' }))
 
@@ -124,6 +148,14 @@ describe('RecoveryPhoneComponent', () => {
     expect(component.title).toBe('Manage your recovery phone number')
     expect(component.primaryLabel).toBe('Update recovery phone number')
     expect(component.maskedRecoveryPhoneNumber).toBe('***********1234')
+  })
+
+  it('tells the form it is running in account settings', () => {
+    build(true, status({ maskedRecoveryPhoneNumber: '***********1234' }))
+
+    expect(hostedForm().context).toBe('SETTINGS')
+    expect(hostedForm().managingExistingNumber).toBeTrue()
+    expect(hostedForm().maskedRecoveryPhoneNumber).toBe('***********1234')
   })
 
   it('leaves the page when the challenge is cancelled', () => {
@@ -147,175 +179,52 @@ describe('RecoveryPhoneComponent', () => {
     expect(dialogRef.close).not.toHaveBeenCalledWith(true)
   })
 
-  it('enables the code field and starts the countdown once a code is sent', () => {
+  it('keeps the primary button dead until a code has been sent', () => {
     build()
     passChallenge()
-    twoFactorService.sendRecoveryPhoneCode.and.returnValue(
-      of({ success: true, resendAfterSeconds: 30 })
+
+    const primary = fixture.debugElement.query(
+      By.css('#cy-step-view-primary-action')
     )
-    component.form.get('phoneNumber')?.setValue('+441234567890')
-
-    component.sendCode()
-
-    expect(component.codeSent).toBeTrue()
-    expect(component.verificationCodeControl?.enabled).toBeTrue()
-    expect(component.resendCountdown).toBe(30)
-    // the number is locked while a code is outstanding
-    expect(component.phoneNumberControl?.disabled).toBeTrue()
+    expect(primary.nativeElement.disabled).toBeTrue()
   })
 
-  it('counts the resend buffer down and frees the number again', fakeAsync(() => {
+  it('hands its primary button to the form', () => {
     build()
     passChallenge()
-    twoFactorService.sendRecoveryPhoneCode.and.returnValue(
-      of({ success: true, resendAfterSeconds: 2 })
-    )
-    component.form.get('phoneNumber')?.setValue('+441234567890')
-    component.sendCode()
-
-    tick(2000)
-
-    expect(component.resendCountdown).toBe(0)
-    expect(component.phoneNumberControl?.enabled).toBeTrue()
-    component.ngOnDestroy()
-  }))
-
-  it('restarts the countdown cleanly on a second send', fakeAsync(() => {
-    build()
-    passChallenge()
-    twoFactorService.sendRecoveryPhoneCode.and.returnValue(
-      of({ success: true, resendAfterSeconds: 3 })
-    )
-    component.form.get('phoneNumber')?.setValue('+441234567890')
-    component.sendCode()
-    tick(3000)
-
-    component.sendCode()
-    tick(1000)
-
-    // one tick, one second gone: a leftover countdown would double the rate
-    expect(component.resendCountdown).toBe(2)
-    component.ngOnDestroy()
-  }))
-
-  it('names the problem the phone field already found, rather than calling it required', () => {
-    build()
-    passChallenge()
-    const control = component.form.get('phoneNumber')
-    control?.setValue('+441234')
-    control?.setErrors({ invalidPhone: 'IS_POSSIBLE_LOCAL_ONLY' })
-
-    component.sendCode()
-
-    expect(component.phoneErrorMessage).toBe('Phone number is too short')
-    expect(twoFactorService.sendRecoveryPhoneCode).not.toHaveBeenCalled()
-  })
-
-  it('still asks for a number when the field is empty', () => {
-    build()
-    passChallenge()
-
-    component.sendCode()
-
-    expect(component.phoneErrorMessage).toBe('Phone number is required')
-  })
-
-  it('shows the length problem the server reports for the number', () => {
-    build()
-    passChallenge()
-    twoFactorService.sendRecoveryPhoneCode.and.returnValue(
-      of({ success: false, errorCode: 'PHONE_TOO_SHORT', resendAfterSeconds: 0 })
-    )
-    component.form.get('phoneNumber')?.setValue('+441234')
-
-    component.sendCode()
-
-    expect(component.phoneErrorMessage).toBe('Phone number is too short')
-    expect(component.codeSent).toBeFalse()
-  })
-
-  it('asks for a code before saving', () => {
-    build()
-    passChallenge()
-
-    component.save()
-
-    expect(component.codeErrorMessage).toBe('A verification code is required')
-    expect(twoFactorService.saveRecoveryPhone).not.toHaveBeenCalled()
-  })
-
-  it('rejects a code that is not six digits', () => {
-    build()
-    passChallenge()
-    component.verificationCodeControl?.enable()
-    component.verificationCodeControl?.setValue('12345')
-
-    component.save()
-
-    expect(component.codeErrorMessage).toBe('Invalid verification code length')
-    expect(twoFactorService.saveRecoveryPhone).not.toHaveBeenCalled()
-  })
-
-  it('reports a rejected code without leaving the page', () => {
-    build()
-    passChallenge()
-    component.verificationCodeControl?.enable()
-    component.verificationCodeControl?.setValue('000000')
-    twoFactorService.saveRecoveryPhone.and.returnValue(
-      of({ success: false, errorCode: 'INVALID_CODE' })
-    )
-    ;(router.navigate as jasmine.Spy).calls.reset()
-
-    component.save()
-
-    expect(component.codeErrorMessage).toBe('Invalid verification code')
-    expect(router.navigate).not.toHaveBeenCalled()
-  })
-
-  it('clears the code entry when it has expired', () => {
-    build()
-    passChallenge()
-    component.verificationCodeControl?.enable()
-    component.verificationCodeControl?.setValue('123456')
+    const form = hostedForm()
+    spyOn(form, 'save')
     component.codeSent = true
-    twoFactorService.saveRecoveryPhone.and.returnValue(
-      of({ success: false, errorCode: 'CODE_EXPIRED' })
+    fixture.detectChanges()
+
+    const primary = fixture.debugElement.query(
+      By.css('#cy-step-view-primary-action')
     )
+    expect(primary.nativeElement.disabled).toBeFalse()
+    primary.nativeElement.click()
 
-    component.save()
-
-    expect(component.codeSent).toBeFalse()
-    expect(component.verificationCodeControl?.disabled).toBeTrue()
+    expect(form.save).toHaveBeenCalled()
   })
 
-  it('asks for the challenge again when the elevation has run out', () => {
+  it('re-opens the challenge when the form says the elevation ran out', () => {
     build()
     passChallenge()
-    component.verificationCodeControl?.enable()
-    component.verificationCodeControl?.setValue('123456')
-    twoFactorService.saveRecoveryPhone.and.returnValue(
-      of({ success: false, errorCode: 'CHALLENGE_REQUIRED' })
-    )
     dialog.open.calls.reset()
 
-    component.save()
+    hostedForm().challengeRequired.emit()
 
     expect(dialog.open).toHaveBeenCalled()
-    // what they typed is still there
-    expect(component.verificationCodeControl?.value).toBe('123456')
   })
 
   it('returns with the added outcome after a first number is stored', () => {
     build()
     passChallenge()
-    component.verificationCodeControl?.enable()
-    component.verificationCodeControl?.setValue('123456')
-    twoFactorService.saveRecoveryPhone.and.returnValue(
-      of({ success: true, maskedRecoveryPhoneNumber: '***********1234' })
-    )
     ;(router.navigate as jasmine.Spy).calls.reset()
 
-    component.save()
+    hostedForm().saved.emit({
+      success: true,
+      maskedRecoveryPhoneNumber: '***********1234',
+    })
 
     expect(router.navigate).toHaveBeenCalledWith(
       [ApplicationRoutes.account],
@@ -326,12 +235,9 @@ describe('RecoveryPhoneComponent', () => {
   it('returns with the updated outcome after a number is changed', () => {
     build(true, status({ maskedRecoveryPhoneNumber: '***********1234' }))
     passChallenge()
-    component.verificationCodeControl?.enable()
-    component.verificationCodeControl?.setValue('123456')
-    twoFactorService.saveRecoveryPhone.and.returnValue(of({ success: true }))
     ;(router.navigate as jasmine.Spy).calls.reset()
 
-    component.save()
+    hostedForm().saved.emit({ success: true })
 
     expect(router.navigate).toHaveBeenCalledWith(
       [ApplicationRoutes.account],
@@ -339,17 +245,12 @@ describe('RecoveryPhoneComponent', () => {
     )
   })
 
-  it('reports a failure when saving breaks', () => {
+  it('returns with the failed outcome when the form gives up', () => {
     build()
     passChallenge()
-    component.verificationCodeControl?.enable()
-    component.verificationCodeControl?.setValue('123456')
-    twoFactorService.saveRecoveryPhone.and.returnValue(
-      throwError(() => new Error('boom'))
-    )
     ;(router.navigate as jasmine.Spy).calls.reset()
 
-    component.save()
+    hostedForm().failed.emit('HTTP')
 
     expect(router.navigate).toHaveBeenCalledWith(
       [ApplicationRoutes.account],

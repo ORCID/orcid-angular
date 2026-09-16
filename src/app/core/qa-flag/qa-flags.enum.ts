@@ -3,4 +3,5 @@ export enum QaFlag {
   forceInterstitialCheckOnEveryReload = 'forceInterstitialChecksOnEveryReload',
   forceAffiliationInterstitialNotSeem = 'forceAffiliationInterstitialAsNeverSeem',
   forceBackupEmailInterstitialNotSeem = 'forceBackupEmailInterstitialAsNeverSeem',
+  forceRecoveryPhoneInterstitialNotSeem = 'forceRecoveryPhoneInterstitialAsNeverSeem',
 }
