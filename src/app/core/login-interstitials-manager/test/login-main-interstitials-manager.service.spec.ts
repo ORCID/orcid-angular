@@ -7,10 +7,12 @@ import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
 import { LoginDomainInterstitialManagerService } from '../implementations/login-domain-interstitials-manager.service'
 import { LoginBackupEmailInterstitialManagerService } from '../implementations/login-backup-email-interstitials-manager.service'
+import { LoginRecoveryPhoneInterstitialManagerService } from '../implementations/login-recovery-phone-interstitials-manager.service'
 import { LoginMainInterstitialsManagerService } from '../login-main-interstitials-manager.service'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 import { BackupEmailComponentDialogOutput } from 'src/app/cdk/interstitials/backup-email/interstitial-dialog-extend/backup-email-dialog.component'
+import { RecoveryPhoneComponentDialogOutput } from '../abstractions/dialog-interface'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { PlatformInfo } from 'src/app/cdk/platform-info/platform-info.type'
 
@@ -27,6 +29,7 @@ describe('LoginMainInterstitialsManagerService', () => {
   let mockLoginDomainInterstitialManagerService: jasmine.SpyObj<LoginDomainInterstitialManagerService>
   let mockLoginAffiliationInterstitialManagerService: jasmine.SpyObj<LoginAffiliationInterstitialManagerService>
   let mockLoginBackupEmailInterstitialManagerService: jasmine.SpyObj<LoginBackupEmailInterstitialManagerService>
+  let mockLoginRecoveryPhoneInterstitialManagerService: jasmine.SpyObj<LoginRecoveryPhoneInterstitialManagerService>
   let mockPlatformInfoService: jasmine.SpyObj<PlatformInfoService>
 
   // Example valid user
@@ -117,6 +120,25 @@ describe('LoginMainInterstitialsManagerService', () => {
       of(false)
     )
 
+    mockLoginRecoveryPhoneInterstitialManagerService =
+      jasmine.createSpyObj<LoginRecoveryPhoneInterstitialManagerService>(
+        'LoginRecoveryPhoneInterstitialManagerService',
+        [
+          'userIsElegibleForInterstitial',
+          'getInterstitialTogglz',
+          'getInterstitialViewed',
+          'showInterstitialAsDialog',
+        ],
+        {
+          INTERSTITIAL_NAME: 'RECOVERY_PHONE_INTERSTITIAL',
+        }
+      )
+    // Last in the chain, so it is reached by every test that gets that far;
+    // the ordering tests are the ones that turn it on
+    mockLoginRecoveryPhoneInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(false)
+    )
+
     mockPlatformInfoService = jasmine.createSpyObj<PlatformInfoService>(
       'PlatformInfoService',
       ['get']
@@ -144,6 +166,10 @@ describe('LoginMainInterstitialsManagerService', () => {
           provide: LoginBackupEmailInterstitialManagerService,
           useValue: mockLoginBackupEmailInterstitialManagerService,
         },
+        {
+          provide: LoginRecoveryPhoneInterstitialManagerService,
+          useValue: mockLoginRecoveryPhoneInterstitialManagerService,
+        },
       ],
     })
 
@@ -167,6 +193,10 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginBackupEmailInterstitialManagerService.getInterstitialTogglz.calls.reset()
     mockLoginBackupEmailInterstitialManagerService.getInterstitialViewed.calls.reset()
     mockLoginBackupEmailInterstitialManagerService.showInterstitialAsDialog.calls.reset()
+    mockLoginRecoveryPhoneInterstitialManagerService.userIsElegibleForInterstitial.calls.reset()
+    mockLoginRecoveryPhoneInterstitialManagerService.getInterstitialTogglz.calls.reset()
+    mockLoginRecoveryPhoneInterstitialManagerService.getInterstitialViewed.calls.reset()
+    mockLoginRecoveryPhoneInterstitialManagerService.showInterstitialAsDialog.calls.reset()
   })
 
   it('should be created', () => {
@@ -290,6 +320,10 @@ describe('LoginMainInterstitialsManagerService', () => {
           expect(
             mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
           ).not.toHaveBeenCalled()
+          // Nor the recovery phone one, which sits behind it
+          expect(
+            mockLoginRecoveryPhoneInterstitialManagerService.userIsElegibleForInterstitial
+          ).not.toHaveBeenCalled()
         },
       })
     tick(1)
@@ -401,6 +435,114 @@ describe('LoginMainInterstitialsManagerService', () => {
           expect(
             mockLoginDomainInterstitialManagerService.showInterstitialAsDialog
           ).toHaveBeenCalled()
+        },
+      })
+    tick(1)
+  }))
+
+  // The recovery phone interstitial sits last in the ordered array. That
+  // position is product-owned: it is the most specific of the four, and five
+  // end-to-end specs dismiss the backup email interstitial by name on sign in,
+  // so anything promoted above it would break them.
+  it('should show the recovery phone interstitial only after the other three decline', fakeAsync(() => {
+    mockInterstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic.and.returnValue(
+      false
+    )
+
+    mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(false)
+    )
+    mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(false)
+    )
+    mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(false)
+    )
+
+    mockLoginRecoveryPhoneInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(true)
+    )
+    mockLoginRecoveryPhoneInterstitialManagerService.getInterstitialTogglz.and.returnValue(
+      of(true)
+    )
+    mockLoginRecoveryPhoneInterstitialManagerService.getInterstitialViewed.and.returnValue(
+      of(false)
+    )
+    mockLoginRecoveryPhoneInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
+      of({
+        type: 'recovery-phone-interstitial',
+        addedRecoveryPhone: '***********6789',
+      } as RecoveryPhoneComponentDialogOutput)
+    )
+
+    service
+      .checkLoginInterstitials(validUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: (result) => {
+          expect(result).toEqual({
+            type: 'recovery-phone-interstitial',
+            addedRecoveryPhone: '***********6789',
+          } as RecoveryPhoneComponentDialogOutput)
+        },
+        complete: () => {
+          expect(
+            mockLoginRecoveryPhoneInterstitialManagerService.showInterstitialAsDialog
+          ).toHaveBeenCalled()
+        },
+      })
+    tick(1)
+
+    expect(
+      mockInterstitialsService.markCurrentSessionToNoCheckInterstitialsLogic
+    ).toHaveBeenCalled()
+  }))
+
+  it('should not promote the recovery phone interstitial above the backup email one', fakeAsync(() => {
+    mockInterstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic.and.returnValue(
+      false
+    )
+
+    // Both qualify; the array order is the only thing separating them
+    mockLoginBackupEmailInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(true)
+    )
+    mockLoginBackupEmailInterstitialManagerService.getInterstitialTogglz.and.returnValue(
+      of(true)
+    )
+    mockLoginBackupEmailInterstitialManagerService.getInterstitialViewed.and.returnValue(
+      of(false)
+    )
+    mockLoginBackupEmailInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
+      of({
+        type: 'backup-email-interstitial',
+      } as BackupEmailComponentDialogOutput)
+    )
+
+    mockLoginRecoveryPhoneInterstitialManagerService.userIsElegibleForInterstitial.and.returnValue(
+      of(true)
+    )
+
+    service
+      .checkLoginInterstitials(validUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: (result) => {
+          expect(result).toEqual({
+            type: 'backup-email-interstitial',
+          } as BackupEmailComponentDialogOutput)
+        },
+        complete: () => {
+          expect(
+            mockLoginRecoveryPhoneInterstitialManagerService.userIsElegibleForInterstitial
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginRecoveryPhoneInterstitialManagerService.showInterstitialAsDialog
+          ).not.toHaveBeenCalled()
         },
       })
     tick(1)
@@ -532,6 +674,18 @@ describe('LoginMainInterstitialsManagerService', () => {
           ).not.toHaveBeenCalled()
           expect(
             mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog
+          ).not.toHaveBeenCalled()
+
+          // The recovery phone one is last, so it is the only one that is
+          // reached and still declines on its own rule
+          expect(
+            mockLoginRecoveryPhoneInterstitialManagerService.userIsElegibleForInterstitial
+          ).toHaveBeenCalled()
+          expect(
+            mockLoginRecoveryPhoneInterstitialManagerService.getInterstitialTogglz
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginRecoveryPhoneInterstitialManagerService.showInterstitialAsDialog
           ).not.toHaveBeenCalled()
         },
       })
