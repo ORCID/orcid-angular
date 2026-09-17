@@ -10,10 +10,9 @@
   $background: map-get($theme, background);
 
   .recovery-phone-onboarding-notice {
-    background-color: mat.m2-get-color-from-palette(
-      $background,
-      state-notice-lightest
-    );
+    // the design fills the panel with state-notice-lightest at 5%, the same
+    // fill the add/manage page uses, rather than the wizard's solid tint
+    background-color: rgba(255, 236, 171, 0.05);
     border-color: mat.m2-get-color-from-palette(
       $foreground,
       'state-notice-dark'

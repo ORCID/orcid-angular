@@ -53,7 +53,7 @@
    */
   --iti-flag-width: 28px;
   --iti-country-selector-bg: var(--orcid-color-background-lightest, #fafafa);
-  --iti-border-color: var(--orcid-color-border-subtle, #bdbdbd);
+  --iti-border-color: var(--orcid-color-ui-background, #bdbdbd);
   --iti-spacer-horizontal: 8px;
 
   ::ng-deep .iti {
@@ -71,7 +71,7 @@
     width: 100%;
     height: 40px;
     box-sizing: border-box;
-    border: 1px solid var(--orcid-color-border-subtle, #bdbdbd);
+    border: 1px solid var(--orcid-color-ui-background, #bdbdbd);
     border-radius: 2px;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -103,12 +103,21 @@
   }
 
   ::ng-deep .iti__selected-country-primary {
-    border-right: 1px solid var(--orcid-color-border-subtle, #bdbdbd);
+    border-right: 1px solid var(--orcid-color-ui-background, #bdbdbd);
     border-radius: 2px 0 0 2px;
     height: 100%;
     padding: 0 6px 0 8px;
     display: flex;
     align-items: center;
+  }
+
+  /*
+   * The chevron is two of the library's borders turned 45 degrees; the design
+   * draws it near-black.
+   */
+  ::ng-deep .iti__arrow {
+    border-right-color: var(--orcid-color-ui-background-darkest, #212121);
+    border-bottom-color: var(--orcid-color-ui-background-darkest, #212121);
   }
 
   /* the dial code is set like the rest of the number, not emphasised */
@@ -188,7 +197,7 @@
 
 .verification-field__input {
   height: 40px;
-  border: 1px solid var(--orcid-color-border-subtle, #bdbdbd);
+  border: 1px solid var(--orcid-color-ui-background, #bdbdbd);
   border-radius: 2px;
   padding: 8px;
   width: 100%;
