@@ -8,7 +8,7 @@
         error: isVerificationCodeInvalid
       }"
       *ngIf="authenticationCodeMode"
-      >Two-factor authentication code
+      >Two-factor authentication
     </mat-label>
     <mat-form-field
       appearance="outline"
@@ -75,14 +75,8 @@
         'enter-code': isVerificationCodeInvalid
       }"
     >
-      <a
-        class="underline orc-font-body-small"
-        (click)="showAuthenticationCode()"
-        i18n="@@ngOrcid.signin.2fa.instructionsPart1"
-        >Enter a code
-      </a>
-      <ng-container i18n="@@ngOrcid.signin.2fa.instructionsPart2">
-        from your two-factor authentication app
+      <ng-container i18n="@@ngOrcid.signin.2fa.enterSixDigitCode">
+        Enter the 6-digit code from your authentication app
       </ng-container>
     </p>
     <p>
@@ -342,10 +336,10 @@
     class="row mat-elevation-z0 two-factor authenticate-button-new-signin"
     type="submit"
     [disabled]="recoveryPhoneMode && !recoveryPhoneCodeSent"
-    i18n="@@ngOrcid.signin.2fa.authenticate"
+    i18n="@@ngOrcid.signin.2fa.authenticateAndSignIn"
     id="authenticateButton"
   >
-    AUTHENTICATE
+    Authenticate and sign in
   </button>
 </form>
 <mat-error *ngIf="showBadVerificationCode" class="orcid-error">
