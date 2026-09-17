@@ -10,10 +10,13 @@
     [ngClass]="{ progress: !data }"
   ></mat-progress-bar>
   }
-  <div
-    class="icon self-center w-16 h-16 mb-8 content-center ml-auto mr-auto rounded-[50%] text-center"
-  >
-    <mat-icon class="material-symbols-outlined">person_check</mat-icon>
+  <div class="self-center w-16 h-16 mb-8 ml-auto mr-auto text-center">
+    <img
+      class="w-16 h-16"
+      src="./assets/vectors/orcid.logo.icon.svg"
+      alt=""
+      aria-hidden="true"
+    />
   </div>
   <h1
     [id]="headingId"
@@ -220,8 +223,8 @@
       <div class="mt-2 grow text-left">
         @if (!parentForm.get(codeControlName)?.invalid ||
         !twoFactorCodeWasTouched) {
-        <mat-hint class="leading-6" i18n="@@account.enterTheCode">
-          Enter the code from your two-factor authentication app
+        <mat-hint class="leading-6" i18n="@@account.enterTheSixDigitCode">
+          Enter the 6-digit code from your authentication app
         </mat-hint>
         } @if (parentForm.get(codeControlName)?.hasError('invalid')) {
         <mat-error>
