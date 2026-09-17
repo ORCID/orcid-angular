@@ -29,7 +29,7 @@
     }
 
     .off {
-      color: mat.m2-get-color-from-palette($foreground, 'state-warning-dark');
+      color: $state-warning-darkest;
     }
 
     .on {

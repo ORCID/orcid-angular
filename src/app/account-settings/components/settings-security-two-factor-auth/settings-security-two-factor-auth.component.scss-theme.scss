@@ -27,7 +27,21 @@
 
   .two-factor-panel__disable-button {
     background-color: $state-warning-darkest !important;
+    // The component stylesheet borders this button in state-warning-dark, one
+    // shade lighter than the background the theme paints it - a 1px halo of
+    // the wrong red that the design comparison found and no eye had.
+    border-color: $state-warning-darkest !important;
     color: white !important;
+  }
+
+  // The design draws every rule in the panel in ui-background. The component
+  // stylesheet reached for a raw grey and for a library CSS variable that the
+  // application does not define, so both rules rendered lighter than the frame.
+  .two-factor-panel__section {
+    border-bottom-color: $ui-background;
+  }
+  .two-factor-panel__requirement {
+    border-top-color: $ui-background;
   }
 }
 

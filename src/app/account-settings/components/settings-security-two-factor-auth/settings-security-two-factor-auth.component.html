@@ -192,10 +192,17 @@
       Disable two-factor authentication
     </h4>
     }
+    @if (recoveryPhoneTogglz && !loadingTogglz) {
+    <p class="two-factor-panel__copy" i18n="@@account.disable2FAWarningBackup">
+      You can disable two-factor authentication at any time. Turning 2FA off
+      will reset your 2FA backup options.
+    </p>
+    } @else {
     <p class="two-factor-panel__copy" i18n="@@account.disable2FAWarning">
       You can disable two-factor authentication at any time. Turning 2FA off
       will reset any account recovery options you have set up.
     </p>
+    }
     @if (recoveryPhoneTogglz && !loadingTogglz) {
     <a
       class="two-factor-panel__link two-factor-panel__link--disable-info"
