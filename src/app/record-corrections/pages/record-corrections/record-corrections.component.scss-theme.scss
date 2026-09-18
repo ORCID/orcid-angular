@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin record-corrections-theme($theme) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .corrections-table {
+    th,
+    td {
+      border-color: mat.m2-get-color-from-palette($foreground, 'divider');
+    }
+  }
+
+  .skeleton-row {
+    border-color: mat.m2-get-color-from-palette($foreground, 'divider');
+  }
+
+  // Palette 700 is brand-secondary-dark, the filled button color in the design.
+  .orcid-button {
+    background-color: mat.m2-get-color-from-palette($primary, 700);
+    border-color: mat.m2-get-color-from-palette($primary, 700);
+    color: mat.m2-get-contrast-color-from-palette($primary, 700);
+  }
+}
+
+@include record-corrections-theme($orcid-app-theme);
