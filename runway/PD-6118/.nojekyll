@@ -1,0 +1,3 @@
+# Disable Jekyll processing for GitHub Pages
+# This ensures files starting with underscores (like _next, _nuxt, etc.) are served correctly
+
