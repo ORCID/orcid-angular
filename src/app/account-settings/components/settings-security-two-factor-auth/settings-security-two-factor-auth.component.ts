@@ -1,7 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { ApplicationRoutes } from '../../../constants'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
+import { TogglzService } from '../../../core/togglz/togglz.service'
+import { TogglzFlag } from '../../../types/config.endpoint'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { MatDialog } from '@angular/material/dialog'
 import { AuthChallengeComponent } from '@orcid/registry-ui'
@@ -22,20 +32,29 @@ import { Status } from '../../../types/two-factor.endpoint'
   ],
   standalone: false,
 })
-export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
+export class SettingsSecurityTwoFactorAuthComponent implements OnInit, OnDestroy {
   @Input() twoFactorInfo: Status | undefined
   @Output() twoFactorStateOutput = new EventEmitter<any>()
+
+  private readonly $destroy = new Subject<void>()
 
   form: UntypedFormGroup
   success = false
   cancel = false
   authChallengeLabel = $localize`:@@accountSettings.security.disable2FA:to disable 2FA`
 
+  recoveryPhoneTogglz = false
+  loadingTogglz = true
+  /** Set from the query param the recovery phone page comes back with. */
+  recoveryPhoneOutcome: 'added' | 'updated' | 'failed' | undefined
+
   constructor(
     private _router: Router,
+    private _route: ActivatedRoute,
     private twoFactorAuthenticationService: TwoFactorAuthenticationService,
     private _fb: UntypedFormBuilder,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _togglz: TogglzService
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +66,54 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
         [Validators.minLength(10), Validators.maxLength(10)],
       ],
     })
+
+    this._togglz
+      .getStateOf(TogglzFlag.TWO_FACTOR_RECOVERY_PHONE)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((value) => {
+        this.loadingTogglz = false
+        this.recoveryPhoneTogglz = value
+      })
+
+    this.readRecoveryPhoneOutcome()
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next()
+    this.$destroy.complete()
+  }
+
+  /**
+   * The add and manage pages come back with the outcome as a query param. Show
+   * it once, then drop it so a refresh does not repeat the message.
+   */
+  private readRecoveryPhoneOutcome(): void {
+    const outcome = this._route.snapshot.queryParamMap.get('recoveryPhone')
+    if (outcome !== 'added' && outcome !== 'updated' && outcome !== 'failed') {
+      return
+    }
+    this.recoveryPhoneOutcome = outcome
+    this._router.navigate([], {
+      relativeTo: this._route,
+      queryParams: { recoveryPhone: null },
+      queryParamsHandling: 'merge',
+      fragment: '2FA',
+      replaceUrl: true,
+    })
+  }
+
+  get hasRecoveryPhone(): boolean {
+    return !!this.twoFactorInfo?.maskedRecoveryPhoneNumber
+  }
+
+  get recoveryPhoneDate() {
+    return this.twoFactorInfo?.recoveryPhoneModified
+      ? this.twoFactorInfo?.recoveryPhoneLastModifiedDate
+      : this.twoFactorInfo?.recoveryPhoneCreationDate
+  }
+
+  manageRecoveryPhone(): void {
+    this._router.navigate([ApplicationRoutes.recoveryPhone])
   }
 
   openAuthChallenge() {

@@ -1,5 +1,25 @@
 <app-settings-panels-data>
-  @if (success) {
+  @if (recoveryPhoneOutcome === 'added' || recoveryPhoneOutcome === 'updated') {
+  <app-alert-message type="success" class="mb-4.5">
+    <div content class="mt-0.5">
+      @if (recoveryPhoneOutcome === 'added') {
+      <span i18n="@@account.recoveryPhoneAdded"
+        >Your recovery phone number has been added</span
+      >
+      } @else {
+      <span i18n="@@account.recoveryPhoneUpdated"
+        >Your recovery phone number has been updated</span
+      >
+      }
+    </div>
+  </app-alert-message>
+  } @if (recoveryPhoneOutcome === 'failed') {
+  <app-alert-message type="warning" class="mb-4.5">
+    <div content class="mt-0.5" i18n="@@account.recoveryPhoneNotUpdated">
+      Your recovery phone number was not updated
+    </div>
+  </app-alert-message>
+  } @if (success) {
   <app-alert-message type="success" class="mb-4.5">
     <div content class="mt-0.5" i18n>
       Two-factor authentication has been disabled
@@ -62,6 +82,9 @@
             Authentication app
           </p>
           <small>
+            @if (recoveryPhoneTogglz && !loadingTogglz) {
+            <span i18n="@@account.enabledDateLabel">Enabled:</span>
+            }
             {{
               twoFactorInfo?.twoFactorCreationDate | monthDayYearDateToString
             }}
@@ -71,7 +94,11 @@
     </section>
 
     <section class="two-factor-panel__section">
+      @if (recoveryPhoneTogglz && !loadingTogglz) {
+      <h4 i18n="@@account.twoFABackup">2FA backup</h4>
+      } @else {
       <h4 i18n="@@account.accountRecovery">Account recovery</h4>
+      }
       <p
         class="two-factor-panel__section-description"
         i18n="@@account.accountRecoveryDescription"
@@ -79,6 +106,60 @@
         Recover access to your ORCID account if you can't use your
         authentication app.
       </p>
+
+      @if (recoveryPhoneTogglz && !loadingTogglz) {
+      <div class="two-factor-panel__requirement">
+        <mat-icon
+          inline="true"
+          aria-hidden="true"
+          class="two-factor-panel__requirement-icon"
+          [class.two-factor-panel__requirement-icon--unmet]="!hasRecoveryPhone"
+        >
+          {{ hasRecoveryPhone ? 'check_circle' : 'radio_button_unchecked' }}
+        </mat-icon>
+        <div class="two-factor-panel__requirement-body">
+          <div>
+            <p class="two-factor-panel__requirement-title leading-5.25">
+              <span i18n="@@account.recoveryPhoneNumber"
+                >Recovery phone number</span
+              >
+              @if (hasRecoveryPhone) {
+              <span class="two-factor-panel__requirement-value">{{
+                twoFactorInfo?.maskedRecoveryPhoneNumber
+              }}</span>
+              }
+            </p>
+            @if (hasRecoveryPhone) {
+            <small class="leading-4.5">
+              @if (twoFactorInfo?.recoveryPhoneModified) {
+              <span i18n="@@account.modifiedDateLabel">Modified:</span>
+              } @else {
+              <span i18n="@@account.enabledDateLabel">Enabled:</span>
+              }
+              {{ recoveryPhoneDate | monthDayYearDateToString }}
+            </small>
+            }
+          </div>
+          <button
+            type="button"
+            id="cy-manage-recovery-phone"
+            class="two-factor-panel__requirement-action"
+            (click)="manageRecoveryPhone()"
+          >
+            @if (hasRecoveryPhone) {
+            <span i18n="@@account.manageRecoveryPhoneNumber"
+              >Manage recovery phone number</span
+            >
+            } @else {
+            <span i18n="@@account.addRecoveryPhoneNumber"
+              >Add recovery phone number</span
+            >
+            }
+          </button>
+        </div>
+      </div>
+      }
+
       <div class="two-factor-panel__requirement">
         <mat-icon
           inline="true"
@@ -92,6 +173,9 @@
             2FA recovery codes
           </p>
           <small class="leading-4.5">
+            @if (recoveryPhoneTogglz && !loadingTogglz) {
+            <span i18n="@@account.enabledDateLabel">Enabled:</span>
+            }
             {{
               twoFactorInfo?.recoveryCodeCreationDate | monthDayYearDateToString
             }}
@@ -100,10 +184,27 @@
       </div>
     </section>
 
+    @if (recoveryPhoneTogglz && !loadingTogglz) {
+    <h4 class="two-factor-panel__disable-heading" i18n="@@account.disableTwoFactorAuth">
+      Disable two-factor authentication
+    </h4>
+    }
     <p class="two-factor-panel__copy" i18n="@@account.disable2FAWarning">
       You can disable two-factor authentication at any time. Turning 2FA off
       will reset any account recovery options you have set up.
     </p>
+    @if (recoveryPhoneTogglz && !loadingTogglz) {
+    <a
+      class="two-factor-panel__link two-factor-panel__link--disable-info"
+      href="https://support.orcid.org/hc/en-us/articles/360006971673"
+      rel="noopener noreferrer"
+      target="_blank"
+      i18n="@@account.learnMoreAbout2FA"
+    >
+      Learn more about two-factor authentication
+      <mat-icon inline="true" aria-hidden="true">open_in_new</mat-icon>
+    </a>
+    } @else {
     <a
       class="two-factor-panel__link two-factor-panel__link--disable-info"
       href="https://support.orcid.org/hc/en-us/articles/360006971673"
@@ -114,6 +215,7 @@
       Find out more about disabling two-factor authentication
       <mat-icon inline="true" aria-hidden="true">open_in_new</mat-icon>
     </a>
+    }
     <button
       mat-raised-button
       id="cy-two-factor-disable"
