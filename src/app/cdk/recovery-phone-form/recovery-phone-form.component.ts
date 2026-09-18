@@ -29,6 +29,12 @@ import {
 } from '../../types/two-factor.endpoint'
 
 /**
+ * Held in one place because it is both set and cleared, and a copy in each
+ * would let the two drift apart silently.
+ */
+const RECOVERY_PHONE_RESEND_TOO_SOON_MESSAGE = $localize`:@@account.recoveryPhoneResendTooSoon:A code was sent to this number a moment ago. Please wait before requesting another.`
+
+/**
  * The recovery phone number form on its own: a country-and-number field, the
  * consent copy, a send control with its resend countdown, and the code field.
  *
@@ -321,6 +327,12 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
           this.resendCountdown = 0
           this.countdownSubscription?.unsubscribe()
           this.phoneNumberControl?.enable()
+          if (
+            this.generalErrorMessage === RECOVERY_PHONE_RESEND_TOO_SOON_MESSAGE
+          ) {
+            // it said to wait, and the wait is over
+            this.generalErrorMessage = null
+          }
         }
       })
   }
@@ -368,6 +380,14 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
         break
       case 'RESEND_TOO_SOON':
         this.startResendCountdown(resendAfterSeconds)
+        if (!this.codeSent) {
+          // The countdown is rendered beside a code that was sent, so with no
+          // code on screen the only thing the user sees is a send button that
+          // has disabled itself. That state is reachable now that the buffer
+          // outlives the code: a code that was used, or whose attempts ran out,
+          // leaves nothing on screen and the buffer still standing.
+          this.generalErrorMessage = RECOVERY_PHONE_RESEND_TOO_SOON_MESSAGE
+        }
         break
       case 'INVALID_CODE':
         this.codeErrorMessage = $localize`:@@account.invalidVerificationCode:Invalid verification code`

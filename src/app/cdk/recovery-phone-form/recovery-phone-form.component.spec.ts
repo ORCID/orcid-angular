@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import {
   ComponentFixture,
   TestBed,
+  discardPeriodicTasks,
   fakeAsync,
   tick,
 } from '@angular/core/testing'
@@ -186,6 +187,51 @@ describe('RecoveryPhoneFormComponent', () => {
     expect(component.phoneErrorMessage).toBe('Phone number is too short')
     expect(component.codeSent).toBeFalse()
   })
+
+  it('explains a refused resend when there is no code on screen to explain it', fakeAsync(() => {
+    fixture.detectChanges()
+    twoFactorService.sendRecoveryPhoneCode.and.returnValue(
+      of({
+        success: false,
+        errorCode: 'RESEND_TOO_SOON',
+        resendAfterSeconds: 2,
+      })
+    )
+    component.form.get('phoneNumber')?.setValue('+441234567890')
+
+    component.sendCode()
+
+    // no code was sent in this session, so the countdown beside one is not
+    // rendered and the disabled send button would be the only signal
+    expect(component.codeSent).toBeFalse()
+    expect(component.generalErrorMessage).toBe(
+      'A code was sent to this number a moment ago. Please wait before requesting another.'
+    )
+
+    tick(2000)
+    expect(component.resendCountdown).toBe(0)
+    expect(component.generalErrorMessage).toBeNull()
+    discardPeriodicTasks()
+  }))
+
+  it('leaves the countdown to speak for itself when a code is on screen', fakeAsync(() => {
+    fixture.detectChanges()
+    sendCodeSuccessfully(30)
+    twoFactorService.sendRecoveryPhoneCode.and.returnValue(
+      of({
+        success: false,
+        errorCode: 'RESEND_TOO_SOON',
+        resendAfterSeconds: 12,
+      })
+    )
+
+    component.sendCode()
+
+    expect(component.codeSent).toBeTrue()
+    expect(component.generalErrorMessage).toBeNull()
+    expect(component.resendCountdown).toBe(12)
+    discardPeriodicTasks()
+  }))
 
   it('says the account has asked for too many codes today', () => {
     fixture.detectChanges()
