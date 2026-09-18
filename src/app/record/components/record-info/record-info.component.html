@@ -4,7 +4,7 @@
     [ngClass]="{ 'no-padding': displayBiography || displaySideBar }"
   >
     <ng-container
-      *ngIf="userInfo.IS_LOCKED === 'true' && !userInfo.PRIMARY_RECORD"
+      *ngIf="userInfo?.IS_LOCKED === 'true' && !userInfo?.PRIMARY_RECORD"
     >
       <p>
         <ng-container i18n="@@topBar.weLockRecords">
@@ -34,9 +34,9 @@
 
     <ng-container
       *ngIf="
-        userInfo.IS_DEACTIVATED === 'true' &&
-        userInfo.IS_LOCKED === 'false' &&
-        !userInfo.PRIMARY_RECORD
+        userInfo?.IS_DEACTIVATED === 'true' &&
+        userInfo?.IS_LOCKED === 'false' &&
+        !userInfo?.PRIMARY_RECORD
       "
     >
       <p>
@@ -57,7 +57,7 @@
       </p>
     </ng-container>
 
-    <ng-container *ngIf="userInfo.PRIMARY_RECORD">
+    <ng-container *ngIf="userInfo?.PRIMARY_RECORD">
       <p>
         <ng-container i18n="@@topBar.accountDeprecated">
           This account has been deprecated, please see account </ng-container
