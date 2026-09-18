@@ -377,6 +377,12 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
         this.resetCodeEntry()
         this.codeErrorMessage = $localize`:@@account.verificationCodeExpired:That code is no longer valid. Send a new code.`
         break
+      case 'SEND_LIMIT_REACHED':
+        // Not about the number or the code, so it belongs to neither field. The
+        // registry refuses further texts until the window rolls over, so there
+        // is nothing to count down to and nothing the user can correct here.
+        this.generalErrorMessage = $localize`:@@account.recoveryPhoneSendLimitReached:Too many verification codes have been requested for this account today. Please try again tomorrow.`
+        break
       case 'CHALLENGE_REQUIRED':
         // The elevation ran out mid form. The host owns the challenge, so all
         // this component does is say so and keep what the user typed.

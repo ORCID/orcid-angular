@@ -246,6 +246,10 @@ describe('TwoFactorAuthenticationFormComponent', () => {
       expect(messageFor('TOO_MANY_ATTEMPTS')).toBe(
         'That code is no longer valid. Send a new code.'
       )
+      expect(messageFor('SEND_LIMIT_REACHED')).toBe(
+        'Too many codes have been sent to your recovery phone number today. ' +
+          'Please try again tomorrow, or use your authentication app or a recovery code.'
+      )
       expect(messageFor('SMS_SEND_FAILED')).toBe(
         'We could not send a verification code. Please try again.'
       )

@@ -171,7 +171,22 @@
         {{ parentForm.get(recoveryPhoneControlName)?.value?.length || 0 }}/6
       </mat-hint>
     </div>
-    @if (recoveryPhone?.errorCode) {
+    @if (recoveryPhone?.errorCode === 'SEND_LIMIT_REACHED') {
+    <!--
+      A branch rather than one message with two meanings: "try again" is wrong
+      advice for a cap that only lifts tomorrow, and it is the advice a user
+      would follow first.
+    -->
+    <mat-error
+      id="twoFactorRecoveryPhoneCode-send-error"
+      role="alert"
+      class="w-full orc-font-small-print mt-2 leading-6"
+      i18n="@@account.recoveryPhoneChallengeSendLimitReached"
+    >
+      Too many codes have been sent to your recovery phone number today. Please
+      try again tomorrow, or use your authentication app or a recovery code.
+    </mat-error>
+    } @else if (recoveryPhone?.errorCode) {
     <!--
       This error belongs to the send, not to the field, so it sits outside the
       form field and has to announce itself.

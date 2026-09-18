@@ -335,6 +335,39 @@ describe('AuthChallengeComponent', () => {
       expect(error.nativeElement.getAttribute('role')).toBe('alert')
     }))
 
+    it('says when the account has asked for too many codes today', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      recoveryPhone.errorCode = 'SEND_LIMIT_REACHED'
+      fixture.detectChanges()
+
+      const error = fixture.debugElement.query(
+        By.css('#twoFactorRecoveryPhoneCode-send-error')
+      )
+      expect(error).toBeTruthy()
+      expect(error.nativeElement.getAttribute('role')).toBe('alert')
+      // "try again" is the wrong advice for a cap that lifts tomorrow
+      expect(error.nativeElement.textContent).toContain(
+        'Too many codes have been sent to your recovery phone number today'
+      )
+      expect(error.nativeElement.textContent).not.toContain(
+        'We could not send a code'
+      )
+    }))
+
+    it('keeps the ordinary send failure message for every other code', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      recoveryPhone.errorCode = 'SMS_SEND_FAILED'
+      fixture.detectChanges()
+
+      expect(
+        fixture.debugElement.query(
+          By.css('#twoFactorRecoveryPhoneCode-send-error')
+        ).nativeElement.textContent
+      ).toContain('We could not send a code to your recovery phone number')
+    }))
+
     it('counts the resend buffer down and offers a resend when it runs out', fakeAsync(() => {
       enterPhoneMode()
       tick()

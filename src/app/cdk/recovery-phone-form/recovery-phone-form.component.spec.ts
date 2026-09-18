@@ -187,6 +187,31 @@ describe('RecoveryPhoneFormComponent', () => {
     expect(component.codeSent).toBeFalse()
   })
 
+  it('says the account has asked for too many codes today', () => {
+    fixture.detectChanges()
+    const failed = jasmine.createSpy('failed')
+    component.failed.subscribe(failed)
+    twoFactorService.sendRecoveryPhoneCode.and.returnValue(
+      of({
+        success: false,
+        errorCode: 'SEND_LIMIT_REACHED',
+        resendAfterSeconds: 0,
+      })
+    )
+    component.form.get('phoneNumber')?.setValue('+441234567890')
+
+    component.sendCode()
+
+    expect(component.generalErrorMessage).toBe(
+      'Too many verification codes have been requested for this account today. Please try again tomorrow.'
+    )
+    // it belongs to neither field, and it is not a reason to leave the form
+    expect(component.phoneErrorMessage).toBeNull()
+    expect(component.codeErrorMessage).toBeNull()
+    expect(component.codeSent).toBeFalse()
+    expect(failed).not.toHaveBeenCalled()
+  })
+
   it('keeps the user on the form when the text never goes out', () => {
     fixture.detectChanges()
     const failed = jasmine.createSpy('failed')

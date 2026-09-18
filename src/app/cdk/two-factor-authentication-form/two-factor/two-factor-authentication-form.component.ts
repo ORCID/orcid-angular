@@ -211,6 +211,8 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
       case 'CODE_EXPIRED':
       case 'TOO_MANY_ATTEMPTS':
         return $localize`:@@account.verificationCodeExpired:That code is no longer valid. Send a new code.`
+      case 'SEND_LIMIT_REACHED':
+        return $localize`:@@ngOrcid.signin.2fa.recoveryNumberSendLimitReached:Too many codes have been sent to your recovery phone number today. Please try again tomorrow, or use your authentication app or a recovery code.`
       case 'SMS_SEND_FAILED':
       case 'SMS_RECIPIENT_NOT_ALLOWED':
       case 'SMS_PROVIDER_NOT_CONFIGURED':

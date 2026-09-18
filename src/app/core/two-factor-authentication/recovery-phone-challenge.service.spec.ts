@@ -197,6 +197,25 @@ describe('RecoveryPhoneChallengeService', () => {
       expect(handle.errorCode).toBe('NO_RECOVERY_PHONE')
     })
 
+    it('carries the daily send limit back to the challenge', () => {
+      twoFactor.sendRecoveryPhoneChallengeCode.and.returnValue(
+        of(
+          sendResponse({
+            success: false,
+            errorCode: 'SEND_LIMIT_REACHED',
+            resendAfterSeconds: 0,
+          })
+        )
+      )
+      const handle = build().create()
+
+      handle.sendCode()
+
+      expect(handle.codeSent).toBeFalse()
+      expect(handle.errorCode).toBe('SEND_LIMIT_REACHED')
+      expect(handle.resendSeconds).toBe(0)
+    })
+
     it('says so when the registry never answered', () => {
       twoFactor.sendRecoveryPhoneChallengeCode.and.returnValue(
         throwError(() => new Error('network'))
