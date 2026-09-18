@@ -32,6 +32,7 @@ import {
 } from '@angular/material/menu/testing'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { PlatformInfo } from '../../cdk/platform-info'
 
 describe('UserMenuComponent', () => {
   let component: UserMenuComponent
@@ -40,6 +41,16 @@ describe('UserMenuComponent', () => {
   let fakeInboxService: InboxService
   let fakeUserService: jasmine.SpyObj<UserService>
   let loader: HarnessLoader
+  const desktopPlatform = {
+    columns12: true,
+    columns8: false,
+    columns4: false,
+  } as unknown as PlatformInfo
+  const mobilePlatform = {
+    columns12: false,
+    columns8: false,
+    columns4: true,
+  } as unknown as PlatformInfo
 
   beforeEach(() => {
     fakeUserService = jasmine.createSpyObj<UserService>('UserService', {
@@ -82,9 +93,16 @@ describe('UserMenuComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserMenuComponent)
     component = fixture.componentInstance
-    fixture.detectChanges()
+    // The account trigger is platform specific, so pin it rather than let the
+    // Karma window width decide which variant renders.
+    setPlatform(desktopPlatform)
     loader = TestbedHarnessEnvironment.loader(fixture)
   })
+
+  function setPlatform(platform: PlatformInfo) {
+    component.platform = platform
+    fixture.detectChanges()
+  }
 
   it('should create', () => {
     expect(component).toBeTruthy()
@@ -129,6 +147,47 @@ describe('UserMenuComponent', () => {
     const inboxIconName = await inboxIcon.getName()
 
     expect(inboxCount).toBe(inboxIconName + 'Notifications inbox (3)')
+  })
+
+  it('shows the account icon button on mobile instead of the desktop trigger', () => {
+    setPlatform(mobilePlatform)
+
+    expect(
+      fixture.debugElement.query(By.css('#cy-user-info-mobile'))
+    ).toBeTruthy()
+    expect(fixture.debugElement.query(By.css('#cy-user-info'))).toBeFalsy()
+  })
+
+  it('offers the signed-out account button on mobile unless it is hidden', () => {
+    component.userInfo = null
+    setPlatform(mobilePlatform)
+
+    expect(
+      fixture.debugElement.query(By.css('#cy-mobile-signin-button'))
+    ).toBeTruthy()
+
+    component.hideSignedOutAccount = true
+    fixture.detectChanges()
+
+    expect(
+      fixture.debugElement.query(By.css('#cy-mobile-signin-button'))
+    ).toBeFalsy()
+  })
+
+  it('reflects the unread state in the mobile notifications icon', () => {
+    setPlatform(mobilePlatform)
+
+    const icon = () =>
+      fixture.debugElement
+        .query(By.css('#cy-inbox-button mat-icon'))
+        .nativeElement.textContent.trim()
+
+    expect(icon()).toBe('notifications_unread')
+
+    component.inboxUnread = 0
+    fixture.detectChanges()
+
+    expect(icon()).toBe('notifications')
   })
 })
 

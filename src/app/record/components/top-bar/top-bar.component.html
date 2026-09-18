@@ -98,6 +98,27 @@
     </ng-container>
   </app-warning-message>
 
+  <app-warning-message *ngIf="newAddedBackupEmail" type="success">
+    <ng-container title i18n="@@topBar.backupEmailAddressAdded"
+      >Backup email address added</ng-container
+    >
+    <ng-container content>
+      <ng-container i18n="@@topBar.youHaveSuccessfullyAdded"
+        >You have successfully added</ng-container
+      >
+      <strong> {{ newAddedBackupEmail }} </strong>
+      <ng-container i18n="@@topBar.asYourBackupEmailAddress"
+        >as your backup email address.</ng-container
+      >
+      <a
+        class="underline green-url"
+        (click)="openEmailModal()"
+        i18n="@@topBar.manageYourEmailAddressesAndDomains"
+        >Manage your email addresses and domains</a
+      >
+    </ng-container>
+  </app-warning-message>
+
   <app-warning-message *ngIf="newAddedAffiliation" type="success">
     <ng-container title i18n="@@topBar.employmentAffiliationAdded"
       >Employment affiliation added</ng-container

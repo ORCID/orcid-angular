@@ -1,3 +1,91 @@
+## v3.23.2 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.1...v3.23.2)
+
+## v3.23.1 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.0...v3.23.1)
+
+## v3.23.0 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.23...v3.23.0)
+
+## v3.0.23 - 2026-09-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.22...v3.0.23)
+
+## v3.0.22 - 2026-09-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.21...v3.0.22)
+
+- [#2925](https://github.com/ORCID/orcid-angular/pull/2925): PD-13050 don't show the affiliation interstitial without a matching ROR
+
+## v3.0.21 - 2026-09-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.20...v3.0.21)
+
+## v3.0.20 - 2026-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.19...v3.0.20)
+
+## v3.0.19 - 2026-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.18...v3.0.19)
+
+## v3.0.18 - 2026-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.17...v3.0.18)
+
+## v3.0.17 - 2026-08-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.16...v3.0.17)
+
+## v3.0.16 - 2026-08-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.15...v3.0.16)
+
+## v3.0.15 - 2026-08-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.14...v3.0.15)
+
+## v3.0.14 - 2026-08-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.13...v3.0.14)
+
+## v3.0.13 - 2026-08-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.12...v3.0.13)
+
+## v3.0.12 - 2026-08-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.11...v3.0.12)
+
+- [#2907](https://github.com/ORCID/orcid-angular/pull/2907): PD-5900
+
+## v3.0.11 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.10...v3.0.11)
+
+## v3.0.10 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.9...v3.0.10)
+
+## v3.0.9 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.8...v3.0.9)
+
+## v3.0.8 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.7...v3.0.8)
+
+## v3.0.7 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.6...v3.0.7)
+
+## v3.0.6 - 2026-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.5...v3.0.6)
+
 ## v3.0.5 - 2026-08-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.4...v3.0.5)
