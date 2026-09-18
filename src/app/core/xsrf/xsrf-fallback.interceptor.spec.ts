@@ -167,6 +167,27 @@ describe('XsrfFallbackInterceptor', () => {
     req.flush({})
   })
 
+  it('keeps auth and web apart when the local proxy puts them on one host', () => {
+    // environment.local.4200 serves the auth server as /auth/ on our own host,
+    // so the host alone cannot say which cookie a request wants.
+    ;(
+      window as any
+    ).runtimeEnvironment.AUTH_SERVER = `${window.location.origin}/auth/`
+    cookieGetSpy.and.callFake((name: string) =>
+      name === 'AUTH-XSRF-TOKEN' ? 'auth-xsrf-token' : 'web-xsrf-token'
+    )
+
+    http.post('/auth/signin/auth.json', {}).subscribe()
+    let req = httpMock.expectOne('/auth/signin/auth.json')
+    expect(req.request.headers.get('x-xsrf-token')).toBe('auth-xsrf-token')
+    req.flush({})
+
+    http.post('/account/emails.json', {}).subscribe()
+    req = httpMock.expectOne('/account/emails.json')
+    expect(req.request.headers.get('x-xsrf-token')).toBe('web-xsrf-token')
+    req.flush({})
+  })
+
   it('adds XSRF-TOKEN for relative URL when cookie is present', () => {
     cookieGetSpy.and.returnValue('rel-xsrf-token')
 

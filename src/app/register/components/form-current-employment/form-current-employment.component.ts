@@ -1,9 +1,11 @@
 import {
   Component,
+  EventEmitter,
   forwardRef,
   Input,
   OnDestroy,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core'
 import {
@@ -100,6 +102,7 @@ export class FormCurrentEmploymentComponent
 
   nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
+  @Output() skipStep = new EventEmitter<void>()
   @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective
   ariaLabelClearOrganization = $localize`:@@register.clearOrganization:Clear organization`
   organizationPlaceholder = $localize`:@@register.organizationPlaceholder:Type your organization name`
@@ -284,6 +287,16 @@ export class FormCurrentEmploymentComponent
       organization: '',
     })
     this.form.controls.organization.markAsUntouched()
+  }
+
+  skipFromNoticePanel() {
+    this._registerObservabilityService.stepC2NoticeSkipLinkClicked(this.form)
+    this.skipStep.emit()
+  }
+
+  skipFromOrganizationError() {
+    this._registerObservabilityService.stepC2ErrorSkipLinkClicked(this.form)
+    this.skipStep.emit()
   }
 
   // OVERWRITE

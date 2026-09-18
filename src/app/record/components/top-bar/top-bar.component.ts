@@ -63,6 +63,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   @Input() newlySharedDomains: string[] = []
   @Input() newAddedAffiliation: string
+  @Input() newAddedBackupEmail: string
   @Input() loadingUserRecord = true
 
   regionNames = $localize`:@@topBar.names:Names`

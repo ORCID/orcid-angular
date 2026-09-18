@@ -3,7 +3,7 @@ import { AuthChallenge, Value } from './common.endpoint'
 export interface ResetPasswordEmailForm extends AuthChallenge {
   newPassword: Value
   retypedPassword: Value
-  encryptedEmail: string
+  token: string
   successRedirectLocation?: string
   twoFactorEnabled?: boolean
   twoFactorCode?: string
@@ -12,6 +12,6 @@ export interface ResetPasswordEmailForm extends AuthChallenge {
   errors?: any[]
 }
 export interface ResetPasswordEmailFormValidate {
-  encryptedEmail: string
+  token: string
   errors?: any[]
 }

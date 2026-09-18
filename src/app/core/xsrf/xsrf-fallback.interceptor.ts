@@ -8,6 +8,13 @@ import { Injectable } from '@angular/core'
 import { from, Observable, of } from 'rxjs'
 import { catchError, switchMap } from 'rxjs/operators'
 import { CookieService } from 'ngx-cookie-service'
+import {
+  isAuthServerUrl,
+  isOrcidBackendUrl,
+  isSameOriginUrl,
+  XSRF_MUTATING_METHODS,
+  xsrfCookieNamesFor,
+} from './xsrf-urls'
 
 declare const runtimeEnvironment: any
 
@@ -24,6 +31,7 @@ declare const runtimeEnvironment: any
  *   - Otherwise, read the appropriate cookie and set `x-xsrf-token`:
  *     - For requests to AUTH_SERVER origin → `AUTH-XSRF-TOKEN`
  *     - For API_WEB / BASE_URL / relative (e.g. /signin/auth.json) → `XSRF-TOKEN`
+ *   - If no cookie exists yet, bootstrap one from csrf.json and retry once.
  */
 @Injectable()
 export class XsrfFallbackInterceptor implements HttpInterceptor {
@@ -36,25 +44,9 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
     })
   }
 
-  private toAbsoluteUrl(url: string): URL | null {
-    try {
-      if (!url) return null
-      if (url.startsWith('//')) {
-        return new URL(`${window.location.protocol}${url}`)
-      }
-      return new URL(url, window.location.origin)
-    } catch (_e) {
-      return null
-    }
-  }
-
-  private sameHost(left: string, right: string): boolean {
-    const leftUrl = this.toAbsoluteUrl(left)
-    const rightUrl = this.toAbsoluteUrl(right)
-    if (!leftUrl || !rightUrl) {
-      return false
-    }
-    return leftUrl.host === rightUrl.host
+  private readToken(url: string): string {
+    const [primary, fallback] = xsrfCookieNamesFor(url)
+    return this._cookie.get(primary) || this._cookie.get(fallback)
   }
 
   intercept(
@@ -64,7 +56,7 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
     const method = (req.method ?? '').toUpperCase()
 
     // Only care about mutating requests
-    if (!method || !['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
+    if (!method || !XSRF_MUTATING_METHODS.includes(method)) {
       return next.handle(req)
     }
 
@@ -74,34 +66,13 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
       return next.handle(req)
     }
 
-    const apiBase = runtimeEnvironment.API_WEB
-    const baseUrl = runtimeEnvironment.BASE_URL
-    const authBase = runtimeEnvironment.AUTH_SERVER
-
-    const isRelativeRequest = req.url.startsWith('/')
-    const requestUrl = this.toAbsoluteUrl(req.url)
-    const isApiHostCall = this.sameHost(req.url, apiBase)
-    const isBaseHostCall = this.sameHost(req.url, baseUrl)
-    const isAuthHostCall = this.sameHost(req.url, authBase)
-    const isSameOriginCall =
-      isRelativeRequest || requestUrl?.host === window.location.host
-
-    const isBackendHost =
-      isRelativeRequest || isApiHostCall || isBaseHostCall || isAuthHostCall
-
-    if (!isBackendHost) {
+    if (!isOrcidBackendUrl(req.url)) {
       return next.handle(req)
     }
 
-    // Decide which cookie to use based on target *host*, not path.
-    // Only the auth server (AUTH_SERVER origin) sets/expects AUTH-XSRF-TOKEN.
-    // API_WEB / BASE_URL / relative URLs (e.g. /signin/auth.json) use XSRF-TOKEN.
-    const isAuthServerCall = isAuthHostCall
-
-    const primaryCookie = isAuthServerCall ? 'AUTH-XSRF-TOKEN' : 'XSRF-TOKEN'
-    const fallbackCookie = isAuthServerCall ? 'XSRF-TOKEN' : 'AUTH-XSRF-TOKEN'
-    const token =
-      this._cookie.get(primaryCookie) || this._cookie.get(fallbackCookie)
+    // Which cookie belongs on this request is a question about the target
+    // backend, not about the endpoint — see xsrf-urls.ts
+    const token = this.readToken(req.url)
 
     if (token) {
       return next.handle(this.attachXsrf(req, token))
@@ -109,14 +80,13 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
 
     // First mutating request can happen before token cookie is materialized.
     // Bootstrap token with csrf.json and retry once with the fresh cookie.
-    if (!isAuthServerCall && isSameOriginCall) {
-      const csrfUrl = `${apiBase}csrf.json`
+    // The auth server is skipped: csrf.json cannot establish AUTH-XSRF-TOKEN.
+    if (!isAuthServerUrl(req.url) && isSameOriginUrl(req.url)) {
+      const csrfUrl = `${runtimeEnvironment.API_WEB}csrf.json`
       return from(fetch(csrfUrl, { credentials: 'include' })).pipe(
         catchError(() => of(null)),
         switchMap(() => {
-          const refreshedToken =
-            this._cookie.get('XSRF-TOKEN') ||
-            this._cookie.get('AUTH-XSRF-TOKEN')
+          const refreshedToken = this.readToken(req.url)
           if (!refreshedToken) {
             return next.handle(req)
           }

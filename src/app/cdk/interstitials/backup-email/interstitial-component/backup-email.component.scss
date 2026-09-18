@@ -1,0 +1,153 @@
+@import '../../../../../assets/scss/orcid.spacing.scss';
+
+// The orc-font-* classes set neither line-height nor font-weight, so the Figma
+// metrics are spelled out here.
+
+section {
+  margin-top: $spacing-large;
+}
+
+h2 {
+  margin: 0 0 $spacing-base 0;
+  font-weight: bold;
+  line-height: 24px; // Figma body-M 16/24
+}
+
+.primary-email-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-small;
+
+  strong {
+    font-weight: 700;
+    line-height: 21px; // Figma $body-s 14/21 bold
+  }
+}
+
+.email-category {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xsmall;
+
+  span {
+    line-height: 18px; // Figma $body-xs 12/18
+  }
+
+  mat-icon {
+    height: 24px;
+    width: 24px;
+    font-size: 24px;
+  }
+}
+
+.backup-email p {
+  margin: 0;
+}
+
+.input-container,
+mat-form-field {
+  width: 100%;
+}
+
+// Figma stacks the label, the field and the message with an even 8px gap
+.input-container {
+  margin-top: $spacing-base;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-small;
+}
+
+mat-label.orc-font-small-print {
+  font-weight: bold;
+  line-height: 18px; // Figma $body-xs 12/18
+}
+
+mat-error.orc-font-small-print {
+  line-height: 18px;
+}
+
+// Confirmation screen: Figma sets a 16px gap between the icon and the address,
+// with the icon at its natural 24px
+.published-email-container {
+  display: flex;
+  align-items: center;
+  gap: $spacing-base;
+
+  .added-email-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .published-email {
+    font-weight: 700;
+    line-height: 21px; // Figma $body-s 14/21 bold
+  }
+}
+
+button.authorize-button {
+  width: 100%;
+  margin-bottom: $spacing-base;
+}
+
+// The decline action is a button so it is keyboard reachable, styled as a link
+button.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+mat-divider {
+  margin-top: $spacing-base;
+  margin-bottom: $spacing-base;
+}
+
+mat-divider.footer-divider {
+  margin-top: $spacing-large;
+  margin-bottom: $spacing-large;
+}
+
+mat-icon > img {
+  height: 20px;
+  margin-top: 2px; // Fix icon component with SVG image
+}
+
+mat-spinner {
+  align-self: center;
+  margin: 60px;
+}
+
+mat-card-header.authorize-header {
+  mat-card-title {
+    margin: 0 0 $spacing-large 0 !important;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .orc-font-heading-small {
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  mat-icon.logo-icon {
+    height: 80px;
+    width: 64px;
+    img {
+      height: 64px;
+    }
+  }
+}
+
+mat-card-content.authorize-content {
+  margin: 0px !important;
+
+  div.deny-button-wrapper {
+    justify-content: center;
+  }
+}
