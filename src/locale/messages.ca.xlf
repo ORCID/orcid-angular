@@ -2415,11 +2415,11 @@
         <target>Get your ORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">295</context>
+          <context context-type="linenumber">310</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">299</context>
+          <context context-type="linenumber">314</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2431,7 +2431,7 @@
         <target>Add/update information about you (country, keywords, etc.)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">303</context>
+          <context context-type="linenumber">318</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2443,7 +2443,7 @@
         <target>Add/update your research activities (works, affiliations, etc.)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">307</context>
+          <context context-type="linenumber">322</context>
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.readInfomationVisibilityTrustedParties" datatype="html" resname="authorize.readInfomationVisibilityTrustedParties">
@@ -2451,7 +2451,7 @@
         <target>Read your information with visibility set to Trusted parties</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">311</context>
+          <context context-type="linenumber">326</context>
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.authenticateLongDescription" datatype="html" resname="authorize.authenticateLongDescription">
@@ -2459,11 +2459,11 @@
         <target>Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">322</context>
+          <context context-type="linenumber">337</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">326</context>
+          <context context-type="linenumber">341</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2475,7 +2475,7 @@
         <target>Allow this organization or application to add information about you (for example, your country, key words, other identifiers - but not your biography) that is stored in their system(s) to the lefthand section of your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">331</context>
+          <context context-type="linenumber">346</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2487,7 +2487,7 @@
         <target>Allow this organization or application to add information about your research activities (for example, works, affiliations) that is stored in their system(s) to your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">336</context>
+          <context context-type="linenumber">351</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2499,7 +2499,7 @@
         <target>Allow this organization or application to read any information from your record you have marked as limited access. They cannot read information you have marked as private.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">341</context>
+          <context context-type="linenumber">356</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2829,10 +2829,6 @@
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.html</context>
           <context context-type="linenumber">142,145</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">145,148</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="register.pleaseEnterAnOrganizationName" datatype="html" resname="register.pleaseEnterAnOrganizationName">
         <source>Please enter an organization name</source>
@@ -2847,7 +2843,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">158,160</context>
+          <context context-type="linenumber">204,206</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.department" datatype="html" resname="register.department">
@@ -2863,7 +2859,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">217</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.optional" datatype="html" resname="register.optional">
@@ -2895,11 +2891,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">218</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">251</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html</context>
@@ -2908,6 +2904,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
           <context context-type="linenumber">63</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.maxLength.less_than_one_thousand" datatype="html" resname="shared.maxLength.less_than_one_thousand">
@@ -2979,11 +2979,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">190,192</context>
+          <context context-type="linenumber">236,238</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">223,225</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.roleJobTitle" datatype="html" resname="register.roleJobTitle">
@@ -2999,7 +2999,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">249</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.startDate" datatype="html" resname="shared.startDate">
@@ -3015,7 +3015,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
@@ -3035,11 +3035,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">285</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.year" datatype="html" resname="shared.year">
@@ -3055,7 +3055,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
@@ -3095,11 +3095,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">257</context>
+          <context context-type="linenumber">303</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">114</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.month" datatype="html" resname="shared.month">
@@ -3115,7 +3115,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
@@ -3155,11 +3155,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">277</context>
+          <context context-type="linenumber">323</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.invalidDate" datatype="html" resname="shared.invalidDate">
@@ -3195,7 +3195,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">290,292</context>
+          <context context-type="linenumber">336,338</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.addThisAffiliation" datatype="html" resname="interstitial.addThisAffiliation">
@@ -3270,6 +3270,14 @@
           <context context-type="linenumber">380,382</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">209</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">209</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
           <context context-type="linenumber">136,138</context>
         </context-group>
@@ -3283,11 +3291,11 @@
         <target>Clear organization</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.organizationPlaceholder" datatype="html" resname="register.organizationPlaceholder">
@@ -3295,11 +3303,11 @@
         <target>Type your organization name</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.departmentPlaceholder" datatype="html" resname="register.departmentPlaceholder">
@@ -3307,11 +3315,11 @@
         <target>School, college or department</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.rolePlaceholder" datatype="html" resname="register.rolePlaceholder">
@@ -3319,11 +3327,11 @@
         <target>Your role or job in the organization</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.organization" datatype="html" resname="register.organization">
@@ -3331,11 +3339,11 @@
         <target>Organization</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.prefilledOrganization" datatype="html" resname="register.prefilledOrganization">
@@ -3343,11 +3351,225 @@
         <target>Organization - We&apos;ve added an organization based on your email domain</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.addABackupEmail" datatype="html" resname="interstitial.addABackupEmail">
+        <source>Add a backup email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.weHaveNoticedYouOnlyHaveOneEmail" datatype="html" resname="interstitial.weHaveNoticedYouOnlyHaveOneEmail">
+        <source>We’ve noticed you only have one email address associated with your ORCID account. Adding a backup email will help you sign in to ORCID if you lose access to your primary email address.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">15,19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">15,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.yourPrimaryEmailAddress" datatype="html" resname="interstitial.yourPrimaryEmailAddress">
+        <source>Your primary email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">23,25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">23,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.professional" datatype="html" resname="interstitial.professional">
+        <source>Professional</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.personal" datatype="html" resname="interstitial.personal">
+        <source>Personal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.yourBackupEmailAddress" datatype="html" resname="interstitial.yourBackupEmailAddress">
+        <source>Your backup email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">49,51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">49,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.addAnotherEmailToYourOrcidAccount" datatype="html" resname="interstitial.addAnotherEmailToYourOrcidAccount">
+        <source>Add another email to your ORCID account as a backup. A mix of personal and professional email addresses works best.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">52,55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">52,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.backupEmail" datatype="html" resname="interstitial.backupEmail">
+        <source>Backup email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">64,66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">64,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.pleaseEnterYourEmail" datatype="html" resname="interstitial.pleaseEnterYourEmail">
+        <source>Please enter your email</source>
+        <target>Please enter your email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">92,94</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">92,94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="side-bar.invalidEmailErrorMessage" datatype="html" resname="side-bar.invalidEmailErrorMessage">
+        <source>Please enter a valid email address, for example joe@institution.edu</source>
+        <target>Please enter a valid email address, for example joe@institution.edu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">101,104</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">101,104</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
+          <context context-type="linenumber">225,228</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">143,145</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.thisEmailIsAlreadyAssociatedWithAnExistingRecord" datatype="html" resname="interstitial.thisEmailIsAlreadyAssociatedWithAnExistingRecord">
+        <source>This email is already associated with an existing ORCID record. Please use a different email address.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">112,115</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">112,115</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.addBackupEmailAddress" datatype="html" resname="interstitial.addBackupEmailAddress">
+        <source>Add backup email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">130,132</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">130,132</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.continueWithoutAddingABackupEmailAddress" datatype="html" resname="interstitial.continueWithoutAddingABackupEmailAddress">
+        <source>Continue without adding a backup email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.backupEmailAddressAdded" datatype="html" resname="interstitial.backupEmailAddressAdded">
+        <source>Backup email address added</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">168,170</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">168,170</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.youHaveSuccessfullyAddedTheFollowingEmail" datatype="html" resname="interstitial.youHaveSuccessfullyAddedTheFollowingEmail">
+        <source>You have successfully added the following email address as your backup email.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">175,178</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">175,178</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.visitYourOrcidRecord" datatype="html" resname="interstitial.visitYourOrcidRecord">
+        <source>Visit your ORCID record to manage your email addresses, domains, affiliations, works and more.</source>
+        <target>Visit your ORCID record to manage your email addresses, domains, affiliations, works and more.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">193,196</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">193,196</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
+          <context context-type="linenumber">122,125</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
+          <context context-type="linenumber">122,125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.continue" datatype="html" resname="interstitial.continue">
+        <source>Continue</source>
+        <target>Continue</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">214</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
+          <context context-type="linenumber">214</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="interstitial.addAnAdditionalEmailAsBackup" datatype="html" resname="interstitial.addAnAdditionalEmailAsBackup">
+        <source>Add an additional email as backup</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.ts</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitial.shareYourVerified" datatype="html" resname="interstitial.shareYourVerified">
@@ -3456,18 +3678,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
           <context context-type="linenumber">102,104</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="interstitial.visitYourOrcidRecord" datatype="html" resname="interstitial.visitYourOrcidRecord">
-        <source>Visit your ORCID record to manage your email addresses, domains, affiliations, works and more.</source>
-        <target>Visit your ORCID record to manage your email addresses, domains, affiliations, works and more.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
-          <context context-type="linenumber">122,125</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
-          <context context-type="linenumber">122,125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.almostDone" datatype="html" resname="ngOrcid.signin.almostDone">
@@ -4408,18 +4618,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
           <context context-type="linenumber">215,217</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.invalidEmailErrorMessage" datatype="html" resname="side-bar.invalidEmailErrorMessage">
-        <source>Please enter a valid email address, for example joe@institution.edu</source>
-        <target>Please enter a valid email address, for example joe@institution.edu</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">225,228</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">143,145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.alreadyAssociated" datatype="html" resname="side-bar.alreadyAssociated">
@@ -6176,7 +6374,7 @@
         <target>ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.twoFactorSetup" datatype="html" resname="share.twoFactorSetup">
@@ -6184,11 +6382,11 @@
         <target>2FA - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.institutionalLinking" datatype="html" resname="share.institutionalLinking">
@@ -6196,7 +6394,7 @@
         <target>Institutional linking - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.social" datatype="html" resname="share.social">
@@ -6204,7 +6402,7 @@
         <target>Social linking - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.institutional" datatype="html" resname="share.institutional">
@@ -6212,7 +6410,7 @@
         <target>Institutional sign in - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.inbox" datatype="html" resname="share.inbox">
@@ -6220,7 +6418,7 @@
         <target>Notifications inbox - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.signin" datatype="html" resname="share.signin">
@@ -6228,15 +6426,15 @@
         <target>Sign in - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">130</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">131</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.authorize" datatype="html" resname="share.authorize">
@@ -6244,7 +6442,7 @@
         <target>Oauth - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.search" datatype="html" resname="share.search">
@@ -6252,7 +6450,7 @@
         <target>Search - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.reactivation" datatype="html" resname="share.reactivation">
@@ -6260,7 +6458,7 @@
         <target>Account reactivation - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.resetPassword" datatype="html" resname="share.resetPassword">
@@ -6268,7 +6466,7 @@
         <target>Reset password - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.register" datatype="html" resname="share.register">
@@ -6276,7 +6474,7 @@
         <target>Register - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.account" datatype="html" resname="share.account">
@@ -6284,7 +6482,7 @@
         <target>Account settings - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.deactivateAccount" datatype="html" resname="share.deactivateAccount">
@@ -6292,7 +6490,7 @@
         <target>Deactivate account - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.trustedParties" datatype="html" resname="share.trustedParties">
@@ -6300,7 +6498,7 @@
         <target>Trusted parties - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.resetPasswordEmail" datatype="html" resname="share.resetPasswordEmail">
@@ -6308,7 +6506,7 @@
         <target>Reset password - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.selfService" datatype="html" resname="share.selfService">
@@ -6316,7 +6514,7 @@
         <target>Self Service - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.developerTools" datatype="html" resname="share.developerTools">
@@ -6324,7 +6522,18 @@
         <target>Developer tools - ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="share.recordCorrections" datatype="html" resname="share.recordCorrections">
+        <source>Record corrections - ORCID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants.ts</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants.ts</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.orcidTitle" datatype="html" resname="share.orcidTitle">
@@ -6332,7 +6541,7 @@
         <target>- ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.myOrcidTitle" datatype="html" resname="share.myOrcidTitle">
@@ -6340,7 +6549,7 @@
         <target>- My ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEmployment" datatype="html" resname="shared.dialogAriaLabeledByEmployment">
@@ -6348,7 +6557,7 @@
         <target>Manage employment dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">370</context>
+          <context context-type="linenumber">376</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEducation" datatype="html" resname="shared.dialogAriaLabeledByEducation">
@@ -6356,7 +6565,7 @@
         <target>Manage education dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">378</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByQualification" datatype="html" resname="shared.dialogAriaLabeledByQualification">
@@ -6364,7 +6573,7 @@
         <target>Manage qualification dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">380</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByDistinction" datatype="html" resname="shared.dialogAriaLabeledByDistinction">
@@ -6372,7 +6581,7 @@
         <target>Manage distinction dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">376</context>
+          <context context-type="linenumber">382</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByInvitedPosition" datatype="html" resname="shared.dialogAriaLabeledByInvitedPosition">
@@ -6380,7 +6589,7 @@
         <target>Manage invited position dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">384</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByMembership" datatype="html" resname="shared.dialogAriaLabeledByMembership">
@@ -6388,7 +6597,7 @@
         <target>Manage membership dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">386</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByService" datatype="html" resname="shared.dialogAriaLabeledByService">
@@ -6396,7 +6605,7 @@
         <target>Manage service dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">382</context>
+          <context context-type="linenumber">388</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEditorialService" datatype="html" resname="shared.dialogAriaLabeledByEditorialService">
@@ -6404,7 +6613,7 @@
         <target>Manage editorial service dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">384</context>
+          <context context-type="linenumber">390</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByBibtex" datatype="html" resname="shared.dialogAriaLabeledByBibtex">
@@ -6412,7 +6621,7 @@
         <target>Manage bibtex dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">387</context>
+          <context context-type="linenumber">393</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByExternalIdentifier" datatype="html" resname="shared.dialogAriaLabeledByExternalIdentifier">
@@ -6420,7 +6629,7 @@
         <target>Manage external identifier dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">395</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByNames" datatype="html" resname="shared.dialogAriaLabeledByNames">
@@ -6428,7 +6637,7 @@
         <target>Manage your names dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">391</context>
+          <context context-type="linenumber">397</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByBiography" datatype="html" resname="shared.dialogAriaLabeledByBiography">
@@ -6436,7 +6645,7 @@
         <target>Manage your biography dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">399</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEmails" datatype="html" resname="shared.dialogAriaLabeledByEmails">
@@ -6444,7 +6653,7 @@
         <target>Manage your emails dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">395</context>
+          <context context-type="linenumber">401</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByCountries" datatype="html" resname="shared.dialogAriaLabeledByCountries">
@@ -6452,7 +6661,7 @@
         <target>Manage your countries dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">403</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByKeywords" datatype="html" resname="shared.dialogAriaLabeledByKeywords">
@@ -6460,7 +6669,7 @@
         <target>Manage your keywords dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">405</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByOtherIds" datatype="html" resname="shared.dialogAriaLabeledByOtherIds">
@@ -6468,7 +6677,7 @@
         <target>Manage your other IDs dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">407</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByWebsites" datatype="html" resname="shared.dialogAriaLabeledByWebsites">
@@ -6476,7 +6685,7 @@
         <target>Manage your websites &amp; social links dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">403</context>
+          <context context-type="linenumber">409</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByFunding" datatype="html" resname="shared.dialogAriaLabeledByFunding">
@@ -6484,7 +6693,7 @@
         <target>Manage funding dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">411</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByFundingSearch" datatype="html" resname="shared.dialogAriaLabeledByFundingSearch">
@@ -6492,7 +6701,7 @@
         <target>Manage funding search dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">407</context>
+          <context context-type="linenumber">413</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByWork" datatype="html" resname="shared.dialogAriaLabeledByWork">
@@ -6500,7 +6709,7 @@
         <target>Manage work dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">409</context>
+          <context context-type="linenumber">415</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByWorkSearch" datatype="html" resname="shared.dialogAriaLabeledByWorkSearch">
@@ -6508,7 +6717,7 @@
         <target>Manage work search dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">411</context>
+          <context context-type="linenumber">417</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByPeerReview" datatype="html" resname="shared.dialogAriaLabeledByPeerReview">
@@ -6516,7 +6725,7 @@
         <target>Manage peer review dialog</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">413</context>
+          <context context-type="linenumber">419</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.youAreOnPage" datatype="html" resname="shared.youAreOnPage">
@@ -6560,6 +6769,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/announcer/announcer.service.ts</context>
           <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared.dialogAriaLabeledByBackupEmail" datatype="html" resname="shared.dialogAriaLabeledByBackupEmail">
+        <source>Add a backup email address dialog</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/login-interstitials-manager/implementations/login-backup-email-interstitials-manager.service.ts</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="record.ogDescription1" datatype="html" resname="record.ogDescription1">
@@ -8662,49 +8878,49 @@
         <source>Import your works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">593</context>
+          <context context-type="linenumber">595</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.importIntroText" datatype="html" resname="works.importIntroText">
         <source>These services can help you update your ORCID record quickly by searching for your research outputs from various databases. Connect to a service to grant permission and add selected research outputs to your ORCID record.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">594</context>
+          <context context-type="linenumber">596</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.importSupportLinkLabel" datatype="html" resname="works.importSupportLinkLabel">
         <source>Find out more about importing works into your ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">597</context>
+          <context context-type="linenumber">599</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.certifiedSectionHeading" datatype="html" resname="works.certifiedSectionHeading">
         <source>ORCID Certified Services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">599</context>
+          <context context-type="linenumber">601</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.moreServicesHeading" datatype="html" resname="works.moreServicesHeading">
         <source>More Services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">600</context>
+          <context context-type="linenumber">602</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectNow" datatype="html" resname="works.connectNow">
         <source>Connect now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">601</context>
+          <context context-type="linenumber">603</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connected" datatype="html" resname="works.connected">
         <source>Connected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">602</context>
+          <context context-type="linenumber">604</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/search-link-wizard/search-link-wizard.component.html</context>
@@ -8715,35 +8931,35 @@
         <source>Close Import your works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">603</context>
+          <context context-type="linenumber">605</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.showMoreServices" datatype="html" resname="works.showMoreServices">
         <source>Show more services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">604</context>
+          <context context-type="linenumber">606</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.hideMoreServices" datatype="html" resname="works.hideMoreServices">
         <source>Hide more services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">605</context>
+          <context context-type="linenumber">607</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectWithCspNow" datatype="html" resname="works.connectWithCspNow">
         <source>Connect with {{name}} now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">606</context>
+          <context context-type="linenumber">608</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectedWithCsp" datatype="html" resname="works.connectedWithCsp">
         <source>Connected with {{name}}</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">607</context>
+          <context context-type="linenumber">609</context>
         </context-group>
       </trans-unit>
       <trans-unit id="developerTools.generateNewClientSecret" datatype="html" resname="developerTools.generateNewClientSecret">
@@ -10407,7 +10623,7 @@
         <target>has made changes to your ORCID record</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification/notification.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -10419,7 +10635,7 @@
         <target>Connecting your</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification/notification.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -10431,7 +10647,7 @@
         <target>account with your ORCID record</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification/notification.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -10794,12 +11010,36 @@
           <context context-type="linenumber">27,29</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="header.signin" datatype="html" resname="header.signin">
+        <source>Sign in</source>
+        <target>Sign in</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="header.register" datatype="html" resname="header.register">
+        <source>Register</source>
+        <target>Register</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="layout.ariaLabelConnectingResearchers" datatype="html" resname="layout.ariaLabelConnectingResearchers">
         <source>Connecting research and researchers</source>
         <target>Connecting research and researchers</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.ariaLabelMenu" datatype="html" resname="layout.ariaLabelMenu">
@@ -10807,11 +11047,11 @@
         <target>main menu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/menu-icon/menu-icon.component.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -10899,7 +11139,7 @@
         <target>Select your preferred language. Current language is</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/language/language.component.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -10990,28 +11230,12 @@
           <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="header.signin" datatype="html" resname="header.signin">
-        <source>Sign in</source>
-        <target>Sign in</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="header.register" datatype="html" resname="header.register">
-        <source>Register</source>
-        <target>Register</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="ngOrcid.viewMyOrcid" datatype="html" resname="ngOrcid.viewMyOrcid">
         <source>View my ORCID record</source>
         <target>View my ORCID record</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">75,77</context>
+          <context context-type="linenumber">106,108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="workspace.notifications" datatype="html" resname="workspace.notifications">
@@ -11019,7 +11243,7 @@
         <target>Notifications inbox</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11031,7 +11255,7 @@
         <target>Account settings</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.trustedParties" datatype="html" resname="layout.trustedParties">
@@ -11039,7 +11263,7 @@
         <target>Trusted parties</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="workspace.developer_tools" datatype="html" resname="workspace.developer_tools">
@@ -11047,7 +11271,7 @@
         <target>Developer tools</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">159</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11059,7 +11283,7 @@
         <target>Member tools</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.logout" datatype="html" resname="ngOrcid.logout">
@@ -11067,7 +11291,7 @@
         <target>Logout</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">172</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.ariaLabelSigninRegister" datatype="html" resname="layout.ariaLabelSigninRegister">
@@ -11075,7 +11299,7 @@
         <target>Sign in to ORCID or register for your ORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.ariaLabelUserMenu" datatype="html" resname="layout.ariaLabelUserMenu">
@@ -11083,7 +11307,7 @@
         <target>User menu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.notificationTooltip" datatype="html" resname="layout.notificationTooltip">
@@ -11091,7 +11315,7 @@
         <target>You have unread notifications</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.notificationTooltipInactive" datatype="html" resname="layout.notificationTooltipInactive">
@@ -11099,7 +11323,7 @@
         <target>Notifications inbox</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.notifications" datatype="html" resname="layout.notifications">
@@ -11107,7 +11331,7 @@
         <target>Open notification inbox</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.notificationsActive" datatype="html" resname="layout.notificationsActive">
@@ -11115,7 +11339,7 @@
         <target>You have unread notifications. Open notification inbox</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="linking.title.1" datatype="html" resname="linking.title.1">
@@ -11358,11 +11582,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.lostAccessToYourEmailAddresses" datatype="html" resname="recovery.lostAccessToYourEmailAddresses">
@@ -11519,18 +11743,25 @@
           <context context-type="linenumber">164</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="recovery.andAnyOtherVerifiedEmails" datatype="html" resname="recovery.andAnyOtherVerifiedEmails">
+        <source>and any other verified email addresses on your account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">168</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="recovery.ifYouDoNotReceive" datatype="html" resname="recovery.ifYouDoNotReceive">
         <source>If you do not receive the recovery email within 10 minutes please check your spam folder.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">168,171</context>
+          <context context-type="linenumber">172,175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.backToSignIn" datatype="html" resname="recovery.backToSignIn">
         <source>Back to sign in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.iveForgotten" datatype="html" resname="recovery.iveForgotten">
@@ -11538,6 +11769,119 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
           <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.heading" datatype="html" resname="recordCorrections.heading">
+        <source>Invalid Data Record Corrections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.p1.1" datatype="html" resname="recordCorrections.p1.1">
+        <source>A core</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.p1.2" datatype="html" resname="recordCorrections.p1.2">
+        <source>ORCID Trust principle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.p1.3" datatype="html" resname="recordCorrections.p1.3">
+        <source>is “Individual Control”; this means that your data is controlled by you. However, in limited circumstances, ORCID may proactively correct data in a record where system errors have resulted in invalid data. We will not correct incorrect data. All corrections of invalid data are listed below.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">26,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.loading" datatype="html" resname="recordCorrections.loading">
+        <source>Loading record corrections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.retry" datatype="html" resname="recordCorrections.retry">
+        <source>Try again</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">73,75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.caption" datatype="html" resname="recordCorrections.caption">
+        <source>Invalid data record corrections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">89,91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.executedDate" datatype="html" resname="recordCorrections.executedDate">
+        <source>Executed date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">98,100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.description" datatype="html" resname="recordCorrections.description">
+        <source>Description</source>
+        <target>Description</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">105,107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.updatedRecords" datatype="html" resname="recordCorrections.updatedRecords">
+        <source>Updated records</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">112,114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.previous" datatype="html" resname="recordCorrections.previous">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">140,142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.next" datatype="html" resname="recordCorrections.next">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
+          <context context-type="linenumber">150,152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.itemType" datatype="html" resname="recordCorrections.itemType">
+        <source>record corrections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.noCorrections" datatype="html" resname="recordCorrections.noCorrections">
+        <source>No corrections to report</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.error" datatype="html" resname="recordCorrections.error">
+        <source>The list of record corrections could not be loaded.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recordCorrections.pagination" datatype="html" resname="recordCorrections.pagination">
+        <source>Record corrections pagination</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.ts</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.makePublicToEnableHighlighting" datatype="html" resname="shared.makePublicToEnableHighlighting">
@@ -11821,7 +12165,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.journal" datatype="html" resname="shared.journal">
@@ -13301,11 +13645,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">137,139</context>
+          <context context-type="linenumber">158,160</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.printableRecord" datatype="html" resname="topBar.printableRecord">
@@ -13653,15 +13997,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">202,204</context>
+          <context context-type="linenumber">230,232</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">253,255</context>
+          <context context-type="linenumber">281,283</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.information" datatype="html" resname="topBar.information">
@@ -13769,7 +14113,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">161,163</context>
+          <context context-type="linenumber">189,191</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.orcidHasANumber" datatype="html" resname="topBar.orcidHasANumber">
@@ -13877,7 +14221,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">145,147</context>
+          <context context-type="linenumber">163,165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.whoCanSeeYourNames" datatype="html" resname="topBar.whoCanSeeYourNames">
@@ -14172,12 +14516,40 @@
           <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="topBar.backupEmailAddressAdded" datatype="html" resname="topBar.backupEmailAddressAdded">
+        <source>Backup email address added</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="topBar.youHaveSuccessfullyAdded" datatype="html" resname="topBar.youHaveSuccessfullyAdded">
+        <source>You have successfully added</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="topBar.asYourBackupEmailAddress" datatype="html" resname="topBar.asYourBackupEmailAddress">
+        <source>as your backup email address.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="topBar.manageYourEmailAddressesAndDomains" datatype="html" resname="topBar.manageYourEmailAddressesAndDomains">
+        <source>Manage your email addresses and domains</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="topBar.employmentAffiliationAdded" datatype="html" resname="topBar.employmentAffiliationAdded">
         <source>Employment affiliation added</source>
         <target>Employment affiliation added</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.hasBeenAddedToYourORCIDRecord" datatype="html" resname="topBar.hasBeenAddedToYourORCIDRecord">
@@ -14185,7 +14557,7 @@
         <target>has been added to your ORCID record. Manage your existing employment affiliations or add new ones in the</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">107,109</context>
+          <context context-type="linenumber">128,130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.employmentSection" datatype="html" resname="topBar.employmentSection">
@@ -14193,7 +14565,7 @@
         <target>Employment section</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.name" datatype="html" resname="topBar.name">
@@ -14201,42 +14573,46 @@
         <target>Name</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">152,154</context>
+          <context context-type="linenumber">168,170</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">180,182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsTitle" datatype="html" resname="topBar.permissionNotificationsTitle">
         <source>Organizations want to connect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsSubtitle" datatype="html" resname="topBar.permissionNotificationsSubtitle">
         <source>Connecting with trusted organizations helps keep your ORCID record up-to-date.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionWantsToAdd" datatype="html" resname="topBar.permissionWantsToAdd">
         <source>wants to add information to your ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">232</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionRead" datatype="html" resname="topBar.permissionRead">
         <source>Read</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionConnectNow" datatype="html" resname="topBar.permissionConnectNow">
         <source>Connect now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">246</context>
+          <context context-type="linenumber">247</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.yourContributionsToThisWork" datatype="html" resname="works.yourContributionsToThisWork">
@@ -16179,11 +16555,11 @@
         <target>Activities</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.html</context>
-          <context context-type="linenumber">121,123</context>
+          <context context-type="linenumber">122,124</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.collapseAll" datatype="html" resname="shared.collapseAll">
@@ -16191,7 +16567,7 @@
         <target>Collapse all</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.html</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.expandAll" datatype="html" resname="shared.expandAll">
@@ -16199,7 +16575,7 @@
         <target>Expand all</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.html</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.collapseAllActivitiesArialLabel" datatype="html" resname="shared.collapseAllActivitiesArialLabel">
@@ -16207,7 +16583,7 @@
         <target>Collapse all activity sections</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.expandAllActivitiesArialLabel" datatype="html" resname="shared.expandAllActivitiesArialLabel">
@@ -16215,7 +16591,7 @@
         <target>Expand all activity sections</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/pages/my-orcid/my-orcid.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.emailIsAlreadyAssociated" datatype="html" resname="register.emailIsAlreadyAssociated">
@@ -16267,11 +16643,10 @@
         </context-group>
       </trans-unit>
       <trans-unit id="register.basedOnYourEmailWeThink" datatype="html" resname="register.basedOnYourEmailWeThink">
-        <source>Based on your emails we think you are currently affiliated with</source>
-        <target>Based on your emails we think you are currently affiliated with</target>
+        <source>Based on your email address we think you are currently affiliated with</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">21,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.webePreselectedThisOrganizationForYouInTheFormBelow" datatype="html" resname="register.webePreselectedThisOrganizationForYouInTheFormBelow">
@@ -16279,15 +16654,53 @@
         <target>We’ve pre-selected this organization for you in the form below.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">29,31</context>
+          <context context-type="linenumber">31,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.whenYouCompleteRegistrationAnEmployment" datatype="html" resname="register.whenYouCompleteRegistrationAnEmployment">
-        <source>When you complete registration an employment affiliation will be automatically added to your new ORCID record.</source>
-        <target>When you complete registration an employment affiliation will be automatically added to your new ORCID record.</target>
+        <source>When you complete registration your affiliation will be automatically added to your new ORCID record.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
-          <context context-type="linenumber">35,38</context>
+          <context context-type="linenumber">38,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.notReadyToAddYourAffiliation" datatype="html" resname="register.notReadyToAddYourAffiliation">
+        <source>Not ready to add your affiliation?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">53,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.youDontNeedToAddAnAffiliation" datatype="html" resname="register.youDontNeedToAddAnAffiliation">
+        <source>You don’t need to add an affiliation to complete registration and get your ORCID record and iD.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">61,64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.skipThisStepAndContinueRegistration" datatype="html" resname="register.skipThisStepAndContinueRegistration">
+        <source>Skip this step and continue registration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.thisOrganizationIsNotInOurDatabase" datatype="html" resname="register.thisOrganizationIsNotInOurDatabase">
+        <source>This organization is not in our database. Please try entering the name again. If you cannot find your organization you can</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">183,184</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.skipThisStep" datatype="html" resname="register.skipThisStep">
+        <source>skip this step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.yearPlaceholder" datatype="html" resname="register.yearPlaceholder">
@@ -16295,7 +16708,7 @@
         <target>Year</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.monthPlaceholder" datatype="html" resname="register.monthPlaceholder">
@@ -16303,7 +16716,7 @@
         <target>Month</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">112</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.tipsFeaturesEmail" datatype="html" resname="register.tipsFeaturesEmail">
@@ -17162,7 +17575,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.cancelRegistration" datatype="html" resname="register.cancelRegistration">
@@ -17214,7 +17627,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
@@ -17226,15 +17639,14 @@
         <target>Step 3 of 5 - Current employment</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
-          <context context-type="linenumber">32,34</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="shared.skipThisStepWithoutAddingAnAffiliation" datatype="html" resname="shared.skipThisStepWithoutAddingAnAffiliation">
-        <source>Skip this step without adding an affiliation</source>
-        <target>Skip this step without adding an affiliation</target>
+      <trans-unit id="register.addingACurrentEmploymentAffiliationHelps" datatype="html" resname="register.addingACurrentEmploymentAffiliationHelps">
+        <source>Adding a current employment affiliation helps distinguish you from other researchers with a similar name.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
-          <context context-type="linenumber">68,69</context>
+          <context context-type="linenumber">44,47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.step5.3" datatype="html" resname="register.step5.3">
@@ -17325,25 +17737,32 @@
           <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="reset.hasAlreadyBeenUsed" datatype="html" resname="reset.hasAlreadyBeenUsed">
+        <source>This password reset link has already been used</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="reset.invalidLink" datatype="html" resname="reset.invalidLink">
         <source>There is a problem with your password reset link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset.youCanRequestANewLink" datatype="html" resname="reset.youCanRequestANewLink">
         <source>You can request a new link from</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset.pleaseTryTheLinkAgain" datatype="html" resname="reset.pleaseTryTheLinkAgain">
         <source>Please try the link again. If this does not work you can request a new password reset link from</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">109,110</context>
+          <context context-type="linenumber">113,114</context>
         </context-group>
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeTrailingText" datatype="html" resname="accountSettings.security.password.authChallengeTrailingText">
@@ -20316,8 +20735,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.fundedByDescription" datatype="html" resname="works.fundedByDescription">
-        <source>The identifier applies to the funding for the work.</source>
-        <target>The identifier applies to the funding for the work.</target>
+        <source>The identifier applies to the grant or other funding awarded for the work. For example, a DOI for the funding or an internal grant number.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">633</context>
@@ -21027,6 +21445,12 @@
       <trans-unit id="printView.redirectingToPrimary" datatype="html" resname="printView.redirectingToPrimary">
         <source>Redirecting to primary ORCID record…</source>
       </trans-unit>
+      <trans-unit id="printView.recordIsNotClaimedTitle" datatype="html" resname="printView.recordIsNotClaimedTitle">
+        <source>This record has not been claimed</source>
+      </trans-unit>
+      <trans-unit id="printView.recordNotClaimedDescription" datatype="html" resname="printView.recordNotClaimedDescription">
+        <source>This record has not been claimed yet</source>
+      </trans-unit>
       <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
         <source>ORCID Print view</source>
       </trans-unit>
@@ -21052,7 +21476,1009 @@
         <source>Funded by</source>
         <target>Funded by</target>
       </trans-unit>
-
+      <trans-unit id="printView.peerReviewSummary" datatype="html" resname="printView.peerReviewSummary">
+        <source>Peer review (<x id="reviewCount" equiv-text="${reviewsCount}"/> reviews for <x id="publicationCount" equiv-text="${publicationsCount}"/> publications/grants)</source>
+      </trans-unit>
+      <trans-unit id="printView.AF" datatype="html" resname="printView.AF">
+        <source>Afghanistan</source>
+        <target>Afghanistan</target>
+      </trans-unit>
+      <trans-unit id="printView.AL" datatype="html" resname="printView.AL">
+        <source>Albania</source>
+        <target>Albania</target>
+      </trans-unit>
+      <trans-unit id="printView.DZ" datatype="html" resname="printView.DZ">
+        <source>Algeria</source>
+        <target>Algeria</target>
+      </trans-unit>
+      <trans-unit id="printView.AS" datatype="html" resname="printView.AS">
+        <source>American Samoa</source>
+        <target>American Samoa</target>
+      </trans-unit>
+      <trans-unit id="printView.AD" datatype="html" resname="printView.AD">
+        <source>Andorra</source>
+        <target>Andorra</target>
+      </trans-unit>
+      <trans-unit id="printView.AO" datatype="html" resname="printView.AO">
+        <source>Angola</source>
+        <target>Angola</target>
+      </trans-unit>
+      <trans-unit id="printView.AI" datatype="html" resname="printView.AI">
+        <source>Anguilla</source>
+        <target>Anguilla</target>
+      </trans-unit>
+      <trans-unit id="printView.AQ" datatype="html" resname="printView.AQ">
+        <source>Antarctica</source>
+        <target>Antarctica</target>
+      </trans-unit>
+      <trans-unit id="printView.AG" datatype="html" resname="printView.AG">
+        <source>Antigua and Barbuda</source>
+        <target>Antigua and Barbuda</target>
+      </trans-unit>
+      <trans-unit id="printView.AR" datatype="html" resname="printView.AR">
+        <source>Argentina</source>
+        <target>Argentina</target>
+      </trans-unit>
+      <trans-unit id="printView.AM" datatype="html" resname="printView.AM">
+        <source>Armenia</source>
+        <target>Armenia</target>
+      </trans-unit>
+      <trans-unit id="printView.AW" datatype="html" resname="printView.AW">
+        <source>Aruba</source>
+        <target>Aruba</target>
+      </trans-unit>
+      <trans-unit id="printView.AU" datatype="html" resname="printView.AU">
+        <source>Australia</source>
+        <target>Australia</target>
+      </trans-unit>
+      <trans-unit id="printView.AT" datatype="html" resname="printView.AT">
+        <source>Austria</source>
+        <target>Austria</target>
+      </trans-unit>
+      <trans-unit id="printView.AZ" datatype="html" resname="printView.AZ">
+        <source>Azerbaijan</source>
+        <target>Azerbaijan</target>
+      </trans-unit>
+      <trans-unit id="printView.BS" datatype="html" resname="printView.BS">
+        <source>Bahamas</source>
+        <target>Bahamas</target>
+      </trans-unit>
+      <trans-unit id="printView.BH" datatype="html" resname="printView.BH">
+        <source>Bahrain</source>
+        <target>Bahrain</target>
+      </trans-unit>
+      <trans-unit id="printView.BD" datatype="html" resname="printView.BD">
+        <source>Bangladesh</source>
+        <target>Bangladesh</target>
+      </trans-unit>
+      <trans-unit id="printView.BB" datatype="html" resname="printView.BB">
+        <source>Barbados</source>
+        <target>Barbados</target>
+      </trans-unit>
+      <trans-unit id="printView.BY" datatype="html" resname="printView.BY">
+        <source>Belarus</source>
+        <target>Belarus</target>
+      </trans-unit>
+      <trans-unit id="printView.BE" datatype="html" resname="printView.BE">
+        <source>Belgium</source>
+        <target>Belgium</target>
+      </trans-unit>
+      <trans-unit id="printView.BZ" datatype="html" resname="printView.BZ">
+        <source>Belize</source>
+        <target>Belize</target>
+      </trans-unit>
+      <trans-unit id="printView.BJ" datatype="html" resname="printView.BJ">
+        <source>Benin</source>
+        <target>Benin</target>
+      </trans-unit>
+      <trans-unit id="printView.BM" datatype="html" resname="printView.BM">
+        <source>Bermuda</source>
+        <target>Bermuda</target>
+      </trans-unit>
+      <trans-unit id="printView.BT" datatype="html" resname="printView.BT">
+        <source>Bhutan</source>
+        <target>Bhutan</target>
+      </trans-unit>
+      <trans-unit id="printView.BO" datatype="html" resname="printView.BO">
+        <source>Bolivia</source>
+        <target>Bolivia</target>
+      </trans-unit>
+      <trans-unit id="printView.BA" datatype="html" resname="printView.BA">
+        <source>Bosnia and Herzegovina</source>
+        <target>Bosnia and Herzegovina</target>
+      </trans-unit>
+      <trans-unit id="printView.BW" datatype="html" resname="printView.BW">
+        <source>Botswana</source>
+        <target>Botswana</target>
+      </trans-unit>
+      <trans-unit id="printView.BV" datatype="html" resname="printView.BV">
+        <source>Bouvet Island</source>
+        <target>Bouvet Island</target>
+      </trans-unit>
+      <trans-unit id="printView.BR" datatype="html" resname="printView.BR">
+        <source>Brazil</source>
+        <target>Brazil</target>
+      </trans-unit>
+      <trans-unit id="printView.BQ" datatype="html" resname="printView.BQ">
+        <source>British Antarctic Territory</source>
+        <target>British Antarctic Territory</target>
+      </trans-unit>
+      <trans-unit id="printView.IO" datatype="html" resname="printView.IO">
+        <source>British Indian Ocean Territory</source>
+        <target>British Indian Ocean Territory</target>
+      </trans-unit>
+      <trans-unit id="printView.VG" datatype="html" resname="printView.VG">
+        <source>British Virgin Islands</source>
+        <target>British Virgin Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.BN" datatype="html" resname="printView.BN">
+        <source>Brunei</source>
+        <target>Brunei</target>
+      </trans-unit>
+      <trans-unit id="printView.BG" datatype="html" resname="printView.BG">
+        <source>Bulgaria</source>
+        <target>Bulgaria</target>
+      </trans-unit>
+      <trans-unit id="printView.BF" datatype="html" resname="printView.BF">
+        <source>Burkina Faso</source>
+        <target>Burkina Faso</target>
+      </trans-unit>
+      <trans-unit id="printView.BI" datatype="html" resname="printView.BI">
+        <source>Burundi</source>
+        <target>Burundi</target>
+      </trans-unit>
+      <trans-unit id="printView.KH" datatype="html" resname="printView.KH">
+        <source>Cambodia</source>
+        <target>Cambodia</target>
+      </trans-unit>
+      <trans-unit id="printView.CM" datatype="html" resname="printView.CM">
+        <source>Cameroon</source>
+        <target>Cameroon</target>
+      </trans-unit>
+      <trans-unit id="printView.CA" datatype="html" resname="printView.CA">
+        <source>Canada</source>
+        <target>Canada</target>
+      </trans-unit>
+      <trans-unit id="printView.CV" datatype="html" resname="printView.CV">
+        <source>Cape Verde</source>
+        <target>Cape Verde</target>
+      </trans-unit>
+      <trans-unit id="printView.KY" datatype="html" resname="printView.KY">
+        <source>Cayman Islands</source>
+        <target>Cayman Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.CF" datatype="html" resname="printView.CF">
+        <source>Central African Republic</source>
+        <target>Central African Republic</target>
+      </trans-unit>
+      <trans-unit id="printView.TD" datatype="html" resname="printView.TD">
+        <source>Chad</source>
+        <target>Chad</target>
+      </trans-unit>
+      <trans-unit id="printView.CL" datatype="html" resname="printView.CL">
+        <source>Chile</source>
+        <target>Chile</target>
+      </trans-unit>
+      <trans-unit id="printView.CN" datatype="html" resname="printView.CN">
+        <source>China</source>
+        <target>China</target>
+      </trans-unit>
+      <trans-unit id="printView.CX" datatype="html" resname="printView.CX">
+        <source>Christmas Island</source>
+        <target>Christmas Island</target>
+      </trans-unit>
+      <trans-unit id="printView.CC" datatype="html" resname="printView.CC">
+        <source>Cocos [Keeling] Islands</source>
+        <target>Cocos [Keeling] Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.CO" datatype="html" resname="printView.CO">
+        <source>Colombia</source>
+        <target>Colombia</target>
+      </trans-unit>
+      <trans-unit id="printView.KM" datatype="html" resname="printView.KM">
+        <source>Comoros</source>
+        <target>Comoros</target>
+      </trans-unit>
+      <trans-unit id="printView.CG" datatype="html" resname="printView.CG">
+        <source>Congo - Brazzaville</source>
+        <target>Congo - Brazzaville</target>
+      </trans-unit>
+      <trans-unit id="printView.CD" datatype="html" resname="printView.CD">
+        <source>Congo - Kinshasa</source>
+        <target>Congo - Kinshasa</target>
+      </trans-unit>
+      <trans-unit id="printView.CK" datatype="html" resname="printView.CK">
+        <source>Cook Islands</source>
+        <target>Cook Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.CR" datatype="html" resname="printView.CR">
+        <source>Costa Rica</source>
+        <target>Costa Rica</target>
+      </trans-unit>
+      <trans-unit id="printView.HR" datatype="html" resname="printView.HR">
+        <source>Croatia</source>
+        <target>Croatia</target>
+      </trans-unit>
+      <trans-unit id="printView.CU" datatype="html" resname="printView.CU">
+        <source>Cuba</source>
+        <target>Cuba</target>
+      </trans-unit>
+      <trans-unit id="printView.CW" datatype="html" resname="printView.CW">
+        <source>Curaçao</source>
+        <target>Curaçao</target>
+      </trans-unit>
+      <trans-unit id="printView.CY" datatype="html" resname="printView.CY">
+        <source>Cyprus</source>
+        <target>Cyprus</target>
+      </trans-unit>
+      <trans-unit id="printView.CZ" datatype="html" resname="printView.CZ">
+        <source>Czech Republic</source>
+        <target>Czech Republic</target>
+      </trans-unit>
+      <trans-unit id="printView.CI" datatype="html" resname="printView.CI">
+        <source>Côte d&apos;Ivoire</source>
+        <target>Côte d&apos;Ivoire</target>
+      </trans-unit>
+      <trans-unit id="printView.DK" datatype="html" resname="printView.DK">
+        <source>Denmark</source>
+        <target>Denmark</target>
+      </trans-unit>
+      <trans-unit id="printView.DJ" datatype="html" resname="printView.DJ">
+        <source>Djibouti</source>
+        <target>Djibouti</target>
+      </trans-unit>
+      <trans-unit id="printView.DM" datatype="html" resname="printView.DM">
+        <source>Dominica</source>
+        <target>Dominica</target>
+      </trans-unit>
+      <trans-unit id="printView.DO" datatype="html" resname="printView.DO">
+        <source>Dominican Republic</source>
+        <target>Dominican Republic</target>
+      </trans-unit>
+      <trans-unit id="printView.EC" datatype="html" resname="printView.EC">
+        <source>Ecuador</source>
+        <target>Ecuador</target>
+      </trans-unit>
+      <trans-unit id="printView.EG" datatype="html" resname="printView.EG">
+        <source>Egypt</source>
+        <target>Egypt</target>
+      </trans-unit>
+      <trans-unit id="printView.SV" datatype="html" resname="printView.SV">
+        <source>El Salvador</source>
+        <target>El Salvador</target>
+      </trans-unit>
+      <trans-unit id="printView.GQ" datatype="html" resname="printView.GQ">
+        <source>Equatorial Guinea</source>
+        <target>Equatorial Guinea</target>
+      </trans-unit>
+      <trans-unit id="printView.ER" datatype="html" resname="printView.ER">
+        <source>Eritrea</source>
+        <target>Eritrea</target>
+      </trans-unit>
+      <trans-unit id="printView.EE" datatype="html" resname="printView.EE">
+        <source>Estonia</source>
+        <target>Estonia</target>
+      </trans-unit>
+      <trans-unit id="printView.ET" datatype="html" resname="printView.ET">
+        <source>Ethiopia</source>
+        <target>Ethiopia</target>
+      </trans-unit>
+      <trans-unit id="printView.FK" datatype="html" resname="printView.FK">
+        <source>Falkland Islands</source>
+        <target>Falkland Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.FO" datatype="html" resname="printView.FO">
+        <source>Faroe Islands</source>
+        <target>Faroe Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.FJ" datatype="html" resname="printView.FJ">
+        <source>Fiji</source>
+        <target>Fiji</target>
+      </trans-unit>
+      <trans-unit id="printView.FI" datatype="html" resname="printView.FI">
+        <source>Finland</source>
+        <target>Finland</target>
+      </trans-unit>
+      <trans-unit id="printView.FR" datatype="html" resname="printView.FR">
+        <source>France</source>
+        <target>France</target>
+      </trans-unit>
+      <trans-unit id="printView.GF" datatype="html" resname="printView.GF">
+        <source>French Guiana</source>
+        <target>French Guiana</target>
+      </trans-unit>
+      <trans-unit id="printView.PF" datatype="html" resname="printView.PF">
+        <source>French Polynesia</source>
+        <target>French Polynesia</target>
+      </trans-unit>
+      <trans-unit id="printView.TF" datatype="html" resname="printView.TF">
+        <source>French Southern Territories</source>
+        <target>French Southern Territories</target>
+      </trans-unit>
+      <trans-unit id="printView.GA" datatype="html" resname="printView.GA">
+        <source>Gabon</source>
+        <target>Gabon</target>
+      </trans-unit>
+      <trans-unit id="printView.GM" datatype="html" resname="printView.GM">
+        <source>Gambia</source>
+        <target>Gambia</target>
+      </trans-unit>
+      <trans-unit id="printView.GE" datatype="html" resname="printView.GE">
+        <source>Georgia</source>
+        <target>Georgia</target>
+      </trans-unit>
+      <trans-unit id="printView.DE" datatype="html" resname="printView.DE">
+        <source>Germany</source>
+        <target>Germany</target>
+      </trans-unit>
+      <trans-unit id="printView.GH" datatype="html" resname="printView.GH">
+        <source>Ghana</source>
+        <target>Ghana</target>
+      </trans-unit>
+      <trans-unit id="printView.GI" datatype="html" resname="printView.GI">
+        <source>Gibraltar</source>
+        <target>Gibraltar</target>
+      </trans-unit>
+      <trans-unit id="printView.GR" datatype="html" resname="printView.GR">
+        <source>Greece</source>
+        <target>Greece</target>
+      </trans-unit>
+      <trans-unit id="printView.GL" datatype="html" resname="printView.GL">
+        <source>Greenland</source>
+        <target>Greenland</target>
+      </trans-unit>
+      <trans-unit id="printView.GD" datatype="html" resname="printView.GD">
+        <source>Grenada</source>
+        <target>Grenada</target>
+      </trans-unit>
+      <trans-unit id="printView.GP" datatype="html" resname="printView.GP">
+        <source>Guadeloupe</source>
+        <target>Guadeloupe</target>
+      </trans-unit>
+      <trans-unit id="printView.GU" datatype="html" resname="printView.GU">
+        <source>Guam</source>
+        <target>Guam</target>
+      </trans-unit>
+      <trans-unit id="printView.GT" datatype="html" resname="printView.GT">
+        <source>Guatemala</source>
+        <target>Guatemala</target>
+      </trans-unit>
+      <trans-unit id="printView.GG" datatype="html" resname="printView.GG">
+        <source>Guernsey</source>
+        <target>Guernsey</target>
+      </trans-unit>
+      <trans-unit id="printView.GN" datatype="html" resname="printView.GN">
+        <source>Guinea</source>
+        <target>Guinea</target>
+      </trans-unit>
+      <trans-unit id="printView.GW" datatype="html" resname="printView.GW">
+        <source>Guinea-Bissau</source>
+        <target>Guinea-Bissau</target>
+      </trans-unit>
+      <trans-unit id="printView.GY" datatype="html" resname="printView.GY">
+        <source>Guyana</source>
+        <target>Guyana</target>
+      </trans-unit>
+      <trans-unit id="printView.HT" datatype="html" resname="printView.HT">
+        <source>Haiti</source>
+        <target>Haiti</target>
+      </trans-unit>
+      <trans-unit id="printView.HM" datatype="html" resname="printView.HM">
+        <source>Heard Island and McDonald Islands</source>
+        <target>Heard Island and McDonald Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.HN" datatype="html" resname="printView.HN">
+        <source>Honduras</source>
+        <target>Honduras</target>
+      </trans-unit>
+      <trans-unit id="printView.HK" datatype="html" resname="printView.HK">
+        <source>Hong Kong SAR China</source>
+        <target>Hong Kong SAR China</target>
+      </trans-unit>
+      <trans-unit id="printView.HU" datatype="html" resname="printView.HU">
+        <source>Hungary</source>
+        <target>Hungary</target>
+      </trans-unit>
+      <trans-unit id="printView.IS" datatype="html" resname="printView.IS">
+        <source>Iceland</source>
+        <target>Iceland</target>
+      </trans-unit>
+      <trans-unit id="printView.IN" datatype="html" resname="printView.IN">
+        <source>India</source>
+        <target>India</target>
+      </trans-unit>
+      <trans-unit id="printView.ID" datatype="html" resname="printView.ID">
+        <source>Indonesia</source>
+        <target>Indonesia</target>
+      </trans-unit>
+      <trans-unit id="printView.IR" datatype="html" resname="printView.IR">
+        <source>Iran</source>
+        <target>Iran</target>
+      </trans-unit>
+      <trans-unit id="printView.IQ" datatype="html" resname="printView.IQ">
+        <source>Iraq</source>
+        <target>Iraq</target>
+      </trans-unit>
+      <trans-unit id="printView.IE" datatype="html" resname="printView.IE">
+        <source>Ireland</source>
+        <target>Ireland</target>
+      </trans-unit>
+      <trans-unit id="printView.IM" datatype="html" resname="printView.IM">
+        <source>Isle of Man</source>
+        <target>Isle of Man</target>
+      </trans-unit>
+      <trans-unit id="printView.IL" datatype="html" resname="printView.IL">
+        <source>Israel</source>
+        <target>Israel</target>
+      </trans-unit>
+      <trans-unit id="printView.IT" datatype="html" resname="printView.IT">
+        <source>Italy</source>
+        <target>Italy</target>
+      </trans-unit>
+      <trans-unit id="printView.JM" datatype="html" resname="printView.JM">
+        <source>Jamaica</source>
+        <target>Jamaica</target>
+      </trans-unit>
+      <trans-unit id="printView.JP" datatype="html" resname="printView.JP">
+        <source>Japan</source>
+        <target>Japan</target>
+      </trans-unit>
+      <trans-unit id="printView.JE" datatype="html" resname="printView.JE">
+        <source>Jersey</source>
+        <target>Jersey</target>
+      </trans-unit>
+      <trans-unit id="printView.JO" datatype="html" resname="printView.JO">
+        <source>Jordan</source>
+        <target>Jordan</target>
+      </trans-unit>
+      <trans-unit id="printView.KZ" datatype="html" resname="printView.KZ">
+        <source>Kazakhstan</source>
+        <target>Kazakhstan</target>
+      </trans-unit>
+      <trans-unit id="printView.KE" datatype="html" resname="printView.KE">
+        <source>Kenya</source>
+        <target>Kenya</target>
+      </trans-unit>
+      <trans-unit id="printView.KI" datatype="html" resname="printView.KI">
+        <source>Kiribati</source>
+        <target>Kiribati</target>
+      </trans-unit>
+      <trans-unit id="printView.XK" datatype="html" resname="printView.XK">
+        <source>Kosovo</source>
+        <target>Kosovo</target>
+      </trans-unit>
+      <trans-unit id="printView.KW" datatype="html" resname="printView.KW">
+        <source>Kuwait</source>
+        <target>Kuwait</target>
+      </trans-unit>
+      <trans-unit id="printView.KG" datatype="html" resname="printView.KG">
+        <source>Kyrgyzstan</source>
+        <target>Kyrgyzstan</target>
+      </trans-unit>
+      <trans-unit id="printView.LA" datatype="html" resname="printView.LA">
+        <source>Laos</source>
+        <target>Laos</target>
+      </trans-unit>
+      <trans-unit id="printView.LV" datatype="html" resname="printView.LV">
+        <source>Latvia</source>
+        <target>Latvia</target>
+      </trans-unit>
+      <trans-unit id="printView.LB" datatype="html" resname="printView.LB">
+        <source>Lebanon</source>
+        <target>Lebanon</target>
+      </trans-unit>
+      <trans-unit id="printView.LS" datatype="html" resname="printView.LS">
+        <source>Lesotho</source>
+        <target>Lesotho</target>
+      </trans-unit>
+      <trans-unit id="printView.LR" datatype="html" resname="printView.LR">
+        <source>Liberia</source>
+        <target>Liberia</target>
+      </trans-unit>
+      <trans-unit id="printView.LY" datatype="html" resname="printView.LY">
+        <source>Libya</source>
+        <target>Libya</target>
+      </trans-unit>
+      <trans-unit id="printView.LI" datatype="html" resname="printView.LI">
+        <source>Liechtenstein</source>
+        <target>Liechtenstein</target>
+      </trans-unit>
+      <trans-unit id="printView.LT" datatype="html" resname="printView.LT">
+        <source>Lithuania</source>
+        <target>Lithuania</target>
+      </trans-unit>
+      <trans-unit id="printView.LU" datatype="html" resname="printView.LU">
+        <source>Luxembourg</source>
+        <target>Luxembourg</target>
+      </trans-unit>
+      <trans-unit id="printView.MO" datatype="html" resname="printView.MO">
+        <source>Macau SAR China</source>
+        <target>Macau SAR China</target>
+      </trans-unit>
+      <trans-unit id="printView.MG" datatype="html" resname="printView.MG">
+        <source>Madagascar</source>
+        <target>Madagascar</target>
+      </trans-unit>
+      <trans-unit id="printView.MW" datatype="html" resname="printView.MW">
+        <source>Malawi</source>
+        <target>Malawi</target>
+      </trans-unit>
+      <trans-unit id="printView.MY" datatype="html" resname="printView.MY">
+        <source>Malaysia</source>
+        <target>Malaysia</target>
+      </trans-unit>
+      <trans-unit id="printView.MV" datatype="html" resname="printView.MV">
+        <source>Maldives</source>
+        <target>Maldives</target>
+      </trans-unit>
+      <trans-unit id="printView.ML" datatype="html" resname="printView.ML">
+        <source>Mali</source>
+        <target>Mali</target>
+      </trans-unit>
+      <trans-unit id="printView.MT" datatype="html" resname="printView.MT">
+        <source>Malta</source>
+        <target>Malta</target>
+      </trans-unit>
+      <trans-unit id="printView.MH" datatype="html" resname="printView.MH">
+        <source>Marshall Islands</source>
+        <target>Marshall Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.MQ" datatype="html" resname="printView.MQ">
+        <source>Martinique</source>
+        <target>Martinique</target>
+      </trans-unit>
+      <trans-unit id="printView.MR" datatype="html" resname="printView.MR">
+        <source>Mauritania</source>
+        <target>Mauritania</target>
+      </trans-unit>
+      <trans-unit id="printView.MU" datatype="html" resname="printView.MU">
+        <source>Mauritius</source>
+        <target>Mauritius</target>
+      </trans-unit>
+      <trans-unit id="printView.YT" datatype="html" resname="printView.YT">
+        <source>Mayotte</source>
+        <target>Mayotte</target>
+      </trans-unit>
+      <trans-unit id="printView.MX" datatype="html" resname="printView.MX">
+        <source>Mexico</source>
+        <target>Mexico</target>
+      </trans-unit>
+      <trans-unit id="printView.FM" datatype="html" resname="printView.FM">
+        <source>Micronesia</source>
+        <target>Micronesia</target>
+      </trans-unit>
+      <trans-unit id="printView.MD" datatype="html" resname="printView.MD">
+        <source>Moldova</source>
+        <target>Moldova</target>
+      </trans-unit>
+      <trans-unit id="printView.MC" datatype="html" resname="printView.MC">
+        <source>Monaco</source>
+        <target>Monaco</target>
+      </trans-unit>
+      <trans-unit id="printView.MN" datatype="html" resname="printView.MN">
+        <source>Mongolia</source>
+        <target>Mongolia</target>
+      </trans-unit>
+      <trans-unit id="printView.ME" datatype="html" resname="printView.ME">
+        <source>Montenegro</source>
+        <target>Montenegro</target>
+      </trans-unit>
+      <trans-unit id="printView.MS" datatype="html" resname="printView.MS">
+        <source>Montserrat</source>
+        <target>Montserrat</target>
+      </trans-unit>
+      <trans-unit id="printView.MA" datatype="html" resname="printView.MA">
+        <source>Morocco</source>
+        <target>Morocco</target>
+      </trans-unit>
+      <trans-unit id="printView.MZ" datatype="html" resname="printView.MZ">
+        <source>Mozambique</source>
+        <target>Mozambique</target>
+      </trans-unit>
+      <trans-unit id="printView.MM" datatype="html" resname="printView.MM">
+        <source>Myanmar [Burma]</source>
+        <target>Myanmar [Burma]</target>
+      </trans-unit>
+      <trans-unit id="printView.NA" datatype="html" resname="printView.NA">
+        <source>Namibia</source>
+        <target>Namibia</target>
+      </trans-unit>
+      <trans-unit id="printView.NR" datatype="html" resname="printView.NR">
+        <source>Nauru</source>
+        <target>Nauru</target>
+      </trans-unit>
+      <trans-unit id="printView.NP" datatype="html" resname="printView.NP">
+        <source>Nepal</source>
+        <target>Nepal</target>
+      </trans-unit>
+      <trans-unit id="printView.NL" datatype="html" resname="printView.NL">
+        <source>Netherlands</source>
+        <target>Netherlands</target>
+      </trans-unit>
+      <trans-unit id="printView.NC" datatype="html" resname="printView.NC">
+        <source>New Caledonia</source>
+        <target>New Caledonia</target>
+      </trans-unit>
+      <trans-unit id="printView.NZ" datatype="html" resname="printView.NZ">
+        <source>New Zealand</source>
+        <target>New Zealand</target>
+      </trans-unit>
+      <trans-unit id="printView.NI" datatype="html" resname="printView.NI">
+        <source>Nicaragua</source>
+        <target>Nicaragua</target>
+      </trans-unit>
+      <trans-unit id="printView.NE" datatype="html" resname="printView.NE">
+        <source>Niger</source>
+        <target>Niger</target>
+      </trans-unit>
+      <trans-unit id="printView.NG" datatype="html" resname="printView.NG">
+        <source>Nigeria</source>
+        <target>Nigeria</target>
+      </trans-unit>
+      <trans-unit id="printView.NU" datatype="html" resname="printView.NU">
+        <source>Niue</source>
+        <target>Niue</target>
+      </trans-unit>
+      <trans-unit id="printView.NF" datatype="html" resname="printView.NF">
+        <source>Norfolk Island</source>
+        <target>Norfolk Island</target>
+      </trans-unit>
+      <trans-unit id="printView.KP" datatype="html" resname="printView.KP">
+        <source>North Korea</source>
+        <target>North Korea</target>
+      </trans-unit>
+      <trans-unit id="printView.MK" datatype="html" resname="printView.MK">
+        <source>North Macedonia</source>
+        <target>North Macedonia</target>
+      </trans-unit>
+      <trans-unit id="printView.MP" datatype="html" resname="printView.MP">
+        <source>Northern Mariana Islands</source>
+        <target>Northern Mariana Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.NO" datatype="html" resname="printView.NO">
+        <source>Norway</source>
+        <target>Norway</target>
+      </trans-unit>
+      <trans-unit id="printView.OM" datatype="html" resname="printView.OM">
+        <source>Oman</source>
+        <target>Oman</target>
+      </trans-unit>
+      <trans-unit id="printView.PK" datatype="html" resname="printView.PK">
+        <source>Pakistan</source>
+        <target>Pakistan</target>
+      </trans-unit>
+      <trans-unit id="printView.PW" datatype="html" resname="printView.PW">
+        <source>Palau</source>
+        <target>Palau</target>
+      </trans-unit>
+      <trans-unit id="printView.PS" datatype="html" resname="printView.PS">
+        <source>Palestinian Territories</source>
+        <target>Palestinian Territories</target>
+      </trans-unit>
+      <trans-unit id="printView.PA" datatype="html" resname="printView.PA">
+        <source>Panama</source>
+        <target>Panama</target>
+      </trans-unit>
+      <trans-unit id="printView.PG" datatype="html" resname="printView.PG">
+        <source>Papua New Guinea</source>
+        <target>Papua New Guinea</target>
+      </trans-unit>
+      <trans-unit id="printView.PY" datatype="html" resname="printView.PY">
+        <source>Paraguay</source>
+        <target>Paraguay</target>
+      </trans-unit>
+      <trans-unit id="printView.PE" datatype="html" resname="printView.PE">
+        <source>Peru</source>
+        <target>Peru</target>
+      </trans-unit>
+      <trans-unit id="printView.PH" datatype="html" resname="printView.PH">
+        <source>Philippines</source>
+        <target>Philippines</target>
+      </trans-unit>
+      <trans-unit id="printView.PN" datatype="html" resname="printView.PN">
+        <source>Pitcairn Islands</source>
+        <target>Pitcairn Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.PL" datatype="html" resname="printView.PL">
+        <source>Poland</source>
+        <target>Poland</target>
+      </trans-unit>
+      <trans-unit id="printView.PT" datatype="html" resname="printView.PT">
+        <source>Portugal</source>
+        <target>Portugal</target>
+      </trans-unit>
+      <trans-unit id="printView.PR" datatype="html" resname="printView.PR">
+        <source>Puerto Rico</source>
+        <target>Puerto Rico</target>
+      </trans-unit>
+      <trans-unit id="printView.QA" datatype="html" resname="printView.QA">
+        <source>Qatar</source>
+        <target>Qatar</target>
+      </trans-unit>
+      <trans-unit id="printView.RO" datatype="html" resname="printView.RO">
+        <source>Romania</source>
+        <target>Romania</target>
+      </trans-unit>
+      <trans-unit id="printView.RU" datatype="html" resname="printView.RU">
+        <source>Russia</source>
+        <target>Russia</target>
+      </trans-unit>
+      <trans-unit id="printView.RW" datatype="html" resname="printView.RW">
+        <source>Rwanda</source>
+        <target>Rwanda</target>
+      </trans-unit>
+      <trans-unit id="printView.RE" datatype="html" resname="printView.RE">
+        <source>Réunion</source>
+        <target>Réunion</target>
+      </trans-unit>
+      <trans-unit id="printView.BL" datatype="html" resname="printView.BL">
+        <source>Saint Barthélemy</source>
+        <target>Saint Barthélemy</target>
+      </trans-unit>
+      <trans-unit id="printView.SH" datatype="html" resname="printView.SH">
+        <source>Saint Helena</source>
+        <target>Saint Helena</target>
+      </trans-unit>
+      <trans-unit id="printView.KN" datatype="html" resname="printView.KN">
+        <source>Saint Kitts and Nevis</source>
+        <target>Saint Kitts and Nevis</target>
+      </trans-unit>
+      <trans-unit id="printView.LC" datatype="html" resname="printView.LC">
+        <source>Saint Lucia</source>
+        <target>Saint Lucia</target>
+      </trans-unit>
+      <trans-unit id="printView.MF" datatype="html" resname="printView.MF">
+        <source>Saint Martin</source>
+        <target>Saint Martin</target>
+      </trans-unit>
+      <trans-unit id="printView.PM" datatype="html" resname="printView.PM">
+        <source>Saint Pierre and Miquelon</source>
+        <target>Saint Pierre and Miquelon</target>
+      </trans-unit>
+      <trans-unit id="printView.VC" datatype="html" resname="printView.VC">
+        <source>Saint Vincent and the Grenadines</source>
+        <target>Saint Vincent and the Grenadines</target>
+      </trans-unit>
+      <trans-unit id="printView.WS" datatype="html" resname="printView.WS">
+        <source>Samoa</source>
+        <target>Samoa</target>
+      </trans-unit>
+      <trans-unit id="printView.SM" datatype="html" resname="printView.SM">
+        <source>San Marino</source>
+        <target>San Marino</target>
+      </trans-unit>
+      <trans-unit id="printView.SA" datatype="html" resname="printView.SA">
+        <source>Saudi Arabia</source>
+        <target>Saudi Arabia</target>
+      </trans-unit>
+      <trans-unit id="printView.SN" datatype="html" resname="printView.SN">
+        <source>Senegal</source>
+        <target>Senegal</target>
+      </trans-unit>
+      <trans-unit id="printView.RS" datatype="html" resname="printView.RS">
+        <source>Serbia</source>
+        <target>Serbia</target>
+      </trans-unit>
+      <trans-unit id="printView.SC" datatype="html" resname="printView.SC">
+        <source>Seychelles</source>
+        <target>Seychelles</target>
+      </trans-unit>
+      <trans-unit id="printView.SL" datatype="html" resname="printView.SL">
+        <source>Sierra Leone</source>
+        <target>Sierra Leone</target>
+      </trans-unit>
+      <trans-unit id="printView.SG" datatype="html" resname="printView.SG">
+        <source>Singapore</source>
+        <target>Singapore</target>
+      </trans-unit>
+      <trans-unit id="printView.SX" datatype="html" resname="printView.SX">
+        <source>Sint Maarten (Dutch Part)</source>
+        <target>Sint Maarten (Dutch Part)</target>
+      </trans-unit>
+      <trans-unit id="printView.SK" datatype="html" resname="printView.SK">
+        <source>Slovakia</source>
+        <target>Slovakia</target>
+      </trans-unit>
+      <trans-unit id="printView.SI" datatype="html" resname="printView.SI">
+        <source>Slovenia</source>
+        <target>Slovenia</target>
+      </trans-unit>
+      <trans-unit id="printView.SB" datatype="html" resname="printView.SB">
+        <source>Solomon Islands</source>
+        <target>Solomon Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.SO" datatype="html" resname="printView.SO">
+        <source>Somalia</source>
+        <target>Somalia</target>
+      </trans-unit>
+      <trans-unit id="printView.ZA" datatype="html" resname="printView.ZA">
+        <source>South Africa</source>
+        <target>South Africa</target>
+      </trans-unit>
+      <trans-unit id="printView.GS" datatype="html" resname="printView.GS">
+        <source>South Georgia and the South Sandwich Islands</source>
+        <target>South Georgia and the South Sandwich Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.KR" datatype="html" resname="printView.KR">
+        <source>South Korea</source>
+        <target>South Korea</target>
+      </trans-unit>
+      <trans-unit id="printView.SS" datatype="html" resname="printView.SS">
+        <source>South Sudan</source>
+        <target>South Sudan</target>
+      </trans-unit>
+      <trans-unit id="printView.ES" datatype="html" resname="printView.ES">
+        <source>Spain</source>
+        <target>Spain</target>
+      </trans-unit>
+      <trans-unit id="printView.LK" datatype="html" resname="printView.LK">
+        <source>Sri Lanka</source>
+        <target>Sri Lanka</target>
+      </trans-unit>
+      <trans-unit id="printView.SD" datatype="html" resname="printView.SD">
+        <source>Sudan</source>
+        <target>Sudan</target>
+      </trans-unit>
+      <trans-unit id="printView.SR" datatype="html" resname="printView.SR">
+        <source>Suriname</source>
+        <target>Suriname</target>
+      </trans-unit>
+      <trans-unit id="printView.SJ" datatype="html" resname="printView.SJ">
+        <source>Svalbard and Jan Mayen</source>
+        <target>Svalbard and Jan Mayen</target>
+      </trans-unit>
+      <trans-unit id="printView.SZ" datatype="html" resname="printView.SZ">
+        <source>Swaziland</source>
+        <target>Swaziland</target>
+      </trans-unit>
+      <trans-unit id="printView.SE" datatype="html" resname="printView.SE">
+        <source>Sweden</source>
+        <target>Sweden</target>
+      </trans-unit>
+      <trans-unit id="printView.CH" datatype="html" resname="printView.CH">
+        <source>Switzerland</source>
+        <target>Switzerland</target>
+      </trans-unit>
+      <trans-unit id="printView.SY" datatype="html" resname="printView.SY">
+        <source>Syria</source>
+        <target>Syria</target>
+      </trans-unit>
+      <trans-unit id="printView.ST" datatype="html" resname="printView.ST">
+        <source>São Tomé and Príncipe</source>
+        <target>São Tomé and Príncipe</target>
+      </trans-unit>
+      <trans-unit id="printView.TW" datatype="html" resname="printView.TW">
+        <source>Taiwan</source>
+        <target>Taiwan</target>
+      </trans-unit>
+      <trans-unit id="printView.TJ" datatype="html" resname="printView.TJ">
+        <source>Tajikistan</source>
+        <target>Tajikistan</target>
+      </trans-unit>
+      <trans-unit id="printView.TZ" datatype="html" resname="printView.TZ">
+        <source>Tanzania</source>
+        <target>Tanzania</target>
+      </trans-unit>
+      <trans-unit id="printView.TH" datatype="html" resname="printView.TH">
+        <source>Thailand</source>
+        <target>Thailand</target>
+      </trans-unit>
+      <trans-unit id="printView.TL" datatype="html" resname="printView.TL">
+        <source>Timor-Leste</source>
+        <target>Timor-Leste</target>
+      </trans-unit>
+      <trans-unit id="printView.TG" datatype="html" resname="printView.TG">
+        <source>Togo</source>
+        <target>Togo</target>
+      </trans-unit>
+      <trans-unit id="printView.TK" datatype="html" resname="printView.TK">
+        <source>Tokelau</source>
+        <target>Tokelau</target>
+      </trans-unit>
+      <trans-unit id="printView.TO" datatype="html" resname="printView.TO">
+        <source>Tonga</source>
+        <target>Tonga</target>
+      </trans-unit>
+      <trans-unit id="printView.TT" datatype="html" resname="printView.TT">
+        <source>Trinidad and Tobago</source>
+        <target>Trinidad and Tobago</target>
+      </trans-unit>
+      <trans-unit id="printView.TN" datatype="html" resname="printView.TN">
+        <source>Tunisia</source>
+        <target>Tunisia</target>
+      </trans-unit>
+      <trans-unit id="printView.TR" datatype="html" resname="printView.TR">
+        <source>Türkiye</source>
+        <target>Türkiye</target>
+      </trans-unit>
+      <trans-unit id="printView.TM" datatype="html" resname="printView.TM">
+        <source>Turkmenistan</source>
+        <target>Turkmenistan</target>
+      </trans-unit>
+      <trans-unit id="printView.TC" datatype="html" resname="printView.TC">
+        <source>Turks and Caicos Islands</source>
+        <target>Turks and Caicos Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.TV" datatype="html" resname="printView.TV">
+        <source>Tuvalu</source>
+        <target>Tuvalu</target>
+      </trans-unit>
+      <trans-unit id="printView.UM" datatype="html" resname="printView.UM">
+        <source>U.S. Minor Outlying Islands</source>
+        <target>U.S. Minor Outlying Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.VI" datatype="html" resname="printView.VI">
+        <source>U.S. Virgin Islands</source>
+        <target>U.S. Virgin Islands</target>
+      </trans-unit>
+      <trans-unit id="printView.UG" datatype="html" resname="printView.UG">
+        <source>Uganda</source>
+        <target>Uganda</target>
+      </trans-unit>
+      <trans-unit id="printView.UA" datatype="html" resname="printView.UA">
+        <source>Ukraine</source>
+        <target>Ukraine</target>
+      </trans-unit>
+      <trans-unit id="printView.AE" datatype="html" resname="printView.AE">
+        <source>United Arab Emirates</source>
+        <target>United Arab Emirates</target>
+      </trans-unit>
+      <trans-unit id="printView.GB" datatype="html" resname="printView.GB">
+        <source>United Kingdom</source>
+        <target>United Kingdom</target>
+      </trans-unit>
+      <trans-unit id="printView.US" datatype="html" resname="printView.US">
+        <source>United States</source>
+        <target>United States</target>
+      </trans-unit>
+      <trans-unit id="printView.UY" datatype="html" resname="printView.UY">
+        <source>Uruguay</source>
+        <target>Uruguay</target>
+      </trans-unit>
+      <trans-unit id="printView.UZ" datatype="html" resname="printView.UZ">
+        <source>Uzbekistan</source>
+        <target>Uzbekistan</target>
+      </trans-unit>
+      <trans-unit id="printView.VU" datatype="html" resname="printView.VU">
+        <source>Vanuatu</source>
+        <target>Vanuatu</target>
+      </trans-unit>
+      <trans-unit id="printView.VA" datatype="html" resname="printView.VA">
+        <source>Vatican City</source>
+        <target>Vatican City</target>
+      </trans-unit>
+      <trans-unit id="printView.VE" datatype="html" resname="printView.VE">
+        <source>Venezuela</source>
+        <target>Venezuela</target>
+      </trans-unit>
+      <trans-unit id="printView.VN" datatype="html" resname="printView.VN">
+        <source>Vietnam</source>
+        <target>Vietnam</target>
+      </trans-unit>
+      <trans-unit id="printView.WF" datatype="html" resname="printView.WF">
+        <source>Wallis and Futuna</source>
+        <target>Wallis and Futuna</target>
+      </trans-unit>
+      <trans-unit id="printView.EH" datatype="html" resname="printView.EH">
+        <source>Western Sahara</source>
+        <target>Western Sahara</target>
+      </trans-unit>
+      <trans-unit id="printView.YE" datatype="html" resname="printView.YE">
+        <source>Yemen</source>
+        <target>Yemen</target>
+      </trans-unit>
+      <trans-unit id="printView.ZM" datatype="html" resname="printView.ZM">
+        <source>Zambia</source>
+        <target>Zambia</target>
+      </trans-unit>
+      <trans-unit id="printView.ZW" datatype="html" resname="printView.ZW">
+        <source>Zimbabwe</source>
+        <target>Zimbabwe</target>
+      </trans-unit>
+      <trans-unit id="printView.AX" datatype="html" resname="printView.AX">
+        <source>Åland Islands</source>
+        <target>Åland Islands</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -93,7 +93,7 @@ export class AccountTrustedIndividualsService {
   addByEmail(delegateEmail: string) {
     return this._http
       .post<void>(
-        runtimeEnvironment.API_WEB + `account/addDelegateByEmail.json/`,
+        runtimeEnvironment.API_WEB + `account/addDelegateByEmail.json`,
         { delegateEmail },
         { headers: this.headers }
       )

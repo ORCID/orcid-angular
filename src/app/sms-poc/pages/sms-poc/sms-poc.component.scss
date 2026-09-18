@@ -88,6 +88,25 @@ intl-tel-input {
   padding: 0.35rem 0.75rem;
 }
 
+.consent-field {
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #fafcf5;
+}
+
+// Keep the checkbox aligned to the top of a multi-line consent label.
+:host ::ng-deep .consent-field .mat-mdc-checkbox .mdc-form-field {
+  align-items: flex-start;
+}
+
+.consent-text {
+  display: inline-block;
+  white-space: normal;
+  line-height: 1.5;
+  color: #334155;
+}
+
 @media (max-width: 640px) {
   :host {
     align-items: flex-start;

@@ -1,0 +1,181 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+// The design centres the content in a 640px column: 140px of date, a 32px gap,
+// the description, another 32px gap and 150px of record counts.
+$content-width: 640px;
+$date-column: 140px;
+$records-column: 150px;
+$column-gap: $spacing-large;
+
+:host {
+  width: 100%;
+}
+
+.container {
+  max-width: $content-width + 2 * $spacing-12;
+  // The design leaves the same 64px below the content as above the iD icon.
+  padding: 0 $spacing-12 $spacing-64 !important;
+}
+
+img {
+  display: block;
+  height: 64px;
+  width: 64px;
+  margin: $spacing-64 auto $spacing-large;
+}
+
+// .orc-font-* sets font-size and letter-spacing only, so the design's
+// line-heights have to be written out.
+h1 {
+  margin: 0;
+  text-align: center;
+  line-height: 36px;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: $spacing-large;
+}
+
+.intro {
+  margin: 0 0 $spacing-64;
+  line-height: 21px;
+}
+
+// The grid's .col is a flex container that does not stretch its children, so
+// the block has to claim the full width itself.
+.corrections {
+  width: 100%;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.corrections-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  th,
+  td {
+    padding: $spacing-base 0;
+    text-align: start;
+    vertical-align: middle;
+    word-break: break-word;
+    line-height: 21px;
+  }
+
+  th {
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  // A single rule separates every row, including above the first one.
+  tbody tr td,
+  thead tr th {
+    border-bottom: 1px solid;
+  }
+
+  .date-column {
+    width: $date-column;
+    padding-inline-end: $column-gap;
+  }
+
+  .description-column {
+    padding-inline-end: $column-gap;
+  }
+
+  .records-column {
+    width: $records-column;
+    text-align: center;
+  }
+}
+
+.empty-message {
+  font-style: italic;
+}
+
+// The skeleton mirrors the table's columns and row rhythm so the placeholder
+// resolves into the loaded rows without the layout jumping.
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: $column-gap;
+  height: 53px;
+  border-bottom: 1px solid;
+
+  .date-column {
+    width: $date-column;
+    flex: none;
+  }
+
+  .description-column {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .records-column {
+    width: $records-column;
+    flex: none;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: $spacing-base;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-base;
+}
+
+.orcid-button {
+  height: 40px;
+  padding: 9px $spacing-base;
+  border: 1px solid;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.25px;
+  line-height: 21px;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
+// Narrow screens cannot afford the design's fixed columns, so give the
+// description the space instead of letting the date wrap character by character.
+@media only screen and (max-width: 599.99px) {
+  .corrections-table {
+    .date-column {
+      width: 96px;
+      padding-inline-end: $spacing-base;
+    }
+
+    .description-column {
+      padding-inline-end: $spacing-base;
+    }
+
+    .records-column {
+      width: 64px;
+    }
+  }
+}

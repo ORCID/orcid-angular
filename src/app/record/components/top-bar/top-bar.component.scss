@@ -11,21 +11,59 @@ app-panel {
   width: 100%;
   margin-top: 16px;
 
-  .name,
   p {
-    margin-top: 0;
+    margin: 0;
   }
 
-  p .published-name {
-    margin-bottom: 18px;
+  .mat-caption.description {
+    display: block;
+    margin: 16px 0 8px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .published-name {
+    margin: 0;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: bold;
+  }
+
+  .name-value {
+    margin: 0;
+    font-weight: bold;
   }
 
   .other-names-container {
-    margin-top: 18px;
+    margin-top: 16px;
 
     .other-names {
       margin-bottom: 0;
     }
+  }
+
+  // Scoped to the names panel only: centre the visibility icon against
+  // the block it belongs to instead of the default flex `stretch`. The
+  // caption label above each value lives outside `app-panel-element` (see
+  // template), so `.line` here is always just the value itself and this
+  // centres correctly whether it's one line or wraps onto several.
+  // `app-panel-element` is shared by other panels, so this is kept local
+  // rather than changed at the source.
+  ::ng-deep .row-with-privacy {
+    align-items: center;
+  }
+
+  // The header uses 8px right padding around a 48px edit button (12px
+  // icon inset each side), while the body uses 16px padding around a
+  // visibility icon with no inset of its own. Those two paddings don't
+  // cancel out, so without this the visibility icon glyph sits 4px
+  // further from the edge than the edit icon glyph. This nudges it back
+  // in line. Scoped locally for the same reason as above.
+  ::ng-deep app-panel-privacy {
+    margin-top: 0;
+    margin-inline-end: 4px;
   }
 }
 

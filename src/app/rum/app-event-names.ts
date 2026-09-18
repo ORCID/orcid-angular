@@ -30,6 +30,8 @@ export enum AppEventName {
   StepBNextButtonClicked = 'step-b-next-button-clicked',
   StepC2NextButtonClicked = 'step-c2-next-button-clicked',
   StepC2SkipButtonClicked = 'step-c2-skip-button-clicked',
+  StepC2NoticeSkipLinkClicked = 'step-c2-notice-skip-link-clicked',
+  StepC2ErrorSkipLinkClicked = 'step-c2-error-skip-link-clicked',
   StepCNextButtonClicked = 'step-c-next-button-clicked',
   StepDNextButtonClicked = 'step-d-next-button-clicked',
   JourneyComplete = 'journey-complete',
@@ -82,6 +84,18 @@ export enum AppEventName {
 
   // ─── Registration lifecycle / pipeline outcomes ────────────────────────────
   RegisterPipelineError = 'register_pipeline_error',
+
+  // ─── Sign-in interstitials (`interstitial` journey) ────────────────────────
+  /** An interstitial was shown. Emitted for every interstitial, both flows. */
+  InterstitialShown = 'interstitial_shown',
+  /** The user completed the interstitial's action. Facet by interstitialName. */
+  InterstitialCompleted = 'interstitial_completed',
+  /** The user chose the "continue without" option. */
+  InterstitialDismissed = 'interstitial_dismissed',
+  /** Submit was blocked by an inline validation error. Not terminal. */
+  InterstitialValidationError = 'interstitial_validation_error',
+  /** The save request failed and the interstitial closed. */
+  InterstitialSaveError = 'interstitial_save_error',
 }
 
 /** Event name for step back button: `step-${step}-back-button-clicked` */

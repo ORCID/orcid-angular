@@ -1,10 +1,11 @@
 <button
-  class="hamburger"
+  mat-stroked-button
+  class="header-action-button"
   [attr.aria-label]="labelMenu"
   aria-haspopup="true"
   [attr.aria-expanded]="isOpen"
 >
-  <div class="hamburger__icon" [ngClass]="{ open: isOpen }">
-    <span></span> <span></span> <span></span> <span></span>
-  </div>
+  <mat-icon class="material-symbols-outlined">{{
+    isOpen ? 'close' : 'menu'
+  }}</mat-icon>
 </button>

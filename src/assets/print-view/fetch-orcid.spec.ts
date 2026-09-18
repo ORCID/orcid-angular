@@ -15,6 +15,10 @@ declare function jsonText(value: any): string
 declare function jsonList(list: any): any[]
 declare function jsonDate(parts: any): string
 declare function jsonOrcidUri(orcidIdentifier: any): string
+declare function peerReviewHeadingText(
+  reviewsCount: number,
+  publicationsCount: number
+): string
 declare function renderOrcidPrompt(message?: string): void
 declare function makeSection(title: string): HTMLElement
 declare function textLineNode(
@@ -27,6 +31,7 @@ declare function otherIdsTextNode(
   value: string,
   url?: string
 ): HTMLElement
+declare function recordIssueFromRecordJson(recordJson: any): any
 declare const STRINGS: Record<string, string>
 
 describe('fetch-orcid.js', () => {
@@ -219,6 +224,16 @@ describe('fetch-orcid.js', () => {
     })
   })
 
+  // ── peerReviewHeadingText ───────────────────────────────────────────────────
+
+  describe('peerReviewHeadingText', () => {
+    it('builds heading text including review and publication counts', () => {
+      expect(peerReviewHeadingText(7, 3)).toBe(
+        'Peer review (7 reviews for 3 publications/grants)'
+      )
+    })
+  })
+
   // ── makeSection ───────────────────────────────────────────────────────────────
 
   describe('makeSection', () => {
@@ -282,30 +297,51 @@ describe('fetch-orcid.js', () => {
         '12345',
         'https://scopus.com/12345'
       )
-      expect(node.textContent).toContain('Scopus ID: 12345')
+      expect(node.textContent).toBe(
+        'Scopus ID: 12345 (https://scopus.com/12345)'
+      )
       const anchor = node.querySelector('a')
       expect(anchor).not.toBeNull()
       expect(anchor!.href).toBe('https://scopus.com/12345')
       expect(anchor!.textContent).toBe('https://scopus.com/12345')
     })
 
-    it('renders value as a link and IGNORES url parameter when value IS a URL', () => {
+    it('renders value as a link and NO url in brackets when value IS a URL and matches url param', () => {
+      const node = otherIdsTextNode(
+        'ResearcherID',
+        'https://researcherid.com/rid/H-1234-2012',
+        'https://researcherid.com/rid/H-1234-2012'
+      )
+      expect(node.textContent).toBe(
+        'ResearcherID: https://researcherid.com/rid/H-1234-2012'
+      )
+      const anchor = node.querySelector('a')
+      expect(anchor).not.toBeNull()
+      expect(anchor!.href).toBe('https://researcherid.com/rid/H-1234-2012')
+    })
+
+    it('renders value as link and url in brackets when value is a URL but different from url param', () => {
       const node = otherIdsTextNode(
         'ResearcherID',
         'https://researcherid.com/rid/H-1234-2012',
         'https://some-other-url.com'
       )
-      // This is the NEW behavior we want.
-      // Currently it would probably render "ResearcherID: https://researcherid.com/rid/H-1234-2012 (https://some-other-url.com)"
+      expect(node.textContent).toContain(
+        'ResearcherID: https://researcherid.com/rid/H-1234-2012'
+      )
+      expect(node.textContent).toContain('(https://some-other-url.com')
+      const anchors = node.querySelectorAll('a')
+      expect(anchors.length).toBe(2)
+      expect(anchors[0].href).toBe('https://researcherid.com/rid/H-1234-2012')
+      expect(anchors[1].href).toContain('https://some-other-url.com')
+    })
+
+    it('renders only url when value is empty', () => {
+      const node = otherIdsTextNode('Label', '', 'https://example.com')
+      expect(node.textContent).toContain('Label: https://example.com')
       const anchor = node.querySelector('a')
       expect(anchor).not.toBeNull()
-      expect(anchor!.href).toBe('https://researcherid.com/rid/H-1234-2012')
-      expect(anchor!.textContent).toBe(
-        'https://researcherid.com/rid/H-1234-2012'
-      )
-
-      // Ensure the other URL is NOT present
-      expect(node.textContent).not.toContain('https://some-other-url.com')
+      expect(anchor!.href).toContain('https://example.com')
     })
   })
 
@@ -323,6 +359,10 @@ describe('fetch-orcid.js', () => {
         'employments',
         'activities',
         'loadingRecord',
+        'recordIsDeprecatedTitle',
+        'recordIsNotClaimedTitle',
+        'recordIsLockedTitle',
+        'recordIsDeactivatedTitle',
       ]
       requiredKeys.forEach((key) => {
         expect(STRINGS[key]).withContext(`STRINGS.${key}`).toBeTruthy()
@@ -338,6 +378,61 @@ describe('fetch-orcid.js', () => {
           .withContext(`STRINGS.${key} should not be empty`)
           .toBeGreaterThan(0)
       })
+    })
+  })
+
+  describe('recordIssueFromRecordJson', () => {
+    it('maps OrcidDeprecatedException to deprecated title and description', () => {
+      expect(
+        recordIssueFromRecordJson({
+          error_name: 'OrcidDeprecatedException',
+          deprecated_orcid: '0000-0001-1111-1111',
+          orcid: '0000-0002-2222-2222',
+        })
+      ).toEqual({
+        title: 'This record has been deprecated',
+        description:
+          'A deprecated record is a duplicate or unwanted ORCID record that has been merged with another owned by the same person.',
+        deprecated_orcid: '0000-0001-1111-1111',
+        orcid: '0000-0002-2222-2222',
+      })
+    })
+
+    it('maps OrcidNotClaimedException to not claimed title and description', () => {
+      expect(
+        recordIssueFromRecordJson({ error_name: 'OrcidNotClaimedException' })
+      ).toEqual({
+        title: 'This record has not been claimed',
+        description: 'This record has not been claimed yet',
+      })
+    })
+
+    it('maps LockedException to locked title and description', () => {
+      expect(
+        recordIssueFromRecordJson({ error_name: 'LockedException' })
+      ).toEqual({
+        title: 'This record is locked',
+        description:
+          'We lock records when they violate conditions of our terms of service.',
+      })
+    })
+
+    it('maps DeactivatedException to deactivated title and description', () => {
+      expect(
+        recordIssueFromRecordJson({ error_name: 'DeactivatedException' })
+      ).toEqual({
+        title: 'This record has been deactivated',
+        description:
+          'When an ORCID record is deactivated all information in the record is deleted. Deactivated records are not shown in registry searches.',
+      })
+    })
+
+    it('returns null for unknown or missing error_name', () => {
+      expect(
+        recordIssueFromRecordJson({ error_name: 'OtherException' })
+      ).toBeNull()
+      expect(recordIssueFromRecordJson({})).toBeNull()
+      expect(recordIssueFromRecordJson(null)).toBeNull()
     })
   })
 })

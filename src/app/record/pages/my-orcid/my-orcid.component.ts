@@ -37,6 +37,7 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
+import { BackupEmailComponentDialogOutput } from 'src/app/cdk/interstitials/backup-email/interstitial-dialog-extend/backup-email-dialog.component'
 import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
@@ -98,6 +99,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   fragment: string
   newlySharedDomains: string[] = []
   newAddedAffiliation: string
+  newAddedBackupEmail: string
 
   featuredWorksTogglz = false
   featuredAffiliationsEnabled = false
@@ -327,17 +329,22 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   private handlesInterstitialOutput(
     interstitialDialog: Observable<
-      AffilationsComponentDialogOutput | ShareEmailsDomainsComponentDialogOutput
+      | AffilationsComponentDialogOutput
+      | ShareEmailsDomainsComponentDialogOutput
+      | BackupEmailComponentDialogOutput
     >
   ) {
     return interstitialDialog.pipe(
       tap((dialogOutput) => {
-        if (dialogOutput.type === 'domains-interstitial') {
+        if (dialogOutput?.type === 'domains-interstitial') {
           this.newlySharedDomains = dialogOutput.newlySharedDomains
         }
-        if (dialogOutput.type === 'affiliation-interstitial') {
+        if (dialogOutput?.type === 'affiliation-interstitial') {
           this.newAddedAffiliation =
             dialogOutput.addedAffiliation?.affiliationName?.value
+        }
+        if (dialogOutput?.type === 'backup-email-interstitial') {
+          this.newAddedBackupEmail = dialogOutput.addedBackupEmail
         }
       })
     )
