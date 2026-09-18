@@ -12,6 +12,8 @@ COPY src/ src/
 
 COPY scripts/ scripts/
 
+COPY projects/ projects/
+
 # RUN apk add gettext
 
 RUN yarn build
