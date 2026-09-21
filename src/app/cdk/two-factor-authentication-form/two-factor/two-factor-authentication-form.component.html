@@ -303,6 +303,22 @@
         Use your authentication app instead
       </button>
     </p>
+    <!--
+      D6: the frames keep this question above the resend line once a code is out
+      (988:11771 on the sign-in board, and the three error frames beside it). It
+      heads the row the resend belongs to, so it goes and comes with it - once
+      the record's daily allowance is spent PD-13635 puts its own message here
+      instead, and a question with no answer under it is worse than none. The id
+      is the one already on this screen at the block above, with the same source
+      text, so the catalogue gains nothing.
+    -->
+    <p
+      *ngIf="recoveryPhoneResendIsWorthOffering"
+      class="recovery-phone-resend__heading"
+      i18n="@@ngOrcid.signin.2fa.noDeviceOrRecoveryCodes"
+    >
+      Don't have your device or your recovery codes?
+    </p>
     <p *ngIf="recoveryPhoneResendIsWorthOffering" class="recovery-phone-resend">
       <ng-container i18n="@@account.didntGetTheCode">
         Didn't get the code?

@@ -108,6 +108,17 @@ mat-label.orc-font-small-print {
   }
 }
 
+.recovery-phone-resend__heading {
+  margin-top: $spacing-base;
+  margin-bottom: 0;
+}
+
+// The question above already carries the gap, so the line under it sits tight
+// against it the way the frames draw the pair.
+.recovery-phone-resend__heading + .recovery-phone-resend {
+  margin-top: 0;
+}
+
 .recovery-phone-resend {
   margin-top: $spacing-base;
 }

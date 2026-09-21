@@ -398,6 +398,52 @@ describe('AuthChallengeComponent', () => {
       expect(component.showRecoveryPhoneCode).toBeFalse()
     }))
 
+    /*
+     * D6. Frame 1160:12657 and the three challenge error frames head the resend
+     * row with this question, and put the way out of phone mode above it rather
+     * than below - which is also the order the sign-in screen already uses for
+     * the same state. The question belongs to the row, so it goes when the row
+     * goes at the cap; the way out does not, which is what the case above this
+     * block protects.
+     */
+    it('heads the resend row with the question the frames put above it', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      recoveryPhone.codeSent = true
+      recoveryPhone.resendSeconds = 12
+      fixture.detectChanges()
+
+      expect(text()).toContain("Don't have your device or your recovery codes?")
+    }))
+
+    it('takes that question away with the resend it heads, at the cap', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      recoveryPhone.codeSent = true
+      recoveryPhone.resendSeconds = 0
+      recoveryPhone.errorCode = 'SEND_LIMIT_REACHED'
+      fixture.detectChanges()
+
+      expect(text()).not.toContain(
+        "Don't have your device or your recovery codes?"
+      )
+    }))
+
+    it('puts the way out of phone mode above the resend row', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      recoveryPhone.codeSent = true
+      recoveryPhone.resendSeconds = 12
+      fixture.detectChanges()
+
+      const rendered = text()
+      expect(
+        rendered.indexOf('Use your authentication app instead')
+      ).toBeLessThan(
+        rendered.indexOf("Don't have your device or your recovery codes?")
+      )
+    }))
+
     it('keeps the ordinary send failure message for every other code', fakeAsync(() => {
       enterPhoneMode()
       tick()

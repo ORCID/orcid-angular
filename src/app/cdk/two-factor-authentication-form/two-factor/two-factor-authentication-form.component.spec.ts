@@ -221,6 +221,40 @@ describe('TwoFactorAuthenticationFormComponent', () => {
       resend.click()
       expect(requested).toHaveBeenCalledTimes(1)
     })
+
+    /*
+     * D6. Frame 988:11771 and the three error frames beside it head this row
+     * with the question, and the screen dropped it. It belongs to the row, not
+     * to the screen, so it goes when the row goes - which is what the second
+     * case is for: once PD-13635's cap is reached the resend has no answer and
+     * neither has the question above it.
+     */
+    it('heads the resend row with the question the frames put above it', () => {
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 12,
+        sending: false,
+      }
+      fixture.detectChanges()
+
+      expect(fixture.nativeElement.textContent).toContain(
+        "Don't have your device or your recovery codes?"
+      )
+    })
+
+    it('takes the question away with the resend it heads, at the cap', () => {
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 0,
+        sending: false,
+        errorCode: 'SEND_LIMIT_REACHED',
+      }
+      fixture.detectChanges()
+
+      expect(fixture.nativeElement.textContent).not.toContain(
+        "Don't have your device or your recovery codes?"
+      )
+    })
   })
 
   describe('error codes', () => {

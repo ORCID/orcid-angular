@@ -369,16 +369,40 @@
       }
     </p>
     <!--
+      D6: the frames put the way out of this mode above the resend row, not
+      below it (1160:12657, and the three challenge error frames), which is also
+      the order the sign-in screen already uses for the same state. Being first
+      it needs no top margin; the row below it carries one.
+    -->
+    <p i18n="@@account.dontHaveYourRecoveryCodes" class="m-0 leading-6">
+      Don't have your recovery codes?
+    </p>
+    <button
+      type="button"
+      class="link-button"
+      data-testid="recovery-phone-back-toggle"
+      (click)="useAuthenticationApp($event)"
+      i18n="@@account.useYourAuthenticationAppInstead"
+    >
+      Use your authentication app instead
+    </button>
+    <!--
       "Didn't get the code? Resend" is the wrong offer once the record's daily
       allowance is spent: the send it offers cannot succeed until tomorrow, and
-      it sits directly under a message that says so. The question goes with the
-      button, because it has no answer either - but only those two. What is
-      below them is the way out of this mode, and hiding that as well left a
-      user who reached the cap with no route back to their authentication app
-      or their recovery codes, on a screen whose only input is a code that can
-      no longer be sent.
+      it sits directly under a message that says so. The question that heads
+      this row has no answer either once that happens, so all three go together.
+      The way out of this mode is deliberately above them rather than inside:
+      hiding that as well left a user who reached the cap with no route back to
+      their authentication app or their recovery codes, on a screen whose only
+      input is a code that can no longer be sent.
     -->
     @if (recoveryPhone?.errorCode !== 'SEND_LIMIT_REACHED') {
+    <p
+      i18n="@@account.dontHaveYourDeviceOrYourRecoveryCodes"
+      class="m-0 leading-6 mt-4!"
+    >
+      Don't have your device or your recovery codes?
+    </p>
     <p i18n="@@account.didntGetTheCode" class="m-0 leading-6">
       Didn't get the code?
     </p>
@@ -406,18 +430,6 @@
       Resend code
     </button>
     } }
-    <p i18n="@@account.dontHaveYourRecoveryCodes" class="m-0 leading-6 mt-4!">
-      Don't have your recovery codes?
-    </p>
-    <button
-      type="button"
-      class="link-button"
-      data-testid="recovery-phone-back-toggle"
-      (click)="useAuthenticationApp($event)"
-      i18n="@@account.useYourAuthenticationAppInstead"
-    >
-      Use your authentication app instead
-    </button>
   </div>
   } @else { @if (!showRecoveryCode) {
   <div class="text-center orc-font-body-small mt-6">
