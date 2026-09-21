@@ -23,9 +23,15 @@
       'link-darkest': 'state-warning-darkest',
       'link-dark': 'state-warning-dark',
     ),
+    // PD-5635: the success notice borrowed the brand green (#7faa26 on
+    // #fcfdf9) because the application had no success state of its own. The
+    // design system has one - notice-success #56b833 on state-success-bg
+    // #f9fef6 - and every frame in the 2FA recovery phone set draws it. The
+    // link colours stay on the brand ramp: no frame answers a colour for a
+    // link inside a success notice.
     'alert-success': (
-      'border': 'brand-primary-dark',
-      'background': 'brand-primary-lightest',
+      'border': 'state-success-dark',
+      'background': 'state-success-lightest',
       'link-darkest': 'brand-primary-darkest',
       'link-dark': 'brand-primary-dark',
     ),

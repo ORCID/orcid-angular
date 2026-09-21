@@ -8,14 +8,17 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
+  // PD-5635: the frames draw an information panel with state-info-dark #1565c0
+  // on state-info-bg #f5fafe. This took the darkest step of the ramp (#0d47a1)
+  // on a different fill (#f1f8fe), which stays where it is used elsewhere.
   .info {
     border-color: mat.m2-get-color-from-palette(
       $foreground,
-      'state-info-darkest'
+      'state-info-dark'
     ) !important;
     background-color: mat.m2-get-color-from-palette(
       $background,
-      'state-info-lightest'
+      'state-info-background'
     ) !important;
   }
 }
