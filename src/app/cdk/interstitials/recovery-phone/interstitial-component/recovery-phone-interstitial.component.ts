@@ -68,6 +68,16 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
   /** Only ever the masked number the registry answered with. */
   addedRecoveryPhone: string | undefined
 
+  /**
+   * The interstitial ends once. A dialog is not destroyed until its exit
+   * animation finishes, so the clock is still running for a moment after a
+   * save or a decline has already closed it - and both of those record a
+   * terminating outcome. Without this latch a timer landing in that gap
+   * records a second one against a journey that is already over, which is
+   * exactly the measurement this outcome was added to keep clean.
+   */
+  private ended = false
+
   // Injected as fields so the dialog subclass only declares what is genuinely
   // its own (MAT_DIALOG_DATA, MatDialogRef)
   private _interstitialObservability = inject(InterstitialObservabilityService)
@@ -106,11 +116,13 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
    * passed as a value would travel intact (R1.2, R7.2).
    */
   onSaved(response: RecoveryPhoneSaveResponse): void {
+    this.ended = true
     this._interstitialObservability.outcome(AppEventName.InterstitialCompleted)
     this.afterSummit(response?.maskedRecoveryPhoneNumber)
   }
 
   onFailed(): void {
+    this.ended = true
     this._interstitialObservability.outcome(AppEventName.InterstitialSaveError)
     this.finishIntertsitial()
   }
@@ -138,12 +150,13 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
    * silence as declining (R6.4).
    */
   private onElevationExpired(): void {
-    if (this.saving) {
+    if (this.ended || this.saving) {
       // The same reason the decline waits: a save already on the wire may be
       // stored, and closing now would report no number for one the registry
       // keeps
       return
     }
+    this.ended = true
     this._interstitialObservability.outcome(
       AppEventName.InterstitialElevationExpired
     )
@@ -168,6 +181,7 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
     if (this.saving) {
       return
     }
+    this.ended = true
     this._interstitialObservability.outcome(AppEventName.InterstitialDismissed)
     this.finishIntertsitial()
   }

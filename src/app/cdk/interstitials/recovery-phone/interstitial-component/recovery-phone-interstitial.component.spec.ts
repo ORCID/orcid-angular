@@ -251,6 +251,19 @@ describe('RecoveryPhoneInterstitialComponent', () => {
       ;(form as any).saving = false
     }))
 
+    it('does not report a second outcome after one has already ended it', fakeAsync(() => {
+      // A dialog is not destroyed until its exit animation finishes, so the
+      // clock is still live for a moment after a save has closed it
+      interstitialOnAFakeClock()
+      component.onSaved({ success: true } as RecoveryPhoneSaveResponse)
+      observability.outcome.calls.reset()
+
+      tick(TTL)
+
+      expect(observability.outcome).not.toHaveBeenCalled()
+      discardPeriodicTasks()
+    }))
+
     it('drops the clock when the interstitial is gone', fakeAsync(() => {
       interstitialOnAFakeClock()
       const finish = spyOn(component.finish, 'emit')
