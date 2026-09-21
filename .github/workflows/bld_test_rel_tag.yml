@@ -28,6 +28,11 @@ on:
         type: boolean
         required: false
         default: false
+      deploy:
+        description: 'Whether to upload the WAR and push the i18n source. Set false for a dry run.'
+        type: boolean
+        required: false
+        default: true
 
   workflow_dispatch:
     inputs:
@@ -62,6 +67,11 @@ on:
         type: boolean
         required: false
         default: false
+      deploy:
+        description: 'Whether to upload the WAR and push the i18n source. Set false for a dry run.'
+        type: boolean
+        required: false
+        default: true
 
 # cancel running job if another commit comes in
 concurrency:
@@ -69,37 +79,31 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  format_i18n:
-    uses: ./.github/workflows/format_i18n.yml
-    secrets: inherit # pass all secrets for pushing
-
-  format_prettier:
-    uses: ./.github/workflows/format_prettier.yml
-    secrets: inherit # pass all secrets for pushing
+  # Extract messages.xlf from the code and push it to Transifex. Off the
+  # critical path: nothing downstream depends on it.
+  # Formatting and unit tests are PR gates (pr.yml), not main gates: branch
+  # protection requires an up-to-date, green branch, so main re-tests a tree
+  # that has already passed.
+  push_i18n_source:
+    if: ${{ github.ref == 'refs/heads/main' && inputs.deploy }}
+    uses: ./.github/workflows/push_i18n_source.yml
+    secrets:
+      TRANSIFEX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
 
 ##############################################################################
 
   lint:
     uses: ./.github/workflows/lint.yml
-    needs:
-      - format_i18n
-      - format_prettier
-
-  test_yarn:
-    uses: ./.github/workflows/test_yarn.yml
-    needs:
-      - format_i18n
-      - format_prettier
 
 ##############################################################################
   # uses maven to build via yarn into a war file
+  # No `needs: lint`. lint is a required check on the pull request (pr.yml
+  # produces `lint / pre-commit`), so main is re-running something the merge
+  # already gated on. Running it in parallel takes ~40s off the critical path;
+  # rel_tag still waits for it, so nothing is tagged or released on a lint failure.
   bld_mvn:
     uses: ./.github/workflows/bld_mvn.yml
     secrets: inherit # pass all secrets for uploading assets
-    needs:
-      - lint
-      - format_i18n
-      - format_prettier
     permissions:
       checks: write
       contents: read
@@ -109,15 +113,12 @@ jobs:
       version_tag: ${{ inputs.version_tag }}
       bump: ${{ inputs.bump }}
       ref: ${{ inputs.ref }}
+      deploy: ${{ inputs.deploy }}
 
   bld_docker:
     if: ${{ inputs.run_docker }}
     uses: ./.github/workflows/bld_docker.yml
     secrets: inherit # pass all secrets for uploading assets
-    needs:
-      - lint
-      - format_i18n
-      - format_prettier
     permissions:
       checks: write
       contents: read
@@ -130,10 +131,15 @@ jobs:
 
 ##############################################################################
 
+  # Gated on lint as well as the WAR: the build can run in parallel, but nothing
+  # gets tagged or released while lint is red. lint (~30s) always finishes long
+  # before bld_mvn (~4min), so this adds no latency.
   rel_tag:
     uses: ./.github/workflows/rel_tag.yml
     if: ${{ inputs.rel_tag }}
-    needs: bld_mvn
+    needs:
+      - bld_mvn
+      - lint
     with:
       version_tag: ${{ inputs.version_tag }}
       bump: ${{ inputs.bump }}

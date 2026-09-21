@@ -8,7 +8,7 @@ const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
 
-const SOURCE_GLOB = 'src/**/*.ts'
+const SOURCE_GLOB = '{src,projects}/**/*.ts'
 const FOCUSED_RE = /\b(fdescribe|fit)\s*\(/
 
 function findFocusedTestsInFile(filePath) {

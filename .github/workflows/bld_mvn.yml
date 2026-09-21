@@ -24,6 +24,11 @@ on:
         required: false
         default: "default"
         type: string
+      deploy:
+        description: 'Whether to upload the WAR to the artifact repository. Set false for a dry run.'
+        required: false
+        default: true
+        type: boolean
 
   workflow_dispatch:
     inputs:
@@ -48,6 +53,11 @@ on:
         required: false
         default: "default"
         type: string
+      deploy:
+        description: 'Whether to upload the WAR to the artifact repository. Set false for a dry run.'
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   bld_mvn:
@@ -71,6 +81,27 @@ jobs:
           # checkout some history so we can scan commits for bump messages
           # NOTE: history does not include tags!
           fetch-depth: 100
+
+      # Build the Angular app here rather than letting frontend-maven-plugin do
+      # it: this reuses the runner's Node and the cached node_modules instead of
+      # downloading Node and installing from cold inside maven. The maven build
+      # below skips the plugin's node/yarn goals and just packages ./dist.
+      - uses: ./.github/actions/yarn-install
+
+      # The WAR must be built from formatted source. That is already guaranteed
+      # by construction: the `format` job applies prettier on the PR branch and
+      # is a required check, so the commit that merges is the formatted one.
+      # This asserts it anyway, and fails fast if anything ever reaches main
+      # without passing that gate (an admin bypass, a direct push).
+      - name: assert the source is formatted
+        run: yarn format:check
+
+      - name: build the Angular app (prebuild + postbuild included)
+        run: yarn build
+
+      # The WAR is a verbatim copy of ./dist, so validate it before packaging.
+      - run: yarn build:manifest:check
+      - run: yarn build:verify
 
       - name: find next version
         id: version
@@ -117,10 +148,15 @@ jobs:
 
       - name: build our project
         run: |
+          # skip.installyarn skips the install-node-and-yarn goal and skip.yarn
+          # skips both `yarn` goals of frontend-maven-plugin: ./dist was already
+          # built by the `yarn build` step above. pom.xml is left untouched so
+          # local `mvn` builds still run the full frontend chain.
           mvn -T 1C --batch-mode \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
               --file "pom.xml" \
               --activate-profiles prod -Dnodejs.workingDirectory=. \
+              -Dskip.installyarn=true -Dskip.yarn=true \
               package -Dmaven.test.skip
 
           echo "------------------------------------------------------"
@@ -129,7 +165,10 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
+      # Skipped by the ci_only dry run: it proves the WAR still builds without
+      # publishing an artifact nobody asked for.
       - name: deploy same artifact for all environments
+        if: ${{ inputs.deploy }}
         run: |
           WAR_FILE="target/orcid-web-frontend-prod.war"
           REPO_URL="${ARTIFACT_URL}${ARTIFACT_REPO_PATH}"

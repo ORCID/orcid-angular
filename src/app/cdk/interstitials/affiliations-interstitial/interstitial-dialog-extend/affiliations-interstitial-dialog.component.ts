@@ -14,7 +14,6 @@ import {
   UntypedFormBuilder,
 } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { error } from 'console'
 import {
   MAT_DIALOG_DATA,
   MatDialogRef,

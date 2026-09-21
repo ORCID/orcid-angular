@@ -19,6 +19,7 @@ import {
   Xliff1TranslationParser,
   Diagnostics,
 } from '@angular/localize/tools'
+import { isLocaleIndexFile } from './dist-layout'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const babel = require('@babel/core')
@@ -84,7 +85,9 @@ export function localizeAndWritePrintViewScript(): void {
 
   // Process every dist locale folder (index.html is the canonical indicator
   // that the folder is a locale build output).
-  const indexFiles: string[] = glob.sync('./dist/*/index.html')
+  const indexFiles: string[] = glob
+    .sync('./dist/*/index.html')
+    .filter(isLocaleIndexFile)
 
   for (const indexFile of indexFiles) {
     const localeFolderSegments = indexFile.split('/')
@@ -95,11 +98,6 @@ export function localizeAndWritePrintViewScript(): void {
     const destFile = `${destDir}/fetch-orcid.js`
 
     let output: string
-
-    if (locale === 'share-assets') {
-      // Not a locale folder — skip.
-      continue
-    }
 
     const translations = getTranslations(locale)
 
