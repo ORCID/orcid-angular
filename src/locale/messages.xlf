@@ -1735,7 +1735,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3a89bdc837beba5deb23158e7d2963827735cd91" datatype="html" resname="3a89bdc837beba5deb23158e7d2963827735cd91">
@@ -3592,7 +3592,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeUse" datatype="html" resname="interstitials.recoveryPhoneNoticeUse">
@@ -18038,35 +18038,35 @@
         <source>Cancel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.manageRecoveryPhoneTitle" datatype="html" resname="account.manageRecoveryPhoneTitle">
         <source>Manage your recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.updateRecoveryPhoneNumber" datatype="html" resname="account.updateRecoveryPhoneNumber">
         <source>Update recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">114</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.manageRecoveryPhoneChallenge" datatype="html" resname="account.manageRecoveryPhoneChallenge">
         <source>to manage your recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.addRecoveryPhoneChallenge" datatype="html" resname="account.addRecoveryPhoneChallenge">
         <source>to add a recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.nextStepRecoveryCodes" datatype="html" resname="account.nextStepRecoveryCodes">
@@ -18130,7 +18130,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.copySetupCodeToClipboard" datatype="html" resname="account.copySetupCodeToClipboard">
@@ -18190,7 +18190,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.clipboard" datatype="html" resname="account.clipboard">
@@ -18218,39 +18218,32 @@
         <source>Step 2 of 3 - Recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">84</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.recoveryPhoneOnboardingSaveFailed" datatype="html" resname="account.recoveryPhoneOnboardingSaveFailed">
         <source>We could not save your recovery phone number. Please try again, or skip this step and add your number later from your account settings.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.ts</context>
-          <context context-type="linenumber">169</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.recoveryPhoneOnboardingChallengeExpired" datatype="html" resname="account.recoveryPhoneOnboardingChallengeExpired">
-        <source>Your recovery phone number was not saved because this step was left open for too long. Please try again, or skip this step and add your number later from your account settings.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.ts</context>
-          <context context-type="linenumber">182</context>
+          <context context-type="linenumber">209</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.step1Of3AuthenticationApp" datatype="html" resname="account.step1Of3AuthenticationApp">
         <source>Step 1 of 3 - Authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.step3Of3RecoveryCodes" datatype="html" resname="account.step3Of3RecoveryCodes">
         <source>Step 3 of 3 - 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="twoFactor.title" datatype="html" resname="twoFactor.title">
