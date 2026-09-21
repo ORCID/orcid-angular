@@ -1,6 +1,8 @@
 import { defer, Observable, timer } from 'rxjs'
 import { map } from 'rxjs/operators'
 
+import { QaFlag } from '../qa-flag/qa-flags.enum'
+
 /**
  * How long adding or changing a recovery phone number stays open after the
  * proof of identity that allowed it (PD-13638).
@@ -35,8 +37,40 @@ export function recoveryPhoneElevationExpiry(
   grantedAt: number
 ): Observable<void> {
   return defer(() =>
-    timer(
-      Math.max(0, grantedAt + RECOVERY_PHONE_ELEVATION_TTL_MILLIS - Date.now())
-    )
+    timer(Math.max(0, grantedAt + elevationTtlMillis() - Date.now()))
   ).pipe(map(() => undefined))
+}
+
+/**
+ * The window, unless a test has asked for a shorter one.
+ *
+ * An end-to-end test cannot wait eight minutes for each of three surfaces, and
+ * the alternative - freezing the browser clock - stops every other timer the
+ * application owns. This reads the same kind of local flag the interstitial
+ * tests already use (`QaFlag`), so the suite can prove the client half of the
+ * exit against a real registry rather than a stubbed answer.
+ *
+ * It can only make a user's own window shorter. The registry enforces its own
+ * eight minutes regardless, so nothing here widens what anybody may do; the
+ * worst a value can achieve is to close a form that was still working.
+ *
+ * Local storage is unreadable in some privacy modes and throws rather than
+ * returning null, hence the catch. Anything that is not a positive whole
+ * number of milliseconds is ignored.
+ */
+function elevationTtlMillis(): number {
+  let raw: string | null = null
+  try {
+    raw = localStorage.getItem(QaFlag.recoveryPhoneElevationTtlMillis)
+  } catch {
+    return RECOVERY_PHONE_ELEVATION_TTL_MILLIS
+  }
+  if (!raw) {
+    return RECOVERY_PHONE_ELEVATION_TTL_MILLIS
+  }
+  const asked = Number(raw)
+  if (!Number.isInteger(asked) || asked <= 0) {
+    return RECOVERY_PHONE_ELEVATION_TTL_MILLIS
+  }
+  return Math.min(asked, RECOVERY_PHONE_ELEVATION_TTL_MILLIS)
 }
