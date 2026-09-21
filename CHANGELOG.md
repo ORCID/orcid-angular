@@ -1,3 +1,10 @@
+## v3.23.4 - 2026-09-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.3...v3.23.4)
+
+- [#2913](https://github.com/ORCID/orcid-angular/pull/2913): PD-6198 outlined icons
+- [#2906](https://github.com/ORCID/orcid-angular/pull/2906): PD-6118 semgrep angular vulnerabilities
+
 ## v3.23.3 - 2026-09-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.2...v3.23.3)
