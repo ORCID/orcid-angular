@@ -188,6 +188,19 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
     return this.recoveryPhoneState?.resendSeconds || 0
   }
 
+  /**
+   * "Didn't get the code? Resend" is the wrong offer once the record's daily
+   * allowance is spent: the send it offers cannot succeed until tomorrow, and
+   * it would sit beside a message that says exactly that. Reachable when a code
+   * went out earlier in this session and the cap was hit on the resend.
+   */
+  get recoveryPhoneResendIsWorthOffering(): boolean {
+    return (
+      this.recoveryPhoneCodeSent &&
+      this.recoveryPhoneState?.errorCode !== 'SEND_LIMIT_REACHED'
+    )
+  }
+
   get recoveryPhoneSending(): boolean {
     return !!this.recoveryPhoneState?.sending
   }

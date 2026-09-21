@@ -262,6 +262,24 @@ describe('TwoFactorAuthenticationFormComponent', () => {
       expect(messageFor('HTTP')).toBe('Something went wrong. Please try again.')
     })
 
+    it('stops offering a resend once the daily cap is reached', () => {
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 0,
+        sending: false,
+        errorCode: 'SEND_LIMIT_REACHED',
+      }
+      expect(component.recoveryPhoneResendIsWorthOffering).toBeFalse()
+
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 0,
+        sending: false,
+        errorCode: 'INVALID_CODE',
+      }
+      expect(component.recoveryPhoneResendIsWorthOffering).toBeTrue()
+    })
+
     it('says nothing when there is no error', () => {
       component.recoveryPhoneState = {
         codeSent: true,

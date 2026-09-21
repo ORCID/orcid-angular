@@ -355,6 +355,23 @@ describe('AuthChallengeComponent', () => {
       )
     }))
 
+    it('stops offering a resend once the daily cap is reached', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+      recoveryPhone.codeSent = true
+      recoveryPhone.resendSeconds = 0
+      recoveryPhone.errorCode = 'SEND_LIMIT_REACHED'
+      fixture.detectChanges()
+
+      //the offer and the question above it both go: neither has an answer today
+      expect(
+        fixture.debugElement.query(
+          By.css('[data-testid="recovery-phone-resend"]')
+        )
+      ).toBeNull()
+      expect(text()).not.toContain("Didn't get the code?")
+    }))
+
     it('keeps the ordinary send failure message for every other code', fakeAsync(() => {
       enterPhoneMode()
       tick()

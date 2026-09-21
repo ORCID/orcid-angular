@@ -352,7 +352,15 @@
       </mat-hint>
     </div>
   </div>
-  } @if (showRecoveryPhoneCode) {
+  }
+  <!--
+    "Didn't get the code? Resend" is the wrong offer once the record's daily
+    allowance is spent: the send it offers cannot succeed until tomorrow, and it
+    sits directly under a message that says so. The whole block goes rather than
+    just the button, because the question above it has no answer either.
+  -->
+  @if (showRecoveryPhoneCode && recoveryPhone?.errorCode !==
+  'SEND_LIMIT_REACHED') {
   <div class="text-center orc-font-body-small mt-6">
     <!--
       The one thing worth announcing, announced once. The countdown below is
