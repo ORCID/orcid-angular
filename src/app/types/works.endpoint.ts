@@ -630,7 +630,7 @@ export const WorkRelationshipsHintsLabels = {
   self: $localize`:@@works.selfDescription:The identifier applies to the work itself. For example, a DOI for a book chapter.`,
   'part-of': $localize`:@@works.partOfDescription:The identifier applies to part of a larger work. For example, the ISBN of the book in which the work was published.`,
   'version-of': $localize`:@@works.versionOfDescription:The identifier applies to an alternate version of the work. For example, an earlier draft of an article.`,
-  'funded-by': $localize`:@@works.fundedByDescription:The identifier applies to the funding for the work.`,
+  'funded-by': $localize`:@@works.fundedByDescription:The identifier applies to the grant or other funding awarded for the work. For example, a DOI for the funding or an internal grant number.`,
 }
 
 export interface Work {

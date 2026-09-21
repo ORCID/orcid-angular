@@ -14,6 +14,7 @@ import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { RecordService } from 'src/app/core/record/record.service'
 import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
 import { RegisterService } from 'src/app/core/register/register.service'
+import { UserService } from 'src/app/core'
 import { Observable, of, Subject, throwError } from 'rxjs'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { EmailCategoryEndpoint } from 'src/app/types/register.email-category'
@@ -27,6 +28,7 @@ describe('BackupEmailComponent', () => {
     control: AbstractControl
   ) => Observable<ValidationErrors | null>
   let emailCategory: () => Observable<EmailCategoryEndpoint>
+  let userSession: () => Observable<any>
   let observability: jasmine.SpyObj<InterstitialObservabilityService>
 
   const primaryEmail = {
@@ -46,6 +48,8 @@ describe('BackupEmailComponent', () => {
     backendValidation = () => of(null)
     emailCategory = () =>
       of({ category: 'PROFESSIONAL', rorId: null } as EmailCategoryEndpoint)
+    // OAuth by default; the sign in flow has no oauthSession
+    userSession = () => of({ oauthSession: { clientName: 'Test Client' } })
     observability = jasmine.createSpyObj<InterstitialObservabilityService>(
       'InterstitialObservabilityService',
       ['shown', 'outcome', 'closed']
@@ -78,6 +82,10 @@ describe('BackupEmailComponent', () => {
           },
         },
         { provide: InterstitialObservabilityService, useValue: observability },
+        {
+          provide: UserService,
+          useValue: { getUserSession: () => userSession() },
+        },
         WINDOW_PROVIDERS,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -176,17 +184,30 @@ describe('BackupEmailComponent', () => {
     )
   })
 
-  it('should finish on success, the confirmation is shown on the record not in the panel', () => {
+  it('should show the confirmation on success rather than finishing straight away', () => {
     const finish = spyOn(component.finish, 'emit')
 
     component.backupEmailControl.setValue('backup@example.com')
     component.addBackupEmail()
 
+    // The OAuth flow leaves for the client next, so this panel is the only
+    // place the confirmation can be shown
+    expect(component.afterSummitStatus).toBeTrue()
+    expect(component.addedBackupEmail).toBe('backup@example.com')
+    expect(finish).not.toHaveBeenCalled()
+
+    component.finishIntertsitial(component.addedBackupEmail)
     expect(finish).toHaveBeenCalled()
   })
 
-  it('should finish even though postEmails replays the pre-save email list', () => {
-    const finish = spyOn(component.finish, 'emit')
+  it('should label the continue button with the authorizing client', () => {
+    component.backupEmailControl.setValue('backup@example.com')
+    component.addBackupEmail()
+
+    expect(component.organizationName).toBe('Test Client')
+  })
+
+  it('should confirm even though postEmails replays the pre-save email list', () => {
     // getEmails is backed by a ReplaySubject, so the first emission after a save
     // is the cached list and cannot be used to confirm the write
     postEmails.and.returnValue(of(emailsEndpoint()))
@@ -194,7 +215,7 @@ describe('BackupEmailComponent', () => {
     component.backupEmailControl.setValue('backup@example.com')
     component.addBackupEmail()
 
-    expect(finish).toHaveBeenCalled()
+    expect(component.afterSummitStatus).toBeTrue()
     expect(component.saving).toBeFalse()
   })
 
