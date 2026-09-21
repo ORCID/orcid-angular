@@ -19,10 +19,9 @@ import {
   MatDialogRef,
   MatDialogState,
 } from '@angular/material/dialog'
-import { OrganizationsService, UserService } from 'src/app/core'
+import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
-import { RegisterService } from 'src/app/core/register/register.service'
 
 import {
   BaseInterstitialDialogInput,
@@ -64,8 +63,6 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
     recordAffiliationService: RecordAffiliationService,
     formBuilder: UntypedFormBuilder,
     recordService: RecordService,
-    organizationService: OrganizationsService,
-    registerService: RegisterService,
     private dialogRef: MatDialogRef<
       AffiliationsInterstitialDialogComponent,
       AffilationsComponentDialogOutput
@@ -78,8 +75,6 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
       recordAffiliationService,
       formBuilder,
       recordService,
-      organizationService,
-      registerService,
       user
     )
   }
