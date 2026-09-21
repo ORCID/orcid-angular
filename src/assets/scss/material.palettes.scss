@@ -156,6 +156,21 @@ $state-info-darkest: #0d47a1;
 $state-warning-dark: #d32f2f;
 $state-warning-lightest: rgba(255, 235, 238, 0.25);
 $state-warning-darkest: #b71c1c;
+// The design system's own notice-warning-background, solid. The -lightest above
+// is the same colour at 25% and is what a notice inside a panel is drawn on;
+// this one is for the full-width banner, which the frames paint solid.
+$state-warning-background: #ffebee;
+
+// state-success zeplin colors. The design system has carried these as
+// notice-success and state-success-bg since the 2FA recovery phone frames were
+// drawn; the application had no success state of its own and borrowed the brand
+// green, which is a different colour (#7faa26).
+$state-success-dark: #56b833;
+$state-success-lightest: #f9fef6;
+
+// state-info-bg, which the frames use for an information panel. The -lightest
+// above (#f1f8fe) is a different value and stays where it is already used.
+$state-info-background: #f5fafe;
 
 $brand-quad-dark: #990041;
 $brand-quad-darkest: #66002b;

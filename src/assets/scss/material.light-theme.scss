@@ -36,7 +36,10 @@
       unselected-chip: white,
       panel-shadow: $panel-shadow,
       state-info-dark: $state-info-dark,
-      state-info-lightest: $state-info-lightest
+      state-info-lightest: $state-info-lightest,
+      state-info-background: $state-info-background,
+      state-success-lightest: $state-success-lightest,
+      state-warning-background: $state-warning-background
     )
   );
   // .
@@ -64,6 +67,10 @@
       state-warning-dark: $state-warning-dark,
       state-warning-darkest: $state-warning-darkest,
       state-warning-lightest: $state-warning-lightest,
+      state-warning-background: $state-warning-background,
+      state-success-dark: $state-success-dark,
+      state-success-lightest: $state-success-lightest,
+      state-info-background: $state-info-background,
       brand-quad-dark: $brand-quad-dark,
       brand-quad-darkest: $brand-quad-darkest,
       brand-citrus-lemon: $brand-citrus-lemon,

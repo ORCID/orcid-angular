@@ -33,6 +33,10 @@
   --orcid-color-state-info-lightest: #bbdefb;
   --orcid-color-state-info-dark: #1565c0;
   --orcid-color-state-info-darkest: #0d47a1;
+  --orcid-color-state-info-background: #f5fafe;
+  --orcid-color-state-success-dark: #56b833;
+  --orcid-color-state-success-lightest: #f9fef6;
+  --orcid-color-state-warning-background: #ffebee;
 
   /* Visibility colours (official: record visibility) */
   --orcid-color-visibility-everyone: #00a500;
