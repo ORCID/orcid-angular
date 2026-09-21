@@ -1,3 +1,21 @@
+## v3.23.3 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.2...v3.23.3)
+
+- [#2915](https://github.com/ORCID/orcid-angular/pull/2915): PD-7612 Restore the build:local-tomcat script
+
+## v3.23.2 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.1...v3.23.2)
+
+## v3.23.1 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.0...v3.23.1)
+
+## v3.23.0 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.23...v3.23.0)
+
 ## v3.0.23 - 2026-09-14
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.22...v3.0.23)

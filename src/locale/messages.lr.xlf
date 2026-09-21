@@ -760,7 +760,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.ts</context>
@@ -4114,7 +4114,7 @@
         <source>reviews</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">57,59</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4122,7 +4122,7 @@
         <source>review</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">63,64</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4130,7 +4130,7 @@
         <source>for</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4138,7 +4138,7 @@
         <source>publications/grants</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4146,7 +4146,7 @@
         <source>publication/grant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4154,11 +4154,11 @@
         <source>Add</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">102</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/pipes/app-panels-add-aria-label/app-panels-add-aria-label.pipe.ts</context>
@@ -4170,7 +4170,7 @@
         <source>Add Education</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">130</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/affiliation-stacks-groups.component.ts</context>
@@ -4186,7 +4186,7 @@
         <source>Add Qualification</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4194,11 +4194,11 @@
         <source>Add Invited Position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">172</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/affiliation-stacks-groups.component.ts</context>
@@ -4214,11 +4214,11 @@
         <source>Add Distinction</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">177</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4226,11 +4226,11 @@
         <source>Add Membership</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">155</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">184</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/affiliation-stacks-groups.component.ts</context>
@@ -4246,11 +4246,11 @@
         <source>Add Service</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">160</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">188</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4258,11 +4258,11 @@
         <source>Add Editorial Service</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">165</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">192</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4270,11 +4270,11 @@
         <source>Search &amp; link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">199</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">250</context>
+          <context context-type="linenumber">248</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
@@ -4286,7 +4286,7 @@
         <source>Add manually</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">204</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
@@ -4298,7 +4298,7 @@
         <source>Sort</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">266,268</context>
+          <context context-type="linenumber">264,266</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/pipes/app-panels-sort-aria-label/app-panels-sort-aria-label.pipe.ts</context>
@@ -4310,7 +4310,7 @@
         <source>Manage</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panels/panels.component.html</context>
-          <context context-type="linenumber">281</context>
+          <context context-type="linenumber">279</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -5863,7 +5863,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -5875,7 +5875,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -5887,7 +5887,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13723,7 +13723,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">281</context>
+          <context context-type="linenumber">287</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13735,7 +13735,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">285</context>
+          <context context-type="linenumber">291</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13743,7 +13743,7 @@
         <source>Names</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/modals/modal-name/modal-name.component.html</context>
@@ -13763,7 +13763,7 @@
         <source>Printable record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13771,7 +13771,7 @@
         <source>Copy iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13779,7 +13779,7 @@
         <source>Hide record summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13787,7 +13787,7 @@
         <source>Show record summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13795,7 +13795,7 @@
         <source>Copy your ORCID iD to the clipboard</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">146</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13803,7 +13803,7 @@
         <source>View a printable version of your ORCID record (Opens in new tab)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -15240,7 +15240,7 @@
         <target>LR</target>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
+        <source>Only identifier types "grant number", "doi", "RRID", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">255,257</context>
