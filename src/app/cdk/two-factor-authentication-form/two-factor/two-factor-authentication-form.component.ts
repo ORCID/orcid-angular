@@ -78,6 +78,12 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
       resendSeconds: 0,
       sending: false,
     }
+    if (this._recoveryPhoneState.errorCode === 'SEND_LIMIT_REACHED') {
+      // Remembered here because this is the only place the send's own answer
+      // is visible. The field it arrives in is shared with the verify, and the
+      // container clears it on every attempt at a code.
+      this.recoveryPhoneSendCapReached = true
+    }
     if (!wasSent && this._recoveryPhoneState.codeSent) {
       setTimeout(() => {
         this.inputRecoveryPhoneCode?.nativeElement.focus()
@@ -195,11 +201,20 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
    * went out earlier in this session and the cap was hit on the resend.
    */
   get recoveryPhoneResendIsWorthOffering(): boolean {
-    return (
-      this.recoveryPhoneCodeSent &&
-      this.recoveryPhoneState?.errorCode !== 'SEND_LIMIT_REACHED'
-    )
+    return this.recoveryPhoneCodeSent && !this.recoveryPhoneSendCapReached
   }
+
+  /**
+   * Remembered rather than read back off the state, because one `errorCode`
+   * field carries both what the send answered and what the verify answered,
+   * and the container clears it on every verify. Reading it directly meant a
+   * rejected code after the cap was hit put the resend offer back on screen,
+   * live, for a send that cannot succeed until tomorrow.
+   *
+   * It is never cleared within the component's life: the cap lifts a day
+   * later, and the user has signed in or given up long before then.
+   */
+  private recoveryPhoneSendCapReached = false
 
   get recoveryPhoneSending(): boolean {
     return !!this.recoveryPhoneState?.sending

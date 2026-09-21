@@ -372,6 +372,32 @@ describe('AuthChallengeComponent', () => {
       expect(text()).not.toContain("Didn't get the code?")
     }))
 
+    it('still offers the way back to the authentication app at the cap', fakeAsync(() => {
+      // Phone mode outranks every other input, and this button is the only
+      // thing that leaves it. Hiding it along with the resend left a user who
+      // reached the cap on a screen whose only field takes a code that can no
+      // longer be sent, with no route to their app or their recovery codes.
+      enterPhoneMode()
+      tick()
+      recoveryPhone.codeSent = true
+      recoveryPhone.resendSeconds = 0
+      recoveryPhone.errorCode = 'SEND_LIMIT_REACHED'
+      fixture.detectChanges()
+
+      const back = fixture.debugElement.query(
+        By.css('[data-testid="recovery-phone-back-toggle"]')
+      )
+      expect(back).not.toBeNull()
+      expect(back.nativeElement.textContent).toContain(
+        'Use your authentication app instead'
+      )
+
+      back.nativeElement.click()
+      fixture.detectChanges()
+
+      expect(component.showRecoveryPhoneCode).toBeFalse()
+    }))
+
     it('keeps the ordinary send failure message for every other code', fakeAsync(() => {
       enterPhoneMode()
       tick()

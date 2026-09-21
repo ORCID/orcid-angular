@@ -352,15 +352,7 @@
       </mat-hint>
     </div>
   </div>
-  }
-  <!--
-    "Didn't get the code? Resend" is the wrong offer once the record's daily
-    allowance is spent: the send it offers cannot succeed until tomorrow, and it
-    sits directly under a message that says so. The whole block goes rather than
-    just the button, because the question above it has no answer either.
-  -->
-  @if (showRecoveryPhoneCode && recoveryPhone?.errorCode !==
-  'SEND_LIMIT_REACHED') {
+  } @if (showRecoveryPhoneCode) {
   <div class="text-center orc-font-body-small mt-6">
     <!--
       The one thing worth announcing, announced once. The countdown below is
@@ -376,6 +368,17 @@
       >&nbsp;{{ recoveryPhone?.maskedNumber }}
       }
     </p>
+    <!--
+      "Didn't get the code? Resend" is the wrong offer once the record's daily
+      allowance is spent: the send it offers cannot succeed until tomorrow, and
+      it sits directly under a message that says so. The question goes with the
+      button, because it has no answer either - but only those two. What is
+      below them is the way out of this mode, and hiding that as well left a
+      user who reached the cap with no route back to their authentication app
+      or their recovery codes, on a screen whose only input is a code that can
+      no longer be sent.
+    -->
+    @if (recoveryPhone?.errorCode !== 'SEND_LIMIT_REACHED') {
     <p i18n="@@account.didntGetTheCode" class="m-0 leading-6">
       Didn't get the code?
     </p>
@@ -402,7 +405,7 @@
     >
       Resend code
     </button>
-    }
+    } }
     <p i18n="@@account.dontHaveYourRecoveryCodes" class="m-0 leading-6 mt-4!">
       Don't have your recovery codes?
     </p>

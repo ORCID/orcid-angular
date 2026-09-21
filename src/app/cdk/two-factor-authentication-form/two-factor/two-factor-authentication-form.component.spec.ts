@@ -262,7 +262,31 @@ describe('TwoFactorAuthenticationFormComponent', () => {
       expect(messageFor('HTTP')).toBe('Something went wrong. Please try again.')
     })
 
+    it('offers a resend while a code has gone out and the cap is untouched', () => {
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 0,
+        sending: false,
+        errorCode: 'INVALID_CODE',
+      }
+      expect(component.recoveryPhoneResendIsWorthOffering).toBeTrue()
+    })
+
     it('stops offering a resend once the daily cap is reached', () => {
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 0,
+        sending: false,
+        errorCode: 'SEND_LIMIT_REACHED',
+      }
+      expect(component.recoveryPhoneResendIsWorthOffering).toBeFalse()
+    })
+
+    it('keeps the resend hidden when a later code is rejected', () => {
+      // One errorCode field carries the send's answer and the verify's, and
+      // the container clears it on every attempt. Reading it directly put the
+      // offer back on screen, live, for a send that cannot succeed until
+      // tomorrow - which is the thing this suppression exists to prevent.
       component.recoveryPhoneState = {
         codeSent: true,
         resendSeconds: 0,
@@ -277,7 +301,8 @@ describe('TwoFactorAuthenticationFormComponent', () => {
         sending: false,
         errorCode: 'INVALID_CODE',
       }
-      expect(component.recoveryPhoneResendIsWorthOffering).toBeTrue()
+
+      expect(component.recoveryPhoneResendIsWorthOffering).toBeFalse()
     })
 
     it('says nothing when there is no error', () => {
