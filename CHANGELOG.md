@@ -1,3 +1,62 @@
+## v3.23.5 - 2026-09-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.4...v3.23.5)
+
+## v3.23.4 - 2026-09-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.3...v3.23.4)
+
+- [#2913](https://github.com/ORCID/orcid-angular/pull/2913): PD-6198 outlined icons
+- [#2906](https://github.com/ORCID/orcid-angular/pull/2906): PD-6118 semgrep angular vulnerabilities
+
+## v3.23.3 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.2...v3.23.3)
+
+- [#2915](https://github.com/ORCID/orcid-angular/pull/2915): PD-7612 Restore the build:local-tomcat script
+
+## v3.23.2 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.1...v3.23.2)
+
+## v3.23.1 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.0...v3.23.1)
+
+## v3.23.0 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.23...v3.23.0)
+
+## v3.0.23 - 2026-09-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.22...v3.0.23)
+
+## v3.0.22 - 2026-09-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.21...v3.0.22)
+
+- [#2925](https://github.com/ORCID/orcid-angular/pull/2925): PD-13050 don't show the affiliation interstitial without a matching ROR
+
+## v3.0.21 - 2026-09-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.20...v3.0.21)
+
+## v3.0.20 - 2026-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.19...v3.0.20)
+
+## v3.0.19 - 2026-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.18...v3.0.19)
+
+## v3.0.18 - 2026-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.17...v3.0.18)
+
+## v3.0.17 - 2026-08-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.16...v3.0.17)
+
 ## v3.0.16 - 2026-08-27
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.15...v3.0.16)

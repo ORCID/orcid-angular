@@ -79,6 +79,27 @@ describe('XsrfFallbackInterceptor', () => {
     req.flush({})
   })
 
+  it('passes through protocol-relative URLs pointing at a foreign host', () => {
+    cookieGetSpy.and.returnValue('token')
+    http.post('//other-origin.com/api', {}).subscribe()
+
+    const req = httpMock.expectOne('//other-origin.com/api')
+    expect(req.request.headers.has('x-xsrf-token')).toBe(false)
+    expect(req.request.withCredentials).toBe(false)
+    req.flush({})
+  })
+
+  it('still adds the token for a protocol-relative URL on the API host', () => {
+    cookieGetSpy.and.callFake((name: string) =>
+      name === 'XSRF-TOKEN' ? 'token' : ''
+    )
+    http.post('//api.example/works/work.json', {}).subscribe()
+
+    const req = httpMock.expectOne('//api.example/works/work.json')
+    expect(req.request.headers.get('x-xsrf-token')).toBe('token')
+    req.flush({})
+  })
+
   it('passes through when cookie is missing', () => {
     cookieGetSpy.and.returnValue('')
 
