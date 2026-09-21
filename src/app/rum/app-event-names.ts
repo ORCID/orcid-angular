@@ -31,6 +31,8 @@ export enum AppEventName {
   TwoFactorSetupRecoveryPhoneSaved = 'two_factor_setup_recovery_phone_saved',
   /** The user moved past the recovery phone step without adding a number. */
   TwoFactorSetupRecoveryPhoneSkipped = 'two_factor_setup_recovery_phone_skipped',
+  /** The recovery phone step ended because its elevation window ran out. */
+  TwoFactorSetupRecoveryPhoneElevationExpired = 'two_factor_setup_recovery_phone_elevation_expired',
   /** Sign in: a code was sent to the stored recovery number. */
   SignInRecoveryPhoneCodeSent = 'sign_in_recovery_phone_code_sent',
   /** Sign in: the recovery number code was accepted, so 2FA is now off. */
@@ -110,6 +112,8 @@ export enum AppEventName {
   InterstitialValidationError = 'interstitial_validation_error',
   /** The save request failed and the interstitial closed. */
   InterstitialSaveError = 'interstitial_save_error',
+  /** The interstitial closed because its elevation window ran out. */
+  InterstitialElevationExpired = 'interstitial_elevation_expired',
 }
 
 /** Event name for step back button: `step-${step}-back-button-clicked` */

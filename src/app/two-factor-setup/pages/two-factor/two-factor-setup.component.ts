@@ -36,6 +36,13 @@ export class TwoFactorSetupComponent implements OnInit, OnDestroy {
   backupCodesClipboard: string
 
   /**
+   * When step 1 turned 2FA on, in epoch milliseconds. The registry elevated
+   * the session at that moment (PD-13638), and the recovery phone step counts
+   * its window from here rather than from its own first render.
+   */
+  elevatedAt: number | undefined
+
+  /**
    * Resolved once, on init rather than on the way out of step 1, because step
    * 1 already has to say whether it is one of two steps or one of three.
    */
@@ -112,6 +119,9 @@ export class TwoFactorSetupComponent implements OnInit, OnDestroy {
   }) {
     this.backupCodes = $event.backupCodes
     this.backupCodesClipboard = $event.backupCodesClipboard
+    // register.json has just answered, which is where the registry stamped
+    // the elevation; the step's clock starts on the same instant
+    this.elevatedAt = Date.now()
     this.step = this.recoveryPhoneEnabled ? 'recoveryPhone' : 'recoveryCodes'
   }
 
@@ -136,6 +146,25 @@ export class TwoFactorSetupComponent implements OnInit, OnDestroy {
       return
     }
     this.step = 'recoveryCodes'
+  }
+
+  /**
+   * The recovery phone step's window ran out, either because the registry said
+   * so or because the clock got there first. The user goes to Account
+   * settings with the two-factor panel open, which is where the number can be
+   * added behind a challenge this flow deliberately does not ask for.
+   *
+   * Two-factor authentication stays on and no number is stored, which is the
+   * state the registry is already in. The recovery codes step is skipped: the
+   * codes were minted by step 1 and this flow is the only place they are ever
+   * shown, so a user who times out here has 2FA on and has never seen them.
+   * That is the ticket's instruction rather than an oversight, and it is
+   * written down for product in the handover.
+   */
+  recoveryPhoneElevationExpired(): void {
+    this.router.navigate(['/' + this.applicationRoutes.account], {
+      fragment: '2FA',
+    })
   }
 
   ngOnDestroy(): void {

@@ -22,8 +22,10 @@
         <app-two-factor-recovery-phone
           *ngIf="step === 'recoveryPhone'"
           [subtitle]="recoveryPhoneSubtitle"
+          [elevatedAt]="elevatedAt"
           (completed)="recoveryPhoneCompleted()"
           (failed)="recoveryPhoneFailed($event)"
+          (elevationExpired)="recoveryPhoneElevationExpired()"
         >
         </app-two-factor-recovery-phone>
         <app-two-factor-recovery-codes

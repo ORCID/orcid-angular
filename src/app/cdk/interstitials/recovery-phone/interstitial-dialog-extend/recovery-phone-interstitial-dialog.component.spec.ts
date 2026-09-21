@@ -97,4 +97,17 @@ describe('RecoveryPhoneInterstitialDialogComponent', () => {
       addedRecoveryPhone: undefined,
     })
   })
+
+  it('should close with no number when the elevation runs out (PD-13638)', () => {
+    // The dialog cannot be dismissed, so an expiry has to close it from the
+    // inside; the record page then shows nothing, exactly as for a decline
+    const component = createComponent()
+
+    component.onChallengeRequired()
+
+    expect(dialogRef.close).toHaveBeenCalledWith({
+      type: 'recovery-phone-interstitial',
+      addedRecoveryPhone: undefined,
+    })
+  })
 })

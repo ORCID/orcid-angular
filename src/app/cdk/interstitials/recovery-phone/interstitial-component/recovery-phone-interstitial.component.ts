@@ -2,14 +2,18 @@ import {
   Component,
   EventEmitter,
   inject,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 import { RecoveryPhoneFormComponent } from 'src/app/cdk/recovery-phone-form/recovery-phone-form.component'
 import { WINDOW } from 'src/app/cdk/window/window.service'
 import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
+import { recoveryPhoneElevationExpiry } from 'src/app/core/two-factor-authentication/recovery-phone-elevation'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { RecoveryPhoneSaveResponse } from 'src/app/types/two-factor.endpoint'
 
@@ -33,7 +37,9 @@ import { RecoveryPhoneSaveResponse } from 'src/app/types/two-factor.endpoint'
   ],
   standalone: false,
 })
-export class RecoveryPhoneInterstitialComponent implements OnInit {
+export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
+  private readonly $destroy = new Subject<void>()
+
   @Output() finish = new EventEmitter<void>()
 
   @ViewChild(RecoveryPhoneFormComponent)
@@ -69,6 +75,20 @@ export class RecoveryPhoneInterstitialComponent implements OnInit {
 
   ngOnInit(): void {
     this.window.scrollTo(0, 0)
+    // The registry counts this window from the sign in, which is what admits
+    // this flow without a challenge (R6.3). The client has no record of that
+    // instant, so it counts from here instead — a few seconds later, and
+    // therefore a few seconds longer. Where the two disagree the registry
+    // refuses the next request first, and the exit is the same either way
+    // (PD-13638).
+    recoveryPhoneElevationExpiry(Date.now())
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => this.onElevationExpired())
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next()
+    this.$destroy.complete()
   }
 
   onFormReady(): void {
@@ -99,11 +119,35 @@ export class RecoveryPhoneInterstitialComponent implements OnInit {
    * R6.3 says the registry accepts this flow on the sign in that just
    * happened, so a challenge should never be asked for. If one is asked for
    * anyway the elevation has gone, and nothing inside a dialog that cannot be
-   * dismissed can answer it — so it ends like any other save failure and the
-   * user keeps the option in Account settings.
+   * dismissed can answer it.
    */
   onChallengeRequired(): void {
-    this.onFailed()
+    this.onElevationExpired()
+  }
+
+  /**
+   * The one exit for both triggers: the registry's refusal, and the clock
+   * reaching the same conclusion first.
+   *
+   * Reported as its own outcome rather than as a save error, which is what
+   * it used to be: nothing was saved and nothing failed, the window simply
+   * closed. The interstitial was marked seen when it was shown (R6.1) and is
+   * not offered again; the number can still be added from Account settings.
+   *
+   * Nothing is handed to the record page, so it shows no notice — the same
+   * silence as declining (R6.4).
+   */
+  private onElevationExpired(): void {
+    if (this.saving) {
+      // The same reason the decline waits: a save already on the wire may be
+      // stored, and closing now would report no number for one the registry
+      // keeps
+      return
+    }
+    this._interstitialObservability.outcome(
+      AppEventName.InterstitialElevationExpired
+    )
+    this.finishIntertsitial()
   }
 
   /**

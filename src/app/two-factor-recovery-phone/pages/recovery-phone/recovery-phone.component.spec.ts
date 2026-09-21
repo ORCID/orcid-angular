@@ -1,5 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, EventEmitter } from '@angular/core'
-import { ComponentFixture, TestBed } from '@angular/core/testing'
+import {
+  ComponentFixture,
+  TestBed,
+  discardPeriodicTasks,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 import { MatIconModule } from '@angular/material/icon'
@@ -13,6 +19,7 @@ import { RecoveryPhoneComponent } from './recovery-phone.component'
 import { RecoveryPhoneFormComponent } from '../../../cdk/recovery-phone-form/recovery-phone-form.component'
 import { ApplicationRoutes } from '../../../constants'
 import { TogglzService } from '../../../core/togglz/togglz.service'
+import { RECOVERY_PHONE_ELEVATION_TTL_MILLIS } from '../../../core/two-factor-authentication/recovery-phone-elevation'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { Status } from '../../../types/two-factor.endpoint'
 
@@ -206,14 +213,22 @@ describe('RecoveryPhoneComponent', () => {
     expect(form.save).toHaveBeenCalled()
   })
 
-  it('re-opens the challenge when the form says the elevation ran out', () => {
+  it('goes back to account settings, reporting nothing, when the registry says the elevation ran out (PD-13638)', () => {
     build()
     passChallenge()
     dialog.open.calls.reset()
+    ;(router.navigate as jasmine.Spy).calls.reset()
 
     hostedForm().challengeRequired.emit()
 
-    expect(dialog.open).toHaveBeenCalled()
+    // This page used to ask its challenge again. Asking a second time without
+    // being invited is a re-prompt, and the exit is the one Cancel already
+    // takes: back to the panel, with nothing said, because nothing happened.
+    expect(dialog.open).not.toHaveBeenCalled()
+    expect(router.navigate).toHaveBeenCalledWith(
+      [ApplicationRoutes.account],
+      jasmine.objectContaining({ queryParams: {}, fragment: '2FA' })
+    )
   })
 
   it('returns with the added outcome after a first number is stored', () => {
@@ -270,5 +285,93 @@ describe('RecoveryPhoneComponent', () => {
       [ApplicationRoutes.account],
       jasmine.objectContaining({ queryParams: {} })
     )
+  })
+
+  /*
+   * The clock, rather than the registry, reaching the end of the window.
+   *
+   * These drive the component directly rather than through a rendered
+   * fixture: the page renders the real recovery phone form, whose phone field
+   * lazily imports its formatting utilities, and a dynamic import inside
+   * fakeAsync never settles.
+   */
+  describe('when the elevation window runs out on its own', () => {
+    const TTL = RECOVERY_PHONE_ELEVATION_TTL_MILLIS
+
+    function pageOnItsOwn() {
+      togglzService.getStateOf.and.returnValue(of(true))
+      twoFactorService.checkState.and.returnValue(of(status()))
+      fixture = TestBed.createComponent(RecoveryPhoneComponent)
+      component = fixture.componentInstance
+      component.ngOnInit()
+    }
+
+    /** The pass, without the render the helper above performs. */
+    function passChallengeOnly() {
+      twoFactorService.verifyRecoveryPhoneChallenge.and.returnValue(
+        of({ success: true } as any)
+      )
+      submitAttempt.emit()
+      afterClosed.next(true)
+    }
+
+    it('returns to account settings eight minutes after the challenge passed', fakeAsync(() => {
+      pageOnItsOwn()
+      passChallengeOnly()
+      ;(router.navigate as jasmine.Spy).calls.reset()
+
+      tick(TTL - 1)
+      expect(router.navigate).not.toHaveBeenCalled()
+
+      tick(1)
+      expect(router.navigate).toHaveBeenCalledWith(
+        [ApplicationRoutes.account],
+        jasmine.objectContaining({ queryParams: {}, fragment: '2FA' })
+      )
+      expect(twoFactorService.saveRecoveryPhone).not.toHaveBeenCalled()
+    }))
+
+    it('does not start the clock until the challenge passes', fakeAsync(() => {
+      pageOnItsOwn()
+      ;(router.navigate as jasmine.Spy).calls.reset()
+
+      // Two minutes spent on the challenge itself buy no part of the window:
+      // the registry grants it when the challenge is accepted, not when the
+      // page was opened.
+      tick(2 * 60 * 1000)
+      passChallengeOnly()
+      ;(router.navigate as jasmine.Spy).calls.reset()
+
+      tick(TTL - 1)
+      expect(router.navigate).not.toHaveBeenCalled()
+
+      tick(1)
+      expect(router.navigate).toHaveBeenCalled()
+    }))
+
+    it('lets a save already on the wire answer first', fakeAsync(() => {
+      pageOnItsOwn()
+      passChallengeOnly()
+      component.recoveryPhoneForm = {
+        saving: true,
+      } as RecoveryPhoneFormComponent
+      ;(router.navigate as jasmine.Spy).calls.reset()
+
+      tick(TTL)
+
+      expect(router.navigate).not.toHaveBeenCalled()
+    }))
+
+    it('drops the clock when the page is gone', fakeAsync(() => {
+      pageOnItsOwn()
+      passChallengeOnly()
+      ;(router.navigate as jasmine.Spy).calls.reset()
+
+      component.ngOnDestroy()
+      tick(TTL)
+
+      expect(router.navigate).not.toHaveBeenCalled()
+      discardPeriodicTasks()
+    }))
   })
 })

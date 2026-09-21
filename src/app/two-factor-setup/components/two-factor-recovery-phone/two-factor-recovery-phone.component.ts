@@ -2,12 +2,16 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 import { RecoveryPhoneFormComponent } from '../../../cdk/recovery-phone-form/recovery-phone-form.component'
+import { recoveryPhoneElevationExpiry } from '../../../core/two-factor-authentication/recovery-phone-elevation'
 import { AppEventName } from '../../../rum/app-event-names'
 import { RumJourneyEventService } from '../../../rum/service/customEvent.service'
 
@@ -50,8 +54,13 @@ export function endsRecoveryPhoneStep(
  * the user a number was stored when none was.
  *
  * Nothing here asks for a password: completing step 1 posted a live 2FA code to
- * `2FA/register.json`, which elevates the session for fifteen minutes, so the
+ * `2FA/register.json`, which elevates the session for eight minutes, so the
  * `ONBOARDING` context is what the backend reads instead of a challenge.
+ *
+ * That window is the third way out, and it is not the step's to explain. When
+ * it ends the step reports `elevationExpired` and the page takes the user to
+ * Account settings, where the challenge this surface deliberately refuses to
+ * ask for is asked properly (PD-13638).
  */
 @Component({
   selector: 'app-two-factor-recovery-phone',
@@ -63,7 +72,9 @@ export function endsRecoveryPhoneStep(
   preserveWhitespaces: true,
   standalone: false,
 })
-export class TwoFactorRecoveryPhoneComponent implements OnInit {
+export class TwoFactorRecoveryPhoneComponent implements OnInit, OnDestroy {
+  private readonly $destroy = new Subject<void>()
+
   /**
    * Supplied by the page, which is the only thing that knows whether the flow
    * is two or three steps long. The default is the three step wording because
@@ -71,6 +82,14 @@ export class TwoFactorRecoveryPhoneComponent implements OnInit {
    */
   @Input()
   subtitle = $localize`:@@account.step2Of3RecoveryPhone:Step 2 of 3 - Recovery phone number`
+
+  /**
+   * When step 1 turned 2FA on, in epoch milliseconds, which is the moment the
+   * registry elevated the session. Supplied by the page, because the page is
+   * where that happened; a step that timed itself from its own creation would
+   * give away whatever the user spent reading step 1.
+   */
+  @Input() elevatedAt: number | undefined
 
   /** Fired on both exits: a saved number and a skipped step. */
   @Output() completed = new EventEmitter<void>()
@@ -80,6 +99,13 @@ export class TwoFactorRecoveryPhoneComponent implements OnInit {
    * handled here rather than passed on, so the page never advances on one.
    */
   @Output() failed = new EventEmitter<TwoFactorRecoveryPhoneRefusal>()
+
+  /**
+   * The elevation is over, so the step is too. Distinct from `failed`, which
+   * is about the feature going away underneath the user; this one is about
+   * time passing, and the page answers it by leaving the flow.
+   */
+  @Output() elevationExpired = new EventEmitter<void>()
 
   @ViewChild(RecoveryPhoneFormComponent)
   recoveryPhoneForm: RecoveryPhoneFormComponent | undefined
@@ -94,12 +120,26 @@ export class TwoFactorRecoveryPhoneComponent implements OnInit {
    */
   stepErrorMessage: string | null = null
 
+  /** The exit is one way; the clock and the registry must not both take it. */
+  private expired = false
+
   constructor(private _observability: RumJourneyEventService) {}
 
   ngOnInit(): void {
     this._observability.recordSimpleEvent(
       AppEventName.TwoFactorSetupRecoveryPhoneLoaded
     )
+    // The fallback matters: a host that forgets the binding gets a window
+    // measured from here, which is too generous rather than too strict, and
+    // the registry refuses the request either way.
+    recoveryPhoneElevationExpiry(this.elevatedAt ?? Date.now())
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => this.onElevationExpired())
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next()
+    this.$destroy.complete()
   }
 
   /**
@@ -170,15 +210,33 @@ export class TwoFactorRecoveryPhoneComponent implements OnInit {
   }
 
   /**
-   * The fifteen minute elevation from step 1 ran out while the user was typing
-   * a number, waiting for a text, or away from the tab. Account settings
-   * answers this by re-opening its password challenge, but that surface already
-   * owns one; growing a password dialog here would ask for a password one
-   * screen after a live 2FA code, which is the trade R2.6 exists to refuse. So
-   * the step says what happened and leaves both ways out live: press again, or
-   * skip and add the number from account settings, which challenges properly.
+   * The registry says the elevation has gone. There is nothing this step can
+   * do about it: growing a password dialog here would ask for a password one
+   * screen after a live 2FA code, which is the trade R2.6 exists to refuse,
+   * and every further send and save would be refused the same way. So the step
+   * ends, and the page takes the user to Account settings (PD-13638).
    */
   onChallengeRequired(): void {
-    this.stepErrorMessage = $localize`:@@account.recoveryPhoneOnboardingChallengeExpired:Your recovery phone number was not saved because this step was left open for too long. Please try again, or skip this step and add your number later from your account settings.`
+    this.onElevationExpired()
+  }
+
+  /**
+   * The one exit for both triggers: the registry's refusal, and the clock
+   * reaching the same conclusion first.
+   *
+   * A save already on the wire is left to answer for itself. It was sent
+   * inside the window, so it may well succeed, and a step that walked away
+   * from it would report nothing stored for a number the registry went on to
+   * store.
+   */
+  private onElevationExpired(): void {
+    if (this.expired || this.saving) {
+      return
+    }
+    this.expired = true
+    this._observability.recordSimpleEvent(
+      AppEventName.TwoFactorSetupRecoveryPhoneElevationExpired
+    )
+    this.elevationExpired.emit()
   }
 }

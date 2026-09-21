@@ -1,11 +1,18 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { ComponentFixture, TestBed } from '@angular/core/testing'
+import {
+  ComponentFixture,
+  TestBed,
+  discardPeriodicTasks,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing'
 import { MatIconModule } from '@angular/material/icon'
 import { By } from '@angular/platform-browser'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { AlertMessageComponent, OrcidStepViewComponent } from '@orcid/ui'
 
 import { RecoveryPhoneFormComponent } from '../../../cdk/recovery-phone-form/recovery-phone-form.component'
+import { RECOVERY_PHONE_ELEVATION_TTL_MILLIS } from '../../../core/two-factor-authentication/recovery-phone-elevation'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { AppEventName } from '../../../rum/app-event-names'
 import { RumJourneyEventService } from '../../../rum/service/customEvent.service'
@@ -208,23 +215,28 @@ describe('TwoFactorRecoveryPhoneComponent', () => {
     expect(primaryAction().disabled).toBeFalse()
   })
 
-  it('says the number was not saved when the elevation ran out (R2.6)', () => {
+  it('leaves the step, with nothing to read, when the registry says the elevation ran out (PD-13638)', () => {
     const failed = jasmine.createSpy('failed')
     const completed = jasmine.createSpy('completed')
+    const elevationExpired = jasmine.createSpy('elevationExpired')
     component.failed.subscribe(failed)
     component.completed.subscribe(completed)
+    component.elevationExpired.subscribe(elevationExpired)
     form().codeSentChange.emit(true)
 
     form().challengeRequired.emit()
     fixture.detectChanges()
 
+    // The page takes the user to account settings, so a message here would be
+    // read by nobody; "please try again" was the advice it used to give, and
+    // every further attempt on this surface is refused the same way.
+    expect(elevationExpired).toHaveBeenCalledTimes(1)
     expect(failed).not.toHaveBeenCalled()
     expect(completed).not.toHaveBeenCalled()
-    expect(stepError()?.getAttribute('role')).toBe('alert')
-    expect(stepError()?.textContent).toContain(
-      'Your recovery phone number was not saved'
+    expect(stepError()).toBeNull()
+    expect(fakeObservability.recordSimpleEvent).toHaveBeenCalledWith(
+      AppEventName.TwoFactorSetupRecoveryPhoneElevationExpired
     )
-    expect(primaryAction().disabled).toBeFalse()
   })
 
   it('leaves the message to the form when the form has one (R2.4)', () => {
@@ -254,5 +266,89 @@ describe('TwoFactorRecoveryPhoneComponent', () => {
 
     expect(save).toHaveBeenCalled()
     expect(stepError()).toBeNull()
+  })
+
+  /*
+   * The clock, rather than the registry, reaching the end of the window.
+   *
+   * These build their own fixture inside fakeAsync and call ngOnInit by hand.
+   * Rendering the step renders the real recovery phone form, whose phone field
+   * lazily imports its formatting utilities, and a dynamic import inside
+   * fakeAsync never settles - the test fails on a pending task rather than on
+   * anything it was asserting.
+   */
+  describe('when the elevation window runs out on its own', () => {
+    const TTL = RECOVERY_PHONE_ELEVATION_TTL_MILLIS
+
+    function stepWithGrantAt(grantedAt: number) {
+      fixture.destroy()
+      fixture = TestBed.createComponent(TwoFactorRecoveryPhoneComponent)
+      component = fixture.componentInstance
+      component.elevatedAt = grantedAt
+      component.ngOnInit()
+      return jasmine.createSpy('elevationExpired')
+    }
+
+    it('leaves the step eight minutes after 2FA was turned on', fakeAsync(() => {
+      const elevationExpired = stepWithGrantAt(Date.now())
+      component.elevationExpired.subscribe(elevationExpired)
+
+      tick(TTL - 1)
+      expect(elevationExpired).not.toHaveBeenCalled()
+
+      tick(1)
+      expect(elevationExpired).toHaveBeenCalledTimes(1)
+      expect(fakeObservability.recordSimpleEvent).toHaveBeenCalledWith(
+        AppEventName.TwoFactorSetupRecoveryPhoneElevationExpired
+      )
+    }))
+
+    it('counts from the grant the page reports, not from when the step opened', fakeAsync(() => {
+      // Five of the eight minutes were spent on step 1, so three are left
+      const elevationExpired = stepWithGrantAt(Date.now() - 5 * 60 * 1000)
+      component.elevationExpired.subscribe(elevationExpired)
+
+      tick(3 * 60 * 1000 - 1)
+      expect(elevationExpired).not.toHaveBeenCalled()
+
+      tick(1)
+      expect(elevationExpired).toHaveBeenCalledTimes(1)
+    }))
+
+    it('reports the expiry once when the clock and the registry agree', fakeAsync(() => {
+      const elevationExpired = stepWithGrantAt(Date.now())
+      component.elevationExpired.subscribe(elevationExpired)
+
+      component.onChallengeRequired()
+      tick(TTL)
+
+      expect(elevationExpired).toHaveBeenCalledTimes(1)
+      discardPeriodicTasks()
+    }))
+
+    it('lets a save already on the wire answer first', fakeAsync(() => {
+      const elevationExpired = stepWithGrantAt(Date.now())
+      component.elevationExpired.subscribe(elevationExpired)
+      // ngOnDestroy because the suite's afterEach calls it on whatever this
+      // field holds, and the real form owns an interval that has to die
+      component.recoveryPhoneForm = {
+        saving: true,
+        ngOnDestroy: () => undefined,
+      } as RecoveryPhoneFormComponent
+
+      tick(TTL)
+
+      expect(elevationExpired).not.toHaveBeenCalled()
+    }))
+
+    it('drops the clock when the step is gone', fakeAsync(() => {
+      const elevationExpired = stepWithGrantAt(Date.now())
+      component.elevationExpired.subscribe(elevationExpired)
+
+      component.ngOnDestroy()
+      tick(TTL)
+
+      expect(elevationExpired).not.toHaveBeenCalled()
+    }))
   })
 })

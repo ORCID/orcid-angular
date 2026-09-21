@@ -234,6 +234,51 @@ describe('Component: TwoFactorSetupComponent', () => {
       expect(findComponent(fixture, 'app-two-factor-recovery-codes')).toBeNull()
     })
 
+    it('should hand the step the moment 2FA was turned on (PD-13638)', () => {
+      const before = Date.now()
+      completeStepOne()
+      const after = Date.now()
+
+      // The step counts its eight minutes from the registry's grant, which
+      // happened when step 1's register.json answered, not from its own first
+      // render - a slow step 1 must not buy the user a longer window here.
+      const elevatedAt = boundProperty(
+        'app-two-factor-recovery-phone',
+        'elevatedAt'
+      )
+      expect(elevatedAt).toBeGreaterThanOrEqual(before)
+      expect(elevatedAt).toBeLessThanOrEqual(after)
+    })
+
+    it('should go to the 2FA panel, not the codes, when the elevation runs out (PD-13638)', () => {
+      completeStepOne()
+      ;(router.navigate as jasmine.Spy).calls.reset()
+
+      component.recoveryPhoneElevationExpired()
+      fixture.detectChanges()
+
+      expect(router.navigate).toHaveBeenCalledWith(['/account'], {
+        fragment: '2FA',
+      })
+      // 2FA is on and the codes step is skipped, which is what the ticket
+      // asks for: the flow is over, not advanced
+      expect(findComponent(fixture, 'app-two-factor-recovery-codes')).toBeNull()
+    })
+
+    it('should take that exit when the step reports it', () => {
+      completeStepOne()
+      ;(router.navigate as jasmine.Spy).calls.reset()
+
+      findComponent(
+        fixture,
+        'app-two-factor-recovery-phone'
+      ).nativeElement.dispatchEvent(new CustomEvent('elevationExpired'))
+
+      expect(router.navigate).toHaveBeenCalledWith(['/account'], {
+        fragment: '2FA',
+      })
+    })
+
     it('should advance to the recovery codes when the step completes (R2.4, R2.5)', () => {
       completeStepOne()
 

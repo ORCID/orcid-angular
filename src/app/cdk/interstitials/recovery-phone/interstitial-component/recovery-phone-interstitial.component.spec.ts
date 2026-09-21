@@ -1,10 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { ComponentFixture, TestBed } from '@angular/core/testing'
+import {
+  ComponentFixture,
+  TestBed,
+  discardPeriodicTasks,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
 
 import { RecoveryPhoneFormComponent } from 'src/app/cdk/recovery-phone-form/recovery-phone-form.component'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
+import { RECOVERY_PHONE_ELEVATION_TTL_MILLIS } from 'src/app/core/two-factor-authentication/recovery-phone-elevation'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { RecoveryPhoneSaveResponse } from 'src/app/types/two-factor.endpoint'
 
@@ -184,17 +191,75 @@ describe('RecoveryPhoneInterstitialComponent', () => {
       expect(finish).toHaveBeenCalled()
     })
 
-    it('should end the interstitial rather than challenge when the registry asks for one', () => {
+    it('should end the interstitial with its own outcome when the registry asks for a challenge', () => {
       // R6.3: there is no second challenge inside an interstitial, and this
-      // dialog cannot be dismissed, so the user must not be stranded in it
+      // dialog cannot be dismissed, so the user must not be stranded in it.
+      // PD-13638 separates this from a save failure: nothing was saved and
+      // nothing failed, the window simply closed.
       const finish = spyOn(component.finish, 'emit')
 
       component.onChallengeRequired()
 
       expect(observability.outcome).toHaveBeenCalledWith(
+        AppEventName.InterstitialElevationExpired
+      )
+      expect(observability.outcome).not.toHaveBeenCalledWith(
         AppEventName.InterstitialSaveError
       )
       expect(finish).toHaveBeenCalled()
     })
+  })
+
+  describe('when the elevation window runs out on its own', () => {
+    const TTL = RECOVERY_PHONE_ELEVATION_TTL_MILLIS
+
+    /** Rebuilt inside fakeAsync, so the clock starts under the fake one. */
+    function interstitialOnAFakeClock() {
+      fixture.destroy()
+      fixture = TestBed.createComponent(RecoveryPhoneInterstitialComponent)
+      component = fixture.componentInstance
+      fixture.detectChanges()
+      observability.outcome.calls.reset()
+    }
+
+    it('closes on its own eight minutes after it opened', fakeAsync(() => {
+      interstitialOnAFakeClock()
+      const finish = spyOn(component.finish, 'emit')
+
+      tick(TTL - 1)
+      expect(finish).not.toHaveBeenCalled()
+
+      tick(1)
+      expect(observability.outcome).toHaveBeenCalledWith(
+        AppEventName.InterstitialElevationExpired
+      )
+      expect(finish).toHaveBeenCalledTimes(1)
+      // Nothing is handed back, so the record page shows no notice (R6.4)
+      expect(component.addedRecoveryPhone).toBeUndefined()
+    }))
+
+    it('lets a save already on the wire answer first', fakeAsync(() => {
+      interstitialOnAFakeClock()
+      const finish = spyOn(component.finish, 'emit')
+      component.recoveryPhoneForm = form
+      ;(form as any).saving = true
+
+      tick(TTL)
+
+      expect(finish).not.toHaveBeenCalled()
+      expect(observability.outcome).not.toHaveBeenCalled()
+      ;(form as any).saving = false
+    }))
+
+    it('drops the clock when the interstitial is gone', fakeAsync(() => {
+      interstitialOnAFakeClock()
+      const finish = spyOn(component.finish, 'emit')
+
+      component.ngOnDestroy()
+      tick(TTL)
+
+      expect(finish).not.toHaveBeenCalled()
+      discardPeriodicTasks()
+    }))
   })
 })

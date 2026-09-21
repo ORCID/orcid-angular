@@ -28,6 +28,7 @@ export const TERMINATING_SIMPLE_EVENT_NAMES: ReadonlySet<string> = new Set([
   AppEventName.SignInOauthInvalidGrantLegacy,
   AppEventName.TwoFactorSignInGuardRedirectToMyOrcid,
   AppEventName.TwoFactorSetupFinalCompleted,
+  AppEventName.TwoFactorSetupRecoveryPhoneElevationExpired,
   AppEventName.RegisterGuardRedirectToAuthorize,
   AppEventName.RegisterPipelineError,
   AppEventName.OauthAuthorizationValidationFailed,
@@ -46,6 +47,7 @@ const INTERSTITIAL_TERMINATING_JOURNEY_EVENT_NAMES: ReadonlySet<string> =
     AppEventName.InterstitialCompleted,
     AppEventName.InterstitialDismissed,
     AppEventName.InterstitialSaveError,
+    AppEventName.InterstitialElevationExpired,
   ])
 
 const OAUTH_TERMINATING_JOURNEY_EVENT_NAMES: ReadonlySet<string> = new Set([

@@ -17,6 +17,7 @@ import { RecoveryPhoneFormComponent } from '../../../cdk/recovery-phone-form/rec
 import { ApplicationRoutes } from '../../../constants'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authentication/recovery-phone-challenge.service'
+import { recoveryPhoneElevationExpiry } from '../../../core/two-factor-authentication/recovery-phone-elevation'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import {
   AuthChallenge,
@@ -174,6 +175,11 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
       this.challengeDialog = undefined
       if (passed) {
         this.challengePassed = true
+        // The registry elevated the session when it accepted the challenge;
+        // this is the client's copy of the same clock (PD-13638)
+        recoveryPhoneElevationExpiry(Date.now())
+          .pipe(takeUntil(this.$destroy))
+          .subscribe(() => this.onElevationExpired())
       } else if (!this.challengePassed) {
         this.returnToAccountSettings()
       }
@@ -219,10 +225,32 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
     this.recoveryPhoneForm?.save()
   }
 
-  /** The elevation ran out mid form: ask again, and keep what they typed. */
+  /** The registry says the elevation has gone; the page is over. */
   onChallengeRequired(): void {
-    this.challengePassed = false
-    this.openAuthChallenge()
+    this.onElevationExpired()
+  }
+
+  /**
+   * The one exit for both triggers: the registry's refusal, and the clock
+   * reaching the same conclusion first.
+   *
+   * This page used to answer by re-opening its own challenge, which is what
+   * R10.4 described. PD-13638 replaced that with the exit Cancel already
+   * takes: back to Account settings, reporting nothing. A second challenge
+   * asked without being invited is a re-prompt, and the ticket rules those
+   * out.
+   *
+   * Nothing is reported on the way out because nothing happened. An outcome
+   * of 'failed' would show the failure notice, which is a message about a
+   * save; no save was attempted.
+   */
+  private onElevationExpired(): void {
+    if (this.recoveryPhoneForm?.saving) {
+      // A save sent inside the window may still succeed, and it reports its
+      // own outcome when it lands
+      return
+    }
+    this.returnToAccountSettings()
   }
 
   onSaved(): void {
