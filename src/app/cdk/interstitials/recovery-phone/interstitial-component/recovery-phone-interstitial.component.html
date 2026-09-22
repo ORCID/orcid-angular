@@ -12,8 +12,10 @@
 
   <mat-card-content class="authorize-content">
     <!-- app-info-panel projects into a <p>, so the two paragraphs of the
-       notice are spans given block layout rather than nested <p> elements -->
-    <app-info-panel>
+       notice are spans given block layout rather than nested <p> elements.
+       PD-5850: this frame draws the outlined question mark, not the disc the
+       panel draws by default -->
+    <app-info-panel type="help">
       <span
         class="recovery-phone-notice__use"
         i18n="@@interstitials.recoveryPhoneNoticeUse"

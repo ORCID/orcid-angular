@@ -20,6 +20,12 @@
       $background,
       'state-info-background'
     ) !important;
+
+    // PD-5850: the `help` glyph is drawn in the same state-info-dark as the
+    // border it sits inside, which is what the frame measures.
+    mat-icon {
+      color: mat.m2-get-color-from-palette($foreground, 'state-info-dark');
+    }
   }
 }
 
