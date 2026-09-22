@@ -16,8 +16,21 @@
     background: mat.m2-get-color-from-palette($primary, 700);
   }
 
+  /*
+   * PD-6042: the same red the field outline is bound to.
+   * `_form-field-theme.scss` binds every `--mat-form-field-outlined-error-*`
+   * token to state-warning-darkest (#b71c1c); this was one step lighter at
+   * state-warning-dark (#d32f2f), so a red label stood beside a red outline in
+   * a different red. The frames draw one: `pd-6042-15`, a field rejected,
+   * carries state-warning-darkest and no other warning colour.
+   *
+   * The two reds are a real distinction, not a slip to unify: `pd-6046-05`,
+   * the panel-level failure NOTICE, carries state-warning-dark and
+   * notice-warning, both #d32f2f. Field red is the darkest; notice red is one
+   * step lighter, which is why `.recovery-phone-error` below keeps it.
+   */
   .error {
-    color: map-get($foreground, 'state-warning-dark');
+    color: map-get($foreground, 'state-warning-darkest');
   }
 
   /* The link-shaped buttons take the colour a.underline would have given them */

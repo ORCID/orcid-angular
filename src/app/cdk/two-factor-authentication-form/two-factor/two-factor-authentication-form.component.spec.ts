@@ -9,6 +9,9 @@ import { WINDOW_PROVIDERS } from '../../window'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 describe('TwoFactorAuthenticationFormComponent', () => {
   let component: TwoFactorAuthenticationFormComponent
@@ -16,7 +19,15 @@ describe('TwoFactorAuthenticationFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
+      imports: [
+        ReactiveFormsModule,
+        // `[errorStateMatcher]` is an input of MatInput: without the real
+        // directives here the binding is an unknown property, and the error
+        // state the frames turn on could not be exercised at all.
+        MatFormFieldModule,
+        MatInputModule,
+        NoopAnimationsModule,
+      ],
       declarations: [TwoFactorAuthenticationFormComponent],
       providers: [WINDOW_PROVIDERS],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -258,6 +269,9 @@ describe('TwoFactorAuthenticationFormComponent', () => {
   })
 
   describe('error codes', () => {
+    // A field-level verdict is rendered in the field's own row and a send-level
+    // one in the alert row below it, so the mapping is read off whichever of
+    // the two answers. R3.4 is that exactly one of them does.
     function messageFor(errorCode: string): string | null {
       component.recoveryPhoneState = {
         codeSent: true,
@@ -265,7 +279,12 @@ describe('TwoFactorAuthenticationFormComponent', () => {
         sending: false,
         errorCode,
       }
-      return component.recoveryPhoneErrorMessage
+      const field = component.recoveryPhoneFieldErrorMessage
+      const send = component.recoveryPhoneErrorMessage
+      expect(field && send)
+        .withContext(errorCode)
+        .toBeFalsy()
+      return field || send
     }
 
     it('maps each code the endpoints answer with (R3.4)', () => {
@@ -585,6 +604,275 @@ describe('TwoFactorAuthenticationFormComponent', () => {
 
       expect(link).not.toBeNull()
       expect(getComputedStyle(link).fontStyle).toBe('normal')
+    })
+  })
+
+  /*
+   * PD-6042, the helper row. Measured off the frame exports rather than read
+   * off the screen. In `pd-6042-01` and `pd-6042-08` the authenticator field's
+   * "Helper text" frame is a single 18 px row at y=74, under an input that
+   * ends at y=66, holding "Microcopy" at x=0 w=424 and "Limit" at x=432 w=20:
+   * one row, hint on the left, counter on the right. `pd-6042-13`, `-14` and
+   * `-15` draw the recovery number code field's rejection in that SAME single
+   * row, at that same y=74 and in a field instance that is still 92 px tall -
+   * the hint is gone, the message stands where the hint stood, the counter is
+   * still on the right, and label, outline, message and counter are all red.
+   * No frame in the set adds a row for an error, and none draws an icon inside
+   * the helper row. The only frame in the whole evidence set that draws an
+   * error icon is `pd-6046-05`, a panel-level failure notice, where it is an
+   * `Icon/24px/Warning` on a banner - which is what the send-level row is.
+   *
+   * The build drew the counter alone on a right-floated line, the hint on a
+   * line below it, an empty Material subscript wrapper above both, and put a
+   * rejected code's message on a further row with an icon while leaving the
+   * label and the outline untouched.
+   *
+   * `.no-hint` and the error outline tokens are global styles (material.scss),
+   * which the app build's style list carries and this suite's does not, so
+   * what is asserted of those here is that the class and the error state are
+   * on the element. The row's own geometry comes from this component's
+   * stylesheet and is measured directly.
+   */
+  describe('the helper row against its frame', () => {
+    const helperOf = (id: string): HTMLElement =>
+      fixture.nativeElement.querySelector(`#${id}`)
+
+    function phoneCodeMode(value = '123456') {
+      component.recoveryPhoneOptionAvailable = true
+      component.showRecoveryPhoneCode()
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 30,
+        sending: false,
+      }
+      component.recoveryPhoneCodeFormControl.setValue(value)
+      fixture.detectChanges()
+    }
+
+    function answers(errorCode: string) {
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 30,
+        sending: false,
+        errorCode,
+      }
+      fixture.detectChanges()
+    }
+
+    it('puts the authenticator hint and its counter on one row', () => {
+      const row = helperOf('totp-helper')
+      expect(row).not.toBeNull()
+      const message: HTMLElement = row.querySelector('.code-helper__message')
+      const count: HTMLElement = row.querySelector('.code-helper__count')
+
+      expect(message.textContent).toContain(
+        'Enter the 6-digit code from your authentication app'
+      )
+      expect(count.textContent.trim()).toBe('0/6')
+      expect(getComputedStyle(row).display).toBe('flex')
+      // The float is what put the counter on a line of its own
+      expect(getComputedStyle(count).float).toBe('none')
+      const left = message.getBoundingClientRect()
+      const right = count.getBoundingClientRect()
+      expect(right.top).toBeLessThan(left.bottom)
+      expect(right.left).toBeGreaterThan(left.left)
+    })
+
+    it('reserves no empty subscript row above either helper', () => {
+      const authenticator: HTMLElement =
+        fixture.nativeElement.querySelector('mat-form-field')
+      expect(authenticator.classList).toContain('no-hint')
+
+      phoneCodeMode()
+      const phone: HTMLElement = element('recovery-phone-signin-code').closest(
+        'mat-form-field'
+      )
+      expect(phone.classList).toContain('no-hint')
+    })
+
+    it('replaces the authenticator hint with its error, in the same row', () => {
+      component.verificationFormControl.setValue('123')
+      component.onSubmit()
+      fixture.detectChanges()
+      const row = helperOf('totp-helper')
+
+      expect(row.textContent).not.toContain(
+        'Enter the 6-digit code from your authentication app'
+      )
+      expect(row.textContent).toContain('Invalid authentication code length')
+      expect(row.textContent).toContain('3/6')
+      expect(row.querySelector('.code-helper__count').classList).toContain(
+        'error'
+      )
+    })
+
+    it('marks the field when the registry rejects a well-formed code', () => {
+      phoneCodeMode()
+      // Six digits: required, minLength and maxLength are all satisfied, so
+      // nothing but the registry's answer can make this field wrong
+      expect(component.recoveryPhoneCodeFormControl.valid).toBeTrue()
+      expect(component.isRecoveryPhoneCodeInvalid).toBeFalse()
+
+      answers('INVALID_CODE')
+
+      expect(
+        component.recoveryPhoneCodeFormControl.hasError('invalid')
+      ).toBeTrue()
+      expect(component.isRecoveryPhoneCodeInvalid).toBeTrue()
+      expect(
+        element('recovery-phone-signin-code').getAttribute('aria-invalid')
+      ).toBe('true')
+      expect(helperOf('recovery-phone-signin-code-label').classList).toContain(
+        'error'
+      )
+    })
+
+    it('replaces the hint with the rejection, in the same row', () => {
+      phoneCodeMode()
+      answers('INVALID_CODE')
+      const row = helperOf('recovery-phone-signin-code-helper')
+
+      expect(row.textContent).toContain('Invalid recovery number code')
+      expect(row.textContent).not.toContain(
+        'Enter the 6-digit verification code sent to your device'
+      )
+      expect(row.textContent).toContain('6/6')
+      // No frame draws an icon inside the helper row
+      expect(row.querySelector('mat-icon')).toBeNull()
+      expect(row.querySelector('.code-helper__count').classList).toContain(
+        'error'
+      )
+    })
+
+    it('paints the label the red the outline is bound to', () => {
+      phoneCodeMode()
+      answers('INVALID_CODE')
+
+      // _form-field-theme.scss:58-71 binds every error outline token to
+      // state-warning-darkest, #b71c1c. A label one step lighter than the
+      // outline beside it is the mismatch this replaces.
+      expect(
+        getComputedStyle(helperOf('recovery-phone-signin-code-label')).color
+      ).toBe('rgb(183, 28, 28)')
+    })
+
+    it('paints every field label that same red', () => {
+      component.verificationFormControl.setValue('123')
+      component.onSubmit()
+      fixture.detectChanges()
+      const label: HTMLElement =
+        fixture.nativeElement.querySelector('mat-label.error')
+
+      expect(label).not.toBeNull()
+      expect(getComputedStyle(label).color).toBe('rgb(183, 28, 28)')
+    })
+
+    it('drives the outline off the same flag as the label', () => {
+      phoneCodeMode()
+      const control = component.recoveryPhoneCodeFormControl
+
+      expect(component.errorMatcher.isErrorState(control)).toBe(
+        component.isRecoveryPhoneCodeInvalid
+      )
+
+      answers('INVALID_CODE')
+
+      expect(component.errorMatcher.isErrorState(control)).toBe(
+        component.isRecoveryPhoneCodeInvalid
+      )
+      expect(component.errorMatcher.isErrorState(control)).toBeTrue()
+    })
+
+    it('takes the field-level codes out of the icon row', () => {
+      for (const code of [
+        'INVALID_CODE',
+        'CODE_EXPIRED',
+        'TOO_MANY_ATTEMPTS',
+      ]) {
+        phoneCodeMode()
+        answers(code)
+
+        expect(component.recoveryPhoneErrorMessage).withContext(code).toBeNull()
+        expect(fixture.nativeElement.querySelector('.recovery-phone-error'))
+          .withContext(code)
+          .toBeNull()
+        expect(component.recoveryPhoneFieldErrorMessage)
+          .withContext(code)
+          .not.toBeNull()
+      }
+    })
+
+    it('keeps the send-level codes in their own row, icon and all', () => {
+      for (const code of [
+        'NO_RECOVERY_PHONE',
+        'SEND_LIMIT_REACHED',
+        'SMS_SEND_FAILED',
+        'BAD_CREDENTIALS',
+      ]) {
+        phoneCodeMode()
+        answers(code)
+        const alert: HTMLElement = fixture.nativeElement.querySelector(
+          '.recovery-phone-error'
+        )
+
+        expect(alert).withContext(code).not.toBeNull()
+        expect(alert.querySelector('mat-icon')).withContext(code).not.toBeNull()
+        // A send that failed says nothing about the code in the field
+        expect(component.recoveryPhoneCodeFormControl.hasError('invalid'))
+          .withContext(code)
+          .toBeFalse()
+        expect(helperOf('recovery-phone-signin-code-helper').textContent)
+          .withContext(code)
+          .toContain('Enter the 6-digit verification code sent to your device')
+      }
+    })
+
+    /*
+     * The resend countdown pushes a whole new state object every second and
+     * spreads the old one into it, errorCode included (form-sign-in's
+     * startRecoveryPhoneCountdown). A verdict is a verdict on one code at one
+     * moment, so it is applied when it ARRIVES and not on every echo of it -
+     * otherwise a user typing a fresh code has the field marked wrong again a
+     * second later, and again, until the countdown runs out.
+     */
+    it('does not put the rejection back while the countdown ticks', () => {
+      phoneCodeMode()
+      answers('INVALID_CODE')
+      expect(component.isRecoveryPhoneCodeInvalid).toBeTrue()
+
+      component.recoveryPhoneCodeFormControl.setValue('654321')
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 29,
+        sending: false,
+        errorCode: 'INVALID_CODE',
+      }
+      fixture.detectChanges()
+
+      expect(
+        component.recoveryPhoneCodeFormControl.hasError('invalid')
+      ).toBeFalse()
+      expect(component.isRecoveryPhoneCodeInvalid).toBeFalse()
+      expect(
+        helperOf('recovery-phone-signin-code-helper').textContent
+      ).toContain('Enter the 6-digit verification code sent to your device')
+    })
+
+    it('lets the rejection go the moment the code is edited', () => {
+      phoneCodeMode()
+      answers('INVALID_CODE')
+      expect(component.isRecoveryPhoneCodeInvalid).toBeTrue()
+
+      component.recoveryPhoneCodeFormControl.setValue('123457')
+      fixture.detectChanges()
+
+      expect(
+        component.recoveryPhoneCodeFormControl.hasError('invalid')
+      ).toBeFalse()
+      expect(component.isRecoveryPhoneCodeInvalid).toBeFalse()
+      expect(
+        helperOf('recovery-phone-signin-code-helper').textContent
+      ).toContain('Enter the 6-digit verification code sent to your device')
     })
   })
 })

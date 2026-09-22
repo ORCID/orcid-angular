@@ -8,28 +8,45 @@
   margin-top: 12px;
 }
 
-.error-message {
-  float: left;
-  margin: 0;
-  [dir='rtl'] :host & {
-    float: right;
+/*
+ * D9. The field's helper row, as the "Helper text" frame in the PD-6042 set
+ * draws it: one 18 px row under the input, the message growing from the left
+ * and the counter pinned right. Measured off `pd-6042-01`, that frame sits at
+ * y=74 of a 92 px field whose input ends at y=66, with "Microcopy" at x=0
+ * w=424 and "Limit" at x=432 w=20; `pd-6042-13`, `-14` and `-15` draw the
+ * rejected state in the same 92 px, so the error replaces the message rather
+ * than being added under it.
+ *
+ * It replaces a pair of floats. `float: right` on the counter took it out of
+ * flow and onto a line of its own, which is what put the two halves of this
+ * one row on two rows in the build.
+ */
+.code-helper {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $spacing-small;
+
+  mat-hint,
+  mat-error,
+  p {
+    display: block;
+    margin: 0;
+    font-weight: normal;
+    line-height: 16px; // Figma small-print 12/16
   }
 }
 
-.error-length {
-  float: right;
-  margin: 0;
-  [dir='rtl'] :host & {
-    float: left;
-  }
+.code-helper__message {
+  flex-grow: 1;
+}
+
+.code-helper__count {
+  flex-shrink: 0;
 }
 
 .orcid-error {
   margin-top: 20px !important;
-}
-
-p.enter-code {
-  margin-top: 28px;
 }
 
 mat-label.orc-font-small-print {
@@ -75,19 +92,6 @@ mat-label.orc-font-small-print {
   &:disabled {
     cursor: default;
     opacity: 0.6;
-  }
-}
-
-.recovery-phone-code-helper {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: $spacing-small;
-
-  p {
-    margin: 0;
-    font-weight: normal;
-    line-height: 16px; // Figma small-print 12/16
   }
 }
 

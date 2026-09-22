@@ -10,11 +10,38 @@ import {
   ViewChild,
 } from '@angular/core'
 import {
+  AbstractControl,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
+import { ErrorStateMatcher } from '@angular/material/core'
 import { WINDOW } from '../../window'
+
+/**
+ * Material decides on its own when to paint a field's outline red, and its
+ * default answer - invalid and touched - is not the one this form's own
+ * getters give, which also ask for dirty. Two answers to one question is how
+ * the label came to be red beside an outline that was not. This is that one
+ * answer, handed to Material so the outline, `aria-invalid`, the label and the
+ * hint-to-error swap all turn on together.
+ */
+export class TwoFactorCodeErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: AbstractControl | UntypedFormControl | null): boolean {
+    return !!(control && control.invalid && control.dirty && control.touched)
+  }
+}
+
+/**
+ * The codes that are a verdict on the code in the field rather than on the
+ * send. They belong in the field's own helper row, where the frames draw them,
+ * and they are the ones that mark the control (R3.4, D9).
+ */
+const RECOVERY_PHONE_FIELD_ERROR_CODES = [
+  'INVALID_CODE',
+  'CODE_EXPIRED',
+  'TOO_MANY_ATTEMPTS',
+]
 
 /**
  * Which credential the form is asking for. It used to be a single boolean
@@ -84,6 +111,7 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
       // container clears it on every attempt at a code.
       this.recoveryPhoneSendCapReached = true
     }
+    this.applyRecoveryPhoneCodeRejection(this._recoveryPhoneState.errorCode)
     if (!wasSent && this._recoveryPhoneState.codeSent) {
       setTimeout(() => {
         this.inputRecoveryPhoneCode?.nativeElement.focus()
@@ -111,6 +139,9 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   inputRecoveryPhoneCode: ElementRef
 
   mode: TwoFactorFormMode = 'totp'
+
+  /** Bound on every code input, so Material reads the same flag this does. */
+  errorMatcher = new TwoFactorCodeErrorStateMatcher()
 
   twoFactorForm = new UntypedFormGroup({
     verificationCode: new UntypedFormControl(''),
@@ -216,29 +247,52 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
    */
   private recoveryPhoneSendCapReached = false
 
+  /** The last verdict this form acted on, so it acts on each one once. */
+  private recoveryPhoneAppliedErrorCode?: string
+
   get recoveryPhoneSending(): boolean {
     return !!this.recoveryPhoneState?.sending
   }
 
   /**
-   * One message per error code the endpoints answer with, so the form maps
-   * codes and never renders text the backend wrote (R3.4).
+   * What the registry decided about the code that was typed, for the field's
+   * own helper row. Gated on the control's error rather than on the code
+   * alone: the verdict stops being true the moment the code is edited, and
+   * that is exactly when Angular drops the error.
+   *
+   * One message per error code, so the form maps codes and never renders text
+   * the backend wrote (R3.4).
+   */
+  get recoveryPhoneFieldErrorMessage(): string | null {
+    if (!this.recoveryPhoneCodeFormControl.hasError('invalid')) {
+      return null
+    }
+    switch (this.recoveryPhoneState?.errorCode) {
+      case 'INVALID_CODE':
+        return $localize`:@@ngOrcid.signin.2fa.badRecoveryNumberCode:Invalid recovery number code`
+      case 'CODE_EXPIRED':
+      case 'TOO_MANY_ATTEMPTS':
+        return $localize`:@@account.verificationCodeExpired:That code is no longer valid. Send a new code.`
+      default:
+        return null
+    }
+  }
+
+  /**
+   * What went wrong with the send, or with the account, for the alert row
+   * below the field. Nothing here is a verdict on what is in the field, so
+   * nothing here marks it (R3.4, D9).
    */
   get recoveryPhoneErrorMessage(): string | null {
     const errorCode = this.recoveryPhoneState?.errorCode
-    if (!errorCode) {
+    if (!errorCode || RECOVERY_PHONE_FIELD_ERROR_CODES.includes(errorCode)) {
       return null
     }
     switch (errorCode) {
-      case 'INVALID_CODE':
-        return $localize`:@@ngOrcid.signin.2fa.badRecoveryNumberCode:Invalid recovery number code`
       case 'NO_RECOVERY_PHONE':
         return $localize`:@@ngOrcid.signin.2fa.noRecoveryNumber:This account has no recovery phone number`
       case 'BAD_CREDENTIALS':
         return $localize`:@@ngOrcid.signin.invalidSignInDetails:Invalid sign in details`
-      case 'CODE_EXPIRED':
-      case 'TOO_MANY_ATTEMPTS':
-        return $localize`:@@account.verificationCodeExpired:That code is no longer valid. Send a new code.`
       case 'SEND_LIMIT_REACHED':
         return $localize`:@@ngOrcid.signin.2fa.recoveryNumberSendLimitReached:Too many codes have been sent to your recovery phone number today. Please try again tomorrow, or use your authentication app or a recovery code.`
       case 'SMS_SEND_FAILED':
@@ -376,6 +430,35 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
 
   navigateTo(val) {
     ;(this.window as any).outOfRouterNavigation(val)
+  }
+
+  /**
+   * A well-formed six-digit code that the registry rejects still satisfies
+   * required, minLength and maxLength, so nothing in the form knows it is
+   * wrong until the verdict is put on the control itself. That one error is
+   * what reddens the label, reddens the outline, sets `aria-invalid` and turns
+   * the hint into the message - one flag, four answers.
+   *
+   * Angular drops a `setErrors` error on the next value change, which is the
+   * moment the verdict stops being about what is in the field.
+   */
+  private applyRecoveryPhoneCodeRejection(errorCode?: string) {
+    // Applied when the verdict ARRIVES, not on every echo of it. The resend
+    // countdown pushes a fresh state object every second and spreads the old
+    // one into it, errorCode and all; re-applying on each of those would mark
+    // the field wrong again a second after the user started typing the next
+    // code, and again, until the countdown ran out.
+    if (errorCode === this.recoveryPhoneAppliedErrorCode) {
+      return
+    }
+    this.recoveryPhoneAppliedErrorCode = errorCode
+    if (!errorCode || !RECOVERY_PHONE_FIELD_ERROR_CODES.includes(errorCode)) {
+      return
+    }
+    const control = this.recoveryPhoneCodeFormControl
+    control.markAsDirty()
+    control.markAsTouched()
+    control.setErrors({ invalid: true })
   }
 
   /**
