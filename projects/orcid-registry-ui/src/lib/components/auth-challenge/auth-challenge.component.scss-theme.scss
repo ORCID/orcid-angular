@@ -2,8 +2,12 @@
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin auth-challenge-theme($theme) {
+  // PD-6043: a hint is text-dark-mid, which is what the global form-field theme
+  // already gives every other hint in the registry and what every frame in this
+  // set binds (#00000099). This component was painting its own hints
+  // text-dark-high, one step darker, on every challenge state.
   mat-hint {
-    color: $text-dark-high;
+    color: $text-dark-mid;
   }
   .error {
     color: $state-warning-darkest !important;

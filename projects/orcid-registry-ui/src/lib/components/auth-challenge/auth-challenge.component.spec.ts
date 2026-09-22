@@ -666,6 +666,14 @@ describe('AuthChallengeComponent', () => {
       expect(form.get('twoFactorRecoveryPhoneCode')?.value).toBeNull()
     }))
 
+    it('draws its hints in text-dark-mid, as the frames bind', () => {
+      const hint: HTMLElement =
+        fixture.nativeElement.querySelector('mat-hint')
+
+      expect(hint).toBeTruthy()
+      expect(getComputedStyle(hint).color).toBe('rgba(0, 0, 0, 0.6)')
+    })
+
     it('still reaches the authentication app, one step further on', fakeAsync(() => {
       enterPhoneMode()
       tick()
