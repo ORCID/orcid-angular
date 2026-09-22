@@ -69,6 +69,36 @@ describe('TopBarComponent', () => {
   })
 
   /*
+   * PD-6043 and PD-5850, the colour half of the same two links. The frames draw
+   * every word of both notices in black: measured over the whole export, the
+   * only dark ink in either is #000000 (1041 px and 1064 px), and neither frame
+   * carries a single pixel of the build's #447405 or of link blue #085c77. The
+   * saturated colours in them - #d32f2f and #56b833 - are the notice's own
+   * border and glyph, not its copy.
+   *
+   * So the link takes `black-url`, not a bare removal of `green-url`: without a
+   * class the global `a.underline` rule would paint it #085c77, which no frame
+   * draws either. The three other `green-url` links in this template are left
+   * alone deliberately - nothing in the evidence photographs them.
+   */
+  it('draws both notice links in the black the frames draw', () => {
+    component.twoFactorDisabledByRecoveryPhone = true
+    component.newAddedRecoveryPhone = '***********3456'
+    fixture.detectChanges()
+
+    const links: HTMLAnchorElement[] = Array.from(
+      fixture.nativeElement.querySelectorAll('a[fragment="2FA"]')
+    )
+
+    expect(links.length).toBe(2)
+    links.forEach((link) => {
+      expect(link.classList).toContain('black-url')
+      expect(link.classList).not.toContain('green-url')
+      expect(getComputedStyle(link).color).toBe('rgb(0, 0, 0)')
+    })
+  })
+
+  /*
    * PD-5850. The frame draws this notice as three pixel-separated rows inside
    * one 568 px column - title, sentence, link - and the build drew two: the
    * anchor ran on inside the sentence's own paragraph and wrapped onto a second
