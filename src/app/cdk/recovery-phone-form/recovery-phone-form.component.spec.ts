@@ -127,6 +127,58 @@ describe('RecoveryPhoneFormComponent', () => {
     expect(component.phoneNumberControl?.disabled).toBeTrue()
   })
 
+  /*
+   * PD-6044. `pd-6044-02` draws the send control washed out while the resend
+   * countdown runs, and `pd-6044-01`/`pd-6044-07` draw it at full strength.
+   * The control was already disabled -- the probe carries
+   * `mat-mdc-button-disabled` in all three -- but the component's own
+   * `.send-code__button` rule ties Material's
+   * `.mat-mdc-unelevated-button.mat-mdc-button-disabled` on specificity and
+   * wins on source order, so every state came out the same teal.
+   *
+   * Measured off the frame with Pillow: the container is #b5ced6, which is
+   * brand-secondary-dark #085c77 at 30% over white, and the label stays #fff.
+   */
+  describe('the send control while the resend countdown runs', () => {
+    function sendButton(): HTMLButtonElement {
+      return fixture.nativeElement.querySelector('#cy-send-verification-code')
+    }
+
+    /** Chrome reports a mixed colour as `color(srgb ...)`, a plain one as `rgb()`. */
+    function rgb255(value: string): string {
+      const srgb = value.match(/^color\(srgb ([\d.]+) ([\d.]+) ([\d.]+)/)
+      if (!srgb) {
+        return value
+      }
+      const [r, g, b] = srgb.slice(1).map((n) => Math.round(Number(n) * 255))
+      return `rgb(${r}, ${g}, ${b})`
+    }
+
+    it('stops drawing itself as though it were still pressable', () => {
+      fixture.detectChanges()
+      const enabled = rgb255(getComputedStyle(sendButton()).backgroundColor)
+      expect(enabled).toBe('rgb(8, 92, 119)')
+
+      sendCodeSuccessfully()
+      fixture.detectChanges()
+
+      expect(sendButton().disabled).toBeTrue()
+      expect(rgb255(getComputedStyle(sendButton()).backgroundColor)).not.toBe(
+        enabled
+      )
+    })
+
+    it('draws the washed container and white label the frame measures', () => {
+      fixture.detectChanges()
+      sendCodeSuccessfully()
+      fixture.detectChanges()
+
+      const style = getComputedStyle(sendButton())
+      expect(rgb255(style.backgroundColor)).toBe('rgb(181, 206, 214)')
+      expect(rgb255(style.color)).toBe('rgb(255, 255, 255)')
+    })
+  })
+
   it('counts the resend buffer down and frees the number again', fakeAsync(() => {
     fixture.detectChanges()
     sendCodeSuccessfully(2)

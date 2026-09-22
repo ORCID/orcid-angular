@@ -4,9 +4,31 @@
 @mixin recovery-phone-form-theme($theme) {
   $primary: map-get($theme, primary);
 
+  /*
+   * PD-6044. Driven through Material's own tokens rather than a bare
+   * background-color: `.send-code__button[_ngcontent-...]` and
+   * `.mat-mdc-unelevated-button:not(:disabled)` are both (0,2,0), so a plain
+   * declaration only ever won on source order -- and it won in every state,
+   * which left the control at full strength while the resend countdown had it
+   * disabled. With the tokens set, Material switches the states itself and
+   * the two rules no longer compete.
+   *
+   * `pd-6044-02` measures the disabled container at #b5ced6, which is
+   * brand-secondary-dark at 30% over white; the label stays white, as it is
+   * in the enabled `pd-6044-01` and `pd-6044-07`.
+   */
   .send-code__button {
-    background-color: var(--orcid-color-brand-secondary-dark, #085c77);
-    color: #ffffff;
+    --mat-button-filled-container-color: var(
+      --orcid-color-brand-secondary-dark,
+      #085c77
+    );
+    --mat-button-filled-label-text-color: #ffffff;
+    --mat-button-filled-disabled-container-color: color-mix(
+      in srgb,
+      var(--orcid-color-brand-secondary-dark, #085c77) 30%,
+      #ffffff
+    );
+    --mat-button-filled-disabled-label-text-color: #ffffff;
   }
 
   .recovery-phone-error,
