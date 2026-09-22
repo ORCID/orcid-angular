@@ -79,66 +79,92 @@
         Enter the 6-digit code from your authentication app
       </ng-container>
     </p>
-    <p>
-      <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1">
-        Don't have your device?
-      </ng-container>
-      <!--
-        R3.1 respells this option only when the flag is on, so the flag-off
-        wording - and the translations it already has - is left alone. The
-        flag-on control is a button rather than an anchor with no href,
-        because an anchor with no href is not reachable by keyboard.
-      -->
-      <a
-        *ngIf="!recoveryPhoneOptionAvailable"
-        class="underline orc-font-body-small"
-        (click)="showRecoveryCode()"
-        i18n="@@ngOrcid.signin.2fa.noDevice2"
-        >Enter a recovery code
-      </a>
-      <button
-        *ngIf="recoveryPhoneOptionAvailable"
-        type="button"
-        id="cy-use-a-recovery-code"
-        class="link-button orc-font-body-small"
-        (click)="showRecoveryCode()"
-        i18n="@@account.useARecoveryCode"
-      >
-        Use a recovery code instead
-      </button>
-    </p>
-    <p *ngIf="!recoveryPhoneOptionAvailable">
-      <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
-        Don't have your device or recovery code?
-      </ng-container>
-      <a
-        class="underline orc-font-body-small"
-        (click)="
-          navigateTo(
-            'https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication'
-          )
-        "
-        rel="noopener noreferrer"
-        target="_blank"
-        i18n="@@shared.orcidHelpCenter"
-        >ORCID Help Center
-      </a>
-    </p>
-    <p *ngIf="recoveryPhoneOptionAvailable">
-      <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecoveryCodes">
-        Don't have your device or your recovery codes?
-      </ng-container>
-      <button
-        type="button"
-        id="cy-send-recovery-phone-code"
-        class="link-button orc-font-body-small"
-        [disabled]="recoveryPhoneSending"
-        (click)="showRecoveryPhoneCode()"
-        i18n="@@ngOrcid.signin.2fa.sendCodeToRecoveryNumber"
-      >
-        Send a code to your recovery number and disable 2FA
-      </button>
-    </p>
+    <!--
+      D8. The frames draw these escape rows centred, one row per sentence:
+      measured off `pd-6042-01`, the four ink runs sit on 289.5-290.0 px of a
+      452 px content column running 64..515, whose centre is 289.5. The build
+      started every one of them at 64 and ran the question into its link. The
+      same block on the challenge screen (PD-6043) is already built this way, so
+      this is the shape the house already has, `text-center` and all - not a new
+      one.
+
+      Only the flag-on rows are rebuilt. The rows below are what a registry
+      without the recovery-phone flag has always drawn, no frame covers them,
+      and R3.1's promise is that the form renders exactly what it always has
+      when the flag is off. Both branches reuse the ids already on this screen,
+      so the catalogue neither gains nor loses a unit.
+    -->
+    <ng-container *ngIf="recoveryPhoneOptionAvailable">
+      <div class="two-factor-escape text-center">
+        <p
+          class="two-factor-escape__question"
+          i18n="@@ngOrcid.signin.2fa.noDevice1"
+        >
+          Don't have your device?
+        </p>
+        <!--
+          A button rather than an anchor with no href, because an anchor with no
+          href is not reachable by keyboard.
+        -->
+        <button
+          type="button"
+          id="cy-use-a-recovery-code"
+          class="link-button orc-font-body-small"
+          (click)="showRecoveryCode()"
+          i18n="@@account.useARecoveryCode"
+        >
+          Use a recovery code instead
+        </button>
+      </div>
+      <div class="two-factor-escape text-center">
+        <p
+          class="two-factor-escape__question"
+          i18n="@@ngOrcid.signin.2fa.noDeviceOrRecoveryCodes"
+        >
+          Don't have your device or your recovery codes?
+        </p>
+        <button
+          type="button"
+          id="cy-send-recovery-phone-code"
+          class="link-button orc-font-body-small"
+          [disabled]="recoveryPhoneSending"
+          (click)="showRecoveryPhoneCode()"
+          i18n="@@ngOrcid.signin.2fa.sendCodeToRecoveryNumber"
+        >
+          Send a code to your recovery number and disable 2FA
+        </button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!recoveryPhoneOptionAvailable">
+      <p>
+        <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1">
+          Don't have your device?
+        </ng-container>
+        <a
+          class="underline orc-font-body-small"
+          (click)="showRecoveryCode()"
+          i18n="@@ngOrcid.signin.2fa.noDevice2"
+          >Enter a recovery code
+        </a>
+      </p>
+      <p>
+        <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
+          Don't have your device or recovery code?
+        </ng-container>
+        <a
+          class="underline orc-font-body-small"
+          (click)="
+            navigateTo(
+              'https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication'
+            )
+          "
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@shared.orcidHelpCenter"
+          >ORCID Help Center
+        </a>
+      </p>
+    </ng-container>
   </ng-container>
   <div class="input-container">
     <mat-label
@@ -290,10 +316,17 @@
       >
       <span class="orc-font-body-small">{{ recoveryPhoneErrorMessage }}</span>
     </div>
-    <p>
-      <ng-container i18n="@@account.dontHaveYourRecoveryCodes">
+    <!--
+      D8 again, on the mode `pd-6042-02` and the three error frames beside it
+      draw: same centred column, same one row per sentence.
+    -->
+    <div class="two-factor-escape text-center">
+      <p
+        class="two-factor-escape__question"
+        i18n="@@account.dontHaveYourRecoveryCodes"
+      >
         Don't have your recovery codes?
-      </ng-container>
+      </p>
       <button
         type="button"
         class="link-button orc-font-body-small"
@@ -302,7 +335,7 @@
       >
         Use your authentication app instead
       </button>
-    </p>
+    </div>
     <!--
       D6: the frames keep this question above the resend line once a code is out
       (988:11771 on the sign-in board, and the three error frames beside it). It
@@ -312,39 +345,43 @@
       is the one already on this screen at the block above, with the same source
       text, so the catalogue gains nothing.
     -->
-    <p
+    <div
+      class="two-factor-escape text-center"
       *ngIf="recoveryPhoneResendIsWorthOffering"
-      class="recovery-phone-resend__heading"
-      i18n="@@ngOrcid.signin.2fa.noDeviceOrRecoveryCodes"
     >
-      Don't have your device or your recovery codes?
-    </p>
-    <p *ngIf="recoveryPhoneResendIsWorthOffering" class="recovery-phone-resend">
-      <ng-container i18n="@@account.didntGetTheCode">
-        Didn't get the code?
-      </ng-container>
-      <ng-container *ngIf="recoveryPhoneResendSeconds > 0">
-        <ng-container i18n="@@account.youCanResendIn"
-          >You can resend in</ng-container
-        >&nbsp;<strong
-          >{{ recoveryPhoneResendSeconds }}&nbsp;<ng-container
-            i18n="@@account.seconds"
-            >seconds</ng-container
-          ></strong
-        >
-      </ng-container>
-      <button
-        *ngIf="recoveryPhoneResendSeconds === 0"
-        type="button"
-        id="cy-resend-recovery-phone-code"
-        class="link-button orc-font-body-small"
-        [disabled]="recoveryPhoneSending"
-        (click)="resendRecoveryPhoneCode()"
-        i18n="@@account.resendCode"
+      <p
+        class="two-factor-escape__question recovery-phone-resend__heading"
+        i18n="@@ngOrcid.signin.2fa.noDeviceOrRecoveryCodes"
       >
-        Resend code
-      </button>
-    </p>
+        Don't have your device or your recovery codes?
+      </p>
+      <p class="recovery-phone-resend">
+        <ng-container i18n="@@account.didntGetTheCode">
+          Didn't get the code?
+        </ng-container>
+        <ng-container *ngIf="recoveryPhoneResendSeconds > 0">
+          <ng-container i18n="@@account.youCanResendIn"
+            >You can resend in</ng-container
+          >&nbsp;<strong
+            >{{ recoveryPhoneResendSeconds }}&nbsp;<ng-container
+              i18n="@@account.seconds"
+              >seconds</ng-container
+            ></strong
+          >
+        </ng-container>
+        <button
+          *ngIf="recoveryPhoneResendSeconds === 0"
+          type="button"
+          id="cy-resend-recovery-phone-code"
+          class="link-button orc-font-body-small"
+          [disabled]="recoveryPhoneSending"
+          (click)="resendRecoveryPhoneCode()"
+          i18n="@@account.resendCode"
+        >
+          Resend code
+        </button>
+      </p>
+    </div>
   </ng-container>
 
   <button

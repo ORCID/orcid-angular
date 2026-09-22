@@ -423,4 +423,107 @@ describe('TwoFactorAuthenticationFormComponent', () => {
       expect(emitted.recoveryPhoneCode).toBeUndefined()
     })
   })
+
+  /*
+   * PD-6042, the design round. Measured off the frame exports rather than read
+   * off the screen: in `pd-6042-01` the four escape rows are ink-centred on
+   * 289.5-290.0 px of a content column that runs 64..515 (centre 289.5), and
+   * the build drew every one of them starting at the column's left edge with
+   * the question and its link run together on one line. `pd-6042-02` and the
+   * three error frames beside it say the same of the recovery-number mode.
+   *
+   * The centring itself is Tailwind's `text-center`, the same utility the
+   * challenge screen's identical block uses. tailwind.css is in the app build's
+   * style list but not in the unit suite's (angular.json, ng-orcid test
+   * options), so what is asserted here is that the utility is on the block -
+   * the rows' geometry is asserted directly, because that comes from this
+   * component's own stylesheet.
+   */
+  describe('the escape rows against their frame', () => {
+    function flagOn() {
+      component.recoveryPhoneOptionAvailable = true
+      fixture.detectChanges()
+    }
+
+    function phoneMode() {
+      component.recoveryPhoneOptionAvailable = true
+      component.showRecoveryPhoneCode()
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 30,
+        sending: false,
+      }
+      fixture.detectChanges()
+    }
+
+    const blockOf = (element: HTMLElement): HTMLElement =>
+      element.closest('.two-factor-escape') as HTMLElement
+
+    it('centres every escape block the frames draw centred', () => {
+      flagOn()
+      const recoveryCode = element('cy-use-a-recovery-code')
+      const recoveryPhone = element('cy-send-recovery-phone-code')
+
+      expect(blockOf(recoveryCode)).toBeTruthy()
+      expect(blockOf(recoveryCode).classList).toContain('text-center')
+      expect(blockOf(recoveryPhone)).toBeTruthy()
+      expect(blockOf(recoveryPhone).classList).toContain('text-center')
+    })
+
+    it('gives the recovery code link its own row under the question', () => {
+      flagOn()
+      const link = element('cy-use-a-recovery-code')
+      const question = blockOf(link).querySelector('p')
+
+      expect(question.textContent).toContain("Don't have your device?")
+      expect(question.contains(link)).toBe(false)
+      expect(link.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+        question.getBoundingClientRect().bottom
+      )
+    })
+
+    it('gives the recovery number link its own row under its question', () => {
+      flagOn()
+      const link = element('cy-send-recovery-phone-code')
+      const question = blockOf(link).querySelector('p')
+
+      expect(question.textContent).toContain(
+        "Don't have your device or your recovery codes?"
+      )
+      expect(question.contains(link)).toBe(false)
+      expect(link.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+        question.getBoundingClientRect().bottom
+      )
+    })
+
+    it('centres the recovery number mode rows too', () => {
+      phoneMode()
+      const back: HTMLElement = fixture.nativeElement.querySelector(
+        '.two-factor-escape .link-button'
+      )
+      const resend: HTMLElement = fixture.nativeElement.querySelector(
+        '.recovery-phone-resend'
+      )
+
+      expect(back).toBeTruthy()
+      expect(back.textContent).toContain('Use your authentication app instead')
+      expect(blockOf(back).classList).toContain('text-center')
+      expect(blockOf(resend)).toBeTruthy()
+      expect(blockOf(resend).classList).toContain('text-center')
+    })
+
+    it('gives the authentication app link its own row', () => {
+      phoneMode()
+      const back: HTMLElement = fixture.nativeElement.querySelector(
+        '.two-factor-escape .link-button'
+      )
+      const question = blockOf(back).querySelector('p')
+
+      expect(question.textContent).toContain("Don't have your recovery codes?")
+      expect(question.contains(back)).toBe(false)
+      expect(back.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+        question.getBoundingClientRect().bottom
+      )
+    })
+  })
 })

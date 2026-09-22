@@ -108,17 +108,29 @@ mat-label.orc-font-small-print {
   }
 }
 
-.recovery-phone-resend__heading {
-  margin-top: $spacing-base;
-  margin-bottom: 0;
+/*
+ * D8. An escape row pair - a question and the way out under it - as the frames
+ * draw it. Measured off `pd-6042-01`: the four ink runs sit on 289.5-290.0 px
+ * of a 452 px column running 64..515 whose centre is 289.5, one sentence per
+ * row, and the two pairs are 16 px apart (the frame's text boxes run 0..42 and
+ * 58..100). `spacing-base` is that 16, top and bottom, and it collapses between
+ * two of these blocks to one gap rather than two.
+ *
+ * The centring itself is `text-center` in the template, the utility the
+ * challenge screen's identical block already uses; it is not restated here.
+ */
+.two-factor-escape {
+  margin: $spacing-base 0;
 }
 
-// The question above already carries the gap, so the line under it sits tight
-// against it the way the frames draw the pair.
-.recovery-phone-resend__heading + .recovery-phone-resend {
-  margin-top: 0;
+// Tight against the row below it: the pair is one unit and the block carries
+// the gap.
+.two-factor-escape__question {
+  margin: 0;
+  line-height: 20px; // Figma body-S 14/20
 }
 
 .recovery-phone-resend {
-  margin-top: $spacing-base;
+  margin: 0;
+  line-height: 20px; // Figma body-S 14/20
 }
