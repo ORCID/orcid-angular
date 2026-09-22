@@ -526,4 +526,65 @@ describe('TwoFactorAuthenticationFormComponent', () => {
       )
     })
   })
+
+  /*
+   * PD-6042, the italic run. The five recovery-number-code frames -
+   * `pd-6042-02`, `pd-6042-09` and the three error frames - draw
+   * "Didn't get the code? You can resend in 27 seconds" in italic, with the
+   * number bold inside it, and every other run on those screens upright. The
+   * build drew the whole row upright: `p.recovery-phone-resend` reports
+   * font-style normal in the DOM probe of all five states. It is the only
+   * italic mismatch in the PD-6042 and PD-6046 frames.
+   */
+  describe('the resend countdown against its frame', () => {
+    function counting() {
+      component.recoveryPhoneOptionAvailable = true
+      component.showRecoveryPhoneCode()
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 27,
+        sending: false,
+      }
+      fixture.detectChanges()
+    }
+
+    it('sets the countdown row in italic', () => {
+      counting()
+      const resend: HTMLElement = fixture.nativeElement.querySelector(
+        '.recovery-phone-resend'
+      )
+
+      expect(resend.textContent).toContain('You can resend in')
+      expect(getComputedStyle(resend).fontStyle).toBe('italic')
+    })
+
+    it('leaves the question above it upright, as the frames draw it', () => {
+      counting()
+      const heading: HTMLElement = fixture.nativeElement.querySelector(
+        '.recovery-phone-resend__heading'
+      )
+
+      expect(getComputedStyle(heading).fontStyle).toBe('normal')
+    })
+
+    /*
+     * The countdown's zero state is not in any frame. Left to inherit, the
+     * resend link came out slanted - the one italic link anywhere in this
+     * design - so it is held upright like every link the frames do draw.
+     */
+    it('keeps the resend link upright once the countdown runs out', () => {
+      component.recoveryPhoneOptionAvailable = true
+      component.showRecoveryPhoneCode()
+      component.recoveryPhoneState = {
+        codeSent: true,
+        resendSeconds: 0,
+        sending: false,
+      }
+      fixture.detectChanges()
+      const link = element('cy-resend-recovery-phone-code')
+
+      expect(link).not.toBeNull()
+      expect(getComputedStyle(link).fontStyle).toBe('normal')
+    })
+  })
 })

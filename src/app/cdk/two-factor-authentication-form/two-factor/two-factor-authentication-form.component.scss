@@ -130,7 +130,24 @@ mat-label.orc-font-small-print {
   line-height: 20px; // Figma body-S 14/20
 }
 
+/*
+ * Italic, the way the five recovery-number-code frames draw this line and only
+ * this line: `pd-6042-02`, `pd-6042-09` and the three error frames beside them
+ * all slant "Didn't get the code? You can resend in 27 seconds" and leave every
+ * other run on the screen upright. The <strong> around the number inherits it
+ * and comes out bold-italic, which is what the frames draw too.
+ *
+ * No frame draws the state this row reaches at zero, where the countdown is
+ * replaced by a resend link, so the link is left looking like every other link
+ * the frames DO draw on this screen: upright. It inherits the slant otherwise -
+ * a button here takes the surrounding font rather than the UA's.
+ */
 .recovery-phone-resend {
   margin: 0;
   line-height: 20px; // Figma body-S 14/20
+  font-style: italic;
+
+  .link-button {
+    font-style: normal;
+  }
 }
