@@ -389,7 +389,7 @@ describe('AuthChallengeComponent', () => {
       )
       expect(back).not.toBeNull()
       expect(back.nativeElement.textContent).toContain(
-        'Use your authentication app instead'
+        'Use a recovery code instead'
       )
 
       back.nativeElement.click()
@@ -639,7 +639,34 @@ describe('AuthChallengeComponent', () => {
       }))
     })
 
-    it('goes back to the authentication app', fakeAsync(() => {
+    /*
+     * D7, settled 2026-09-22 the frames' way: the way out of phone mode is a
+     * recovery code, not the authentication app. The app is still reachable -
+     * the recovery-code screen's own escape goes there - but it is one step
+     * further on, and that is the whole behavioural consequence of the change.
+     */
+    it('goes to the recovery code, which is what the frames offer', fakeAsync(() => {
+      enterPhoneMode()
+      tick()
+
+      const back = fixture.debugElement.query(
+        By.css('[data-testid="recovery-phone-back-toggle"]')
+      )
+      expect(back.nativeElement.textContent).toContain(
+        'Use a recovery code instead'
+      )
+
+      back.nativeElement.click()
+      fixture.detectChanges()
+      tick()
+
+      expect(component.showRecoveryPhoneCode).toBeFalse()
+      expect(component.showRecoveryCode).toBeTrue()
+      expect(fixture.debugElement.query(By.css(PHONE_CODE_INPUT))).toBeFalsy()
+      expect(form.get('twoFactorRecoveryPhoneCode')?.value).toBeNull()
+    }))
+
+    it('still reaches the authentication app, one step further on', fakeAsync(() => {
       enterPhoneMode()
       tick()
 
@@ -649,11 +676,14 @@ describe('AuthChallengeComponent', () => {
       fixture.detectChanges()
       tick()
 
-      expect(component.showRecoveryPhoneCode).toBeFalse()
+      fixture.debugElement
+        .query(By.css('[data-testid="recovery-toggle"]'))
+        .nativeElement.click()
+      fixture.detectChanges()
+      tick()
+
+      expect(component.showRecoveryCode).toBeFalse()
       expect(fixture.debugElement.query(By.css('#twoFactorCode'))).toBeTruthy()
-      expect(fixture.debugElement.query(By.css(PHONE_CODE_INPUT))).toBeFalsy()
-      expect(form.get('twoFactorRecoveryPhoneCode')?.value).toBeNull()
-      expect(form.get('twoFactorCode')?.hasError('required')).toBeTrue()
     }))
   })
 })

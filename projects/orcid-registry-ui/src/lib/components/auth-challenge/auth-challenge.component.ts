@@ -289,6 +289,28 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.recoveryPhone?.sendCode()
   }
 
+  /**
+   * Leave the phone code for a recovery code, which is what the frames offer as
+   * the way out of this mode (1160:12657 and the three challenge error frames).
+   *
+   * The route back to the authentication app is still there, one step further
+   * on: the recovery-code screen's own escape is "Use your authentication app
+   * instead". What must not happen is this row disappearing, which is what the
+   * comment in the template's cap branch is about.
+   */
+  useRecoveryCode(event: Event) {
+    event.preventDefault()
+    this.showRecoveryPhoneCode = false
+    this.showRecoveryCode = true
+    this.parentForm?.get(this.recoveryPhoneControlName)?.setValue(null)
+    this.parentForm?.get(this.recoveryControlName)?.markAsUntouched()
+    this.updateTwoFactorValidators()
+
+    setTimeout(() => {
+      this.twoFactorRecoveryCodeInput?.nativeElement.focus()
+    })
+  }
+
   /** Back out of the phone code and use the authentication app after all. */
   useAuthenticationApp(event: Event) {
     event.preventDefault()

@@ -374,17 +374,24 @@
       the order the sign-in screen already uses for the same state. Being first
       it needs no top margin; the row below it carries one.
     -->
-    <p i18n="@@account.dontHaveYourRecoveryCodes" class="m-0 leading-6">
-      Don't have your recovery codes?
+    <!--
+      D7, settled 2026-09-22 the frames' way. This row used to carry the
+      recovery-code screen's own question and link, on a screen the user reached
+      without ever mentioning recovery codes. Both ids below already exist in
+      this template for the authenticator mode, so reusing them costs
+      translators nothing.
+    -->
+    <p i18n="@@ngOrcid.signin.2fa.noDevice1" class="m-0 leading-6">
+      Don't have your device?
     </p>
     <button
       type="button"
       class="link-button"
       data-testid="recovery-phone-back-toggle"
-      (click)="useAuthenticationApp($event)"
-      i18n="@@account.useYourAuthenticationAppInstead"
+      (click)="useRecoveryCode($event)"
+      i18n="@@account.useARecoveryCode"
     >
-      Use your authentication app instead
+      Use a recovery code instead
     </button>
     <!--
       "Didn't get the code? Resend" is the wrong offer once the record's daily
