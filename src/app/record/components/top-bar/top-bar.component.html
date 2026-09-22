@@ -145,17 +145,32 @@
       >Two-factor authentication (2FA) has been disabled</ng-container
     >
     <ng-container content>
+      <!--
+        PD-6043: the frame links two words, not the sentence. Measured off the
+        export rather than read off the metadata - a design tool styles a link
+        as a range inside a text node, so `get_metadata` shows one node and only
+        the pixels say where the underline starts and stops. It is a continuous
+        111 px run, which is "account settings" and nothing else.
+
+        The anchor stays a sibling rather than moving inside the message:
+        `scripts/normalize-xlf.prebuild.ts` cannot round-trip a <source> that
+        holds mixed content -- it says so in its own comment, and handles it
+        only for the print-view units it generates itself. A message with an
+        embedded <a> comes back out of it with both placeholders moved to the
+        end, which no translator could place. So the sentence carries up to the
+        link and the link carries its own two words.
+      -->
       <ng-container i18n="@@topBar.youHaveSignedInUsingYourRecoveryPhoneNumber"
         >You have signed in using your recovery phone number. Your recovery
         number has been deleted and two-factor authentication has been disabled
-        for this ORCID account.</ng-container
+        for this ORCID account. You can re-enable 2FA from your</ng-container
       >
       <a
         class="underline green-url"
         routerLink="/account"
         fragment="2FA"
-        i18n="@@topBar.youCanReEnable2FAFromYourAccountSettings"
-        >You can re-enable 2FA from your account settings</a
+        i18n="@@topBar.accountSettingsMidSentence"
+        >account settings</a
       >
     </ng-container>
   </app-warning-message>

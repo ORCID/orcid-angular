@@ -43,4 +43,27 @@ describe('TopBarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
+
+  /*
+   * PD-6043. The frame links two words and the notice linked the whole closing
+   * sentence. Measured off the export: the underline is a continuous 111 px
+   * run, which is "account settings" and no more. `get_metadata` cannot answer
+   * this - a design tool styles a link as a range inside one text node - so the
+   * assertion pins the shape the pixels showed.
+   */
+  it('links only the account settings words in the 2FA disabled notice', () => {
+    component.twoFactorDisabledByRecoveryPhone = true
+    fixture.detectChanges()
+
+    const notice: HTMLElement = fixture.nativeElement.querySelector(
+      'app-warning-message'
+    )
+    const link: HTMLAnchorElement = notice.querySelector('a[fragment="2FA"]')
+
+    expect(link).toBeTruthy()
+    expect(link.textContent.trim()).toBe('account settings')
+    expect(notice.textContent.replace(/\s+/g, ' ')).toContain(
+      'You can re-enable 2FA from your account settings'
+    )
+  })
 })

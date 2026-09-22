@@ -283,108 +283,15 @@
           <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.dontHaveYourRecoveryCodes" datatype="html" resname="account.dontHaveYourRecoveryCodes">
-        <source>Don't have your recovery codes?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">377,379</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">451,453</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
-          <context context-type="linenumber">322,324</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">294,296</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.useYourAuthenticationAppInstead" datatype="html" resname="account.useYourAuthenticationAppInstead">
-        <source>Use your authentication app instead</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">386,388</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">460,462</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
-          <context context-type="linenumber">329,331</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">302,304</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.dontHaveYourDeviceOrYourRecoveryCodes" datatype="html" resname="account.dontHaveYourDeviceOrYourRecoveryCodes">
-        <source>Don't have your device or your recovery codes?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">403,405</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">474,476</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.didntGetTheCode" datatype="html" resname="account.didntGetTheCode">
-        <source>Didn't get the code?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">406,408</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">323,325</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.youCanResendIn" datatype="html" resname="account.youCanResendIn">
-        <source>You can resend in</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">412</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">328</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.seconds" datatype="html" resname="account.seconds">
-        <source>seconds</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">416</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">109</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">332</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="account.resendCode" datatype="html" resname="account.resendCode">
-        <source>Resend code</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">429,431</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">344,346</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDevice1" datatype="html" resname="ngOrcid.signin.2fa.noDevice1">
         <source>Don't have your device?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">436,438</context>
+          <context context-type="linenumber">384,386</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">443,445</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -399,7 +306,11 @@
         <source>Use a recovery code instead</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">445,447</context>
+          <context context-type="linenumber">393,395</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">452,454</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -410,18 +321,107 @@
           <context context-type="linenumber">106,108</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="account.dontHaveYourDeviceOrYourRecoveryCodes" datatype="html" resname="account.dontHaveYourDeviceOrYourRecoveryCodes">
+        <source>Don't have your device or your recovery codes?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">410,412</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">481,483</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.didntGetTheCode" datatype="html" resname="account.didntGetTheCode">
+        <source>Didn't get the code?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">413,415</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">323,325</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.youCanResendIn" datatype="html" resname="account.youCanResendIn">
+        <source>You can resend in</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">419</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">328</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.seconds" datatype="html" resname="account.seconds">
+        <source>seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">423</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">332</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.resendCode" datatype="html" resname="account.resendCode">
+        <source>Resend code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">436,438</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">344,346</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.dontHaveYourRecoveryCodes" datatype="html" resname="account.dontHaveYourRecoveryCodes">
+        <source>Don't have your recovery codes?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">458,460</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
+          <context context-type="linenumber">322,324</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">294,296</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.useYourAuthenticationAppInstead" datatype="html" resname="account.useYourAuthenticationAppInstead">
+        <source>Use your authentication app instead</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">467,469</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
+          <context context-type="linenumber">329,331</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">302,304</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="account.sendCodeToRecoveryPhoneNumber" datatype="html" resname="account.sendCodeToRecoveryPhoneNumber">
         <source>Send a code to your recovery phone number and disable 2FA</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">485,487</context>
+          <context context-type="linenumber">492,494</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDeviceOrRecovery" datatype="html" resname="ngOrcid.signin.2fa.noDeviceOrRecovery">
         <source>Don't have your device or recovery code?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">491,493</context>
+          <context context-type="linenumber">498,500</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -436,7 +436,7 @@
         <source>ORCID help centre</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">500,502</context>
+          <context context-type="linenumber">507,509</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -451,14 +451,14 @@
         <source>Verify my account and continue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">517,519</context>
+          <context context-type="linenumber">524,526</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5" datatype="html" resname="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5">
         <source>Cancel account verification</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">529,531</context>
+          <context context-type="linenumber">536,538</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.deleteAlternateAccounts" datatype="html" resname="account.deleteAlternateAccounts">
@@ -12924,7 +12924,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">202,204</context>
+          <context context-type="linenumber">217,219</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -13239,11 +13239,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">274,276</context>
+          <context context-type="linenumber">289,291</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">325,327</context>
+          <context context-type="linenumber">340,342</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -13344,7 +13344,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">233,235</context>
+          <context context-type="linenumber">248,250</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.orcidHasANumber" datatype="html" resname="topBar.orcidHasANumber">
@@ -13441,7 +13441,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">207,209</context>
+          <context context-type="linenumber">222,224</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.whoCanSeeYourNames" datatype="html" resname="topBar.whoCanSeeYourNames">
@@ -13717,7 +13717,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.asYourBackupEmailAddress" datatype="html" resname="topBar.asYourBackupEmailAddress">
@@ -13763,49 +13763,49 @@
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.youHaveSignedInUsingYourRecoveryPhoneNumber" datatype="html" resname="topBar.youHaveSignedInUsingYourRecoveryPhoneNumber">
-        <source>You have signed in using your recovery phone number. Your recovery number has been deleted and two-factor authentication has been disabled for this ORCID account.</source>
+        <source>You have signed in using your recovery phone number. Your recovery number has been deleted and two-factor authentication has been disabled for this ORCID account. You can re-enable 2FA from your</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">149,151</context>
+          <context context-type="linenumber">164,166</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="topBar.youCanReEnable2FAFromYourAccountSettings" datatype="html" resname="topBar.youCanReEnable2FAFromYourAccountSettings">
-        <source>You can re-enable 2FA from your account settings</source>
+      <trans-unit id="topBar.accountSettingsMidSentence" datatype="html" resname="topBar.accountSettingsMidSentence">
+        <source>account settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">173</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.recoveryPhoneNumberAdded" datatype="html" resname="topBar.recoveryPhoneNumberAdded">
         <source>Recovery phone number added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.asAnAccountRecoveryOption" datatype="html" resname="topBar.asAnAccountRecoveryOption">
         <source>as an account recovery option.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">173</context>
+          <context context-type="linenumber">188</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.manageYourRecoveryOptionsInAccountSettings" datatype="html" resname="topBar.manageYourRecoveryOptionsInAccountSettings">
         <source>Manage your recovery options in Account settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">195</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.name" datatype="html" resname="topBar.name">
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">212,214</context>
+          <context context-type="linenumber">227,229</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">224,226</context>
+          <context context-type="linenumber">239,241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsTitle" datatype="html" resname="topBar.permissionNotificationsTitle">
