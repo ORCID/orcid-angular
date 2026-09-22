@@ -667,8 +667,7 @@ describe('AuthChallengeComponent', () => {
     }))
 
     it('draws its hints in text-dark-mid, as the frames bind', () => {
-      const hint: HTMLElement =
-        fixture.nativeElement.querySelector('mat-hint')
+      const hint: HTMLElement = fixture.nativeElement.querySelector('mat-hint')
 
       expect(hint).toBeTruthy()
       expect(getComputedStyle(hint).color).toBe('rgba(0, 0, 0, 0.6)')
@@ -693,5 +692,87 @@ describe('AuthChallengeComponent', () => {
       expect(component.showRecoveryCode).toBeFalse()
       expect(fixture.debugElement.query(By.css('#twoFactorCode'))).toBeTruthy()
     }))
+
+    /*
+     * The italic run, the same mismatch PD-6042 fixed on the sign-in screen in
+     * `84e5f4ac0`. Frames `pd-6043-02`, `-07`, `-08` and `-09` all draw
+     * "Didn't get the code? You can resend in XX seconds" slanted, with the
+     * number bold inside it, and leave every other run on the screen upright -
+     * measured off the exports, the countdown band straightens at a shear of
+     * +0.25 (14 degrees) where the question directly above it sits at -0.07.
+     * The build drew the whole row upright: both paragraphs report font-style
+     * normal in the DOM probe of all four states.
+     *
+     * The frames set that sentence on ONE line; this template spells it over
+     * two paragraphs, because the countdown half is aria-hidden - the number
+     * changes every second and the live region says the sentence once instead.
+     * Joining them would drag the question out of the accessibility tree with
+     * it, so the two stay apart and both take the slant.
+     */
+    describe('the resend countdown against its frame', () => {
+      function counting(): void {
+        enterPhoneMode()
+        recoveryPhone.codeSent = true
+        recoveryPhone.resendSeconds = 27
+        fixture.detectChanges()
+      }
+
+      function paragraphSaying(fragment: string): HTMLElement {
+        const found = fixture.debugElement
+          .queryAll(By.css('p'))
+          .find((p) => p.nativeElement.textContent.includes(fragment))
+        expect(found).withContext(fragment).toBeTruthy()
+        return found!.nativeElement
+      }
+
+      it('sets both halves of the countdown line in italic', fakeAsync(() => {
+        counting()
+        tick()
+
+        expect(
+          getComputedStyle(paragraphSaying("Didn't get the code?")).fontStyle
+        ).toBe('italic')
+        expect(
+          getComputedStyle(paragraphSaying('You can resend in')).fontStyle
+        ).toBe('italic')
+      }))
+
+      it('leaves the question above it upright, as the frames draw it', fakeAsync(() => {
+        counting()
+        tick()
+
+        expect(
+          getComputedStyle(
+            paragraphSaying("Don't have your device or your recovery codes?")
+          ).fontStyle
+        ).toBe('normal')
+      }))
+
+      /*
+       * The countdown's zero state is not in any frame. The resend link that
+       * replaces the countdown is a sibling of the slanted paragraphs rather
+       * than a child, so it inherits nothing today - but it is the one run a
+       * later re-nesting would silently slant, and no link the frames draw on
+       * this screen is italic. Same for the way out of phone mode above it.
+       */
+      it('keeps the resend link upright once the countdown runs out', fakeAsync(() => {
+        enterPhoneMode()
+        tick()
+        recoveryPhone.codeSent = true
+        recoveryPhone.resendSeconds = 0
+        fixture.detectChanges()
+
+        const resend = fixture.debugElement.query(
+          By.css('#cy-challenge-resend-recovery-phone-code')
+        )
+        expect(resend).toBeTruthy()
+        expect(getComputedStyle(resend.nativeElement).fontStyle).toBe('normal')
+
+        const back = fixture.debugElement.query(
+          By.css('[data-testid="recovery-phone-back-toggle"]')
+        )
+        expect(getComputedStyle(back.nativeElement).fontStyle).toBe('normal')
+      }))
+    })
   })
 })

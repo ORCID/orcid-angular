@@ -120,6 +120,32 @@ mat-icon {
   }
 }
 
+/*
+ * Italic, the way the four recovery-phone-mode frames draw this sentence and
+ * only this sentence: `pd-6043-02` and the three challenge error frames beside
+ * it all slant "Didn't get the code? You can resend in XX seconds" and leave
+ * every other run on the screen upright. Measured off the exports, that band
+ * straightens at a shear of +0.25 (14 degrees) where the question directly
+ * above it, "Don't have your device or your recovery codes?", sits at -0.07.
+ * The <strong> around the number inherits the slant and comes out bold-italic,
+ * which is what the frames draw too. Same mismatch, same treatment as the
+ * sign-in screen's `.recovery-phone-resend` in `84e5f4ac0`.
+ *
+ * Two elements rather than one because the frames' single line is spelt here
+ * as a question plus an aria-hidden countdown: the number changes every second
+ * and the live region reads the sentence once instead, so joining them would
+ * drag the question out of the accessibility tree along with it.
+ *
+ * No `.link-button` carve-out is needed here, unlike the sign-in screen. The
+ * resend link that replaces the countdown at zero is the @else arm of the
+ * block, a SIBLING of these paragraphs rather than a child, so it inherits
+ * nothing and stays upright like every link the frames do draw. The spec pins
+ * that rather than this stylesheet, so a later re-nesting is caught.
+ */
+.recovery-phone-resend-line {
+  font-style: italic;
+}
+
 mat-progress-bar {
   margin-top: -64px;
   margin-left: -64px;

@@ -410,11 +410,14 @@
     >
       Don't have your device or your recovery codes?
     </p>
-    <p i18n="@@account.didntGetTheCode" class="m-0 leading-6">
+    <p
+      i18n="@@account.didntGetTheCode"
+      class="m-0 leading-6 recovery-phone-resend-line"
+    >
       Didn't get the code?
     </p>
     @if (recoveryPhone?.resendSeconds) {
-    <p class="m-0 leading-6" aria-hidden="true">
+    <p class="m-0 leading-6 recovery-phone-resend-line" aria-hidden="true">
       <ng-container i18n="@@account.youCanResendIn"
         >You can resend in</ng-container
       >&nbsp;<strong
