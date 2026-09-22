@@ -200,17 +200,22 @@
       Disable two-factor authentication
     </h4>
     }
-    @if (recoveryPhoneTogglz && !loadingTogglz) {
-    <p class="two-factor-panel__copy" i18n="@@account.disable2FAWarningBackup">
-      You can disable two-factor authentication at any time. Turning 2FA off
-      will reset your 2FA backup options.
-    </p>
-    } @else {
+    <!--
+      One sentence, not two. The frame's disable paragraph
+      (I904:11559;5677:17140, the same node in every ON state) closes on "any
+      account recovery options you have set up", which is what
+      `account.disable2FAWarning` has always said and what all sixteen shipped
+      locales already translate. The flag-on twin
+      `account.disable2FAWarningBackup` said "your 2FA backup options": it was
+      born on this branch, it has never been pushed, and no locale file carries
+      it - so with the flag on, every non-English reader saw English. Retiring
+      it costs nothing and rewriting its source would have cost every
+      translation of the id that stays.
+    -->
     <p class="two-factor-panel__copy" i18n="@@account.disable2FAWarning">
       You can disable two-factor authentication at any time. Turning 2FA off
       will reset any account recovery options you have set up.
     </p>
-    }
     @if (recoveryPhoneTogglz && !loadingTogglz) {
     <a
       class="two-factor-panel__link two-factor-panel__link--disable-info"

@@ -1798,7 +1798,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">221,223</context>
+          <context context-type="linenumber">226,228</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
@@ -1930,15 +1930,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">243,245</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="account.disable2FAWarningBackup" datatype="html" resname="account.disable2FAWarningBackup">
-        <source>You can disable two-factor authentication at any time. Turning 2FA off will reset your 2FA backup options.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">204,207</context>
+          <context context-type="linenumber">248,250</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1946,7 +1938,7 @@
         <source>You can disable two-factor authentication at any time. Turning 2FA off will reset any account recovery options you have set up.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">209,212</context>
+          <context context-type="linenumber">215,218</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1958,7 +1950,7 @@
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">232,234</context>
+          <context context-type="linenumber">237,239</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -14367,7 +14359,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">217,219</context>
+          <context context-type="linenumber">230,232</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -14719,11 +14711,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">289,291</context>
+          <context context-type="linenumber">302,304</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">340,342</context>
+          <context context-type="linenumber">353,355</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -14835,7 +14827,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">248,250</context>
+          <context context-type="linenumber">261,263</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -14943,7 +14935,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">222,224</context>
+          <context context-type="linenumber">235,237</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -15343,7 +15335,7 @@
         <source>Manage your recovery options in Account settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">195</context>
+          <context context-type="linenumber">209</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -15351,11 +15343,11 @@
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">227,229</context>
+          <context context-type="linenumber">240,242</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">239,241</context>
+          <context context-type="linenumber">252,254</context>
         </context-group>
         <target>RL</target>
       </trans-unit>

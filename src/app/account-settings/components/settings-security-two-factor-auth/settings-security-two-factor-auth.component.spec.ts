@@ -337,4 +337,45 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
       expect(heading.textContent.trim()).toBe('Enable two-factor authentication')
     })
   })
+
+  /*
+   * PD-6046, the third design round. The frame's disable paragraph
+   * (I904:11559;5677:17140, the same node in all five ON states) closes on
+   * "any account recovery options you have set up". The build had a second
+   * sentence behind the recovery-phone flag - "your 2FA backup options" - so
+   * the paragraph the frame draws was the one a user could never see once the
+   * feature was on. One sentence now, in one message, whatever the flag says.
+   */
+  describe('the disable warning against its frame', () => {
+    const frameSentence =
+      'You can disable two-factor authentication at any time. ' +
+      'Turning 2FA off will reset any account recovery options you have set up.'
+
+    const disableWarning = (): HTMLElement =>
+      Array.from(
+        fixture.nativeElement.querySelectorAll('p.two-factor-panel__copy')
+      ).find((paragraph: HTMLElement) =>
+        paragraph.textContent.includes('You can disable')
+      ) as HTMLElement
+
+    it('states the frame sentence with the recovery phone flag on', () => {
+      build(true)
+      const warning = disableWarning()
+
+      expect(warning).toBeTruthy()
+      expect(warning.textContent.replace(/\s+/g, ' ').trim()).toBe(
+        frameSentence
+      )
+    })
+
+    it('states the same sentence with the flag off', () => {
+      build(false)
+      const warning = disableWarning()
+
+      expect(warning).toBeTruthy()
+      expect(warning.textContent.replace(/\s+/g, ' ').trim()).toBe(
+        frameSentence
+      )
+    })
+  })
 })
