@@ -50,6 +50,13 @@ app-alert-message {
   font-weight: 500;
   line-height: 20px; // Figma body-S 14/20
 
+  // PD-5635: `color="primary"` resolves to the palette's 500 (#2e7f9f), and
+  // this was the only primary action in the feature left on it -- the frame
+  // paints #085c77 over 17 070 px of `pd-6042-10`, and every sibling button
+  // reaches brand-secondary-dark through a rule of its own.
+  background: var(--orcid-color-brand-secondary-dark, #085c77) !important;
+  color: #fff !important;
+
   // Material buttons ship no focus ring here
   &:focus-visible {
     box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
