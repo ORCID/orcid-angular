@@ -17,9 +17,14 @@
       'link-darkest': 'state-info-darkest',
       'link-dark': 'state-info-dark',
     ),
+    // PD-6042: state-warning-lightest is notice-warning-background at 25%,
+    // which composites to #fffafb on white. The frames paint the token itself
+    // - pd-6042-10's notice reads #ffebee at all 44 interior samples, and its
+    // variables bind notice-warning-background to exactly that - so this takes
+    // the solid value, which is what the top-bar warning already uses.
     'alert-warning': (
       'border': 'state-warning-dark',
-      'background': 'state-warning-lightest',
+      'background': 'state-warning-background',
       'link-darkest': 'state-warning-darkest',
       'link-dark': 'state-warning-dark',
     ),

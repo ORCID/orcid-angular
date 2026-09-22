@@ -42,9 +42,19 @@ describe('AlertMessageComponent', () => {
     expect(style.backgroundColor).toBe('rgb(249, 254, 246)')
   })
 
+  /*
+   * PD-6042. The background was state-warning-lightest, which is the same
+   * colour at 25% and composites to #fffafb on white. The frame behind
+   * `pd-6042-10` paints notice-warning-background #ffebee at full opacity -
+   * 44 of 44 interior samples, and the token it binds for it is an exact
+   * match - so the notice now paints the solid token. pd-6042-04 and
+   * pd-6043-10 paint the same #ffebee, and the top-bar warning already used
+   * the solid value; this brings the panel notice onto it too.
+   */
   it('draws a warning alert in the design system notice-warning colours', () => {
     const style = getComputedStyle(containerOf('warning'))
 
     expect(style.borderTopColor).toBe('rgb(211, 47, 47)')
+    expect(style.backgroundColor).toBe('rgb(255, 235, 238)')
   })
 })

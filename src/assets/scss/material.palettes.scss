@@ -157,8 +157,10 @@ $state-warning-dark: #d32f2f;
 $state-warning-lightest: rgba(255, 235, 238, 0.25);
 $state-warning-darkest: #b71c1c;
 // The design system's own notice-warning-background, solid. The -lightest above
-// is the same colour at 25% and is what a notice inside a panel is drawn on;
-// this one is for the full-width banner, which the frames paint solid.
+// is the same colour at 25%. PD-6042 measured the panel notice too - the frame
+// behind `pd-6042-10` reads #ffebee at all 44 interior samples, as do
+// pd-6042-04 and pd-6043-10 - so both the banner and the panel notice now take
+// this value and nothing live is left on the 25% tint.
 $state-warning-background: #ffebee;
 
 // state-success zeplin colors. The design system has carried these as
