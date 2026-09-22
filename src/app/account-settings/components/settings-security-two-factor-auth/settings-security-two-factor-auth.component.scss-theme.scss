@@ -25,23 +25,26 @@
     background: $brand-secondary-dark !important;
   }
 
+  // PD-5635: the halo was real and the fix took the wrong side of it. The
+  // frame paints this button state-warning-dark #d32f2f over 9 486 px of its
+  // own export; darkest #b71c1c is the colour of an error message. Border and
+  // background still have to agree, so both move, not one.
   .two-factor-panel__disable-button {
-    background-color: $state-warning-darkest !important;
-    // The component stylesheet borders this button in state-warning-dark, one
-    // shade lighter than the background the theme paints it - a 1px halo of
-    // the wrong red that the design comparison found and no eye had.
-    border-color: $state-warning-darkest !important;
+    background-color: $state-warning-dark !important;
+    border-color: $state-warning-dark !important;
     color: white !important;
   }
 
-  // The design draws every rule in the panel in ui-background. The component
-  // stylesheet reached for a raw grey and for a library CSS variable that the
-  // application does not define, so both rules rendered lighter than the frame.
+  // PD-5635: the rules inside the panel are ui-background-light. Measured off
+  // the frame rather than read off the header: every rule in the body of
+  // `pd-6046-03` is a single #eeeeee row (y 148, 220, 321, 393, 465), and the
+  // one #bdbdbd row is the panel header's own bottom edge, which this component
+  // does not draw.
   .two-factor-panel__section {
-    border-bottom-color: $ui-background;
+    border-bottom-color: $ui-background-light;
   }
   .two-factor-panel__requirement {
-    border-top-color: $ui-background;
+    border-top-color: $ui-background-light;
   }
 }
 

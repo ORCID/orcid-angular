@@ -33,6 +33,14 @@
   </app-alert-message>
   } @if (!twoFactorInfo?.enabled) {
   <div class="two-factor-panel">
+    <!--
+      PD-5635: the frame opens this panel with a heading above the copy, the
+      same words as the button below it. The id is the button's, because the
+      source text is identical and reusing it costs translators nothing.
+    -->
+    <h4 class="two-factor-panel__heading" i18n="@@account.enableTwoFactorAuth">
+      Enable two-factor authentication
+    </h4>
     <p class="two-factor-panel__copy" i18n="@@account.addExtraSecurity">
       Add extra security to your ORCID account by enabling two-factor
       authentication (2FA).

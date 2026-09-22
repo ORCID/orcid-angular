@@ -295,4 +295,46 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
       expect(dialogRef.close).toHaveBeenCalledWith(true)
     })
   })
+  /*
+   * PD-5635, the second design round. Three values measured off the frame
+   * exports rather than read off the panel: the disable button is
+   * state-warning-dark over 9 486 px of `pd-6046-03`, every rule in the body of
+   * that frame is a single #eeeeee row, and the off state opens with a heading
+   * the panel did not have.
+   */
+  describe('the panel against its design frame', () => {
+    it('paints the disable button state-warning-dark, border and all', () => {
+      build(true)
+      const button: HTMLElement = fixture.nativeElement.querySelector(
+        '.two-factor-panel__disable-button'
+      )
+      const style = getComputedStyle(button)
+
+      expect(style.backgroundColor).toBe('rgb(211, 47, 47)')
+      expect(style.borderTopColor).toBe('rgb(211, 47, 47)')
+    })
+
+    it('rules the panel body in ui-background-light', () => {
+      build(true)
+      const section: HTMLElement = fixture.nativeElement.querySelector(
+        '.two-factor-panel__section'
+      )
+
+      expect(getComputedStyle(section).borderBottomColor).toBe(
+        'rgb(238, 238, 238)'
+      )
+    })
+
+    it('opens the off state with the heading the frame draws', () => {
+      build(true)
+      component.twoFactorInfo = { enabled: false } as any
+      fixture.detectChanges()
+      const heading: HTMLElement = fixture.nativeElement.querySelector(
+        '.two-factor-panel__heading'
+      )
+
+      expect(heading).toBeTruthy()
+      expect(heading.textContent.trim()).toBe('Enable two-factor authentication')
+    })
+  })
 })

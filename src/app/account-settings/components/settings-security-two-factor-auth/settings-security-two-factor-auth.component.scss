@@ -21,10 +21,15 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
-.two-factor-panel__section h4 {
+.two-factor-panel__section h4,
+.two-factor-panel__heading {
   margin: 0;
   font-size: 16px;
   line-height: 24px;
+}
+
+.two-factor-panel__heading {
+  margin-bottom: var(--orcid-space-s, 8px);
 }
 
 .two-factor-panel__section p {
@@ -57,7 +62,7 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  border-top: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  border-top: 1px solid var(--orcid-color-border-subtle, #eeeeee);
   padding-top: 16px;
 }
 
@@ -91,7 +96,10 @@
 }
 
 .two-factor-panel__requirement-icon--unmet {
-  color: var(--orcid-color-border-subtle, #bdbdbd);
+  // PD-5635: a marker, not a rule. border-subtle is the design system's
+  // ui-background-light and is now too pale to read as an icon; this one wants
+  // ui-background, which is what its own fallback already said.
+  color: var(--orcid-color-ui-background, #bdbdbd);
 }
 
 /* The row holding the number and its add/manage link */
