@@ -187,14 +187,27 @@
       <ng-container i18n="@@topBar.asAnAccountRecoveryOption"
         >as an account recovery option.</ng-container
       >
-      <a
-        class="underline green-url"
-        routerLink="/account"
-        fragment="2FA"
-        i18n="@@topBar.manageYourRecoveryOptionsInAccountSettings"
-        >Manage your recovery options in Account settings</a
-      >
     </ng-container>
+    <!--
+      PD-5850: the frame draws three pixel-separated rows in one 568px column -
+      title, sentence, link - and this link is the third. The sentence before it
+      is grammatically complete, so the link is a call to action and not a
+      continuation, and it goes in the `link` slot rather than in `content`.
+
+      Contrast the 2FA disabled notice above (D13), where the sentence runs INTO
+      its link and the two are one line by design. Same component, two shapes,
+      and the slot is which one this is.
+
+      Nothing about the message changes: same text, same id, same unit.
+    -->
+    <a
+      link
+      class="underline green-url"
+      routerLink="/account"
+      fragment="2FA"
+      i18n="@@topBar.manageYourRecoveryOptionsInAccountSettings"
+      >Manage your recovery options in Account settings</a
+    >
   </app-warning-message>
 
   <section

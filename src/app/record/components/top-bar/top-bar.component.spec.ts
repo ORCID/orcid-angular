@@ -10,6 +10,7 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
+import { WarningMessageComponent } from '../../../cdk/warning-message/warning-message/warning-message.component'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
@@ -20,7 +21,7 @@ describe('TopBarComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
-      declarations: [TopBarComponent],
+      declarations: [TopBarComponent, WarningMessageComponent],
       providers: [
         WINDOW_PROVIDERS,
         PlatformInfoService,
@@ -65,5 +66,59 @@ describe('TopBarComponent', () => {
     expect(notice.textContent.replace(/\s+/g, ' ')).toContain(
       'You can re-enable 2FA from your account settings'
     )
+  })
+
+  /*
+   * PD-5850. The frame draws this notice as three pixel-separated rows inside
+   * one 568 px column - title, sentence, link - and the build drew two: the
+   * anchor ran on inside the sentence's own paragraph and wrapped onto a second
+   * line. Three assertions, one per thing the frame states and the build did
+   * not.
+   *
+   * The first is the one the comparison reads. `block_text` in the DOM probe is
+   * the browser's innerText, so an anchor projected into the same <p> as the
+   * sentence is part of that paragraph's string whatever it is styled as -
+   * display: block included. Only leaving the paragraph changes the string, and
+   * that is what closes the frame's sentence node against the page's.
+   */
+  describe('the recovery phone added notice against its frame', () => {
+    const notice = () => {
+      component.newAddedRecoveryPhone = '***********3456'
+      fixture.detectChanges()
+      return fixture.nativeElement.querySelector(
+        'app-warning-message'
+      ) as HTMLElement
+    }
+
+    it('keeps the link out of the sentence paragraph', () => {
+      const banner = notice()
+      const paragraph: HTMLParagraphElement = banner.querySelector('p')
+      const link: HTMLAnchorElement = banner.querySelector('a[fragment="2FA"]')
+
+      expect(paragraph).toBeTruthy()
+      expect(link).toBeTruthy()
+      expect(paragraph.contains(link)).toBe(false)
+      expect(paragraph.innerText || paragraph.textContent).not.toContain(
+        'Manage your recovery options'
+      )
+    })
+
+    it('draws the link as its own row', () => {
+      const banner = notice()
+      const link: HTMLAnchorElement = banner.querySelector('a[fragment="2FA"]')
+
+      expect(getComputedStyle(link).display).toBe('block')
+    })
+
+    it('sets the link a spacing-S row below the sentence', () => {
+      const banner = notice()
+      const paragraph: HTMLParagraphElement = banner.querySelector('p')
+      const link: HTMLAnchorElement = banner.querySelector('a[fragment="2FA"]')
+
+      expect(getComputedStyle(link).marginTop).toBe('8px')
+      expect(link.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+        paragraph.getBoundingClientRect().bottom
+      )
+    })
   })
 })
