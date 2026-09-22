@@ -3,6 +3,17 @@
 
 @mixin mat-divider-theme-overwrites($theme) {
   $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+
+  // PD-5635: the "OR" rule on the sign-in card and the rules inside the 2FA
+  // panel. Material draws them in black at 12%; the frames draw
+  // ui-background-light.
+  .mat-divider {
+    --mat-divider-color: #{mat.m2-get-color-from-palette(
+        $background,
+        'ui-background-light'
+      )};
+  }
 
   .mat-divider.orcid-divider {
     border-top-color: mat.m2-get-color-from-palette($accent);

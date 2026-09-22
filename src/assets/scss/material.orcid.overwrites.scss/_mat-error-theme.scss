@@ -1,9 +1,12 @@
 @use '@angular/material' as mat;
 
 @mixin mat-error-theme-overwrites($theme) {
-  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
 
   mat-error {
-    color: mat.m2-get-color-from-palette($warn, 700) !important;
+    // PD-5635: the warn palette's 700 is #d32f2f, which the design system uses
+    // for a destructive button. The frames draw field errors one step darker,
+    // in state-warning-darkest.
+    color: mat.m2-get-color-from-palette($foreground, 'state-warning-darkest') !important;
   }
 }

@@ -16,4 +16,14 @@
       border: solid 1px mat.m2-get-color-from-palette($foreground, dividers);
     }
   }
+
+  // PD-5635: the frames draw the card that holds a form -- the sign-in card,
+  // the challenge panel -- with a ui-background outline. Material's default is
+  // black at 12%, a grey no token names.
+  .mat-mdc-card {
+    --mat-card-outlined-outline-color: #{mat.m2-get-color-from-palette(
+        $background,
+        'ui-background'
+      )};
+  }
 }
