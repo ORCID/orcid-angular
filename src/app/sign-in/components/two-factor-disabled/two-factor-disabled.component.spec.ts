@@ -60,6 +60,43 @@ describe('TwoFactorDisabledComponent', () => {
     expect(document.activeElement).toBe(heading)
   })
 
+  /*
+   * PD-6042. The heading is focused in ngAfterViewInit so the panel swap is
+   * announced. Browsers propagate :focus-visible to a programmatically focused
+   * element when the last interaction was the keyboard -- which is exactly how
+   * this screen is reached, by typing a code and pressing Enter -- so the ring
+   * was drawn in the state `pd-6042-10` captures, and that frame draws no box.
+   * :focus-visible is the house convention, but every other one of its sites
+   * is a control a user can tab to; this one is out of the tab order.
+   *
+   * The pseudo-class cannot be forced in a headless run, so what is asserted
+   * is that no rule offers the heading a focus ring at all.
+   */
+  it('offers its heading no focus ring, which the frame does not draw', () => {
+    fixture.detectChanges()
+
+    const rings: string[] = []
+    for (const sheet of Array.from(document.styleSheets)) {
+      let rules: CSSRuleList
+      try {
+        rules = sheet.cssRules
+      } catch {
+        continue
+      }
+      for (const rule of Array.from(rules)) {
+        const text = rule.cssText || ''
+        if (
+          text.includes('two-factor-disabled__title') &&
+          text.includes('focus-visible')
+        ) {
+          rings.push(text)
+        }
+      }
+    }
+
+    expect(rings).toEqual([])
+  })
+
   it('continues on its own after ten seconds (R4.3)', fakeAsync(() => {
     fixture.detectChanges()
 
