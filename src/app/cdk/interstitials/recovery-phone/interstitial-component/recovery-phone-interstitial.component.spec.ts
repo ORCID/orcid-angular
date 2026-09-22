@@ -111,6 +111,21 @@ describe('RecoveryPhoneInterstitialComponent', () => {
       expect(deny.nativeElement.tagName).toBe('BUTTON')
     })
 
+    /*
+     * PD-5850. The label was wrapped in a literal <i>, which the frame does not
+     * draw: the slant is the user-agent default for that element, so nothing in
+     * a stylesheet undoes it.
+     */
+    it('should not be italic, which the frame does not draw', () => {
+      const deny = denyButton()
+
+      expect(deny.querySelector('i')).toBeNull()
+      expect(getComputedStyle(deny).fontStyle).toBe('normal')
+      expect(deny.textContent.trim()).toBe(
+        'Continue without adding a recovery number'
+      )
+    })
+
     it('should be disabled while a save is in flight, so keyboard cannot reach it', () => {
       expect(denyButton().disabled).toBeFalse()
 

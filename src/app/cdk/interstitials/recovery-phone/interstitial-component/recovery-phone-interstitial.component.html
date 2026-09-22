@@ -78,8 +78,11 @@
         [disabled]="saving"
         (click)="declineRecoveryPhone()"
       >
-        <i i18n="@@interstitials.continueWithoutRecoveryNumber"
-          >Continue without adding a recovery number</i
+        <!-- A span, not an <i>: the frame draws this upright, and the slant was
+           the user-agent default for that element (PD-5850). The marker hugs
+           the text so the extracted source keeps no surrounding whitespace -->
+        <span i18n="@@interstitials.continueWithoutRecoveryNumber"
+          >Continue without adding a recovery number</span
         >
       </button>
     </div>
