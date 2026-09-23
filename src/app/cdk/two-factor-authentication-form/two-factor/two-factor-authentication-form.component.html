@@ -273,11 +273,7 @@
           appTrim
           autocomplete="one-time-code"
           aria-labelledby="recovery-phone-signin-code-label"
-          [attr.aria-describedby]="
-            recoveryPhoneErrorMessage
-              ? 'recovery-phone-signin-code-helper recovery-phone-signin-code-error'
-              : 'recovery-phone-signin-code-helper'
-          "
+          aria-describedby="recovery-phone-signin-code-helper"
           [attr.aria-invalid]="isRecoveryPhoneCodeInvalid ? 'true' : null"
           [errorStateMatcher]="errorMatcher"
           id="recovery-phone-signin-code"
