@@ -1,12 +1,17 @@
 import {
   ComponentFixture,
+  discardPeriodicTasks,
   fakeAsync,
+  flush,
   TestBed,
   tick,
 } from '@angular/core/testing'
 
 import { ResetPasswordComponent } from './reset-password.component'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { MatDialog } from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
@@ -134,11 +139,6 @@ describe('ResetPasswordComponent', () => {
       const recovery = TestBed.inject(PasswordRecoveryService)
       spyOn(recovery, 'resetPasswordEmail').and.returnValue(of(reused as any))
       const redirect = spyOn(component, 'successRedirect')
-      const group = component.form.get('passwordGroup')
-      const revalidate = spyOn(
-        group,
-        'updateValueAndValidity'
-      ).and.callThrough()
 
       component.save()
       fixture.detectChanges()
@@ -146,9 +146,6 @@ describe('ResetPasswordComponent', () => {
       const password = component.passwordForm.form.get('password')
       expect(password.hasError('passwordPreviouslyUsed')).toBeTrue()
       expect(redirect).not.toHaveBeenCalled()
-      // The page's form takes the error in, so a second save is refused here
-      expect(revalidate).toHaveBeenCalled()
-      expect(component.passwordForm.form.valid).toBeFalse()
       const error: HTMLElement = fixture.nativeElement.querySelector(
         '#cy-password-previously-used-error'
       )
@@ -157,6 +154,57 @@ describe('ResetPasswordComponent', () => {
       )
       expect(error.getAttribute('role')).toBe('alert')
     })
+
+    it('refuses a second save on the page until the password changes', fakeAsync(() => {
+      setupWithTokenErrors([])
+      tick()
+      const http = TestBed.inject(HttpTestingController)
+      const answerTheRegistrysChecks = () => {
+        tick(1000)
+        http
+          .match(() => true)
+          .forEach((request) =>
+            request.flush({
+              password: { errors: [] },
+              passwordConfirm: { errors: [] },
+            })
+          )
+        tick(1000)
+        fixture.detectChanges()
+      }
+      const recovery = TestBed.inject(PasswordRecoveryService)
+      const post = spyOn(recovery, 'resetPasswordEmail').and.returnValue(
+        of(reused as any)
+      )
+      spyOn(component, 'successRedirect')
+      component.passwordForm.form.setValue({
+        password: 'Current1password',
+        passwordConfirm: 'Current1password',
+      })
+      answerTheRegistrysChecks()
+      expect(component.form.valid).toBeTrue()
+
+      component.save()
+      tick(1000)
+      fixture.detectChanges()
+      expect(post).toHaveBeenCalledTimes(1)
+      expect(component.form.get('passwordGroup').invalid).toBeTrue()
+
+      // The same password again is refused on the page: nothing is posted
+      component.save()
+      tick(1000)
+      expect(post).toHaveBeenCalledTimes(1)
+
+      // A different password clears the error and can be saved
+      component.passwordForm.form.setValue({
+        password: 'Another1password',
+        passwordConfirm: 'Another1password',
+      })
+      answerTheRegistrysChecks()
+      expect(component.form.valid).toBeTrue()
+      discardPeriodicTasks()
+      flush()
+    }))
 
     it('returns from the 2FA challenge to the form with the error', fakeAsync(() => {
       setupWithTokenErrors([])
