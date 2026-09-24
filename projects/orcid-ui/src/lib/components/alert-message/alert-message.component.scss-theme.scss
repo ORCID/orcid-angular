@@ -22,24 +22,26 @@
     // - pd-6042-10's notice reads #ffebee at all 44 interior samples, and its
     // variables bind notice-warning-background to exactly that - so this takes
     // the solid value, which is what the top-bar warning already uses.
-    'alert-warning': (
-      'border': 'state-warning-dark',
-      'background': 'state-warning-background',
-      'link-darkest': 'state-warning-darkest',
-      'link-dark': 'state-warning-dark',
-    ),
+    'alert-warning':
+      (
+        'border': 'state-warning-dark',
+        'background': 'state-warning-background',
+        'link-darkest': 'state-warning-darkest',
+        'link-dark': 'state-warning-dark',
+      ),
     // PD-5635: the success notice borrowed the brand green (#7faa26 on
     // #fcfdf9) because the application had no success state of its own. The
     // design system has one - notice-success #56b833 on state-success-bg
     // #f9fef6 - and every frame in the 2FA recovery phone set draws it. The
     // link colours stay on the brand ramp: no frame answers a colour for a
     // link inside a success notice.
-    'alert-success': (
-      'border': 'state-success-dark',
-      'background': 'state-success-lightest',
-      'link-darkest': 'brand-primary-darkest',
-      'link-dark': 'brand-primary-dark',
-    ),
+    'alert-success':
+      (
+        'border': 'state-success-dark',
+        'background': 'state-success-lightest',
+        'link-darkest': 'brand-primary-darkest',
+        'link-dark': 'brand-primary-dark',
+      ),
   );
 
   @each $class, $settings in $alert-colors {

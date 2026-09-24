@@ -334,7 +334,9 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
       )
 
       expect(heading).toBeTruthy()
-      expect(heading.textContent.trim()).toBe('Enable two-factor authentication')
+      expect(heading.textContent.trim()).toBe(
+        'Enable two-factor authentication'
+      )
     })
   })
 

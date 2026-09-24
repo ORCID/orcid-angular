@@ -23,7 +23,11 @@ export class WarningMessageComponent implements OnInit, OnDestroy {
     // 'info' for every type, so a warning banner and an information banner
     // carried the same icon and differed only by colour.
     this.icon =
-      value === 'warning' ? 'warning' : value === 'success' ? 'thumb_up' : 'info'
+      value === 'warning'
+        ? 'warning'
+        : value === 'success'
+        ? 'thumb_up'
+        : 'info'
   }
   get type(): 'warning' | 'success' | 'info' {
     return this._type
