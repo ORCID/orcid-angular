@@ -65,3 +65,26 @@ app-alert-message {
   }
   margin-top: 24px;
 }
+
+// Mandatory password reset notice (PD-5692): 24px under the email field's
+// hint, 8px from the title to the body and one blank line before the action,
+// as the design draws it. Below it the field container's own padding gives
+// the same 28px every field on this card has above the next one.
+.password-reset-required {
+  app-alert-message {
+    display: block;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .password-reset-required-title {
+    margin-bottom: 8px;
+  }
+
+  .password-reset-required-action {
+    margin-top: 21px;
+  }
+}
