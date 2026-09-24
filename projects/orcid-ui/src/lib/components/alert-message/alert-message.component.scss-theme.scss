@@ -11,6 +11,17 @@
       'link-darkest': 'brand-quad-darkest',
       'link-dark': 'brand-quad-dark',
     ),
+    // PD-5692: the notice the design system calls notice-important, drawn in
+    // the frames as #ff9c00 on the notice background with an error glyph and
+    // the ordinary link colour. A variant of its own rather than a change to
+    // 'notice', which every existing consumer would repaint with.
+    'alert-notice-important':
+      (
+        'border': 'state-notice-dark',
+        'background': 'state-notice-lightest',
+        'link-darkest': 'brand-secondary-dark',
+        'link-dark': 'brand-secondary-darkest',
+      ),
     'alert-info': (
       'border': 'state-info-darkest',
       'background': 'state-info-lightest',
