@@ -1,0 +1,1 @@
+import{ib as e}from"./chunk-NNSE4CNP.js";var n=(()=>{class t{static{this.\u0275fac=function(i){return new(i||t)}}static{this.\u0275dir=e({type:t,selectors:[["","accentButton",""]],hostAttrs:[1,"accent-button"]})}}return t})();export{n as a};
