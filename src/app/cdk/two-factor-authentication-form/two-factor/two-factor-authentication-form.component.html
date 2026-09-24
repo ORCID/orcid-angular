@@ -7,13 +7,19 @@
       [ngClass]="{
         error: isVerificationCodeInvalid
       }"
-      *ngIf="!recoveryCode"
-      >Two-factor authentication code
+      *ngIf="authenticationCodeMode"
+      >Two-factor authentication
     </mat-label>
+    <!--
+      D9. `no-hint` because every hint and error on this screen sits outside the
+      field, in the row below: without it Material still reserves its own
+      subscript wrapper, empty, and that empty wrapper is the gap above the
+      helper that the frames do not draw.
+    -->
     <mat-form-field
       appearance="outline"
-      class="row deactivate"
-      *ngIf="!recoveryCode"
+      class="row deactivate no-hint"
+      *ngIf="authenticationCodeMode"
     >
       <input
         matInput
@@ -22,96 +28,156 @@
         cdkFocusInitial
         appTrim
         autocomplete="one-time-code"
+        aria-describedby="totp-helper"
+        [attr.aria-invalid]="isVerificationCodeInvalid ? 'true' : null"
+        [errorStateMatcher]="errorMatcher"
         id="totp"
         inputmode="numeric"
         name="totp"
         type="text"
       />
     </mat-form-field>
-    <ng-container *ngIf="!recoveryCode">
-      <mat-hint
-        class="orc-font-small-print error-length"
-        *ngIf="!isVerificationCodeInvalid"
-        >{{ verificationFormControl.value?.length || 0 }}/6</mat-hint
-      >
-      <mat-error
-        *ngIf="
-          verificationWasTouched && verificationFormControl.hasError('required')
-        "
-      >
-        <p
+    <!--
+      D9. One row under the input, hint left and counter right, the way the
+      field's own "Helper text" frame draws it: in `pd-6042-01` and
+      `pd-6042-08` that frame is 18 px tall at y=74, under an input that ends
+      at y=66, with "Microcopy" at x=0 w=424 and "Limit" at x=432 w=20. The
+      error REPLACES the hint in that one row - `pd-6042-13`, `-14` and `-15`
+      draw the rejected state in a field instance that is still 92 px tall,
+      with no second row and no icon.
+    -->
+    <div
+      class="code-helper orc-font-small-print"
+      id="totp-helper"
+      *ngIf="authenticationCodeMode"
+    >
+      <div class="code-helper__message">
+        <mat-hint
+          *ngIf="!isVerificationCodeInvalid"
+          i18n="@@ngOrcid.signin.2fa.enterSixDigitCode"
+          >Enter the 6-digit code from your authentication app</mat-hint
+        >
+        <mat-error
+          role="alert"
+          *ngIf="
+            isVerificationCodeInvalid &&
+            verificationFormControl.hasError('required')
+          "
           i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
-          class="error-message"
+          >Authentication code is required</mat-error
         >
-          Authentication code is required
-        </p>
-        <p class="error-length">
-          {{ verificationFormControl.value?.length || 0 }}/6
-        </p>
-      </mat-error>
-
-      <mat-error
-        *ngIf="
-          verificationWasTouched &&
-          (verificationFormControl.hasError('minlength') ||
-            verificationFormControl.hasError('maxlength'))
-        "
-      >
-        <p
+        <mat-error
+          role="alert"
+          *ngIf="
+            isVerificationCodeInvalid &&
+            (verificationFormControl.hasError('minlength') ||
+              verificationFormControl.hasError('maxlength'))
+          "
           i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
-          class="error-message"
+          >Invalid authentication code length</mat-error
         >
-          Invalid authentication code length
-        </p>
-        <p class="error-length">
-          {{ verificationFormControl.value?.length || 0 }}/6
-        </p>
-      </mat-error>
-    </ng-container>
+      </div>
+      <!--
+        aria-hidden because the message beside it already says what is wrong,
+        and a count that changes on every keystroke is noise in a live region.
+      -->
+      <p
+        class="code-helper__count"
+        [ngClass]="{ error: isVerificationCodeInvalid }"
+        aria-hidden="true"
+      >
+        {{ verificationFormControl.value?.length || 0 }}/6
+      </p>
+    </div>
   </div>
-  <p
-    [ngClass]="{
-      'enter-code': isVerificationCodeInvalid
-    }"
-  >
-    <a
-      class="underline orc-font-body-small"
-      (click)="showAuthenticationCode()"
-      i18n="@@ngOrcid.signin.2fa.instructionsPart1"
-      >Enter a code
-    </a>
-    <ng-container i18n="@@ngOrcid.signin.2fa.instructionsPart2">
-      from your two-factor authentication app
+  <ng-container *ngIf="!recoveryPhoneMode">
+    <!--
+      D8. The frames draw these escape rows centred, one row per sentence:
+      measured off `pd-6042-01`, the four ink runs sit on 289.5-290.0 px of a
+      452 px content column running 64..515, whose centre is 289.5. The build
+      started every one of them at 64 and ran the question into its link. The
+      same block on the challenge screen (PD-6043) is already built this way, so
+      this is the shape the house already has, `text-center` and all - not a new
+      one.
+
+      Only the flag-on rows are rebuilt. The rows below are what a registry
+      without the recovery-phone flag has always drawn, no frame covers them,
+      and R3.1's promise is that the form renders exactly what it always has
+      when the flag is off. Both branches reuse the ids already on this screen,
+      so the catalogue neither gains nor loses a unit.
+    -->
+    <ng-container *ngIf="recoveryPhoneOptionAvailable">
+      <div class="two-factor-escape text-center">
+        <p
+          class="two-factor-escape__question"
+          i18n="@@ngOrcid.signin.2fa.noDevice1"
+        >
+          Don't have your device?
+        </p>
+        <!--
+          A button rather than an anchor with no href, because an anchor with no
+          href is not reachable by keyboard.
+        -->
+        <button
+          type="button"
+          id="cy-use-a-recovery-code"
+          class="link-button orc-font-body-small"
+          (click)="showRecoveryCode()"
+          i18n="@@account.useARecoveryCode"
+        >
+          Use a recovery code instead
+        </button>
+      </div>
+      <div class="two-factor-escape text-center">
+        <p
+          class="two-factor-escape__question"
+          i18n="@@ngOrcid.signin.2fa.noDeviceOrRecoveryCodes"
+        >
+          Don't have your device or your recovery codes?
+        </p>
+        <button
+          type="button"
+          id="cy-send-recovery-phone-code"
+          class="link-button orc-font-body-small"
+          [disabled]="recoveryPhoneSending"
+          (click)="showRecoveryPhoneCode()"
+          i18n="@@ngOrcid.signin.2fa.sendCodeToRecoveryNumber"
+        >
+          Send a code to your recovery number and disable 2FA
+        </button>
+      </div>
     </ng-container>
-  </p>
-  <p>
-    <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1">
-      Don't have your device?
+    <ng-container *ngIf="!recoveryPhoneOptionAvailable">
+      <p>
+        <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1">
+          Don't have your device?
+        </ng-container>
+        <a
+          class="underline orc-font-body-small"
+          (click)="showRecoveryCode()"
+          i18n="@@ngOrcid.signin.2fa.noDevice2"
+          >Enter a recovery code
+        </a>
+      </p>
+      <p>
+        <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
+          Don't have your device or recovery code?
+        </ng-container>
+        <a
+          class="underline orc-font-body-small"
+          (click)="
+            navigateTo(
+              'https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication'
+            )
+          "
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@shared.orcidHelpCenter"
+          >ORCID Help Center
+        </a>
+      </p>
     </ng-container>
-    <a
-      class="underline orc-font-body-small"
-      (click)="showRecoveryCode()"
-      i18n="@@ngOrcid.signin.2fa.noDevice2"
-      >Enter a recovery code
-    </a>
-  </p>
-  <p>
-    <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
-      Don't have your device or recovery code?
-    </ng-container>
-    <a
-      class="underline orc-font-body-small"
-      (click)="
-        navigateTo(
-          'https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication'
-        )
-      "
-      rel="noopener noreferrer"
-      target="_blank"
-      i18n="@@shared.orcidHelpCenter"
-      >ORCID Help Center
-    </a>
-  </p>
+  </ng-container>
   <div class="input-container">
     <mat-label
       class="orc-font-small-print"
@@ -122,68 +188,251 @@
       *ngIf="recoveryCode"
       >Recovery code
     </mat-label>
-    <mat-form-field appearance="outline" class="row" *ngIf="recoveryCode">
+    <mat-form-field
+      appearance="outline"
+      class="row no-hint"
+      *ngIf="recoveryCode"
+    >
       <input
         matInput
         #inputRecoveryCode
         formControlName="recoveryCode"
         appTrim
         autocomplete="one-time-code"
+        aria-describedby="recovery-code-helper"
+        [attr.aria-invalid]="isRecoveryCodeInvalid ? 'true' : null"
+        [errorStateMatcher]="errorMatcher"
         inputmode="numeric"
         name="totp"
         type="text"
       />
     </mat-form-field>
-    <ng-container *ngIf="recoveryCode">
-      <mat-hint
-        class="orc-font-small-print error-length"
-        *ngIf="!isRecoveryCodeInvalid"
-        >{{ recoveryCodeFormControl.value?.length || 0 }}/10</mat-hint
-      >
-      <mat-error
-        *ngIf="
-          recoveryCodeWasTouched && recoveryCodeFormControl.hasError('required')
-        "
-      >
-        <p
+    <!--
+      D9 again. No frame covers this mode - the PD-6042 set draws the
+      authenticator field and the recovery NUMBER field and nothing else - so
+      this row is the same field component in the same shape, with no hint
+      because this screen has never had one to say here.
+    -->
+    <div
+      class="code-helper orc-font-small-print"
+      id="recovery-code-helper"
+      *ngIf="recoveryCode"
+    >
+      <div class="code-helper__message">
+        <mat-error
+          role="alert"
+          *ngIf="
+            isRecoveryCodeInvalid &&
+            recoveryCodeFormControl.hasError('required')
+          "
           i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
-          class="error-message"
+          >Recovery code is required</mat-error
         >
-          Recovery code is required
-        </p>
-        <p class="error-length">
-          {{ recoveryCodeFormControl.value?.length || 0 }}/10
-        </p>
-      </mat-error>
-
-      <mat-error
-        *ngIf="
-          recoveryCodeWasTouched &&
-          (recoveryCodeFormControl.hasError('minlength') ||
-            recoveryCodeFormControl.hasError('maxlength'))
-        "
-      >
-        <p
+        <mat-error
+          role="alert"
+          *ngIf="
+            isRecoveryCodeInvalid &&
+            (recoveryCodeFormControl.hasError('minlength') ||
+              recoveryCodeFormControl.hasError('maxlength'))
+          "
           i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
-          class="error-message"
+          >Invalid recovery code length</mat-error
         >
-          Invalid recovery code length
-        </p>
-        <p class="error-length">
-          {{ recoveryCodeFormControl.value?.length || 0 }}/10
-        </p>
-      </mat-error>
-    </ng-container>
+      </div>
+      <p
+        class="code-helper__count"
+        [ngClass]="{ error: isRecoveryCodeInvalid }"
+        aria-hidden="true"
+      >
+        {{ recoveryCodeFormControl.value?.length || 0 }}/10
+      </p>
+    </div>
   </div>
+
+  <ng-container *ngIf="recoveryPhoneMode">
+    <div class="input-container" *ngIf="recoveryPhoneCodeSent">
+      <!--
+        mat-label is a directive, not a <label>, so "for" associates nothing
+        and MatFormField wires no aria-labelledby of its own: the input has
+        to name this element itself.
+      -->
+      <mat-label
+        class="orc-font-small-print"
+        id="recovery-phone-signin-code-label"
+        i18n="@@ngOrcid.signin.2fa.recoveryNumberCode"
+        [ngClass]="{
+          error: isRecoveryPhoneCodeInvalid
+        }"
+        >Recovery number code
+      </mat-label>
+      <mat-form-field appearance="outline" class="row no-hint">
+        <input
+          matInput
+          #inputRecoveryPhoneCode
+          formControlName="recoveryPhoneCode"
+          appTrim
+          autocomplete="one-time-code"
+          aria-labelledby="recovery-phone-signin-code-label"
+          aria-describedby="recovery-phone-signin-code-helper"
+          [attr.aria-invalid]="isRecoveryPhoneCodeInvalid ? 'true' : null"
+          [errorStateMatcher]="errorMatcher"
+          id="recovery-phone-signin-code"
+          inputmode="numeric"
+          maxlength="6"
+          name="recoveryPhoneCode"
+          type="text"
+        />
+      </mat-form-field>
+      <!--
+        D9. The frames that draw this field rejected - `pd-6042-13`, `-14` and
+        `-15` - put the message where the hint was, in the same 18 px row, with
+        the counter still on the right and both of them red. The field instance
+        is 92 px tall in every one of them, resting and rejected alike: the
+        error replaces the hint rather than joining it, and nothing is stacked
+        under the row.
+      -->
+      <div
+        id="recovery-phone-signin-code-helper"
+        class="code-helper orc-font-small-print"
+      >
+        <div class="code-helper__message">
+          <mat-hint
+            *ngIf="!isRecoveryPhoneCodeInvalid"
+            i18n="@@account.enterSixDigitCodeSentToDevice"
+            >Enter the 6-digit verification code sent to your device</mat-hint
+          >
+          <mat-error
+            role="alert"
+            *ngIf="
+              isRecoveryPhoneCodeInvalid &&
+              recoveryPhoneCodeFormControl.hasError('required')
+            "
+            i18n="@@ngOrcid.signin.2fa.recoveryNumberCodeRequired"
+            >A recovery number code is required</mat-error
+          >
+          <mat-error
+            role="alert"
+            *ngIf="
+              isRecoveryPhoneCodeInvalid &&
+              (recoveryPhoneCodeFormControl.hasError('minlength') ||
+                recoveryPhoneCodeFormControl.hasError('maxlength'))
+            "
+            i18n="@@ngOrcid.signin.2fa.recoveryNumberCodeLength"
+            >Invalid recovery number code length</mat-error
+          >
+          <!--
+            The registry's verdict on the code itself. The text is chosen in
+            the component, from the error code, so the form never renders what
+            the backend wrote (R3.4).
+          -->
+          <mat-error role="alert" *ngIf="recoveryPhoneFieldErrorMessage">{{
+            recoveryPhoneFieldErrorMessage
+          }}</mat-error>
+        </div>
+        <p
+          class="code-helper__count"
+          [ngClass]="{ error: isRecoveryPhoneCodeInvalid }"
+          aria-hidden="true"
+        >
+          {{ recoveryPhoneCodeFormControl.value?.length || 0 }}/6
+        </p>
+      </div>
+    </div>
+    <!--
+      Send and account level: nothing here is a verdict on what is in the
+      field, so it stays out of the field's row. The icon stays with it. The
+      one frame in the whole set that draws an error message at this level is
+      `pd-6046-05`, the panel failure notice, and it draws an
+      `Icon/24px/Warning` beside the sentence; the frames that draw a field's
+      helper row draw Microcopy and Limit in it and nothing else.
+    -->
+    <div
+      class="orcid-error recovery-phone-error"
+      role="alert"
+      *ngIf="recoveryPhoneErrorMessage"
+    >
+      <mat-icon class="recovery-phone-error__icon" inline="true"
+        >error</mat-icon
+      >
+      <span class="orc-font-body-small">{{ recoveryPhoneErrorMessage }}</span>
+    </div>
+    <!--
+      D8 again, on the mode `pd-6042-02` and the three error frames beside it
+      draw: same centred column, same one row per sentence.
+    -->
+    <div class="two-factor-escape text-center">
+      <p
+        class="two-factor-escape__question"
+        i18n="@@account.dontHaveYourRecoveryCodes"
+      >
+        Don't have your recovery codes?
+      </p>
+      <button
+        type="button"
+        class="link-button orc-font-body-small"
+        (click)="showAuthenticationCode()"
+        i18n="@@account.useYourAuthenticationAppInstead"
+      >
+        Use your authentication app instead
+      </button>
+    </div>
+    <!--
+      D6: the frames keep this question above the resend line once a code is out
+      (988:11771 on the sign-in board, and the three error frames beside it). It
+      heads the row the resend belongs to, so it goes and comes with it - once
+      the record's daily allowance is spent PD-13635 puts its own message here
+      instead, and a question with no answer under it is worse than none. The id
+      is the one already on this screen at the block above, with the same source
+      text, so the catalogue gains nothing.
+    -->
+    <div
+      class="two-factor-escape text-center"
+      *ngIf="recoveryPhoneResendIsWorthOffering"
+    >
+      <p
+        class="two-factor-escape__question recovery-phone-resend__heading"
+        i18n="@@ngOrcid.signin.2fa.noDeviceOrRecoveryCodes"
+      >
+        Don't have your device or your recovery codes?
+      </p>
+      <p class="recovery-phone-resend">
+        <ng-container i18n="@@account.didntGetTheCode">
+          Didn't get the code?
+        </ng-container>
+        <ng-container *ngIf="recoveryPhoneResendSeconds > 0">
+          <ng-container i18n="@@account.youCanResendIn"
+            >You can resend in</ng-container
+          >&nbsp;<strong
+            >{{ recoveryPhoneResendSeconds }}&nbsp;<ng-container
+              i18n="@@account.seconds"
+              >seconds</ng-container
+            ></strong
+          >
+        </ng-container>
+        <button
+          *ngIf="recoveryPhoneResendSeconds === 0"
+          type="button"
+          id="cy-resend-recovery-phone-code"
+          class="link-button orc-font-body-small"
+          [disabled]="recoveryPhoneSending"
+          (click)="resendRecoveryPhoneCode()"
+          i18n="@@account.resendCode"
+        >
+          Resend code
+        </button>
+      </p>
+    </div>
+  </ng-container>
 
   <button
     mat-raised-button
     class="row mat-elevation-z0 two-factor authenticate-button-new-signin"
     type="submit"
-    i18n="@@ngOrcid.signin.2fa.authenticate"
+    [disabled]="recoveryPhoneMode && !recoveryPhoneCodeSent"
+    i18n="@@ngOrcid.signin.2fa.authenticateAndSignIn"
     id="authenticateButton"
   >
-    AUTHENTICATE
+    Authenticate and sign in
   </button>
 </form>
 <mat-error *ngIf="showBadVerificationCode" class="orcid-error">

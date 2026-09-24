@@ -14,6 +14,7 @@ import { DeactivatedComponent } from './components/errors/deactivated/deactivate
 import { LoggedInComponent } from './components/logged-in/logged-in.component'
 import { PrintErrorsComponent } from './components/errors/print-errors/print-errors.component'
 import { FormSignInComponent } from './components/form-sign-in/form-sign-in.component'
+import { TwoFactorDisabledComponent } from './components/two-factor-disabled/two-factor-disabled.component'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MyOrcidAlertsModule } from '../cdk/my-orcid-alerts/my-orcid-alerts.module'
@@ -28,6 +29,7 @@ import { AlertMessageComponent } from '@orcid/ui'
     LoggedInComponent,
     PrintErrorsComponent,
     FormSignInComponent,
+    TwoFactorDisabledComponent,
   ],
   imports: [
     CommonModule,

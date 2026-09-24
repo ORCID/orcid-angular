@@ -19,8 +19,11 @@ export class WarningMessageComponent implements OnInit, OnDestroy {
 
   @Input() set type(value: 'warning' | 'success' | 'info') {
     this._type = value
+    // PD-5635: the frames draw a warning with the warning glyph. This read
+    // 'info' for every type, so a warning banner and an information banner
+    // carried the same icon and differed only by colour.
     this.icon =
-      value === 'warning' ? 'info' : value === 'success' ? 'thumb_up' : 'info'
+      value === 'warning' ? 'warning' : value === 'success' ? 'thumb_up' : 'info'
   }
   get type(): 'warning' | 'success' | 'info' {
     return this._type

@@ -7,3 +7,4 @@ export * from './lib/components/permission-notifications/permission-notification
 export * from './lib/components/import-works-dialog/import-works-dialog.component'
 export * from './lib/components/import-works-dialog/import-works-dialog.types'
 export * from './lib/components/auth-challenge/auth-challenge.component'
+export * from './lib/components/auth-challenge/auth-challenge.types'

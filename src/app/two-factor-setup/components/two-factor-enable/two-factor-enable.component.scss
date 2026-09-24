@@ -15,7 +15,7 @@ textarea.text-code {
 
 .textarea-copy-action {
   flex: 0 0 40px;
-  border: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  border: 1px solid var(--orcid-color-border-subtle, #eeeeee);
   border-radius: 2px;
   background: #fff;
   padding: 0;
@@ -96,7 +96,7 @@ mat-error {
 }
 
 .verification-section {
-  border-top: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  border-top: 1px solid var(--orcid-color-border-subtle, #eeeeee);
   padding-top: var(--orcid-space-l, 32px);
 }
 

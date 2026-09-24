@@ -138,6 +138,78 @@
     </ng-container>
   </app-warning-message>
 
+  <app-warning-message *ngIf="twoFactorDisabledByRecoveryPhone" type="warning">
+    <ng-container
+      title
+      i18n="@@topBar.twoFactorAuthentication2FAHasBeenDisabled"
+      >Two-factor authentication (2FA) has been disabled</ng-container
+    >
+    <ng-container content>
+      <!--
+        PD-6043: the frame links two words, not the sentence. Measured off the
+        export rather than read off the metadata - a design tool styles a link
+        as a range inside a text node, so `get_metadata` shows one node and only
+        the pixels say where the underline starts and stops. It is a continuous
+        111 px run, which is "account settings" and nothing else.
+
+        The anchor stays a sibling rather than moving inside the message:
+        `scripts/normalize-xlf.prebuild.ts` cannot round-trip a <source> that
+        holds mixed content -- it says so in its own comment, and handles it
+        only for the print-view units it generates itself. A message with an
+        embedded <a> comes back out of it with both placeholders moved to the
+        end, which no translator could place. So the sentence carries up to the
+        link and the link carries its own two words.
+      -->
+      <ng-container i18n="@@topBar.youHaveSignedInUsingYourRecoveryPhoneNumber"
+        >You have signed in using your recovery phone number. Your recovery
+        number has been deleted and two-factor authentication has been disabled
+        for this ORCID account. You can re-enable 2FA from your</ng-container
+      >
+      <a
+        class="underline black-url"
+        routerLink="/account"
+        fragment="2FA"
+        i18n="@@topBar.accountSettingsMidSentence"
+        >account settings</a
+      >
+    </ng-container>
+  </app-warning-message>
+
+  <app-warning-message *ngIf="newAddedRecoveryPhone" type="success">
+    <ng-container title i18n="@@topBar.recoveryPhoneNumberAdded"
+      >Recovery phone number added</ng-container
+    >
+    <ng-container content>
+      <ng-container i18n="@@topBar.youHaveSuccessfullyAdded"
+        >You have successfully added</ng-container
+      >
+      <strong> {{ newAddedRecoveryPhone }} </strong>
+      <ng-container i18n="@@topBar.asAnAccountRecoveryOption"
+        >as an account recovery option.</ng-container
+      >
+    </ng-container>
+    <!--
+      PD-5850: the frame draws three pixel-separated rows in one 568px column -
+      title, sentence, link - and this link is the third. The sentence before it
+      is grammatically complete, so the link is a call to action and not a
+      continuation, and it goes in the `link` slot rather than in `content`.
+
+      Contrast the 2FA disabled notice above (D13), where the sentence runs INTO
+      its link and the two are one line by design. Same component, two shapes,
+      and the slot is which one this is.
+
+      Nothing about the message changes: same text, same id, same unit.
+    -->
+    <a
+      link
+      class="underline black-url"
+      routerLink="/account"
+      fragment="2FA"
+      i18n="@@topBar.manageYourRecoveryOptionsInAccountSettings"
+      >Manage your recovery options in Account settings</a
+    >
+  </app-warning-message>
+
   <section
     id="names"
     role="region"

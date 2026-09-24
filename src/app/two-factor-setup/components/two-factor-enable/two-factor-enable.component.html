@@ -1,11 +1,10 @@
 <form [formGroup]="twoFactorForm" (ngSubmit)="onSubmit()">
   <orcid-step-view
     i18n-title="@@account.enableTwoFactorAuth"
-    i18n-subtitle="@@account.step1AuthenticationApp"
     i18n-primaryLabel="@@account.nextStepRecoveryCodes"
     title="Enable two-factor authentication"
-    subtitle="Step 1 of 2 - Authentication app"
     primaryLabel="Next step - 2FA recovery codes"
+    [subtitle]="subtitle"
     [primaryDisabled]="loading"
     (primaryAction)="onSubmit()"
   >

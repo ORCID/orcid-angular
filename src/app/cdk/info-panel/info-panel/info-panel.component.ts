@@ -1,4 +1,14 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
+
+/**
+ * Which glyph the panel draws.
+ *
+ * `check-window` is the filled disc this panel has always drawn and is the
+ * default, so the consumers whose frames have not been rechecked keep it.
+ * `help` is the outlined question mark the recovery phone interstitial's
+ * frame draws (PD-5850).
+ */
+export type InfoPanelType = 'check-window' | 'help'
 
 @Component({
   selector: 'app-info-panel',
@@ -9,4 +19,6 @@ import { Component } from '@angular/core'
   ],
   standalone: false,
 })
-export class InfoPanelComponent {}
+export class InfoPanelComponent {
+  @Input() type: InfoPanelType = 'check-window'
+}

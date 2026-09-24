@@ -12,7 +12,7 @@ import { Status } from '../../../types/two-factor.endpoint'
 })
 export class SettingsSecurityComponent implements OnInit {
   titleAccountPassword = $localize`:@@account.accountPassword:Account password`
-  titleTwoFactor = $localize`:@@account.twoPassword:Two-factor authentication`
+  titleTwoFactor = $localize`:@@account.twoPassword:Two-factor authentication (2FA)`
   titleAlternativeSignin = $localize`:@@account.alternativeSignin:Alternate sign in accounts`
 
   settingSecurityPasswordOpen = false

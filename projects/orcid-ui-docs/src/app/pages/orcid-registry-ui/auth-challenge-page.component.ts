@@ -11,13 +11,19 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
-import { AuthChallengeComponent } from '@orcid/registry-ui'
+import {
+  AUTH_CHALLENGE_HEADING_ID,
+  AuthChallengeComponent,
+  AuthChallengeRecoveryPhone,
+  AuthChallengeRecoveryPhoneVerification,
+} from '@orcid/registry-ui'
 import '@angular/localize/init'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
 import { MatDialog } from '@angular/material/dialog'
 import { MatButtonModule } from '@angular/material/button'
-import { takeUntil } from 'rxjs/operators'
+import { Observable, Subscription, timer } from 'rxjs'
+import { map, take, takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'auth-challenge-page',
@@ -40,6 +46,7 @@ import { takeUntil } from 'rxjs/operators'
 export class AuthChallengePageComponent implements OnInit {
   showPasswordField = true
   showTwoFactorField = true
+  offerRecoveryPhone = false
   actionDescription = 'to perform this action on'
   boldText = 'Example Account'
   trailingText = 'to continue.'
@@ -54,12 +61,79 @@ export class AuthChallengePageComponent implements OnInit {
         null,
         [Validators.minLength(10), Validators.maxLength(10)],
       ],
+      twoFactorRecoveryPhoneCode: [
+        null,
+        [Validators.minLength(6), Validators.maxLength(6)],
+      ],
       password: [null, Validators.required],
     })
   }
 
+  /**
+   * A stand-in for what the application hands the component: the registry is
+   * not here, so sending is instant, 123456 is the code that works and 000000
+   * stands in for the password having been wrong - which the registry decides
+   * before it ever looks at the code.
+   */
+  private buildRecoveryPhone(): AuthChallengeRecoveryPhone {
+    // Everything this one challenge has running, emptied by `dispose()`
+    const running = new Subscription()
+
+    const recoveryPhone: AuthChallengeRecoveryPhone = {
+      available: true,
+      maskedNumber: '***********1234',
+      codeSent: false,
+      resendSeconds: 0,
+      sending: false,
+      errorCode: undefined,
+      used: false,
+      sendCode: () => {
+        recoveryPhone.sending = true
+        running.add(
+          timer(400).subscribe(() => {
+            recoveryPhone.sending = false
+            recoveryPhone.codeSent = true
+            recoveryPhone.resendSeconds = 30
+            // `take` bounds the countdown so the demo leaves nothing ticking
+            running.add(
+              timer(1000, 1000)
+                .pipe(take(30))
+                .subscribe(() => {
+                  recoveryPhone.resendSeconds = Math.max(
+                    0,
+                    recoveryPhone.resendSeconds - 1
+                  )
+                })
+            )
+          })
+        )
+      },
+      verify: (
+        _password: string,
+        code: string
+      ): Observable<AuthChallengeRecoveryPhoneVerification> =>
+        timer(600).pipe(
+          map(() => {
+            if (code === '000000') {
+              return 'invalidPassword'
+            }
+            return code === '123456' ? 'passed' : 'invalidCode'
+          })
+        ),
+      dispose: () => running.unsubscribe(),
+    }
+    return recoveryPhone
+  }
+
   openDialog() {
+    const recoveryPhone = this.offerRecoveryPhone
+      ? this.buildRecoveryPhone()
+      : undefined
+
     const dialogRef = this._dialog.open(AuthChallengeComponent, {
+      // Named from the challenge's own heading rather than from a second copy
+      // of that sentence here
+      ariaLabelledBy: AUTH_CHALLENGE_HEADING_ID,
       data: {
         parentForm: this.form,
         actionDescription: this.actionDescription,
@@ -67,6 +141,11 @@ export class AuthChallengePageComponent implements OnInit {
         trailingText: this.trailingText,
         showPasswordField: this.showPasswordField,
         showTwoFactorField: this.showTwoFactorField,
+        // Which control holds the *account* password. Required before the
+        // recovery phone option is offered to a challenge that does not
+        // collect the password itself.
+        passwordControlName: 'password',
+        recoveryPhone,
       },
     })
 
@@ -74,6 +153,12 @@ export class AuthChallengePageComponent implements OnInit {
     dialogRef.componentInstance.submitAttempt
       .pipe(takeUntil(dialogRef.afterClosed()))
       .subscribe(() => {
+        if (recoveryPhone?.used) {
+          // The recovery phone number code has already answered the challenge
+          // and turned 2FA off, so the guarded action simply proceeds.
+          dialogRef.close(true)
+          return
+        }
         // Simulate a 1-second backend delay
         setTimeout(() => {
           // Fake a backend response complaining about a bad password

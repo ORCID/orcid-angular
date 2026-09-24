@@ -119,6 +119,9 @@
     *ngIf="show2FA"
     [showBadVerificationCode]="showBadVerificationCode"
     [showBadRecoveryCode]="showBadRecoveryCode"
+    [recoveryPhoneOptionAvailable]="recoveryPhoneOptionAvailable"
+    [recoveryPhoneState]="recoveryPhoneState"
+    (requestRecoveryPhoneCode)="onRequestRecoveryPhoneCode()"
     (authenticate)="authenticate($event)"
   >
   </app-two-factor-authentication-form>
@@ -129,6 +132,6 @@
     (click)="forgotPassword()"
     id="forgot-password-button"
   >
-    Forgot your password or ORCID ID?
+    Forgot your password or ORCID iD?
   </a>
 </form>

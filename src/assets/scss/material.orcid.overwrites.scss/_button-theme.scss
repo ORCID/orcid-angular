@@ -3,7 +3,6 @@
 @mixin mat-button-theme-overwrites($theme) {
   $primary: map-get($theme, primary);
   $foreground: map-get($theme, foreground);
-  $divider-color: mat.m2-get-color-from-palette($foreground, divider);
 
   $background: map-get($theme, background);
   $unselected-background: mat.m2-get-color-from-palette(
@@ -14,9 +13,6 @@
 
   .mat-mdc-button.orcid-button-light-grey {
     background-color: map-get($background, light-grey);
-  }
-  button.mat-mdc-raised-button.mat-unthemed {
-    border-color: $divider-color;
   }
 }
 
@@ -33,14 +29,28 @@ mat-paginator button.mat-mdc-icon-button {
   --mat-icon-button-icon-size: revert;
 }
 
+// PD-5635: an unthemed raised button used to take `border: solid 1px` here,
+// coloured with Material's M2 stock `divider` rgba(0, 0, 0, 0.12) because the
+// ORCID theme never overrides that key. The frames draw no border on these
+// buttons at all: the primary submit in pd-6042-01 and pd-6043-01 is a 452x40
+// #085c77 rectangle whose 2 px outside ring is 1984 of 1984 pixels white, and
+// the same holds for all 26 filled primary buttons across the 34 frames in the
+// set. rgba(0, 0, 0, 0.12) over #085c77 composites to #075169, which has zero
+// pixels in either export, while the same exports do resolve unrelated 1 px
+// rules - so a border would have rendered had one been drawn.
+//
+// Eleven raised buttons in the application are unthemed. Nine paint their own
+// fill (#085c77 on the sign-in, authorize, link-account, duplicate-record,
+// institutional-page continue and 2FA submits, #d32f2f on the 2FA disable,
+// #b71c1c on the account deactivate) and lose nothing. The two on white declare
+// their own edge: `.not-you` already did, in `logged-in.component.scss`, and
+// `.institutional` now does in `social.component.scss-theme.scss`, in the
+// ui-background grey the frames actually draw there.
 button.mat-mdc-raised-button {
   @include mat.elevation(0);
   &:hover,
   &:focus,
   &:active {
     box-shadow: none !important; // kill the shadow
-  }
-  &.mat-unthemed {
-    border: solid 1px;
   }
 }

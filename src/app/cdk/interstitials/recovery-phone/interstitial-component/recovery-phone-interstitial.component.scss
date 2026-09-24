@@ -1,0 +1,105 @@
+@import '../../../../../assets/scss/orcid.spacing.scss';
+
+// The orc-font-* classes set font-size and letter-spacing only, so the Figma
+// line-height and weight are spelled out here.
+
+mat-card-header.authorize-header {
+  mat-card-title {
+    margin: 0 0 $spacing-large 0 !important;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .orc-font-heading-small {
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px; // Figma heading-S 24/32
+  }
+
+  mat-icon.logo-icon {
+    height: 80px;
+    width: 64px;
+    // Direct child of the flex card title: without this it renders as a sliver
+    flex-shrink: 0;
+
+    img {
+      height: 64px;
+    }
+  }
+}
+
+mat-icon > img {
+  height: 20px;
+  margin-top: 2px; // Fix icon component with SVG image
+}
+
+// The notice is two paragraphs in one panel. app-info-panel projects into a
+// <p>, so they are spans laid out as blocks.
+.recovery-phone-notice__use,
+.recovery-phone-notice__once {
+  display: block;
+  line-height: 24px; // Figma body-M 16/24
+  font-weight: 400;
+}
+
+.recovery-phone-notice__once {
+  font-style: italic;
+  margin-top: $spacing-base;
+}
+
+app-recovery-phone-form {
+  display: block;
+  margin-top: $spacing-large;
+}
+
+mat-spinner {
+  display: block;
+  margin: 60px auto;
+}
+
+mat-divider.footer-divider {
+  margin-top: $spacing-large;
+  margin-bottom: $spacing-large;
+}
+
+button.authorize-button {
+  width: 100%;
+  margin-bottom: $spacing-base;
+
+  // Material ships no focus ring here, so the house one is drawn by hand
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
+    outline: none;
+  }
+}
+
+// The decline action is a button so it is keyboard reachable, styled as a link
+button.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+
+  // Only ever disabled for as long as a save is on the wire, so the colour is
+  // left alone and only the cursor stops promising something to press
+  &:disabled {
+    cursor: default;
+  }
+
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
+    outline: none;
+  }
+}
+
+mat-card-content.authorize-content {
+  margin: 0px !important;
+
+  div.deny-button-wrapper {
+    justify-content: center;
+  }
+}
