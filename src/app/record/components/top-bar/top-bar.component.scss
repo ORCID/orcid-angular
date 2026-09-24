@@ -189,3 +189,24 @@ app-warning-message,
 orcid-registry-permission-notifications {
   margin-bottom: 16px;
 }
+
+// PD-5692: 8px from the title to the body and one blank line before the
+// action, as the design draws it; 32px from the printable version link above
+// (whose button box already holds 24px of it) and 32px to the names panel below
+app-alert-message.force-password-reset {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 32px;
+
+  p {
+    margin: 0;
+  }
+
+  .force-password-reset-title {
+    margin-bottom: 8px;
+  }
+
+  .force-password-reset-action {
+    margin-top: 21px;
+  }
+}
