@@ -169,7 +169,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">444,446</context>
+          <context context-type="linenumber">440,442</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
@@ -261,7 +261,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">450,452</context>
+          <context context-type="linenumber">446,448</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -373,7 +373,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">403,405</context>
+          <context context-type="linenumber">399,401</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -385,7 +385,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">408</context>
+          <context context-type="linenumber">404</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -401,7 +401,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">412</context>
+          <context context-type="linenumber">408</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -413,7 +413,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">424,426</context>
+          <context context-type="linenumber">420,422</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -429,7 +429,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">371,373</context>
+          <context context-type="linenumber">367,369</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -445,7 +445,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">379,381</context>
+          <context context-type="linenumber">375,377</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -2114,7 +2114,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">292</context>
+          <context context-type="linenumber">295</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4834,7 +4834,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">306</context>
+          <context context-type="linenumber">302</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4854,7 +4854,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">299</context>
+          <context context-type="linenumber">302</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4942,7 +4942,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">272</context>
+          <context context-type="linenumber">275</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4962,7 +4962,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">301</context>
+          <context context-type="linenumber">304</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6883,7 +6883,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">399,401</context>
+          <context context-type="linenumber">395,397</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6919,7 +6919,7 @@
         <source>A recovery number code is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">315</context>
+          <context context-type="linenumber">311</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6927,7 +6927,7 @@
         <source>Invalid recovery number code length</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">325</context>
+          <context context-type="linenumber">321</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6935,7 +6935,7 @@
         <source>Authenticate and sign in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">438,440</context>
+          <context context-type="linenumber">434,436</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6943,7 +6943,7 @@
         <source>Invalid recovery number code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">269</context>
+          <context context-type="linenumber">272</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6951,7 +6951,7 @@
         <source>This account has no recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">290</context>
+          <context context-type="linenumber">293</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6959,7 +6959,7 @@
         <source>Too many codes have been sent to your recovery phone number today. Please try again tomorrow, or use your authentication app or a recovery code.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">294</context>
+          <context context-type="linenumber">297</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
