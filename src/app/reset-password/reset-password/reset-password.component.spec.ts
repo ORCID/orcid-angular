@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing'
 
 import { ResetPasswordComponent } from './reset-password.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
@@ -15,7 +20,7 @@ import { RegisterService } from '../../core/register/register.service'
 import { PasswordRecoveryService } from '../../core/password-recovery/password-recovery.service'
 import { MdePopoverModule } from '../../cdk/popover'
 import { ActivatedRoute } from '@angular/router'
-import { of } from 'rxjs'
+import { of, Subject } from 'rxjs'
 
 import { MatCardModule } from '@angular/material/card'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
@@ -110,5 +115,94 @@ describe('ResetPasswordComponent', () => {
     expect(fixture.nativeElement.textContent).toContain(
       'There is a problem with your password reset link'
     )
+  })
+
+  /*
+   * PD-5692: previous passwords cannot be reused. The registry answers with
+   * this code when the new password is the current one.
+   */
+  describe('a reused password', () => {
+    const reused = {
+      newPassword: {
+        errors: ['Pattern.registrationForm.password.previouslyUsed'],
+      },
+    }
+
+    it('shows the inline error under the password field and saves nothing', async () => {
+      await setupWithTokenErrors([])
+      spyOnProperty(component.form, 'valid', 'get').and.returnValue(true)
+      const recovery = TestBed.inject(PasswordRecoveryService)
+      spyOn(recovery, 'resetPasswordEmail').and.returnValue(of(reused as any))
+      const redirect = spyOn(component, 'successRedirect')
+      const group = component.form.get('passwordGroup')
+      const revalidate = spyOn(
+        group,
+        'updateValueAndValidity'
+      ).and.callThrough()
+
+      component.save()
+      fixture.detectChanges()
+
+      const password = component.passwordForm.form.get('password')
+      expect(password.hasError('passwordPreviouslyUsed')).toBeTrue()
+      expect(redirect).not.toHaveBeenCalled()
+      // The page's form takes the error in, so a second save is refused here
+      expect(revalidate).toHaveBeenCalled()
+      expect(component.passwordForm.form.valid).toBeFalse()
+      const error: HTMLElement = fixture.nativeElement.querySelector(
+        '#cy-password-previously-used-error'
+      )
+      expect(error.textContent.replace(/\s+/g, ' ').trim()).toBe(
+        'Please enter a new password. Previous passwords cannot be reused.'
+      )
+      expect(error.getAttribute('role')).toBe('alert')
+    })
+
+    it('returns from the 2FA challenge to the form with the error', fakeAsync(() => {
+      setupWithTokenErrors([])
+      tick()
+      const submitAttempt = new Subject<void>()
+      const challenge = {
+        submitAttempt,
+        cancelAttempt: new Subject<void>(),
+        processBackendResponse: jasmine.createSpy('processBackendResponse'),
+      }
+      const outlet = {
+        attachComponentPortal: () => ({
+          instance: challenge,
+          changeDetectorRef: { detectChanges: () => {} },
+        }),
+        detach: jasmine.createSpy('detach'),
+      }
+      component.outlet = outlet as any
+      const recovery = TestBed.inject(PasswordRecoveryService)
+      spyOn(recovery, 'resetPasswordEmail').and.returnValue(of(reused as any))
+      ;(component as any).showAuthenticationChallenge('0000-0001-2345-6789')
+      expect(component.showForm).toBeFalse()
+
+      component.form.patchValue({ twoFactorCode: '123456' })
+      submitAttempt.next()
+      fixture.detectChanges()
+      tick()
+      fixture.detectChanges()
+
+      expect(outlet.detach).toHaveBeenCalled()
+      expect(challenge.processBackendResponse).not.toHaveBeenCalled()
+      expect(component.showForm).toBeTrue()
+      expect(component.showAuthChallenge).toBeFalse()
+      expect(component.form.value.twoFactorCode).toBeNull()
+      const password = component.passwordForm.form.get('password')
+      expect(password.hasError('passwordPreviouslyUsed')).toBeTrue()
+      // The emptied field still reads as empty, so the requirements checklist
+      // shows nothing as met, and only the reuse message is shown
+      expect(password.hasError('required')).toBeTrue()
+      expect(component.passwordForm.validate8orMoreCharacters).toBeTrue()
+      const errors = Array.from(
+        fixture.nativeElement.querySelectorAll('mat-error')
+      ).map((e: HTMLElement) => e.textContent.replace(/\s+/g, ' ').trim())
+      expect(errors).toEqual([
+        'Please enter a new password. Previous passwords cannot be reused.',
+      ])
+    }))
   })
 })
