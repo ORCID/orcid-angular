@@ -68,10 +68,15 @@
     >
     </app-print-errors>
 
-    <div class="password-reset-required" aria-live="polite">
+    <div
+      class="password-reset-required"
+      id="cy-password-reset-status"
+      aria-live="polite"
+      [attr.aria-busy]="checkingPasswordResetStatus"
+    >
       <app-alert-message
         type="notice-important"
-        *ngIf="showPasswordResetRequired && !show2FA"
+        *ngIf="showPasswordResetNotice"
         id="cy-password-reset-required-notice"
       >
         <div content class="content">

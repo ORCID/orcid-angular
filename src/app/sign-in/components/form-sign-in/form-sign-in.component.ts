@@ -18,7 +18,6 @@ import {
 import { ActivatedRoute, Router } from '@angular/router'
 import {
   catchError,
-  distinctUntilChanged,
   first,
   map,
   switchMap,
@@ -151,6 +150,12 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   /** The usernames the reset email was sent for from the notice, on this page */
   private readonly passwordResetEmailSentFor = new Set<string>()
   sendingPasswordResetEmail = false
+  /** The username most recently looked up, so leaving the field again does not ask twice */
+  private lastLookedUpUsername: string | null = null
+  /** A lookup is on its way; the notice region is marked busy meanwhile */
+  checkingPasswordResetStatus = false
+  /** Sign in posts so far, so an answer that a newer post overtook is dropped */
+  private signInAttempts = 0
   private readonly passwordResetStatusCheck = new Subject<string>()
 
   placeholderUsername = $localize`:@@ngOrcid.signin.username:Email or 16-digit ORCID iD`
@@ -168,6 +173,19 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   get showPasswordResetRequired(): boolean {
     const username = this.normalisedUsername()
     return !!username && username === this.passwordResetRequiredFor
+  }
+
+  /**
+   * Whether the notice is on screen. During the 2FA step only the sign in's
+   * own answer puts it there, when the record was flagged after its password
+   * was accepted; a lookup never overrules the 2FA prompt.
+   */
+  get showPasswordResetNotice(): boolean {
+    return (
+      this.showPasswordResetRequired &&
+      (!this.show2FA ||
+        this.passwordResetConfirmedFor === this.normalisedUsername())
+    )
   }
 
   get passwordResetEmailSent(): boolean {
@@ -303,6 +321,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       // The answer is about this username, whatever the field holds by the
       // time it arrives
       const submittedUsername = this.normalisedUsername()
+      const attempt = ++this.signInAttempts
       this.hideErrors()
       this.loading.next(true)
 
@@ -318,14 +337,27 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       this.authorizationFormSubmitted = true
       $signIn.subscribe((data) => {
         this.printError = false
-        // A 2FA prompt means the password was accepted, so no reset is owed
+        // Only an answer that says no more than "not signed in" is the
+        // notice's to explain; anything more specific is shown as usual
+        const plainFailure =
+          !data.success &&
+          !data.passwordResetRequired &&
+          !data.verificationCodeRequired &&
+          !data.deprecated &&
+          !data.disabled &&
+          !data.unclaimed &&
+          !data.badVerificationCode &&
+          !data.badRecoveryCode &&
+          !data.invalidUserType
+        // A lookup's notice never speaks for the 2FA step, where the password
+        // has already been accepted
         const noticeShown =
+          !this.show2FA &&
           !!submittedUsername &&
           submittedUsername === this.passwordResetRequiredFor
         const passwordResetRequired =
           !data.success &&
-          (data.passwordResetRequired ||
-            (noticeShown && !data.verificationCodeRequired))
+          (data.passwordResetRequired || (noticeShown && plainFailure))
         if (passwordResetRequired) {
           // The record has to reset its password: the sign in fails silently
           // and the notice above the password field says why (PD-5692). The
@@ -335,9 +367,10 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           if (data.passwordResetRequired) {
             this.passwordResetRequiredFor = submittedUsername
             this.passwordResetConfirmedFor = submittedUsername
-          } else {
-            // Kept silent on the notice's word alone: check it still holds
-            this.recheckPasswordResetStatus(submittedUsername)
+          } else if (this.passwordResetConfirmedFor !== submittedUsername) {
+            // Kept silent on a lookup's word alone: check it still holds. A
+            // notice the sign in itself confirmed needs no second opinion
+            this.recheckPasswordResetStatus(submittedUsername, attempt)
           }
           this._observability.recordSimpleEvent(AppEventName.SignInFailure, {
             isOauth: !!isOauth,
@@ -348,8 +381,9 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           })
           return
         }
-        if (data.success || data.verificationCodeRequired) {
-          // The password was accepted, so no reset is owed any more
+        if (!plainFailure) {
+          // The password was accepted, or the answer says more than "not
+          // signed in" (deprecated, deactivated...): no reset notice applies
           this.passwordResetRequiredFor = null
           this.passwordResetConfirmedFor = null
         }
@@ -606,9 +640,16 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   checkPasswordResetStatus(): void {
     const control = this.authorizationForm?.get('username')
     const username = this.normalisedUsername()
-    if (!control || !username || UsernameValidator.orcidOrEmail(control)) {
+    if (
+      !control ||
+      !username ||
+      UsernameValidator.orcidOrEmail(control) ||
+      username === this.lastLookedUpUsername
+    ) {
       return
     }
+    this.lastLookedUpUsername = username
+    this.checkingPasswordResetStatus = true
     this.passwordResetStatusCheck.next(username)
   }
 
@@ -650,7 +691,6 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   private observePasswordResetStatus(): void {
     this.passwordResetStatusCheck
       .pipe(
-        distinctUntilChanged(),
         switchMap((username) =>
           this._signIn.getPasswordResetStatus(username).pipe(
             map((status) => ({
@@ -662,6 +702,11 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         takeUntil(this.$destroy)
       )
       .subscribe(({ username, required }) => {
+        this.checkingPasswordResetStatus = false
+        if (this.show2FA) {
+          // The password was accepted meanwhile; the 2FA step decides now
+          return
+        }
         if (required) {
           this.passwordResetRequiredFor = username
         } else if (
@@ -680,25 +725,40 @@ export class FormSignInComponent implements OnInit, OnDestroy {
    * any more, take the notice away and show the answer as the wrong password
    * it was, instead of leaving the user with silence.
    */
-  private recheckPasswordResetStatus(username: string): void {
+  private recheckPasswordResetStatus(username: string, attempt: number): void {
     if (!username) {
       return
     }
     this._signIn
-      .getPasswordResetStatus(username)
+      .getPasswordResetStatus(username, false)
       .pipe(first(), takeUntil(this.$destroy))
-      .subscribe((status) => {
-        if (
-          status?.passwordResetRequired ||
-          this.normalisedUsername() !== username ||
-          this.show2FA
-        ) {
-          return
-        }
-        this.passwordResetRequiredFor = null
-        this.passwordResetConfirmedFor = null
-        this.badCredentials = true
-        this.printError = true
+      .subscribe({
+        next: (status) => {
+          if (
+            status?.passwordResetRequired ||
+            attempt !== this.signInAttempts ||
+            this.show2FA ||
+            this.normalisedUsername() !== username
+          ) {
+            return
+          }
+          this.passwordResetRequiredFor = null
+          this.passwordResetConfirmedFor = null
+          // Ask again the next time the field is left
+          this.lastLookedUpUsername = null
+          this.badCredentials = true
+          this.printError = true
+          this._observability.recordSimpleEvent(AppEventName.SignInFailure, {
+            isOauth: !!this.signInLocal?.isOauth,
+            signInType: this.signInLocal?.type || 'regular',
+            passwordResetRequired: false,
+            suppressedByNotice: false,
+            badCredentials: true,
+            recheckedAfterNotice: true,
+          })
+        },
+        // Could not ask: stay silent rather than guess
+        error: () => {},
       })
   }
 

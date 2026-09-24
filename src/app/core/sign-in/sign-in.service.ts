@@ -212,21 +212,25 @@ export class SignInService {
    * Always the Registry, like the recovery phone calls: the flag lives on the
    * record and the lookup is not part of either sign-in implementation. A
    * failure answers false and reports nothing: this is a hint, and the sign-in
-   * itself reports the same state once the password is right.
+   * itself reports the same state once the password is right. A caller that
+   * has to tell "no reset owed" from "could not ask" passes `failOpen` false
+   * and gets the error instead.
    */
   getPasswordResetStatus(
-    username: string
+    username: string,
+    failOpen = true
   ): Observable<PasswordResetStatusResponse> {
-    return this._http
-      .post<PasswordResetStatusResponse>(
-        runtimeEnvironment.API_WEB + 'signin/password-reset-status.json',
-        { username: getOrcidNumber((username || '').trim()) },
-        {
-          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-          withCredentials: true,
-        }
-      )
-      .pipe(catchError(() => of({ passwordResetRequired: false })))
+    const request = this._http.post<PasswordResetStatusResponse>(
+      runtimeEnvironment.API_WEB + 'signin/password-reset-status.json',
+      { username: getOrcidNumber((username || '').trim()) },
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        withCredentials: true,
+      }
+    )
+    return failOpen
+      ? request.pipe(catchError(() => of({ passwordResetRequired: false })))
+      : request
   }
 
   /**

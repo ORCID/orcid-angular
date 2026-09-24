@@ -23,7 +23,7 @@ import { OauthService } from '../../../core/oauth/oauth.service'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
 import { Router } from '@angular/router'
-import { of, Subject } from 'rxjs'
+import { of, Subject, throwError } from 'rxjs'
 import { OauthURLSessionManagerService } from '../../../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 describe('FormSignInComponent', () => {
@@ -379,8 +379,13 @@ describe('FormSignInComponent', () => {
       expect(component.show2FA).toBeFalse()
       expect(navigateToSpy).not.toHaveBeenCalled()
       expect(notice()).toBeTruthy()
-      // Kept silent on the notice's word, so the status is asked again
+      // Kept silent on the notice's word, so the status is asked again, and
+      // this time an error is not taken for "no reset owed"
       expect(statusSpy).toHaveBeenCalledTimes(2)
+      expect(statusSpy.calls.mostRecent().args).toEqual([
+        'test@example.org',
+        false,
+      ])
       expect(eventSpy).toHaveBeenCalledWith(
         'sign_in_failure',
         jasmine.objectContaining({
@@ -405,6 +410,11 @@ describe('FormSignInComponent', () => {
         of({ success: false } as any)
       )
 
+      const eventSpy = spyOn(
+        (component as any)._observability,
+        'recordSimpleEvent'
+      )
+
       component.onSubmit()
       fixture.detectChanges()
 
@@ -412,6 +422,164 @@ describe('FormSignInComponent', () => {
       expect(notice()).toBeNull()
       expect(component.badCredentials).toBeTrue()
       expect(component.printError).toBeTrue()
+      expect(eventSpy).toHaveBeenCalledWith(
+        'sign_in_failure',
+        jasmine.objectContaining({
+          badCredentials: true,
+          recheckedAfterNotice: true,
+        })
+      )
+    })
+
+    it('does not second-guess a notice the sign in itself confirmed', () => {
+      const signIn = spyOn(
+        (component as any)._signIn,
+        'signIn'
+      ).and.returnValues(
+        of({ success: false, passwordResetRequired: true } as any),
+        of({ success: false } as any)
+      )
+      component.authorizationForm.patchValue({
+        username: 'test@example.org',
+        password: 'the-old-one',
+      })
+
+      component.onSubmit()
+      component.authorizationForm.patchValue({ password: 'a-typo' })
+      component.onSubmit()
+
+      expect(signIn).toHaveBeenCalledTimes(2)
+      expect(statusSpy).not.toHaveBeenCalled()
+      expect(component.showPasswordResetRequired).toBeTrue()
+      expect(component.badCredentials).toBeFalse()
+    })
+
+    it('stays silent when the re-check cannot ask', () => {
+      statusSpy.and.returnValues(
+        of({ passwordResetRequired: true }),
+        throwError(() => new Error('offline'))
+      )
+      component.authorizationForm.patchValue({
+        username: 'test@example.org',
+        password: 'the-old-one',
+      })
+      component.checkPasswordResetStatus()
+      spyOn((component as any)._signIn, 'signIn').and.returnValue(
+        of({ success: false } as any)
+      )
+
+      component.onSubmit()
+
+      expect(component.showPasswordResetRequired).toBeTrue()
+      expect(component.badCredentials).toBeFalse()
+      expect(component.printError).toBeFalse()
+    })
+
+    it('drops a re-check that a newer sign in overtook', () => {
+      const late = new Subject<{ passwordResetRequired: boolean }>()
+      statusSpy.and.returnValues(
+        of({ passwordResetRequired: true }),
+        late,
+        of({ passwordResetRequired: true })
+      )
+      component.authorizationForm.patchValue({
+        username: 'test@example.org',
+        password: 'the-old-one',
+      })
+      component.checkPasswordResetStatus()
+      spyOn((component as any)._signIn, 'signIn').and.returnValue(
+        of({ success: false } as any)
+      )
+
+      component.onSubmit()
+      component.onSubmit()
+      late.next({ passwordResetRequired: false })
+
+      expect(component.showPasswordResetRequired).toBeTrue()
+      expect(component.badCredentials).toBeFalse()
+    })
+
+    it('shows a deprecated answer instead of keeping it quiet', () => {
+      component.authorizationForm.patchValue({
+        username: 'test@example.org',
+        password: 'secret',
+      })
+      component.checkPasswordResetStatus()
+      spyOn((component as any)._signIn, 'signIn').and.returnValue(
+        of({
+          success: false,
+          deprecated: true,
+          primary: '0000-0001-2345-6789',
+        } as any)
+      )
+
+      component.onSubmit()
+
+      expect(component.showDeprecatedError).toBeTrue()
+      expect(component.printError).toBeTrue()
+      expect(component.showPasswordResetRequired).toBeFalse()
+    })
+
+    it("does not keep a failure at the 2FA step quiet on a lookup's word", () => {
+      component.authorizationForm.patchValue({
+        username: 'test@example.org',
+        password: 'secret',
+      })
+      component.show2FA = true
+      ;(component as any).passwordResetRequiredFor = 'test@example.org'
+      spyOn((component as any)._signIn, 'signIn').and.returnValue(
+        of({ success: false } as any)
+      )
+
+      component.onSubmit()
+
+      expect(component.badCredentials).toBeTrue()
+      expect(component.printError).toBeTrue()
+    })
+
+    it('shows the notice when the registry refuses at the 2FA step', () => {
+      component.authorizationForm.patchValue({
+        username: 'test@example.org',
+        password: 'secret',
+      })
+      component.show2FA = true
+      spyOn((component as any)._signIn, 'signIn').and.returnValue(
+        of({ success: false, passwordResetRequired: true } as any)
+      )
+
+      component.onSubmit()
+      fixture.detectChanges()
+
+      expect(component.showPasswordResetNotice).toBeTrue()
+      expect(notice()).toBeTruthy()
+    })
+
+    it('ignores a lookup answer that arrives during the 2FA step', () => {
+      component.authorizationForm.patchValue({ username: 'test@example.org' })
+      component.show2FA = true
+
+      component.checkPasswordResetStatus()
+
+      expect(statusSpy).toHaveBeenCalled()
+      expect(component.showPasswordResetRequired).toBeFalse()
+      expect(component.checkingPasswordResetStatus).toBeFalse()
+    })
+
+    it('marks the notice region busy while it asks', () => {
+      const late = new Subject<{ passwordResetRequired: boolean }>()
+      statusSpy.and.returnValue(late)
+      component.authorizationForm.patchValue({ username: 'test@example.org' })
+
+      component.checkPasswordResetStatus()
+      fixture.detectChanges()
+      const region: HTMLElement = fixture.nativeElement.querySelector(
+        '#cy-password-reset-status'
+      )
+      expect(region.getAttribute('aria-busy')).toBe('true')
+
+      late.next({ passwordResetRequired: false })
+      fixture.detectChanges()
+      expect(region.getAttribute('aria-busy')).toBe('false')
     })
 
     it('still proceeds when the sign in succeeds while the notice is shown', () => {

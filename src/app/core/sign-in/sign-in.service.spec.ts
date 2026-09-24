@@ -164,5 +164,21 @@ describe('SignInService', () => {
 
       expect(response.passwordResetRequired).toBeFalse()
     })
+
+    it('lets the error through when asked not to fail open', () => {
+      let failed = false
+      let answered = false
+      service.getPasswordResetStatus('user@example.org', false).subscribe({
+        next: () => (answered = true),
+        error: () => (failed = true),
+      })
+
+      httpController
+        .expectOne(API_WEB + 'signin/password-reset-status.json')
+        .flush('boom', { status: 500, statusText: 'Server Error' })
+
+      expect(failed).toBeTrue()
+      expect(answered).toBeFalse()
+    })
   })
 })
