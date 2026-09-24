@@ -1,3 +1,9 @@
+## v3.23.6 - 2026-09-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.5...v3.23.6)
+
+- [#2916](https://github.com/ORCID/orcid-angular/pull/2916): PD-6046 PD-6045 add 2FA recovery phone number
+
 ## v3.23.5 - 2026-09-21
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.4...v3.23.5)
