@@ -3470,7 +3470,7 @@
       </trans-unit>
       <trans-unit id="interstitial.weHaveNoticedYouOnlyHaveOneEmail" datatype="html" resname="interstitial.weHaveNoticedYouOnlyHaveOneEmail">
         <source>We’ve noticed you only have one email address associated with your ORCID account. Adding a backup email will help you sign in to ORCID if you lose access to your primary email address.</source>
-        <target>Všimli jsme si, že máte ke svému účtu ORCID přidruženou pouze jednu e-mailovou adresu. Přidání záložního e-mailu vám pomůže se přihlásit k ORCID, pokud ztratíte přístup ke své hlavní e-mailové adrese.</target>
+        <target>Všimli jsme si, že ke svému účtu ORCID máte přidruženou pouze jednu e-mailovou adresu. Přidání záložního e-mailu vám pomůže se přihlásit k ORCID, pokud ztratíte přístup ke své hlavní e-mailové adrese.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">15,19</context>
@@ -11943,7 +11943,7 @@
       </trans-unit>
       <trans-unit id="recordCorrections.p1.3" datatype="html" resname="recordCorrections.p1.3">
         <source>is “Individual Control”; this means that your data is controlled by you. However, in limited circumstances, ORCID may proactively correct data in a record where system errors have resulted in invalid data. We will not correct incorrect data. All corrections of invalid data are listed below.</source>
-        <target>je „Individuální kontrola“; to znamená, že svá data si ovládáte sami. Ve výjimečných případech však může ORCID proaktivně opravit data v záznamu, pokud systémové chyby vedly k neplatným údajům. Nesprávná data opravovat nebudeme. Všechny opravy neplatných dat jsou uvedeny níže.</target>
+        <target>je „Individuální kontrola“; to znamená, že svá data si spravujete sami. Ve výjimečných případech však může ORCID proaktivně opravit data v záznamu, pokud by systémové chyby vedly k neplatným údajům. Nesprávná data opravovat nebudeme. Všechny opravy neplatných dat jsou uvedeny níže.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record-corrections/pages/record-corrections/record-corrections.component.html</context>
           <context context-type="linenumber">26,30</context>
@@ -16875,6 +16875,7 @@
       </trans-unit>
       <trans-unit id="register.thisOrganizationIsNotInOurDatabase" datatype="html" resname="register.thisOrganizationIsNotInOurDatabase">
         <source>This organization is not in our database. Please try entering the name again. If you cannot find your organization you can</source>
+        <target>Tato organizace není v naší databázi. Zkuste prosím zadat název znovu. Pokud svou organizaci nemůžete najít, můžete</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">183,184</context>
@@ -16882,6 +16883,7 @@
       </trans-unit>
       <trans-unit id="register.skipThisStep" datatype="html" resname="register.skipThisStep">
         <source>skip this step</source>
+        <target>tento krok přeskočit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
           <context context-type="linenumber">190</context>
@@ -17829,6 +17831,7 @@
       </trans-unit>
       <trans-unit id="register.addingACurrentEmploymentAffiliationHelps" datatype="html" resname="register.addingACurrentEmploymentAffiliationHelps">
         <source>Adding a current employment affiliation helps distinguish you from other researchers with a similar name.</source>
+        <target>Přidání vašeho současného pracovního přidružení vás pomáhá odlišit od ostatních výzkumníků s podobným jménem.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
           <context context-type="linenumber">44,47</context>
@@ -17928,6 +17931,7 @@
       </trans-unit>
       <trans-unit id="reset.hasAlreadyBeenUsed" datatype="html" resname="reset.hasAlreadyBeenUsed">
         <source>This password reset link has already been used</source>
+        <target>Tento odkaz pro obnovení hesla již byl použit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">88</context>
@@ -20943,6 +20947,7 @@
       </trans-unit>
       <trans-unit id="works.fundedByDescription" datatype="html" resname="works.fundedByDescription">
         <source>The identifier applies to the grant or other funding awarded for the work. For example, a DOI for the funding or an internal grant number.</source>
+        <target>Identifikátor se vztahuje ke grantu nebo jinému financování, které bylo dané práci uděleno. Jedná se například o DOI pro financování nebo o interní číslo grantu.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">633</context>
@@ -21663,9 +21668,11 @@
       </trans-unit>
       <trans-unit id="printView.recordIsNotClaimedTitle" datatype="html" resname="printView.recordIsNotClaimedTitle">
         <source>This record has not been claimed</source>
+        <target>Tento záznam nebyl nárokován</target>
       </trans-unit>
       <trans-unit id="printView.recordNotClaimedDescription" datatype="html" resname="printView.recordNotClaimedDescription">
         <source>This record has not been claimed yet</source>
+        <target>Tento záznam zatím nebyl nárokován</target>
       </trans-unit>
       <trans-unit id="printView.orcidPrintView" datatype="html" resname="printView.orcidPrintView">
         <source>ORCID Print view</source>
