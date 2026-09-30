@@ -52,7 +52,7 @@ export class SettingsSecurityTwoFactorAuthComponent
   recoveryPhoneTogglz = false
   loadingTogglz = true
   /** Set from the query param the recovery phone page comes back with. */
-  recoveryPhoneOutcome: 'added' | 'updated' | 'failed' | undefined
+  recoveryPhoneOutcome: 'added' | 'updated' | 'failed' | 'cancelled' | undefined
 
   constructor(
     private _router: Router,
@@ -100,7 +100,12 @@ export class SettingsSecurityTwoFactorAuthComponent
    */
   private readRecoveryPhoneOutcome(): void {
     const outcome = this._route.snapshot.queryParamMap.get('recoveryPhone')
-    if (outcome !== 'added' && outcome !== 'updated' && outcome !== 'failed') {
+    if (
+      outcome !== 'added' &&
+      outcome !== 'updated' &&
+      outcome !== 'failed' &&
+      outcome !== 'cancelled'
+    ) {
       return
     }
     this.recoveryPhoneOutcome = outcome
@@ -111,6 +116,14 @@ export class SettingsSecurityTwoFactorAuthComponent
       fragment: '2FA',
       replaceUrl: true,
     })
+  }
+
+  /** A cancel leaves the number as it was, which the frame says the same way a failed save does. */
+  get recoveryPhoneNotUpdated(): boolean {
+    return (
+      this.recoveryPhoneOutcome === 'failed' ||
+      this.recoveryPhoneOutcome === 'cancelled'
+    )
   }
 
   get hasRecoveryPhone(): boolean {

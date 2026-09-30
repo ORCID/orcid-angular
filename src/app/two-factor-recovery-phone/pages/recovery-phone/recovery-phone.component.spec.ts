@@ -165,13 +165,18 @@ describe('RecoveryPhoneComponent', () => {
     expect(hostedForm().maskedRecoveryPhoneNumber).toBe('***********1234')
   })
 
-  it('leaves the page when the challenge is cancelled', () => {
+  it('leaves the page, reporting nothing, when the challenge is cancelled', () => {
     build()
     ;(router.navigate as jasmine.Spy).calls.reset()
 
     afterClosed.next(false)
 
-    expect(router.navigate).toHaveBeenCalled()
+    // "Cancel account verification" happens before any change could be made,
+    // so unlike the page's own Cancel it has no notice (R10.2)
+    expect(router.navigate).toHaveBeenCalledWith(
+      [ApplicationRoutes.account],
+      jasmine.objectContaining({ queryParams: {}, fragment: '2FA' })
+    )
   })
 
   it('reports a failed challenge back into the dialog', () => {
@@ -222,8 +227,9 @@ describe('RecoveryPhoneComponent', () => {
     hostedForm().challengeRequired.emit()
 
     // This page used to ask its challenge again. Asking a second time without
-    // being invited is a re-prompt, and the exit is the one Cancel already
-    // takes: back to the panel, with nothing said, because nothing happened.
+    // being invited is a re-prompt, and the exit is the one "Cancel account
+    // verification" takes: back to the panel, with nothing said, because the
+    // user did nothing.
     expect(dialog.open).not.toHaveBeenCalled()
     expect(router.navigate).toHaveBeenCalledWith(
       [ApplicationRoutes.account],
@@ -273,7 +279,7 @@ describe('RecoveryPhoneComponent', () => {
     )
   })
 
-  it('leaves without saving anything when cancelled', () => {
+  it('leaves without saving anything, reporting the cancel, when cancelled (PD-14413)', () => {
     build()
     passChallenge()
     ;(router.navigate as jasmine.Spy).calls.reset()
@@ -283,7 +289,10 @@ describe('RecoveryPhoneComponent', () => {
     expect(twoFactorService.saveRecoveryPhone).not.toHaveBeenCalled()
     expect(router.navigate).toHaveBeenCalledWith(
       [ApplicationRoutes.account],
-      jasmine.objectContaining({ queryParams: {} })
+      jasmine.objectContaining({
+        queryParams: { recoveryPhone: 'cancelled' },
+        fragment: '2FA',
+      })
     )
   })
 

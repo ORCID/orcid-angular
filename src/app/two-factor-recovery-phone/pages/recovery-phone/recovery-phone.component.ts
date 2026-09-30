@@ -235,14 +235,14 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
    * reaching the same conclusion first.
    *
    * This page used to answer by re-opening its own challenge, which is what
-   * R10.4 described. PD-13638 replaced that with the exit Cancel already
-   * takes: back to Account settings, reporting nothing. A second challenge
-   * asked without being invited is a re-prompt, and the ticket rules those
-   * out.
+   * R10.4 described. PD-13638 replaced that with the exit "Cancel account
+   * verification" takes: back to Account settings, reporting nothing. A
+   * second challenge asked without being invited is a re-prompt, and the
+   * ticket rules those out.
    *
-   * Nothing is reported on the way out because nothing happened. An outcome
-   * of 'failed' would show the failure notice, which is a message about a
-   * save; no save was attempted.
+   * Nothing is reported on the way out because the user did nothing. The
+   * page's own Cancel is different: the user chose to abandon a change, and
+   * the frame answers that with "not updated" (PD-14413).
    */
   private onElevationExpired(): void {
     if (this.recoveryPhoneForm?.saving) {
@@ -263,12 +263,17 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
     this.returnToAccountSettings('failed')
   }
 
+  /**
+   * The number stays as it was, and the panel says so with the same notice a
+   * failed save shows (PD-14413). The outcome is its own value so the address
+   * never claims a save failed when none was attempted.
+   */
   cancel(): void {
-    this.returnToAccountSettings()
+    this.returnToAccountSettings('cancelled')
   }
 
   private returnToAccountSettings(
-    outcome?: 'added' | 'updated' | 'failed'
+    outcome?: 'added' | 'updated' | 'failed' | 'cancelled'
   ): void {
     this._router.navigate([ApplicationRoutes.account], {
       queryParams: outcome ? { recoveryPhone: outcome } : {},
