@@ -27,7 +27,7 @@ describe('AlertMessageComponent', () => {
    * warning variant was already on the right border and is pinned here beside
    * it so a later palette change cannot move one without the other.
    */
-  const containerOf = (type: 'warning' | 'success') => {
+  const containerOf = (type: 'warning' | 'success' | 'notice-important') => {
     component.type = type
     fixture.detectChanges()
     return fixture.nativeElement.querySelector(
@@ -56,5 +56,35 @@ describe('AlertMessageComponent', () => {
 
     expect(style.borderTopColor).toBe('rgb(211, 47, 47)')
     expect(style.backgroundColor).toBe('rgb(255, 235, 238)')
+  })
+
+  /*
+   * PD-5692. The mandatory password reset frames draw their notice in the
+   * design system's notice-important: #ff9c00 on the notice background, an
+   * error glyph, and links in the ordinary #085c77. The plain notice keeps its
+   * own colours, so nothing that already uses it changes.
+   */
+  it('draws a notice-important alert in the design system colours', () => {
+    const container = containerOf('notice-important')
+    const style = getComputedStyle(container)
+
+    expect(style.borderTopColor).toBe('rgb(255, 156, 0)')
+    expect(style.backgroundColor).toBe('rgb(255, 251, 238)')
+    expect(container.querySelector('mat-icon').textContent.trim()).toBe(
+      'error_outline'
+    )
+  })
+
+  it('leaves the plain notice on its own colours', () => {
+    component.type = 'notice'
+    fixture.detectChanges()
+    const container = fixture.nativeElement.querySelector(
+      '.alert-container'
+    ) as HTMLElement
+
+    expect(getComputedStyle(container).borderTopColor).toBe('rgb(255, 100, 0)')
+    expect(container.querySelector('mat-icon').textContent.trim()).toBe(
+      'info_outline'
+    )
   })
 })

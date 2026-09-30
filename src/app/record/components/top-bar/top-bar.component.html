@@ -12,6 +12,45 @@
   [justRegistered]="justRegistered"
 ></app-top-bar-verification-email>
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
+  <!--
+    PD-5692: the record has to reset its password. Its user got here through a
+    linked institutional or social account, since a password sign in is
+    refused, so the action goes straight to the Account password panel.
+  -->
+  <app-alert-message
+    type="notice-important"
+    *ngIf="userInfo?.FORCE_PASSWORD_RESET === 'true'"
+    class="force-password-reset"
+    id="cy-force-password-reset-notice"
+  >
+    <div content>
+      <p class="force-password-reset-title">
+        <strong i18n="@@topBar.passwordResetRequired.title"
+          >Your ORCID account password needs to be reset</strong
+        >
+      </p>
+      <p>
+        <ng-container i18n="@@topBar.passwordResetRequired.body"
+          >To help maintain the security of your ORCID account please reset your
+          account password.</ng-container
+        >&nbsp;<i i18n="@@topBar.passwordResetRequired.cannotSignIn"
+          >You will not be able to sign in to ORCID until your password has been
+          reset.</i
+        >
+      </p>
+      <p class="force-password-reset-action">
+        <a
+          class="underline"
+          routerLink="/account"
+          fragment="password"
+          id="cy-force-password-reset-link"
+          i18n="@@topBar.passwordResetRequired.resetNow"
+          >Reset your account password now</a
+        >
+      </p>
+    </div>
+  </app-alert-message>
+
   <orcid-registry-permission-notifications
     *ngIf="permissionPanelNotifications?.length && userInfo?.LOCKED !== 'true'"
     [title]="permissionPanelTitle"

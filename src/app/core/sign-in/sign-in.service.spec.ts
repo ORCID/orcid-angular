@@ -121,4 +121,64 @@ describe('SignInService', () => {
       expect(response.orcid).toBe('0000-0001-2345-6789')
     })
   })
+
+  describe('password reset status lookup (PD-5692)', () => {
+    let service: SignInService
+    let httpController: HttpTestingController
+
+    beforeEach(() => {
+      service = TestBed.inject(SignInService)
+      httpController = TestBed.inject(HttpTestingController)
+    })
+
+    afterEach(() => {
+      httpController.verify()
+    })
+
+    it('asks the registry, with an iD in its canonical form', () => {
+      let response: { passwordResetRequired: boolean }
+      service
+        .getPasswordResetStatus(' https://orcid.org/0000-0001-2345-6789 ')
+        .subscribe((value) => (response = value))
+
+      const request = httpController.expectOne(
+        API_WEB + 'signin/password-reset-status.json'
+      )
+      expect(request.request.method).toBe('POST')
+      expect(request.request.withCredentials).toBeTrue()
+      expect(request.request.body).toEqual({ username: '0000-0001-2345-6789' })
+
+      request.flush({ passwordResetRequired: true })
+      expect(response.passwordResetRequired).toBeTrue()
+    })
+
+    it('answers false when the lookup fails, so sign in is never blocked', () => {
+      let response: { passwordResetRequired: boolean }
+      service
+        .getPasswordResetStatus('user@example.org')
+        .subscribe((value) => (response = value))
+
+      httpController
+        .expectOne(API_WEB + 'signin/password-reset-status.json')
+        .flush('boom', { status: 500, statusText: 'Server Error' })
+
+      expect(response.passwordResetRequired).toBeFalse()
+    })
+
+    it('lets the error through when asked not to fail open', () => {
+      let failed = false
+      let answered = false
+      service.getPasswordResetStatus('user@example.org', false).subscribe({
+        next: () => (answered = true),
+        error: () => (failed = true),
+      })
+
+      httpController
+        .expectOne(API_WEB + 'signin/password-reset-status.json')
+        .flush('boom', { status: 500, statusText: 'Server Error' })
+
+      expect(failed).toBeTrue()
+      expect(answered).toBeFalse()
+    })
+  })
 })

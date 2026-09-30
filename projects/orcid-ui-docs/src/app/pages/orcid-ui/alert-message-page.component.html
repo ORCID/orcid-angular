@@ -17,6 +17,7 @@
         <mat-label>Alert Type</mat-label>
         <mat-select [(ngModel)]="type" aria-label="Alert type">
           <mat-option value="notice">Notice</mat-option>
+          <mat-option value="notice-important">Notice (important)</mat-option>
           <mat-option value="info">Info</mat-option>
           <mat-option value="warning">Warning</mat-option>
           <mat-option value="success">Success</mat-option>
@@ -58,8 +59,12 @@
     <ul>
       <li>
         <code>type</code>:
-        <code>'notice' | 'info' | 'warning' | 'success'</code> (default
-        <code>'notice'</code>)
+        <code
+          >'notice' | 'notice-important' | 'info' | 'warning' | 'success'</code
+        >
+        (default <code>'notice'</code>). <code>'notice-important'</code> is the
+        design system's notice-important: an error glyph, a #ff9c00 border and
+        links in the ordinary link colour, for a notice the user has to act on.
       </li>
     </ul>
 
