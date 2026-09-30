@@ -215,6 +215,14 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
     )
   })
 
+  it('says the number was not updated when the page was cancelled', () => {
+    build(true, { recoveryPhone: 'cancelled' })
+    expect(component.recoveryPhoneOutcome).toBe('cancelled')
+    expect(fixture.nativeElement.textContent).toContain(
+      'Your recovery phone number was not updated'
+    )
+  })
+
   it('ignores an outcome it does not recognise', () => {
     build(true, { recoveryPhone: 'nonsense' })
     expect(component.recoveryPhoneOutcome).toBeUndefined()
