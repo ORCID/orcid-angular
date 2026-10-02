@@ -172,11 +172,15 @@
  * on-screen keyboard resizes the viewport, so with no keyboard up it ran the
  * full height of an iPhone. It is held to the top half of the screen, which is
  * how it already looks on Android with the keyboard up, and the keyboard still
- * wins when it leaves less room than that.
+ * wins when it leaves less room than that. A screen 600px tall or less - a
+ * phone on its side, a desktop zoomed in - keeps the whole height, which is
+ * already little enough; 600 is the height the library itself calls short.
  */
-::ng-deep .recovery-phone-iti.iti--fullscreen-popup .iti__country-selector {
-  max-height: min(100%, 50vh);
-  max-height: min(100%, 50dvh);
+@media (min-height: 601px) {
+  ::ng-deep .recovery-phone-iti.iti--fullscreen-popup .iti__country-selector {
+    max-height: min(100%, 50vh);
+    max-height: min(100%, 50dvh);
+  }
 }
 
 /* the popup's search box is a field too, so the same 16px applies on iOS */
