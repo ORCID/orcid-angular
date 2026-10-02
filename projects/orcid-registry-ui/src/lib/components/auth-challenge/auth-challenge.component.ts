@@ -1,7 +1,9 @@
+import { Platform } from '@angular/cdk/platform'
 import { CommonModule } from '@angular/common'
 import {
   Component,
   ElementRef,
+  HostBinding,
   Inject,
   OnDestroy,
   OnInit,
@@ -125,11 +127,22 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
   private verification: Subscription | undefined
   private closeWasAlreadyDisabled = false
 
+  /**
+   * Safari on an iPhone zooms the page in when a field set smaller than 16px
+   * takes focus, and stays zoomed after this dialog closes, so whatever the
+   * host shows next runs off the right of the screen (PD-14435). The
+   * stylesheet sets the fields at 16px there only.
+   */
+  @HostBinding('class.auth-challenge--ios')
+  readonly ios: boolean
+
   constructor(
     // Make dialog dependencies optional
     @Optional() private matRef: MatDialogRef<AuthChallengeComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    platform: Platform
   ) {
+    this.ios = platform.IOS
     // Only execute dialog-specific logic if matRef exists
     if (this.matRef) {
       this.matRef.updateSize('580px')
