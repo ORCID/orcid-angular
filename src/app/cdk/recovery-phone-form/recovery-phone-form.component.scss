@@ -141,6 +141,49 @@
   }
 }
 
+/*
+ * PD-14435. Safari on an iPhone zooms the whole page in when a field set
+ * smaller than 16px takes focus, and leaves it zoomed, so the form runs off the
+ * right of the screen. 16px is the smallest size it leaves alone. On iOS the
+ * fields a user types into are set at that size, and the dial code with the
+ * number it starts; everywhere else they keep the 14px the design draws.
+ */
+:host(.recovery-phone-form--ios) {
+  .phone-input-shell {
+    ::ng-deep .iti__tel-input,
+    ::ng-deep input[type='tel'],
+    ::ng-deep .iti__selected-dial-code {
+      font-size: 16px;
+    }
+  }
+
+  .verification-field__input {
+    font-size: 16px;
+  }
+}
+
+/*
+ * On a phone the country list opens as a popup that the library moves to the
+ * end of <body>, outside this component, so none of the rules above reach it.
+ * It carries the class the form hands the library instead, and these two are
+ * written against that class with nothing of the component in front of them.
+ *
+ * PD-14435. The popup is fixed to the whole screen and only shrinks when the
+ * on-screen keyboard resizes the viewport, so with no keyboard up it ran the
+ * full height of an iPhone. It is held to the top half of the screen, which is
+ * how it already looks on Android with the keyboard up, and the keyboard still
+ * wins when it leaves less room than that.
+ */
+::ng-deep .recovery-phone-iti.iti--fullscreen-popup .iti__country-selector {
+  max-height: min(100%, 50vh);
+  max-height: min(100%, 50dvh);
+}
+
+/* the popup's search box is a field too, so the same 16px applies on iOS */
+::ng-deep .recovery-phone-iti--ios .iti__search-input {
+  font-size: 16px;
+}
+
 /* a rejected number turns the whole field red, not just the message below it */
 .phone-input-shell--invalid {
   ::ng-deep .iti__tel-input,

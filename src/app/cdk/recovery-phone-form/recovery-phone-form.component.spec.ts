@@ -1,3 +1,4 @@
+import { Platform } from '@angular/cdk/platform'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import {
   ComponentFixture,
@@ -470,5 +471,51 @@ describe('RecoveryPhoneFormComponent', () => {
 
     expect(failed).toHaveBeenCalledWith('HTTP')
     expect(component.saving).toBeFalse()
+  })
+
+  describe('on an iPhone and elsewhere', () => {
+    /**
+     * The platform is read once, when the form is built, so each case sets it
+     * on the real service and builds the form again rather than mocking the
+     * whole service, which the Material controls in the template also read.
+     */
+    function renderOn(ios: boolean) {
+      TestBed.inject(Platform).IOS = ios
+      fixture = TestBed.createComponent(RecoveryPhoneFormComponent)
+      component = fixture.componentInstance
+      component.loadUtils = () => Promise.resolve({} as never)
+      fixture.detectChanges()
+    }
+
+    it('marks itself for the 16px fields Safari on an iPhone needs', () => {
+      renderOn(true)
+
+      expect(fixture.nativeElement.classList).toContain(
+        'recovery-phone-form--ios'
+      )
+    })
+
+    it('hands the country popup a class that names iOS too', () => {
+      renderOn(true)
+
+      const wrapper: HTMLElement = fixture.nativeElement.querySelector('.iti')
+      expect(component.countrySelectorClass).toBe(
+        'recovery-phone-iti recovery-phone-iti--ios'
+      )
+      expect(wrapper.classList).toContain('recovery-phone-iti')
+      expect(wrapper.classList).toContain('recovery-phone-iti--ios')
+    })
+
+    it('keeps the design sizes everywhere else, and still marks its popup', () => {
+      renderOn(false)
+
+      const wrapper: HTMLElement = fixture.nativeElement.querySelector('.iti')
+      expect(fixture.nativeElement.classList).not.toContain(
+        'recovery-phone-form--ios'
+      )
+      expect(component.countrySelectorClass).toBe('recovery-phone-iti')
+      expect(wrapper.classList).toContain('recovery-phone-iti')
+      expect(wrapper.classList).not.toContain('recovery-phone-iti--ios')
+    })
   })
 })

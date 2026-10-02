@@ -1,6 +1,8 @@
+import { Platform } from '@angular/cdk/platform'
 import {
   Component,
   EventEmitter,
+  HostBinding,
   Inject,
   Input,
   LOCALE_ID,
@@ -135,11 +137,34 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
 
   private countdownSubscription: Subscription | undefined
 
+  /**
+   * Safari on an iPhone zooms the page in when a field set smaller than 16px
+   * takes focus, and stays zoomed, which runs the form off the right of the
+   * screen (PD-14435). The stylesheet sets the fields at 16px there only, so
+   * everywhere else they keep the 14px the design draws.
+   */
+  @HostBinding('class.recovery-phone-form--ios')
+  readonly ios: boolean
+
+  /**
+   * On a phone the country list opens as a popup the library moves to the end
+   * of <body>, out of reach of this component's styles; the class handed to
+   * the library is how the stylesheet finds it again.
+   */
+  get countrySelectorClass(): string {
+    return this.ios
+      ? 'recovery-phone-iti recovery-phone-iti--ios'
+      : 'recovery-phone-iti'
+  }
+
   constructor(
     private _fb: UntypedFormBuilder,
     private _twoFactorAuthenticationService: TwoFactorAuthenticationService,
-    @Inject(LOCALE_ID) private _locale: string
-  ) {}
+    @Inject(LOCALE_ID) private _locale: string,
+    _platform: Platform
+  ) {
+    this.ios = _platform.IOS
+  }
 
   ngOnInit(): void {
     this.initialCountry = this.resolveInitialCountry()
