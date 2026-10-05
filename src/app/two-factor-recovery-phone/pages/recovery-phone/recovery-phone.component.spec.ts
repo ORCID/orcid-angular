@@ -309,7 +309,8 @@ describe('RecoveryPhoneComponent', () => {
    */
   describe('starting from the number on file (F4.1 to F4.4)', () => {
     const NUMBER = '+441234567890'
-    const existing = () => status({ maskedRecoveryPhoneNumber: '***********7890' })
+    const existing = () =>
+      status({ maskedRecoveryPhoneNumber: '***********7890' })
 
     it('no longer states the mask above the form (F4.1)', () => {
       build(true, existing())
@@ -331,7 +332,6 @@ describe('RecoveryPhoneComponent', () => {
       passChallenge()
 
       expect(twoFactorService.getRecoveryPhoneNumber).toHaveBeenCalledTimes(1)
-      expect(component.currentPhoneNumber).toBe(NUMBER)
       expect(hostedForm().phoneNumberControl.value).toBe(NUMBER)
     })
 
@@ -350,7 +350,6 @@ describe('RecoveryPhoneComponent', () => {
       build(true, existing())
       passChallenge()
 
-      expect(component.currentPhoneNumber).toBeUndefined()
       expect(hostedForm().phoneNumberControl.value).toBe('')
     })
 
@@ -361,7 +360,6 @@ describe('RecoveryPhoneComponent', () => {
       build(true, existing())
       passChallenge()
 
-      expect(component.currentPhoneNumber).toBeUndefined()
       expect(hostedForm().phoneNumberControl.value).toBe('')
       expect(router.navigate).not.toHaveBeenCalled()
     })
@@ -376,21 +374,22 @@ describe('RecoveryPhoneComponent', () => {
 
       const stored = writes.calls
         .allArgs()
-        .filter((args) => args.some((value) => `${value}`.includes('1234567890')))
+        .filter((args) =>
+          args.some((value) => `${value}`.includes('1234567890'))
+        )
       expect(stored).toEqual([])
       expect(document.cookie).not.toContain('1234567890')
     })
 
-    it('forgets the number with the page (F4.3)', () => {
+    it('hands the number to the form and keeps no copy of its own (F4.3)', () => {
       twoFactorService.getRecoveryPhoneNumber.and.returnValue(
         of({ success: true, phoneNumber: NUMBER })
       )
       build(true, existing())
       passChallenge()
 
-      fixture.destroy()
-
-      expect(component.currentPhoneNumber).toBeUndefined()
+      expect(hostedForm().phoneNumberControl.value).toBe(NUMBER)
+      expect(Object.values(component)).not.toContain(NUMBER)
     })
   })
 

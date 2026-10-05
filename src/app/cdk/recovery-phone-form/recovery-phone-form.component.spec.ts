@@ -111,14 +111,14 @@ describe('RecoveryPhoneFormComponent', () => {
     it('starts the field from it', () => {
       fixture.detectChanges()
 
-      component.currentPhoneNumber = NUMBER
+      component.startFromNumber(NUMBER)
 
       expect(component.phoneNumberControl.value).toBe(NUMBER)
       expect(component.phoneNumberControl.dirty).toBeFalse()
     })
 
     it('takes it even when it arrives before the form exists', () => {
-      component.currentPhoneNumber = NUMBER
+      component.startFromNumber(NUMBER)
 
       fixture.detectChanges()
 
@@ -130,14 +130,14 @@ describe('RecoveryPhoneFormComponent', () => {
       component.phoneNumberControl.setValue('+15555550123')
       component.phoneNumberControl.markAsDirty()
 
-      component.currentPhoneNumber = NUMBER
+      component.startFromNumber(NUMBER)
 
       expect(component.phoneNumberControl.value).toBe('+15555550123')
     })
 
     it('no longer states the masked number above the field', () => {
       fixture.detectChanges()
-      component.currentPhoneNumber = NUMBER
+      component.startFromNumber(NUMBER)
       fixture.detectChanges()
 
       expect(fixture.nativeElement.textContent).not.toContain(

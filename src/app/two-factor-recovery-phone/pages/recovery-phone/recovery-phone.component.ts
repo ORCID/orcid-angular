@@ -53,13 +53,7 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
   /** Set once the user has a number already, which turns this into a change. */
   managingExistingNumber = false
 
-  /**
-   * The number on file, in full, asked for once the challenge has passed so
-   * the field can start from it (F4.1). It lives here and in the form control
-   * only for as long as the page does, and is never written anywhere the
-   * browser keeps (F4.3).
-   */
-  currentPhoneNumber: string | undefined
+  /** The number on file is asked for once per page (F4.3). */
   private currentPhoneNumberRequested = false
 
   /** Mirrored from the form: the primary action is dead until a code is out. */
@@ -107,7 +101,6 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.currentPhoneNumber = undefined
     this.$destroy.next()
     this.$destroy.complete()
   }
@@ -199,8 +192,10 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
 
   /**
    * Asks for the number on file now that the challenge has elevated the
-   * session (F4.2). Anything but a number - a refusal, an error - leaves the
-   * field empty and the page working as it always has (F4.4).
+   * session (F4.2), and hands it straight to the form, which is already on the
+   * page behind the challenge: the page keeps no copy of its own (F4.3).
+   * Anything but a number - a refusal, an error - leaves the field empty and
+   * the page working as it always has (F4.4).
    */
   private loadCurrentPhoneNumber(): void {
     if (this.currentPhoneNumberRequested) {
@@ -214,7 +209,7 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           if (response?.success && response.phoneNumber) {
-            this.currentPhoneNumber = response.phoneNumber
+            this.recoveryPhoneForm?.startFromNumber(response.phoneNumber)
           }
         },
         error: () => {

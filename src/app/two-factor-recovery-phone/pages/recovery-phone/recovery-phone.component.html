@@ -33,7 +33,6 @@
 
       <app-recovery-phone-form
         context="SETTINGS"
-        [currentPhoneNumber]="currentPhoneNumber"
         (codeSentChange)="codeSent = $event"
         (saved)="onSaved()"
         (failed)="onFailed()"

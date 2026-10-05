@@ -23,7 +23,12 @@ describe('TwoFactorAuthenticationService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        { provide: ErrorHandlerService, useValue: jasmine.createSpyObj('ErrorHandlerService', ['handleError']) },
+        {
+          provide: ErrorHandlerService,
+          useValue: jasmine.createSpyObj('ErrorHandlerService', [
+            'handleError',
+          ]),
+        },
       ],
     })
     service = TestBed.inject(TwoFactorAuthenticationService)

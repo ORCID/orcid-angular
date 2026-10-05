@@ -73,17 +73,6 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
    */
   @Input() context: RecoveryPhoneContext = 'SETTINGS'
 
-  /**
-   * The number on file, in full, for the manage page to start the field from
-   * (F4.1); the field's widget selects the country from it. It goes straight
-   * into the form control and is held nowhere else (F4.3), and it never
-   * overwrites what the user has started typing.
-   */
-  @Input() set currentPhoneNumber(value: string | undefined) {
-    this.pendingCurrentPhoneNumber = value
-    this.applyCurrentPhoneNumber()
-  }
-
   /** Only until the form exists to take it: cleared the moment it is applied. */
   private pendingCurrentPhoneNumber: string | undefined
 
@@ -185,6 +174,17 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
     })
     this.applyCurrentPhoneNumber()
     this.loadPhoneFieldTranslations()
+  }
+
+  /**
+   * Starts the field from the number on file, in full, for the manage page
+   * (F4.1); the field's widget selects the country from it. The host hands it
+   * over rather than binding it, so the field is the only place it stays
+   * (F4.3), and it never overwrites what the user has started typing.
+   */
+  startFromNumber(phoneNumber: string): void {
+    this.pendingCurrentPhoneNumber = phoneNumber
+    this.applyCurrentPhoneNumber()
   }
 
   private applyCurrentPhoneNumber(): void {
