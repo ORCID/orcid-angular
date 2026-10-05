@@ -1,6 +1,9 @@
-import { TestBed } from '@angular/core/testing'
+import { fakeAsync, TestBed, tick } from '@angular/core/testing'
 
-import { SignInService } from './sign-in.service'
+import {
+  RECOVERY_PHONE_STATUS_TIMEOUT_MS,
+  SignInService,
+} from './sign-in.service'
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -95,6 +98,88 @@ describe('SignInService', () => {
       expect(response.success).toBeTrue()
       expect(response.resendAfterSeconds).toBe(30)
     })
+
+    it('asks the registry whether the account has a number (F1.2)', () => {
+      const answers: Array<boolean | undefined> = []
+      service
+        .recoveryPhoneStatus({
+          username: 'user@example.org',
+          password: 'a-password',
+        })
+        .subscribe((value) => answers.push(value))
+
+      const request = httpController.expectOne(
+        API_WEB + 'signin/recoveryPhone/status.json'
+      )
+      expect(request.request.method).toBe('POST')
+      expect(request.request.withCredentials).toBeTrue()
+      expect(request.request.body).toEqual({
+        username: 'user@example.org',
+        password: 'a-password',
+      })
+
+      request.flush({ success: true, hasRecoveryPhone: false })
+      expect(answers).toEqual([false])
+    })
+
+    it('says yes when the registry does', () => {
+      let answer: boolean | undefined
+      service
+        .recoveryPhoneStatus({ username: 'u', password: 'p' })
+        .subscribe((value) => (answer = value))
+
+      httpController
+        .expectOne(API_WEB + 'signin/recoveryPhone/status.json')
+        .flush({ success: true, hasRecoveryPhone: true })
+      expect(answer).toBeTrue()
+    })
+
+    it('reads a refusal as not known (F1.4)', () => {
+      let answer: boolean | undefined = true
+      service
+        .recoveryPhoneStatus({ username: 'u', password: 'p' })
+        .subscribe((value) => (answer = value))
+
+      httpController
+        .expectOne(API_WEB + 'signin/recoveryPhone/status.json')
+        .flush({ success: false, errorCode: 'BAD_CREDENTIALS' })
+      expect(answer).toBeUndefined()
+    })
+
+    it('reads a failed request as not known, and never errors (F1.4)', () => {
+      let answer: boolean | undefined = true
+      let failed = false
+      service.recoveryPhoneStatus({ username: 'u', password: 'p' }).subscribe({
+        next: (value) => (answer = value),
+        error: () => (failed = true),
+      })
+
+      httpController
+        .expectOne(API_WEB + 'signin/recoveryPhone/status.json')
+        .flush('boom', { status: 500, statusText: 'Server Error' })
+      expect(answer).toBeUndefined()
+      expect(failed).toBeFalse()
+    })
+
+    it('stops waiting after five seconds (F1.4)', fakeAsync(() => {
+      let answer: boolean | undefined = true
+      let done = false
+      service.recoveryPhoneStatus({ username: 'u', password: 'p' }).subscribe({
+        next: (value) => (answer = value),
+        complete: () => (done = true),
+      })
+      const request = httpController.expectOne(
+        API_WEB + 'signin/recoveryPhone/status.json'
+      )
+
+      tick(RECOVERY_PHONE_STATUS_TIMEOUT_MS - 1)
+      expect(done).toBeFalse()
+      tick(1)
+
+      expect(answer).toBeUndefined()
+      expect(done).toBeTrue()
+      expect(request.cancelled).toBeTrue()
+    }))
 
     it('verifies the code through the registry, with the code in the body', () => {
       let response: { success: boolean; orcid?: string }

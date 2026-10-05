@@ -109,6 +109,13 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   /** TWO_FACTOR_RECOVERY_PHONE, resolved once and passed to the 2FA form. */
   recoveryPhoneOptionAvailable = false
 
+  /**
+   * Whether the account has a recovery number, asked before the 2FA step is
+   * shown (F1.2). `undefined` until the registry answers, and for good if it
+   * cannot, which the form reads as "offer the recovery number" (F1.4).
+   */
+  hasRecoveryPhone: boolean | undefined
+
   /** Everything the 2FA form needs to know about the code we asked for. */
   recoveryPhoneState: RecoveryPhoneSignInState = {
     codeSent: false,
@@ -295,9 +302,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
           this.authorizationFormSubmitted = false
-          this.loading.next(false)
-          this.show2FA = true
-          this.show2FAEmitter.emit()
+          this.enterTwoFactorStep()
         } else {
           this.authorizationFormSubmitted = false
           this.loading.next(false)
@@ -341,6 +346,33 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         this.firstInput.nativeElement.focus()
       }
     }
+  }
+
+  /**
+   * Shows the 2FA step. With the recovery number flag on, the step's second
+   * way out depends on the account, so the registry is asked first and the step
+   * appears already showing the right one rather than swapping it in front of
+   * the user (F1.1, F1.2). The spinner stays on for that one request; the
+   * service caps it and never fails (F1.4).
+   */
+  private enterTwoFactorStep(): void {
+    if (!this.recoveryPhoneOptionAvailable || this.show2FA) {
+      // Off, nothing to ask; already showing, already asked
+      this.loading.next(false)
+      this.show2FA = true
+      this.show2FAEmitter.emit()
+      return
+    }
+    const { username, password } = this.authorizationForm.getRawValue()
+    this._signIn
+      .recoveryPhoneStatus({ username, password })
+      .pipe(first())
+      .subscribe((hasRecoveryPhone) => {
+        this.hasRecoveryPhone = hasRecoveryPhone
+        this.loading.next(false)
+        this.show2FA = true
+        this.show2FAEmitter.emit()
+      })
   }
 
   authenticate($event) {
