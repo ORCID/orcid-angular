@@ -98,11 +98,10 @@
       <mat-icon class="logo-icon"
         ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
       </mat-icon>
-      <h1
-        class="orc-font-heading-small"
-        i18n="@@topBar.recoveryPhoneNumberAdded"
-      >
-        Recovery phone number added
+      <h1 class="orc-font-heading-small" #confirmationHeading tabindex="-1">
+        <ng-container i18n="@@topBar.recoveryPhoneNumberAdded"
+          >Recovery phone number added</ng-container
+        >
       </h1>
     </mat-card-title>
   </mat-card-header>

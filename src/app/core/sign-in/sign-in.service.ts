@@ -133,6 +133,15 @@ export class SignInService {
             }),
             switchMap((response) => {
               if (!updateUserSession) {
+                // The page is about to hand the browser to the authorization
+                // server, so there is no session to refresh here. The tab
+                // still starts a new sign in, which is what the interstitial
+                // gate counts once per: without one, the authorize page found
+                // no session id and the gate read that as already checked,
+                // so no OAuth interstitial ever ran (F2.7)
+                if (response?.success) {
+                  this._userService.createLocalUserSessionUid()
+                }
                 return of(response)
               }
               // call refreshUserSession with force session update to handle register actions from sessions with a logged in user

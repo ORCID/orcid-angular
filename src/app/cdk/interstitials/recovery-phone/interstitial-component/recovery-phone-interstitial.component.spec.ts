@@ -295,6 +295,15 @@ describe('RecoveryPhoneInterstitialComponent', () => {
       tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
     }))
 
+    it('takes focus, which the pressed button took with it', fakeAsync(() => {
+      save()
+
+      const heading = fixture.nativeElement.querySelector('h1')
+      expect(document.activeElement).toBe(heading)
+      expect(heading.getAttribute('tabindex')).toBe('-1')
+      tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
+    }))
+
     it('names the client the user is going back to', fakeAsync(() => {
       save()
 

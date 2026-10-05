@@ -20,6 +20,10 @@ import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { of } from 'rxjs'
+import { LOCAL_SESSION_UID } from '../../constants'
+import { SignInLocal } from '../../types/sign-in.local'
+import { TogglzService } from '../togglz/togglz.service'
 
 declare const runtimeEnvironment: { API_WEB: string }
 
@@ -56,6 +60,72 @@ describe('SignInService', () => {
   it('should be created', () => {
     const service: SignInService = TestBed.inject(SignInService)
     expect(service).toBeTruthy()
+  })
+
+  describe('starting the sign in in this tab (F2.7)', () => {
+    const AUTH_SERVER = 'https://auth.test.orcid.org/'
+    let service: SignInService
+    let httpController: HttpTestingController
+    let userService: UserService
+    let previousUid: string | null
+
+    beforeEach(() => {
+      ;(window as any).runtimeEnvironment = { API_WEB, AUTH_SERVER }
+      previousUid = window.sessionStorage.getItem(LOCAL_SESSION_UID)
+      window.sessionStorage.removeItem(LOCAL_SESSION_UID)
+      spyOn(TestBed.inject(TogglzService), 'getStateOf').and.returnValue(
+        of(true)
+      )
+      service = TestBed.inject(SignInService)
+      httpController = TestBed.inject(HttpTestingController)
+      userService = TestBed.inject(UserService)
+      spyOn(userService, 'createLocalUserSessionUid').and.callThrough()
+      spyOn(userService, 'refreshUserSession').and.callThrough()
+    })
+
+    afterEach(() => {
+      httpController.verify()
+      if (previousUid === null) {
+        window.sessionStorage.removeItem(LOCAL_SESSION_UID)
+      } else {
+        window.sessionStorage.setItem(LOCAL_SESSION_UID, previousUid)
+      }
+    })
+
+    /** The OAuth sign in that hands the browser to the authorization server. */
+    function signInWithoutRefreshing() {
+      service
+        .signIn(
+          {
+            data: { username: '0000-0001-2345-6789', password: 'p' },
+            isOauth: true,
+          } as SignInLocal,
+          false
+        )
+        .subscribe()
+      return httpController.expectOne(AUTH_SERVER + 'login')
+    }
+
+    it('starts one even when the session is not refreshed here', () => {
+      signInWithoutRefreshing().flush({
+        success: true,
+        url: AUTH_SERVER + 'oauth2/authorize',
+      })
+
+      expect(userService.createLocalUserSessionUid).toHaveBeenCalledTimes(1)
+      expect(userService.refreshUserSession).not.toHaveBeenCalled()
+      expect(window.sessionStorage.getItem(LOCAL_SESSION_UID)).toBeTruthy()
+    })
+
+    it('starts none for an attempt the server has not accepted yet', () => {
+      signInWithoutRefreshing().flush({
+        success: false,
+        verificationCodeRequired: true,
+      })
+
+      expect(userService.createLocalUserSessionUid).not.toHaveBeenCalled()
+      expect(window.sessionStorage.getItem(LOCAL_SESSION_UID)).toBeNull()
+    })
   })
 
   describe('recovery phone sign in', () => {

@@ -1,5 +1,7 @@
 import {
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   inject,
   OnDestroy,
@@ -52,6 +54,10 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
   @ViewChild(RecoveryPhoneFormComponent)
   recoveryPhoneForm: RecoveryPhoneFormComponent | undefined
 
+  /** The confirmation's heading, which takes focus when it appears (F2.5). */
+  @ViewChild('confirmationHeading')
+  confirmationHeading: ElementRef<HTMLElement> | undefined
+
   /**
    * The form renders nothing until the phone field's own translations have
    * loaded, so the spinner stands in for it until it says it is ready.
@@ -98,6 +104,7 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
   private _interstitialObservability = inject(InterstitialObservabilityService)
   private window = inject(WINDOW) as Window
   private _userService = inject(UserService)
+  private _changeDetectorRef = inject(ChangeDetectorRef)
 
   ngOnInit(): void {
     this.window.scrollTo(0, 0)
@@ -229,6 +236,11 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
     this.addedRecoveryPhone = maskedRecoveryPhoneNumber
     this.afterSummitStatus = true
     this.window.scrollTo(0, 0)
+    // The button that was pressed has just left the page, which drops focus
+    // to the body: move it to the confirmation, so a screen reader announces
+    // it and the keyboard starts from it
+    this._changeDetectorRef.detectChanges()
+    this.confirmationHeading?.nativeElement.focus()
     this.autoContinue = timer(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => this.continueToClient())
