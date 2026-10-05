@@ -163,6 +163,22 @@ describe('RecoveryPhoneInterstitialComponent', () => {
       expect(finish).not.toHaveBeenCalled()
     })
 
+    it('should be ignored once the interstitial has ended', () => {
+      // A dialog is still on screen during its exit animation, so a click can
+      // land here after a failed save or the window has already ended it; the
+      // interstitial ends once, with one outcome
+      const finish = spyOn(component.finish, 'emit')
+      attachFormSpy()
+      component.onFailed()
+      observability.outcome.calls.reset()
+      finish.calls.reset()
+
+      component.declineRecoveryPhone()
+
+      expect(observability.outcome).not.toHaveBeenCalled()
+      expect(finish).not.toHaveBeenCalled()
+    })
+
     it('should report a dismissal and end the interstitial without saving', () => {
       const finish = spyOn(component.finish, 'emit')
       attachFormSpy()
@@ -247,13 +263,18 @@ describe('RecoveryPhoneInterstitialComponent', () => {
     }
 
     const text = (selector: string): string =>
-      fixture.nativeElement.querySelector(selector)?.textContent.replace(/\s+/g, ' ').trim()
+      fixture.nativeElement
+        .querySelector(selector)
+        ?.textContent.replace(/\s+/g, ' ')
+        .trim()
 
     it('replaces the form with the confirmation the frame draws', fakeAsync(() => {
       save()
 
       expect(
-        fixture.debugElement.query(By.css('#cy-interstitial-add-recovery-phone'))
+        fixture.debugElement.query(
+          By.css('#cy-interstitial-add-recovery-phone')
+        )
       ).toBeNull()
       expect(text('h1')).toBe('Recovery phone number added')
       const copy = fixture.debugElement
@@ -267,7 +288,8 @@ describe('RecoveryPhoneInterstitialComponent', () => {
         '***********6789'
       )
       expect(
-        fixture.debugElement.queryAll(By.css('mat-divider.green-divider')).length
+        fixture.debugElement.queryAll(By.css('mat-divider.green-divider'))
+          .length
       ).toBe(2)
       discardPeriodicTasks()
       tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)

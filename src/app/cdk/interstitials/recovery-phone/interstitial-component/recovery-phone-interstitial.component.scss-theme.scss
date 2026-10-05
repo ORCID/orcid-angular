@@ -34,7 +34,10 @@
   ::ng-deep {
     .mat-divider.green-divider {
       border: solid 1px
-        mat.m2-get-color-from-palette(map-get($theme, foreground), brand-primary);
+        mat.m2-get-color-from-palette(
+          map-get($theme, foreground),
+          brand-primary
+        );
     }
   }
 }

@@ -209,7 +209,9 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
     // the registry stores the number anyway, so /my-orcid shows no notice for
     // a number that is now on the account (R6.4). The button carries the same
     // condition; this guard is what holds if a click lands in the same turn.
-    if (this.saving) {
+    // Once anything has ended the interstitial, a click landing during the
+    // dialog's exit animation is ignored too: it ends once (see `ended`).
+    if (this.saving || this.ended) {
       return
     }
     this.ended = true
