@@ -3605,6 +3605,14 @@
           <context context-type="linenumber">209</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
           <context context-type="linenumber">136,138</context>
         </context-group>
@@ -3905,6 +3913,14 @@
           <context context-type="linenumber">214</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
@@ -3967,6 +3983,46 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">85</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="topBar.recoveryPhoneNumberAdded" datatype="html" resname="topBar.recoveryPhoneNumberAdded">
+        <source>Recovery phone number added</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">104,106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">104,106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">180</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="interstitials.recoveryPhoneAddedToRecord" datatype="html" resname="interstitials.recoveryPhoneAddedToRecord">
+        <source>You have successfully added a recovery phone number to your ORCID record.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">114,116</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">114,116</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="interstitials.recoveryPhoneVisitRecord" datatype="html" resname="interstitials.recoveryPhoneVisitRecord">
+        <source>Visit your ORCID record to manage your account security and recovery options.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">136,139</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">136,139</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -7463,7 +7519,7 @@
         <source>Add a recovery phone number dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/login-interstitials-manager/implementations/login-recovery-phone-interstitials-manager.service.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -15332,14 +15388,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">173</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="topBar.recoveryPhoneNumberAdded" datatype="html" resname="topBar.recoveryPhoneNumberAdded">
-        <source>Recovery phone number added</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">180</context>
         </context-group>
         <target>RL</target>
       </trans-unit>

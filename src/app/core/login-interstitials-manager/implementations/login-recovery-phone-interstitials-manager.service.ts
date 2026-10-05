@@ -33,13 +33,13 @@ export class LoginRecoveryPhoneInterstitialManagerService extends LoginBaseInter
     QaFlag.forceRecoveryPhoneInterstitialNotSeem
   INTERSTITIAL_NAME: InterstitialType = 'RECOVERY_PHONE_INTERSTITIAL'
   /**
-   * One entry per flow, and deliberately only the `LOGIN_` one (R6.1).
-   * `getInterstitialTogglz()` picks the flag by prefix, so the missing
-   * `OAUTH_` entry resolves to `getStateOf(undefined)` — false — which is the
-   * supported way to scope an interstitial to the standard sign-in flow.
+   * One entry per flow (F2.1). `getInterstitialTogglz()` picks the flag by
+   * prefix, so each flag turns on its own flow: the sign-in dialog, or the
+   * form inside the OAuth authorization page.
    */
   INTERSTITIAL_TOGGLE: TogglzFlag[] = [
     TogglzFlag.LOGIN_RECOVERY_PHONE_INTERSTITIAL,
+    TogglzFlag.OAUTH_RECOVERY_PHONE_INTERSTITIAL,
   ]
 
   constructor(
@@ -55,7 +55,7 @@ export class LoginRecoveryPhoneInterstitialManagerService extends LoginBaseInter
   }
 
   /**
-   * R6.1 in full: show this only on a standard sign in, to the account owner,
+   * R6.1 in full, on either flow (F2.1): show this only to the account owner,
    * once the two interstitials that come before it in the chain have been
    * seen, when the feature is on, 2FA is active and no recovery number is
    * stored yet.
@@ -130,8 +130,9 @@ export class LoginRecoveryPhoneInterstitialManagerService extends LoginBaseInter
   }
 
   /**
-   * Required by the base class. Nothing reaches it today: with no `OAUTH_`
-   * flag the OAuth chain never gets past `getInterstitialTogglz`.
+   * What the OAuth authorization page mounts inline (F2.3). The base
+   * component, not the dialog subclass: its `afterSummit` swaps the form for
+   * the confirmation that ends with "Continue to <client>" (F2.5).
    */
   getComponentToShow(): ComponentType<RecoveryPhoneInterstitialComponent> {
     return RecoveryPhoneInterstitialComponent

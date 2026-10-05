@@ -88,3 +88,74 @@
     </div>
   </mat-card-content>
 </ng-container>
+
+<!-- F2.5 (PD-14423). OAuth only: the sign-in flow closes its dialog and shows
+     the notice on the record instead, so the dialog subclass overrides
+     afterSummit(). Laid out like the backup email confirmation. -->
+<ng-container *ngIf="afterSummitStatus">
+  <mat-card-header class="authorize-header">
+    <mat-card-title role="heading" aria-level="1">
+      <mat-icon class="logo-icon"
+        ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+      </mat-icon>
+      <h1
+        class="orc-font-heading-small"
+        i18n="@@topBar.recoveryPhoneNumberAdded"
+      >
+        Recovery phone number added
+      </h1>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="authorize-content">
+    <p
+      class="orc-font-body-small confirmation-copy"
+      i18n="@@interstitials.recoveryPhoneAddedToRecord"
+    >
+      You have successfully added a recovery phone number to your ORCID record.
+    </p>
+
+    <mat-divider class="green-divider"></mat-divider>
+    <div class="added-recovery-phone">
+      <img
+        src="./assets/vectors/thumbs-up.svg"
+        alt=""
+        class="added-recovery-phone__icon"
+      />
+      <strong
+        class="orc-font-body-small added-recovery-phone__number"
+        id="cy-interstitial-added-recovery-phone"
+        >{{ addedRecoveryPhone }}</strong
+      >
+    </div>
+    <mat-divider class="green-divider"></mat-divider>
+
+    <p
+      class="orc-font-body-small confirmation-copy"
+      i18n="@@interstitials.recoveryPhoneVisitRecord"
+    >
+      Visit your ORCID record to manage your account security and recovery
+      options.
+    </p>
+
+    <mat-divider class="footer-divider"></mat-divider>
+
+    <button
+      class="authorize-button mat-button-wrap-text"
+      mat-raised-button
+      color="primary"
+      id="cy-interstitial-recovery-phone-continue"
+      (click)="continueToClient()"
+    >
+      <ng-container *ngIf="organizationName; else continueWithoutClient">
+        <ng-container i18n="@@interstitial.continueTo"
+          >Continue to</ng-container
+        >
+        {{ organizationName }}
+      </ng-container>
+      <ng-template #continueWithoutClient>
+        <ng-container i18n="@@interstitial.continue">Continue</ng-container>
+      </ng-template>
+    </button>
+  </mat-card-content>
+</ng-container>

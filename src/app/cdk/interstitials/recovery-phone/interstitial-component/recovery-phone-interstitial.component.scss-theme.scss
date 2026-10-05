@@ -28,6 +28,15 @@
   button.link-button {
     color: mat.m2-get-color-from-palette($primary, 700);
   }
+
+  // F2.5: the green rules around the added number, as the backup email
+  // confirmation draws them
+  ::ng-deep {
+    .mat-divider.green-divider {
+      border: solid 1px
+        mat.m2-get-color-from-palette(map-get($theme, foreground), brand-primary);
+    }
+  }
 }
 
 @include theme($orcid-app-theme);

@@ -19,11 +19,12 @@ export const TogglzFlag = {
     'SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS',
   TWO_FACTOR_RECOVERY_PHONE: 'TWO_FACTOR_RECOVERY_PHONE',
   /**
-   * The add-a-recovery-number interstitial. There is deliberately no OAUTH_
-   * counterpart: the interstitial managers resolve their flag by prefix, so
-   * leaving it out is what keeps this one to the standard sign-in flow.
+   * The add-a-recovery-number interstitial, one flag per flow like the others:
+   * the interstitial managers resolve their flag by prefix, so each turns on
+   * its own flow and nothing else (F2.1).
    */
   LOGIN_RECOVERY_PHONE_INTERSTITIAL: 'LOGIN_RECOVERY_PHONE_INTERSTITIAL',
+  OAUTH_RECOVERY_PHONE_INTERSTITIAL: 'OAUTH_RECOVERY_PHONE_INTERSTITIAL',
   /** Real User Monitoring / session recording (supports percentage 0–100 via FEATURE_PERCENTAGE). */
   RUM: 'RUM',
 } as const
