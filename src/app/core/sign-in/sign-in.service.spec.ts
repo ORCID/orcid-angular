@@ -181,6 +181,34 @@ describe('SignInService', () => {
       expect(request.cancelled).toBeTrue()
     }))
 
+    it('stops waiting after five seconds in all, retries included (F1.4)', fakeAsync(() => {
+      // The cap is for the whole question, not for each attempt: a first
+      // attempt that fails after a second leaves the retry four seconds
+      let answer: boolean | undefined = true
+      let done = false
+      service.recoveryPhoneStatus({ username: 'u', password: 'p' }).subscribe({
+        next: (value) => (answer = value),
+        complete: () => (done = true),
+      })
+
+      tick(1000)
+      httpController
+        .expectOne(API_WEB + 'signin/recoveryPhone/status.json')
+        .flush(null, { status: 503, statusText: 'Service Unavailable' })
+      tick(0)
+      const retried = httpController.expectOne(
+        API_WEB + 'signin/recoveryPhone/status.json'
+      )
+
+      tick(RECOVERY_PHONE_STATUS_TIMEOUT_MS - 1000 - 1)
+      expect(done).toBeFalse()
+      tick(1)
+
+      expect(answer).toBeUndefined()
+      expect(done).toBeTrue()
+      expect(retried.cancelled).toBeTrue()
+    }))
+
     it('verifies the code through the registry, with the code in the body', () => {
       let response: { success: boolean; orcid?: string }
       service

@@ -363,7 +363,10 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       this.show2FAEmitter.emit()
       return
     }
-    const { username, password } = this.authorizationForm.getRawValue()
+    // The credentials the sign in just posted, not the form's current values:
+    // the fields stay editable while the request runs, and a different
+    // password here would be refused and counted towards the lockout
+    const { username, password } = this.signInLocal.data
     this._signIn
       .recoveryPhoneStatus({ username, password })
       .pipe(first())

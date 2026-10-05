@@ -161,6 +161,23 @@ describe('FormSignInComponent', () => {
       expect(shown).toHaveBeenCalledTimes(1)
     })
 
+    it('asks with the credentials the sign in posted, not the fields as they are now', () => {
+      // The fields stay editable while the sign in request runs; a password
+      // typed meanwhile would be refused and counted towards the lockout
+      component.recoveryPhoneOptionAvailable = true
+      const response = new Subject<any>()
+      ;(component as any)._signIn.signIn.and.returnValue(response)
+
+      component.onSubmit()
+      component.authorizationForm.patchValue({ password: 'edited meanwhile' })
+      response.next({ success: false, verificationCodeRequired: true })
+
+      expect(statusSpy).toHaveBeenCalledOnceWith({
+        username: 'test@example.org',
+        password: 'secret',
+      })
+    })
+
     it('shows the step with the number offered when the answer never comes (F1.4)', () => {
       component.recoveryPhoneOptionAvailable = true
 
