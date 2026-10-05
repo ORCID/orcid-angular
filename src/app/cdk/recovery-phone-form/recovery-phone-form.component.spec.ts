@@ -14,6 +14,9 @@ import { RecoveryPhoneFormComponent } from './recovery-phone-form.component'
 import { TwoFactorAuthenticationService } from '../../core/two-factor-authentication/two-factor-authentication.service'
 import { RecoveryPhoneSaveResponse } from '../../types/two-factor.endpoint'
 
+/** Stands in for intl-tel-input's utils loader; see the first beforeEach. */
+const neverLoadingUtils = () => new Promise<never>(() => {})
+
 describe('RecoveryPhoneFormComponent', () => {
   let component: RecoveryPhoneFormComponent
   let fixture: ComponentFixture<RecoveryPhoneFormComponent>
@@ -48,8 +51,11 @@ describe('RecoveryPhoneFormComponent', () => {
     // resolve and surfaces as a ChunkLoadError from whichever test happens to be
     // fakeAsync -- nothing to do with what that test is checking. None of these tests
     // exercise the library's formatting, so the loader is stubbed for all of them.
+    // The stub never settles: one that resolves to anything but the utils module
+    // makes attachUtils reject, and that rejection fails whichever fakeAsync test
+    // is running when it lands, which depends on the random order.
     component = fixture.componentInstance
-    component.loadUtils = () => Promise.resolve({} as never)
+    component.loadUtils = neverLoadingUtils
   })
 
   afterEach(() => {
@@ -133,6 +139,38 @@ describe('RecoveryPhoneFormComponent', () => {
       component.startFromNumber(NUMBER)
 
       expect(component.phoneNumberControl.value).toBe('+15555550123')
+    })
+
+    describe('once the phone field has started, as it does in a browser', () => {
+      // The phone field writes its empty value back through the form as it
+      // finishes starting up (setNumber('') raises an input event, and the
+      // wrapper reports '' to the form), which marks the control dirty before
+      // anyone has typed: observed in ChromeHeadless with the real utils. The
+      // utils are stubbed for this whole file, and intl-tel-input loads them
+      // once per page, so the write is reproduced here rather than awaited.
+      function phoneFieldStarted() {
+        fixture.detectChanges()
+        component.phoneNumberControl.setValue('')
+        component.phoneNumberControl.markAsDirty()
+      }
+
+      it('starts the field from it', () => {
+        phoneFieldStarted()
+
+        component.startFromNumber(NUMBER)
+
+        expect(component.phoneNumberControl.value).toBe(NUMBER)
+      })
+
+      it('never overwrites what the user has started typing', () => {
+        phoneFieldStarted()
+        component.phoneNumberControl.setValue('+447700900123')
+        component.phoneNumberControl.markAsDirty()
+
+        component.startFromNumber(NUMBER)
+
+        expect(component.phoneNumberControl.value).toBe('+447700900123')
+      })
     })
 
     it('no longer states the masked number above the field', () => {
@@ -548,7 +586,7 @@ describe('RecoveryPhoneFormComponent', () => {
       TestBed.inject(Platform).IOS = ios
       fixture = TestBed.createComponent(RecoveryPhoneFormComponent)
       component = fixture.componentInstance
-      component.loadUtils = () => Promise.resolve({} as never)
+      component.loadUtils = neverLoadingUtils
       fixture.detectChanges()
     }
 

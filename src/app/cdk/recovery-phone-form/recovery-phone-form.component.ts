@@ -192,7 +192,10 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
     if (!control || !this.pendingCurrentPhoneNumber) {
       return
     }
-    if (!control.dirty && !this.codeSent) {
+    // An empty field means nothing has been typed yet. `dirty` cannot say
+    // that: the phone field writes its own empty value back through the form
+    // as it finishes starting up, which marks the control dirty untouched.
+    if (!control.value && !this.codeSent) {
       control.setValue(this.pendingCurrentPhoneNumber)
     }
     this.pendingCurrentPhoneNumber = undefined
