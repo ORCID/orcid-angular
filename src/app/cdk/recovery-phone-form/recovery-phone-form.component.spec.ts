@@ -81,6 +81,30 @@ describe('RecoveryPhoneFormComponent', () => {
     ).toBeTruthy()
   })
 
+  it('states the consent AWS Notify requires, links included (F3.1)', () => {
+    fixture.detectChanges()
+
+    const consent: HTMLElement = fixture.nativeElement.querySelector(
+      '.recovery-phone-consent'
+    )
+    // Whitespace is normalised and nothing else: a missing space between the
+    // two translation units would still read "apply.Message" here
+    const paragraph = consent
+      .querySelector('p')
+      .textContent.replace(/\s+/g, ' ')
+      .trim()
+    expect(paragraph).toBe(
+      "By entering my phone number and clicking 'Send verification code', I consent to receive an automated one-time verification code from ORCID at the number provided. Message and data rates may apply. Message frequency varies. Reply HELP for help, STOP to cancel."
+    )
+    const links = Array.from(
+      consent.querySelectorAll('a') as NodeListOf<HTMLAnchorElement>
+    ).map((link) => [link.textContent.trim(), link.getAttribute('href')])
+    expect(links).toEqual([
+      ['Terms of use', 'https://orcid.org/content/orcid-terms-use'],
+      ['Privacy policy', 'https://orcid.org/privacy-policy'],
+    ])
+  })
+
   it('drops the heading and the help line when the host prints its own', () => {
     component.showHeading = false
     fixture.detectChanges()
