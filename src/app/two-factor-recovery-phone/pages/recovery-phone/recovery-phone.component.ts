@@ -52,7 +52,15 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
   loadingState = true
   /** Set once the user has a number already, which turns this into a change. */
   managingExistingNumber = false
-  maskedRecoveryPhoneNumber: string | undefined
+
+  /**
+   * The number on file, in full, asked for once the challenge has passed so
+   * the field can start from it (F4.1). It lives here and in the form control
+   * only for as long as the page does, and is never written anywhere the
+   * browser keeps (F4.3).
+   */
+  currentPhoneNumber: string | undefined
+  private currentPhoneNumberRequested = false
 
   /** Mirrored from the form: the primary action is dead until a code is out. */
   codeSent = false
@@ -99,6 +107,7 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.currentPhoneNumber = undefined
     this.$destroy.next()
     this.$destroy.complete()
   }
@@ -133,7 +142,6 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
             return
           }
           this.managingExistingNumber = !!status.maskedRecoveryPhoneNumber
-          this.maskedRecoveryPhoneNumber = status.maskedRecoveryPhoneNumber
           this.loadingState = false
           this.openAuthChallenge()
         },
@@ -180,10 +188,39 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
         recoveryPhoneElevationExpiry(Date.now())
           .pipe(takeUntil(this.$destroy))
           .subscribe(() => this.onElevationExpired())
+        if (this.managingExistingNumber) {
+          this.loadCurrentPhoneNumber()
+        }
       } else if (!this.challengePassed) {
         this.returnToAccountSettings()
       }
     })
+  }
+
+  /**
+   * Asks for the number on file now that the challenge has elevated the
+   * session (F4.2). Anything but a number - a refusal, an error - leaves the
+   * field empty and the page working as it always has (F4.4).
+   */
+  private loadCurrentPhoneNumber(): void {
+    if (this.currentPhoneNumberRequested) {
+      // Once per page (F4.3)
+      return
+    }
+    this.currentPhoneNumberRequested = true
+    this._twoFactorAuthenticationService
+      .getRecoveryPhoneNumber()
+      .pipe(first(), takeUntil(this.$destroy))
+      .subscribe({
+        next: (response) => {
+          if (response?.success && response.phoneNumber) {
+            this.currentPhoneNumber = response.phoneNumber
+          }
+        },
+        error: () => {
+          // F4.4: the field starts empty
+        },
+      })
   }
 
   private submitAuthChallenge(): void {

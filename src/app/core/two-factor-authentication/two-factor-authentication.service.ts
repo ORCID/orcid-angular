@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable'
 import {
   QrCode,
   RecoveryPhoneErrorCode,
+  RecoveryPhoneNumberResponse,
   RecoveryPhoneSaveRequest,
   RecoveryPhoneSaveResponse,
   RecoveryPhoneSendCodeRequest,
@@ -101,6 +102,20 @@ export class TwoFactorAuthenticationService {
     return this._http.post<AuthChallenge>(
       runtimeEnvironment.BASE_URL + '2FA/recoveryPhone/challenge/verify.json',
       data,
+      { headers: this.headers }
+    )
+  }
+
+  /**
+   * The number on file, in full, for the manage page to start its field from
+   * (F4.1). The registry answers only the account owner, on a session that has
+   * passed the challenge inside the window, and marks the answer no-store
+   * (F4.2). A POST, so no cache along the way keeps a copy either.
+   */
+  getRecoveryPhoneNumber(): Observable<RecoveryPhoneNumberResponse> {
+    return this._http.post<RecoveryPhoneNumberResponse>(
+      runtimeEnvironment.BASE_URL + '2FA/recoveryPhone/number.json',
+      {},
       { headers: this.headers }
     )
   }

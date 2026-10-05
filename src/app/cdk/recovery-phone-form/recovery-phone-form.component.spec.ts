@@ -105,6 +105,47 @@ describe('RecoveryPhoneFormComponent', () => {
     ])
   })
 
+  describe('the number on file (F4.1)', () => {
+    const NUMBER = '+441234567890'
+
+    it('starts the field from it', () => {
+      fixture.detectChanges()
+
+      component.currentPhoneNumber = NUMBER
+
+      expect(component.phoneNumberControl.value).toBe(NUMBER)
+      expect(component.phoneNumberControl.dirty).toBeFalse()
+    })
+
+    it('takes it even when it arrives before the form exists', () => {
+      component.currentPhoneNumber = NUMBER
+
+      fixture.detectChanges()
+
+      expect(component.phoneNumberControl.value).toBe(NUMBER)
+    })
+
+    it('never overwrites what the user has started typing', () => {
+      fixture.detectChanges()
+      component.phoneNumberControl.setValue('+15555550123')
+      component.phoneNumberControl.markAsDirty()
+
+      component.currentPhoneNumber = NUMBER
+
+      expect(component.phoneNumberControl.value).toBe('+15555550123')
+    })
+
+    it('no longer states the masked number above the field', () => {
+      fixture.detectChanges()
+      component.currentPhoneNumber = NUMBER
+      fixture.detectChanges()
+
+      expect(fixture.nativeElement.textContent).not.toContain(
+        'Your current recovery phone number is'
+      )
+    })
+  })
+
   it('drops the heading and the help line when the host prints its own', () => {
     component.showHeading = false
     fixture.detectChanges()

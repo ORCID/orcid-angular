@@ -73,11 +73,19 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
    */
   @Input() context: RecoveryPhoneContext = 'SETTINGS'
 
-  /** Set once the user has a number already, which turns this into a change. */
-  @Input() managingExistingNumber = false
+  /**
+   * The number on file, in full, for the manage page to start the field from
+   * (F4.1); the field's widget selects the country from it. It goes straight
+   * into the form control and is held nowhere else (F4.3), and it never
+   * overwrites what the user has started typing.
+   */
+  @Input() set currentPhoneNumber(value: string | undefined) {
+    this.pendingCurrentPhoneNumber = value
+    this.applyCurrentPhoneNumber()
+  }
 
-  /** Only ever the last four digits; the registry never reads the number back. */
-  @Input() maskedRecoveryPhoneNumber?: string
+  /** Only until the form exists to take it: cleared the moment it is applied. */
+  private pendingCurrentPhoneNumber: string | undefined
 
   /**
    * Hosts that print their own heading — the onboarding step and the
@@ -175,7 +183,19 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
         [Validators.required, Validators.minLength(6), Validators.maxLength(6)],
       ],
     })
+    this.applyCurrentPhoneNumber()
     this.loadPhoneFieldTranslations()
+  }
+
+  private applyCurrentPhoneNumber(): void {
+    const control = this.phoneNumberControl
+    if (!control || !this.pendingCurrentPhoneNumber) {
+      return
+    }
+    if (!control.dirty && !this.codeSent) {
+      control.setValue(this.pendingCurrentPhoneNumber)
+    }
+    this.pendingCurrentPhoneNumber = undefined
   }
 
   ngOnDestroy(): void {

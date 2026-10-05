@@ -5,15 +5,6 @@
 >
   Your recovery phone number
 </h2>
-} @if (managingExistingNumber) {
-<p class="orc-font-body-small recovery-phone-current">
-  <span i18n="@@account.recoveryPhoneCurrentNumber"
-    >Your current recovery phone number is</span
-  >
-  <span class="recovery-phone-current__value">{{
-    maskedRecoveryPhoneNumber
-  }}</span>
-</p>
 } @if (showHeading) {
 <p
   class="orc-font-body-small recovery-phone-help"

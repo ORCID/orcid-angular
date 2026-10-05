@@ -13,7 +13,7 @@ import { By } from '@angular/platform-browser'
 import { Router } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
 import { OrcidStepViewComponent } from '@orcid/ui'
-import { Subject, of } from 'rxjs'
+import { Subject, of, throwError } from 'rxjs'
 
 import { RecoveryPhoneComponent } from './recovery-phone.component'
 import { RecoveryPhoneFormComponent } from '../../../cdk/recovery-phone-form/recovery-phone-form.component'
@@ -89,7 +89,13 @@ describe('RecoveryPhoneComponent', () => {
       'verifyRecoveryPhoneChallenge',
       'sendRecoveryPhoneCode',
       'saveRecoveryPhone',
+      'getRecoveryPhoneNumber',
     ])
+    // A refusal unless a test says otherwise: the field then starts empty,
+    // which is what every test written before F4.1 expects
+    twoFactorService.getRecoveryPhoneNumber.and.returnValue(
+      of({ success: false, errorCode: 'CHALLENGE_REQUIRED' })
+    )
     togglzService = jasmine.createSpyObj('TogglzService', ['getStateOf'])
     dialog = jasmine.createSpyObj('MatDialog', ['open'])
     dialog.open.and.returnValue(dialogRef)
@@ -154,15 +160,12 @@ describe('RecoveryPhoneComponent', () => {
     expect(component.managingExistingNumber).toBeTrue()
     expect(component.title).toBe('Manage your recovery phone number')
     expect(component.primaryLabel).toBe('Update recovery phone number')
-    expect(component.maskedRecoveryPhoneNumber).toBe('***********1234')
   })
 
   it('tells the form it is running in account settings', () => {
     build(true, status({ maskedRecoveryPhoneNumber: '***********1234' }))
 
     expect(hostedForm().context).toBe('SETTINGS')
-    expect(hostedForm().managingExistingNumber).toBeTrue()
-    expect(hostedForm().maskedRecoveryPhoneNumber).toBe('***********1234')
   })
 
   it('leaves the page, reporting nothing, when the challenge is cancelled', () => {
@@ -304,6 +307,93 @@ describe('RecoveryPhoneComponent', () => {
    * lazily imports its formatting utilities, and a dynamic import inside
    * fakeAsync never settles.
    */
+  describe('starting from the number on file (F4.1 to F4.4)', () => {
+    const NUMBER = '+441234567890'
+    const existing = () => status({ maskedRecoveryPhoneNumber: '***********7890' })
+
+    it('no longer states the mask above the form (F4.1)', () => {
+      build(true, existing())
+      passChallenge()
+
+      const text = fixture.nativeElement.textContent
+      expect(text).not.toContain('Your current recovery phone number is')
+      expect(text).not.toContain('***********7890')
+    })
+
+    it('asks for the number only once the challenge has passed', () => {
+      twoFactorService.getRecoveryPhoneNumber.and.returnValue(
+        of({ success: true, phoneNumber: NUMBER })
+      )
+      build(true, existing())
+
+      expect(twoFactorService.getRecoveryPhoneNumber).not.toHaveBeenCalled()
+
+      passChallenge()
+
+      expect(twoFactorService.getRecoveryPhoneNumber).toHaveBeenCalledTimes(1)
+      expect(component.currentPhoneNumber).toBe(NUMBER)
+      expect(hostedForm().phoneNumberControl.value).toBe(NUMBER)
+    })
+
+    it('asks nothing when a first number is being added', () => {
+      build()
+      passChallenge()
+
+      expect(twoFactorService.getRecoveryPhoneNumber).not.toHaveBeenCalled()
+      expect(hostedForm().phoneNumberControl.value).toBe('')
+    })
+
+    it('starts the field empty when the registry refuses (F4.4)', () => {
+      twoFactorService.getRecoveryPhoneNumber.and.returnValue(
+        of({ success: false, errorCode: 'NOT_ACCOUNT_OWNER' })
+      )
+      build(true, existing())
+      passChallenge()
+
+      expect(component.currentPhoneNumber).toBeUndefined()
+      expect(hostedForm().phoneNumberControl.value).toBe('')
+    })
+
+    it('starts the field empty when the request fails (F4.4)', () => {
+      twoFactorService.getRecoveryPhoneNumber.and.returnValue(
+        throwError(() => new Error('offline'))
+      )
+      build(true, existing())
+      passChallenge()
+
+      expect(component.currentPhoneNumber).toBeUndefined()
+      expect(hostedForm().phoneNumberControl.value).toBe('')
+      expect(router.navigate).not.toHaveBeenCalled()
+    })
+
+    it('never writes the number anywhere the browser keeps it (F4.3)', () => {
+      const writes = spyOn(Storage.prototype, 'setItem').and.callThrough()
+      twoFactorService.getRecoveryPhoneNumber.and.returnValue(
+        of({ success: true, phoneNumber: NUMBER })
+      )
+      build(true, existing())
+      passChallenge()
+
+      const stored = writes.calls
+        .allArgs()
+        .filter((args) => args.some((value) => `${value}`.includes('1234567890')))
+      expect(stored).toEqual([])
+      expect(document.cookie).not.toContain('1234567890')
+    })
+
+    it('forgets the number with the page (F4.3)', () => {
+      twoFactorService.getRecoveryPhoneNumber.and.returnValue(
+        of({ success: true, phoneNumber: NUMBER })
+      )
+      build(true, existing())
+      passChallenge()
+
+      fixture.destroy()
+
+      expect(component.currentPhoneNumber).toBeUndefined()
+    })
+  })
+
   describe('when the elevation window runs out on its own', () => {
     const TTL = RECOVERY_PHONE_ELEVATION_TTL_MILLIS
 
