@@ -4,7 +4,7 @@
 // - developer-name: lowercase letters, numbers, dot, underscore, hyphen (one or more)
 // - ticket: one or more uppercase letters, hyphen, one or more digits (e.g., PD-0000, ENGAGE-243)
 // - suffix: any optional characters after the ticket (e.g., "/feature-x", "-refactor", etc.)
-// Special allowed names: transifex
+// Special allowed names: transifex, forward-port/release-X.Y/<sha>
 // Examples:
 //   yourname/PD-0000
 //   lmendoza/ENGAGE-243
@@ -65,6 +65,12 @@ function main() {
   // Allowed special branch names
   const special = new Set(['transifex'])
   if (special.has(branch)) {
+    process.exit(0)
+  }
+
+  // Forward-port branches opened by pushrelease.yml, which the PR format job
+  // may commit to
+  if (/^forward-port\/release-\d+\.\d+\/[0-9a-f]+$/.test(branch)) {
     process.exit(0)
   }
 
