@@ -6,7 +6,16 @@ on:
 
 jobs:
   test_yarn:
-    runs-on: ubuntu-22.04
+    # Same image as every other job. The yarn-install cache key includes the OS
+    # release, and nothing on main runs on 22.04 any more, so a 22.04 job could
+    # never restore a node_modules cache saved on main and installed cold on
+    # every pull request's first run.
+    #
+    # The 22.04 pin (2024-10) dated from puppeteer's downloaded Chrome, which
+    # Ubuntu 24.04's AppArmor user-namespace restriction blocks from using its
+    # sandbox. karma now launches the image's own google-chrome, installed at
+    # /opt/google/chrome/chrome, which Ubuntu ships an AppArmor profile for.
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - name: Harden the runner (Audit all outbound calls)
