@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+/*
+ * The same tokens the registration wizard's `.info` panel uses, so the two
+ * notices are the same orange rather than two near misses.
+ */
+@mixin two-factor-recovery-phone-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .recovery-phone-onboarding-notice {
+    // the design fills the panel with state-notice-lightest at 5%, the same
+    // fill the add/manage page uses, rather than the wizard's solid tint
+    background-color: rgba(255, 236, 171, 0.05);
+    border-color: mat.m2-get-color-from-palette(
+      $foreground,
+      'state-notice-dark'
+    );
+
+    mat-icon {
+      color: mat.m2-get-color-from-palette($foreground, 'state-notice-dark');
+    }
+  }
+}
+@include two-factor-recovery-phone-theme($orcid-app-theme);

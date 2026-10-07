@@ -15,6 +15,30 @@
   padding: 14px;
 }
 
+// PD-5850: the `[link]` slot's row. `.text-container` is a column, so anything
+// projected here is already its own row; these three declarations are what the
+// frame states about it beyond that.
+//
+// `spacing-S` is the frame's own token for the gap: the title box ends at 24,
+// the sentence starts at 28 (the 4px `p` margin above), ends at 49, and the
+// link starts at 57.
+//
+// `fit-content` so the box stops where the words do. A stretched flex item
+// would still draw its underline only under the glyphs, but it would take
+// clicks across the whole column, and the frame's link is 341px of a 568px
+// column. It also keeps the comparison's width check honest: it measures the
+// text against the box drawn for it, and a two-line union is what reported
+// 231px of overflow nobody could see.
+//
+// `::ng-deep` because projected content carries the CONSUMER's encapsulation
+// attribute, not this component's, so an ordinary rule here never matches it.
+// Nested under `:host` so it cannot leak past this banner.
+:host ::ng-deep .text-container > [link] {
+  display: block;
+  width: fit-content;
+  margin-top: var(--orcid-space-s, 8px);
+}
+
 :host {
   display: block;
   width: 100%;

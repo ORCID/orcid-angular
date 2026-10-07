@@ -21,10 +21,10 @@
               {{ title }}
               <ng-container *ngIf="type?.value === 'two-factor'">
                 <span *ngIf="type?.enabled" class="on">
-                  (<ng-container i18n="@@account.on">ON</ng-container>)
+                  <ng-container i18n="@@account.on">ON</ng-container>
                 </span>
                 <span *ngIf="!type?.enabled" class="off">
-                  (<ng-container i18n="@@account.off">OFF</ng-container>)
+                  <ng-container i18n="@@account.off">OFF</ng-container>
                 </span>
               </ng-container>
             </h3>

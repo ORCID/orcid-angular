@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { first } from 'rxjs/operators'
 import {
   UntypedFormControl,
@@ -37,6 +37,14 @@ export const clipboardTooltip: MatTooltipDefaultOptions = {
   standalone: false,
 })
 export class TwoFactorEnableComponent implements OnInit {
+  /**
+   * Supplied by the page, which is the only thing that knows how long the flow
+   * is. The default keeps the two step wording, so a caller that passes nothing
+   * - and the flag-off flow is exactly that - is unchanged.
+   */
+  @Input()
+  subtitle = $localize`:@@account.step1AuthenticationApp:Step 1 of 2 - Authentication app`
+
   @Output() twoFactorEnabled = new EventEmitter<{
     backupCodes?: string
     backupCodesClipboard?: string

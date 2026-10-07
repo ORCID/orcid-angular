@@ -16,9 +16,18 @@ import {
   Validators,
 } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { catchError, first, map, take, takeUntil, tap } from 'rxjs/operators'
+import {
+  catchError,
+  first,
+  map,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+} from 'rxjs/operators'
 import {
   ApplicationRoutes,
+  getOrcidNumber,
   isRedirectToTheAuthorizationPage,
 } from 'src/app/constants'
 import { UserService } from 'src/app/core'
@@ -34,7 +43,14 @@ import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { OauthService } from '../../../core/oauth/oauth.service'
-import { combineLatest, forkJoin, Observable, Subject } from 'rxjs'
+import {
+  combineLatest,
+  forkJoin,
+  interval,
+  Observable,
+  Subject,
+  Subscription,
+} from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
 import { ERROR_REPORT } from 'src/app/errors'
 import { ErrorStateMatcherForPasswordField } from '../../ErrorStateMatcherForPasswordField'
@@ -45,6 +61,9 @@ import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-man
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
+import { RecoveryPhoneSignInState } from '../../../cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component'
+import { RecoveryPhoneNoticeService } from '../../../core/two-factor-authentication/recovery-phone-notice.service'
+import { PasswordRecoveryService } from '../../../core/password-recovery/password-recovery.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -65,6 +84,15 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   @Output() show2FAEmitter = new EventEmitter<object>()
   @Output() loading = new EventEmitter<boolean>()
   @Output() errorDescription = new EventEmitter<string>()
+  /**
+   * The user signed in with their recovery phone number while answering an
+   * OAuth request. They are not sent back to the client straight away: the
+   * page shows them what just happened to their account first (R4.2), and
+   * carries this url when they continue.
+   */
+  @Output() twoFactorDisabledByRecoveryPhone = new EventEmitter<{
+    url: string
+  }>()
   @Input() showForgotYourPassword = true
 
   badCredentials = false
@@ -88,6 +116,48 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   invalidVerifyUrl: boolean
   private oauthRedirectTriggered = false
 
+  /** TWO_FACTOR_RECOVERY_PHONE, resolved once and passed to the 2FA form. */
+  recoveryPhoneOptionAvailable = false
+
+  /** Everything the 2FA form needs to know about the code we asked for. */
+  recoveryPhoneState: RecoveryPhoneSignInState = {
+    codeSent: false,
+    resendSeconds: 0,
+    sending: false,
+  }
+
+  /**
+   * Set the moment the registry accepts a recovery number code, so the sign-in
+   * that follows knows it is the second half of that flow rather than an
+   * ordinary one.
+   */
+  private twoFactorDisabledByRecoveryPhoneFlow = false
+  private recoveryPhoneCountdown: Subscription
+
+  /**
+   * Mandatory password reset (PD-5692). The username, normalised, that the
+   * registry says has to reset its password before it can sign in. The notice
+   * shows while the username field still holds it, so editing the field hides
+   * it until the new value is looked up.
+   */
+  private passwordResetRequiredFor: string | null = null
+  /**
+   * The username the sign in's own answer said has to reset its password. That
+   * answer reads the primary database, so a lookup answer arriving after it,
+   * read from a replica, does not take the notice away.
+   */
+  private passwordResetConfirmedFor: string | null = null
+  /** The usernames the reset email was sent for from the notice, on this page */
+  private readonly passwordResetEmailSentFor = new Set<string>()
+  sendingPasswordResetEmail = false
+  /** The username most recently looked up, so leaving the field again does not ask twice */
+  private lastLookedUpUsername: string | null = null
+  /** A lookup is on its way; the notice region is marked busy meanwhile */
+  checkingPasswordResetStatus = false
+  /** Sign in posts so far, so an answer that a newer post overtook is dropped */
+  private signInAttempts = 0
+  private readonly passwordResetStatusCheck = new Subject<string>()
+
   placeholderUsername = $localize`:@@ngOrcid.signin.username:Email or 16-digit ORCID iD`
   placeholderPassword = $localize`:@@ngOrcid.signin.yourOrcidPassword:Your ORCID password`
   isOauthAuthorizationTogglzEnable: boolean
@@ -98,6 +168,39 @@ export class FormSignInComponent implements OnInit, OnDestroy {
 
   get usernameForm() {
     return this.authorizationForm.controls.username
+  }
+
+  get showPasswordResetRequired(): boolean {
+    const username = this.normalisedUsername()
+    return !!username && username === this.passwordResetRequiredFor
+  }
+
+  /**
+   * Whether the notice is on screen. During the 2FA step only the sign in's
+   * own answer puts it there, when the record was flagged after its password
+   * was accepted; a lookup never overrules the 2FA prompt.
+   */
+  get showPasswordResetNotice(): boolean {
+    return (
+      this.showPasswordResetRequired &&
+      (!this.show2FA ||
+        this.passwordResetConfirmedFor === this.normalisedUsername())
+    )
+  }
+
+  get passwordResetEmailSent(): boolean {
+    const username = this.normalisedUsername()
+    return !!username && this.passwordResetEmailSentFor.has(username)
+  }
+
+  /**
+   * The address the reset email went to, when the user typed one. Empty for an
+   * ORCID iD: the registry sends to the record's primary address, which the
+   * page never learns.
+   */
+  get passwordResetEmailSentTo(): string {
+    const username = this.normalisedUsername()
+    return username.includes('@') ? username : ''
   }
 
   constructor(
@@ -116,7 +219,9 @@ export class FormSignInComponent implements OnInit, OnDestroy {
     private _snackBar: SnackbarService,
     private _togglzService: TogglzService,
     private _oauthUrlSessionManager: OauthURLSessionManagerService,
-    private _observability: RumJourneyEventService
+    private _observability: RumJourneyEventService,
+    private _recoveryPhoneNotice: RecoveryPhoneNoticeService,
+    private _passwordRecovery: PasswordRecoveryService
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -172,6 +277,13 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationTogglzEnable
       })
 
+    this._togglzService
+      .getStateOf(TogglzFlag.TWO_FACTOR_RECOVERY_PHONE)
+      .pipe(take(1))
+      .subscribe((recoveryPhoneOptionAvailable) => {
+        this.recoveryPhoneOptionAvailable = recoveryPhoneOptionAvailable
+      })
+
     this.authorizationForm = new UntypedFormGroup({
       username: new UntypedFormControl(),
       password: new UntypedFormControl('', {
@@ -181,17 +293,22 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       verificationCode: new UntypedFormControl(),
     })
 
+    this.observePasswordResetStatus()
+
     if (this.email) {
       this.authorizationForm.patchValue({
         username: this.email,
       })
       this.addUsernameValidation()
+      // A username that arrives filled in is never blurred, so ask now
+      this.checkPasswordResetStatus()
     }
     this.cd.detectChanges()
     this.observeSessionUpdates()
   }
 
   ngOnDestroy(): void {
+    this.recoveryPhoneCountdown?.unsubscribe()
     this.$destroy.next(true)
     this.$destroy.complete()
   }
@@ -201,6 +318,10 @@ export class FormSignInComponent implements OnInit, OnDestroy {
 
     if (this.authorizationForm.valid) {
       this.signInLocal.data = this.authorizationForm.getRawValue()
+      // The answer is about this username, whatever the field holds by the
+      // time it arrives
+      const submittedUsername = this.normalisedUsername()
+      const attempt = ++this.signInAttempts
       this.hideErrors()
       this.loading.next(true)
 
@@ -216,11 +337,76 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       this.authorizationFormSubmitted = true
       $signIn.subscribe((data) => {
         this.printError = false
+        // Only an answer that says no more than "not signed in" is the
+        // notice's to explain; anything more specific is shown as usual
+        const plainFailure =
+          !data.success &&
+          !data.passwordResetRequired &&
+          !data.verificationCodeRequired &&
+          !data.deprecated &&
+          !data.disabled &&
+          !data.unclaimed &&
+          !data.badVerificationCode &&
+          !data.badRecoveryCode &&
+          !data.invalidUserType
+        // A lookup's notice never speaks for the 2FA step, where the password
+        // has already been accepted
+        const noticeShown =
+          !this.show2FA &&
+          !!submittedUsername &&
+          submittedUsername === this.passwordResetRequiredFor
+        const passwordResetRequired =
+          !data.success &&
+          (data.passwordResetRequired || (noticeShown && plainFailure))
+        if (passwordResetRequired) {
+          // The record has to reset its password: the sign in fails silently
+          // and the notice above the password field says why (PD-5692). The
+          // sign in's own answer covers a lookup that never ran or failed.
+          this.authorizationFormSubmitted = false
+          this.loading.next(false)
+          if (data.passwordResetRequired) {
+            this.passwordResetRequiredFor = submittedUsername
+            this.passwordResetConfirmedFor = submittedUsername
+          } else if (this.passwordResetConfirmedFor !== submittedUsername) {
+            // Kept silent on a lookup's word alone: check it still holds. A
+            // notice the sign in itself confirmed needs no second opinion
+            this.recheckPasswordResetStatus(submittedUsername, attempt)
+          }
+          this._observability.recordSimpleEvent(AppEventName.SignInFailure, {
+            isOauth: !!isOauth,
+            signInType: this.signInLocal.type || 'regular',
+            passwordResetRequired: !!data.passwordResetRequired,
+            suppressedByNotice: !data.passwordResetRequired,
+            badCredentials: false,
+          })
+          return
+        }
+        if (!plainFailure) {
+          // The password was accepted, or the answer says more than "not
+          // signed in" (deprecated, deactivated...): no reset notice applies
+          this.passwordResetRequiredFor = null
+          this.passwordResetConfirmedFor = null
+        }
         if (data.success) {
           this._observability.recordSimpleEvent(AppEventName.SignInSuccess, {
             isOauth: !!isOauth,
             signInType: this.signInLocal.type || 'regular',
           })
+          // The OAuth half of the recovery number flow stops here: the user is
+          // told 2FA is off before they are handed back to the client (R4.2).
+          // This form has more than one host - link-account hosts it too - and
+          // only a host that binds the output can show that panel, so check
+          // somebody is listening before holding the navigation back. Emitting
+          // into nothing would strand the user on a dead sign-in card.
+          if (
+            this.twoFactorDisabledByRecoveryPhoneFlow &&
+            isOauth &&
+            this.twoFactorDisabledByRecoveryPhone.observed
+          ) {
+            this.loading.next(false)
+            this.twoFactorDisabledByRecoveryPhone.emit({ url: data.url })
+            return
+          }
           if (
             this.isOauthAuthorizationTogglzEnable &&
             this._oauthUrlSessionManager.get()
@@ -268,6 +454,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
             badVerificationCode: !!data.badVerificationCode,
             badRecoveryCode: !!data.badRecoveryCode,
             invalidUserType: !!data.invalidUserType,
+            passwordResetRequired: false,
             badCredentials: !!this.badCredentials,
           })
           this.printError = true
@@ -285,7 +472,9 @@ export class FormSignInComponent implements OnInit, OnDestroy {
 
   authenticate($event) {
     this.resetTwoFactor()
-    if ($event.recoveryCode) {
+    if ($event.recoveryPhoneCode) {
+      this.verifyRecoveryPhoneCode($event.recoveryPhoneCode)
+    } else if ($event.recoveryCode) {
       this.authorizationForm.patchValue({
         recoveryCode: $event.recoveryCode,
       })
@@ -296,6 +485,294 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       })
       this.onSubmit()
     }
+  }
+
+  /**
+   * Asks the registry to text a code to the number on the account. The
+   * password goes with it: the registry checks it through the ordinary
+   * authentication manager, so a wrong one counts toward the sign-in lockout
+   * exactly as a sign-in attempt does (R3.2).
+   */
+  onRequestRecoveryPhoneCode(): void {
+    if (this.recoveryPhoneState.sending) {
+      return
+    }
+    const { username, password } = this.authorizationForm.getRawValue()
+    this.recoveryPhoneState = {
+      ...this.recoveryPhoneState,
+      sending: true,
+      errorCode: undefined,
+    }
+
+    this._signIn
+      .sendRecoveryPhoneCode({ username, password })
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          if (response?.success) {
+            this.recoveryPhoneState = {
+              codeSent: true,
+              maskedNumber: response.maskedRecoveryPhoneNumber,
+              resendSeconds: 0,
+              sending: false,
+              errorCode: undefined,
+            }
+            this.startRecoveryPhoneCountdown(response.resendAfterSeconds)
+            this._observability.recordSimpleEvent(
+              AppEventName.SignInRecoveryPhoneCodeSent,
+              { isOauth: !!this.signInLocal.isOauth }
+            )
+          } else if (response?.errorCode === 'RESEND_TOO_SOON') {
+            // A code is already in flight: show the field and count the
+            // registry's own buffer down rather than calling this an error
+            this.recoveryPhoneState = {
+              ...this.recoveryPhoneState,
+              codeSent: true,
+              sending: false,
+              errorCode: undefined,
+            }
+            this.startRecoveryPhoneCountdown(response.resendAfterSeconds)
+          } else {
+            this.recoveryPhoneState = {
+              ...this.recoveryPhoneState,
+              sending: false,
+              errorCode: response?.errorCode || 'HTTP',
+            }
+          }
+        },
+        error: () => {
+          this.recoveryPhoneState = {
+            ...this.recoveryPhoneState,
+            sending: false,
+            errorCode: 'HTTP',
+          }
+        },
+      })
+  }
+
+  /**
+   * Posts the texted code. On success the registry has already disabled 2FA,
+   * deleted the number and invalidated the backup codes, so the ordinary
+   * sign-in is submitted again with no code at all and now succeeds (R3.5).
+   */
+  private verifyRecoveryPhoneCode(verificationCode: string): void {
+    const { username, password } = this.authorizationForm.getRawValue()
+    this.hideErrors()
+    this.recoveryPhoneState = {
+      ...this.recoveryPhoneState,
+      errorCode: undefined,
+    }
+    this.loading.next(true)
+
+    this._signIn
+      .verifyRecoveryPhoneCode({ username, password, verificationCode })
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          if (response?.success) {
+            const isOauth = !!this.signInLocal.isOauth
+            this._observability.recordSimpleEvent(
+              AppEventName.SignInRecoveryPhoneUsed,
+              { isOauth }
+            )
+            if (!isOauth) {
+              // The OAuth flow shows its own panel and may never reach the
+              // record, so it queues no notice (R4.3)
+              this._recoveryPhoneNotice.markTwoFactorDisabled(response.orcid)
+            }
+            this.twoFactorDisabledByRecoveryPhoneFlow = true
+            this.recoveryPhoneCountdown?.unsubscribe()
+            this.resetTwoFactor()
+            this.onSubmit()
+          } else {
+            this.loading.next(false)
+            this.recoveryPhoneState = {
+              ...this.recoveryPhoneState,
+              errorCode: response?.errorCode || 'HTTP',
+            }
+          }
+        },
+        error: () => {
+          this.loading.next(false)
+          this.recoveryPhoneState = {
+            ...this.recoveryPhoneState,
+            errorCode: 'HTTP',
+          }
+        },
+      })
+  }
+
+  /**
+   * Counts the registry's resend buffer down a second at a time, so the resend
+   * control comes back at the moment another send would be accepted.
+   */
+  private startRecoveryPhoneCountdown(seconds: number): void {
+    // Drop any countdown still running, or two of them would race and the
+    // control would come back early
+    this.recoveryPhoneCountdown?.unsubscribe()
+    const from = Math.max(0, seconds || 0)
+    this.recoveryPhoneState = {
+      ...this.recoveryPhoneState,
+      resendSeconds: from,
+    }
+    if (from <= 0) {
+      return
+    }
+    this.recoveryPhoneCountdown = interval(1000)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => {
+        const remaining = this.recoveryPhoneState.resendSeconds - 1
+        this.recoveryPhoneState = {
+          ...this.recoveryPhoneState,
+          resendSeconds: remaining > 0 ? remaining : 0,
+        }
+        if (remaining <= 0) {
+          this.recoveryPhoneCountdown?.unsubscribe()
+        }
+      })
+  }
+
+  /**
+   * Looks the entered username up once the field is left, so a record that
+   * has to reset its password is told so before a password is typed
+   * (PD-5692). Only a well formed email address or ORCID iD is asked about.
+   */
+  checkPasswordResetStatus(): void {
+    const control = this.authorizationForm?.get('username')
+    const username = this.normalisedUsername()
+    if (
+      !control ||
+      !username ||
+      UsernameValidator.orcidOrEmail(control) ||
+      username === this.lastLookedUpUsername
+    ) {
+      return
+    }
+    this.lastLookedUpUsername = username
+    this.checkingPasswordResetStatus = true
+    this.passwordResetStatusCheck.next(username)
+  }
+
+  /**
+   * Sends the standard password reset email from the notice. An ORCID iD goes
+   * as typed and the registry sends to the record's primary address, which
+   * the page never learns; an address goes to that address and every other
+   * verified one on the record.
+   */
+  sendPasswordResetEmail(): void {
+    const username = this.normalisedUsername()
+    if (
+      !username ||
+      this.sendingPasswordResetEmail ||
+      this.passwordResetEmailSent
+    ) {
+      return
+    }
+    this.sendingPasswordResetEmail = true
+    this._passwordRecovery
+      .resetPassword({ email: username })
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          this.sendingPasswordResetEmail = false
+          if (response?.errors?.length) {
+            return
+          }
+          // Each send replaces the link sent before it, so a username that has
+          // had its email keeps the confirmation, even after switching away
+          this.passwordResetEmailSentFor.add(username)
+        },
+        error: () => {
+          this.sendingPasswordResetEmail = false
+        },
+      })
+  }
+
+  private observePasswordResetStatus(): void {
+    this.passwordResetStatusCheck
+      .pipe(
+        switchMap((username) =>
+          this._signIn.getPasswordResetStatus(username).pipe(
+            map((status) => ({
+              username,
+              required: !!status?.passwordResetRequired,
+            }))
+          )
+        ),
+        takeUntil(this.$destroy)
+      )
+      .subscribe(({ username, required }) => {
+        this.checkingPasswordResetStatus = false
+        if (this.show2FA) {
+          // The password was accepted meanwhile; the 2FA step decides now
+          return
+        }
+        if (required) {
+          this.passwordResetRequiredFor = username
+        } else if (
+          this.passwordResetRequiredFor === username &&
+          this.passwordResetConfirmedFor !== username
+        ) {
+          this.passwordResetRequiredFor = null
+        }
+      })
+  }
+
+  /**
+   * A sign in the notice kept silent although the registry did not say a reset
+   * is owed: the password was wrong, or the record has been reset since the
+   * lookup, from the email in another tab. Ask again, and when no reset is owed
+   * any more, take the notice away and show the answer as the wrong password
+   * it was, instead of leaving the user with silence.
+   */
+  private recheckPasswordResetStatus(username: string, attempt: number): void {
+    if (!username) {
+      return
+    }
+    this._signIn
+      .getPasswordResetStatus(username, false)
+      .pipe(first(), takeUntil(this.$destroy))
+      .subscribe({
+        next: (status) => {
+          if (
+            status?.passwordResetRequired ||
+            attempt !== this.signInAttempts ||
+            this.show2FA ||
+            this.normalisedUsername() !== username
+          ) {
+            return
+          }
+          this.passwordResetRequiredFor = null
+          this.passwordResetConfirmedFor = null
+          // Ask again the next time the field is left
+          this.lastLookedUpUsername = null
+          this.badCredentials = true
+          this.printError = true
+          this._observability.recordSimpleEvent(AppEventName.SignInFailure, {
+            isOauth: !!this.signInLocal?.isOauth,
+            signInType: this.signInLocal?.type || 'regular',
+            passwordResetRequired: false,
+            suppressedByNotice: false,
+            badCredentials: true,
+            recheckedAfterNotice: true,
+          })
+        },
+        // Could not ask: stay silent rather than guess
+        error: () => {},
+      })
+  }
+
+  /**
+   * The username field as the registry sees it: an iD in its canonical form,
+   * an address lower cased, so the same account compares equal however typed.
+   */
+  private normalisedUsername(): string {
+    const value = this.authorizationForm?.get('username')?.value
+    if (typeof value !== 'string' || !value.trim()) {
+      return ''
+    }
+    const username = getOrcidNumber(value.trim())
+    return username.includes('@') ? username.toLowerCase() : username
   }
 
   hideErrors() {

@@ -3,6 +3,7 @@
     <div class="row space-around">
       <div class="col l6 m6 s4">
         <mat-card
+          *ngIf="!twoFactorDisabledByRecoveryPhone"
           appearance="outlined"
           class="orcid-wizard sign-in-wrapper"
           [ngClass]="{
@@ -54,6 +55,9 @@
                 (show2FAEmitter)="show2FAEmitter($event)"
                 (isOauthError)="isOauthError = $event"
                 (errorDescription)="errorDescription = $event"
+                (twoFactorDisabledByRecoveryPhone)="
+                  onTwoFactorDisabledByRecoveryPhone($event)
+                "
               >
                 <button
                   mat-raised-button
@@ -79,6 +83,23 @@
               [realUserOrcid]="realUserOrcid"
             >
             </app-logged-in>
+          </mat-card-content>
+        </mat-card>
+        <mat-card
+          *ngIf="twoFactorDisabledByRecoveryPhone"
+          appearance="outlined"
+          class="orcid-wizard sign-in-wrapper"
+          [ngClass]="{
+            mobile: platform?.columns4
+          }"
+        >
+          <mat-card-content>
+            <app-two-factor-disabled
+              [clientName]="oauthClientName"
+              [redirectUrl]="twoFactorDisabledRedirectUrl"
+              (continue)="continueAfterTwoFactorDisabled()"
+            >
+            </app-two-factor-disabled>
           </mat-card-content>
         </mat-card>
       </div>

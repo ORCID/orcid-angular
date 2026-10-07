@@ -30,6 +30,7 @@
         formControlName="username"
         matInput
         [placeholder]="placeholderUsername"
+        (blur)="checkPasswordResetStatus()"
         #firstInput
       />
     </mat-form-field>
@@ -66,6 +67,69 @@
       (signInActiveAccount)="signInActiveAccount()"
     >
     </app-print-errors>
+
+    <div
+      class="password-reset-required"
+      id="cy-password-reset-status"
+      aria-live="polite"
+      [attr.aria-busy]="checkingPasswordResetStatus"
+    >
+      <app-alert-message
+        type="notice-important"
+        *ngIf="showPasswordResetNotice"
+        id="cy-password-reset-required-notice"
+      >
+        <div content class="content">
+          <p class="password-reset-required-title">
+            <strong i18n="@@ngOrcid.signin.passwordResetRequired.title"
+              >Your ORCID account password needs to be reset</strong
+            >
+          </p>
+          <p>
+            <ng-container i18n="@@ngOrcid.signin.passwordResetRequired.body"
+              >To help maintain the security of your ORCID account please reset
+              your account password.</ng-container
+            >&nbsp;<i i18n="@@ngOrcid.signin.passwordResetRequired.cannotSignIn"
+              >You will not be able to sign in to ORCID until your password has
+              been reset.</i
+            >
+          </p>
+          <p class="password-reset-required-action">
+            <a
+              *ngIf="!passwordResetEmailSent"
+              class="underline"
+              id="cy-send-password-reset-email"
+              (click)="sendPasswordResetEmail()"
+              i18n="@@ngOrcid.signin.passwordResetRequired.sendEmail"
+              >Send password reset email</a
+            >
+            <span
+              *ngIf="passwordResetEmailSent"
+              id="cy-password-reset-email-sent"
+              ><ng-container *ngIf="passwordResetEmailSentTo"
+                ><span i18n="@@ngOrcid.signin.passwordResetRequired.emailSentTo"
+                  >We have sent a password reset email to</span
+                >&nbsp;<b>{{ passwordResetEmailSentTo }}</b
+                >&nbsp;<span
+                  i18n="
+                    @@ngOrcid.signin.passwordResetRequired.emailSentToOthers"
+                  >and any other verified email addresses on your account.</span
+                ></ng-container
+              ><span
+                *ngIf="!passwordResetEmailSentTo"
+                i18n="@@ngOrcid.signin.passwordResetRequired.emailSentToRecord"
+                >We have sent a password reset email to the email addresses on
+                your ORCID record.</span
+              >&nbsp;<span
+                i18n="@@ngOrcid.signin.passwordResetRequired.checkSpam"
+                >If you do not receive it within 10 minutes please check your
+                spam folder.</span
+              ></span
+            >
+          </p>
+        </div>
+      </app-alert-message>
+    </div>
   </div>
   <div class="input-container">
     <mat-label
@@ -119,6 +183,9 @@
     *ngIf="show2FA"
     [showBadVerificationCode]="showBadVerificationCode"
     [showBadRecoveryCode]="showBadRecoveryCode"
+    [recoveryPhoneOptionAvailable]="recoveryPhoneOptionAvailable"
+    [recoveryPhoneState]="recoveryPhoneState"
+    (requestRecoveryPhoneCode)="onRequestRecoveryPhoneCode()"
     (authenticate)="authenticate($event)"
   >
   </app-two-factor-authentication-form>
@@ -129,6 +196,6 @@
     (click)="forgotPassword()"
     id="forgot-password-button"
   >
-    Forgot your password or ORCID ID?
+    Forgot your password or ORCID iD?
   </a>
 </form>

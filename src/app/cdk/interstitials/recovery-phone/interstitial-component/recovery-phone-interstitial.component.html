@@ -1,0 +1,90 @@
+<ng-container *ngIf="!afterSummitStatus">
+  <mat-card-header class="authorize-header">
+    <mat-card-title role="heading" aria-level="1">
+      <mat-icon class="logo-icon"
+        ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+      </mat-icon>
+      <h1 class="orc-font-heading-small" i18n="@@account.addRecoveryPhoneTitle">
+        Add a recovery phone number
+      </h1>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="authorize-content">
+    <!-- app-info-panel projects into a <p>, so the two paragraphs of the
+       notice are spans given block layout rather than nested <p> elements.
+       PD-5850: this frame draws the outlined question mark, not the disc the
+       panel draws by default -->
+    <app-info-panel type="help">
+      <span
+        class="recovery-phone-notice__use"
+        i18n="@@interstitials.recoveryPhoneNoticeUse"
+        >A recovery phone number can be used to access your ORCID account if you
+        don't have your authentication app or recovery codes.</span
+      >
+      <span
+        class="recovery-phone-notice__once"
+        i18n="@@interstitials.recoveryPhoneNoticeOnce"
+        >Recovery phone numbers can only be used once. Using it will disable
+        two-factor authentication and reset your 2FA backup options.</span
+      >
+    </app-info-panel>
+
+    <!-- INTERSTITIAL is what lets the registry accept the send and the save on
+       the sign in the user has just completed, with no second challenge (R6.3) -->
+    <app-recovery-phone-form
+      context="INTERSTITIAL"
+      [showHeading]="true"
+      (ready)="onFormReady()"
+      (codeSentChange)="codeSent = $event"
+      (saved)="onSaved($event)"
+      (failed)="onFailed()"
+      (challengeRequired)="onChallengeRequired()"
+    ></app-recovery-phone-form>
+
+    <!-- After the form on purpose: the form emits `ready` from its own ngOnInit
+       when the locale needs no extra translations, and a binding placed above
+       it would be evaluated before that and change within the same check -->
+    <mat-spinner
+      *ngIf="!formReady"
+      class="spinner"
+      [diameter]="80"
+      [strokeWidth]="5"
+    ></mat-spinner>
+
+    <mat-divider class="footer-divider"></mat-divider>
+
+    <button
+      class="authorize-button"
+      mat-raised-button
+      color="primary"
+      (click)="addRecoveryPhone()"
+      id="cy-interstitial-add-recovery-phone"
+      [disabled]="!codeSent"
+      i18n="@@account.addRecoveryPhoneNumber"
+    >
+      Add recovery phone number
+    </button>
+    <div class="row deny-button-wrapper">
+      <!-- A button, not an anchor: the dialog sets disableClose, so this is the
+         only way out and it has to be reachable by keyboard.
+         Disabled while the save is in flight, so keyboard cannot reach the
+         state either: the POST cannot be called back, and leaving here now
+         would report no number added for one the registry keeps (R6.4) -->
+      <button
+        id="deny-button"
+        type="button"
+        class="link-button underline"
+        [disabled]="saving"
+        (click)="declineRecoveryPhone()"
+      >
+        <!-- A span, not an <i>: the frame draws this upright, and the slant was
+           the user-agent default for that element (PD-5850). The marker hugs
+           the text so the extracted source keeps no surrounding whitespace -->
+        <span i18n="@@interstitials.continueWithoutRecoveryNumber"
+          >Continue without adding a recovery number</span
+        >
+      </button>
+    </div>
+  </mat-card-content>
+</ng-container>

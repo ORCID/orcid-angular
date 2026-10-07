@@ -1,0 +1,46 @@
+<main id="main">
+  <div class="recovery-phone-page">
+    @if (!loadingState) {
+    <orcid-step-view
+      [title]="title"
+      [primaryLabel]="primaryLabel"
+      [primaryDisabled]="!codeSent"
+      [secondaryLabel]="cancelLabel"
+      (primaryAction)="onPrimaryAction()"
+      (secondaryAction)="cancel()"
+    >
+      <div class="recovery-phone-notice" role="note">
+        <mat-icon class="recovery-phone-notice__icon" aria-hidden="true"
+          >error_outline</mat-icon
+        >
+        <div>
+          <p
+            class="orc-font-body-small"
+            i18n="@@account.recoveryPhoneNoticeUse"
+          >
+            Your recovery phone number can be used to access your ORCID account
+            if you don't have your authentication app or recovery codes.
+          </p>
+          <p
+            class="orc-font-body-small recovery-phone-notice__emphasis"
+            i18n="@@account.recoveryPhoneNoticeOnce"
+          >
+            Your recovery phone number can only be used once. Using it will
+            disable two-factor authentication and reset your 2FA backup options.
+          </p>
+        </div>
+      </div>
+
+      <app-recovery-phone-form
+        context="SETTINGS"
+        [managingExistingNumber]="managingExistingNumber"
+        [maskedRecoveryPhoneNumber]="maskedRecoveryPhoneNumber"
+        (codeSentChange)="codeSent = $event"
+        (saved)="onSaved()"
+        (failed)="onFailed()"
+        (challengeRequired)="onChallengeRequired()"
+      />
+    </orcid-step-view>
+    }
+  </div>
+</main>

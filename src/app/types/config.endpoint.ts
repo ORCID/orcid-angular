@@ -17,6 +17,13 @@ export const TogglzFlag = {
   PERMISSION_NOTIFICATIONS: 'PERMISSION_NOTIFICATIONS',
   SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS:
     'SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS',
+  TWO_FACTOR_RECOVERY_PHONE: 'TWO_FACTOR_RECOVERY_PHONE',
+  /**
+   * The add-a-recovery-number interstitial. There is deliberately no OAUTH_
+   * counterpart: the interstitial managers resolve their flag by prefix, so
+   * leaving it out is what keeps this one to the standard sign-in flow.
+   */
+  LOGIN_RECOVERY_PHONE_INTERSTITIAL: 'LOGIN_RECOVERY_PHONE_INTERSTITIAL',
   /** Real User Monitoring / session recording (supports percentage 0–100 via FEATURE_PERCENTAGE). */
   RUM: 'RUM',
 } as const

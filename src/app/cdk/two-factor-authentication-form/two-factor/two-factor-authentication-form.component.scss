@@ -1,3 +1,5 @@
+@import '../../../../assets/scss/orcid.spacing.scss';
+
 :host {
   width: 100%;
 }
@@ -6,28 +8,45 @@
   margin-top: 12px;
 }
 
-.error-message {
-  float: left;
-  margin: 0;
-  [dir='rtl'] :host & {
-    float: right;
+/*
+ * D9. The field's helper row, as the "Helper text" frame in the PD-6042 set
+ * draws it: one 18 px row under the input, the message growing from the left
+ * and the counter pinned right. Measured off `pd-6042-01`, that frame sits at
+ * y=74 of a 92 px field whose input ends at y=66, with "Microcopy" at x=0
+ * w=424 and "Limit" at x=432 w=20; `pd-6042-13`, `-14` and `-15` draw the
+ * rejected state in the same 92 px, so the error replaces the message rather
+ * than being added under it.
+ *
+ * It replaces a pair of floats. `float: right` on the counter took it out of
+ * flow and onto a line of its own, which is what put the two halves of this
+ * one row on two rows in the build.
+ */
+.code-helper {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $spacing-small;
+
+  mat-hint,
+  mat-error,
+  p {
+    display: block;
+    margin: 0;
+    font-weight: normal;
+    line-height: 16px; // Figma small-print 12/16
   }
 }
 
-.error-length {
-  float: right;
-  margin: 0;
-  [dir='rtl'] :host & {
-    float: left;
-  }
+.code-helper__message {
+  flex-grow: 1;
+}
+
+.code-helper__count {
+  flex-shrink: 0;
 }
 
 .orcid-error {
   margin-top: 20px !important;
-}
-
-p.enter-code {
-  margin-top: 28px;
 }
 
 mat-label.orc-font-small-print {
@@ -37,5 +56,102 @@ mat-label.orc-font-small-print {
 
   label {
     font-weight: normal;
+  }
+}
+
+/*
+ * The recovery number option and the field it opens. The orc-font-* classes
+ * carry a size and a letter-spacing and nothing else, so every line-height and
+ * weight below is spelled out.
+ */
+
+/*
+ * A link that does something rather than going somewhere. An <a> with no href
+ * is not reachable by keyboard, so these are buttons wearing the link's
+ * clothes - including the house focus ring, which Material buttons do not
+ * ship.
+ */
+.link-button {
+  display: inline;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-weight: normal;
+  line-height: 20px; // Figma body-S 14/20
+  text-align: inherit;
+  cursor: pointer;
+  /* a.underline only ever matches an anchor, so say it here */
+  text-decoration: underline;
+
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+.recovery-phone-error {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-small;
+  line-height: 20px; // Figma body-S 14/20
+
+  /* a direct flex child, so it has to be told not to be squeezed to a sliver */
+  .recovery-phone-error__icon {
+    flex-shrink: 0;
+  }
+
+  span {
+    font-weight: normal;
+    line-height: 20px;
+  }
+}
+
+/*
+ * D8. An escape row pair - a question and the way out under it - as the frames
+ * draw it. Measured off `pd-6042-01`: the four ink runs sit on 289.5-290.0 px
+ * of a 452 px column running 64..515 whose centre is 289.5, one sentence per
+ * row, and the two pairs are 16 px apart (the frame's text boxes run 0..42 and
+ * 58..100). `spacing-base` is that 16, top and bottom, and it collapses between
+ * two of these blocks to one gap rather than two.
+ *
+ * The centring itself is `text-center` in the template, the utility the
+ * challenge screen's identical block already uses; it is not restated here.
+ */
+.two-factor-escape {
+  margin: $spacing-base 0;
+}
+
+// Tight against the row below it: the pair is one unit and the block carries
+// the gap.
+.two-factor-escape__question {
+  margin: 0;
+  line-height: 20px; // Figma body-S 14/20
+}
+
+/*
+ * Italic, the way the five recovery-number-code frames draw this line and only
+ * this line: `pd-6042-02`, `pd-6042-09` and the three error frames beside them
+ * all slant "Didn't get the code? You can resend in 27 seconds" and leave every
+ * other run on the screen upright. The <strong> around the number inherits it
+ * and comes out bold-italic, which is what the frames draw too.
+ *
+ * No frame draws the state this row reaches at zero, where the countdown is
+ * replaced by a resend link, so the link is left looking like every other link
+ * the frames DO draw on this screen: upright. It inherits the slant otherwise -
+ * a button here takes the surrounding font rather than the UA's.
+ */
+.recovery-phone-resend {
+  margin: 0;
+  line-height: 20px; // Figma body-S 14/20
+  font-style: italic;
+
+  .link-button {
+    font-style: normal;
   }
 }
