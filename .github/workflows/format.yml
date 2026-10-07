@@ -50,6 +50,8 @@ jobs:
       # the branch name and run a full `tsc --noEmit`. HUSKY=0 skips both the
       # install and the hooks.
       HUSKY: '0'
+      # Subject of the commit this job pushes. The loop guard below reads it.
+      FIX_COMMIT_MESSAGE: '🤖 GITHUB ACTIONS prettier'
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
@@ -114,12 +116,30 @@ jobs:
         if: steps.mode.outputs.can_push == 'true'
         run: yarn format
 
+      # Loop guard. The push below starts a new run, which runs this job again,
+      # and that stops only because prettier is idempotent: the second run finds
+      # nothing to change. If prettier ever is not, for some input, every run
+      # would push another fix and cancel the one before it. So never stack a
+      # fix on top of this job's own fix: if the branch tip already is one and
+      # prettier still wants changes, fail and show them instead of pushing.
+      - name: Refuse to push a second fix in a row
+        if: steps.mode.outputs.can_push == 'true'
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            exit 0
+          fi
+          if [ "$(git log -1 --format=%s)" = "$FIX_COMMIT_MESSAGE" ]; then
+            echo "::error::prettier changed files again on top of its own fix commit, so it is not idempotent for them. Not pushing, to avoid a push and re-run loop. Format these by hand."
+            git status --porcelain
+            exit 1
+          fi
+
       - name: Commit and push the fix
         id: fix
         if: steps.mode.outputs.can_push == 'true'
         uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9.1.4
         with:
-          message: '🤖 GITHUB ACTIONS prettier'
+          message: ${{ env.FIX_COMMIT_MESSAGE }}
           default_author: github_actions
           push: true
         env:
