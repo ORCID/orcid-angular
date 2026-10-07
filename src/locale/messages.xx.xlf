@@ -1558,7 +1558,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">114,116</context>
+          <context context-type="linenumber">131,133</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -1582,7 +1582,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">105,107</context>
+          <context context-type="linenumber">122,124</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1602,7 +1602,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1614,7 +1614,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1626,7 +1626,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">140,142</context>
+          <context context-type="linenumber">157,159</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1638,7 +1638,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">165</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -2218,7 +2218,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">162</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -12131,7 +12131,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">134,136</context>
+          <context context-type="linenumber">198,200</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14371,7 +14371,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">230,232</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -14723,11 +14723,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">302,304</context>
+          <context context-type="linenumber">341,343</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">353,355</context>
+          <context context-type="linenumber">392,394</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -14839,7 +14839,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">261,263</context>
+          <context context-type="linenumber">300,302</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -14947,7 +14947,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">235,237</context>
+          <context context-type="linenumber">274,276</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15155,11 +15155,43 @@
         </context-group>
         <target>X</target>
       </trans-unit>
+      <trans-unit id="topBar.passwordResetRequired.title" datatype="html" resname="topBar.passwordResetRequired.title">
+        <source>Your ORCID account password needs to be reset</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.passwordResetRequired.body" datatype="html" resname="topBar.passwordResetRequired.body">
+        <source>To help maintain the security of your ORCID account please reset your account password.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.passwordResetRequired.cannotSignIn" datatype="html" resname="topBar.passwordResetRequired.cannotSignIn">
+        <source>You will not be able to sign in to ORCID until your password has been reset.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.passwordResetRequired.resetNow" datatype="html" resname="topBar.passwordResetRequired.resetNow">
+        <source>Reset your account password now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
       <trans-unit id="topBar.accountHasBeenLocked" datatype="html" resname="topBar.accountHasBeenLocked">
         <source>Your account has been locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">24,26</context>
+          <context context-type="linenumber">63,65</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15167,7 +15199,7 @@
         <source>Please contact</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15175,7 +15207,7 @@
         <source>ORCID support</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15183,7 +15215,7 @@
         <source>if you believe this account was locked in error.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15191,7 +15223,7 @@
         <source>Email domains shared</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">84</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15199,7 +15231,7 @@
         <source>The email domains</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15207,7 +15239,7 @@
         <source>The email domain</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15215,7 +15247,7 @@
         <source>and</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">71,73</context>
+          <context context-type="linenumber">110,112</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15223,7 +15255,7 @@
         <source>are now visible on your public ORCID record. Manage your email addresses and domains in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">79,82</context>
+          <context context-type="linenumber">118,121</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15231,7 +15263,7 @@
         <source>is now visible on your public ORCID record. Manage your email addresses and domains in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">86,89</context>
+          <context context-type="linenumber">125,128</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15239,7 +15271,7 @@
         <source>Emails &amp; domains section</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15247,7 +15279,7 @@
         <source>Backup email address added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15255,11 +15287,11 @@
         <source>You have successfully added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">146</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">223</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15267,7 +15299,7 @@
         <source>as your backup email address.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15275,7 +15307,7 @@
         <source>Manage your email addresses and domains</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">156</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15283,7 +15315,7 @@
         <source>Employment affiliation added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">163</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15291,7 +15323,7 @@
         <source>has been added to your ORCID record. Manage your existing employment affiliations or add new ones in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">128,130</context>
+          <context context-type="linenumber">167,169</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15299,7 +15331,7 @@
         <source>Employment section</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">175</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15307,7 +15339,7 @@
         <source>Two-factor authentication (2FA) has been disabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">184</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15315,7 +15347,7 @@
         <source>You have signed in using your recovery phone number. Your recovery number has been deleted and two-factor authentication has been disabled for this ORCID account. You can re-enable 2FA from your</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">164,166</context>
+          <context context-type="linenumber">203,205</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15323,7 +15355,7 @@
         <source>account settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">173</context>
+          <context context-type="linenumber">212</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15331,7 +15363,7 @@
         <source>Recovery phone number added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">219</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15339,7 +15371,7 @@
         <source>as an account recovery option.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">227</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15347,7 +15379,7 @@
         <source>Manage your recovery options in Account settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">248</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15355,11 +15387,11 @@
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">240,242</context>
+          <context context-type="linenumber">279,281</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">252,254</context>
+          <context context-type="linenumber">291,293</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -17567,7 +17599,15 @@
         <source>Password must not be the same as your email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">53,55</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.passwordPreviouslyUsed" datatype="html" resname="register.passwordPreviouslyUsed">
+        <source>Please enter a new password. Previous passwords cannot be reused.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">64,65</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -17575,7 +17615,7 @@
         <source>Password must be between 8 and 256 characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">81,83</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -17583,7 +17623,7 @@
         <source>Passwords do not match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">123,125</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -18095,7 +18135,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">679</context>
+          <context context-type="linenumber">949</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -18115,7 +18155,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">681</context>
+          <context context-type="linenumber">951</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -18127,11 +18167,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">682</context>
+          <context context-type="linenumber">952</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">703</context>
+          <context context-type="linenumber">973</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -19943,7 +19983,7 @@
         <source>For example: joe@institution.edu or 0000-1234-5678-9101</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">40,41</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19951,7 +19991,7 @@
         <source>Please enter your email address or your ORCID iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">46,47</context>
+          <context context-type="linenumber">47,48</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19959,7 +19999,71 @@
         <source>Please enter a valid email address or ORCID iD, for example: joe@institution.edu or 0000-1234-5678-9101</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">52,54</context>
+          <context context-type="linenumber">53,55</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="ngOrcid.signin.passwordResetRequired.title" datatype="html" resname="ngOrcid.signin.passwordResetRequired.title">
+        <source>Your ORCID account password needs to be reset</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="ngOrcid.signin.passwordResetRequired.body" datatype="html" resname="ngOrcid.signin.passwordResetRequired.body">
+        <source>To help maintain the security of your ORCID account please reset your account password.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">90,91</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="ngOrcid.signin.passwordResetRequired.cannotSignIn" datatype="html" resname="ngOrcid.signin.passwordResetRequired.cannotSignIn">
+        <source>You will not be able to sign in to ORCID until your password has been reset.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">93,94</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="ngOrcid.signin.passwordResetRequired.sendEmail" datatype="html" resname="ngOrcid.signin.passwordResetRequired.sendEmail">
+        <source>Send password reset email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentTo" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentTo">
+        <source>We have sent a password reset email to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentToOthers" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentToOthers">
+        <source>and any other verified email addresses on your account.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentToRecord" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentToRecord">
+        <source>We have sent a password reset email to the email addresses on your ORCID record.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">121,122</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="ngOrcid.signin.passwordResetRequired.checkSpam" datatype="html" resname="ngOrcid.signin.passwordResetRequired.checkSpam">
+        <source>If you do not receive it within 10 minutes please check your spam folder.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">125,126</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19967,7 +20071,7 @@
         <source>Your password is more than 256 characters long.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">165</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19975,7 +20079,7 @@
         <source>You cannot sign in to this ORCID account until you have reset your password.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">104,105</context>
+          <context context-type="linenumber">168,169</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19983,7 +20087,7 @@
         <source>Reset your password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">108,109</context>
+          <context context-type="linenumber">172,173</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19991,7 +20095,7 @@
         <source>Email or 16-digit ORCID iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">161</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19999,7 +20103,7 @@
         <source>Claiming your account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">700</context>
+          <context context-type="linenumber">970</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -20007,7 +20111,7 @@
         <source>Thank you for claiming your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">702</context>
+          <context context-type="linenumber">972</context>
         </context-group>
         <target>X</target>
       </trans-unit>

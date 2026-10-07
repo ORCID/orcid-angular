@@ -151,4 +151,67 @@ describe('TopBarComponent', () => {
       )
     })
   })
+
+  /*
+   * PD-5692. A record that has to reset its password gets here through a
+   * linked institutional account, and the notice takes it straight to the
+   * Account password panel.
+   */
+  describe('mandatory password reset notice', () => {
+    const notice = (): HTMLElement =>
+      fixture.nativeElement.querySelector(
+        '[id="cy-force-password-reset-notice"]'
+      )
+
+    it('shows above everything else and links to the password panel', () => {
+      component.userInfo = { FORCE_PASSWORD_RESET: 'true' } as any
+      component.userRecord = {
+        names: {
+          givenNames: { value: 'Given' },
+          familyName: { value: 'Family' },
+          visibility: { visibility: 'PUBLIC' },
+        },
+      } as any
+      fixture.detectChanges()
+
+      expect(notice()).toBeTruthy()
+      const link: HTMLAnchorElement = notice().querySelector(
+        '#cy-force-password-reset-link'
+      )
+      expect(link.getAttribute('href')).toBe('/account#password')
+      expect(link.textContent.trim()).toBe('Reset your account password now')
+      // The first thing in the signed-in part of the page, ahead of every
+      // other notice and of the names panel, as the frame draws it
+      const host: HTMLElement = fixture.nativeElement
+      const children = Array.from(host.children)
+      const previous = children[children.indexOf(notice()) - 1]
+      expect(previous.tagName.toLowerCase()).toBe(
+        'app-top-bar-verification-email'
+      )
+      const names = host.querySelector('#names')
+      expect(names).toBeTruthy()
+      expect(
+        notice().compareDocumentPosition(names) &
+          Node.DOCUMENT_POSITION_FOLLOWING
+      ).toBeTruthy()
+    })
+
+    it('is absent when no reset is owed', () => {
+      component.userInfo = { FORCE_PASSWORD_RESET: 'false' } as any
+      fixture.detectChanges()
+      expect(notice()).toBeNull()
+
+      component.userInfo = {} as any
+      fixture.detectChanges()
+      expect(notice()).toBeNull()
+    })
+
+    it('is absent on a public record', () => {
+      component.isPublicRecord = 'true' as any
+      component.userInfo = { FORCE_PASSWORD_RESET: 'true' } as any
+      fixture.detectChanges()
+
+      expect(notice()).toBeNull()
+    })
+  })
 })
