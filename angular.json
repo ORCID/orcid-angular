@@ -103,29 +103,16 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": ["src/polyfills.ts"],
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "crossOrigin": "use-credentials",
             "outputHashing": "all",
-            "outputPath": {
-              "base": "dist",
-              "browser": "",
-              "media": "assets"
-            },
+            "outputPath": "dist",
             "i18nMissingTranslation": "warning",
-            "allowedCommonJsDependencies": [
-              "lodash",
-              "xml2js",
-              "bowser",
-              "helphero",
-              "intl-tel-input",
-              "@orcid/bibtex-parse-js",
-              "buffer"
-            ],
             "assets": [
               {
                 "glob": "**/*",
@@ -136,13 +123,18 @@
                   "**/*.spec.ts",
                   "print-view/**"
                 ],
-                "output": "assets/"
+                "output": "/assets/"
               },
               {
                 "glob": "**/*",
                 "input": "src/assets/print-view/",
                 "ignore": ["**/*.spec.ts"],
-                "output": "print-view/"
+                "output": "/print-view/"
+              },
+              {
+                "glob": "src/favicon.ico",
+                "input": "src/",
+                "output": "/assets/"
               }
             ],
             "styles": [
@@ -157,16 +149,16 @@
               "src/assets/scss/grid.scss"
             ],
             "scripts": [
-              "scripts/environment.runtime.js",
-              "scripts/onetrust.runtime.js"
+              "/scripts/environment.runtime.js",
+              "/scripts/onetrust.runtime.js"
             ]
           },
           "configurations": {
             "local": {
               "scripts": [
-                "scripts/environment.runtime.js",
-                "scripts/onetrust.runtime.js",
-                "scripts/new-relic.runtime.js"
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
               ],
               "budgets": [
                 {
@@ -183,19 +175,25 @@
                 "hidden": false
               },
               "namedChunks": true,
-              "extractLicenses": false
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "outputPath": "dist"
             },
             "local-with-proxy": {
               "scripts": [
-                "scripts/environment.runtime.js",
-                "scripts/onetrust.runtime.js",
-                "scripts/new-relic.runtime.js"
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
               ],
               "optimization": false,
               "outputHashing": "none",
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "outputPath": "dist",
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -205,9 +203,9 @@
             },
             "local-with-proxy-localize-en": {
               "scripts": [
-                "scripts/environment.runtime.js",
-                "scripts/onetrust.runtime.js",
-                "scripts/new-relic.runtime.js"
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
               ],
               "localize": ["en"],
               "optimization": false,
@@ -215,6 +213,9 @@
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "outputPath": "dist",
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -224,30 +225,27 @@
             },
             "local-with-proxy-localize-fr": {
               "scripts": [
-                "scripts/environment.runtime.js",
-                "scripts/onetrust.runtime.js",
-                "scripts/new-relic.runtime.js"
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
               ],
               "localize": ["fr"]
             },
             "local-with-proxy-localize-ar": {
               "scripts": [
-                "scripts/environment.runtime.js",
-                "scripts/onetrust.runtime.js",
-                "scripts/new-relic.runtime.js"
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
               ],
               "localize": ["ar"]
             },
             "local-with-proxy-localize-xx": {
               "scripts": [
-                "scripts/environment.runtime.js",
-                "scripts/onetrust.runtime.js",
-                "scripts/new-relic.runtime.js"
+                "/scripts/environment.runtime.js",
+                "/scripts/onetrust.runtime.js",
+                "/scripts/new-relic.runtime.js"
               ],
               "localize": ["xx"]
-            },
-            "i18n-extract": {
-              "scripts": []
             },
             "production": {
               "budgets": [
@@ -315,10 +313,9 @@
           "defaultConfiguration": ""
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "ng-orcid:build:local",
-            "allowedHosts": true
+            "buildTarget": "ng-orcid:build:local"
           },
           "configurations": {
             "local-qa": {
@@ -414,9 +411,9 @@
           }
         },
         "extract-i18n": {
-          "builder": "@angular/build:extract-i18n",
+          "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "ng-orcid:build:i18n-extract"
+            "buildTarget": "ng-orcid:build"
           }
         },
         "test": {

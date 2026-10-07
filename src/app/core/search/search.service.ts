@@ -9,6 +9,7 @@ import {
   DEFAULT_PAGE_SIZE,
   ORCID_REGEXP_CASE_INSENSITIVE,
 } from 'src/app/constants'
+import { debug } from 'console'
 
 @Injectable({
   providedIn: 'root',

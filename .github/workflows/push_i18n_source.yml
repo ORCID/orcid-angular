@@ -36,10 +36,10 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - uses: ./.github/actions/yarn-install
 
-      # scripts/environment.runtime.js is generated and gitignored. The
-      # extract-i18n build configuration blanks the global scripts so extraction
-      # no longer needs it, but generating it here keeps this job working if that
-      # configuration is ever changed. Two seconds.
+      # scripts/environment.runtime.js is generated and gitignored, and the build
+      # target that extract-i18n compiles lists it as a global script. Generating
+      # it first, as `yarn build`'s prebuild does, keeps extraction independent of
+      # whether the builder tolerates a missing script file. Two seconds.
       - run: yarn build-runtime-env
 
       # ng extract-i18n + scripts/normalize-xlf.prebuild.ts.
