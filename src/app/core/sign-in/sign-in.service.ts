@@ -19,6 +19,7 @@ import { getOrcidNumber, isValidOrcidFormat } from '../../constants'
 import { Claim } from '../../types/claim.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
 import {
+  PasswordResetStatusResponse,
   RecoveryPhoneSignInSendResponse,
   RecoveryPhoneSignInStatusResponse,
   RecoveryPhoneSignInVerifyResponse,
@@ -261,6 +262,35 @@ export class SignInService {
         retryTransient(),
         catchError((error) => this._errorHandler.handleError(error))
       )
+  }
+
+  /**
+   * Asks the Registry whether the record behind an email address or ORCID iD
+   * has to reset its password before it can sign in (PD-5692), so the form
+   * can say so before a password is typed.
+   *
+   * Always the Registry, like the recovery phone calls: the flag lives on the
+   * record and the lookup is not part of either sign-in implementation. A
+   * failure answers false and reports nothing: this is a hint, and the sign-in
+   * itself reports the same state once the password is right. A caller that
+   * has to tell "no reset owed" from "could not ask" passes `failOpen` false
+   * and gets the error instead.
+   */
+  getPasswordResetStatus(
+    username: string,
+    failOpen = true
+  ): Observable<PasswordResetStatusResponse> {
+    const request = this._http.post<PasswordResetStatusResponse>(
+      runtimeEnvironment.API_WEB + 'signin/password-reset-status.json',
+      { username: getOrcidNumber((username || '').trim()) },
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        withCredentials: true,
+      }
+    )
+    return failOpen
+      ? request.pipe(catchError(() => of({ passwordResetRequired: false })))
+      : request
   }
 
   /**

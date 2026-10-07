@@ -11,6 +11,20 @@ export interface SignIn {
   invalidUserType: any
   url: string
   primary: string
+  /**
+   * The password was right, but the record has to reset it before it can sign
+   * in with one (PD-5692). Only ever sent with `success: false`.
+   */
+  passwordResetRequired?: boolean
+}
+
+/**
+ * Answer to `signin/password-reset-status.json`: whether the record behind an
+ * email address or ORCID iD has to reset its password before it can sign in.
+ * The same answer covers an unknown identifier and the feature being off.
+ */
+export interface PasswordResetStatusResponse {
+  passwordResetRequired: boolean
 }
 
 /**
