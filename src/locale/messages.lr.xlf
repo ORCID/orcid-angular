@@ -169,7 +169,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">440,442</context>
+          <context context-type="linenumber">469,471</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
@@ -229,7 +229,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">189,190</context>
+          <context context-type="linenumber">218,219</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -245,7 +245,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">159,160</context>
+          <context context-type="linenumber">188,189</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -261,7 +261,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">446,448</context>
+          <context context-type="linenumber">475,477</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -277,7 +277,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">229</context>
+          <context context-type="linenumber">258</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -293,7 +293,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">268</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -305,7 +305,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">108</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -329,7 +329,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">152,154</context>
+          <context context-type="linenumber">181,183</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -373,7 +373,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">399,401</context>
+          <context context-type="linenumber">428,430</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -385,7 +385,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">404</context>
+          <context context-type="linenumber">433</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -397,11 +397,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">408</context>
+          <context context-type="linenumber">437</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -413,7 +413,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">420,422</context>
+          <context context-type="linenumber">449,451</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -429,7 +429,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">367,369</context>
+          <context context-type="linenumber">396,398</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -445,7 +445,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">375,377</context>
+          <context context-type="linenumber">404,406</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -469,7 +469,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">163,165</context>
+          <context context-type="linenumber">165,167</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">192,194</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -1914,7 +1918,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -2114,7 +2118,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">295</context>
+          <context context-type="linenumber">307</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -2218,7 +2222,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">169</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -3601,6 +3605,14 @@
           <context context-type="linenumber">209</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component.html</context>
           <context context-type="linenumber">136,138</context>
         </context-group>
@@ -3901,6 +3913,14 @@
           <context context-type="linenumber">214</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
@@ -3926,7 +3946,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">111</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -3963,6 +3983,46 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">85</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="topBar.recoveryPhoneNumberAdded" datatype="html" resname="topBar.recoveryPhoneNumberAdded">
+        <source>Recovery phone number added</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">219</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="interstitials.recoveryPhoneAddedToRecord" datatype="html" resname="interstitials.recoveryPhoneAddedToRecord">
+        <source>You have successfully added a recovery phone number to your ORCID record.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">113,115</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">113,115</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="interstitials.recoveryPhoneVisitRecord" datatype="html" resname="interstitials.recoveryPhoneVisitRecord">
+        <source>Visit your ORCID record to manage your account security and recovery options.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">135,138</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
+          <context context-type="linenumber">135,138</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4762,19 +4822,11 @@
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="account.recoveryPhoneCurrentNumber" datatype="html" resname="account.recoveryPhoneCurrentNumber">
-        <source>Your current recovery phone number is</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
       <trans-unit id="account.selectCountryAndEnterNumber" datatype="html" resname="account.selectCountryAndEnterNumber">
         <source>Select a country or location and enter your phone number.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4782,15 +4834,25 @@
         <source>By entering my phone number and clicking 'Send verification code', I consent to receive an automated one-time verification code from ORCID at the number provided. Message and data rates may apply.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">63,67</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="account.recoveryPhoneConsentFrequency" datatype="html" resname="account.recoveryPhoneConsentFrequency">
+        <source>Message frequency varies. Reply HELP for help, STOP to cancel.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <note priority="1" from="description">HELP and STOP are the reply keywords the text message provider
+          answers: keep them in English</note>
         <target>LR</target>
       </trans-unit>
       <trans-unit id="account.termsOfUse" datatype="html" resname="account.termsOfUse">
         <source>Terms of use</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4798,7 +4860,7 @@
         <source>Privacy policy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4806,7 +4868,7 @@
         <source>Send verification code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">96,98</context>
+          <context context-type="linenumber">102,104</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4814,7 +4876,7 @@
         <source>Resend in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4822,7 +4884,7 @@
         <source>Verification code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">131</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4830,11 +4892,11 @@
         <source>Enter the 6-digit verification code sent to your device</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">153</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">302</context>
+          <context context-type="linenumber">331</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4842,7 +4904,7 @@
         <source>A code was sent to this number a moment ago. Please wait before requesting another.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4850,11 +4912,11 @@
         <source>We could not send a verification code. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">257</context>
+          <context context-type="linenumber">305</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">302</context>
+          <context context-type="linenumber">314</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4862,7 +4924,7 @@
         <source>A verification code is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">276</context>
+          <context context-type="linenumber">324</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4870,7 +4932,7 @@
         <source>Invalid verification code length</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">281</context>
+          <context context-type="linenumber">329</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4878,7 +4940,7 @@
         <source>Phone number is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">348</context>
+          <context context-type="linenumber">396</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4886,11 +4948,11 @@
         <source>Phone number is too short</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">356</context>
+          <context context-type="linenumber">404</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">370</context>
+          <context context-type="linenumber">418</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4898,11 +4960,11 @@
         <source>Phone number is too long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">359</context>
+          <context context-type="linenumber">407</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">373</context>
+          <context context-type="linenumber">421</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4910,11 +4972,11 @@
         <source>Phone number is invalid</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">361</context>
+          <context context-type="linenumber">409</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">376</context>
+          <context context-type="linenumber">424</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4922,7 +4984,7 @@
         <source>This code was sent to a different number. Send a new code to this number.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">379</context>
+          <context context-type="linenumber">427</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4930,7 +4992,7 @@
         <source>Invalid verification code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">441</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4938,11 +5000,11 @@
         <source>That code is no longer valid. Send a new code.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">398</context>
+          <context context-type="linenumber">446</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">275</context>
+          <context context-type="linenumber">287</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4950,7 +5012,7 @@
         <source>Too many verification codes have been requested for this account today. Please try again tomorrow.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">404</context>
+          <context context-type="linenumber">452</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -4958,11 +5020,11 @@
         <source>Something went wrong. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">416</context>
+          <context context-type="linenumber">464</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">304</context>
+          <context context-type="linenumber">316</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6879,11 +6941,11 @@
         <source>Don't have your device or your recovery codes?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">135,137</context>
+          <context context-type="linenumber">138,140</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">395,397</context>
+          <context context-type="linenumber">424,426</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6891,7 +6953,7 @@
         <source>Send a code to your recovery number and disable 2FA</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">145,147</context>
+          <context context-type="linenumber">148,150</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6899,7 +6961,11 @@
         <source>ORCID Help Center</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">176,177</context>
+          <context context-type="linenumber">175</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">205,206</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/footer/footer.component.html</context>
@@ -6911,7 +6977,7 @@
         <source>Recovery number code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">266,267</context>
+          <context context-type="linenumber">295,296</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6919,7 +6985,7 @@
         <source>A recovery number code is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">311</context>
+          <context context-type="linenumber">340</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6927,7 +6993,7 @@
         <source>Invalid recovery number code length</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">321</context>
+          <context context-type="linenumber">350</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6935,7 +7001,7 @@
         <source>Authenticate and sign in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">434,436</context>
+          <context context-type="linenumber">463,465</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6943,7 +7009,7 @@
         <source>Invalid recovery number code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">272</context>
+          <context context-type="linenumber">284</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6951,7 +7017,7 @@
         <source>This account has no recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">293</context>
+          <context context-type="linenumber">305</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -6959,7 +7025,7 @@
         <source>Too many codes have been sent to your recovery phone number today. Please try again tomorrow, or use your authentication app or a recovery code.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">297</context>
+          <context context-type="linenumber">309</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -7455,7 +7521,7 @@
         <source>Add a recovery phone number dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/login-interstitials-manager/implementations/login-recovery-phone-interstitials-manager.service.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -12131,7 +12197,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">198,200</context>
+          <context context-type="linenumber">199,201</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -15359,14 +15425,6 @@
         </context-group>
         <target>LR</target>
       </trans-unit>
-      <trans-unit id="topBar.recoveryPhoneNumberAdded" datatype="html" resname="topBar.recoveryPhoneNumberAdded">
-        <source>Recovery phone number added</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">219</context>
-        </context-group>
-        <target>LR</target>
-      </trans-unit>
       <trans-unit id="topBar.asAnAccountRecoveryOption" datatype="html" resname="topBar.asAnAccountRecoveryOption">
         <source>as an account recovery option.</source>
         <context-group purpose="location">
@@ -18135,7 +18193,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">949</context>
+          <context context-type="linenumber">984</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -18155,7 +18213,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">951</context>
+          <context context-type="linenumber">986</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -18167,11 +18225,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">952</context>
+          <context context-type="linenumber">987</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">973</context>
+          <context context-type="linenumber">1008</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -20095,7 +20153,7 @@
         <source>Email or 16-digit ORCID iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">168</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -20103,7 +20161,7 @@
         <source>Claiming your account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">970</context>
+          <context context-type="linenumber">1005</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -20111,7 +20169,7 @@
         <source>Thank you for claiming your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">972</context>
+          <context context-type="linenumber">1007</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -20246,7 +20304,7 @@
         <source>Cancel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -20254,7 +20312,7 @@
         <source>Manage your recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">110</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -20262,7 +20320,7 @@
         <source>Update recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -20270,7 +20328,7 @@
         <source>to manage your recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -20278,7 +20336,7 @@
         <source>to add a recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <target>LR</target>
       </trans-unit>

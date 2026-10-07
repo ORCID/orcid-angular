@@ -458,6 +458,81 @@ describe('TwoFactorAuthenticationFormComponent', () => {
    * the rows' geometry is asserted directly, because that comes from this
    * component's own stylesheet.
    */
+  describe('an account with no recovery number (F1.1)', () => {
+    const helpArticle =
+      'https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication'
+
+    function flagOnWith(hasRecoveryPhone: boolean | undefined) {
+      component.recoveryPhoneOptionAvailable = true
+      component.hasRecoveryPhone = hasRecoveryPhone
+      fixture.detectChanges()
+    }
+
+    it('offers the help centre in place of the recovery number', () => {
+      flagOnWith(false)
+
+      expect(element('cy-send-recovery-phone-code')).toBeNull()
+      const help = element('cy-2fa-help-center') as HTMLAnchorElement
+      expect(help).not.toBeNull()
+      expect(help.textContent.trim()).toBe('ORCID Help Center')
+      expect(help.getAttribute('href')).toBe(helpArticle)
+      expect(help.getAttribute('target')).toBe('_blank')
+      expect(help.getAttribute('rel')).toBe('noopener noreferrer')
+      const question = help.closest('.two-factor-escape').querySelector('p')
+      expect(question.textContent.trim()).toBe(
+        "Don't have your device or recovery code?"
+      )
+    })
+
+    it('keeps the first option as it is', () => {
+      flagOnWith(false)
+
+      expect(element('cy-use-a-recovery-code')).not.toBeNull()
+      const text = fixture.nativeElement.textContent
+      expect(text).toContain('Use a recovery code instead')
+      expect(text).not.toContain('Enter a recovery code')
+    })
+
+    it('lays the help row out like the row above it', () => {
+      flagOnWith(false)
+      const help = element('cy-2fa-help-center')
+      const block = help.closest('.two-factor-escape') as HTMLElement
+      const question = block.querySelector('p')
+
+      expect(block.classList).toContain('text-center')
+      expect(question.contains(help)).toBe(false)
+      expect(help.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+        question.getBoundingClientRect().bottom
+      )
+    })
+
+    it('keeps the recovery number for an account that has one', () => {
+      flagOnWith(true)
+
+      expect(element('cy-send-recovery-phone-code')).not.toBeNull()
+      expect(element('cy-2fa-help-center')).toBeNull()
+    })
+
+    it('keeps the recovery number when the host could not find out (F1.4)', () => {
+      flagOnWith(undefined)
+
+      expect(element('cy-send-recovery-phone-code')).not.toBeNull()
+      expect(element('cy-2fa-help-center')).toBeNull()
+    })
+
+    it('leaves the flag-off screen alone whatever the account holds', () => {
+      component.recoveryPhoneOptionAvailable = false
+      component.hasRecoveryPhone = false
+      fixture.detectChanges()
+
+      expect(element('cy-2fa-help-center')).toBeNull()
+      expect(element('cy-send-recovery-phone-code')).toBeNull()
+      expect(fixture.nativeElement.textContent).toContain(
+        'Enter a recovery code'
+      )
+    })
+  })
+
   describe('the escape rows against their frame', () => {
     function flagOn() {
       component.recoveryPhoneOptionAvailable = true

@@ -51,6 +51,15 @@ input {
   font-size: 14px !important;
 }
 
+/*
+ * PD-14435. Safari on an iPhone zooms the page in when a field smaller than
+ * 16px takes focus and leaves it zoomed after the dialog closes. 16px is the
+ * smallest size it leaves alone; everywhere else the fields keep 14px.
+ */
+:host(.auth-challenge--ios) input {
+  font-size: 16px !important;
+}
+
 .verify-button-loading {
   opacity: 30%;
 }

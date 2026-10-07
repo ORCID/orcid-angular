@@ -5,15 +5,6 @@
 >
   Your recovery phone number
 </h2>
-} @if (managingExistingNumber) {
-<p class="orc-font-body-small recovery-phone-current">
-  <span i18n="@@account.recoveryPhoneCurrentNumber"
-    >Your current recovery phone number is</span
-  >
-  <span class="recovery-phone-current__value">{{
-    maskedRecoveryPhoneNumber
-  }}</span>
-</p>
 } @if (showHeading) {
 <p
   class="orc-font-body-small recovery-phone-help"
@@ -40,6 +31,7 @@
         [initialCountry]="$any(initialCountry)"
         [separateDialCode]="true"
         [countrySearch]="true"
+        [containerClass]="countrySelectorClass"
         [countryNameLocale]="countryNameLocale"
         [uiTranslations]="$any(uiTranslations)"
       />
@@ -60,10 +52,24 @@
   </div>
 
   <div class="recovery-phone-consent">
-    <p class="orc-font-small-print" i18n="@@account.recoveryPhoneConsent">
-      By entering my phone number and clicking 'Send verification code', I
-      consent to receive an automated one-time verification code from ORCID at
-      the number provided. Message and data rates may apply.
+    <!--
+      F3.1 (PD-14449). The disclosures AWS Notify requires are a unit of their
+      own after the existing one rather than an edit to it, so whatever
+      translators already hold for the first three sentences survives (F3.3).
+      &ngsp; keeps the space between the two units: this component drops
+      whitespace-only text between elements.
+    -->
+    <p class="orc-font-small-print">
+      <span i18n="@@account.recoveryPhoneConsent"
+        >By entering my phone number and clicking 'Send verification code', I
+        consent to receive an automated one-time verification code from ORCID at
+        the number provided. Message and data rates may apply.</span
+      >&ngsp;<span
+        i18n="
+          HELP and STOP are the reply keywords the text message provider
+          answers: keep them in English@@account.recoveryPhoneConsentFrequency"
+        >Message frequency varies. Reply HELP for help, STOP to cancel.</span
+      >
     </p>
     <p class="orc-font-small-print">
       <a

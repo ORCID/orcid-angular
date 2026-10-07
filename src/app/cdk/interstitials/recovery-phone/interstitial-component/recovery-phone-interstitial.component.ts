@@ -1,5 +1,7 @@
 import {
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   inject,
   OnDestroy,
@@ -7,15 +9,22 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { Subject, Subscription, timer } from 'rxjs'
+import { take, takeUntil } from 'rxjs/operators'
 
 import { RecoveryPhoneFormComponent } from 'src/app/cdk/recovery-phone-form/recovery-phone-form.component'
 import { WINDOW } from 'src/app/cdk/window/window.service'
+import { UserService } from 'src/app/core'
 import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
 import { recoveryPhoneElevationExpiry } from 'src/app/core/two-factor-authentication/recovery-phone-elevation'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { RecoveryPhoneSaveResponse } from 'src/app/types/two-factor.endpoint'
+
+/**
+ * How long the OAuth confirmation waits for "Continue to <client>" before
+ * continuing by itself (F2.5), as the other in-page confirmations do.
+ */
+export const RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS = 10000
 
 /**
  * The post-sign-in "Add a recovery phone number" interstitial (PD-5850, R6).
@@ -45,6 +54,10 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
   @ViewChild(RecoveryPhoneFormComponent)
   recoveryPhoneForm: RecoveryPhoneFormComponent | undefined
 
+  /** The confirmation's heading, which takes focus when it appears (F2.5). */
+  @ViewChild('confirmationHeading')
+  confirmationHeading: ElementRef<HTMLElement> | undefined
+
   /**
    * The form renders nothing until the phone field's own translations have
    * loaded, so the spinner stands in for it until it says it is ready.
@@ -56,17 +69,25 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
 
   /**
    * The seam the other three interstitials use: the base sets a flag that
-   * swaps the form out, and the dialog subclass overrides `afterSummit()` to
-   * close instead. This interstitial only ever runs as a dialog — it has a
-   * `LOGIN_` flag and deliberately no `OAUTH_` one (R6.1) — and /my-orcid
-   * shows the "Recovery phone number added" notice (R6.4), so there is no
-   * confirmation panel here. The flag is kept so that an inline host added
-   * later has the same shape to override as the other three.
+   * swaps the form for its confirmation, and the dialog subclass overrides
+   * `afterSummit()` to close instead. Only the OAuth flow renders this
+   * component bare, so the confirmation is the OAuth flow's (F2.5); the
+   * sign-in flow closes its dialog and /my-orcid shows the notice (R6.4).
    */
   afterSummitStatus = false
 
   /** Only ever the masked number the registry answered with. */
   addedRecoveryPhone: string | undefined
+
+  /**
+   * The client the user is on their way back to, for "Continue to <client>".
+   * Only the OAuth flow has one; without it the button reads "Continue".
+   */
+  organizationName: string | undefined
+
+  /** The confirmation continues by itself, once (F2.5). */
+  private autoContinue: Subscription | undefined
+  private continued = false
 
   /**
    * The interstitial ends once. A dialog is not destroyed until its exit
@@ -82,9 +103,12 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
   // its own (MAT_DIALOG_DATA, MatDialogRef)
   private _interstitialObservability = inject(InterstitialObservabilityService)
   private window = inject(WINDOW) as Window
+  private _userService = inject(UserService)
+  private _changeDetectorRef = inject(ChangeDetectorRef)
 
   ngOnInit(): void {
     this.window.scrollTo(0, 0)
+    this.loadOrganizationName()
     // The registry counts this window from the sign in, which is what admits
     // this flow without a challenge (R6.3). The client has no record of that
     // instant, so it counts from here instead — a few seconds later, and
@@ -97,8 +121,22 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.autoContinue?.unsubscribe()
     this.$destroy.next()
     this.$destroy.complete()
+  }
+
+  /**
+   * Only the OAuth flow has an OAuth session, so only there does the
+   * confirmation's button name the client (F2.5).
+   */
+  private loadOrganizationName(): void {
+    this._userService
+      .getUserSession()
+      .pipe(take(1), takeUntil(this.$destroy))
+      .subscribe((session) => {
+        this.organizationName = session?.oauthSession?.clientName
+      })
   }
 
   onFormReady(): void {
@@ -178,7 +216,9 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
     // the registry stores the number anyway, so /my-orcid shows no notice for
     // a number that is now on the account (R6.4). The button carries the same
     // condition; this guard is what holds if a click lands in the same turn.
-    if (this.saving) {
+    // Once anything has ended the interstitial, a click landing during the
+    // dialog's exit animation is ignored too: it ends once (see `ended`).
+    if (this.saving || this.ended) {
       return
     }
     this.ended = true
@@ -187,13 +227,36 @@ export class RecoveryPhoneInterstitialComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Swap the form out. Overridden by the dialog subclass, which closes instead
-   * and lets the record show its own notice.
+   * Swap the form for the confirmation (F2.5), which continues by itself after
+   * ten seconds if "Continue to <client>" is not pressed first. Overridden by
+   * the dialog subclass, which closes instead and lets the record show its own
+   * notice.
    */
   afterSummit(maskedRecoveryPhoneNumber?: string) {
     this.addedRecoveryPhone = maskedRecoveryPhoneNumber
     this.afterSummitStatus = true
     this.window.scrollTo(0, 0)
+    // The button that was pressed has just left the page, which drops focus
+    // to the body: move it to the confirmation, so a screen reader announces
+    // it and the keyboard starts from it
+    this._changeDetectorRef.detectChanges()
+    this.confirmationHeading?.nativeElement.focus()
+    this.autoContinue = timer(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => this.continueToClient())
+  }
+
+  /**
+   * The confirmation's one way on, pressed or timed out. Whichever comes first
+   * ends it; the other does nothing, so the authorization continues once.
+   */
+  continueToClient(): void {
+    if (this.continued) {
+      return
+    }
+    this.continued = true
+    this.autoContinue?.unsubscribe()
+    this.finishIntertsitial(this.addedRecoveryPhone)
   }
 
   /**

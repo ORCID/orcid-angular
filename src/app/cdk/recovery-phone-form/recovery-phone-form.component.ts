@@ -1,6 +1,8 @@
+import { Platform } from '@angular/cdk/platform'
 import {
   Component,
   EventEmitter,
+  HostBinding,
   Inject,
   Input,
   LOCALE_ID,
@@ -71,11 +73,8 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
    */
   @Input() context: RecoveryPhoneContext = 'SETTINGS'
 
-  /** Set once the user has a number already, which turns this into a change. */
-  @Input() managingExistingNumber = false
-
-  /** Only ever the last four digits; the registry never reads the number back. */
-  @Input() maskedRecoveryPhoneNumber?: string
+  /** Only until the form exists to take it: cleared the moment it is applied. */
+  private pendingCurrentPhoneNumber: string | undefined
 
   /**
    * Hosts that print their own heading — the onboarding step and the
@@ -135,11 +134,34 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
 
   private countdownSubscription: Subscription | undefined
 
+  /**
+   * Safari on an iPhone zooms the page in when a field set smaller than 16px
+   * takes focus, and stays zoomed, which runs the form off the right of the
+   * screen (PD-14435). The stylesheet sets the fields at 16px there only, so
+   * everywhere else they keep the 14px the design draws.
+   */
+  @HostBinding('class.recovery-phone-form--ios')
+  readonly ios: boolean
+
+  /**
+   * On a phone the country list opens as a popup the library moves to the end
+   * of <body>, out of reach of this component's styles; the class handed to
+   * the library is how the stylesheet finds it again.
+   */
+  get countrySelectorClass(): string {
+    return this.ios
+      ? 'recovery-phone-iti recovery-phone-iti--ios'
+      : 'recovery-phone-iti'
+  }
+
   constructor(
     private _fb: UntypedFormBuilder,
     private _twoFactorAuthenticationService: TwoFactorAuthenticationService,
-    @Inject(LOCALE_ID) private _locale: string
-  ) {}
+    @Inject(LOCALE_ID) private _locale: string,
+    _platform: Platform
+  ) {
+    this.ios = _platform.IOS
+  }
 
   ngOnInit(): void {
     this.initialCountry = this.resolveInitialCountry()
@@ -150,7 +172,33 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
         [Validators.required, Validators.minLength(6), Validators.maxLength(6)],
       ],
     })
+    this.applyCurrentPhoneNumber()
     this.loadPhoneFieldTranslations()
+  }
+
+  /**
+   * Starts the field from the number on file, in full, for the manage page
+   * (F4.1); the field's widget selects the country from it. The host hands it
+   * over rather than binding it, so the field is the only place it stays
+   * (F4.3), and it never overwrites what the user has started typing.
+   */
+  startFromNumber(phoneNumber: string): void {
+    this.pendingCurrentPhoneNumber = phoneNumber
+    this.applyCurrentPhoneNumber()
+  }
+
+  private applyCurrentPhoneNumber(): void {
+    const control = this.phoneNumberControl
+    if (!control || !this.pendingCurrentPhoneNumber) {
+      return
+    }
+    // An empty field means nothing has been typed yet. `dirty` cannot say
+    // that: the phone field writes its own empty value back through the form
+    // as it finishes starting up, which marks the control dirty untouched.
+    if (!control.value && !this.codeSent) {
+      control.setValue(this.pendingCurrentPhoneNumber)
+    }
+    this.pendingCurrentPhoneNumber = undefined
   }
 
   ngOnDestroy(): void {

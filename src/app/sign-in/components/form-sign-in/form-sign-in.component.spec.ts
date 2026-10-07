@@ -118,6 +118,97 @@ describe('FormSignInComponent', () => {
     expect(signInSpy).toHaveBeenCalledWith(jasmine.anything(), false, true)
   })
 
+  describe('entering the 2FA step (F1.2)', () => {
+    let status: Subject<boolean | undefined>
+    let statusSpy: jasmine.Spy
+
+    beforeEach(() => {
+      component.authorizationForm.patchValue({
+        username: 'test@example.org',
+        password: 'secret',
+      })
+      component.signInLocal = { isOauth: false, type: 'regular' as any } as any
+      spyOn((component as any)._signIn, 'signIn').and.returnValue(
+        of({ success: false, verificationCodeRequired: true } as any)
+      )
+      status = new Subject<boolean | undefined>()
+      statusSpy = spyOn(
+        (component as any)._signIn,
+        'recoveryPhoneStatus'
+      ).and.returnValue(status)
+    })
+
+    it('asks whether the account has a number before showing the step', () => {
+      component.recoveryPhoneOptionAvailable = true
+      const shown = jasmine.createSpy('show2FA')
+      component.show2FAEmitter.subscribe(shown)
+
+      component.onSubmit()
+
+      expect(statusSpy).toHaveBeenCalledOnceWith({
+        username: 'test@example.org',
+        password: 'secret',
+      })
+      // Nothing is shown until the answer is in, so the way out never
+      // changes in front of the user
+      expect(component.show2FA).toBeFalse()
+      expect(shown).not.toHaveBeenCalled()
+
+      status.next(false)
+
+      expect(component.show2FA).toBeTrue()
+      expect(component.hasRecoveryPhone).toBeFalse()
+      expect(shown).toHaveBeenCalledTimes(1)
+    })
+
+    it('asks with the credentials the sign in posted, not the fields as they are now', () => {
+      // The fields stay editable while the sign in request runs; a password
+      // typed meanwhile would be refused and counted towards the lockout
+      component.recoveryPhoneOptionAvailable = true
+      const response = new Subject<any>()
+      ;(component as any)._signIn.signIn.and.returnValue(response)
+
+      component.onSubmit()
+      component.authorizationForm.patchValue({ password: 'edited meanwhile' })
+      response.next({ success: false, verificationCodeRequired: true })
+
+      expect(statusSpy).toHaveBeenCalledOnceWith({
+        username: 'test@example.org',
+        password: 'secret',
+      })
+    })
+
+    it('shows the step with the number offered when the answer never comes (F1.4)', () => {
+      component.recoveryPhoneOptionAvailable = true
+
+      component.onSubmit()
+      status.next(undefined)
+
+      expect(component.show2FA).toBeTrue()
+      expect(component.hasRecoveryPhone).toBeUndefined()
+    })
+
+    it('asks nothing with the flag off', () => {
+      component.recoveryPhoneOptionAvailable = false
+
+      component.onSubmit()
+
+      expect(statusSpy).not.toHaveBeenCalled()
+      expect(component.show2FA).toBeTrue()
+    })
+
+    it('asks once, not again while the step is already showing', () => {
+      component.recoveryPhoneOptionAvailable = true
+      component.onSubmit()
+      status.next(true)
+
+      component.onSubmit()
+
+      expect(statusSpy).toHaveBeenCalledTimes(1)
+      expect(component.hasRecoveryPhone).toBeTrue()
+    })
+  })
+
   describe('signing in with the recovery phone number', () => {
     beforeEach(() => {
       component.authorizationForm.patchValue({

@@ -8,15 +8,25 @@ import {
 } from '@angular/core/testing'
 import { MatButtonModule } from '@angular/material/button'
 import { By } from '@angular/platform-browser'
+import { of } from 'rxjs'
 
 import { RecoveryPhoneFormComponent } from 'src/app/cdk/recovery-phone-form/recovery-phone-form.component'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
+import { UserService } from 'src/app/core'
 import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
 import { RECOVERY_PHONE_ELEVATION_TTL_MILLIS } from 'src/app/core/two-factor-authentication/recovery-phone-elevation'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { RecoveryPhoneSaveResponse } from 'src/app/types/two-factor.endpoint'
 
-import { RecoveryPhoneInterstitialComponent } from './recovery-phone-interstitial.component'
+import {
+  RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS,
+  RecoveryPhoneInterstitialComponent,
+} from './recovery-phone-interstitial.component'
+
+/** The OAuth flow's session: the only place a client name comes from. */
+const oauthUserService = () => ({
+  getUserSession: () => of({ oauthSession: { clientName: 'MSSx' } }),
+})
 
 describe('RecoveryPhoneInterstitialComponent', () => {
   let component: RecoveryPhoneInterstitialComponent
@@ -41,6 +51,7 @@ describe('RecoveryPhoneInterstitialComponent', () => {
       declarations: [RecoveryPhoneInterstitialComponent],
       providers: [
         { provide: InterstitialObservabilityService, useValue: observability },
+        { provide: UserService, useValue: oauthUserService() },
         WINDOW_PROVIDERS,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -152,6 +163,22 @@ describe('RecoveryPhoneInterstitialComponent', () => {
       expect(finish).not.toHaveBeenCalled()
     })
 
+    it('should be ignored once the interstitial has ended', () => {
+      // A dialog is still on screen during its exit animation, so a click can
+      // land here after a failed save or the window has already ended it; the
+      // interstitial ends once, with one outcome
+      const finish = spyOn(component.finish, 'emit')
+      attachFormSpy()
+      component.onFailed()
+      observability.outcome.calls.reset()
+      finish.calls.reset()
+
+      component.declineRecoveryPhone()
+
+      expect(observability.outcome).not.toHaveBeenCalled()
+      expect(finish).not.toHaveBeenCalled()
+    })
+
     it('should report a dismissal and end the interstitial without saving', () => {
       const finish = spyOn(component.finish, 'emit')
       attachFormSpy()
@@ -224,6 +251,116 @@ describe('RecoveryPhoneInterstitialComponent', () => {
       )
       expect(finish).toHaveBeenCalled()
     })
+  })
+
+  describe('the OAuth confirmation (F2.5)', () => {
+    function save(): void {
+      component.onSaved({
+        success: true,
+        maskedRecoveryPhoneNumber: '***********6789',
+      } as RecoveryPhoneSaveResponse)
+      fixture.detectChanges()
+    }
+
+    const text = (selector: string): string =>
+      fixture.nativeElement
+        .querySelector(selector)
+        ?.textContent.replace(/\s+/g, ' ')
+        .trim()
+
+    it('replaces the form with the confirmation the frame draws', fakeAsync(() => {
+      save()
+
+      expect(
+        fixture.debugElement.query(
+          By.css('#cy-interstitial-add-recovery-phone')
+        )
+      ).toBeNull()
+      expect(text('h1')).toBe('Recovery phone number added')
+      const copy = fixture.debugElement
+        .queryAll(By.css('.confirmation-copy'))
+        .map((p) => p.nativeElement.textContent.replace(/\s+/g, ' ').trim())
+      expect(copy).toEqual([
+        'You have successfully added a recovery phone number to your ORCID record.',
+        'Visit your ORCID record to manage your account security and recovery options.',
+      ])
+      expect(text('#cy-interstitial-added-recovery-phone')).toBe(
+        '***********6789'
+      )
+      expect(
+        fixture.debugElement.queryAll(By.css('mat-divider.green-divider'))
+          .length
+      ).toBe(2)
+      discardPeriodicTasks()
+      tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
+    }))
+
+    it('takes focus, which the pressed button took with it', fakeAsync(() => {
+      save()
+
+      const heading = fixture.nativeElement.querySelector('h1')
+      expect(document.activeElement).toBe(heading)
+      expect(heading.getAttribute('tabindex')).toBe('-1')
+      tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
+    }))
+
+    it('names the client the user is going back to', fakeAsync(() => {
+      save()
+
+      expect(component.organizationName).toBe('MSSx')
+      expect(text('#cy-interstitial-recovery-phone-continue')).toBe(
+        'Continue to MSSx'
+      )
+      tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
+    }))
+
+    it('reads plain "Continue" when there is no client name', fakeAsync(() => {
+      component.organizationName = undefined
+      save()
+
+      expect(text('#cy-interstitial-recovery-phone-continue')).toBe('Continue')
+      tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
+    }))
+
+    it('continues the authorization when the button is pressed, once', fakeAsync(() => {
+      const finish = spyOn(component.finish, 'emit')
+      save()
+
+      fixture.nativeElement
+        .querySelector('#cy-interstitial-recovery-phone-continue')
+        .click()
+      // The timer that was running must not continue it a second time
+      tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
+
+      expect(finish).toHaveBeenCalledTimes(1)
+    }))
+
+    it('continues by itself after ten seconds, once', fakeAsync(() => {
+      const finish = spyOn(component.finish, 'emit')
+      save()
+
+      tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS - 1)
+      expect(finish).not.toHaveBeenCalled()
+      tick(1)
+      expect(finish).toHaveBeenCalledTimes(1)
+
+      component.continueToClient()
+      expect(finish).toHaveBeenCalledTimes(1)
+    }))
+
+    it('ten seconds is the number', () => {
+      expect(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS).toBe(10000)
+    })
+
+    it('stops the clock when the interstitial is gone', fakeAsync(() => {
+      const finish = spyOn(component.finish, 'emit')
+      save()
+
+      fixture.destroy()
+      tick(RECOVERY_PHONE_CONFIRMATION_AUTO_CONTINUE_MS)
+
+      expect(finish).not.toHaveBeenCalled()
+    }))
   })
 
   describe('when the elevation window runs out on its own', () => {
@@ -314,6 +451,7 @@ describe('RecoveryPhoneInterstitialComponent primary action colours', () => {
             ['shown', 'outcome', 'closed']
           ),
         },
+        { provide: UserService, useValue: oauthUserService() },
         WINDOW_PROVIDERS,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

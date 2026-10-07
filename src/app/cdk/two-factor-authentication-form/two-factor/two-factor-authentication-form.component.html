@@ -128,7 +128,10 @@
           Use a recovery code instead
         </button>
       </div>
-      <div class="two-factor-escape text-center">
+      <div
+        class="two-factor-escape text-center"
+        *ngIf="hasRecoveryPhone !== false"
+      >
         <p
           class="two-factor-escape__question"
           i18n="@@ngOrcid.signin.2fa.noDeviceOrRecoveryCodes"
@@ -145,6 +148,32 @@
         >
           Send a code to your recovery number and disable 2FA
         </button>
+      </div>
+      <!--
+        F1.1 (PD-14333). No number on the account: the flag-off screen's own
+        help row, its words and its destination, laid out like the row above.
+        D17 records why the question is the flag-off one and not the frame's.
+        An anchor with an href, so it is reachable by keyboard (R7.3).
+      -->
+      <div
+        class="two-factor-escape text-center"
+        *ngIf="hasRecoveryPhone === false"
+      >
+        <p
+          class="two-factor-escape__question"
+          i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery"
+        >
+          Don't have your device or recovery code?
+        </p>
+        <a
+          id="cy-2fa-help-center"
+          class="underline orc-font-body-small"
+          [href]="twoFactorHelpArticleUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          i18n="@@shared.orcidHelpCenter"
+          >ORCID Help Center</a
+        >
       </div>
     </ng-container>
     <ng-container *ngIf="!recoveryPhoneOptionAvailable">

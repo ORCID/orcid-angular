@@ -1,3 +1,4 @@
+import { Platform } from '@angular/cdk/platform'
 import {
   ComponentFixture,
   TestBed,
@@ -773,6 +774,41 @@ describe('AuthChallengeComponent', () => {
         )
         expect(getComputedStyle(back.nativeElement).fontStyle).toBe('normal')
       }))
+    })
+  })
+
+  describe('on an iPhone and elsewhere', () => {
+    /**
+     * The platform is read once, when the dialog is built, so each case sets it
+     * on the real service and builds the dialog again.
+     */
+    function renderOn(ios: boolean) {
+      TestBed.inject(Platform).IOS = ios
+      fixture = TestBed.createComponent(AuthChallengeComponent)
+      component = fixture.componentInstance
+      fixture.detectChanges()
+    }
+
+    const fontSizes = () =>
+      ['#password', '#twoFactorCode'].map(
+        (id) =>
+          getComputedStyle(fixture.nativeElement.querySelector(id)).fontSize
+      )
+
+    it('sets its fields at 16px on an iPhone, so Safari does not zoom the page', () => {
+      renderOn(true)
+
+      expect(fixture.nativeElement.classList).toContain('auth-challenge--ios')
+      expect(fontSizes()).toEqual(['16px', '16px'])
+    })
+
+    it('keeps its fields at 14px everywhere else', () => {
+      renderOn(false)
+
+      expect(fixture.nativeElement.classList).not.toContain(
+        'auth-challenge--ios'
+      )
+      expect(fontSizes()).toEqual(['14px', '14px'])
     })
   })
 })
