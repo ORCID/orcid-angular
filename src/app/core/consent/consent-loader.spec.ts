@@ -93,15 +93,24 @@ describe('consent loader (scripts/onetrust.runtime.js)', () => {
         expect(store).toEqual({})
       })
 
-      it('stays on OneTrust even if a key reached a non-debugging environment', () => {
+      it('stays on OneTrust in a debugging environment with no key', () => {
+        // Only the empty key stops it here: the host is QA's, the environment
+        // debugs, and the browser has opted in.
+        store[QaFlag.useCookieYesConsent] = 'true'
+
         expect(
-          chooseVendor(
-            { ...production, COOKIE_YES: 'cookie-yes-key' },
-            '?cookieyes=true',
-            'orcid.org'
-          )
+          chooseVendor({ ...qa, COOKIE_YES: '' }, '?cookieyes=true', QA)
         ).toBe('onetrust')
-        expect(store).toEqual({})
+      })
+
+      it('stays on OneTrust if a key reached a non-debugging environment', () => {
+        // Only the debugger flag stops it here: the key is set, the host is
+        // QA's, and the browser has opted in.
+        store[QaFlag.useCookieYesConsent] = 'true'
+
+        expect(
+          chooseVendor({ ...qa, debugger: false }, '?cookieyes=true', QA)
+        ).toBe('onetrust')
       })
 
       it('loads OneTrust when there is no environment at all', () => {
