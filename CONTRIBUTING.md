@@ -52,12 +52,15 @@ yarn test:scripts       # postbuild characterization tests
 yarn format:check       # what the format job checks
 ```
 
-Two notes that save time:
+Three notes that save time:
 
 - `src/locale/messages.xlf` and the `xx`, `lr` and `rl` locale files are
   generated and deliberately not committed. Run `yarn build:i18n` once after a
   fresh clone. Real translations come from Transifex through the
   `pull-translations` workflow.
+- A branch that still commits those four files gets a modify/delete conflict
+  on them when it merges `main`. Resolve it by deleting them:
+  `git rm src/locale/messages.xlf src/locale/messages.{xx,lr,rl}.xlf`.
 - The dev server only recognises port **4200**. On any other port the app falls
   back to its production environment and calls hosts that do not exist locally.
 
