@@ -87,6 +87,39 @@ localeIndexFiles.forEach((file) => {
 // preloads them as bare `href="chunk-XXXXXXXX.js"`. Rewriting the exact quoted
 // filename covers both spellings and both bundlers.
 
+// Exact quoted forms only: `"name"`, `'name'`, `"./name"`, `'./name'`, plus
+// `sourceMappingURL=name.map` (only emitted when sourceMaps are on, which
+// production does not use). These are content-hashed names, so they never
+// occur as an accidental substring, and requiring the closing quote right after
+// `.js` keeps a match from touching a longer name that contains a renamed one.
+//
+// One pass per file with a lookup, rather than a split/join per renamed name:
+// the latter rescanned every file once per bundle in the locale, which made
+// this step quadratic in the number of chunks.
+const BUNDLE_REFERENCE_RE =
+  /(["'])(\.\/)?([^"'\/\\\s]+\.js)\1|(sourceMappingURL=)([^"'\/\\\s]+\.js)(\.map)/g
+
+function rewriteBundleReferences(
+  source: string,
+  renames: ReadonlyMap<string, string>
+): string {
+  return source.replace(
+    BUNDLE_REFERENCE_RE,
+    (match, quote, dotSlash, name, mapPrefix, mapName, mapSuffix) => {
+      if (quote !== undefined) {
+        const renamed = renames.get(name)
+        return renamed === undefined
+          ? match
+          : `${quote}${dotSlash ?? ''}${renamed}${quote}`
+      }
+      const renamed = renames.get(mapName)
+      return renamed === undefined
+        ? match
+        : `${mapPrefix}${renamed}${mapSuffix}`
+    }
+  )
+}
+
 localeIndexFiles.forEach((indexFile) => {
   const localeDir = dirname(indexFile)
   const locale = getOptionsObjet(indexFile).languageCode
@@ -125,24 +158,7 @@ localeIndexFiles.forEach((indexFile) => {
 
   for (const file of filesToRewrite) {
     const before = readFileSync(file, 'utf8')
-    let after = before
-    for (const [oldName, newName] of renames) {
-      // Exact quoted forms only. These are content-hashed names, so they never
-      // occur as an accidental substring, and matching the quotes keeps the
-      // replacement from touching a longer name that contains this one.
-      after = after
-        .split(`"${oldName}"`)
-        .join(`"${newName}"`)
-        .split(`'${oldName}'`)
-        .join(`'${newName}'`)
-        .split(`"./${oldName}"`)
-        .join(`"./${newName}"`)
-        .split(`'./${oldName}'`)
-        .join(`'./${newName}'`)
-        // Only emitted when sourceMaps are on, which production does not use.
-        .split(`sourceMappingURL=${oldName}.map`)
-        .join(`sourceMappingURL=${newName}.map`)
-    }
+    const after = rewriteBundleReferences(before, renames)
     if (after !== before) {
       writeFileSync(file, after, 'utf8')
     }
