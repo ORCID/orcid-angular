@@ -6,7 +6,14 @@ import {
 } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import { catchError, map, switchMap, first, take } from 'rxjs/operators'
+import {
+  catchError,
+  map,
+  switchMap,
+  first,
+  take,
+  timeout,
+} from 'rxjs/operators'
 
 import { getOrcidNumber, isValidOrcidFormat } from '../../constants'
 import { Claim } from '../../types/claim.endpoint'
@@ -14,6 +21,7 @@ import { Reactivation } from '../../types/reactivation.endpoint'
 import {
   PasswordResetStatusResponse,
   RecoveryPhoneSignInSendResponse,
+  RecoveryPhoneSignInStatusResponse,
   RecoveryPhoneSignInVerifyResponse,
   SignIn,
 } from '../../types/sign-in.endpoint'
@@ -30,6 +38,12 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { retryTransient } from '../http/retry-transient'
+
+/**
+ * How long the 2FA step waits to learn whether the account has a recovery
+ * number before showing itself anyway, with the recovery number offered (F1.4).
+ */
+export const RECOVERY_PHONE_STATUS_TIMEOUT_MS = 5000
 
 @Injectable({
   providedIn: 'root',
@@ -120,6 +134,15 @@ export class SignInService {
             }),
             switchMap((response) => {
               if (!updateUserSession) {
+                // The page is about to hand the browser to the authorization
+                // server, so there is no session to refresh here. The tab
+                // still starts a new sign in, which is what the interstitial
+                // gate counts once per: without one, the authorize page found
+                // no session id and the gate read that as already checked,
+                // so no OAuth interstitial ever ran (F2.7)
+                if (response?.success) {
+                  this._userService.createLocalUserSessionUid()
+                }
                 return of(response)
               }
               // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
@@ -133,6 +156,43 @@ export class SignInService {
           )
       })
     )
+  }
+
+  /**
+   * Whether the account the credentials belong to has a recovery number, asked
+   * the moment the sign in says 2FA is needed so the step can offer the right
+   * way out before it is shown (F1.2).
+   *
+   * Goes to the Registry for the reason given on {@link sendRecoveryPhoneCode}.
+   * Never fails: an error, a refusal or no answer inside
+   * {@link RECOVERY_PHONE_STATUS_TIMEOUT_MS} all come back as `undefined`, which
+   * the step reads as "not known" and answers by offering the recovery number,
+   * as it did before it could ask (F1.4).
+   */
+  recoveryPhoneStatus(request: {
+    username: string
+    password: string
+  }): Observable<boolean | undefined> {
+    return this._http
+      .post<RecoveryPhoneSignInStatusResponse>(
+        runtimeEnvironment.API_WEB + 'signin/recoveryPhone/status.json',
+        {
+          username: getOrcidNumber(request.username),
+          password: request.password,
+        },
+        {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        retryTransient(),
+        timeout(RECOVERY_PHONE_STATUS_TIMEOUT_MS),
+        map((response) =>
+          response?.success ? !!response.hasRecoveryPhone : undefined
+        ),
+        catchError(() => of(undefined))
+      )
   }
 
   /**

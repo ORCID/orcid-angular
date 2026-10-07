@@ -33,8 +33,6 @@
 
       <app-recovery-phone-form
         context="SETTINGS"
-        [managingExistingNumber]="managingExistingNumber"
-        [maskedRecoveryPhoneNumber]="maskedRecoveryPhoneNumber"
         (codeSentChange)="codeSent = $event"
         (saved)="onSaved()"
         (failed)="onFailed()"

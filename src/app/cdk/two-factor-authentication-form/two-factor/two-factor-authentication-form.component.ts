@@ -85,6 +85,18 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
    */
   @Input() recoveryPhoneOptionAvailable = false
 
+  /**
+   * Whether the account has a recovery number to text (F1.1). Only `false`
+   * changes anything: the option is then replaced by the help centre row the
+   * flag-off screen has always had. `undefined` means the host could not find
+   * out, and the option stays, as it was before the host could ask (F1.4).
+   */
+  @Input() hasRecoveryPhone: boolean | undefined
+
+  /** The flag-off screen's own help link, reused as it is (F1.1). */
+  readonly twoFactorHelpArticleUrl =
+    'https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication'
+
   private _recoveryPhoneState: RecoveryPhoneSignInState = {
     codeSent: false,
     resendSeconds: 0,

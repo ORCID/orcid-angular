@@ -52,7 +52,9 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
   loadingState = true
   /** Set once the user has a number already, which turns this into a change. */
   managingExistingNumber = false
-  maskedRecoveryPhoneNumber: string | undefined
+
+  /** The number on file is asked for once per page (F4.3). */
+  private currentPhoneNumberRequested = false
 
   /** Mirrored from the form: the primary action is dead until a code is out. */
   codeSent = false
@@ -133,7 +135,6 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
             return
           }
           this.managingExistingNumber = !!status.maskedRecoveryPhoneNumber
-          this.maskedRecoveryPhoneNumber = status.maskedRecoveryPhoneNumber
           this.loadingState = false
           this.openAuthChallenge()
         },
@@ -180,10 +181,41 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
         recoveryPhoneElevationExpiry(Date.now())
           .pipe(takeUntil(this.$destroy))
           .subscribe(() => this.onElevationExpired())
+        if (this.managingExistingNumber) {
+          this.loadCurrentPhoneNumber()
+        }
       } else if (!this.challengePassed) {
         this.returnToAccountSettings()
       }
     })
+  }
+
+  /**
+   * Asks for the number on file now that the challenge has elevated the
+   * session (F4.2), and hands it straight to the form, which is already on the
+   * page behind the challenge: the page keeps no copy of its own (F4.3).
+   * Anything but a number - a refusal, an error - leaves the field empty and
+   * the page working as it always has (F4.4).
+   */
+  private loadCurrentPhoneNumber(): void {
+    if (this.currentPhoneNumberRequested) {
+      // Once per page (F4.3)
+      return
+    }
+    this.currentPhoneNumberRequested = true
+    this._twoFactorAuthenticationService
+      .getRecoveryPhoneNumber()
+      .pipe(first(), takeUntil(this.$destroy))
+      .subscribe({
+        next: (response) => {
+          if (response?.success && response.phoneNumber) {
+            this.recoveryPhoneForm?.startFromNumber(response.phoneNumber)
+          }
+        },
+        error: () => {
+          // F4.4: the field starts empty
+        },
+      })
   }
 
   private submitAuthChallenge(): void {

@@ -121,9 +121,10 @@ describe('LoginRecoveryPhoneInterstitialManagerService', () => {
       )
     })
 
-    it('should declare only the LOGIN togglz, which is what scopes it to sign in', () => {
+    it('should declare one togglz per flow (F2.1)', () => {
       expect(service.INTERSTITIAL_TOGGLE).toEqual([
         TogglzFlag.LOGIN_RECOVERY_PHONE_INTERSTITIAL,
+        TogglzFlag.OAUTH_RECOVERY_PHONE_INTERSTITIAL,
       ])
     })
 
@@ -145,16 +146,25 @@ describe('LoginRecoveryPhoneInterstitialManagerService', () => {
       })
     })
 
-    it('should find no flag at all on the OAuth flow', (done) => {
-      // There is no OAUTH_ entry, so the prefix lookup misses and the real
-      // TogglzService answers false for an undefined flag. That miss is what
-      // keeps this interstitial off the OAuth chain (R6.1).
-      service.getInterstitialTogglz('OAUTH').subscribe(() => {
+    it('should resolve the OAUTH togglz on the OAuth flow (F2.1)', (done) => {
+      // Each flow reads its own flag and nothing else, so turning the OAuth
+      // one on never turns the sign-in one on, or the other way round
+      service.getInterstitialTogglz('OAUTH').subscribe((state) => {
         expect(mockTogglzService.getStateOf).toHaveBeenCalledWith(
-          undefined as any
+          TogglzFlag.OAUTH_RECOVERY_PHONE_INTERSTITIAL
         )
+        expect(mockTogglzService.getStateOf).not.toHaveBeenCalledWith(
+          TogglzFlag.LOGIN_RECOVERY_PHONE_INTERSTITIAL
+        )
+        expect(state).toBeTrue()
         done()
       })
+    })
+
+    it('should hand the OAuth host the bare component, not the dialog (F2.3)', () => {
+      expect(service.getComponentToShow()).toBe(
+        RecoveryPhoneInterstitialComponent
+      )
     })
   })
 

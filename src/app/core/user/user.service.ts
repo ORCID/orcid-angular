@@ -494,7 +494,13 @@ export class UserService {
     )
   }
 
-  private createLocalUserSessionUid() {
+  /**
+   * Marks a new sign in in this tab. The login interstitials run once per
+   * value of this id (InterstitialsService), so every sign in has to write
+   * one, including the OAuth sign in that hands the browser to the
+   * authorization server instead of refreshing the session here.
+   */
+  createLocalUserSessionUid() {
     this.window.sessionStorage.setItem(
       LOCAL_SESSION_UID,
       Math.random().toString(36).substring(2, 15)

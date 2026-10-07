@@ -103,3 +103,32 @@ mat-card-content.authorize-content {
     justify-content: center;
   }
 }
+
+// F2.5. The OAuth confirmation, measured off the backup email confirmation it
+// mirrors: a 16px gap between the icon and the number, the icon at its natural
+// 24px, the number in body-S bold
+.confirmation-copy {
+  margin: 0;
+  line-height: 21px; // Figma body-S 14/21
+}
+
+mat-divider.green-divider {
+  margin: $spacing-base 0;
+}
+
+.added-recovery-phone {
+  display: flex;
+  align-items: center;
+  gap: $spacing-base;
+
+  .added-recovery-phone__icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .added-recovery-phone__number {
+    font-weight: 700;
+    line-height: 21px;
+  }
+}

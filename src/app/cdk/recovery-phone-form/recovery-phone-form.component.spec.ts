@@ -1,3 +1,4 @@
+import { Platform } from '@angular/cdk/platform'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import {
   ComponentFixture,
@@ -12,6 +13,9 @@ import { Subject, of, throwError } from 'rxjs'
 import { RecoveryPhoneFormComponent } from './recovery-phone-form.component'
 import { TwoFactorAuthenticationService } from '../../core/two-factor-authentication/two-factor-authentication.service'
 import { RecoveryPhoneSaveResponse } from '../../types/two-factor.endpoint'
+
+/** Stands in for intl-tel-input's utils loader; see the first beforeEach. */
+const neverLoadingUtils = () => new Promise<never>(() => {})
 
 describe('RecoveryPhoneFormComponent', () => {
   let component: RecoveryPhoneFormComponent
@@ -47,8 +51,11 @@ describe('RecoveryPhoneFormComponent', () => {
     // resolve and surfaces as a ChunkLoadError from whichever test happens to be
     // fakeAsync -- nothing to do with what that test is checking. None of these tests
     // exercise the library's formatting, so the loader is stubbed for all of them.
+    // The stub never settles: one that resolves to anything but the utils module
+    // makes attachUtils reject, and that rejection fails whichever fakeAsync test
+    // is running when it lands, which depends on the random order.
     component = fixture.componentInstance
-    component.loadUtils = () => Promise.resolve({} as never)
+    component.loadUtils = neverLoadingUtils
   })
 
   afterEach(() => {
@@ -78,6 +85,103 @@ describe('RecoveryPhoneFormComponent', () => {
     expect(
       fixture.nativeElement.querySelector('#recovery-phone-number')
     ).toBeTruthy()
+  })
+
+  it('states the consent AWS Notify requires, links included (F3.1)', () => {
+    fixture.detectChanges()
+
+    const consent: HTMLElement = fixture.nativeElement.querySelector(
+      '.recovery-phone-consent'
+    )
+    // Whitespace is normalised and nothing else: a missing space between the
+    // two translation units would still read "apply.Message" here
+    const paragraph = consent
+      .querySelector('p')
+      .textContent.replace(/\s+/g, ' ')
+      .trim()
+    expect(paragraph).toBe(
+      "By entering my phone number and clicking 'Send verification code', I consent to receive an automated one-time verification code from ORCID at the number provided. Message and data rates may apply. Message frequency varies. Reply HELP for help, STOP to cancel."
+    )
+    const links = Array.from(
+      consent.querySelectorAll('a') as NodeListOf<HTMLAnchorElement>
+    ).map((link) => [link.textContent.trim(), link.getAttribute('href')])
+    expect(links).toEqual([
+      ['Terms of use', 'https://orcid.org/content/orcid-terms-use'],
+      ['Privacy policy', 'https://orcid.org/privacy-policy'],
+    ])
+  })
+
+  describe('the number on file (F4.1)', () => {
+    const NUMBER = '+441234567890'
+
+    it('starts the field from it', () => {
+      fixture.detectChanges()
+
+      component.startFromNumber(NUMBER)
+
+      expect(component.phoneNumberControl.value).toBe(NUMBER)
+      expect(component.phoneNumberControl.dirty).toBeFalse()
+    })
+
+    it('takes it even when it arrives before the form exists', () => {
+      component.startFromNumber(NUMBER)
+
+      fixture.detectChanges()
+
+      expect(component.phoneNumberControl.value).toBe(NUMBER)
+    })
+
+    it('never overwrites what the user has started typing', () => {
+      fixture.detectChanges()
+      component.phoneNumberControl.setValue('+15555550123')
+      component.phoneNumberControl.markAsDirty()
+
+      component.startFromNumber(NUMBER)
+
+      expect(component.phoneNumberControl.value).toBe('+15555550123')
+    })
+
+    describe('once the phone field has started, as it does in a browser', () => {
+      // The phone field writes its empty value back through the form as it
+      // finishes starting up (setNumber('') raises an input event, and the
+      // wrapper reports '' to the form), which marks the control dirty before
+      // anyone has typed: observed in ChromeHeadless with the real utils. The
+      // utils are stubbed for this whole file, and intl-tel-input loads them
+      // once per page, so the write is reproduced here rather than awaited.
+      function phoneFieldStarted() {
+        fixture.detectChanges()
+        component.phoneNumberControl.setValue('')
+        component.phoneNumberControl.markAsDirty()
+      }
+
+      it('starts the field from it', () => {
+        phoneFieldStarted()
+
+        component.startFromNumber(NUMBER)
+
+        expect(component.phoneNumberControl.value).toBe(NUMBER)
+      })
+
+      it('never overwrites what the user has started typing', () => {
+        phoneFieldStarted()
+        component.phoneNumberControl.setValue('+447700900123')
+        component.phoneNumberControl.markAsDirty()
+
+        component.startFromNumber(NUMBER)
+
+        expect(component.phoneNumberControl.value).toBe('+447700900123')
+      })
+    })
+
+    it('no longer states the masked number above the field', () => {
+      fixture.detectChanges()
+      component.startFromNumber(NUMBER)
+      fixture.detectChanges()
+
+      expect(fixture.nativeElement.textContent).not.toContain(
+        'Your current recovery phone number is'
+      )
+    })
   })
 
   it('drops the heading and the help line when the host prints its own', () => {
@@ -470,5 +574,51 @@ describe('RecoveryPhoneFormComponent', () => {
 
     expect(failed).toHaveBeenCalledWith('HTTP')
     expect(component.saving).toBeFalse()
+  })
+
+  describe('on an iPhone and elsewhere', () => {
+    /**
+     * The platform is read once, when the form is built, so each case sets it
+     * on the real service and builds the form again rather than mocking the
+     * whole service, which the Material controls in the template also read.
+     */
+    function renderOn(ios: boolean) {
+      TestBed.inject(Platform).IOS = ios
+      fixture = TestBed.createComponent(RecoveryPhoneFormComponent)
+      component = fixture.componentInstance
+      component.loadUtils = neverLoadingUtils
+      fixture.detectChanges()
+    }
+
+    it('marks itself for the 16px fields Safari on an iPhone needs', () => {
+      renderOn(true)
+
+      expect(fixture.nativeElement.classList).toContain(
+        'recovery-phone-form--ios'
+      )
+    })
+
+    it('hands the country popup a class that names iOS too', () => {
+      renderOn(true)
+
+      const wrapper: HTMLElement = fixture.nativeElement.querySelector('.iti')
+      expect(component.countrySelectorClass).toBe(
+        'recovery-phone-iti recovery-phone-iti--ios'
+      )
+      expect(wrapper.classList).toContain('recovery-phone-iti')
+      expect(wrapper.classList).toContain('recovery-phone-iti--ios')
+    })
+
+    it('keeps the design sizes everywhere else, and still marks its popup', () => {
+      renderOn(false)
+
+      const wrapper: HTMLElement = fixture.nativeElement.querySelector('.iti')
+      expect(fixture.nativeElement.classList).not.toContain(
+        'recovery-phone-form--ios'
+      )
+      expect(component.countrySelectorClass).toBe('recovery-phone-iti')
+      expect(wrapper.classList).toContain('recovery-phone-iti')
+      expect(wrapper.classList).not.toContain('recovery-phone-iti--ios')
+    })
   })
 })

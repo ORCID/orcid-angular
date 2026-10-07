@@ -1,8 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { TestBed } from '@angular/core/testing'
+import { fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 
+import { of } from 'rxjs'
+
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
+import { UserService } from 'src/app/core'
 import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
 import { RecoveryPhoneSaveResponse } from 'src/app/types/two-factor.endpoint'
 
@@ -34,6 +37,7 @@ describe('RecoveryPhoneInterstitialDialogComponent', () => {
           useValue: { type: 'recovery-phone-interstitial' },
         },
         { provide: MatDialogRef, useValue: dialogRef },
+        { provide: UserService, useValue: { getUserSession: () => of({}) } },
         WINDOW_PROVIDERS,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -64,6 +68,17 @@ describe('RecoveryPhoneInterstitialDialogComponent', () => {
       addedRecoveryPhone: '***********6789',
     })
   })
+
+  it('should start none of the OAuth confirmation clock (F2.5)', fakeAsync(() => {
+    // The ten-second continue belongs to the in-page confirmation; the
+    // dialog closes at once and must not close a second time later
+    const component = createComponent()
+
+    component.afterSummit('***********6789')
+    tick(10000)
+
+    expect(dialogRef.close).toHaveBeenCalledTimes(1)
+  }))
 
   it('should hand back only the masked number, which is all the record prints', () => {
     const component = createComponent()
