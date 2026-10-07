@@ -5,9 +5,9 @@
 // - Prints the offending files and ALWAYS exits 0
 //
 // This is a heads-up, never a blocker. The enforcement point is the `format`
-// job on the pull request (.github/workflows/format.yml), which applies
-// prettier and pushes the fix to the PR branch. Failing the commit here would
-// just be a second gate for something CI fixes on its own.
+// job on the pull request (.github/workflows/format.yml), which fails on
+// unformatted files and pushes nothing. Warning here, at commit time, is just
+// the earliest moment to hear about it.
 //
 // It does not auto-fix either: `prettier --write` plus `git add` would stage
 // unstaged hunks of a partially staged file.
@@ -58,9 +58,8 @@ function main() {
     console.error('')
     console.error('Heads up, this is not a blocker.')
     console.error('Formatting issues were found in the files above.')
-    console.error('Run `yarn format` to fix them now, or leave them: the')
-    console.error('format job on the pull request applies prettier and pushes')
-    console.error('the fix to your branch.')
+    console.error('Run `yarn format` before you push: the format check on the')
+    console.error('pull request fails on unformatted files.')
     console.error('')
   }
 

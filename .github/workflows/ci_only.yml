@@ -8,7 +8,7 @@ name: ci_only
 # (a workflow tweak should not cut a release), so this runs the same pipeline
 # with the side effects turned off:
 #
-#   - pr.yml           test_yarn, bld_yarn, format (check-only: no PR branch)
+#   - pr.yml           lint, test_yarn, bld_yarn, format (all check-only)
 #   - bld_test_rel_tag rel_tag: false  -> no tag, no GitHub release, no Slack
 #                      deploy:  false  -> no WAR upload, no Transifex push
 #
@@ -82,9 +82,8 @@ jobs:
     needs: detect
     if: needs.detect.outputs.ci_only == 'true'
     uses: ./.github/workflows/pr.yml
-    # No secrets, and no write. This is a push event, so the format job takes
-    # its check-only path: it reports drift rather than pushing a fix, and
-    # needs neither the PAT nor a writable GITHUB_TOKEN.
+    # No secrets, and no write: nothing in pr.yml uses either. The format job
+    # checks the pushed commit and reports drift, as it does on every PR.
     permissions:
       contents: read
       pull-requests: read

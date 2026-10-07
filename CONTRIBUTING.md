@@ -14,29 +14,25 @@ Four checks must pass before a pull request can merge:
 | Check                   | What it does                                                                                                                                                                                            |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `lint / pre-commit`     | Runs [pre-commit](https://pre-commit.com/): YAML validity, no oversized files, shebangs on executables, and **actionlint** over `.github/workflows/`. This is the only thing that lints workflow files. |
-| `format / format`       | Runs Prettier. See below, it behaves differently depending on where your branch lives.                                                                                                                  |
+| `format / format`       | Checks that every file Prettier covers is formatted. It never changes your branch; see below.                                                                                                           |
 | `test_yarn / test_yarn` | Unit tests for the app and the five sibling projects under `projects/`, plus the postbuild characterization tests.                                                                                      |
 | `bld_yarn / bld_yarn`   | A full production build of all 21 locales, then checks that the emitted layout is still routable by the deployed nginx and Tomcat rules.                                                                |
 
 ## Formatting
 
-**If your branch is in this repository**, you do not need to run Prettier
-yourself. The `format` job applies it and pushes the fix to your branch. That
-push starts a new CI run on the formatted commit and cancels the superseded one,
-so the commit that merges is the formatted one and nothing is tested twice.
-
-**If you are working from a fork**, CI cannot push to your branch, so the same
-job only checks. If it fails, run:
+Run Prettier before you push:
 
 ```bash
 yarn format
 ```
 
-and push the result. Prettier does not look at `.github/**`; workflow files are
-covered by actionlint inside `lint / pre-commit`.
+CI only checks. The `format` job runs `yarn format:check` on your pull
+request's head commit and fails if anything is unformatted; it never pushes a
+fix to your branch. This is the same for everyone, whether your branch is in
+this repository or in a fork.
 
-Both cases are the same command locally, so running `yarn format` before you
-push is never wrong.
+Prettier does not look at `.github/**`; workflow files are covered by
+actionlint inside `lint / pre-commit`.
 
 ## Running things locally
 
