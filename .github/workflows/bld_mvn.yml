@@ -86,7 +86,8 @@ jobs:
       # it: this reuses the runner's Node and the cached node_modules instead of
       # downloading Node and installing from cold inside maven. The maven build
       # below skips the plugin's node/yarn goals and just packages ./dist.
-      - uses: ./.github/actions/yarn-install
+      - id: deps
+        uses: ./.github/actions/yarn-install
 
       # The WAR must be built from formatted source. That is already guaranteed
       # by construction: the `format` job applies prettier on the PR branch and
@@ -96,12 +97,35 @@ jobs:
       - name: assert the source is formatted
         run: yarn format:check
 
+      # The Angular build cache, same lineage as bld_yarn's (the comment there
+      # explains the key and when it refreshes). Restoring main's newest entry
+      # speeds up this release build; saving below is what gives every new pull
+      # request a warm first run.
+      - name: restore the Angular build cache
+        id: ng_cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .angular/cache
+          key: ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-${{ github.sha }}
+          restore-keys: |
+            ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-
+
       - name: build the Angular app (prebuild + postbuild included)
         run: yarn build
 
       # The WAR is a verbatim copy of ./dist, so validate it before packaging.
       - run: yarn build:manifest:check
       - run: yarn build:verify
+
+      # Saved only after the build and both layout checks passed: steps run
+      # under `if: success()` unless told otherwise, so a failed build never
+      # saves. Skipped on an exact hit, i.e. a re-run of the same commit.
+      - name: save the Angular build cache
+        if: steps.ng_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .angular/cache
+          key: ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-${{ github.sha }}
 
       - name: find next version
         id: version

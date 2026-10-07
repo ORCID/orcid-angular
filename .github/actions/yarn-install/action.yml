@@ -3,6 +3,13 @@ description: >
   Set up the Node version from .nvmrc and get node_modules in place, restoring
   it from cache when nothing that shapes the tree has changed.
 
+outputs:
+  os:
+    description: >-
+      The runner's OS release as used in this action's cache keys, e.g.
+      ubuntu24.04, so callers can key their own caches the same way.
+    value: ${{ steps.os.outputs.id }}
+
 runs:
   using: composite
   steps:

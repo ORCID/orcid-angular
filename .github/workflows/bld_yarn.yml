@@ -19,20 +19,30 @@ jobs:
           egress-policy: audit
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-      - uses: ./.github/actions/yarn-install
+      - id: deps
+        uses: ./.github/actions/yarn-install
 
-      # Angular's persistent cache. Its own key, not shared with test_yarn: both
-      # jobs start together, the first to finish wins the save and the other
-      # gets "Unable to reserve cache". test_yarn always finished first, so this
-      # job kept restoring a karma cache, which has no angular-i18n.db (karma
-      # never localizes), and the translation inlining that dominates the
-      # localized build ran cold on every run.
+      # Angular's persistent build cache: webpack's module and minifier cache
+      # and babel's, ~70 MB compressed. bld_mvn on main saves the same lineage,
+      # so restore picks this pull request's newest entry and otherwise main's
+      # newest; this job then saves its own. test_yarn has a separate `ng-test-`
+      # lineage: the two jobs run at once, and one shared key made them race for
+      # the save and restore each other's cache.
+      #
+      # When it refreshes: the key hashes yarn.lock, angular.json and .nvmrc, so
+      # a dependency, Angular configuration or Node change starts a new, empty
+      # lineage instead of reusing entries built by another toolchain, and every
+      # successful build saves a newer entry under its own commit. Within a
+      # lineage webpack still checks every cached module against its source
+      # before reusing it, so the cache only speeds the build up: cold and warm
+      # builds emit the same content-hashed bundles. Translation inlining is not
+      # cached at all.
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .angular/cache
-          key: ${{ runner.os }}-ng-build-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
+          key: ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-ng-build-${{ hashFiles('yarn.lock') }}-
+            ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-
 
       - run: yarn build
 
