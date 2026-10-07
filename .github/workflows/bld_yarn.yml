@@ -22,22 +22,26 @@ jobs:
       - id: deps
         uses: ./.github/actions/yarn-install
 
-      # Angular's persistent build cache: webpack's module and minifier cache
-      # and babel's, ~70 MB compressed. bld_mvn on main saves the same lineage,
-      # so restore picks this pull request's newest entry and otherwise main's
-      # newest; this job then saves its own. test_yarn has a separate `ng-test-`
-      # lineage: the two jobs run at once, and one shared key made them race for
-      # the save and restore each other's cache.
+      # Angular's persistent build cache (webpack's module and minifier caches
+      # and babel's, ~70 MB compressed), restored from the newest entry bld_mvn
+      # saved on main. Restore only. Angular gives webpack timestamp snapshots
+      # for app modules, so a fresh checkout recompiles every app module
+      # whichever entry is restored, and what carries over (node_modules, babel
+      # and minifier results) is the same in main's entry as in one this pull
+      # request could save, apart from the few files it changes itself. Saving
+      # would add a ~70 MB upload to this job, the slowest on the pull request.
+      # test_yarn keeps a separate `ng-test-` lineage: the two jobs run at once,
+      # and one shared key made them race and restore each other's cache.
       #
       # When it refreshes: the key hashes yarn.lock, angular.json and .nvmrc, so
-      # a dependency, Angular configuration or Node change starts a new, empty
-      # lineage instead of reusing entries built by another toolchain, and every
-      # successful build saves a newer entry under its own commit. Within a
-      # lineage webpack still checks every cached module against its source
-      # before reusing it, so the cache only speeds the build up: cold and warm
-      # builds emit the same content-hashed bundles. Translation inlining is not
-      # cached at all.
-      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      # a dependency, Angular configuration or Node change starts a new lineage
+      # instead of reusing entries built by another toolchain, and every
+      # successful build on main saves a newer entry. A pull request that
+      # changes one of those files finds no entry yet and builds cold. Within a
+      # lineage webpack checks every cached module against its source before
+      # reusing it, so cold and warm builds emit the same content-hashed
+      # bundles. Translation inlining is not cached at all.
+      - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .angular/cache
           key: ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-${{ github.sha }}
