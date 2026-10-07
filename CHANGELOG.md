@@ -1,3 +1,15 @@
+## v3.23.8 - 2026-09-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.7...v3.23.8)
+
+- [#2930](https://github.com/ORCID/orcid-angular/pull/2930): PD-14413 page cancel says the recovery phone was not updated
+
+## v3.23.7 - 2026-09-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.6...v3.23.7)
+
+- [#2929](https://github.com/ORCID/orcid-angular/pull/2929): PD-14420 interstitial disabled add button keeps a white label
+
 ## v3.23.6 - 2026-09-24
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.5...v3.23.6)

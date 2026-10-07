@@ -8,6 +8,21 @@
     background-color: mat.m2-get-color-from-palette($primary, 700);
   }
 
+  // PD-14420. The rule above keeps the dark fill in every state, and Material's
+  // disabled label is dark grey, so the disabled action was unreadable. It is
+  // drawn the way the settings page's step view draws it: white label, the
+  // whole button at 60% until a code has been sent
+  button.authorize-button {
+    --mat-button-protected-disabled-label-text-color: var(
+      --orcid-color-text-light-high,
+      #ffffff
+    );
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+
   // The decline action is a <button> for keyboard access, so it does not pick
   // up the anchor colour
   button.link-button {

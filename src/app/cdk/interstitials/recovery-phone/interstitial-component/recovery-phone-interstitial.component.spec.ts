@@ -6,6 +6,7 @@ import {
   fakeAsync,
   tick,
 } from '@angular/core/testing'
+import { MatButtonModule } from '@angular/material/button'
 import { By } from '@angular/platform-browser'
 
 import { RecoveryPhoneFormComponent } from 'src/app/cdk/recovery-phone-form/recovery-phone-form.component'
@@ -289,5 +290,56 @@ describe('RecoveryPhoneInterstitialComponent', () => {
       expect(finish).not.toHaveBeenCalled()
       discardPeriodicTasks()
     }))
+  })
+})
+
+/**
+ * PD-14420. Rendered with the real Material button and the global theme, so
+ * these read the colours the browser computes rather than the class list. The
+ * settings page draws this action through the step view: the enabled button at
+ * 60% when disabled, the label white in both states.
+ */
+describe('RecoveryPhoneInterstitialComponent primary action colours', () => {
+  let fixture: ComponentFixture<RecoveryPhoneInterstitialComponent>
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [RecoveryPhoneInterstitialComponent],
+      imports: [MatButtonModule],
+      providers: [
+        {
+          provide: InterstitialObservabilityService,
+          useValue: jasmine.createSpyObj<InterstitialObservabilityService>(
+            'InterstitialObservabilityService',
+            ['shown', 'outcome', 'closed']
+          ),
+        },
+        WINDOW_PROVIDERS,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    })
+    fixture = TestBed.createComponent(RecoveryPhoneInterstitialComponent)
+    fixture.detectChanges()
+  })
+
+  function primaryButtonStyle(): CSSStyleDeclaration {
+    return getComputedStyle(
+      fixture.debugElement.query(By.css('#cy-interstitial-add-recovery-phone'))
+        .nativeElement
+    )
+  }
+
+  it('keeps a white label and fades the button while no code has been sent', () => {
+    const style = primaryButtonStyle()
+    expect(style.color).toBe('rgb(255, 255, 255)')
+    expect(style.opacity).toBe('0.6')
+  })
+
+  it('is at full strength with a white label once a code has been sent', () => {
+    fixture.componentInstance.codeSent = true
+    fixture.detectChanges()
+    const style = primaryButtonStyle()
+    expect(style.color).toBe('rgb(255, 255, 255)')
+    expect(style.opacity).toBe('1')
   })
 })
