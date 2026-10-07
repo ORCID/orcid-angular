@@ -1,3 +1,9 @@
+## v3.24.1 - 2026-10-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.24.0...v3.24.1)
+
+- [#2932](https://github.com/ORCID/orcid-angular/pull/2932): Lmendoa/pd 14333 pd 14423 pd 14449 pd 14450 recovery phone
+
 ## v3.24.0 - 2026-10-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.8...v3.24.0)
