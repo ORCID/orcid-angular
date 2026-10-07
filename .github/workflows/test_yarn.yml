@@ -17,12 +17,14 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - uses: ./.github/actions/yarn-install
 
+      # Angular's persistent cache, keyed apart from bld_yarn's (see there): a
+      # shared key made the two jobs race to save it and overwrite each other.
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .angular/cache
-          key: ${{ runner.os }}-ng-cache-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
+          key: ${{ runner.os }}-ng-test-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-ng-cache-${{ hashFiles('yarn.lock') }}-
+            ${{ runner.os }}-ng-test-${{ hashFiles('yarn.lock') }}-
 
       # Characterization tests for scripts/postbuild.ts. Node-only and a couple
       # of seconds, so they run before the browser suite.
