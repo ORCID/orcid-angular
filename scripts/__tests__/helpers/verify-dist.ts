@@ -4,8 +4,8 @@
  * postbuild.test.ts proves the postbuild transforms a small synthetic tree
  * correctly. This proves the tree that actually ships is servable: every URL
  * the browser will request is routable by the production nginx rules and
- * resolves to a file, and every lazy chunk a bundle imports exists and belongs
- * to the same locale.
+ * resolves to a file, and every lazy chunk a locale's webpack runtime can load
+ * exists under that same locale's suffix.
  *
  * The two are complementary. The fixture has 4 locales and a handful of files;
  * this sees all 21 locales and ~2000 bundles, including anything a feature
@@ -25,7 +25,13 @@ import {
   matchesDevAssetRoute,
   matchesProdAssetRoute,
 } from './routing-contract'
-import { NON_LOCALE_DIRS } from '../../dist-layout'
+
+/**
+ * Top-level directories under dist/ that are not locale output: share-assets is
+ * created by postbuild, and test-out is where `@angular/build:karma` compiles
+ * the specs (it leaves the directory behind, empty, after a run).
+ */
+const NON_LOCALE_DIRS = ['share-assets', 'test-out']
 
 interface Problem {
   where: string
@@ -189,11 +195,12 @@ function main(distRoot: string): void {
     )
   }
 
-  // ---- every bundle carries a locale suffix and imports its own locale ----
+  // ---- every bundle carries a locale suffix ----
   // The suffix is the directory Angular emitted, so dist/zh_CN holds -zh-CN.
-  const suffixes = [
-    ...new Set(localeDirs.map((d) => d.replace('_', '-'))),
-  ].sort((a, b) => b.length - a.length)
+  const suffixFor = (dir: string) => dir.replace('_', '-')
+  const suffixes = [...new Set(localeDirs.map(suffixFor))].sort(
+    (a, b) => b.length - a.length
+  )
   const suffixOf = (file: string) =>
     suffixes.find((s) => file.endsWith(`-${s}.js`))
 
@@ -203,8 +210,7 @@ function main(distRoot: string): void {
   let bundlesChecked = 0
 
   for (const file of bundles) {
-    const locale = suffixOf(file)
-    if (!locale) {
+    if (!suffixOf(file)) {
       fail(
         `share-assets/${file}`,
         'has no locale suffix; share-assets is one flat namespace and ' +
@@ -213,22 +219,85 @@ function main(distRoot: string): void {
       continue
     }
     bundlesChecked++
+  }
 
-    const source = fs.readFileSync(path.join(shareAssets, file), 'utf8')
-    const specifiers = new Set(
-      [
-        ...source.matchAll(
-          /["'](?:\.\/)?((?:chunk|main|polyfills|scripts|common|runtime)[-.][^"'/]+\.js)["']/g
-        ),
-      ].map((m) => m[1])
-    )
-    for (const spec of specifiers) {
-      if (!shareAssetFiles.has(spec)) {
-        fail(`share-assets/${file}`, `imports "${spec}", which does not exist`)
-      } else if (suffixOf(spec) !== locale) {
+  // ---- index.html loads only its own locale's bundles ----
+  for (const dir of localeDirs) {
+    const index = path.join(distRoot, dir, 'index.html')
+    if (!fs.existsSync(index)) continue
+    for (const raw of referencedUrls(fs.readFileSync(index, 'utf8'))) {
+      const file = raw.replace(/^\.?\//, '').split('?')[0]
+      if (!file.endsWith('.js')) continue
+      if (!file.endsWith(`-${suffixFor(dir)}.js`)) {
         fail(
-          `share-assets/${file}`,
-          `(locale ${locale}) imports "${spec}", which belongs to another locale`
+          `dist/${dir}/index.html`,
+          `references "${raw}", which is not suffixed for ${suffixFor(dir)}; ` +
+            'an unsuffixed or foreign bundle is shared across locales by ' +
+            "Cloudflare's URL-keyed cache"
+        )
+      }
+    }
+  }
+
+  // ---- every lazy chunk the runtime can load exists for the same locale ----
+  // webpack builds a lazy chunk's URL in the runtime chunk:
+  //   .u=e=>(76===e?"common":e)+"."+{42:"<hash>-en",76:"<hash>-en"}[e]+".js"
+  // postbuild suffixes each hash in that map with the locale, so chunk 42
+  // resolves to 42.<hash>-en.js and the named chunk 76 to common.<hash>-en.js.
+  // Nothing else in the tree references those files, so an entry that points
+  // at a missing or foreign file only shows up as a 404 when a user opens the
+  // route.
+  let chunksChecked = 0
+  for (const dir of localeDirs) {
+    const suffix = suffixFor(dir)
+    const runtimes = bundles.filter(
+      (f) => /^runtime\.[0-9a-f]{16}-/.test(f) && suffixOf(f) === suffix
+    )
+    if (runtimes.length !== 1) {
+      fail(
+        `share-assets/runtime.*-${suffix}.js`,
+        `expected exactly one runtime chunk for ${suffix}, found ${runtimes.length}`
+      )
+      continue
+    }
+    const runtime = runtimes[0]
+    const source = fs.readFileSync(path.join(shareAssets, runtime), 'utf8')
+
+    const start = source.indexOf('.u=e=>')
+    const end = start < 0 ? -1 : source.indexOf('+".js"', start)
+    const urlFn = start < 0 || end < 0 ? '' : source.slice(start, end)
+    const map = urlFn.match(/\{([^{}]*)\}\[e\]$/)
+    if (!map) {
+      fail(
+        `share-assets/${runtime}`,
+        'has no chunk URL map in the expected shape (.u=e=>...{id:"hash"}[e]+".js"); ' +
+          'the webpack runtime changed and this check needs updating'
+      )
+      continue
+    }
+
+    const aliases = new Map<string, string>()
+    for (const m of urlFn.matchAll(/(\d+)===e\?"([^"]+)"/g)) {
+      aliases.set(m[1], m[2])
+    }
+
+    const entries = [...map[1].matchAll(/(\d+):"([^"]*)"/g)]
+    if (entries.length === 0) {
+      fail(`share-assets/${runtime}`, 'chunk URL map is empty')
+      continue
+    }
+    for (const [, id, value] of entries) {
+      chunksChecked++
+      const chunk = `${aliases.get(id) ?? id}.${value}.js`
+      if (!value.endsWith(`-${suffix}`)) {
+        fail(
+          `share-assets/${runtime}`,
+          `maps chunk ${id} to "${chunk}", which is not suffixed for ${suffix}`
+        )
+      } else if (!shareAssetFiles.has(chunk)) {
+        fail(
+          `share-assets/${runtime}`,
+          `maps chunk ${id} to "${chunk}", which does not exist`
         )
       }
     }
@@ -259,7 +328,7 @@ function main(distRoot: string): void {
 
   console.log(
     `verify-dist: ${localeDirs.length} locales, ${urlsChecked} asset URLs, ` +
-      `${bundlesChecked} bundles`
+      `${bundlesChecked} bundles, ${chunksChecked} runtime chunk entries`
   )
   for (const note of notes) console.log(`  note: ${note}`)
 

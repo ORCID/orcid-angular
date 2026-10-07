@@ -42,6 +42,8 @@ jobs:
       # changes are reported but do not fail; see the helper for why.
       - run: yarn build:manifest:check
 
-      # Resolves every asset URL and every chunk import in the real 21-locale
-      # tree through the production nginx rules. Catches what the fixture cannot.
+      # Resolves every asset URL in the real 21-locale tree through the
+      # production nginx rules, and every lazy chunk in each locale's webpack
+      # runtime map to a file with that locale's suffix. Catches what the
+      # fixture cannot.
       - run: yarn build:verify
