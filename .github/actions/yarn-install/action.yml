@@ -6,12 +6,13 @@ description: >
 runs:
   using: composite
   steps:
-    # The runner's OS release, not just `runner.os`. Both ubuntu-22.04 and
-    # ubuntu-24.04 report "Linux", and this repo uses both, so keying on
-    # runner.os alone would let a tree installed on one be restored on the
-    # other. The prebuilt native binaries we pull (rollup, lmdb, lightningcss,
-    # esbuild) target an old glibc and would survive that today, but nothing
-    # guarantees the next dependency will.
+    # The runner's OS release, not just `runner.os`. Every release reports
+    # "Linux", so keying on runner.os alone would let a tree installed on one
+    # image be restored on another, e.g. when ubuntu-latest moves to a new
+    # release, or if a job pins a different one again. All jobs use
+    # ubuntu-latest so they share one entry. The prebuilt native binaries we pull
+    # (rollup, lmdb, lightningcss, esbuild) target an old glibc and would
+    # survive a mismatch today, but nothing guarantees the next dependency will.
     - id: os
       shell: bash
       run: |
