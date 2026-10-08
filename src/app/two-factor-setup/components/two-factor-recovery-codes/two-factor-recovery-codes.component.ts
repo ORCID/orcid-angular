@@ -24,6 +24,15 @@ declare const $localize: any
 export class TwoFactorRecoveryCodesComponent implements OnInit {
   @Input() backupCodes: string
   @Input() backupCodesClipboard: string
+
+  /**
+   * Supplied by the page, which is the only thing that knows how long the flow
+   * is. The default keeps the two step wording, so a caller that passes nothing
+   * - and the flag-off flow is exactly that - is unchanged.
+   */
+  @Input()
+  subtitle = $localize`:@@account.step2RecoveryCodes:Step 2 of 2 - 2FA recovery codes`
+
   applicationRoutes = ApplicationRoutes
   twoFactorForm: UntypedFormGroup
   hasDownloadedOrCopied = false

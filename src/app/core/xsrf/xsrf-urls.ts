@@ -72,9 +72,15 @@ export function isOrcidBackendUrl(url: string): boolean {
   return isOrcidWebUrl(url) || isAuthServerUrl(url)
 }
 
-/** A path-only URL such as `/signin/auth.json`, always served by our backend. */
+/**
+ * A path-only URL such as `/signin/auth.json`, always served by our backend.
+ *
+ * A protocol-relative URL (`//host/path`) also starts with `/` but resolves to
+ * a foreign origin, so it is deliberately not relative here — otherwise the
+ * token ends up on whatever host the URL names.
+ */
 export function isRelativeUrl(url: string): boolean {
-  return !!url && url.startsWith('/')
+  return !!url && url.startsWith('/') && !url.startsWith('//')
 }
 
 /** Served by the origin the app itself was loaded from. */

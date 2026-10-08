@@ -20,6 +20,8 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OauthParameters } from 'src/app/types'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
+import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 @Component({
   selector: 'app-sign-in',
@@ -52,6 +54,18 @@ export class SignInComponent implements OnInit {
   invalidVerifyUrl: boolean
   platform: PlatformInfo
   orLabel = $localize`:@@ngOrcid.signin.or:or`
+  isOauthAuthorizationTogglzEnable = false
+
+  /**
+   * The user signed in with their recovery phone number on an OAuth request.
+   * The sign-in card gives way to a panel that says 2FA is now off, and the
+   * client is only reached when that panel continues (R4.2).
+   */
+  twoFactorDisabledByRecoveryPhone = false
+  twoFactorDisabledRedirectUrl: string
+  /** The client's name, when the OAuth session carries one. */
+  oauthClientName: string
+  private twoFactorDisabledRedirectTriggered = false
 
   constructor(
     private _platformInfo: PlatformInfoService,
@@ -59,6 +73,7 @@ export class SignInComponent implements OnInit {
     private _route: ActivatedRoute,
     private _userInfo: UserService,
     private _togglzService: TogglzService,
+    private _oauthUrlSessionManager: OauthURLSessionManagerService,
     @Inject(WINDOW) private window: Window
   ) {}
 
@@ -76,6 +91,8 @@ export class SignInComponent implements OnInit {
         this.platform = platform as PlatformInfo
 
         this.isLoggedIn = session.loggedIn
+        this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationTogglzEnable
+        this.oauthClientName = session.oauthSession?.clientName
         if (!isOauthAuthorizationTogglzEnable) {
           this.isForceLogin = session.oauthSession?.forceLogin
         } else {
@@ -127,6 +144,60 @@ export class SignInComponent implements OnInit {
 
   show2FAEmitter($event) {
     this.show2FA = true
+  }
+
+  /**
+   * The sign-in behind an OAuth request succeeded on a recovery number code.
+   * Hold the url the sign-in answered with and show the panel instead of
+   * following it (R4.2).
+   */
+  onTwoFactorDisabledByRecoveryPhone($event: { url: string }) {
+    this.twoFactorDisabledRedirectUrl = $event?.url
+    this.twoFactorDisabledByRecoveryPhone = true
+    this.show2FA = false
+    this.loading = false
+  }
+
+  /**
+   * Continues to the client, by the button or by the panel's own ten-second
+   * timer. This is the continuation the ordinary OAuth success path takes -
+   * see FormSignInComponent.oauthAuthorize - repeated here because the form,
+   * and its redirect, are gone by the time the panel is on screen.
+   */
+  continueAfterTwoFactorDisabled() {
+    if (this.twoFactorDisabledRedirectTriggered) {
+      return
+    }
+    this.twoFactorDisabledRedirectTriggered = true
+    let urlRedirect = this.twoFactorDisabledRedirectUrl
+
+    if (this.isOauthAuthorizationTogglzEnable) {
+      const storedOauthRedirectUrl = this._oauthUrlSessionManager.get()
+      if (storedOauthRedirectUrl) {
+        urlRedirect = storedOauthRedirectUrl
+        this._oauthUrlSessionManager.clear()
+      }
+      //add http if not present
+      if (urlRedirect && !urlRedirect.startsWith('https://')) {
+        urlRedirect = `https://${urlRedirect}`
+      }
+      this.navigateTo(urlRedirect)
+    } else {
+      if (
+        (this.platform?.social || this.platform?.institutional) &&
+        !isRedirectToTheAuthorizationPage({ url: urlRedirect })
+      ) {
+        this.navigateTo(urlRedirect)
+      } else {
+        this._router.navigate(['/oauth/authorize'], {
+          queryParams: {
+            ...this.platform?.queryParameters,
+            prompt: undefined,
+            show_login: undefined,
+          },
+        })
+      }
+    }
   }
 
   navigateTo(val) {

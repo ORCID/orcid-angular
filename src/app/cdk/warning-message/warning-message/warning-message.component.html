@@ -28,6 +28,26 @@
       <p>
         <ng-content select="[content]"></ng-content>
       </p>
+      <!--
+        PD-5850: a slot for a standalone call to action, rendered as a sibling
+        of the sentence rather than inside it.
+
+        A notice either continues its sentence into a link ("...re-enable 2FA
+        from your account settings") or closes the sentence and offers a link
+        after it. The first belongs in `content` and stays inline. The second is
+        its own row in every frame that draws one, and putting it in `content`
+        is what drew it as a wrapped continuation of the paragraph.
+
+        It has to leave the <p>, not merely be styled as a block inside it. The
+        design comparison reads a paragraph's innerText, and innerText is the
+        text of every rendered descendant whatever its display - so an anchor
+        inside this <p> is part of the sentence's string, and the frame's
+        sentence node can never match the page's.
+
+        This is the same shape the 2FA panels already use, where the standalone
+        link is a sibling of the copy rather than a child of it.
+      -->
+      <ng-content select="[link]"></ng-content>
     </div>
   </div>
 </div>

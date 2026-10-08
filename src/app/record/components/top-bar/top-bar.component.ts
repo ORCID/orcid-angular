@@ -64,6 +64,10 @@ export class TopBarComponent implements OnInit, OnDestroy {
   @Input() newlySharedDomains: string[] = []
   @Input() newAddedAffiliation: string
   @Input() newAddedBackupEmail: string
+  /** The masked number just added through the sign-in interstitial (R6.4). */
+  @Input() newAddedRecoveryPhone: string
+  /** Set when this sign in used the recovery number and turned 2FA off (R3.6). */
+  @Input() twoFactorDisabledByRecoveryPhone: boolean
   @Input() loadingUserRecord = true
 
   regionNames = $localize`:@@topBar.names:Names`

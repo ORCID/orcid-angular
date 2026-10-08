@@ -18,10 +18,14 @@ import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
 import { AccountSecurityPasswordService } from 'src/app/core/account-security-password/account-security-password.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
-import { AuthChallengeComponent } from '@orcid/registry-ui'
+import {
+  AUTH_CHALLENGE_HEADING_ID,
+  AuthChallengeComponent,
+} from '@orcid/registry-ui'
 import { ErrorStateMatcherForTwoFactorFields } from '../../../sign-in/ErrorStateMatcherForTwoFactorFields'
 import { MatDialog } from '@angular/material/dialog'
 import { AuthChallengeFormData } from '../../../types/common.endpoint'
+import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authentication/recovery-phone-challenge.service'
 
 @Component({
   selector: 'app-settings-security-password',
@@ -55,7 +59,8 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
     private _fb: UntypedFormBuilder,
     private _register: RegisterService,
     private _accountPassword: AccountSecurityPasswordService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _recoveryPhoneChallenge: RecoveryPhoneChallengeService
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +86,10 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
           Validators.minLength(10),
           Validators.maxLength(10),
         ]),
+        twoFactorRecoveryPhoneCode: new UntypedFormControl(null, [
+          Validators.minLength(6),
+          Validators.maxLength(6),
+        ]),
       },
       {
         validators: OrcidValidators.matchValues('password', 'retypedPassword'),
@@ -89,14 +98,28 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   }
 
   openAuthChallenge() {
+    // If the user answers with a recovery phone number code the registry turns
+    // 2FA off before it answers (R5.3), so by the time `submitAttempt` fires
+    // the password on its own is enough and the update below just proceeds.
+    const recoveryPhone = this._recoveryPhoneChallenge.create()
     const dialogRef = this._dialog.open<AuthChallengeComponent>(
       AuthChallengeComponent,
       {
+        // The challenge names itself from its own heading, so the dialog and
+        // the panel it opens are one string rather than two.
+        ariaLabelledBy: AUTH_CHALLENGE_HEADING_ID,
         data: {
-          parentForm: this.form,
-          showPasswordField: false,
-          actionDescription: this.authChallengeLabel,
-        } as AuthChallengeFormData,
+          ...({
+            parentForm: this.form,
+            showPasswordField: false,
+            // This form's `password` is the *new* password being chosen; the
+            // account password - the one the challenge exists to prove - is
+            // `oldPassword`, and that is what a recovery phone verify posts.
+            passwordControlName: 'oldPassword',
+            actionDescription: this.authChallengeLabel,
+          } as AuthChallengeFormData),
+          recoveryPhone,
+        },
       }
     )
 

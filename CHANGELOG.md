@@ -1,3 +1,42 @@
+## v3.24.1 - 2026-10-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.24.0...v3.24.1)
+
+- [#2932](https://github.com/ORCID/orcid-angular/pull/2932): Lmendoa/pd 14333 pd 14423 pd 14449 pd 14450 recovery phone
+
+## v3.24.0 - 2026-10-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.8...v3.24.0)
+
+## v3.23.8 - 2026-09-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.7...v3.23.8)
+
+- [#2930](https://github.com/ORCID/orcid-angular/pull/2930): PD-14413 page cancel says the recovery phone was not updated
+
+## v3.23.7 - 2026-09-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.6...v3.23.7)
+
+- [#2929](https://github.com/ORCID/orcid-angular/pull/2929): PD-14420 interstitial disabled add button keeps a white label
+
+## v3.23.6 - 2026-09-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.5...v3.23.6)
+
+- [#2916](https://github.com/ORCID/orcid-angular/pull/2916): PD-6046 PD-6045 add 2FA recovery phone number
+
+## v3.23.5 - 2026-09-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.4...v3.23.5)
+
+## v3.23.4 - 2026-09-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.3...v3.23.4)
+
+- [#2913](https://github.com/ORCID/orcid-angular/pull/2913): PD-6198 outlined icons
+- [#2906](https://github.com/ORCID/orcid-angular/pull/2906): PD-6118 semgrep angular vulnerabilities
+
 ## v3.23.3 - 2026-09-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.2...v3.23.3)

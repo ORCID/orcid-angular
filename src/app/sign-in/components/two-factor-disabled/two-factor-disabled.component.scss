@@ -1,0 +1,63 @@
+@import '../../../../assets/scss/orcid.spacing.scss';
+
+// The orc-font-* classes set a size and a letter-spacing and nothing else, so
+// the Figma metrics are spelled out here.
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.two-factor-disabled {
+  text-align: center;
+}
+
+.two-factor-disabled__icon {
+  margin-bottom: $spacing-large;
+
+  img {
+    width: 64px;
+  }
+}
+
+.two-factor-disabled__title {
+  margin: 0 0 $spacing-large 0;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; // Figma heading-S 24/32
+
+  // Focused on arrival so the panel swap is announced, and never reached by
+  // tabbing. No ring: a heading is not an interactive control, and this screen
+  // is reached from the keyboard, which is when a browser calls a programmatic
+  // focus visible -- so the house ring was drawn where the frame draws none
+  // (PD-6042). Only the outline the focus itself brings is suppressed.
+  &:focus {
+    outline: none;
+  }
+}
+
+app-alert-message {
+  display: block;
+  text-align: left;
+  margin-bottom: $spacing-large;
+}
+
+.two-factor-disabled__continue {
+  width: 100%;
+  max-height: 40px;
+  font-weight: 500;
+  line-height: 20px; // Figma body-S 14/20
+
+  // PD-5635: `color="primary"` resolves to the palette's 500 (#2e7f9f), and
+  // this was the only primary action in the feature left on it -- the frame
+  // paints #085c77 over 17 070 px of `pd-6042-10`, and every sibling button
+  // reaches brand-secondary-dark through a rule of its own.
+  background: var(--orcid-color-brand-secondary-dark, #085c77) !important;
+  color: #fff !important;
+
+  // Material buttons ship no focus ring here
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
+    outline: none;
+  }
+}

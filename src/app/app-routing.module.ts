@@ -134,6 +134,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: ApplicationRoutes.recoveryPhone,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import(
+        './two-factor-recovery-phone/two-factor-recovery-phone.module'
+      ).then((m) => m.TwoFactorRecoveryPhoneModule),
+  },
+  {
     path: ApplicationRoutes.resetPasswordEmail + '/:key',
     loadChildren: () =>
       import('./reset-password/reset-password.module').then(

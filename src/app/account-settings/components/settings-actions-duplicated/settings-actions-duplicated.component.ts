@@ -21,11 +21,15 @@ import { UserService } from 'src/app/core'
 import { AccountActionsDuplicatedService } from 'src/app/core/account-actions-duplicated/account-actions-duplicated.service'
 import { UserSession } from 'src/app/types/session.local'
 
-import { AuthChallengeComponent } from '@orcid/registry-ui'
+import {
+  AUTH_CHALLENGE_HEADING_ID,
+  AuthChallengeComponent,
+} from '@orcid/registry-ui'
 import { AuthChallengeFormData } from '../../../types/common.endpoint'
 import { DuplicateRemoveEndpoint } from '../../../types/account-actions-duplicated'
 import { ErrorStateMatcherForTwoFactorFields } from '../../../sign-in/ErrorStateMatcherForTwoFactorFields'
 import { ErrorStateMatcher } from '@angular/material/core'
+import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authentication/recovery-phone-challenge.service'
 export class NeverShowErrorMatcher implements ErrorStateMatcher {
   isErrorState(
     control: UntypedFormControl | null,
@@ -51,7 +55,8 @@ export class SettingsActionsDuplicatedComponent implements OnInit, OnDestroy {
     private _duplicateService: AccountActionsDuplicatedService,
     private _form: UntypedFormBuilder,
     private _dialog: MatDialog,
-    private _user: UserService
+    private _user: UserService,
+    private _recoveryPhoneChallenge: RecoveryPhoneChallengeService
   ) {}
   @Output() loading = new EventEmitter<boolean>()
   @Output() close = new EventEmitter<void>()
@@ -82,6 +87,10 @@ export class SettingsActionsDuplicatedComponent implements OnInit, OnDestroy {
         null,
         [Validators.minLength(10), Validators.maxLength(10)],
       ],
+      twoFactorRecoveryPhoneCode: [
+        null,
+        [Validators.minLength(6), Validators.maxLength(6)],
+      ],
     })
     this._user
       .getUserSession()
@@ -93,16 +102,27 @@ export class SettingsActionsDuplicatedComponent implements OnInit, OnDestroy {
   }
 
   openAuthChallenge(orcidOrEmail: string) {
+    // A challenge answered with a recovery phone number code has already left
+    // 2FA off (R5.3), so the deprecation below runs exactly as it does for a
+    // challenge that was passed the ordinary way.
+    const recoveryPhone = this._recoveryPhoneChallenge.create()
     const dialogRef = this._dialog.open<AuthChallengeComponent>(
       AuthChallengeComponent,
       {
+        ariaLabelledBy: AUTH_CHALLENGE_HEADING_ID,
         data: {
-          parentForm: this.form,
-          showPasswordField: false,
-          actionDescription: this.authChallengeLeadingText,
-          boldText: orcidOrEmail,
-          trailingText: this.authChallengeTrailingText,
-        } as AuthChallengeFormData,
+          ...({
+            parentForm: this.form,
+            showPasswordField: false,
+            // Collected on the panel behind the dialog, so the challenge has
+            // to be told which control holds the account password.
+            passwordControlName: 'password',
+            actionDescription: this.authChallengeLeadingText,
+            boldText: orcidOrEmail,
+            trailingText: this.authChallengeTrailingText,
+          } as AuthChallengeFormData),
+          recoveryPhone,
+        },
       }
     )
 

@@ -14,6 +14,11 @@
         Display two-factor field
       </mat-checkbox>
 
+      <mat-checkbox [(ngModel)]="offerRecoveryPhone">
+        Offer a recovery phone number (the demo accepts the code
+        <code>123456</code>)
+      </mat-checkbox>
+
       <mat-form-field appearance="outline">
         <mat-label>Action Description</mat-label>
         <input matInput [(ngModel)]="actionDescription" />
@@ -83,6 +88,8 @@
   <span style="background-color: #fff59d; color: #000;">password: [null, Validators.required],</span>
   <span style="background-color: #fff59d; color: #000;">twoFactorCode: [null, [Validators.minLength(6), Validators.maxLength(6)]],</span>
   <span style="background-color: #fff59d; color: #000;">twoFactorRecoveryCode: [null, [Validators.minLength(10), Validators.maxLength(10)]],</span>
+  <span style="color: #666;">// only needed when you pass a recoveryPhone</span>
+  <span style="background-color: #fff59d; color: #000;">twoFactorRecoveryPhoneCode: [null, [Validators.minLength(6), Validators.maxLength(6)]],</span>
 &#125;);</code></pre>
 
     <h4>2A. Usage via MatDialog</h4>
@@ -178,7 +185,10 @@ export interface AuthChallengeFormData &#123;
   recoveryControlName?: string;
   passwordControlName?: string;
   parentForm?: UntypedFormGroup;
-&#125;</code></pre>
+&#125;
+
+<span style="color: #666;">// recoveryPhone and recoveryPhoneControlName are passed alongside it in the
+// same data object; see 5. The recovery phone number mode.</span></code></pre>
 
     <h4>4. Backend Implementation</h4>
     <p>
@@ -202,6 +212,99 @@ export interface AuthChallengeFormData &#123;
 <span style="color: #666;">// 3. Mark as successful</span>
 <span style="background-color: #fff59d; color: #000;">form.setSuccess(true);</span>
 return form;</code></pre>
+
+    <h4>5. The recovery phone number mode</h4>
+    <p>
+      A third mode sits behind the two above: a code texted to the recovery
+      phone number on the account. It is offered only when the
+      <code>recoveryPhone</code> input is present and its
+      <code>available</code> is <code>true</code> — the feature flag is on, 2FA
+      is active on the account and a number is stored. Without it the panel
+      keeps the ORCID help centre link it has always shown.
+    </p>
+    <p>
+      This is a <strong>library</strong> component: it cannot inject an
+      application service, read a feature flag or reach the registry. So the
+      host resolves all of that and hands it over as one plain object, which the
+      component reads live and mutates in place. In the registry that object
+      comes from <code>RecoveryPhoneChallengeService.create()</code>.
+    </p>
+    <p>
+      <em
+        >Accepting one of these codes is not only an authentication. The
+        registry disables 2FA, deletes the number and invalidates the unused
+        backup codes before it answers.</em
+      >
+      The component therefore does <strong>not</strong> emit
+      <code>submitAttempt</code> when the verify button is pressed in this mode:
+      it calls <code>verify()</code> first, and only once that answers
+      <code>'passed'</code> does it set <code>used</code>, empty the code fields
+      and emit. The guarded action then runs on the password alone, which works
+      precisely because 2FA has just been turned off.
+      <code>'invalidCode'</code> leaves the dialog open with an invalid-code
+      error and emits nothing; <code>'invalidPassword'</code> puts the error on
+      the password instead, exactly as <code>processBackendResponse</code> does
+      for the two ordinary modes, because the Registry never got as far as the
+      code and the one the user typed is still good.
+    </p>
+    <p>
+      While that request is outstanding the cancel control is disabled and the
+      dialog will not close: a pass has already disabled 2FA, deleted the number
+      and voided the backup codes by the time it answers, and hanging up aborts
+      the request without undoing any of it. For the same reason
+      <code>verify()</code> must do its own bookkeeping on the response rather
+      than in the subscription the challenge holds &mdash; that subscription
+      ends when the dialog does. The challenge calls <code>dispose()</code> on
+      the way out, which stops the resend countdown; every other field stays
+      readable, because that is when a host reads <code>used</code>.
+    </p>
+    <p>
+      After the challenge closes, ask <code>recoveryPhone.used</code> what
+      happened. An action that was itself guarding "disable 2FA" must not run —
+      2FA is already off. Everything else proceeds exactly as it does after an
+      ordinary pass.
+    </p>
+    <pre><code class="language-typescript">const recoveryPhone = this._recoveryPhoneChallenge.create();
+
+const dialogRef = this._dialog.open&lt;AuthChallengeComponent&gt;(AuthChallengeComponent, &#123;
+  <span style="color: #666;">// name the dialog from the challenge's own heading, not a second copy of it</span>
+  ariaLabelledBy: AUTH_CHALLENGE_HEADING_ID,
+  data: &#123;
+    parentForm: this.form,
+    actionDescription: '...',
+    <span style="color: #666;">// which control holds the ACCOUNT password - required here, see below</span>
+    <span style="background-color: #fff59d; color: #000;">passwordControlName: 'oldPassword',</span>
+    <span style="background-color: #fff59d; color: #000;">recoveryPhone</span>
+  &#125;,
+&#125;);
+
+dialogRef.componentInstance.submitAttempt
+  .pipe(takeUntil(dialogRef.afterClosed()))
+  .subscribe(() => &#123;
+    <span style="background-color: #fff59d; color: #000;">if (recoveryPhone.used) &#123;</span>
+      <span style="color: #666;">// 2FA is already off - do not disable it a second time</span>
+      <span style="background-color: #fff59d; color: #000;">dialogRef.close(true);</span>
+      <span style="background-color: #fff59d; color: #000;">return;</span>
+    <span style="background-color: #fff59d; color: #000;">&#125;</span>
+    this.myService.doTheGuardedThing(this.form.value).subscribe(/* ... */);
+  &#125;);</code></pre>
+
+    <pre><code class="language-typescript">export interface AuthChallengeRecoveryPhone &#123;
+  available: boolean;          <span style="color: #666;">// flag on + 2FA on + a number stored</span>
+  maskedNumber?: string;       <span style="color: #666;">// last four digits only, never the number</span>
+  codeSent: boolean;
+  resendSeconds: number;       <span style="color: #666;">// counts down; 0 means a resend is allowed</span>
+  sending: boolean;
+  errorCode?: string;          <span style="color: #666;">// why the SEND failed, not why a code was rejected</span>
+  used: boolean;               <span style="color: #666;">// true once a code was accepted, whoever learns first</span>
+  sendCode(): void;
+  verify(password: string, code: string): Observable&lt;AuthChallengeRecoveryPhoneVerification&gt;;
+  dispose(): void;             <span style="color: #666;">// called by the challenge when it closes</span>
+&#125;
+
+<span style="color: #666;">// The Registry checks the password BEFORE the code, so a wrong password comes
+// back with no code attempt spent and must not be reported as a wrong code.</span>
+type AuthChallengeRecoveryPhoneVerification = 'passed' | 'invalidPassword' | 'invalidCode';</code></pre>
   </div>
 
   <div inputs>
@@ -237,8 +340,16 @@ return form;</code></pre>
       </li>
       <li>
         <code style="font-weight: bold">passwordControlName</code>:
-        <code>string</code>. Custom form control name. (default
-        <code>'password'</code>)
+        <code>string</code>. The control holding the
+        <strong>account</strong> password. (default <code>'password'</code>)
+        <strong
+          >Required whenever <code>showPasswordField</code> is
+          <code>false</code> and a <code>recoveryPhone</code> is offered</strong
+        >: the challenge then reads a control it never displayed, and the
+        default is a guess &mdash; in a change-password form
+        <code>password</code> is the <em>new</em> password. Without it the
+        recovery phone option is not offered at all, rather than posting the
+        wrong credential.
       </li>
       <li>
         <code style="font-weight: bold">codeControlName</code>:
@@ -249,6 +360,19 @@ return form;</code></pre>
         <code style="font-weight: bold">recoveryControlName</code>:
         <code>string</code>. Custom form control name. (default
         <code>'twoFactorRecoveryCode'</code>)
+      </li>
+      <li>
+        <code style="font-weight: bold">recoveryPhone</code>:
+        <code>AuthChallengeRecoveryPhone</code>. Everything needed to offer the
+        third mode, the recovery phone number. Leave it out (or hand over an
+        object whose <code>available</code> is <code>false</code>) and the
+        challenge behaves exactly as it always has. See
+        <em>5. The recovery phone number mode</em> below.
+      </li>
+      <li>
+        <code style="font-weight: bold">recoveryPhoneControlName</code>:
+        <code>string</code>. Custom form control name for the phone code.
+        (default <code>'twoFactorRecoveryPhoneCode'</code>)
       </li>
     </ul>
   </div>
