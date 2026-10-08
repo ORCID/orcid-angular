@@ -1,3 +1,9 @@
+## v3.24.2 - 2026-10-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.24.1...v3.24.2)
+
+- [#2923](https://github.com/ORCID/orcid-angular/pull/2923): PD-13324 speed up CI
+
 ## v3.24.1 - 2026-10-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.24.0...v3.24.1)
