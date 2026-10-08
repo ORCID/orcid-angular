@@ -22,19 +22,19 @@ describe('GoogleTagManagerService', () => {
   let inserted: HTMLScriptElement[]
 
   function simulateScript(outcome: 'load' | 'error', onLoad?: () => void) {
-    spyOn(document.head, 'insertBefore').and.callFake(<T extends Node>(
-      node: T
-    ): T => {
-      const script = node as unknown as HTMLScriptElement
-      inserted.push(script)
-      setTimeout(() => {
-        if (outcome === 'load' && onLoad) {
-          onLoad()
-        }
-        script.dispatchEvent(new Event(outcome))
-      })
-      return node
-    })
+    spyOn(document.head, 'insertBefore').and.callFake(
+      <T extends Node>(node: T): T => {
+        const script = node as unknown as HTMLScriptElement
+        inserted.push(script)
+        setTimeout(() => {
+          if (outcome === 'load' && onLoad) {
+            onLoad()
+          }
+          script.dispatchEvent(new Event(outcome))
+        })
+        return node
+      }
+    )
   }
 
   beforeEach(() => {
