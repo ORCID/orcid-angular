@@ -1,9 +1,8 @@
 name: bld_yarn
 
+# The job only builds; it calls no GitHub API.
 permissions:
-  checks: write
   contents: read
-  issues: read
 
 on:
   workflow_call:
@@ -20,9 +19,45 @@ jobs:
           egress-policy: audit
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - id: deps
+        uses: ./.github/actions/yarn-install
+
+      # Angular's persistent build cache (webpack's module and minifier caches
+      # and babel's, ~70 MB compressed), restored from the newest entry bld_mvn
+      # saved on main. Restore only. Angular gives webpack timestamp snapshots
+      # for app modules, so a fresh checkout recompiles every app module
+      # whichever entry is restored, and what carries over (node_modules, babel
+      # and minifier results) is the same in main's entry as in one this pull
+      # request could save, apart from the few files it changes itself. Saving
+      # would add a ~70 MB upload to this job, the slowest on the pull request.
+      # test_yarn keeps a separate `ng-test-` lineage: the two jobs run at once,
+      # and one shared key made them race and restore each other's cache.
+      #
+      # When it refreshes: the key hashes yarn.lock, angular.json and .nvmrc, so
+      # a dependency, Angular configuration or Node change starts a new lineage
+      # instead of reusing entries built by another toolchain, and every
+      # successful build on main saves a newer entry. A pull request that
+      # changes one of those files finds no entry yet and builds cold. Within a
+      # lineage webpack checks every cached module against its source before
+      # reusing it, so cold and warm builds emit the same content-hashed
+      # bundles. Translation inlining is not cached at all.
+      - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          node-version: 'v20.x'
-          cache: 'yarn'
-      - run: yarn
+          path: .angular/cache
+          key: ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-${{ github.sha }}
+          restore-keys: |
+            ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-
+
       - run: yarn build
+
+      # Fails when the real build changes the shape of the deployed tree (a
+      # locale that stopped being emitted, a bundle that lost its locale
+      # suffix, a file that moved out of share-assets). Lazy-chunk count
+      # changes are reported but do not fail; see the helper for why.
+      - run: yarn build:manifest:check
+
+      # Resolves every asset URL in the real 21-locale tree through the
+      # production nginx rules, and every lazy chunk in each locale's webpack
+      # runtime map to a file with that locale's suffix. Catches what the
+      # fixture cannot.
+      - run: yarn build:verify

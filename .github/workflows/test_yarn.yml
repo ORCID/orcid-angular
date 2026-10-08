@@ -6,7 +6,17 @@ on:
 
 jobs:
   test_yarn:
-    runs-on: ubuntu-22.04
+    # Same image as every other job. The yarn-install cache key includes the OS
+    # release, and nothing on main runs on 22.04 any more, so a 22.04 job could
+    # never restore a node_modules cache saved on main and installed cold on
+    # every pull request's first run.
+    #
+    # The 22.04 pin (2024-10) dated from puppeteer's downloaded Chrome, which
+    # Ubuntu 24.04's AppArmor user-namespace restriction blocks from using its
+    # sandbox. karma now launches the image's own google-chrome, installed at
+    # /opt/google/chrome/chrome, which Ubuntu ships an AppArmor profile for.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
@@ -14,9 +24,20 @@ jobs:
           egress-policy: audit
 
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: ./.github/actions/yarn-install
+
+      # Angular's persistent cache, keyed apart from bld_yarn's (see there): a
+      # shared key made the two jobs race to save it and overwrite each other.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          node-version: 'v20.x'
-          cache: 'yarn'
-      - run: yarn
+          path: .angular/cache
+          key: ${{ runner.os }}-ng-test-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-ng-test-${{ hashFiles('yarn.lock') }}-
+
+      # Characterization tests for scripts/postbuild.ts. Node-only and a couple
+      # of seconds, so they run before the browser suite.
+      - run: yarn test:scripts
+      - run: yarn typecheck:scripts
+
       - run: yarn test-headless:ci

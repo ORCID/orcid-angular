@@ -117,6 +117,26 @@ function writeSupportedBrowsersMarkdown(supported: SupportedBrowsers) {
     return aName.localeCompare(bName)
   })
 
+  const rows = entries.map(([key, version]) => {
+    const major = version.major
+    const minor = version.minor ?? 0
+    return [
+      DISPLAY_NAME[key] ?? key,
+      minor > 0 ? `${major}.${minor} or newer` : `${major} or newer`,
+    ]
+  })
+
+  // Pad the columns the way prettier formats a markdown table. This file is
+  // committed, and `prettier --check .` covers it, so emitting an unpadded
+  // table would leave the working tree dirty after every build and make the
+  // format gate fail on a tree nobody edited.
+  const header = ['Browser', 'Minimum version']
+  const widths = header.map((cell, i) =>
+    Math.max(cell.length, ...rows.map((row) => row[i].length))
+  )
+  const pad = (cells: string[]) =>
+    `| ${cells.map((cell, i) => cell.padEnd(widths[i])).join(' | ')} |`
+
   const lines: string[] = []
 
   lines.push('# Supported browsers')
@@ -125,17 +145,10 @@ function writeSupportedBrowsersMarkdown(supported: SupportedBrowsers) {
     '> This file is auto-generated from `.browserslistrc` during the prebuild step. Do not edit manually.'
   )
   lines.push('')
-  lines.push('| Browser | Minimum version |')
-  lines.push('|---------|-----------------|')
-
-  for (const [key, version] of entries) {
-    const name = DISPLAY_NAME[key] ?? key
-    const major = version.major
-    const minor = version.minor ?? 0
-    const versionLabel =
-      minor > 0 ? `${major}.${minor} or newer` : `${major} or newer`
-
-    lines.push(`| ${name} | ${versionLabel} |`)
+  lines.push(pad(header))
+  lines.push(`| ${widths.map((w) => '-'.repeat(w)).join(' | ')} |`)
+  for (const row of rows) {
+    lines.push(pad(row))
   }
 
   lines.push('')
