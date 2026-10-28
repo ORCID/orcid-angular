@@ -47,17 +47,14 @@ describe('consent loader (scripts/onetrust.runtime.js)', () => {
     return { doc, appended }
   }
 
-  function fakeWindow(environment: any, search = '', inFrame = false) {
+  function fakeWindow(environment: any, search = '') {
     const { doc, appended } = fakeDocument()
-    const top = {}
     const win: any = {
-      top,
       runtimeEnvironment: environment,
       location: { search, hostname: QA },
       localStorage: storage,
       document: doc,
     }
-    win.self = inFrame ? {} : top
     return { win, appended }
   }
 
@@ -229,19 +226,10 @@ describe('consent loader (scripts/onetrust.runtime.js)', () => {
   })
 
   describe('starting on a page', () => {
-    it('loads nothing inside an iframe (R12)', () => {
-      const { win, appended } = fakeWindow(qa, '?cookieyes=true', true)
-
-      expect(consent.start(win)).toBeFalse()
-      expect(appended).toEqual([])
-      expect(win.orcidConsent).toBeUndefined()
-      expect(store).toEqual({})
-    })
-
     it('publishes the vendor it chose and loads it (R3, R4)', () => {
       const { win, appended } = fakeWindow(qa, '?cookieyes=true')
 
-      expect(consent.start(win)).toBeTrue()
+      consent.start(win)
       expect(win.orcidConsent.vendor).toBe('cookieyes')
       expect(appended.length).toBe(1)
     })

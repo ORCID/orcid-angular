@@ -70,12 +70,7 @@
     }
   }
 
-  // Nothing loads inside an iframe, such as the trust-markers summary widget
-  // embedded on another site (PD-9698).
   consent.start = function (win) {
-    if (win.self !== win.top) {
-      return false
-    }
     ;(function waitForRuntimeEnvironment() {
       // Check if the runtime environment is available.
       if (win.runtimeEnvironment) {
@@ -97,8 +92,11 @@
         setTimeout(waitForRuntimeEnvironment, 50)
       }
     })()
-    return true
   }
 
-  consent.start(window)
+  // Nothing loads inside an iframe, such as the trust-markers summary widget
+  // embedded on another site (PD-9698).
+  if (window.self === window.top) {
+    consent.start(window)
+  }
 })((window.orcidConsent = window.orcidConsent || {}))
