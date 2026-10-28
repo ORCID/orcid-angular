@@ -165,10 +165,21 @@ export class RecordEmailsService {
 
       return this.validateRegisterValue(value).pipe(
         map((res) => {
-          if (res.errors.length > 0) {
-            const error = {
-              backendError: res.errors,
+          const errors = res?.errors ?? []
+
+          if (errors.length > 0 || Object.keys(errors).length > 0) {
+            const error: ValidationErrors = {
+              backendError: errors,
             }
+
+            const hasDisposableKey = Array.isArray(errors)
+              ? errors.includes('disposable_email')
+              : Object.prototype.hasOwnProperty.call(errors, 'disposable_email')
+
+            if (hasDisposableKey) {
+              error.disposable = true
+            }
+
             return error
           }
           return null
