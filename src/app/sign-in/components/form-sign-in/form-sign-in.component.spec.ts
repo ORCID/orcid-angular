@@ -38,9 +38,10 @@ describe('FormSignInComponent', () => {
     oauthUrlSessionManager =
       jasmine.createSpyObj<OauthURLSessionManagerService>(
         'OauthURLSessionManagerService',
-        ['get', 'clear']
+        ['get', 'clear', 'consumePasswordJustReset']
       )
     oauthUrlSessionManager.get.and.returnValue(null)
+    oauthUrlSessionManager.consumePasswordJustReset.and.returnValue(false)
 
     TestBed.configureTestingModule({
       imports: [
@@ -78,6 +79,52 @@ describe('FormSignInComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  describe('after a signed-out password reset (PD-14612)', () => {
+    const notice = (): HTMLElement | null =>
+      fixture.nativeElement.querySelector('#cy-password-reset-success')
+
+    function recreate(justReset: boolean) {
+      oauthUrlSessionManager.consumePasswordJustReset.and.returnValue(justReset)
+      fixture.destroy()
+      oauthUrlSessionManager.consumePasswordJustReset.calls.reset()
+      fixture = TestBed.createComponent(FormSignInComponent)
+      component = fixture.componentInstance
+      fixture.detectChanges()
+    }
+
+    it('says the password has been reset, above the email field (R8.1)', () => {
+      recreate(true)
+
+      const shown = notice()
+      expect(shown).not.toBeNull()
+      expect(shown.getAttribute('type')).toBe('success')
+      expect(shown.textContent.replace(/\s+/g, ' ').trim()).toBe(
+        'Your account password has been reset'
+      )
+      const username = fixture.nativeElement.querySelector(
+        '#username-input-label'
+      )
+      expect(
+        shown.compareDocumentPosition(username) &
+          Node.DOCUMENT_POSITION_FOLLOWING
+      ).toBeTruthy()
+    })
+
+    it('reads the flag once, on load (R8.3)', () => {
+      recreate(true)
+
+      expect(
+        oauthUrlSessionManager.consumePasswordJustReset
+      ).toHaveBeenCalledTimes(1)
+    })
+
+    it('says nothing on an ordinary visit (R8.3)', () => {
+      recreate(false)
+
+      expect(notice()).toBeNull()
+    })
   })
 
   it('only triggers oauth redirect once per successful flow', () => {

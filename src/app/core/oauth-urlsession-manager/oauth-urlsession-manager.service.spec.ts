@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing'
 import { OauthURLSessionManagerService } from './oauth-urlsession-manager.service'
 
 const JUST_REGISTERED_KEY = 'oauthJustRegistered'
+const PASSWORD_JUST_RESET_KEY = 'passwordJustReset'
 
 describe('OauthURLSessionManagerService', () => {
   let service: OauthURLSessionManagerService
@@ -15,6 +16,45 @@ describe('OauthURLSessionManagerService', () => {
 
   afterEach(() => {
     localStorage.removeItem(JUST_REGISTERED_KEY)
+    localStorage.removeItem(PASSWORD_JUST_RESET_KEY)
+  })
+
+  describe('consumePasswordJustReset (PD-14612)', () => {
+    it('returns the flag once and clears storage (R8.3)', () => {
+      service.setPasswordJustReset()
+
+      expect(service.consumePasswordJustReset()).toBeTrue()
+      expect(localStorage.getItem(PASSWORD_JUST_RESET_KEY)).toBeNull()
+      expect(service.consumePasswordJustReset()).toBeFalse()
+    })
+
+    it('is false when nothing was stored', () => {
+      expect(service.consumePasswordJustReset()).toBeFalse()
+    })
+
+    it('is false and cleared once the flag is older than five minutes', () => {
+      jasmine.clock().install()
+      jasmine.clock().mockDate(new Date(2026, 9, 28, 12, 0, 0))
+      service.setPasswordJustReset()
+      jasmine.clock().tick(5 * 60 * 1000 + 1)
+
+      expect(service.consumePasswordJustReset()).toBeFalse()
+      expect(localStorage.getItem(PASSWORD_JUST_RESET_KEY)).toBeNull()
+      jasmine.clock().uninstall()
+    })
+
+    it('survives clear(), which the OAuth branch of the reset calls (R8.2)', () => {
+      service.setPasswordJustReset()
+      service.clear()
+
+      expect(service.consumePasswordJustReset()).toBeTrue()
+    })
+
+    it('is false for a malformed payload', () => {
+      localStorage.setItem(PASSWORD_JUST_RESET_KEY, '{not json')
+
+      expect(service.consumePasswordJustReset()).toBeFalse()
+    })
   })
 
   it('should be created', () => {

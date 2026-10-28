@@ -2,11 +2,18 @@ import { Injectable } from '@angular/core'
 
 const LOCALSTORAGE_KEY = 'oauthRedirectUrl'
 const LOCALSTORAGE_JUST_REGISTERED_KEY = 'oauthJustRegistered'
+const LOCALSTORAGE_PASSWORD_JUST_RESET_KEY = 'passwordJustReset'
 
 /**
  * 30 minutes expressed in milliseconds.
  */
 const EXPIRATION_MS = 30 * 60 * 1000
+
+/**
+ * Long enough to reach sign-in, short enough that a reset which never got
+ * there does not surface on a later visit (PD-14612).
+ */
+const PASSWORD_JUST_RESET_EXPIRATION_MS = 5 * 60 * 1000
 
 interface StoredRedirect {
   /** Full OAuth URL (query string and all) */
@@ -102,6 +109,39 @@ export class OauthURLSessionManagerService {
   clear(): void {
     localStorage.removeItem(LOCALSTORAGE_KEY)
     localStorage.removeItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
+  }
+
+  /**
+   * Persist a one-time flag telling the next sign-in form that a signed-out
+   * password reset has just succeeded. Lives outside `clear()` because the
+   * OAuth branch of the reset clears the redirect before it leaves.
+   */
+  setPasswordJustReset(): void {
+    const payload: StoredBooleanFlag = {
+      value: true,
+      expiresAt: Date.now() + PASSWORD_JUST_RESET_EXPIRATION_MS,
+    }
+    localStorage.setItem(
+      LOCALSTORAGE_PASSWORD_JUST_RESET_KEY,
+      JSON.stringify(payload)
+    )
+  }
+
+  /**
+   * Read and clear the one-time password reset flag.
+   */
+  consumePasswordJustReset(): boolean {
+    const raw = localStorage.getItem(LOCALSTORAGE_PASSWORD_JUST_RESET_KEY)
+    localStorage.removeItem(LOCALSTORAGE_PASSWORD_JUST_RESET_KEY)
+    if (!raw) {
+      return false
+    }
+    try {
+      const payload = JSON.parse(raw) as StoredBooleanFlag
+      return !!payload.value && payload.expiresAt > Date.now()
+    } catch {
+      return false
+    }
   }
 
   /**
