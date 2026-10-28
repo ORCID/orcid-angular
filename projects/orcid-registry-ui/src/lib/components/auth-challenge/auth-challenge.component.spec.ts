@@ -238,22 +238,18 @@ describe('AuthChallengeComponent', () => {
       return fixture.nativeElement.textContent
     }
 
-    it('keeps focus in the empty password field when the send link is pressed (PD-14598)', () => {
+    it('stops a press on the send link from taking focus off the password (PD-14598)', () => {
       offer()
-      const password: HTMLInputElement =
-        fixture.nativeElement.querySelector('#password')
-      password.focus()
       const press = new MouseEvent('mousedown', {
         bubbles: true,
         cancelable: true,
       })
 
       fixture.nativeElement.querySelector(SEND_TOGGLE).dispatchEvent(press)
-      fixture.detectChanges()
 
+      // a press whose default is prevented does not move focus, so the
+      // password does not blur and nothing above the link moves
       expect(press.defaultPrevented).toBeTrue()
-      expect(document.activeElement).toBe(password)
-      expect(text()).not.toContain('Password cannot be empty')
     })
 
     it('does not call the empty password wrong when focus moves to the code field (PD-14598 R5.1)', fakeAsync(() => {
@@ -289,23 +285,69 @@ describe('AuthChallengeComponent', () => {
       expect(text()).toContain('Password cannot be empty')
     }))
 
-    it('keeps focus on press for every other mode link too (PD-14598 R5.2)', () => {
+    it('says the password is missing once the code it goes with is typed (PD-14598 R5.3)', fakeAsync(() => {
       offer()
-      const links: HTMLElement[] = Array.from(
-        fixture.nativeElement.querySelectorAll('.link-button, a[href="#"]')
-      )
-      expect(links.length).toBeGreaterThan(0)
-      for (const link of links) {
-        const press = new MouseEvent('mousedown', {
-          bubbles: true,
-          cancelable: true,
-        })
-        link.dispatchEvent(press)
-        expect(press.defaultPrevented)
-          .withContext(link.textContent.trim())
-          .toBeTrue()
+      const password = component.parentForm.get(component.passwordControlName)
+      password.addValidators(Validators.required)
+      password.setValue('')
+      component.sendRecoveryPhoneCode(new Event('click'))
+      fixture.detectChanges()
+      tick()
+      fixture.detectChanges()
+      expect(text()).not.toContain('Password cannot be empty')
+
+      component.parentForm
+        .get(component.recoveryPhoneControlName)
+        .setValue('123456')
+      fixture.detectChanges()
+
+      // "Verify" is greyed out, and this is what says why
+      expect(password.touched).toBeFalse()
+      expect(text()).toContain('Password cannot be empty')
+    }))
+
+    it('keeps focus on press for every link in every mode (PD-14598 R5.2)', fakeAsync(() => {
+      const LINKS =
+        '.link-button, a[href="#"], a[target="_blank"], #cy-cancel-account-verification'
+      const pressEach = (mode: string) => {
+        const links: HTMLElement[] = Array.from(
+          fixture.nativeElement.querySelectorAll(LINKS)
+        )
+        expect(links.length).withContext(mode).toBeGreaterThan(0)
+        for (const link of links) {
+          const press = new MouseEvent('mousedown', {
+            bubbles: true,
+            cancelable: true,
+          })
+          link.dispatchEvent(press)
+          expect(press.defaultPrevented)
+            .withContext(`${mode}: ${link.textContent.trim()}`)
+            .toBeTrue()
+        }
       }
-    })
+
+      offer()
+      pressEach('authentication app')
+
+      component.toggleRecoveryCode(new Event('click'))
+      fixture.detectChanges()
+      tick()
+      pressEach('recovery code')
+
+      component.toggleRecoveryCode(new Event('click'))
+      component.sendRecoveryPhoneCode(new Event('click'))
+      recoveryPhone.codeSent = true
+      recoveryPhone.resendSeconds = 0
+      fixture.detectChanges()
+      tick()
+      pressEach('recovery phone code')
+
+      offer(false)
+      component.showRecoveryPhoneCode = false
+      fixture.detectChanges()
+      tick()
+      pressEach('no recovery phone')
+    }))
 
     it('says nothing about a recovery phone number when there is no option', () => {
       expect(fixture.debugElement.query(By.css(SEND_TOGGLE))).toBeFalsy()

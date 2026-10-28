@@ -258,12 +258,11 @@ export class RecoveryPhoneChallengeService implements OnDestroy {
   }
 
   /**
-   * The session, the record notice and the telemetry are looked up where they
-   * are used rather than taken in the constructor. None of them is what this
-   * service is for: they are courtesies around the one thing that matters,
-   * which is whether the code was accepted. A challenge that cannot be opened
-   * because a page action could not be recorded would be the wrong trade, and
-   * it would also drag the whole session graph into every host that opens one.
+   * The telemetry is looked up where it is used rather than taken in the
+   * constructor. It is not what this service is for: it is a courtesy around
+   * the one thing that matters, which is whether the code was accepted. A
+   * challenge that cannot be opened because a page action could not be
+   * recorded would be the wrong trade.
    */
   private optional<T>(token: ProviderToken<T>): T | null {
     try {

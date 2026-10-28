@@ -119,7 +119,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
   /**
    * True only while a recovery phone number code is with the registry. That
    * request is the one thing here that cannot be taken back, so the cancel
-   * control is held shut for as long as it is outstanding (R5.4).
+   * control is held shut for as long as it is outstanding.
    */
   verifying = false
 
@@ -189,6 +189,23 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
 
   get passwordWasTouched() {
     return this.parentForm?.get(this.passwordControlName)?.touched
+  }
+
+  /**
+   * An empty password is called out once the user has left the field, or once
+   * they have typed the code it goes with: that is when "Verify" being greyed
+   * out needs explaining (PD-14598).
+   */
+  get passwordMissingShows(): boolean {
+    if (this.passwordWasTouched) {
+      return true
+    }
+    const answer = this.showRecoveryPhoneCode
+      ? this.recoveryPhoneControlName
+      : this.showRecoveryCode
+      ? this.recoveryControlName
+      : this.codeControlName
+    return !!this.parentForm?.get(answer)?.value
   }
 
   get twoFactorCodeWasTouched() {
@@ -494,7 +511,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // Only stops this component listening. What follows from a code the
     // registry has already accepted does not hang off this subscription, so
-    // dropping it here cannot lose the record notice (R5.4).
+    // dropping it here cannot lose what the host does with the answer.
     this.verification?.unsubscribe()
 
     // The countdown belongs to the challenge, not to the application.

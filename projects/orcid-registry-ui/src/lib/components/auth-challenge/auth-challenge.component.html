@@ -44,7 +44,7 @@
       id="password-input-label"
       [ngClass]="{
         error:
-          parentForm.get(passwordControlName)?.invalid && passwordWasTouched
+          parentForm.get(passwordControlName)?.invalid && passwordMissingShows
       }"
     >
       <strong i18n="@@register.password">Password</strong>
@@ -63,13 +63,13 @@
         [errorStateMatcher]="errorMatcher"
         [ngClass]="{
           error:
-            parentForm.get(passwordControlName)?.invalid && passwordWasTouched
+            parentForm.get(passwordControlName)?.invalid && passwordMissingShows
         }"
       />
     </mat-form-field>
 
     @if (parentForm.get(passwordControlName)?.hasError('required') &&
-    passwordWasTouched) {
+    passwordMissingShows) {
     <mat-error
       class="w-full orc-font-small-print mt-2"
       i18n="@@account.passwordCannotBeEmpty"
@@ -522,6 +522,7 @@
       href="https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication"
       target="_blank"
       rel="noopener noreferrer"
+      (mousedown)="$event.preventDefault()"
       i18n="@@topBar.knowledge"
     >
       ORCID help centre
@@ -549,6 +550,7 @@
     type="button"
     id="cy-cancel-account-verification"
     (click)="onCancel()"
+    (mousedown)="$event.preventDefault()"
     [disabled]="verifying"
     class="text-center orc-font-body-small h-10! w-full block content-center cancel font-normal!"
     i18n

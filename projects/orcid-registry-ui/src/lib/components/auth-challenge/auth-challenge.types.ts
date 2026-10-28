@@ -84,7 +84,7 @@ export interface AuthChallengeRecoveryPhone {
    * off, the number is gone and the backup codes are void. Hanging up undoes
    * none of it, so an implementation must carry out its own consequences on
    * the response itself and not from this subscription - the challenge may
-   * have closed while the request was in flight (R5.4).
+   * have closed while the request was in flight.
    */
   verify(
     password: string,
