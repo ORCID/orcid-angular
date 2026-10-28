@@ -26,6 +26,11 @@ export interface EnvironmentInterface {
   }
   proxyMode: boolean
   ONE_TRUST: string
+  /**
+   * CookieYes site key (OPS-2428 proof of concept). Empty means CookieYes can
+   * never load in this environment, whatever the browser has opted into.
+   */
+  COOKIE_YES: string
 }
 
 declare global {
