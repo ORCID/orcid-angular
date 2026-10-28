@@ -120,6 +120,17 @@ describe('FormSignInComponent', () => {
       ).toHaveBeenCalledTimes(1)
     })
 
+    it('takes the notice away once the user tries to sign in (PD-14612)', () => {
+      recreate(true)
+      expect(notice()).not.toBeNull()
+
+      // an empty form is refused on the page, so nothing is sent anywhere
+      component.onSubmit()
+      fixture.detectChanges()
+
+      expect(notice()).toBeNull()
+    })
+
     it('says nothing on an ordinary visit (R8.3)', () => {
       recreate(false)
 

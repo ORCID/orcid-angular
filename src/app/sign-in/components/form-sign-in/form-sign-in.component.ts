@@ -325,6 +325,8 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    // the reset is old news once the user signs in, or fails to
+    this.passwordJustReset = false
     this.addUsernameValidation()
 
     if (this.authorizationForm.valid) {

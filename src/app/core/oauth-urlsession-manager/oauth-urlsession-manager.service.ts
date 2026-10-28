@@ -121,22 +121,28 @@ export class OauthURLSessionManagerService {
       value: true,
       expiresAt: Date.now() + PASSWORD_JUST_RESET_EXPIRATION_MS,
     }
-    localStorage.setItem(
-      LOCALSTORAGE_PASSWORD_JUST_RESET_KEY,
-      JSON.stringify(payload)
-    )
+    try {
+      localStorage.setItem(
+        LOCALSTORAGE_PASSWORD_JUST_RESET_KEY,
+        JSON.stringify(payload)
+      )
+    } catch {
+      // no storage, no notice: the reset itself has already succeeded
+    }
   }
 
   /**
    * Read and clear the one-time password reset flag.
    */
   consumePasswordJustReset(): boolean {
-    const raw = localStorage.getItem(LOCALSTORAGE_PASSWORD_JUST_RESET_KEY)
-    localStorage.removeItem(LOCALSTORAGE_PASSWORD_JUST_RESET_KEY)
-    if (!raw) {
-      return false
-    }
+    // Read by the sign-in form as it loads, so a browser that refuses storage
+    // must cost the notice and nothing else
     try {
+      const raw = localStorage.getItem(LOCALSTORAGE_PASSWORD_JUST_RESET_KEY)
+      localStorage.removeItem(LOCALSTORAGE_PASSWORD_JUST_RESET_KEY)
+      if (!raw) {
+        return false
+      }
       const payload = JSON.parse(raw) as StoredBooleanFlag
       return !!payload.value && payload.expiresAt > Date.now()
     } catch {

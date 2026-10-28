@@ -55,6 +55,18 @@ describe('OauthURLSessionManagerService', () => {
 
       expect(service.consumePasswordJustReset()).toBeFalse()
     })
+
+    it('is false, and does not throw, when storage refuses to be read', () => {
+      spyOn(Storage.prototype, 'getItem').and.throwError('SecurityError')
+
+      expect(service.consumePasswordJustReset()).toBeFalse()
+    })
+
+    it('does not throw when storage refuses to be written', () => {
+      spyOn(Storage.prototype, 'setItem').and.throwError('QuotaExceededError')
+
+      expect(() => service.setPasswordJustReset()).not.toThrow()
+    })
   })
 
   it('should be created', () => {
