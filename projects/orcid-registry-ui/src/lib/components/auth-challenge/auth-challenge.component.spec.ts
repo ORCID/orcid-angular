@@ -301,9 +301,16 @@ describe('AuthChallengeComponent', () => {
         .setValue('123456')
       fixture.detectChanges()
 
-      // "Verify" is greyed out, and this is what says why
+      // "Verify" is greyed out, and this is what says why - the field's own
+      // error state (its outline) says it too
       expect(password.touched).toBeFalse()
       expect(text()).toContain('Password cannot be empty')
+      expect(
+        fixture.nativeElement
+          .querySelector('#password')
+          .closest('mat-form-field')
+          .classList.contains('mat-form-field-invalid')
+      ).toBeTrue()
     }))
 
     it('keeps focus on press for every link in every mode (PD-14598 R5.2)', fakeAsync(() => {

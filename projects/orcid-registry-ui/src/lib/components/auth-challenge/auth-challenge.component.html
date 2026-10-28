@@ -60,7 +60,7 @@
         id="password"
         type="password"
         aria-labelledby="password-input-label"
-        [errorStateMatcher]="errorMatcher"
+        [errorStateMatcher]="passwordErrorMatcher"
         [ngClass]="{
           error:
             parentForm.get(passwordControlName)?.invalid && passwordMissingShows

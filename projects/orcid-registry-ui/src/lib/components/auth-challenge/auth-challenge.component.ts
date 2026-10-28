@@ -115,6 +115,11 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
   /** The third mode: a code sent by text instead of a code from the app. */
   showRecoveryPhoneCode = false
   errorMatcher = new ErrorStateMatcherForTwoFactorFields()
+  /** The outline and aria-invalid follow the same rule as the message. */
+  passwordErrorMatcher: ErrorStateMatcher = {
+    isErrorState: (control) =>
+      !!(control && control.invalid && this.passwordMissingShows),
+  }
   loading = false
   /**
    * True only while a recovery phone number code is with the registry. That
