@@ -336,7 +336,7 @@ describe('AuthChallengeComponent', () => {
       expect(error.nativeElement.getAttribute('role')).toBe('alert')
     }))
 
-    it('says when the account has asked for too many codes today', fakeAsync(() => {
+    it('says when the account has asked for too many codes today, in a warning notice (PD-14603)', fakeAsync(() => {
       enterPhoneMode()
       tick()
       recoveryPhone.errorCode = 'SEND_LIMIT_REACHED'
@@ -346,14 +346,25 @@ describe('AuthChallengeComponent', () => {
         By.css('#twoFactorRecoveryPhoneCode-send-error')
       )
       expect(error).toBeTruthy()
+      expect(error.nativeElement.tagName.toLowerCase()).toBe(
+        'app-alert-message'
+      )
       expect(error.nativeElement.getAttribute('role')).toBe('alert')
+      expect(error.nativeElement.querySelector('.alert-warning')).not.toBeNull()
       // "try again" is the wrong advice for a cap that lifts tomorrow
-      expect(error.nativeElement.textContent).toContain(
-        'Too many codes have been sent to your recovery phone number today'
+      expect(error.nativeElement.textContent.replace(/\s+/g, ' ').trim()).toBe(
+        'warning_amber Too many verification codes have been requested for this account today. Please try again tomorrow or use your authentication app or recovery codes instead.'
       )
-      expect(error.nativeElement.textContent).not.toContain(
-        'We could not send a code'
-      )
+      expect(
+        fixture.nativeElement
+          .querySelector('#twoFactorRecoveryPhoneCode')
+          .getAttribute('aria-describedby')
+      ).toContain('twoFactorRecoveryPhoneCode-send-error')
+      expect(
+        fixture.debugElement.query(
+          By.css('mat-error#twoFactorRecoveryPhoneCode-send-error')
+        )
+      ).toBeNull()
     }))
 
     it('stops offering a resend once the daily cap is reached', fakeAsync(() => {

@@ -32,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { Subscription } from 'rxjs'
+import { AlertMessageComponent } from '@orcid/ui'
 
 import {
   AUTH_CHALLENGE_HEADING_ID,
@@ -57,6 +58,7 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
     MatInputModule,
     ReactiveFormsModule,
     MatDialogModule,
+    AlertMessageComponent,
   ],
   templateUrl: './auth-challenge.component.html',
   styleUrls: [

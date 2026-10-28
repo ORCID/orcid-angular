@@ -177,15 +177,21 @@
       advice for a cap that only lifts tomorrow, and it is the advice a user
       would follow first.
     -->
-    <mat-error
+    <app-alert-message
       id="twoFactorRecoveryPhoneCode-send-error"
       role="alert"
-      class="w-full orc-font-small-print mt-2 leading-6"
-      i18n="@@account.recoveryPhoneChallengeSendLimitReached"
+      type="warning"
+      class="block mt-4 text-left"
     >
-      Too many codes have been sent to your recovery phone number today. Please
-      try again tomorrow, or use your authentication app or a recovery code.
-    </mat-error>
+      <div
+        content
+        i18n="@@account.recoveryPhoneChallengeSendLimitReachedNotice"
+      >
+        Too many verification codes have been requested for this account today.
+        Please try again tomorrow or use your authentication app or recovery
+        codes instead.
+      </div>
+    </app-alert-message>
     } @else if (recoveryPhone?.errorCode) {
     <!--
       This error belongs to the send, not to the field, so it sits outside the
