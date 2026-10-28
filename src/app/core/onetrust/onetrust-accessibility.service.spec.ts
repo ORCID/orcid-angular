@@ -195,12 +195,11 @@ describe('OneTrustAccessibilityService', () => {
       })
 
       it('returns focus to the trigger even when the vendor focused into the dialog first (R7)', async () => {
-        createService()
-        const modal = addToPage(fadingPreferenceCentre)
         // CookieYes inserts its markup when the banner loads, long before the
-        // preference centre is opened, so let the re-checks that insertion
-        // started run out first.
-        await wait(2000)
+        // preference centre is opened, so it is already there when this
+        // service starts watching.
+        const modal = addToPage(fadingPreferenceCentre)
+        createService()
         trigger.focus()
         // CookieYes moves focus in from an animation frame it requests before
         // the class change is observed, so it runs ahead of this service.
