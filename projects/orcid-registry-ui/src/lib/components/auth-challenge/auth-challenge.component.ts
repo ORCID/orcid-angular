@@ -257,15 +257,11 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.showRecoveryCode = !this.showRecoveryCode
 
     if (this.showRecoveryCode) {
-      setTimeout(() => {
-        this.twoFactorRecoveryCodeInput?.nativeElement.focus()
-      })
+      this.focusLeavingPasswordAsItWas(() => this.twoFactorRecoveryCodeInput)
       this.parentForm?.get(this.codeControlName)?.setValue(null)
       this.parentForm?.get(this.recoveryControlName)?.markAsUntouched()
     } else {
-      setTimeout(() => {
-        this.twoFactorCodeInput?.nativeElement.focus()
-      })
+      this.focusLeavingPasswordAsItWas(() => this.twoFactorCodeInput)
       this.parentForm?.get(this.recoveryControlName)?.setValue(null)
       this.parentForm?.get(this.codeControlName)?.markAsUntouched()
     }
@@ -288,10 +284,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.parentForm?.get(this.recoveryControlName)?.setValue(null)
     this.parentForm?.get(this.recoveryPhoneControlName)?.markAsUntouched()
     this.updateTwoFactorValidators()
-
-    setTimeout(() => {
-      this.twoFactorRecoveryPhoneCodeInput?.nativeElement.focus()
-    })
+    this.focusLeavingPasswordAsItWas(() => this.twoFactorRecoveryPhoneCodeInput)
 
     this.recoveryPhone?.sendCode()
   }
@@ -320,10 +313,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.parentForm?.get(this.recoveryPhoneControlName)?.setValue(null)
     this.parentForm?.get(this.recoveryControlName)?.markAsUntouched()
     this.updateTwoFactorValidators()
-
-    setTimeout(() => {
-      this.twoFactorRecoveryCodeInput?.nativeElement.focus()
-    })
+    this.focusLeavingPasswordAsItWas(() => this.twoFactorRecoveryCodeInput)
   }
 
   /** Back out of the phone code and use the authentication app after all. */
@@ -334,9 +324,25 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.parentForm?.get(this.recoveryPhoneControlName)?.setValue(null)
     this.parentForm?.get(this.codeControlName)?.markAsUntouched()
     this.updateTwoFactorValidators()
+    this.focusLeavingPasswordAsItWas(() => this.twoFactorCodeInput)
+  }
 
+  /**
+   * Moving to another code field blurs the password field, which would mark it
+   * touched and show "Password cannot be empty" before the user has done
+   * anything wrong (PD-14598). A switch of mode is not the user leaving the
+   * field, so an untouched password stays untouched.
+   */
+  private focusLeavingPasswordAsItWas(
+    target: () => ElementRef | undefined
+  ): void {
+    const password = this.parentForm?.get(this.passwordControlName)
+    const untouched = !!password && !password.touched
     setTimeout(() => {
-      this.twoFactorCodeInput?.nativeElement.focus()
+      target()?.nativeElement.focus()
+      if (untouched) {
+        password.markAsUntouched()
+      }
     })
   }
 

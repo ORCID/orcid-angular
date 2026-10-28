@@ -238,6 +238,75 @@ describe('AuthChallengeComponent', () => {
       return fixture.nativeElement.textContent
     }
 
+    it('keeps focus in the empty password field when the send link is pressed (PD-14598)', () => {
+      offer()
+      const password: HTMLInputElement =
+        fixture.nativeElement.querySelector('#password')
+      password.focus()
+      const press = new MouseEvent('mousedown', {
+        bubbles: true,
+        cancelable: true,
+      })
+
+      fixture.nativeElement.querySelector(SEND_TOGGLE).dispatchEvent(press)
+      fixture.detectChanges()
+
+      expect(press.defaultPrevented).toBeTrue()
+      expect(document.activeElement).toBe(password)
+      expect(text()).not.toContain('Password cannot be empty')
+    })
+
+    it('does not call the empty password wrong when focus moves to the code field (PD-14598 R5.1)', fakeAsync(() => {
+      offer()
+      const password: HTMLInputElement =
+        fixture.nativeElement.querySelector('#password')
+      password.focus()
+
+      component.sendRecoveryPhoneCode(new Event('click'))
+      fixture.detectChanges()
+      tick()
+      fixture.detectChanges()
+
+      expect(document.activeElement).toBe(
+        fixture.nativeElement.querySelector(PHONE_CODE_INPUT)
+      )
+      expect(component.passwordWasTouched).toBeFalse()
+      expect(text()).not.toContain('Password cannot be empty')
+    }))
+
+    it('still says the password is missing once the user has left it (PD-14598 R5.3)', fakeAsync(() => {
+      offer()
+      const password = component.parentForm.get(component.passwordControlName)
+      password.addValidators(Validators.required)
+      password.setValue('')
+      password.markAsTouched()
+
+      component.sendRecoveryPhoneCode(new Event('click'))
+      fixture.detectChanges()
+      tick()
+      fixture.detectChanges()
+
+      expect(text()).toContain('Password cannot be empty')
+    }))
+
+    it('keeps focus on press for every other mode link too (PD-14598 R5.2)', () => {
+      offer()
+      const links: HTMLElement[] = Array.from(
+        fixture.nativeElement.querySelectorAll('.link-button, a[href="#"]')
+      )
+      expect(links.length).toBeGreaterThan(0)
+      for (const link of links) {
+        const press = new MouseEvent('mousedown', {
+          bubbles: true,
+          cancelable: true,
+        })
+        link.dispatchEvent(press)
+        expect(press.defaultPrevented)
+          .withContext(link.textContent.trim())
+          .toBeTrue()
+      }
+    })
+
     it('says nothing about a recovery phone number when there is no option', () => {
       expect(fixture.debugElement.query(By.css(SEND_TOGGLE))).toBeFalsy()
       expect(text()).toContain('ORCID help centre')

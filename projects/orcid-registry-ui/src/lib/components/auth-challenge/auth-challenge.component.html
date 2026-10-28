@@ -395,6 +395,7 @@
       class="link-button"
       data-testid="recovery-phone-back-toggle"
       (click)="useRecoveryCode($event)"
+      (mousedown)="$event.preventDefault()"
       i18n="@@account.useARecoveryCode"
     >
       Use a recovery code instead
@@ -441,6 +442,7 @@
       data-testid="recovery-phone-resend"
       [disabled]="recoveryPhone?.sending"
       (click)="resendRecoveryPhoneCode($event)"
+      (mousedown)="$event.preventDefault()"
       i18n="@@account.resendCode"
     >
       Resend code
@@ -455,6 +457,7 @@
     <a
       href="#"
       (click)="toggleRecoveryCode($event)"
+      (mousedown)="$event.preventDefault()"
       i18n="@@account.useARecoveryCode"
       class="underline"
       data-testid="recovery-toggle"
@@ -470,6 +473,7 @@
     <a
       href="#"
       (click)="toggleRecoveryCode($event)"
+      (mousedown)="$event.preventDefault()"
       data-testid="recovery-toggle"
       i18n="@@account.useYourAuthenticationAppInstead"
       class="underline"
@@ -482,6 +486,11 @@
     R5.1: only offered when the account can actually use it - the flag is on,
     2FA is active and a number is stored. Otherwise the help centre link that
     has always been here is what the user gets.
+  -->
+  <!--
+    PD-14598: the mode links keep focus where it is on press. Otherwise the
+    password field blurs, its "cannot be empty" row appears, the link moves
+    down and the release lands beside it, so the first click does nothing.
   -->
   <div class="text-center orc-font-body-small mt-4!">
     <p
@@ -497,6 +506,7 @@
       data-testid="recovery-phone-toggle"
       [disabled]="recoveryPhone?.sending"
       (click)="sendRecoveryPhoneCode($event)"
+      (mousedown)="$event.preventDefault()"
       i18n="@@account.sendCodeToRecoveryPhoneNumber"
     >
       Send a code to your recovery phone number and disable 2FA
