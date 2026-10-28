@@ -41,7 +41,19 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
     this._recoveryPhoneChallenge.twoFactorDisabled$
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => {
+        // the registry has already turned 2FA off and deleted the number; the
+        // re-read below fills in the rest, and the page is right if it fails
         this.twoFactorEnabled = false
+        if (this.twoFactorInfo) {
+          this.twoFactorInfo = {
+            ...this.twoFactorInfo,
+            enabled: false,
+            maskedRecoveryPhoneNumber: undefined,
+            recoveryPhoneCreationDate: undefined,
+            recoveryPhoneLastModifiedDate: undefined,
+            recoveryPhoneModified: false,
+          }
+        }
         this.loadTwoFactorState()
       })
     const hash = this._window.location.hash.substr(1)
@@ -71,9 +83,13 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
     this.twoFactorAuthenticationService
       .checkState()
       .pipe(first())
-      .subscribe((result) => {
-        this.twoFactorInfo = result
-        this.twoFactorEnabled = result.enabled
+      .subscribe({
+        next: (result) => {
+          this.twoFactorInfo = result
+          this.twoFactorEnabled = result.enabled
+        },
+        // a failed read leaves the page as it was
+        error: () => {},
       })
   }
 }

@@ -7,7 +7,7 @@ import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authenti
 import { Status } from '../../../types/two-factor.endpoint'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { Subject, of } from 'rxjs'
+import { Subject, of, throwError } from 'rxjs'
 
 describe('SettingsSecurityComponent', () => {
   let component: SettingsSecurityComponent
@@ -64,6 +64,16 @@ describe('SettingsSecurityComponent', () => {
     expect(component.twoFactorEnabled).toBeFalse()
     expect(twoFactor.checkState).toHaveBeenCalledTimes(2)
     expect(component.twoFactorInfo).toBe(disabled)
+  })
+
+  it('shows the panel off even when the re-read fails (PD-14596)', () => {
+    twoFactor.checkState.and.returnValue(throwError(() => new Error('down')))
+
+    twoFactorDisabled.next()
+
+    expect(component.twoFactorEnabled).toBeFalse()
+    expect(component.twoFactorInfo.enabled).toBeFalse()
+    expect(component.twoFactorInfo.maskedRecoveryPhoneNumber).toBeUndefined()
   })
 
   it('stops listening once the page is gone', () => {
