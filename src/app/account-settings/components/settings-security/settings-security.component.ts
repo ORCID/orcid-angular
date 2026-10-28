@@ -54,7 +54,7 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
             recoveryPhoneModified: false,
           }
         }
-        this.loadTwoFactorState()
+        this.loadTwoFactorState(true)
       })
     const hash = this._window.location.hash.substr(1)
     switch (hash) {
@@ -79,7 +79,7 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
     this.twoFactorEnabled = $event
   }
 
-  private loadTwoFactorState(): void {
+  private loadTwoFactorState(afterRecoveryPhone = false): void {
     this.twoFactorAuthenticationService
       .checkState()
       .pipe(first())
@@ -88,8 +88,13 @@ export class SettingsSecurityComponent implements OnInit, OnDestroy {
           this.twoFactorInfo = result
           this.twoFactorEnabled = result.enabled
         },
-        // a failed read leaves the page as it was
-        error: () => {},
+        // a failed re-read leaves the page as the challenge left it; a failed
+        // first read still surfaces as it always has
+        error: (error) => {
+          if (!afterRecoveryPhone) {
+            throw error
+          }
+        },
       })
   }
 }
