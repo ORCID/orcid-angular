@@ -4,7 +4,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Inject,
   Input,
   Output,
   ViewChild,
@@ -16,7 +15,6 @@ import {
   Validators,
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
-import { WINDOW } from '../../window'
 
 /**
  * Material decides on its own when to paint a field's outline red, and its
@@ -317,10 +315,7 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
     }
   }
 
-  constructor(
-    private cdref: ChangeDetectorRef,
-    @Inject(WINDOW) private window: Window
-  ) {}
+  constructor(private cdref: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
     this.inputVerificationCode?.nativeElement.focus()
@@ -438,10 +433,6 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   hideErrorMessages() {
     this.showBadVerificationCode = false
     this.showBadRecoveryCode = false
-  }
-
-  navigateTo(val) {
-    ;(this.window as any).outOfRouterNavigation(val)
   }
 
   /**
