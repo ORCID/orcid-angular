@@ -251,13 +251,13 @@ describe('RecoveryPhoneChallengeService', () => {
       })
     })
 
-    it('queues the record notice and tells the host once the code is accepted (R5.4)', () => {
+    it('tells the host once the code is accepted, and leaves the record notice to sign-in (PD-14597)', () => {
       const onUsed = jasmine.createSpy('onUsed')
       const handle = build().create({ onUsed })
 
       expect(verify(handle)).toBe('passed')
       expect(handle.used).toBeTrue()
-      expect(notice.markTwoFactorDisabled).toHaveBeenCalledWith(ORCID)
+      expect(notice.markTwoFactorDisabled).not.toHaveBeenCalled()
       expect(observability.recordSimpleEvent).toHaveBeenCalledWith(
         AppEventName.AuthChallengeRecoveryPhoneUsed
       )
@@ -290,7 +290,7 @@ describe('RecoveryPhoneChallengeService', () => {
       expect(notice.markTwoFactorDisabled).not.toHaveBeenCalled()
     })
 
-    it('finishes what the registry started even when nobody is listening (R5.4)', () => {
+    it('finishes what the registry started even when nobody is listening', () => {
       const response = new Subject<AuthChallenge>()
       twoFactor.verifyRecoveryPhoneChallengeCode.and.returnValue(
         response.asObservable()
@@ -304,7 +304,7 @@ describe('RecoveryPhoneChallengeService', () => {
       response.next({ success: true } as AuthChallenge)
 
       expect(handle.used).toBeTrue()
-      expect(notice.markTwoFactorDisabled).toHaveBeenCalledWith(ORCID)
+      expect(notice.markTwoFactorDisabled).not.toHaveBeenCalled()
       expect(observability.recordSimpleEvent).toHaveBeenCalledWith(
         AppEventName.AuthChallengeRecoveryPhoneUsed
       )
