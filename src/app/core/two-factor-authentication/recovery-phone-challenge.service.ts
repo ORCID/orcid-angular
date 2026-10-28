@@ -6,6 +6,7 @@ import {
 import {
   Observable,
   ReplaySubject,
+  Subject,
   Subscription,
   combineLatest,
   interval,
@@ -44,6 +45,14 @@ import { TwoFactorAuthenticationService } from './two-factor-authentication.serv
 export class RecoveryPhoneChallengeService implements OnDestroy {
   /** Every subscription any handle has opened, so none outlive the app. */
   private readonly subscriptions = new Subscription()
+
+  private readonly _twoFactorDisabled = new Subject<void>()
+
+  /**
+   * Fires whenever any challenge was passed with a recovery phone code, which
+   * turned 2FA off on the way through (PD-14596).
+   */
+  readonly twoFactorDisabled$ = this._twoFactorDisabled.asObservable()
 
   constructor(
     private _twoFactorAuthenticationService: TwoFactorAuthenticationService,
@@ -227,6 +236,7 @@ export class RecoveryPhoneChallengeService implements OnDestroy {
             }
 
             handle.used = true
+            this._twoFactorDisabled.next()
             // No attributes: a phone number, an ORCID iD and an email address are
             // all out of bounds here, and nothing else about this is interesting.
             this.optional(RumJourneyEventService)?.recordSimpleEvent(

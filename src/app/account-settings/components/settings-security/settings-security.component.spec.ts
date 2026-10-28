@@ -1,36 +1,42 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SettingsSecurityComponent } from './settings-security.component'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { RouterTestingModule } from '@angular/router/testing'
-import { MatDialog } from '@angular/material/dialog'
-import { WINDOW_PROVIDERS } from '../../../cdk/window'
-import { PlatformInfoService } from '../../../cdk/platform-info'
-import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
-import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { Overlay } from '@angular/cdk/overlay'
+import { WINDOW } from '../../../cdk/window'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
+import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authentication/recovery-phone-challenge.service'
+import { Status } from '../../../types/two-factor.endpoint'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { Subject, of } from 'rxjs'
 
 describe('SettingsSecurityComponent', () => {
   let component: SettingsSecurityComponent
   let fixture: ComponentFixture<SettingsSecurityComponent>
+  let twoFactor: jasmine.SpyObj<TwoFactorAuthenticationService>
+  let twoFactorDisabled: Subject<void>
+
+  const enabled = {
+    enabled: true,
+    maskedRecoveryPhoneNumber: '*******1234',
+  } as Status
+  const disabled = { enabled: false } as Status
 
   beforeEach(async () => {
+    twoFactor = jasmine.createSpyObj('TwoFactorAuthenticationService', [
+      'checkState',
+    ])
+    twoFactor.checkState.and.returnValues(of(enabled), of(disabled))
+    twoFactorDisabled = new Subject<void>()
+
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [SettingsSecurityComponent],
       providers: [
-        WINDOW_PROVIDERS,
-        TwoFactorAuthenticationService,
-        PlatformInfoService,
-        ErrorHandlerService,
-        SnackbarService,
-        MatSnackBar,
-        MatDialog,
-        Overlay,
+        { provide: WINDOW, useValue: { location: { hash: '' } } },
+        { provide: TwoFactorAuthenticationService, useValue: twoFactor },
+        {
+          provide: RecoveryPhoneChallengeService,
+          useValue: { twoFactorDisabled$: twoFactorDisabled.asObservable() },
+        },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
@@ -44,5 +50,26 @@ describe('SettingsSecurityComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('reads the 2FA state once on load', () => {
+    expect(twoFactor.checkState).toHaveBeenCalledTimes(1)
+    expect(component.twoFactorEnabled).toBeTrue()
+    expect(component.twoFactorInfo).toBe(enabled)
+  })
+
+  it('shows 2FA off as soon as a challenge is passed with the recovery phone (PD-14596 R3.1, R3.2)', () => {
+    twoFactorDisabled.next()
+
+    expect(component.twoFactorEnabled).toBeFalse()
+    expect(twoFactor.checkState).toHaveBeenCalledTimes(2)
+    expect(component.twoFactorInfo).toBe(disabled)
+  })
+
+  it('stops listening once the page is gone', () => {
+    fixture.destroy()
+    twoFactorDisabled.next()
+
+    expect(twoFactor.checkState).toHaveBeenCalledTimes(1)
   })
 })

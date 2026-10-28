@@ -264,6 +264,27 @@ describe('RecoveryPhoneChallengeService', () => {
       expect(onUsed).toHaveBeenCalled()
     })
 
+    it('tells every listener that 2FA went off once the code is accepted (PD-14596)', () => {
+      const service = build()
+      const disabled = jasmine.createSpy('twoFactorDisabled')
+      service.twoFactorDisabled$.subscribe(disabled)
+
+      expect(verify(service.create())).toBe('passed')
+      expect(disabled).toHaveBeenCalledTimes(1)
+    })
+
+    it('tells nobody when the code is refused (PD-14596 R3.3)', () => {
+      twoFactor.verifyRecoveryPhoneChallengeCode.and.returnValue(
+        of({ success: false, invalidTwoFactorCode: true } as AuthChallenge)
+      )
+      const service = build()
+      const disabled = jasmine.createSpy('twoFactorDisabled')
+      service.twoFactorDisabled$.subscribe(disabled)
+
+      expect(verify(service.create())).toBe('invalidCode')
+      expect(disabled).not.toHaveBeenCalled()
+    })
+
     it('queues nothing when the code is refused', () => {
       twoFactor.verifyRecoveryPhoneChallengeCode.and.returnValue(
         of({ success: false, invalidTwoFactorCode: true } as AuthChallenge)
