@@ -24,12 +24,30 @@ export enum AppEventName {
   TwoFactorSetupFinalButtonClicked = 'two_factor_setup_final_button_clicked',
   TwoFactorSetupFinalCompleted = 'two_factor_setup_final_completed',
 
+  // ─── 2FA recovery phone number ─────────────────────────────────────────────
+  /** The recovery phone step of 2FA setup was shown. */
+  TwoFactorSetupRecoveryPhoneLoaded = 'two_factor_setup_recovery_phone_loaded',
+  /** A recovery phone number was stored from the 2FA setup step. */
+  TwoFactorSetupRecoveryPhoneSaved = 'two_factor_setup_recovery_phone_saved',
+  /** The user moved past the recovery phone step without adding a number. */
+  TwoFactorSetupRecoveryPhoneSkipped = 'two_factor_setup_recovery_phone_skipped',
+  /** The recovery phone step ended because its elevation window ran out. */
+  TwoFactorSetupRecoveryPhoneElevationExpired = 'two_factor_setup_recovery_phone_elevation_expired',
+  /** Sign in: a code was sent to the stored recovery number. */
+  SignInRecoveryPhoneCodeSent = 'sign_in_recovery_phone_code_sent',
+  /** Sign in: the recovery number code was accepted, so 2FA is now off. */
+  SignInRecoveryPhoneUsed = 'sign_in_recovery_phone_used',
+  /** An authentication challenge was passed with a recovery number code. */
+  AuthChallengeRecoveryPhoneUsed = 'auth_challenge_recovery_phone_used',
+
   // ─── Orcid registration journey events ─────────────────────────────────────
   StepASignInButtonClicked = 'step-a-sign-in-button-clicked',
   StepANextButtonClicked = 'step-a-next-button-clicked',
   StepBNextButtonClicked = 'step-b-next-button-clicked',
   StepC2NextButtonClicked = 'step-c2-next-button-clicked',
   StepC2SkipButtonClicked = 'step-c2-skip-button-clicked',
+  StepC2NoticeSkipLinkClicked = 'step-c2-notice-skip-link-clicked',
+  StepC2ErrorSkipLinkClicked = 'step-c2-error-skip-link-clicked',
   StepCNextButtonClicked = 'step-c-next-button-clicked',
   StepDNextButtonClicked = 'step-d-next-button-clicked',
   JourneyComplete = 'journey-complete',
@@ -82,6 +100,20 @@ export enum AppEventName {
 
   // ─── Registration lifecycle / pipeline outcomes ────────────────────────────
   RegisterPipelineError = 'register_pipeline_error',
+
+  // ─── Sign-in interstitials (`interstitial` journey) ────────────────────────
+  /** An interstitial was shown. Emitted for every interstitial, both flows. */
+  InterstitialShown = 'interstitial_shown',
+  /** The user completed the interstitial's action. Facet by interstitialName. */
+  InterstitialCompleted = 'interstitial_completed',
+  /** The user chose the "continue without" option. */
+  InterstitialDismissed = 'interstitial_dismissed',
+  /** Submit was blocked by an inline validation error. Not terminal. */
+  InterstitialValidationError = 'interstitial_validation_error',
+  /** The save request failed and the interstitial closed. */
+  InterstitialSaveError = 'interstitial_save_error',
+  /** The interstitial closed because its elevation window ran out. */
+  InterstitialElevationExpired = 'interstitial_elevation_expired',
 }
 
 /** Event name for step back button: `step-${step}-back-button-clicked` */

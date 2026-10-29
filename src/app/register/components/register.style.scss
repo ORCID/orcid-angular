@@ -131,6 +131,9 @@ mat-label.orc-font-small-print {
   mat-icon,
   img {
     margin-right: 16px;
+    // Direct flex children, so without this the icon is squeezed below its
+    // 24px glyph box and renders as a clipped sliver.
+    flex-shrink: 0;
   }
 
   h3 {

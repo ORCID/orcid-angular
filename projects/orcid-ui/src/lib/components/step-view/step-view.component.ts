@@ -31,8 +31,13 @@ export class OrcidStepViewComponent {
   /** Disables the primary action button when true. */
   @Input() primaryDisabled = false
 
+  /** Optional text for a secondary action, shown as a link below the primary button. */
+  @Input() secondaryLabel = ''
+
   /** Whether footer buttons should fill the container width. */
   @Input() fullWidthActions = true
 
   @Output() primaryAction = new EventEmitter<void>()
+
+  @Output() secondaryAction = new EventEmitter<void>()
 }

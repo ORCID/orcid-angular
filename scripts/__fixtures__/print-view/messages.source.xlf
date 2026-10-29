@@ -1,0 +1,18 @@
+<?xml version="1.0" ?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="en">
+    <body>
+      <trans-unit id="printView.biography" datatype="html" resname="printView.biography">
+        <source>Biography</source>
+        <target>Biography</target>
+      </trans-unit>
+      <trans-unit id="printView.worksCount" datatype="html" resname="printView.worksCount">
+        <source><x id="count" equiv-text="${count}"/> works</source>
+        <target><x id="count" equiv-text="${count}"/> works</target>
+      </trans-unit>
+      <trans-unit id="printView.lastModified" datatype="html" resname="printView.lastModified">
+        <source>Last modified</source>
+        <target>Last modified</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

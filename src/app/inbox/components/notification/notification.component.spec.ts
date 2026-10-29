@@ -56,4 +56,49 @@ describe('NotificationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
+
+  // `notificationTitle` runs for every row in the inbox, so an unguarded read
+  // of a null source throws during change detection and takes the whole page
+  // down with it — the global header buttons included (PD-13322).
+  describe('with a notification whose source is null', () => {
+    function notification(notificationType: string) {
+      return {
+        notificationType,
+        putCode: 1,
+        subject: 'A subject composed by the backend',
+        source: null,
+      } as any
+    }
+
+    it('falls back to the subject for an amended notification', () => {
+      expect(() =>
+        component.notificationTitle(notification('AMENDED'))
+      ).not.toThrow()
+      expect(component.notificationTitle(notification('AMENDED'))).toBe(
+        'A subject composed by the backend'
+      )
+    })
+
+    it('falls back to the subject for an institutional connection', () => {
+      expect(() =>
+        component.notificationTitle(notification('INSTITUTIONAL_CONNECTION'))
+      ).not.toThrow()
+      expect(
+        component.notificationTitle(notification('INSTITUTIONAL_CONNECTION'))
+      ).toBe('A subject composed by the backend')
+    })
+
+    it('still uses the source name when one is present', () => {
+      const withSource = {
+        notificationType: 'AMENDED',
+        putCode: 1,
+        subject: 'ignored',
+        source: { sourceName: { content: 'Example University' } },
+      } as any
+
+      expect(component.notificationTitle(withSource)).toContain(
+        'Example University'
+      )
+    })
+  })
 })

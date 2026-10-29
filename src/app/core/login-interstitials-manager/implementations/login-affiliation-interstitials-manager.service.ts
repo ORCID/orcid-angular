@@ -1,6 +1,7 @@
 import { Component, Inject, Injectable, Type } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Observable, of } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { UserRecord } from 'src/app/types/record.local'
@@ -12,6 +13,7 @@ import { QaFlagsService } from '../../qa-flag/qa-flag.service'
 import { TogglzService } from '../../togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { LoginBaseInterstitialManagerService } from '../abstractions/login-abstract-interstitial-manager.service'
+import { AffiliationInterstitialOrganizationService } from '../affiliation-interstitial-organization.service'
 import { AffiliationsInterstitialComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component'
 import {
   AffilationsComponentDialogInput,
@@ -41,6 +43,7 @@ export class LoginAffiliationInterstitialManagerService extends LoginBaseInterst
     interstitialsService: InterstitialsService,
     togglzService: TogglzService,
     qaFlagService: QaFlagsService,
+    private affiliationOrganization: AffiliationInterstitialOrganizationService,
     @Inject(WINDOW) private _window: Window
   ) {
     // Pass dependencies to the parent
@@ -71,7 +74,17 @@ export class LoginAffiliationInterstitialManagerService extends LoginBaseInterst
 
     if (userHasEmploymentAffiliation || isImpersonation || insideAnIframe)
       return of(false)
-    return of(true)
+
+    // The interstitial's entire offer is "we think you work at X, add it to
+    // your record". Without a single X to name there is nothing to offer, so
+    // it must not open at all — eligibility is the only gate early enough to
+    // stop it, since being shown is what marks it as seen.
+    //
+    // A domain matching no ROR and a domain matching several both resolve to
+    // `undefined` here, which are exactly the two cases reported.
+    return this.affiliationOrganization
+      .resolveFromDomains(userRecord.emails.emailDomains)
+      .pipe(map((organization) => !!organization))
   }
 
   // Return the dialog component that we want to display

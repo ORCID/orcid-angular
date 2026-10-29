@@ -4,7 +4,9 @@ import {
   Inject,
   LOCALE_ID,
 } from '@angular/core'
+import { Observable } from 'rxjs'
 
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { LanguageService } from 'src/app/core/language/language.service'
 
@@ -18,12 +20,15 @@ import { LanguageService } from 'src/app/core/language/language.service'
 export class LanguageComponent {
   languageMenuOptions: { [key: string]: string }
   labelLanguage = $localize`:@@layout.ariaLabelLanguage:Select your preferred language. Current language is`
+  platform$: Observable<PlatformInfo>
 
   constructor(
     @Inject(LOCALE_ID) public locale: string,
     @Inject(WINDOW) private window: Window,
-    private _language: LanguageService
+    private _language: LanguageService,
+    _platform: PlatformInfoService
   ) {
+    this.platform$ = _platform.get()
     this.languageMenuOptions = runtimeEnvironment.LANGUAGE_MENU_OPTIONS
     // LOCAL DEV GET'S `en-US` from locale but `en` is required
     this.locale = this.locale === 'en-US' ? 'en' : this.locale

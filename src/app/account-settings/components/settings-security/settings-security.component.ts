@@ -1,6 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
-import { first } from 'rxjs/operators'
+import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authentication/recovery-phone-challenge.service'
+import { Subject } from 'rxjs'
+import { first, takeUntil } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { Status } from '../../../types/two-factor.endpoint'
 
@@ -10,9 +12,9 @@ import { Status } from '../../../types/two-factor.endpoint'
   styleUrls: ['./settings-security.component.scss'],
   standalone: false,
 })
-export class SettingsSecurityComponent implements OnInit {
+export class SettingsSecurityComponent implements OnInit, OnDestroy {
   titleAccountPassword = $localize`:@@account.accountPassword:Account password`
-  titleTwoFactor = $localize`:@@account.twoPassword:Two-factor authentication`
+  titleTwoFactor = $localize`:@@account.twoPassword:Two-factor authentication (2FA)`
   titleAlternativeSignin = $localize`:@@account.alternativeSignin:Alternate sign in accounts`
 
   settingSecurityPasswordOpen = false
@@ -26,18 +28,33 @@ export class SettingsSecurityComponent implements OnInit {
   twoFactorEnabled = false
   twoFactorInfo: Status | undefined
 
+  private readonly $destroy = new Subject<void>()
+
   constructor(
     private twoFactorAuthenticationService: TwoFactorAuthenticationService,
+    private _recoveryPhoneChallenge: RecoveryPhoneChallengeService,
     @Inject(WINDOW) private _window: Window
   ) {}
 
   ngOnInit(): void {
-    this.twoFactorAuthenticationService
-      .checkState()
-      .pipe(first())
-      .subscribe((result) => {
-        this.twoFactorInfo = result
-        this.twoFactorEnabled = result.enabled
+    this.loadTwoFactorState()
+    this._recoveryPhoneChallenge.twoFactorDisabled$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(() => {
+        // the registry has already turned 2FA off and deleted the number; the
+        // re-read below fills in the rest, and the page is right if it fails
+        this.twoFactorEnabled = false
+        if (this.twoFactorInfo) {
+          this.twoFactorInfo = {
+            ...this.twoFactorInfo,
+            enabled: false,
+            maskedRecoveryPhoneNumber: undefined,
+            recoveryPhoneCreationDate: undefined,
+            recoveryPhoneLastModifiedDate: undefined,
+            recoveryPhoneModified: false,
+          }
+        }
+        this.loadTwoFactorState(true)
       })
     const hash = this._window.location.hash.substr(1)
     switch (hash) {
@@ -53,7 +70,31 @@ export class SettingsSecurityComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.$destroy.next()
+    this.$destroy.complete()
+  }
+
   twoFactorStateChanges($event) {
     this.twoFactorEnabled = $event
+  }
+
+  private loadTwoFactorState(afterRecoveryPhone = false): void {
+    this.twoFactorAuthenticationService
+      .checkState()
+      .pipe(first())
+      .subscribe({
+        next: (result) => {
+          this.twoFactorInfo = result
+          this.twoFactorEnabled = result.enabled
+        },
+        // a failed re-read leaves the page as the challenge left it; a failed
+        // first read still surfaces as it always has
+        error: (error) => {
+          if (!afterRecoveryPhone) {
+            throw error
+          }
+        },
+      })
   }
 }

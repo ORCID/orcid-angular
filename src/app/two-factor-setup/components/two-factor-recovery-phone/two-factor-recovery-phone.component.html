@@ -1,0 +1,50 @@
+<orcid-step-view
+  i18n-title="@@account.enableTwoFactorAuth"
+  i18n-primaryLabel="@@account.nextStepRecoveryCodes"
+  i18n-secondaryLabel="@@account.skipRecoveryPhoneStep"
+  title="Enable two-factor authentication"
+  primaryLabel="Next step - 2FA recovery codes"
+  secondaryLabel="Skip this step - Don't add a recovery phone number"
+  [subtitle]="subtitle"
+  [primaryDisabled]="!codeSent || saving"
+  (primaryAction)="onPrimaryAction()"
+  (secondaryAction)="onSkipped()"
+>
+  <div class="recovery-phone-onboarding-notice" role="note">
+    <mat-icon class="recovery-phone-onboarding-notice__icon" aria-hidden="true"
+      >error_outline</mat-icon
+    >
+    <div>
+      <p
+        class="orc-font-body-small"
+        i18n="@@account.recoveryPhoneOnboardingNotice"
+      >
+        We strongly recommend adding a phone number to ORCID as an emergency 2FA
+        backup option. Your recovery phone number can be used to access your
+        ORCID account if you don't have your authentication app or recovery
+        codes.
+      </p>
+    </div>
+  </div>
+
+  <app-recovery-phone-form
+    context="ONBOARDING"
+    (codeSentChange)="codeSent = $event"
+    (saved)="onSaved()"
+    (failed)="onFailed($event)"
+    (challengeRequired)="onChallengeRequired()"
+  />
+
+  <!--
+    Below the form, so the form's own field errors keep their place next to the
+    field they belong to. role="alert" because this appears in answer to a
+    press, and the press left the user on a screen that looks unchanged.
+  -->
+  @if (stepErrorMessage) {
+  <div class="recovery-phone-step-error" role="alert">
+    <app-alert-message type="warning">
+      <div content>{{ stepErrorMessage }}</div>
+    </app-alert-message>
+  </div>
+  }
+</orcid-step-view>

@@ -11,6 +11,17 @@
     color: mat.m2-get-color-from-palette($primary, default-contrast);
   }
 
+  // PD-5635: the frames draw this button as a 1 px rectangle in ui-background
+  // #bdbdbd - x 64..515 by y 948..987 in pd-6042-01, -08 and -09, the same
+  // grey as the form fields and the card on the same screen. It used to take a
+  // blanket `border: solid 1px` that `_button-theme.scss` gave every unthemed
+  // raised button in Material's stock divider colour; that rule is gone,
+  // because the frames draw no border at all on the filled buttons it also
+  // reached, so the one button that is outlined declares its own.
+  .institutional {
+    border: solid 1px map-get($background, 'ui-background');
+  }
+
   .google {
     border: 1px solid mat.m2-get-color-from-palette($background, gray);
   }

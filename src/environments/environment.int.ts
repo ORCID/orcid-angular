@@ -22,6 +22,7 @@ export const environment: EnvironmentInterface = {
   CERTIFIED_LINKS_LOCALIZE_BASE_URL:
     'https://s3.us-east-2.amazonaws.com/orcid-search-and-link.qa.orcid.org',
   ONE_TRUST: '5a6d60d3-b085-4e48-8afa-d707c7afc419-test',
+  COOKIE_YES: '',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',

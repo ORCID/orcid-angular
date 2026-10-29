@@ -71,6 +71,13 @@
                 </a>
               </p>
 
+              <!--
+                This page is a second host for app-form-sign-in. It does not
+                bind (twoFactorDisabledByRecoveryPhone) because it has no
+                panel to show; the form checks whether that output is
+                subscribed before it holds a redirect back, so the sign-in
+                here continues as it always has (R4.2).
+              -->
               <app-form-sign-in
                 (loading)="signingLoading = $event"
                 [email]="email"

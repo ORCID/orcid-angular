@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing'
-import { TestBed } from '@angular/core/testing'
+import { fakeAsync, flushMicrotasks, TestBed } from '@angular/core/testing'
 import { CookieService } from 'ngx-cookie-service'
 import { XsrfFallbackInterceptor } from './xsrf-fallback.interceptor'
 
@@ -79,6 +79,27 @@ describe('XsrfFallbackInterceptor', () => {
     req.flush({})
   })
 
+  it('passes through protocol-relative URLs pointing at a foreign host', () => {
+    cookieGetSpy.and.returnValue('token')
+    http.post('//other-origin.com/api', {}).subscribe()
+
+    const req = httpMock.expectOne('//other-origin.com/api')
+    expect(req.request.headers.has('x-xsrf-token')).toBe(false)
+    expect(req.request.withCredentials).toBe(false)
+    req.flush({})
+  })
+
+  it('still adds the token for a protocol-relative URL on the API host', () => {
+    cookieGetSpy.and.callFake((name: string) =>
+      name === 'XSRF-TOKEN' ? 'token' : ''
+    )
+    http.post('//api.example/works/work.json', {}).subscribe()
+
+    const req = httpMock.expectOne('//api.example/works/work.json')
+    expect(req.request.headers.get('x-xsrf-token')).toBe('token')
+    req.flush({})
+  })
+
   it('passes through when cookie is missing', () => {
     cookieGetSpy.and.returnValue('')
 
@@ -88,6 +109,31 @@ describe('XsrfFallbackInterceptor', () => {
     expect(req.request.headers.has('x-xsrf-token')).toBe(false)
     req.flush({})
   })
+
+  it('bootstraps csrf.json and adds token on first mutating backend request', fakeAsync(() => {
+    let hasToken = false
+    cookieGetSpy.and.callFake((name: string) => {
+      if (name === 'XSRF-TOKEN' && hasToken) {
+        return 'bootstrapped-token'
+      }
+      return ''
+    })
+
+    spyOn(window, 'fetch').and.callFake(() => {
+      hasToken = true
+      return Promise.resolve({} as Response)
+    })
+
+    http.post('/account/revokeDelegate.json', {}).subscribe()
+    flushMicrotasks()
+
+    const req = httpMock.expectOne('/account/revokeDelegate.json')
+    expect(window.fetch).toHaveBeenCalledWith(apiBase + 'csrf.json', {
+      credentials: 'include',
+    })
+    expect(req.request.headers.get('x-xsrf-token')).toBe('bootstrapped-token')
+    req.flush({})
+  }))
 
   it('adds XSRF-TOKEN for POST to API_WEB when cookie is present', () => {
     cookieGetSpy.and.callFake((name: string) =>
@@ -102,6 +148,34 @@ describe('XsrfFallbackInterceptor', () => {
     req.flush({})
   })
 
+  it('adds XSRF-TOKEN for absolute same-host API URL', () => {
+    cookieGetSpy.and.callFake((name: string) =>
+      name === 'XSRF-TOKEN' ? 'abs-api-xsrf-token' : ''
+    )
+
+    http
+      .post('https://api.example/account/revokeSocialAccount.json', {})
+      .subscribe()
+
+    const req = httpMock.expectOne(
+      'https://api.example/account/revokeSocialAccount.json'
+    )
+    expect(req.request.headers.get('x-xsrf-token')).toBe('abs-api-xsrf-token')
+    req.flush({})
+  })
+
+  it('adds AUTH-XSRF-TOKEN for absolute auth host URL', () => {
+    cookieGetSpy.and.callFake((name: string) =>
+      name === 'AUTH-XSRF-TOKEN' ? 'abs-auth-xsrf-token' : ''
+    )
+
+    http.post('https://auth.example/signin/auth.json', {}).subscribe()
+
+    const req = httpMock.expectOne('https://auth.example/signin/auth.json')
+    expect(req.request.headers.get('x-xsrf-token')).toBe('abs-auth-xsrf-token')
+    req.flush({})
+  })
+
   it('adds AUTH-XSRF-TOKEN for POST to AUTH_SERVER when cookie is present', () => {
     cookieGetSpy.and.callFake((name: string) =>
       name === 'AUTH-XSRF-TOKEN' ? 'auth-xsrf-token' : ''
@@ -111,6 +185,27 @@ describe('XsrfFallbackInterceptor', () => {
 
     const req = httpMock.expectOne(authBase + 'signin/auth.json')
     expect(req.request.headers.get('x-xsrf-token')).toBe('auth-xsrf-token')
+    req.flush({})
+  })
+
+  it('keeps auth and web apart when the local proxy puts them on one host', () => {
+    // environment.local.4200 serves the auth server as /auth/ on our own host,
+    // so the host alone cannot say which cookie a request wants.
+    ;(
+      window as any
+    ).runtimeEnvironment.AUTH_SERVER = `${window.location.origin}/auth/`
+    cookieGetSpy.and.callFake((name: string) =>
+      name === 'AUTH-XSRF-TOKEN' ? 'auth-xsrf-token' : 'web-xsrf-token'
+    )
+
+    http.post('/auth/signin/auth.json', {}).subscribe()
+    let req = httpMock.expectOne('/auth/signin/auth.json')
+    expect(req.request.headers.get('x-xsrf-token')).toBe('auth-xsrf-token')
+    req.flush({})
+
+    http.post('/account/emails.json', {}).subscribe()
+    req = httpMock.expectOne('/account/emails.json')
+    expect(req.request.headers.get('x-xsrf-token')).toBe('web-xsrf-token')
     req.flush({})
   })
 

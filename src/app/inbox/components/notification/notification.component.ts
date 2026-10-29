@@ -131,15 +131,21 @@ export class NotificationComponent
   }
 
   notificationTitle(notification: InboxNotification) {
+    // A notification can arrive with `source: null` — the endpoint sends it
+    // even though the type says otherwise. This runs for every row, so an
+    // unguarded read here throws during change detection and takes down the
+    // whole page, the global header included (PD-13322). Fall back to the
+    // subject the backend already composed rather than rendering "undefined".
+    const sourceName = notification?.source?.sourceName?.content
     switch (notification?.notificationType) {
       case 'AMENDED':
-        return `${
-          notification.source.sourceName.content
-        } ${$localize`:@@inbox.hadMadeChanges:has made changes to your ORCID record`}`
+        return sourceName
+          ? `${sourceName} ${$localize`:@@inbox.hadMadeChanges:has made changes to your ORCID record`}`
+          : `${notification?.subject}`
       case 'INSTITUTIONAL_CONNECTION':
-        return `${$localize`:@@inbox.connectingYour:Connecting your`} ${
-          notification.source.sourceName.content
-        } ${$localize`:@@inbox.accountWithYourOrcid:account with your ORCID record`}`
+        return sourceName
+          ? `${$localize`:@@inbox.connectingYour:Connecting your`} ${sourceName} ${$localize`:@@inbox.accountWithYourOrcid:account with your ORCID record`}`
+          : `${notification?.subject}`
 
       case 'PERMISSION':
         // The subject of the permission request is define by the member with the API

@@ -1,0 +1,60 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+/*
+ * The page positions the other two steps through their element selectors, and
+ * this one owns its own spacing so it lines up with them.
+ */
+:host {
+  display: block;
+  margin-top: var(--orcid-space-l, #{$spacing-large});
+
+  @media (max-width: 767px) {
+    margin-top: 0;
+  }
+}
+
+/*
+ * The registration wizard's yellow notice panel, repeated here rather than
+ * reached for through a global: the colours come from the state-notice tokens
+ * in the theme file next to this one.
+ */
+.recovery-phone-onboarding-notice {
+  display: flex;
+  padding: $spacing-base;
+  margin-bottom: $spacing-large;
+  border: solid 2px;
+  border-radius: 4px;
+  text-align: left;
+
+  p {
+    margin: 0;
+    // .orc-font-* only carries font-size and letter-spacing
+    line-height: 21px;
+    font-weight: 400;
+  }
+}
+
+.recovery-phone-onboarding-notice__icon {
+  margin-right: $spacing-base;
+  // A direct flex child, so without this the icon is squeezed below its 24px
+  // glyph box and renders as a clipped sliver.
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  line-height: 24px;
+
+  [dir='rtl'] :host & {
+    margin-right: 0;
+    margin-left: $spacing-base;
+  }
+}
+
+/*
+ * The alert sits under the form, between the last field and the step's own
+ * actions, so it needs the gap on both sides that the form's fields have.
+ */
+.recovery-phone-step-error {
+  margin-top: $spacing-base;
+  text-align: left;
+}

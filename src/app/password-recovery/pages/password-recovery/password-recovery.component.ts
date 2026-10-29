@@ -25,6 +25,14 @@ export class PasswordRecoveryComponent implements OnInit {
   ariaLabelMyOrcidAccountPassword = $localize`:@@recovery.myOrcidAccountPassword:my ORCID account password`
   ariaLabelMy16DigitOrcidId = $localize`:@@recovery.my16DigitOrcidId:my 16-digit ORCID iD`
 
+  /**
+   * The confirmation block is shared with the "remind me my ORCID iD" flow, which still emails a
+   * single address, so only the password reset path may claim the fan out.
+   */
+  get isPasswordReset(): boolean {
+    return this.recoveryForm?.get('recoveryType')?.value === 'password'
+  }
+
   ngOnInit() {
     this.recoveryForm = new FormGroup({
       recoveryType: new FormControl('password', Validators.required),

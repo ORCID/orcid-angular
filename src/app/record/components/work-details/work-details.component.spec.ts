@@ -8,6 +8,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MonthDayYearDateToStringPipe } from 'src/app/shared/pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 describe('WorkDetailsComponent', () => {
   let component: WorkDetailsComponent
@@ -18,6 +19,7 @@ describe('WorkDetailsComponent', () => {
       imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [WorkDetailsComponent, MonthDayYearDateToStringPipe],
       providers: [WINDOW_PROVIDERS, SnackbarService, MatSnackBar, MatDialog],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     fixture = TestBed.createComponent(WorkDetailsComponent)
     component = fixture.componentInstance

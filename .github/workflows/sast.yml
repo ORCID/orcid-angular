@@ -45,7 +45,13 @@ jobs:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
       image: semgrep/semgrep
-    if: (github.actor != 'dependabot[bot]')
+    # Also skipped for fork pull requests: SEMGREP_APP_TOKEN is unavailable there,
+    # so the scan runs unconfigured, and `semgrep ci > /dev/null 2>&1` below hides
+    # any resulting failure. Not a required check.
+    if: >-
+      github.actor != 'dependabot[bot]' &&
+      (github.event_name != 'pull_request' ||
+       github.event.pull_request.head.repo.full_name == github.repository)
     steps:
       - name: Checkout code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1

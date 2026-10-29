@@ -1,5 +1,11 @@
 import { ComponentType } from '@angular/cdk/overlay'
-import { Component, Inject, ViewChild } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  inject,
+  ViewChild,
+} from '@angular/core'
 import { Observable, forkJoin, of } from 'rxjs'
 import {
   filter,
@@ -14,6 +20,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
+import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
@@ -50,6 +57,7 @@ export class AuthorizeComponent {
   redirectByReportAlreadyAuthorize: boolean
   OAUTH2_AUTHORIZATION_ENABLE: boolean
   private log: ReturnType<FeatureLoggerService['scoped']>
+  private interstitialObservability = inject(InterstitialObservabilityService)
 
   constructor(
     private userService: UserService,
@@ -60,7 +68,8 @@ export class AuthorizeComponent {
     private toglzService: TogglzService,
     private oauthUrlSessionManger: OauthURLSessionManagerService,
     private readonly featureLogger: FeatureLoggerService,
-    private readonly _observability: RumJourneyEventService
+    private readonly _observability: RumJourneyEventService,
+    private readonly changeDetectorRef: ChangeDetectorRef
   ) {
     this.log = this.featureLogger.scoped('Auth Component')
   }
@@ -177,20 +186,46 @@ export class AuthorizeComponent {
 
   /**
    * Displays the interstitial
+   *
+   * The outlet lives inside the card, and the card only renders once one of the
+   * flags in its *ngIf is set. A `static: false` view query is refreshed by
+   * change detection, so mounting the card and running a pass are both
+   * preconditions for `outlet` to exist — the already authorized path reaches
+   * here with none of those flags set, which is what left `outlet` undefined.
+   * Doing both here keeps mount and attach in the same synchronous block, so
+   * the card is never painted empty (PD-2371).
    */
   private showInterstitial(): void {
+    this.showInterstital = true
+    this.changeDetectorRef.detectChanges()
+
+    if (!this.outlet) {
+      // Never strand the user on a blank page: the OAuth flow still owes them a
+      // redirect to redirect_uri, and the journey opened by `shown()` has to be
+      // closed or it stays open forever.
+      this.log.error('Interstitial outlet unavailable, redirecting instead')
+      this.showInterstital = false
+      this.interstitialObservability.closed()
+      this.finishRedirect().subscribe()
+      return
+    }
+
     const portal = new ComponentPortal(this.interstitialComponent)
 
     const componentRef = this.outlet.attachComponentPortal(portal)
 
+    // The dialog path closes the journey on afterClosed(); here the host owns
+    // the component's lifetime, so `finish` is the equivalent end point
     componentRef.instance.finish
-      .pipe(switchMap(() => this.finishRedirect()))
+      .pipe(
+        tap(() => this.interstitialObservability.closed()),
+        switchMap(() => this.finishRedirect())
+      )
       .subscribe()
 
     componentRef.changeDetectorRef.detectChanges()
 
     this.showAuthorizationComponent = false
-    this.showInterstital = true
   }
 
   /**
@@ -233,6 +268,9 @@ export class AuthorizeComponent {
         this.loading = false
         this.redirectUrl = this.oauthSession.redirectUrl
         trace.push('already authorized with interstitial → show interstitial')
+        // Deferred because `finalize` runs synchronously inside change
+        // detection when the source observables are, and `showInterstitial`
+        // runs a pass of its own.
         setTimeout(() => this.showInterstitial())
       } else {
         trace.push('already authorized without interstitial → redirect now')

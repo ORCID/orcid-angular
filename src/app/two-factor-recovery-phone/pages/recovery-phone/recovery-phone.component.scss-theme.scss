@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+/*
+ * Everything this file used to theme - the send button and the error colours -
+ * went with the form to src/app/cdk/recovery-phone-form. The page keeps the
+ * hook so a page-level rule has somewhere to go.
+ */
+@mixin recovery-phone-theme($theme) {
+  $primary: map-get($theme, primary);
+}
+@include recovery-phone-theme($orcid-app-theme);

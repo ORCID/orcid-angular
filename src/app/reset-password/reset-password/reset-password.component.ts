@@ -50,9 +50,10 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   loading = false
   errors: string[]
   $destroy = new Subject<void>()
-  emailKey: string
+  token: string
   expiredPasswordResetToken: boolean
   invalidPasswordResetToken: boolean
+  alreadyUsedPasswordResetToken: boolean
   isMobile: boolean
   isOauthAuthorizationTogglzEnable: boolean
   showForm = true
@@ -83,7 +84,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
       this.isMobile = platform.columns4 || platform.columns8
     })
 
-    this.emailKey = this._route.snapshot.params.key
+    this.token = this._route.snapshot.params.key
 
     this._route.data.subscribe((data) => {
       if (
@@ -99,6 +100,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         )
       ) {
         this.expiredPasswordResetToken = true
+      }
+      if (
+        data.tokenVerification.errors.find(
+          (x: string) => x === 'alreadyUsedPasswordResetToken'
+        )
+      ) {
+        this.alreadyUsedPasswordResetToken = true
       }
     })
 
@@ -116,7 +124,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     return {
       newPassword: this.form.value.passwordGroup.password,
       retypedPassword: this.form.value.passwordGroup.passwordConfirm,
-      encryptedEmail: this.emailKey,
+      token: this.token,
       successRedirectLocation: null,
       twoFactorCode: this.form.value.twoFactorCode,
       twoFactorRecoveryCode: this.form.value.twoFactorRecoveryCode,
@@ -147,6 +155,21 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
           next: (response: any) => {
             if (response.successRedirectLocation || response.success) {
               this.successRedirect(response.successRedirectLocation)
+            } else if (this.isPasswordPreviouslyUsed(response)) {
+              // The code was right, but the new password is the current one,
+              // which the registry only checks once 2FA has passed (PD-5692).
+              // Back to the password form, which is where the fix is made. It
+              // is rebuilt empty: its value accessor cannot take back the value
+              // it emitted, and the password has to change anyway
+              this.outlet.detach()
+              this.showAuthChallenge = false
+              this.form.patchValue({
+                passwordGroup: null,
+                twoFactorCode: null,
+                twoFactorRecoveryCode: null,
+              })
+              this.showForm = true
+              setTimeout(() => this.showPasswordPreviouslyUsed(response))
             } else {
               componentRef.instance.processBackendResponse(response)
             }
@@ -205,6 +228,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
                 this.expiredPasswordResetToken = true
               }
               if (
+                value.errors?.find(
+                  (x: string) => x === 'alreadyUsedPasswordResetToken'
+                )
+              ) {
+                this.alreadyUsedPasswordResetToken = true
+              }
+              if (
                 value.newPassword?.errors?.find(
                   (x: string) =>
                     x === 'Pattern.registrationForm.password.containsEmail'
@@ -214,6 +244,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
                   passwordIsEqualToTheEmail: true,
                 })
               }
+              this.showPasswordPreviouslyUsed(value)
             } else if (value.twoFactorEnabled) {
               this.showAuthenticationChallenge(value.orcid)
             }
@@ -225,9 +256,41 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Previous passwords cannot be reused (PD-5692): the registry answers with
+   * this code when the new password is the current one.
+   */
+  private isPasswordPreviouslyUsed(value: any): boolean {
+    return !!value?.newPassword?.errors?.find(
+      (x: string) => x === 'Pattern.registrationForm.password.previouslyUsed'
+    )
+  }
+
+  private showPasswordPreviouslyUsed(value: any): void {
+    const password = this.passwordForm?.form?.get('password')
+    if (!password || !this.isPasswordPreviouslyUsed(value)) {
+      return
+    }
+    // Merged, not replaced: an emptied field keeps `required`, which the
+    // requirements checklist reads to show nothing as met yet
+    password.setErrors({
+      ...(password.errors || {}),
+      passwordPreviouslyUsed: true,
+    })
+    password.markAsTouched()
+    // The page's own form reads the password form's status only when asked,
+    // so ask: until the password changes, saving is refused here rather than
+    // posted again for the registry to refuse
+    this.form.get('passwordGroup')?.updateValueAndValidity()
+    ;(
+      this._window?.document?.getElementById('password-input') as HTMLElement
+    )?.focus()
+  }
+
   successRedirect(location: string) {
     const oauthURLFromSessionManager = this._oauthURLSessionManagerService.get()
     this.form.reset()
+    this._oauthURLSessionManagerService.setPasswordJustReset()
 
     if (
       !this.isOauthAuthorizationTogglzEnable &&

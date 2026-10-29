@@ -1,3 +1,184 @@
+## v3.25.2 - 2026-10-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.25.1...v3.25.2)
+
+## v3.25.1 - 2026-10-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.25.0...v3.25.1)
+
+## v3.25.0 - 2026-10-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.24.2...v3.25.0)
+
+## v3.24.2 - 2026-10-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.24.1...v3.24.2)
+
+- [#2923](https://github.com/ORCID/orcid-angular/pull/2923): PD-13324 speed up CI
+
+## v3.24.1 - 2026-10-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.24.0...v3.24.1)
+
+- [#2932](https://github.com/ORCID/orcid-angular/pull/2932): Lmendoa/pd 14333 pd 14423 pd 14449 pd 14450 recovery phone
+
+## v3.24.0 - 2026-10-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.8...v3.24.0)
+
+## v3.23.8 - 2026-09-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.7...v3.23.8)
+
+- [#2930](https://github.com/ORCID/orcid-angular/pull/2930): PD-14413 page cancel says the recovery phone was not updated
+
+## v3.23.7 - 2026-09-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.6...v3.23.7)
+
+- [#2929](https://github.com/ORCID/orcid-angular/pull/2929): PD-14420 interstitial disabled add button keeps a white label
+
+## v3.23.6 - 2026-09-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.5...v3.23.6)
+
+- [#2916](https://github.com/ORCID/orcid-angular/pull/2916): PD-6046 PD-6045 add 2FA recovery phone number
+
+## v3.23.5 - 2026-09-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.4...v3.23.5)
+
+## v3.23.4 - 2026-09-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.3...v3.23.4)
+
+- [#2913](https://github.com/ORCID/orcid-angular/pull/2913): PD-6198 outlined icons
+- [#2906](https://github.com/ORCID/orcid-angular/pull/2906): PD-6118 semgrep angular vulnerabilities
+
+## v3.23.3 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.2...v3.23.3)
+
+- [#2915](https://github.com/ORCID/orcid-angular/pull/2915): PD-7612 Restore the build:local-tomcat script
+
+## v3.23.2 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.1...v3.23.2)
+
+## v3.23.1 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.23.0...v3.23.1)
+
+## v3.23.0 - 2026-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.23...v3.23.0)
+
+## v3.0.23 - 2026-09-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.22...v3.0.23)
+
+## v3.0.22 - 2026-09-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.21...v3.0.22)
+
+- [#2925](https://github.com/ORCID/orcid-angular/pull/2925): PD-13050 don't show the affiliation interstitial without a matching ROR
+
+## v3.0.21 - 2026-09-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.20...v3.0.21)
+
+## v3.0.20 - 2026-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.19...v3.0.20)
+
+## v3.0.19 - 2026-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.18...v3.0.19)
+
+## v3.0.18 - 2026-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.17...v3.0.18)
+
+## v3.0.17 - 2026-08-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.16...v3.0.17)
+
+## v3.0.16 - 2026-08-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.15...v3.0.16)
+
+## v3.0.15 - 2026-08-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.14...v3.0.15)
+
+## v3.0.14 - 2026-08-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.13...v3.0.14)
+
+## v3.0.13 - 2026-08-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.12...v3.0.13)
+
+## v3.0.12 - 2026-08-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.11...v3.0.12)
+
+- [#2907](https://github.com/ORCID/orcid-angular/pull/2907): PD-5900
+
+## v3.0.11 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.10...v3.0.11)
+
+## v3.0.10 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.9...v3.0.10)
+
+## v3.0.9 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.8...v3.0.9)
+
+## v3.0.8 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.7...v3.0.8)
+
+## v3.0.7 - 2026-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.6...v3.0.7)
+
+## v3.0.6 - 2026-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.5...v3.0.6)
+
+## v3.0.5 - 2026-08-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.4...v3.0.5)
+
+## v3.0.4 - 2026-08-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.3...v3.0.4)
+
+## v3.0.3 - 2026-08-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.2...v3.0.3)
+
+## v3.0.2 - 2026-08-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.1...v3.0.2)
+
+## v3.0.1 - 2026-07-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v3.0.0...v3.0.1)
+
+## v3.0.0 - 2026-07-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.11...v3.0.0)
+
+## v2.136.11 - 2026-07-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.10...v2.136.11)
+
+- [#2878](https://github.com/ORCID/orcid-angular/pull/2878): Transifex: update translations
+
 ## v2.136.10 - 2026-07-10
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.136.9...v2.136.10)

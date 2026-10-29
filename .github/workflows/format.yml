@@ -1,0 +1,43 @@
+name: format
+
+# Formatting gate for pull requests. It only checks: an unformatted pull request
+# fails this job, and nothing is pushed back to its branch. The remedy is the
+# same for every author, whether the branch lives in this repository or in a
+# fork: run `yarn format` and push.
+#
+# It must be a required status check, so unformatted code cannot reach main.
+
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
+      # The pull request's own head commit, not the default merge ref.
+      # Otherwise a PR is judged on its branch merged into main, and drift on
+      # main would fail an innocent PR with a message telling the author to
+      # format files they never touched. Falls back to the pushed commit when
+      # called from a push (the ci_only dry run).
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - uses: ./.github/actions/yarn-install
+
+      - name: Check formatting
+        run: |
+          if ! yarn format:check; then
+            echo "::error::Some files are not formatted with Prettier (listed above). Run 'yarn format' and push the result."
+            exit 1
+          fi

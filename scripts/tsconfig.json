@@ -20,9 +20,5 @@
     "skipLibCheck": true,
     "experimentalDecorators": true
   },
-  "include": [
-    "./*",
-    "../environments/environment.*.ts",
-    "../node_modules/@types/puppeteer/index.d.ts"
-  ]
+  "include": ["./*", "./__tests__/**/*.ts", "../environments/environment.*.ts"]
 }

@@ -29,18 +29,17 @@
         </div>
       </a>
       <div class="col no-gutters" role="navigation">
-        <div *ngIf="!platform.columns12" class="row middle no-gutters">
-          <div *ngIf="mobileMenuState" class="col no-gutters">
-            <app-language
-              class="col no-gutters"
-              id="cy-language-mob"
-            ></app-language>
-          </div>
-          <div *ngIf="!mobileMenuState" class="col no-gutters">
-            <app-user-menu></app-user-menu>
-          </div>
+        <div
+          *ngIf="!platform.columns12"
+          class="row middle no-gutters header-actions"
+        >
+          <app-user-menu
+            [hideSignedOutAccount]="isAuthPatternPage"
+          ></app-user-menu>
+          <app-language id="cy-language-mob"></app-language>
 
           <app-menu-icon
+            *ngIf="!hideMainMenu"
             (click)="toggleMobileMenu()"
             [isOpen]="mobileMenuState"
           ></app-menu-icon>
@@ -100,6 +99,29 @@
       [ngClass]="{ container: platform.columns12 }"
       tabindex="-1"
     >
+      <ul
+        class="row mobile-auth-menu"
+        *ngIf="checkMenuItemRequirements({ desktop: false })"
+      >
+        <li
+          class="col no-gutters button-wrapper"
+          *ngIf="checkMenuItemRequirements({ logging: false })"
+        >
+          <button
+            [ngClass]="{ active: activeMenuItemId === 'header-signin' }"
+            class="top-menu-button sign-in-button"
+            mat-button
+            (click)="onNavClick('signin', 'header-signin')"
+            id="header-signin"
+          >
+            <ng-container i18n="@@header.signin">Sign in</ng-container
+            >&nbsp;/&nbsp;<ng-container i18n="@@header.register"
+              >Register</ng-container
+            >
+          </button>
+        </li>
+      </ul>
+
       <ng-template #recursiveList let-list let-parents="parents">
         <ul class="row" *ngIf="!isDesktopThirdLevelMenu(parents)">
           <ng-container *ngFor="let item of list">

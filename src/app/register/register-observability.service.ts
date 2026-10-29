@@ -107,6 +107,38 @@ export class RegisterObservabilityService {
     )
   }
 
+  stepC2NoticeSkipLinkClicked(form: UntypedFormGroup) {
+    this._observability.recordEvent(
+      'orcid_registration',
+      AppEventName.StepC2NoticeSkipLinkClicked,
+      {
+        formValid: form.valid,
+        errors: {
+          departmentNameError: form.controls.departmentName.errors,
+          roleTitleError: form.controls.roleTitle.errors,
+          startDateGroupErrors: form.controls.startDateGroup.errors,
+          organizationErrors: form.controls.organization.errors,
+        },
+      }
+    )
+  }
+
+  stepC2ErrorSkipLinkClicked(form: UntypedFormGroup) {
+    this._observability.recordEvent(
+      'orcid_registration',
+      AppEventName.StepC2ErrorSkipLinkClicked,
+      {
+        formValid: form.valid,
+        errors: {
+          departmentNameError: form.controls.departmentName.errors,
+          roleTitleError: form.controls.roleTitle.errors,
+          startDateGroupErrors: form.controls.startDateGroup.errors,
+          organizationErrors: form.controls.organization.errors,
+        },
+      }
+    )
+  }
+
   stepCNextButtonClicked(form: UntypedFormGroup) {
     this._observability.recordEvent(
       'orcid_registration',

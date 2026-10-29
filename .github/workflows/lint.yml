@@ -2,11 +2,10 @@ name: lint
 
 # we don't pay for pre-commit-ci yet so need this for private repos
 
+# Only runs pre-commit; it calls no GitHub API. Kept at read so this workflow can
+# be called from pr.yml, where a fork pull request caps the run at read-only.
 permissions:
-  checks: write
   contents: read
-  issues: read
-  pull-requests: write
 
 on:
   workflow_call:

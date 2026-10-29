@@ -19,6 +19,7 @@ COPY *.json .
 COPY *.lock .
 
 COPY ./src ./src
+COPY ./projects ./projects
 
 RUN mvn -T 1C --batch-mode \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \

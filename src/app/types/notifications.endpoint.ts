@@ -46,7 +46,10 @@ export interface InboxNotification {
   sourceDescription?: any
   encryptedPutCode?: any
   subject: string
-  source: SourceWithAssertionOrigin
+  // Nullable in practice: notifications raised by ORCID itself, and those
+  // whose member source is no longer resolvable, arrive with `source: null`.
+  // Declaring it required hid PD-13322 from `strictTemplates` for years.
+  source: SourceWithAssertionOrigin | null
 }
 
 export interface InboxNotificationAmended extends InboxNotification {

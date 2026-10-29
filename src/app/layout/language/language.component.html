@@ -1,14 +1,27 @@
-<button
-  mat-button
-  [matMenuTriggerFor]="languageMenu"
-  [attr.aria-label]="labelLanguage"
-  class="orcid-button-light-grey"
->
-  <div class="row middle space-between button-box no-wrap">
-    <p class="col no-gutters">{{ languageMenuOptions[locale] }}</p>
-    <mat-icon>expand_more</mat-icon>
-  </div>
-</button>
+<ng-container *ngIf="(platform$ | async)?.columns12; else languageIconButton">
+  <button
+    mat-button
+    [matMenuTriggerFor]="languageMenu"
+    [attr.aria-label]="labelLanguage"
+    class="orcid-button-light-grey"
+  >
+    <div class="row middle space-between button-box no-wrap">
+      <p class="col no-gutters">{{ languageMenuOptions[locale] }}</p>
+      <mat-icon>expand_more</mat-icon>
+    </div>
+  </button>
+</ng-container>
+
+<ng-template #languageIconButton>
+  <button
+    mat-stroked-button
+    class="header-action-button"
+    [matMenuTriggerFor]="languageMenu"
+    [attr.aria-label]="labelLanguage"
+  >
+    <mat-icon class="material-symbols-outlined">language</mat-icon>
+  </button>
+</ng-template>
 
 <mat-menu
   #languageMenu="matMenu"

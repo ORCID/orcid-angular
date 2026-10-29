@@ -1,0 +1,44 @@
+<div class="two-factor-disabled">
+  <div class="two-factor-disabled__icon">
+    <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
+  </div>
+  <!--
+    The panel replaces the sign-in card, so focus would otherwise fall to the
+    body: nothing would be announced and tabbing would restart at the top of
+    the page while the ten-second timer runs. The heading is taken out of the
+    tab order but made focusable, and the panel focuses it on arrival.
+  -->
+  <h1
+    #panelTitle
+    tabindex="-1"
+    class="orc-font-heading-small two-factor-disabled__title"
+    i18n="@@ngOrcid.signin.2fa.disabledTitle"
+  >
+    Two-factor authentication (2FA) has been disabled
+  </h1>
+  <app-alert-message type="warning">
+    <div content i18n="@@ngOrcid.signin.2fa.disabledOauthBody">
+      You have signed in to ORCID using your recovery phone number. Two-factor
+      authentication has been disabled for this ORCID account and your 2FA
+      backup options have been reset. You can re-enable 2FA when you next sign
+      in at orcid.org
+    </div>
+  </app-alert-message>
+  <button
+    mat-raised-button
+    color="primary"
+    class="row two-factor-disabled__continue mat-elevation-z0"
+    type="button"
+    id="cy-continue-after-two-factor-disabled"
+    (click)="onContinue()"
+  >
+    <ng-container
+      *ngIf="clientName"
+      i18n="@@ngOrcid.signin.2fa.continueToClient"
+      >Continue to {{ clientName }}</ng-container
+    >
+    <ng-container *ngIf="!clientName" i18n="@@interstitial.continue"
+      >Continue</ng-container
+    >
+  </button>
+</div>

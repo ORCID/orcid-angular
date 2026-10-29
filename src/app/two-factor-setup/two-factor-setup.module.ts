@@ -18,8 +18,10 @@ import { ClipboardModule } from '@angular/cdk/clipboard'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { TwoFactorRecoveryCodesComponent } from './components/two-factor-recovery-codes/two-factor-recovery-codes.component'
 import { TwoFactorEnableComponent } from './components/two-factor-enable/two-factor-enable.component'
+import { TwoFactorRecoveryPhoneComponent } from './components/two-factor-recovery-phone/two-factor-recovery-phone.component'
+import { RecoveryPhoneFormComponent } from '../cdk/recovery-phone-form/recovery-phone-form.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
-import { OrcidStepViewComponent } from '@orcid/ui'
+import { AlertMessageComponent, OrcidStepViewComponent } from '@orcid/ui'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 
 @NgModule({
@@ -27,6 +29,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
     TwoFactorSetupComponent,
     TwoFactorRecoveryCodesComponent,
     TwoFactorEnableComponent,
+    TwoFactorRecoveryPhoneComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +50,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
     MatTooltipModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
+    // Standalone components
+    AlertMessageComponent,
     OrcidStepViewComponent,
+    RecoveryPhoneFormComponent,
   ],
 })
 export class TwoFactorSetupModule {}

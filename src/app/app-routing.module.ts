@@ -134,6 +134,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: ApplicationRoutes.recoveryPhone,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import(
+        './two-factor-recovery-phone/two-factor-recovery-phone.module'
+      ).then((m) => m.TwoFactorRecoveryPhoneModule),
+  },
+  {
     path: ApplicationRoutes.resetPasswordEmail + '/:key',
     loadChildren: () =>
       import('./reset-password/reset-password.module').then(
@@ -173,6 +181,20 @@ const routes: Routes = [
     canActivateChild: [AuthenticatedGuard],
     loadChildren: () =>
       import('./sms-poc/sms-poc.module').then((m) => m.SmsPocModule),
+  },
+  {
+    // Legacy URL kept alive: the reverse proxy deliberately excludes it from the
+    // /about redirect to the info site.
+    path: ApplicationRoutes.recordCorrectionsLegacy,
+    redirectTo: '/' + ApplicationRoutes.recordCorrections,
+    pathMatch: 'full',
+  },
+  {
+    path: ApplicationRoutes.recordCorrections,
+    loadChildren: () =>
+      import('./record-corrections/record-corrections.module').then(
+        (m) => m.RecordCorrectionsModule
+      ),
   },
   {
     path: '404',

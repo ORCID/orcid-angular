@@ -48,7 +48,7 @@ Common sign-in event names:
 - `sign_in_guard_redirect_to_register`
 - `two_factor_signin_guard_redirect_to_my_orcid`
 
-`sign_in_failure` includes classification attrs (deprecated, disabled, unclaimed, bad verification/recovery code, invalid user type, bad credentials fallback).
+`sign_in_failure` includes classification attrs (deprecated, disabled, unclaimed, bad verification/recovery code, invalid user type, bad credentials fallback). Two more come from the mandatory password reset (PD-5692): `passwordResetRequired` when the registry refused a correct password because the record has to reset it, and `suppressedByNotice` when a failure was kept silent because the reset notice was showing. Neither shows a bad-credentials message, so both carry `badCredentials: false`. When a failure kept silent by the notice turns out not to be owed any more, the page shows the bad-credentials message after all, and a second `sign_in_failure` records it with `badCredentials: true` and `recheckedAfterNotice: true`.
 
 ## NRQL query patterns
 

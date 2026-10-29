@@ -12,6 +12,8 @@ import { LoginAffiliationInterstitialManagerService } from '../implementations/l
 import { AffiliationsInterstitialDialogComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { AffiliationInterstitialOrganizationService } from '../affiliation-interstitial-organization.service'
+import { Organization } from 'src/app/types/common.endpoint'
 
 describe('LoginAffiliationInterstitialManagerService', () => {
   let service: LoginAffiliationInterstitialManagerService
@@ -21,6 +23,7 @@ describe('LoginAffiliationInterstitialManagerService', () => {
   let mockInterstitialsService: jasmine.SpyObj<InterstitialsService>
   let mockTogglzService: jasmine.SpyObj<TogglzService>
   let mockQaFlagsService: jasmine.SpyObj<QaFlagsService>
+  let mockAffiliationOrganizationService: jasmine.SpyObj<AffiliationInterstitialOrganizationService>
 
   beforeEach(() => {
     mockMatDialog = jasmine.createSpyObj<MatDialog>('MatDialog', ['open'])
@@ -35,6 +38,15 @@ describe('LoginAffiliationInterstitialManagerService', () => {
       'QaFlagsService',
       ['isFlagEnabled']
     )
+    mockAffiliationOrganizationService =
+      jasmine.createSpyObj<AffiliationInterstitialOrganizationService>(
+        'AffiliationInterstitialOrganizationService',
+        ['resolveFromDomains']
+      )
+    // Default: the domain maps to exactly one organization.
+    mockAffiliationOrganizationService.resolveFromDomains.and.returnValue(
+      of({ value: 'My University' } as Organization)
+    )
 
     TestBed.configureTestingModule({
       providers: [
@@ -43,6 +55,10 @@ describe('LoginAffiliationInterstitialManagerService', () => {
         { provide: TogglzService, useValue: mockTogglzService },
         { provide: InterstitialsService, useValue: mockInterstitialsService },
         { provide: QaFlagsService, useValue: mockQaFlagsService },
+        {
+          provide: AffiliationInterstitialOrganizationService,
+          useValue: mockAffiliationOrganizationService,
+        },
         WINDOW_PROVIDERS,
       ],
     })
@@ -115,6 +131,48 @@ describe('LoginAffiliationInterstitialManagerService', () => {
         .userIsElegibleForInterstitial(userRecord)
         .subscribe((isEligible) => {
           expect(isEligible).toBeTrue()
+          done()
+        })
+    })
+
+    // PD-13050. The interstitial has nothing to offer without a single
+    // matching organization, and showing it is what marks it as seen — so it
+    // has to be ruled out here, before anything is recorded.
+    it('should return false if the email domain resolves to no organization', (done) => {
+      mockAffiliationOrganizationService.resolveFromDomains.and.returnValue(
+        of(undefined)
+      )
+      const userRecord = {
+        emails: { emailDomains: ['myuniversity.edu'] },
+        affiliations: [],
+      } as unknown as UserRecord
+
+      service
+        .userIsElegibleForInterstitial(userRecord)
+        .subscribe((isEligible) => {
+          expect(isEligible).toBeFalse()
+          done()
+        })
+    })
+
+    it('should not look up an organization for a user already ruled out', (done) => {
+      const userRecord = {
+        emails: { emailDomains: ['myuniversity.edu'] },
+        affiliations: [
+          {
+            type: 'EMPLOYMENT',
+            affiliationGroup: ['Some Employment Data'],
+          },
+        ],
+      } as unknown as UserRecord
+
+      service
+        .userIsElegibleForInterstitial(userRecord)
+        .subscribe((isEligible) => {
+          expect(isEligible).toBeFalse()
+          expect(
+            mockAffiliationOrganizationService.resolveFromDomains
+          ).not.toHaveBeenCalled()
           done()
         })
     })

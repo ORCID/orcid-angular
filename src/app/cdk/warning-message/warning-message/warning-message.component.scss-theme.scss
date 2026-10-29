@@ -8,27 +8,48 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
+  // PD-5635: both variants took colours the design system does not use for a
+  // notice - state-notice-dark #ff9c00 for a warning, the brand green #7faa26
+  // for a success - and neither was drawn on a background. The frames paint
+  // this banner solid: notice-warning #d32f2f on notice-warning-background
+  // #ffebee, and notice-success #56b833 on state-success-bg #f9fef6. (The
+  // 25% variants of these fills are what a notice *inside a panel* is drawn
+  // on; this component is the full-width banner.)
   .wrapper.warning-message {
     border-color: mat.m2-get-color-from-palette(
       $foreground,
-      'state-notice-dark'
+      'state-warning-dark'
+    ) !important;
+    background-color: mat.m2-get-color-from-palette(
+      $background,
+      'state-warning-background'
     ) !important;
     .container-text-and-icon {
       mat-icon {
         color: mat.m2-get-color-from-palette(
           $foreground,
-          'state-notice-dark'
+          'state-warning-dark'
         ) !important;
       }
     }
   }
 
   .wrapper.success-message {
-    border-color: $brand-primary-dark;
+    border-color: mat.m2-get-color-from-palette(
+      $foreground,
+      'state-success-dark'
+    ) !important;
+    background-color: mat.m2-get-color-from-palette(
+      $background,
+      'state-success-lightest'
+    ) !important;
 
     .container-text-and-icon {
       mat-icon {
-        color: $brand-primary-dark;
+        color: mat.m2-get-color-from-palette(
+          $foreground,
+          'state-success-dark'
+        ) !important;
       }
     }
   }

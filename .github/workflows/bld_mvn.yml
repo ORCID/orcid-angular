@@ -24,6 +24,11 @@ on:
         required: false
         default: "default"
         type: string
+      deploy:
+        description: 'Whether to upload the WAR to the artifact repository. Set false for a dry run.'
+        required: false
+        default: true
+        type: boolean
 
   workflow_dispatch:
     inputs:
@@ -48,6 +53,11 @@ on:
         required: false
         default: "default"
         type: string
+      deploy:
+        description: 'Whether to upload the WAR to the artifact repository. Set false for a dry run.'
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   bld_mvn:
@@ -71,6 +81,46 @@ jobs:
           # checkout some history so we can scan commits for bump messages
           # NOTE: history does not include tags!
           fetch-depth: 100
+
+      # Build the Angular app here rather than letting frontend-maven-plugin do
+      # it: this reuses the runner's Node and the cached node_modules instead of
+      # downloading Node and installing from cold inside maven. The maven build
+      # below skips the plugin's node/yarn goals and just packages ./dist.
+      - id: deps
+        uses: ./.github/actions/yarn-install
+
+      # No formatting check here: formatting is a pull request gate (the
+      # `format` job), and a release build must not fail on whitespace.
+
+      # The Angular build cache, same lineage as bld_yarn's (the comment there
+      # explains the key and when it refreshes). Restoring main's newest entry
+      # speeds up this release build; saving below is what gives every new pull
+      # request a warm first run.
+      - name: restore the Angular build cache
+        id: ng_cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .angular/cache
+          key: ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-${{ github.sha }}
+          restore-keys: |
+            ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-
+
+      - name: build the Angular app (prebuild + postbuild included)
+        run: yarn build
+
+      # The WAR is a verbatim copy of ./dist, so validate it before packaging.
+      - run: yarn build:manifest:check
+      - run: yarn build:verify
+
+      # Saved only after the build and both layout checks passed: steps run
+      # under `if: success()` unless told otherwise, so a failed build never
+      # saves. Skipped on an exact hit, i.e. a re-run of the same commit.
+      - name: save the Angular build cache
+        if: steps.ng_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .angular/cache
+          key: ng-build-${{ steps.deps.outputs.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', 'angular.json', '.nvmrc') }}-${{ github.sha }}
 
       - name: find next version
         id: version
@@ -117,10 +167,15 @@ jobs:
 
       - name: build our project
         run: |
+          # skip.installyarn skips the install-node-and-yarn goal and skip.yarn
+          # skips both `yarn` goals of frontend-maven-plugin: ./dist was already
+          # built by the `yarn build` step above. pom.xml is left untouched so
+          # local `mvn` builds still run the full frontend chain.
           mvn -T 1C --batch-mode \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
               --file "pom.xml" \
               --activate-profiles prod -Dnodejs.workingDirectory=. \
+              -Dskip.installyarn=true -Dskip.yarn=true \
               package -Dmaven.test.skip
 
           echo "------------------------------------------------------"
@@ -129,7 +184,10 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
+      # Skipped by the ci_only dry run: it proves the WAR still builds without
+      # publishing an artifact nobody asked for.
       - name: deploy same artifact for all environments
+        if: ${{ inputs.deploy }}
         run: |
           WAR_FILE="target/orcid-web-frontend-prod.war"
           REPO_URL="${ARTIFACT_URL}${ARTIFACT_REPO_PATH}"

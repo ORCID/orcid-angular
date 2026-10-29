@@ -12,7 +12,7 @@ import { PseudoModule } from 'src/locale/i18n.pseudo.component'
 import { TitleService } from './core/title-service/title.service'
 import { HttpContentTypeHeaderInterceptor } from './core/http-content-type-header-interceptor/http-content-type-header-interceptor'
 import { XsrfFallbackInterceptor } from './core/xsrf/xsrf-fallback.interceptor'
-import { FirefoxXsrfPreloadInterceptor } from './core/lang-preload/firefox-xsrf-preload.interceptor'
+import { XsrfPreloadInterceptor } from './core/xsrf/xsrf-preload.interceptor'
 import { RetryTransientInterceptor } from './core/http/retry-transient.interceptor'
 import {
   HTTP_INTERCEPTORS,
@@ -47,10 +47,12 @@ import { FormsModule } from '@angular/forms'
   ],
   providers: [
     TitleService,
-    // Firefox-only workaround to ensure XSRF cookie is established before backend calls
+    // Ensures the XSRF cookie is established before any backend call, on every
+    // browser: without it the first mutating request goes out with no
+    // x-xsrf-token header and gets a 403
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: FirefoxXsrfPreloadInterceptor,
+      useClass: XsrfPreloadInterceptor,
       multi: true,
     },
     {

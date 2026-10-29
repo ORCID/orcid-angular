@@ -1,0 +1,39 @@
+// Shared styling for the global header action buttons on mobile and tablet
+// (account, notifications, language and main menu).
+//
+// Applied on top of `mat-stroked-button`, which supplies the border and hover
+// states. The explicit box is required because MDC stroked buttons default to
+// 36px high and grow with their border.
+@mixin header-action-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  margin: 0;
+
+  // The MDC outlined button draws no focus ring of its own, so keyboard users
+  // get no indicator without this. Matches the ring used by the header nav
+  // buttons in header.component.scss.
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--orcid-color-ui-focus, #1098ff);
+    outline: none;
+  }
+
+  mat-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+    overflow: visible;
+    margin: 0;
+    color: var(--orcid-color-ui-background-darkest, #212121);
+  }
+
+  .filled {
+    font-variation-settings: 'FILL' 1;
+  }
+}

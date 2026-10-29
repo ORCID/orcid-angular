@@ -22,6 +22,11 @@ import { AffiliationsInterstitialComponent } from './affiliations-interstitial/i
 import { AffiliationsInterstitialDialogComponent } from './affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 import { ShareEmailsDomainsDialogComponent } from './share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial-component/share-emails-domains.component'
+import { BackupEmailComponent } from './backup-email/interstitial-component/backup-email.component'
+import { BackupEmailDialogComponent } from './backup-email/interstitial-dialog-extend/backup-email-dialog.component'
+import { RecoveryPhoneInterstitialComponent } from './recovery-phone/interstitial-component/recovery-phone-interstitial.component'
+import { RecoveryPhoneInterstitialDialogComponent } from './recovery-phone/interstitial-dialog-extend/recovery-phone-interstitial-dialog.component'
+import { RecoveryPhoneFormComponent } from '../recovery-phone-form/recovery-phone-form.component'
 
 @NgModule({
   declarations: [
@@ -29,6 +34,10 @@ import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial
     ShareEmailsDomainsDialogComponent,
     AffiliationsInterstitialComponent,
     AffiliationsInterstitialDialogComponent,
+    BackupEmailComponent,
+    BackupEmailDialogComponent,
+    RecoveryPhoneInterstitialComponent,
+    RecoveryPhoneInterstitialDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -49,12 +58,19 @@ import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial
     MatButtonModule,
     InfoPanelModule,
     A11yLinkModule,
+    // Standalone: the recovery phone interstitial renders it, and it brings its
+    // own phone field and reactive form wiring with it
+    RecoveryPhoneFormComponent,
   ],
   exports: [
     ShareEmailsDomainsComponent,
     ShareEmailsDomainsDialogComponent,
     AffiliationsInterstitialComponent,
     AffiliationsInterstitialDialogComponent,
+    BackupEmailComponent,
+    BackupEmailDialogComponent,
+    RecoveryPhoneInterstitialComponent,
+    RecoveryPhoneInterstitialDialogComponent,
   ],
 })
 export class InterstitialsModule {}
