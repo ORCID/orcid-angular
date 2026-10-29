@@ -203,6 +203,8 @@
           id="ot-sdk-btn"
           tabindex="0"
           class="ot-sdk-show-settings underline"
+          (click)="openCookieSettings($event)"
+          (keydown.enter)="openCookieSettings($event)"
           i18n="@@footer.cookieSettings"
         >
           Cookie Settings
