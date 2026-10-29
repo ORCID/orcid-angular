@@ -17,6 +17,7 @@ import { ZendeskService } from './core/zendesk/zendesk.service'
 import { ERROR_REPORT } from './errors'
 import { NewRelicService } from './core/new-relic/new-relic.service'
 import { OneTrustAccessibilityService } from './core/onetrust/onetrust-accessibility.service'
+import { ConsentVendorService } from './core/consent/consent-vendor.service'
 
 @Component({
   selector: 'app-root',
@@ -58,7 +59,8 @@ export class AppComponent {
     @Inject(WINDOW) private _window: Window,
     _titleService: TitleService,
     _newRelicService: NewRelicService,
-    _oneTrustAccessibilityService: OneTrustAccessibilityService
+    _oneTrustAccessibilityService: OneTrustAccessibilityService,
+    _consentVendorService: ConsentVendorService
   ) {
     _titleService.init()
     _platformInfo
@@ -78,6 +80,7 @@ export class AppComponent {
 
     _newRelicService.init()
     _oneTrustAccessibilityService.init()
+    _consentVendorService.init()
 
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
