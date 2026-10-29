@@ -185,13 +185,6 @@
       <ng-container
         *ngFor="let error of this.emails.getError('backendError', 'email')"
       >
-        <ng-container *ngIf="error === 'disposable_email'">
-          <app-alert-message>
-            <div content class="content">
-              <ng-container i18n="@@side-bar.disposableEmailNotSupported">ORCID does not support temporary or disposable email addresses. Please try a different email address.</ng-container>
-            </div>
-          </app-alert-message>
-        </ng-container>
         <ng-container *ngIf="error !== 'disposable_email'">
           <app-alert-message>
             <div content class="content">
