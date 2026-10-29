@@ -172,3 +172,10 @@ mat-progress-bar {
     padding: 32px;
   }
 }
+
+// PD-14603: a block of its own, 16px under the code field's helper row; the
+// notice component's own host style is inline-block.
+app-alert-message.recovery-phone-send-limit {
+  display: block;
+  margin-top: 16px;
+}

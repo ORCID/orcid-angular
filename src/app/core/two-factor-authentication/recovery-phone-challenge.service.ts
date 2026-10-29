@@ -6,6 +6,7 @@ import {
 import {
   Observable,
   ReplaySubject,
+  Subject,
   Subscription,
   combineLatest,
   interval,
@@ -19,13 +20,11 @@ import { AuthChallenge } from '../../types/common.endpoint'
 import { TogglzFlag } from '../../types/config.endpoint'
 import { Status } from '../../types/two-factor.endpoint'
 import { TogglzService } from '../togglz/togglz.service'
-import { UserService } from '../user/user.service'
-import { RecoveryPhoneNoticeService } from './recovery-phone-notice.service'
 import { TwoFactorAuthenticationService } from './two-factor-authentication.service'
 
 /**
  * Builds the object the "Verify your ORCID account" challenge is handed when it
- * is allowed to offer a recovery phone number (R5.1 to R5.4).
+ * is allowed to offer a recovery phone number (R5.1 to R5.3).
  *
  * The challenge lives in the component library, so it can neither reach the
  * registry nor read a feature flag. Everything it needs is resolved here and
@@ -46,6 +45,14 @@ import { TwoFactorAuthenticationService } from './two-factor-authentication.serv
 export class RecoveryPhoneChallengeService implements OnDestroy {
   /** Every subscription any handle has opened, so none outlive the app. */
   private readonly subscriptions = new Subscription()
+
+  private readonly _twoFactorDisabled = new Subject<void>()
+
+  /**
+   * Fires whenever any challenge was passed with a recovery phone code, which
+   * turned 2FA off on the way through (PD-14596).
+   */
+  readonly twoFactorDisabled$ = this._twoFactorDisabled.asObservable()
 
   constructor(
     private _twoFactorAuthenticationService: TwoFactorAuthenticationService,
@@ -68,25 +75,6 @@ export class RecoveryPhoneChallengeService implements OnDestroy {
     const running = new Subscription()
     this.subscriptions.add(running)
 
-    /**
-     * Read when the challenge opens, not when a code is accepted: by then the
-     * account is about to lose its 2FA and the page is about to change, and
-     * the notice waiting on the record is keyed by the iD it belongs to. Kept
-     * out of `running` because the verify that reads it must survive disposal.
-     */
-    let orcid = ''
-    const user = this.optional(UserService)
-    if (user) {
-      this.subscriptions.add(
-        user
-          .getUserSession()
-          .pipe(first())
-          .subscribe((session) => {
-            orcid = session?.userInfo?.EFFECTIVE_USER_ORCID || ''
-          })
-      )
-    }
-
     const handle: AuthChallengeRecoveryPhone = {
       available: false,
       maskedNumber: undefined,
@@ -97,7 +85,7 @@ export class RecoveryPhoneChallengeService implements OnDestroy {
       used: false,
       sendCode: () => this.sendCode(handle, running),
       verify: (password: string, code: string) =>
-        this.verify(handle, password, code, () => orcid, options?.onUsed),
+        this.verify(handle, password, code, options?.onUsed),
       dispose: () => running.unsubscribe(),
     }
 
@@ -209,14 +197,14 @@ export class RecoveryPhoneChallengeService implements OnDestroy {
   /**
    * A success here is not only an authentication: the registry has just
    * disabled 2FA, deleted the number and invalidated the backup codes in one
-   * transaction. The record has to say so the next time it is opened (R5.4),
-   * and the host has to know not to ask for a 2FA code again.
+   * transaction. The host has to know not to ask for a 2FA code again, and the
+   * record says nothing about it: that notice belongs to sign-in (PD-14597).
    *
    * So the request is subscribed here, once, and everything that follows from
    * it happens on the response. The challenge is handed a subject it may leave
    * at any time - if the user cancels or the dialog closes mid-flight, the
-   * server has still done all of the above, and the notice, the telemetry and
-   * `used` still have to be right.
+   * server has still done all of the above, and the telemetry and `used` still
+   * have to be right.
    *
    * The registry checks the password before the code, so a rejection says
    * which of the two it was (R5.2); a request that never landed says nothing,
@@ -226,7 +214,6 @@ export class RecoveryPhoneChallengeService implements OnDestroy {
     handle: AuthChallengeRecoveryPhone,
     password: string,
     code: string,
-    readOrcid: () => string,
     onUsed?: () => void
   ): Observable<AuthChallengeRecoveryPhoneVerification> {
     const answer = new ReplaySubject<AuthChallengeRecoveryPhoneVerification>(1)
@@ -249,9 +236,7 @@ export class RecoveryPhoneChallengeService implements OnDestroy {
             }
 
             handle.used = true
-            this.optional(RecoveryPhoneNoticeService)?.markTwoFactorDisabled(
-              readOrcid()
-            )
+            this._twoFactorDisabled.next()
             // No attributes: a phone number, an ORCID iD and an email address are
             // all out of bounds here, and nothing else about this is interesting.
             this.optional(RumJourneyEventService)?.recordSimpleEvent(
@@ -273,12 +258,11 @@ export class RecoveryPhoneChallengeService implements OnDestroy {
   }
 
   /**
-   * The session, the record notice and the telemetry are looked up where they
-   * are used rather than taken in the constructor. None of them is what this
-   * service is for: they are courtesies around the one thing that matters,
-   * which is whether the code was accepted. A challenge that cannot be opened
-   * because a page action could not be recorded would be the wrong trade, and
-   * it would also drag the whole session graph into every host that opens one.
+   * The telemetry is looked up where it is used rather than taken in the
+   * constructor. It is not what this service is for: it is a courtesy around
+   * the one thing that matters, which is whether the code was accepted. A
+   * challenge that cannot be opened because a page action could not be
+   * recorded would be the wrong trade.
    */
   private optional<T>(token: ProviderToken<T>): T | null {
     try {
