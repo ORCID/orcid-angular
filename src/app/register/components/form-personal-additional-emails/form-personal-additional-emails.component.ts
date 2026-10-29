@@ -83,41 +83,6 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     return errors || []
   }
 
-  // deleteEmailInput(id: string): void {
-  //   this.additionalEmails.removeControl(id)
-  //   this._changeDetectorRef.detectChanges()
-
-  //   const input = this.inputs.filter(
-  //     (x) => this.parseInt(x.nativeElement.id) > this.parseInt(id)
-  //   )?.[0]
-  //   if (input) {
-  //     input.nativeElement.focus()
-  //   } else if (this.inputs.last) {
-  //     this.inputs.last.nativeElement.focus()
-  //   }
-  // }
-
-  // addAdditionalEmail(): void {
-  //   const controlName = ++this.additionalEmailsCount
-  //   this.additionalEmails.addControl(
-  //     this.zeroPad(controlName, 2),
-  //     new UntypedFormControl('', {
-  //       validators: [OrcidValidators.email],
-  //     })
-  //   )
-  //   this._changeDetectorRef.detectChanges()
-  //   const input = this.inputs.last.nativeElement as HTMLInputElement
-  //   input.focus()
-  // }
-
-  parseInt(number: string) {
-    return parseInt(number, 10)
-  }
-
-  zeroPad(num, places) {
-    return String(num).padStart(places, '0')
-  }
-
   public ngAfterViewInit() {
     this._ref.detectChanges()
   }

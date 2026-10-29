@@ -7,4 +7,5 @@ export enum RegisterBackendErrors {
   'duplicatedAdditionalEmail',
   'orcid.frontend.verify.unclaimed_email',
   'orcid.frontend.verify.deactivated_email',
+  'disposable_email',
 }
