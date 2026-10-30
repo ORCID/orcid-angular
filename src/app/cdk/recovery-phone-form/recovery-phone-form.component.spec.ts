@@ -87,6 +87,23 @@ describe('RecoveryPhoneFormComponent', () => {
     ).toBeTruthy()
   })
 
+  it('puts the links one blank line below the consent copy (PD-14562)', () => {
+    fixture.detectChanges()
+
+    const [copy, links] = Array.from(
+      fixture.nativeElement.querySelectorAll(
+        '.recovery-phone-consent p'
+      ) as NodeListOf<HTMLElement>
+    )
+    const gap =
+      links.getBoundingClientRect().top - copy.getBoundingClientRect().bottom
+    // the links are one line, so their own height is the line height
+    const lineHeight = links.getBoundingClientRect().height
+
+    expect(lineHeight).toBeGreaterThan(0)
+    expect(Math.abs(gap - lineHeight)).toBeLessThanOrEqual(1)
+  })
+
   it('states the consent AWS Notify requires, links included (F3.1)', () => {
     fixture.detectChanges()
 

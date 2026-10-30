@@ -238,6 +238,124 @@ describe('AuthChallengeComponent', () => {
       return fixture.nativeElement.textContent
     }
 
+    it('stops a press on the send link from taking focus off the password (PD-14598)', () => {
+      offer()
+      const press = new MouseEvent('mousedown', {
+        bubbles: true,
+        cancelable: true,
+      })
+
+      fixture.nativeElement.querySelector(SEND_TOGGLE).dispatchEvent(press)
+
+      // a press whose default is prevented does not move focus, so the
+      // password does not blur and nothing above the link moves
+      expect(press.defaultPrevented).toBeTrue()
+    })
+
+    it('does not call the empty password wrong when focus moves to the code field (PD-14598 R5.1)', fakeAsync(() => {
+      offer()
+      const password: HTMLInputElement =
+        fixture.nativeElement.querySelector('#password')
+      password.focus()
+
+      component.sendRecoveryPhoneCode(new Event('click'))
+      fixture.detectChanges()
+      tick()
+      fixture.detectChanges()
+
+      expect(document.activeElement).toBe(
+        fixture.nativeElement.querySelector(PHONE_CODE_INPUT)
+      )
+      expect(component.passwordWasTouched).toBeFalse()
+      expect(text()).not.toContain('Password cannot be empty')
+    }))
+
+    it('still says the password is missing once the user has left it (PD-14598 R5.3)', fakeAsync(() => {
+      offer()
+      const password = component.parentForm.get(component.passwordControlName)
+      password.addValidators(Validators.required)
+      password.setValue('')
+      password.markAsTouched()
+
+      component.sendRecoveryPhoneCode(new Event('click'))
+      fixture.detectChanges()
+      tick()
+      fixture.detectChanges()
+
+      expect(text()).toContain('Password cannot be empty')
+    }))
+
+    it('says the password is missing once the code it goes with is typed (PD-14598 R5.3)', fakeAsync(() => {
+      offer()
+      const password = component.parentForm.get(component.passwordControlName)
+      password.addValidators(Validators.required)
+      password.setValue('')
+      component.sendRecoveryPhoneCode(new Event('click'))
+      fixture.detectChanges()
+      tick()
+      fixture.detectChanges()
+      expect(text()).not.toContain('Password cannot be empty')
+
+      component.parentForm
+        .get(component.recoveryPhoneControlName)
+        .setValue('123456')
+      fixture.detectChanges()
+
+      // "Verify" is greyed out, and this is what says why - the field's own
+      // error state (its outline) says it too
+      expect(password.touched).toBeFalse()
+      expect(text()).toContain('Password cannot be empty')
+      expect(
+        fixture.nativeElement
+          .querySelector('#password')
+          .closest('mat-form-field')
+          .classList.contains('mat-form-field-invalid')
+      ).toBeTrue()
+    }))
+
+    it('keeps focus on press for every link in every mode (PD-14598 R5.2)', fakeAsync(() => {
+      const LINKS =
+        '.link-button, a[href="#"], a[target="_blank"], #cy-cancel-account-verification'
+      const pressEach = (mode: string) => {
+        const links: HTMLElement[] = Array.from(
+          fixture.nativeElement.querySelectorAll(LINKS)
+        )
+        expect(links.length).withContext(mode).toBeGreaterThan(0)
+        for (const link of links) {
+          const press = new MouseEvent('mousedown', {
+            bubbles: true,
+            cancelable: true,
+          })
+          link.dispatchEvent(press)
+          expect(press.defaultPrevented)
+            .withContext(`${mode}: ${link.textContent.trim()}`)
+            .toBeTrue()
+        }
+      }
+
+      offer()
+      pressEach('authentication app')
+
+      component.toggleRecoveryCode(new Event('click'))
+      fixture.detectChanges()
+      tick()
+      pressEach('recovery code')
+
+      component.toggleRecoveryCode(new Event('click'))
+      component.sendRecoveryPhoneCode(new Event('click'))
+      recoveryPhone.codeSent = true
+      recoveryPhone.resendSeconds = 0
+      fixture.detectChanges()
+      tick()
+      pressEach('recovery phone code')
+
+      offer(false)
+      component.showRecoveryPhoneCode = false
+      fixture.detectChanges()
+      tick()
+      pressEach('no recovery phone')
+    }))
+
     it('says nothing about a recovery phone number when there is no option', () => {
       expect(fixture.debugElement.query(By.css(SEND_TOGGLE))).toBeFalsy()
       expect(text()).toContain('ORCID help centre')
@@ -336,7 +454,7 @@ describe('AuthChallengeComponent', () => {
       expect(error.nativeElement.getAttribute('role')).toBe('alert')
     }))
 
-    it('says when the account has asked for too many codes today', fakeAsync(() => {
+    it('says when the account has asked for too many codes today, in a warning notice (PD-14603)', fakeAsync(() => {
       enterPhoneMode()
       tick()
       recoveryPhone.errorCode = 'SEND_LIMIT_REACHED'
@@ -346,14 +464,25 @@ describe('AuthChallengeComponent', () => {
         By.css('#twoFactorRecoveryPhoneCode-send-error')
       )
       expect(error).toBeTruthy()
+      expect(error.nativeElement.tagName.toLowerCase()).toBe(
+        'app-alert-message'
+      )
       expect(error.nativeElement.getAttribute('role')).toBe('alert')
+      expect(error.nativeElement.querySelector('.alert-warning')).not.toBeNull()
       // "try again" is the wrong advice for a cap that lifts tomorrow
-      expect(error.nativeElement.textContent).toContain(
-        'Too many codes have been sent to your recovery phone number today'
+      expect(error.nativeElement.textContent.replace(/\s+/g, ' ').trim()).toBe(
+        'warning_amber Too many verification codes have been requested for this account today. Please try again tomorrow or use your authentication app or recovery codes instead.'
       )
-      expect(error.nativeElement.textContent).not.toContain(
-        'We could not send a code'
-      )
+      expect(
+        fixture.nativeElement
+          .querySelector('#twoFactorRecoveryPhoneCode')
+          .getAttribute('aria-describedby')
+      ).toContain('twoFactorRecoveryPhoneCode-send-error')
+      expect(
+        fixture.debugElement.query(
+          By.css('mat-error#twoFactorRecoveryPhoneCode-send-error')
+        )
+      ).toBeNull()
     }))
 
     it('stops offering a resend once the daily cap is reached', fakeAsync(() => {

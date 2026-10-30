@@ -525,12 +525,113 @@ describe('TwoFactorAuthenticationFormComponent', () => {
       component.hasRecoveryPhone = false
       fixture.detectChanges()
 
-      expect(element('cy-2fa-help-center')).toBeNull()
       expect(element('cy-send-recovery-phone-code')).toBeNull()
+      expect(element('cy-use-a-recovery-code')).toBeNull()
       expect(fixture.nativeElement.textContent).toContain(
         'Enter a recovery code'
       )
     })
+  })
+
+  describe('the escape rows on the sign-in 2FA step (PD-14602)', () => {
+    const text = (): string =>
+      fixture.nativeElement.textContent.replace(/\s+/g, ' ')
+
+    function below(lower: HTMLElement, upper: HTMLElement): boolean {
+      return (
+        lower.getBoundingClientRect().top >=
+        upper.getBoundingClientRect().bottom - 1
+      )
+    }
+
+    it('puts each flag-off link on the line below its question (R6.1)', () => {
+      fixture.detectChanges()
+
+      for (const id of ['cy-enter-a-recovery-code', 'cy-2fa-help-center']) {
+        const link = element(id)
+        const block = link.closest('.two-factor-escape') as HTMLElement
+        const question = block.querySelector(
+          '.two-factor-escape__question'
+        ) as HTMLElement
+
+        expect(block.classList).toContain('text-center')
+        expect(question.contains(link)).toBeFalse()
+        expect(below(link, question)).toBeTrue()
+      }
+      expect(element('cy-enter-a-recovery-code').textContent.trim()).toBe(
+        'Enter a recovery code'
+      )
+      expect(element('cy-2fa-help-center').textContent.trim()).toBe(
+        'ORCID Help Center'
+      )
+    })
+
+    it('reaches every flag-off link by keyboard (R6.4)', () => {
+      fixture.detectChanges()
+
+      expect(element('cy-enter-a-recovery-code').tagName).toBe('BUTTON')
+      expect(element('cy-2fa-help-center').getAttribute('href')).toBe(
+        component.twoFactorHelpArticleUrl
+      )
+    })
+
+    for (const flag of [false, true]) {
+      describe(`with the recovery phone flag ${flag ? 'on' : 'off'}`, () => {
+        const enterRecoveryCode = flag
+          ? 'cy-use-a-recovery-code'
+          : 'cy-enter-a-recovery-code'
+
+        beforeEach(() => {
+          component.recoveryPhoneOptionAvailable = flag
+          component.hasRecoveryPhone = flag
+          fixture.detectChanges()
+        })
+
+        it('offers the way back to the authentication app in recovery code mode (R6.2)', () => {
+          expect(element('cy-use-authentication-app')).toBeNull()
+
+          element(enterRecoveryCode).click()
+          fixture.detectChanges()
+
+          expect(component.mode).toBe('recovery')
+          expect(element(enterRecoveryCode)).toBeNull()
+          expect(text()).toContain(
+            "Don't have your recovery codes? Use your authentication app instead"
+          )
+
+          element('cy-use-authentication-app').click()
+          fixture.detectChanges()
+
+          expect(component.mode).toBe('totp')
+          expect(element('cy-use-authentication-app')).toBeNull()
+          expect(element(enterRecoveryCode)).not.toBeNull()
+        })
+
+        it('toggles as often as the user wants (R6.2)', () => {
+          for (let round = 0; round < 3; round++) {
+            element(enterRecoveryCode).click()
+            fixture.detectChanges()
+            expect(component.mode).toBe('recovery')
+
+            element('cy-use-authentication-app').click()
+            fixture.detectChanges()
+            expect(component.mode).toBe('totp')
+          }
+        })
+
+        it('keeps the second row in both modes (R6.3)', () => {
+          const second = flag
+            ? 'cy-send-recovery-phone-code'
+            : 'cy-2fa-help-center'
+          expect(element(second)).not.toBeNull()
+
+          element(enterRecoveryCode).click()
+          fixture.detectChanges()
+
+          expect(element(second)).not.toBeNull()
+        })
+      })
+    }
   })
 
   describe('the escape rows against their frame', () => {

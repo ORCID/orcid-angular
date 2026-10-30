@@ -66,6 +66,7 @@ export class TwoFactorSetupComponent implements OnInit, OnDestroy {
   enableSubtitle = $localize`:@@account.step1AuthenticationApp:Step 1 of 2 - Authentication app`
   recoveryPhoneSubtitle = $localize`:@@account.step2Of3RecoveryPhone:Step 2 of 3 - Recovery phone number`
   recoveryCodesSubtitle = $localize`:@@account.step2RecoveryCodes:Step 2 of 2 - 2FA recovery codes`
+  enableNextLabel = $localize`:@@account.nextStepRecoveryCodes:Next step - 2FA recovery codes`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -94,6 +95,7 @@ export class TwoFactorSetupComponent implements OnInit, OnDestroy {
           if (enabled) {
             this.enableSubtitle = $localize`:@@account.step1Of3AuthenticationApp:Step 1 of 3 - Authentication app`
             this.recoveryCodesSubtitle = $localize`:@@account.step3Of3RecoveryCodes:Step 3 of 3 - 2FA recovery codes`
+            this.enableNextLabel = $localize`:@@account.nextStepAddRecoveryPhone:Next step - Add a recovery phone number`
           }
           this.flagResolved = true
         },

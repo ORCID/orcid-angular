@@ -133,6 +133,23 @@ describe('TwoFactorEnableComponent', () => {
     ).toBeFalse()
   })
 
+  it('should label the button with the next step it is given (PD-14561)', () => {
+    const button = (): string =>
+      debugElement.nativeElement
+        .querySelector('#cy-step-view-primary-action')
+        .textContent.trim()
+
+    expect(button()).toBe('Next step - 2FA recovery codes')
+
+    fixture.componentRef.setInput(
+      'primaryLabel',
+      'Next step - Add a recovery phone number'
+    )
+    fixture.detectChanges()
+
+    expect(button()).toBe('Next step - Add a recovery phone number')
+  })
+
   it('should expose static setup code tooltip text', () => {
     expect(component.textCodeTooltip).toBe('Copy setup code to clipboard')
   })

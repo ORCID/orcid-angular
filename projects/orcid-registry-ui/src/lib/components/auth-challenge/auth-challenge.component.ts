@@ -32,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { Subscription } from 'rxjs'
+import { AlertMessageComponent } from '@orcid/ui'
 
 import {
   AUTH_CHALLENGE_HEADING_ID,
@@ -57,6 +58,7 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
     MatInputModule,
     ReactiveFormsModule,
     MatDialogModule,
+    AlertMessageComponent,
   ],
   templateUrl: './auth-challenge.component.html',
   styleUrls: [
@@ -113,11 +115,16 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
   /** The third mode: a code sent by text instead of a code from the app. */
   showRecoveryPhoneCode = false
   errorMatcher = new ErrorStateMatcherForTwoFactorFields()
+  /** The outline and aria-invalid follow the same rule as the message. */
+  passwordErrorMatcher: ErrorStateMatcher = {
+    isErrorState: (control) =>
+      !!(control && control.invalid && this.passwordMissingShows),
+  }
   loading = false
   /**
    * True only while a recovery phone number code is with the registry. That
    * request is the one thing here that cannot be taken back, so the cancel
-   * control is held shut for as long as it is outstanding (R5.4).
+   * control is held shut for as long as it is outstanding.
    */
   verifying = false
 
@@ -189,6 +196,23 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     return this.parentForm?.get(this.passwordControlName)?.touched
   }
 
+  /**
+   * An empty password is called out once the user has left the field, or once
+   * they have typed the code it goes with: that is when "Verify" being greyed
+   * out needs explaining (PD-14598).
+   */
+  get passwordMissingShows(): boolean {
+    if (this.passwordWasTouched) {
+      return true
+    }
+    const answer = this.showRecoveryPhoneCode
+      ? this.recoveryPhoneControlName
+      : this.showRecoveryCode
+      ? this.recoveryControlName
+      : this.codeControlName
+    return !!this.parentForm?.get(answer)?.value
+  }
+
   get twoFactorCodeWasTouched() {
     return this.parentForm?.get(this.codeControlName)?.touched
   }
@@ -255,15 +279,11 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.showRecoveryCode = !this.showRecoveryCode
 
     if (this.showRecoveryCode) {
-      setTimeout(() => {
-        this.twoFactorRecoveryCodeInput?.nativeElement.focus()
-      })
+      this.focusLeavingPasswordAsItWas(() => this.twoFactorRecoveryCodeInput)
       this.parentForm?.get(this.codeControlName)?.setValue(null)
       this.parentForm?.get(this.recoveryControlName)?.markAsUntouched()
     } else {
-      setTimeout(() => {
-        this.twoFactorCodeInput?.nativeElement.focus()
-      })
+      this.focusLeavingPasswordAsItWas(() => this.twoFactorCodeInput)
       this.parentForm?.get(this.recoveryControlName)?.setValue(null)
       this.parentForm?.get(this.codeControlName)?.markAsUntouched()
     }
@@ -286,10 +306,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.parentForm?.get(this.recoveryControlName)?.setValue(null)
     this.parentForm?.get(this.recoveryPhoneControlName)?.markAsUntouched()
     this.updateTwoFactorValidators()
-
-    setTimeout(() => {
-      this.twoFactorRecoveryPhoneCodeInput?.nativeElement.focus()
-    })
+    this.focusLeavingPasswordAsItWas(() => this.twoFactorRecoveryPhoneCodeInput)
 
     this.recoveryPhone?.sendCode()
   }
@@ -318,10 +335,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.parentForm?.get(this.recoveryPhoneControlName)?.setValue(null)
     this.parentForm?.get(this.recoveryControlName)?.markAsUntouched()
     this.updateTwoFactorValidators()
-
-    setTimeout(() => {
-      this.twoFactorRecoveryCodeInput?.nativeElement.focus()
-    })
+    this.focusLeavingPasswordAsItWas(() => this.twoFactorRecoveryCodeInput)
   }
 
   /** Back out of the phone code and use the authentication app after all. */
@@ -332,9 +346,25 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.parentForm?.get(this.recoveryPhoneControlName)?.setValue(null)
     this.parentForm?.get(this.codeControlName)?.markAsUntouched()
     this.updateTwoFactorValidators()
+    this.focusLeavingPasswordAsItWas(() => this.twoFactorCodeInput)
+  }
 
+  /**
+   * Moving to another code field blurs the password field, which would mark it
+   * touched and show "Password cannot be empty" before the user has done
+   * anything wrong (PD-14598). A switch of mode is not the user leaving the
+   * field, so an untouched password stays untouched.
+   */
+  private focusLeavingPasswordAsItWas(
+    target: () => ElementRef | undefined
+  ): void {
+    const password = this.parentForm?.get(this.passwordControlName)
+    const untouched = !!password && !password.touched
     setTimeout(() => {
-      this.twoFactorCodeInput?.nativeElement.focus()
+      target()?.nativeElement.focus()
+      if (untouched) {
+        password.markAsUntouched()
+      }
     })
   }
 
@@ -486,7 +516,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // Only stops this component listening. What follows from a code the
     // registry has already accepted does not hang off this subscription, so
-    // dropping it here cannot lose the record notice (R5.4).
+    // dropping it here cannot lose what the host does with the answer.
     this.verification?.unsubscribe()
 
     // The countdown belongs to the challenge, not to the application.

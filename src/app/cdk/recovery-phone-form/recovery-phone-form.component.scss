@@ -185,13 +185,16 @@
 }
 
 /*
- * The consent copy and the two links it ends with are one run of text in the
- * design, so the links follow on the next line with nothing but the line
- * height between them: as separate children of the form they would be pushed
- * apart by its 24px gap.
+ * The links sit one blank line below the consent copy (PD-14562), not the
+ * form's 24px gap apart.
  */
 .recovery-phone-consent p {
   margin: 0;
+}
+
+.recovery-phone-consent p + p {
+  margin-top: var(--orcid-space-base, 16px);
+  margin-top: 1lh;
 }
 
 .recovery-phone-error {

@@ -188,6 +188,12 @@ describe('Component: TwoFactorSetupComponent', () => {
       )
     })
 
+    it('should point the step 1 button at the recovery codes (PD-14561 R1.2)', () => {
+      expect(boundProperty('app-two-factor-enable', 'primaryLabel')).toBe(
+        'Next step - 2FA recovery codes'
+      )
+    })
+
     it('should go straight from the app step to the recovery codes (R2.1)', () => {
       completeStepOne()
 
@@ -221,6 +227,12 @@ describe('Component: TwoFactorSetupComponent', () => {
 
       expect(boundProperty('app-two-factor-recovery-codes', 'subtitle')).toBe(
         'Step 3 of 3 - 2FA recovery codes'
+      )
+    })
+
+    it('should point the step 1 button at the recovery phone (PD-14561 R1.1)', () => {
+      expect(boundProperty('app-two-factor-enable', 'primaryLabel')).toBe(
+        'Next step - Add a recovery phone number'
       )
     })
 
