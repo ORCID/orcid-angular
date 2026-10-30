@@ -112,18 +112,18 @@
           <context context-type="linenumber">157,159</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.recoveryPhoneChallengeSendLimitReached" datatype="html" resname="account.recoveryPhoneChallengeSendLimitReached">
-        <source>Too many codes have been sent to your recovery phone number today. Please try again tomorrow, or use your authentication app or a recovery code.</source>
+      <trans-unit id="account.recoveryPhoneChallengeSendLimitReachedNotice" datatype="html" resname="account.recoveryPhoneChallengeSendLimitReachedNotice">
+        <source>Too many verification codes have been requested for this account today. Please try again tomorrow or use your authentication app or recovery codes instead.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">185,188</context>
+          <context context-type="linenumber">189,193</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.recoveryPhoneChallengeCodeNotSent" datatype="html" resname="account.recoveryPhoneChallengeCodeNotSent">
         <source>We could not send a code to your recovery phone number. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">199,201</context>
+          <context context-type="linenumber">205,207</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.twoPassword" datatype="html" resname="account.twoPassword">
@@ -131,11 +131,11 @@
         <target>2 要素認証</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">214,216</context>
+          <context context-type="linenumber">220,222</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security/settings-security.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -146,7 +146,7 @@
         <source>Enter the 6-digit code from your authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">241,243</context>
+          <context context-type="linenumber">247,249</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.badVerificationCode" datatype="html" resname="ngOrcid.signin.2fa.badVerificationCode">
@@ -154,7 +154,7 @@
         <target>認証コードが無効です</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">246,248</context>
+          <context context-type="linenumber">252,254</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -162,11 +162,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">469,471</context>
+          <context context-type="linenumber">490,492</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">120,122</context>
+          <context context-type="linenumber">119,121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.verificationCodeRequired" datatype="html" resname="ngOrcid.signin.2fa.verificationCodeRequired">
@@ -174,7 +174,7 @@
         <target>認証コードが必要です</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">253,255</context>
+          <context context-type="linenumber">259,261</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -186,7 +186,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">89,91</context>
+          <context context-type="linenumber">88,90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.badVerificationCodeLength" datatype="html" resname="ngOrcid.signin.2fa.badVerificationCodeLength">
@@ -194,7 +194,7 @@
         <target>認証コードの長さが不正です</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">261,263</context>
+          <context context-type="linenumber">267,269</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -206,7 +206,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">106,108</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryCode" datatype="html" resname="ngOrcid.signin.2fa.recoveryCode">
@@ -214,7 +214,7 @@
         <target>復元コード</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">289,291</context>
+          <context context-type="linenumber">295,297</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -222,7 +222,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">218,219</context>
+          <context context-type="linenumber">239,240</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDevice2" datatype="html" resname="ngOrcid.signin.2fa.noDevice2">
@@ -230,7 +230,7 @@
         <target>復元コードを入力します。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">318</context>
+          <context context-type="linenumber">324</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -238,7 +238,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">188,189</context>
+          <context context-type="linenumber">208,210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.badRecoveryCode" datatype="html" resname="ngOrcid.signin.2fa.badRecoveryCode">
@@ -246,7 +246,7 @@
         <target>復元コードが無効です</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">322,324</context>
+          <context context-type="linenumber">328,330</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -254,7 +254,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">475,477</context>
+          <context context-type="linenumber">496,498</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryCodeRequired" datatype="html" resname="ngOrcid.signin.2fa.recoveryCodeRequired">
@@ -262,7 +262,7 @@
         <target>リカバリコードが必要です</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">329,331</context>
+          <context context-type="linenumber">335,337</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -270,7 +270,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">258</context>
+          <context context-type="linenumber">279</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.badRecoveryCodeLength" datatype="html" resname="ngOrcid.signin.2fa.badRecoveryCodeLength">
@@ -278,7 +278,7 @@
         <target>リカバリコードの長さが無効です</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">337,339</context>
+          <context context-type="linenumber">343,345</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -286,14 +286,14 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">268</context>
+          <context context-type="linenumber">289</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.recoveryPhoneCodeSentTo" datatype="html" resname="account.recoveryPhoneCodeSentTo">
         <source>Verification code sent to</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">367</context>
+          <context context-type="linenumber">373</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
@@ -305,11 +305,11 @@
         <target>デバイスをお持ちではありませんか?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">384,386</context>
+          <context context-type="linenumber">390,392</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">446,448</context>
+          <context context-type="linenumber">454,456</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -317,11 +317,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">114,116</context>
+          <context context-type="linenumber">129,131</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">181,183</context>
+          <context context-type="linenumber">199,201</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.useARecoveryCode" datatype="html" resname="account.useARecoveryCode">
@@ -329,11 +329,11 @@
         <target>代わりにリカバリーコードを使用してください。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">393,395</context>
+          <context context-type="linenumber">400,402</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">455,457</context>
+          <context context-type="linenumber">464,466</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -341,47 +341,47 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">127,129</context>
+          <context context-type="linenumber">142,144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.dontHaveYourDeviceOrYourRecoveryCodes" datatype="html" resname="account.dontHaveYourDeviceOrYourRecoveryCodes">
         <source>Don&apos;t have your device or your recovery codes?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">410,412</context>
+          <context context-type="linenumber">417,419</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">484,486</context>
+          <context context-type="linenumber">499,501</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.didntGetTheCode" datatype="html" resname="account.didntGetTheCode">
         <source>Didn&apos;t get the code?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">416,418</context>
+          <context context-type="linenumber">423,425</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">428,430</context>
+          <context context-type="linenumber">449,451</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.youCanResendIn" datatype="html" resname="account.youCanResendIn">
         <source>You can resend in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">422</context>
+          <context context-type="linenumber">429</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">433</context>
+          <context context-type="linenumber">454</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.seconds" datatype="html" resname="account.seconds">
         <source>seconds</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">426</context>
+          <context context-type="linenumber">433</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
@@ -389,18 +389,18 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">437</context>
+          <context context-type="linenumber">458</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.resendCode" datatype="html" resname="account.resendCode">
         <source>Resend code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">439,441</context>
+          <context context-type="linenumber">447,449</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">449,451</context>
+          <context context-type="linenumber">470,472</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.dontHaveYourRecoveryCodes" datatype="html" resname="account.dontHaveYourRecoveryCodes">
@@ -408,7 +408,7 @@
         <target>リカバリーコードをお持ちではありませんか？</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">461,463</context>
+          <context context-type="linenumber">470,472</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -416,7 +416,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">396,398</context>
+          <context context-type="linenumber">111,113</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">417,419</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.useYourAuthenticationAppInstead" datatype="html" resname="account.useYourAuthenticationAppInstead">
@@ -424,7 +428,7 @@
         <target>代わりに認証アプリを使用してください。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">470,472</context>
+          <context context-type="linenumber">480,482</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -432,14 +436,18 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">404,406</context>
+          <context context-type="linenumber">120,122</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
+          <context context-type="linenumber">425,427</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.sendCodeToRecoveryPhoneNumber" datatype="html" resname="account.sendCodeToRecoveryPhoneNumber">
         <source>Send a code to your recovery phone number and disable 2FA</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">495,497</context>
+          <context context-type="linenumber">511,513</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDeviceOrRecovery" datatype="html" resname="ngOrcid.signin.2fa.noDeviceOrRecovery">
@@ -447,7 +455,7 @@
         <target>デバイスや復元コードがありませんか？</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">501,503</context>
+          <context context-type="linenumber">517,519</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -455,11 +463,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">165,167</context>
+          <context context-type="linenumber">180,182</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">192,194</context>
+          <context context-type="linenumber">216,218</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.knowledge" datatype="html" resname="topBar.knowledge">
@@ -467,7 +475,7 @@
         <target>ORCIDヘルプセンター</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">510,512</context>
+          <context context-type="linenumber">527,529</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -483,7 +491,7 @@
         <target>アカウントを確認して続行</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">527,529</context>
+          <context context-type="linenumber">544,546</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5" datatype="html" resname="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5">
@@ -491,7 +499,7 @@
         <target>アカウントの確認をキャンセル</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">539,541</context>
+          <context context-type="linenumber">557,559</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.deleteAlternateAccounts" datatype="html" resname="account.deleteAlternateAccounts">
@@ -1799,7 +1807,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.html</context>
@@ -2013,7 +2021,7 @@
         <target>アカウントパスワード</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security/settings-security.component.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.alternativeSignin" datatype="html" resname="account.alternativeSignin">
@@ -2021,7 +2029,7 @@
         <target>サインイン用アカウント</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security/settings-security.component.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.copyTheCodeBelow" datatype="html" resname="account.copyTheCodeBelow">
@@ -2149,7 +2157,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">307</context>
+          <context context-type="linenumber">305</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.pleaseCheckYourDetails" datatype="html" resname="ngOrcid.signin.pleaseCheckYourDetails">
@@ -2253,7 +2261,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.addAccessTrustedIndividuals" datatype="html" resname="account.addAccessTrustedIndividuals">
@@ -4910,7 +4918,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">331</context>
+          <context context-type="linenumber">352</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.recoveryPhoneResendTooSoon" datatype="html" resname="account.recoveryPhoneResendTooSoon">
@@ -4928,7 +4936,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">314</context>
+          <context context-type="linenumber">312</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.verificationCodeRequired" datatype="html" resname="account.verificationCodeRequired">
@@ -5007,7 +5015,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">287</context>
+          <context context-type="linenumber">285</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.recoveryPhoneSendLimitReached" datatype="html" resname="account.recoveryPhoneSendLimitReached">
@@ -5025,7 +5033,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">316</context>
+          <context context-type="linenumber">314</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.countries" datatype="html" resname="side-bar.countries">
@@ -6940,18 +6948,18 @@
         <source>Don&apos;t have your device or your recovery codes?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">138,140</context>
+          <context context-type="linenumber">153,155</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">424,426</context>
+          <context context-type="linenumber">445,447</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.sendCodeToRecoveryNumber" datatype="html" resname="ngOrcid.signin.2fa.sendCodeToRecoveryNumber">
         <source>Send a code to your recovery number and disable 2FA</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">148,150</context>
+          <context context-type="linenumber">163,165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.orcidHelpCenter" datatype="html" resname="shared.orcidHelpCenter">
@@ -6959,11 +6967,11 @@
         <target>ORCIDヘルプセンター</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">190</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">205,206</context>
+          <context context-type="linenumber">226</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/footer/footer.component.html</context>
@@ -6974,49 +6982,49 @@
         <source>Recovery number code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">295,296</context>
+          <context context-type="linenumber">316,317</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCodeRequired" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCodeRequired">
         <source>A recovery number code is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">340</context>
+          <context context-type="linenumber">361</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCodeLength" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCodeLength">
         <source>Invalid recovery number code length</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">350</context>
+          <context context-type="linenumber">371</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.authenticateAndSignIn" datatype="html" resname="ngOrcid.signin.2fa.authenticateAndSignIn">
         <source>Authenticate and sign in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
-          <context context-type="linenumber">463,465</context>
+          <context context-type="linenumber">484,486</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.badRecoveryNumberCode" datatype="html" resname="ngOrcid.signin.2fa.badRecoveryNumberCode">
         <source>Invalid recovery number code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">284</context>
+          <context context-type="linenumber">282</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noRecoveryNumber" datatype="html" resname="ngOrcid.signin.2fa.noRecoveryNumber">
         <source>This account has no recovery phone number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">305</context>
+          <context context-type="linenumber">303</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberSendLimitReached" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberSendLimitReached">
         <source>Too many codes have been sent to your recovery phone number today. Please try again tomorrow, or use your authentication app or a recovery code.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
-          <context context-type="linenumber">309</context>
+          <context context-type="linenumber">307</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.setVisibilityFor" datatype="html" resname="shared.setVisibilityFor">
@@ -11723,11 +11731,11 @@
         <target>Cookie設定</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/footer/footer.component.html</context>
-          <context context-type="linenumber">207,209</context>
+          <context context-type="linenumber">209,211</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/footer/footer.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.ariaLabelFooter" datatype="html" resname="layout.ariaLabelFooter">
@@ -11735,7 +11743,7 @@
         <target>フッター</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/footer/footer.component.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11747,7 +11755,7 @@
         <target>ライセンス</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/footer/footer.component.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="confirm-oauth-access.connectingresearchandresearchers" datatype="html" resname="confirm-oauth-access.connectingresearchandresearchers">
@@ -12187,7 +12195,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">199,201</context>
+          <context context-type="linenumber">210,212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.registerNow" datatype="html" resname="ngOrcid.signin.registerNow">
@@ -12467,7 +12475,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.forExampleEmail" datatype="html" resname="recovery.forExampleEmail">
@@ -18172,7 +18180,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">984</context>
+          <context context-type="linenumber">990</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -18192,7 +18200,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">986</context>
+          <context context-type="linenumber">992</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.contactSupport" datatype="html" resname="shared.contactSupport">
@@ -18204,11 +18212,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">987</context>
+          <context context-type="linenumber">993</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1008</context>
+          <context context-type="linenumber">1014</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -19999,12 +20007,19 @@
           <context context-type="linenumber">119,120</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ngOrcid.signin.passwordHasBeenReset" datatype="html" resname="ngOrcid.signin.passwordHasBeenReset">
+        <source>Your account password has been reset</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">16,18</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="account.or" datatype="html" resname="account.or">
         <source>or</source>
         <target>または</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.orcidID" datatype="html" resname="account.orcidID">
@@ -20012,7 +20027,7 @@
         <target>ORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.forExample" datatype="html" resname="ngOrcid.signin.forExample">
@@ -20020,7 +20035,7 @@
         <target>例: joe@institution.edu または 0000-1234-5678-9101</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">41,42</context>
+          <context context-type="linenumber">52,53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.pleaseEnterEmailAddress" datatype="html" resname="ngOrcid.signin.pleaseEnterEmailAddress">
@@ -20028,7 +20043,7 @@
         <target>メールアドレスまたはORCID iDを入力してください</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">47,48</context>
+          <context context-type="linenumber">58,59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.enterValidEmailOrOrcidForExample" datatype="html" resname="ngOrcid.signin.enterValidEmailOrOrcidForExample">
@@ -20036,63 +20051,63 @@
         <target>有効なEメールアドレスまたはORCID iDを入力してください。例:  joe@institution.edu または 0000-1234-5678-9101</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">53,55</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.title" datatype="html" resname="ngOrcid.signin.passwordResetRequired.title">
         <source>Your ORCID account password needs to be reset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.body" datatype="html" resname="ngOrcid.signin.passwordResetRequired.body">
         <source>To help maintain the security of your ORCID account please reset your account password.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">90,91</context>
+          <context context-type="linenumber">101,102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.cannotSignIn" datatype="html" resname="ngOrcid.signin.passwordResetRequired.cannotSignIn">
         <source>You will not be able to sign in to ORCID until your password has been reset.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">93,94</context>
+          <context context-type="linenumber">104,105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.sendEmail" datatype="html" resname="ngOrcid.signin.passwordResetRequired.sendEmail">
         <source>Send password reset email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentTo" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentTo">
         <source>We have sent a password reset email to</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentToOthers" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentToOthers">
         <source>and any other verified email addresses on your account.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentToRecord" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentToRecord">
         <source>We have sent a password reset email to the email addresses on your ORCID record.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">121,122</context>
+          <context context-type="linenumber">132,133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.checkSpam" datatype="html" resname="ngOrcid.signin.passwordResetRequired.checkSpam">
         <source>If you do not receive it within 10 minutes please check your spam folder.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">125,126</context>
+          <context context-type="linenumber">136,137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.yourPasswordMoreThan" datatype="html" resname="ngOrcid.signin.yourPasswordMoreThan">
@@ -20100,7 +20115,7 @@
         <target>パスワードが256文字以上入力されています。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">176</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.yourCannotSignIn" datatype="html" resname="ngOrcid.signin.yourCannotSignIn">
@@ -20108,7 +20123,7 @@
         <target>パスワードをリセットするまで、このORCIDアカウントにサインインできません。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">168,169</context>
+          <context context-type="linenumber">179,180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.resetYourPassword" datatype="html" resname="ngOrcid.signin.resetYourPassword">
@@ -20116,7 +20131,7 @@
         <target>パスワードをリセット</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">172,173</context>
+          <context context-type="linenumber">183,184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.username" datatype="html" resname="ngOrcid.signin.username">
@@ -20124,7 +20139,7 @@
         <target>メールまたは16桁のORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.claiming" datatype="html" resname="ngOrcid.signin.claiming">
@@ -20132,7 +20147,7 @@
         <target>アカウントの申請</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1005</context>
+          <context context-type="linenumber">1011</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.verify.claimSent" datatype="html" resname="ngOrcid.signin.verify.claimSent">
@@ -20140,7 +20155,7 @@
         <target>ORCIDレコードを申請いただきありがとうございます。今からお送りするメールの手順に従って処理を完了してください。メールが届かない場合は、</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1007</context>
+          <context context-type="linenumber">1013</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.currentlySign" datatype="html" resname="ngOrcid.signin.currentlySign">
@@ -20301,24 +20316,12 @@
           <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.nextStepRecoveryCodes" datatype="html" resname="account.nextStepRecoveryCodes">
-        <source>Next step - 2FA recovery codes</source>
-        <target>次のステップ - 2FAリカバリーコード</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="account.scanQrCodeWithAuthApp" datatype="html" resname="account.scanQrCodeWithAuthApp">
         <source>Scan the QR code with your authentication app.</source>
         <target>認証アプリでQRコードをスキャンしてください。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">11,13</context>
+          <context context-type="linenumber">10,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.qrCodeAltText" datatype="html" resname="account.qrCodeAltText">
@@ -20326,7 +20329,7 @@
         <target>QRコード</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.cantScanQrCodePrefix" datatype="html" resname="account.cantScanQrCodePrefix">
@@ -20334,7 +20337,7 @@
         <target>QRコードをスキャンできない場合</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">25,26</context>
+          <context context-type="linenumber">24,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.getSetupCodeInstead" datatype="html" resname="account.getSetupCodeInstead">
@@ -20342,7 +20345,7 @@
         <target>代わりにセットアップコードを入手してください</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">33,35</context>
+          <context context-type="linenumber">32,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.copySetupCode" datatype="html" resname="account.copySetupCode">
@@ -20350,7 +20353,7 @@
         <target>セットアップコードをコピー</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.enterVerificationCodeFromAuthApp" datatype="html" resname="account.enterVerificationCodeFromAuthApp">
@@ -20358,7 +20361,7 @@
         <target>認証アプリに表示される6桁の認証コードを入力してください</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">62,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.step1AuthenticationApp" datatype="html" resname="account.step1AuthenticationApp">
@@ -20373,12 +20376,28 @@
           <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="account.nextStepRecoveryCodes" datatype="html" resname="account.nextStepRecoveryCodes">
+        <source>Next step - 2FA recovery codes</source>
+        <target>次のステップ - 2FAリカバリーコード</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="account.copySetupCodeToClipboard" datatype="html" resname="account.copySetupCodeToClipboard">
         <source>Copy setup code to clipboard</source>
         <target>セットアップコードをクリップボードにコピー</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.yourRecoveryCodesTitle" datatype="html" resname="account.yourRecoveryCodesTitle">
@@ -20485,14 +20504,21 @@
         <source>Step 1 of 3 - Authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.step3Of3RecoveryCodes" datatype="html" resname="account.step3Of3RecoveryCodes">
         <source>Step 3 of 3 - 2FA recovery codes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.nextStepAddRecoveryPhone" datatype="html" resname="account.nextStepAddRecoveryPhone">
+        <source>Next step - Add a recovery phone number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
+          <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="twoFactor.title" datatype="html" resname="twoFactor.title">
