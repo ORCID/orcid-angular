@@ -5296,12 +5296,23 @@
           <context context-type="linenumber">215,217</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="side-bar.disposableEmailNotSupported" datatype="html" resname="side-bar.disposableEmailNotSupported">
+        <source>ORCID does not support temporary or disposable email addresses. Please try a different email address.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
+          <context context-type="linenumber">237,240</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/backend-error/backend-error.component.html</context>
+          <context context-type="linenumber">39,42</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="side-bar.alreadyAssociated" datatype="html" resname="side-bar.alreadyAssociated">
         <source>This email is already associated with an ORCID record.</source>
         <target>이 이메일은 이미 ORCID 기록과 연동되어 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">237,239</context>
+          <context context-type="linenumber">249,251</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.anotherEmail" datatype="html" resname="side-bar.anotherEmail">
@@ -5309,7 +5320,7 @@
         <target>다른 이메일 주소를 추가하세요</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">257,259</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.verifiedEmailDomains" datatype="html" resname="side-bar.verifiedEmailDomains">
@@ -5317,7 +5328,7 @@
         <target>확인된 이메일 도메인</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">268,270</context>
+          <context context-type="linenumber">280,282</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
@@ -5333,7 +5344,7 @@
         <target>업무용 이메일 주소가 확인되면 관련 도메인을 레코드에 추가해드립니다. 공개 레코드에 이메일 주소 전체 대신 이메일 도메인을 표시하도록 선택할 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">273,276</context>
+          <context context-type="linenumber">285,288</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.findOutMoreAboutVerifiedEmailDomains" datatype="html" resname="side-bar.findOutMoreAboutVerifiedEmailDomains">
@@ -5341,7 +5352,7 @@
         <target>확인된 이메일 도메인에 대해 자세히 알아보기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">283</context>
+          <context context-type="linenumber">295</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.noVerifiedEmailDomains" datatype="html" resname="side-bar.noVerifiedEmailDomains">
@@ -5349,7 +5360,7 @@
         <target>확인된 이메일 도메인 없음</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">288</context>
+          <context context-type="linenumber">300</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
@@ -5361,7 +5372,7 @@
         <target>이메일 알림</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">337,339</context>
+          <context context-type="linenumber">349,351</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.whichVerifiedEmail" datatype="html" resname="side-bar.whichVerifiedEmail">
@@ -5369,7 +5380,7 @@
         <target>어떤 확인된 이메일 주소로 ORCID 알림을 받으시겠습니까? 알림 이메일 빈도 변경은</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">341,344</context>
+          <context context-type="linenumber">353,356</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.yourOrcidAccountSettings" datatype="html" resname="side-bar.yourOrcidAccountSettings">
@@ -5377,7 +5388,7 @@
         <target>ORCID 계정 설정에서 가능합니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">351</context>
+          <context context-type="linenumber">363</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelOrcidTermsOfUseBase" datatype="html" resname="side-bar.ariaLabelOrcidTermsOfUseBase">
@@ -17808,7 +17819,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">289,291</context>
+          <context context-type="linenumber">293,295</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.ariaLabelInfoEmails" datatype="html" resname="register.ariaLabelInfoEmails">
@@ -17908,7 +17919,7 @@
         <target>이메일 주소</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">191,193</context>
+          <context context-type="linenumber">192,194</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17920,7 +17931,7 @@
         <target>이(가) 이미</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">196,197</context>
+          <context context-type="linenumber">197,198</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17932,7 +17943,7 @@
         <target>기존</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">201,202</context>
+          <context context-type="linenumber">202,203</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.anUnclaimed" datatype="html" resname="register.anUnclaimed">
@@ -17940,7 +17951,7 @@
         <target>클레임되지 않은</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">206,207</context>
+          <context context-type="linenumber">207,208</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17952,7 +17963,7 @@
         <target>비활성화된</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">211,212</context>
+          <context context-type="linenumber">212,213</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17964,7 +17975,7 @@
         <target>ORCID 레코드에 연결되어 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">215</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17976,7 +17987,7 @@
         <target>새 ORCID iD를 만들 때 이 이메일 주소를 사용할 수 없습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">216,218</context>
+          <context context-type="linenumber">217,220</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.signInToOrcidUsingThisEmail" datatype="html" resname="register.signInToOrcidUsingThisEmail">
@@ -17984,7 +17995,7 @@
         <target>이 이메일 주소를 사용하여 ORCID에 로그인</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">225,226</context>
+          <context context-type="linenumber">227,228</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.resendClaimAddress" datatype="html" resname="register.resendClaimAddress">
@@ -17992,7 +18003,7 @@
         <target>이 이메일 주소로 클레임 이메일 다시 보내기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">232,233</context>
+          <context context-type="linenumber">234,235</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.reactivateOrcidAssociated" datatype="html" resname="register.reactivateOrcidAssociated">
@@ -18000,7 +18011,7 @@
         <target>이 이메일 주소에 연결된 ORCID 레코드 재활성화</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">239,240</context>
+          <context context-type="linenumber">241,243</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -18012,7 +18023,7 @@
         <target>이메일 주소 확인</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">279,281</context>
+          <context context-type="linenumber">283,285</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.confirmationEmailNotMatch2" datatype="html" resname="register.confirmationEmailNotMatch2">
@@ -18020,7 +18031,7 @@
         <target>이메일 주소가 일치하지 않음</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">298,300</context>
+          <context context-type="linenumber">302,304</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.thisLooksLikeAPersonalEmail" datatype="html" resname="register.thisLooksLikeAPersonalEmail">
@@ -18028,7 +18039,7 @@
         <target>개인용 이메일인 것으로 보임</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">327,329</context>
+          <context context-type="linenumber">331,333</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.addA" datatype="html" resname="register.addA">
@@ -18036,7 +18047,7 @@
         <target>추가</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">333</context>
+          <context context-type="linenumber">337</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.professionalEmail" datatype="html" resname="register.professionalEmail">
@@ -18044,7 +18055,7 @@
         <target>업무용 이메일</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">336</context>
+          <context context-type="linenumber">340</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.asBackupSoWeCanBetter" datatype="html" resname="register.asBackupSoWeCanBetter">
@@ -18052,7 +18063,7 @@
         <target>을 추가하면 담당기관 및 기타 관련 데이터를 더 잘 추천해드릴 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">338,341</context>
+          <context context-type="linenumber">342,345</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.addAnotherEmailToSecure" datatype="html" resname="register.addAnotherEmailToSecure">
@@ -18060,7 +18071,7 @@
         <target>다른 이메일 주소를 추가하여 계정 보호</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">357,359</context>
+          <context context-type="linenumber">361,363</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.addingAnAddiotionalEmailAsBackup" datatype="html" resname="register.addingAnAddiotionalEmailAsBackup">
@@ -18068,7 +18079,7 @@
         <target>백업 이메일 주소를 추가하면 계정의 보안을 안전하게 보호하면서 언제든 로그인할 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">361,364</context>
+          <context context-type="linenumber">365,368</context>
         </context-group>
       </trans-unit>
       <trans-unit id="regiser.thisLooksLikeAProffessional" datatype="html" resname="regiser.thisLooksLikeAProffessional">
@@ -18076,7 +18087,7 @@
         <target>업무용 이메일인 것으로 보임</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">382,384</context>
+          <context context-type="linenumber">386,388</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.weRecommendAdding" datatype="html" resname="register.weRecommendAdding">
@@ -18084,7 +18095,7 @@
         <target>추가를 권장합니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">388</context>
+          <context context-type="linenumber">392</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.personalEmail" datatype="html" resname="register.personalEmail">
@@ -18092,7 +18103,7 @@
         <target>개인용 이메일</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">390</context>
+          <context context-type="linenumber">394</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.asBackupSoYouAlways" datatype="html" resname="register.asBackupSoYouAlways">
@@ -18100,7 +18111,7 @@
         <target>을 추가하면 업무 및 역할이 변경되었을 때도 ORCID 계정에 항상 액세스할 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">392,393</context>
+          <context context-type="linenumber">396,397</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.emailPlaceholder" datatype="html" resname="register.emailPlaceholder">
@@ -18176,7 +18187,7 @@
         <target>귀하의 계정을 재활성화 중</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">398</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
@@ -18192,7 +18203,7 @@
         <target>ORCID 레코드를 다시 활성화해 주셔서 감사합니다. 지금 보내드리는 이메일의 단계에 따라 절차를 완료하십시오. 이메일을 받지 못하면</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">400</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
@@ -18208,7 +18219,7 @@
         <target>지원팀에 문의하십시오.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">400</context>
+          <context context-type="linenumber">401</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>

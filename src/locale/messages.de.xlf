@@ -5296,12 +5296,23 @@
           <context context-type="linenumber">215,217</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="side-bar.disposableEmailNotSupported" datatype="html" resname="side-bar.disposableEmailNotSupported">
+        <source>ORCID does not support temporary or disposable email addresses. Please try a different email address.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
+          <context context-type="linenumber">237,240</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/backend-error/backend-error.component.html</context>
+          <context context-type="linenumber">39,42</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="side-bar.alreadyAssociated" datatype="html" resname="side-bar.alreadyAssociated">
         <source>This email is already associated with an ORCID record.</source>
         <target>Diese E-Mail ist bereits mit einem ORCID-Eintrag verknüpft.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">237,239</context>
+          <context context-type="linenumber">249,251</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.anotherEmail" datatype="html" resname="side-bar.anotherEmail">
@@ -5309,7 +5320,7 @@
         <target>Weitere E-Mail-Adresse hinzufügen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">257,259</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.verifiedEmailDomains" datatype="html" resname="side-bar.verifiedEmailDomains">
@@ -5317,7 +5328,7 @@
         <target>Verifizierte E-Mail-Domains</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">268,270</context>
+          <context context-type="linenumber">280,282</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
@@ -5333,7 +5344,7 @@
         <target>Wenn Sie eine professionelle E-Mail-Adresse verifizieren, fügen wir die zugehörige Domain zu Ihrem Eintrag hinzu. Sie können wählen, ob Sie in Ihrem öffentlichen Eintrag eine E-Mail-Domain anstelle der vollständigen E-Mail-Adresse anzeigen möchten.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">273,276</context>
+          <context context-type="linenumber">285,288</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.findOutMoreAboutVerifiedEmailDomains" datatype="html" resname="side-bar.findOutMoreAboutVerifiedEmailDomains">
@@ -5341,7 +5352,7 @@
         <target>Erfahren Sie mehr über verifizierte E-Mail-Domains</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">283</context>
+          <context context-type="linenumber">295</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.noVerifiedEmailDomains" datatype="html" resname="side-bar.noVerifiedEmailDomains">
@@ -5349,7 +5360,7 @@
         <target>Keine verifizierten E-Mail-Domains</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">288</context>
+          <context context-type="linenumber">300</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
@@ -5361,7 +5372,7 @@
         <target>E-Mail-Benachrichtigungen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">337,339</context>
+          <context context-type="linenumber">349,351</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.whichVerifiedEmail" datatype="html" resname="side-bar.whichVerifiedEmail">
@@ -5369,7 +5380,7 @@
         <target>An welche verifizierte E-Mail-Adresse sollen wir Ihre ORCID-Benachrichtigungen senden? Sie können die Häufigkeit dieser Benachrichtigungs-E-Mails in</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">341,344</context>
+          <context context-type="linenumber">353,356</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.yourOrcidAccountSettings" datatype="html" resname="side-bar.yourOrcidAccountSettings">
@@ -5377,7 +5388,7 @@
         <target>den Einstellungen Ihres ORCID-Kontos ändern.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">351</context>
+          <context context-type="linenumber">363</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelOrcidTermsOfUseBase" datatype="html" resname="side-bar.ariaLabelOrcidTermsOfUseBase">
@@ -17808,7 +17819,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">289,291</context>
+          <context context-type="linenumber">293,295</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.ariaLabelInfoEmails" datatype="html" resname="register.ariaLabelInfoEmails">
@@ -17908,7 +17919,7 @@
         <target>Die E-Mail-Adresse</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">191,193</context>
+          <context context-type="linenumber">192,194</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17920,7 +17931,7 @@
         <target>ist bereits verbunden mit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">196,197</context>
+          <context context-type="linenumber">197,198</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17932,7 +17943,7 @@
         <target>einem bestehenden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">201,202</context>
+          <context context-type="linenumber">202,203</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.anUnclaimed" datatype="html" resname="register.anUnclaimed">
@@ -17940,7 +17951,7 @@
         <target>einem nicht beanspruchten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">206,207</context>
+          <context context-type="linenumber">207,208</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17952,7 +17963,7 @@
         <target>einem deaktivierten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">211,212</context>
+          <context context-type="linenumber">212,213</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17964,7 +17975,7 @@
         <target>ORCID-Eintrag.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">215</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -17976,7 +17987,7 @@
         <target>Sie können diese E-Mail-Adresse nicht verwenden, um eine neue ORCID-ID zu erstellen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">216,218</context>
+          <context context-type="linenumber">217,220</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.signInToOrcidUsingThisEmail" datatype="html" resname="register.signInToOrcidUsingThisEmail">
@@ -17984,7 +17995,7 @@
         <target>Melden Sie sich mit dieser E-Mail-Adresse bei ORCID an.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">225,226</context>
+          <context context-type="linenumber">227,228</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.resendClaimAddress" datatype="html" resname="register.resendClaimAddress">
@@ -17992,7 +18003,7 @@
         <target>Anspruchs-E-Mail erneut an diese E-Mail-Adresse schicken</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">232,233</context>
+          <context context-type="linenumber">234,235</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.reactivateOrcidAssociated" datatype="html" resname="register.reactivateOrcidAssociated">
@@ -18000,7 +18011,7 @@
         <target>Den mit dieser E-Mail-Adresse verknüpften ORCID-Eintrag reaktivieren.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">239,240</context>
+          <context context-type="linenumber">241,243</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -18012,7 +18023,7 @@
         <target>Bitte bestätigen Sie Ihre E-Mail-Adresse.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">279,281</context>
+          <context context-type="linenumber">283,285</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.confirmationEmailNotMatch2" datatype="html" resname="register.confirmationEmailNotMatch2">
@@ -18020,7 +18031,7 @@
         <target>E-Mail-Adressen stimmen nicht überein.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">298,300</context>
+          <context context-type="linenumber">302,304</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.thisLooksLikeAPersonalEmail" datatype="html" resname="register.thisLooksLikeAPersonalEmail">
@@ -18028,7 +18039,7 @@
         <target>Dies sieht nach einer privaten E-Mail-Adresse aus.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">327,329</context>
+          <context context-type="linenumber">331,333</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.addA" datatype="html" resname="register.addA">
@@ -18036,7 +18047,7 @@
         <target>Add an additional</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">333</context>
+          <context context-type="linenumber">337</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.professionalEmail" datatype="html" resname="register.professionalEmail">
@@ -18044,7 +18055,7 @@
         <target>berufliche E-Mail-Adresse</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">336</context>
+          <context context-type="linenumber">340</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.asBackupSoWeCanBetter" datatype="html" resname="register.asBackupSoWeCanBetter">
@@ -18052,7 +18063,7 @@
         <target>als Backup hinzu, damit wir Ihnen Zugehörigkeiten und damit verbundene Daten besser empfehlen können.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">338,341</context>
+          <context context-type="linenumber">342,345</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.addAnotherEmailToSecure" datatype="html" resname="register.addAnotherEmailToSecure">
@@ -18060,7 +18071,7 @@
         <target>Fügen Sie eine zusätzliche E-Mail-Adresse hinzu, um Ihr Konto zu sichern</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">357,359</context>
+          <context context-type="linenumber">361,363</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.addingAnAddiotionalEmailAsBackup" datatype="html" resname="register.addingAnAddiotionalEmailAsBackup">
@@ -18068,7 +18079,7 @@
         <target>Indem Sie eine weitere E-Mail-Adresse als Backup hinzufügen, schützen Sie Ihr Konto und stellen Sie sicher, dass Sie sich immer anmelden können.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">361,364</context>
+          <context context-type="linenumber">365,368</context>
         </context-group>
       </trans-unit>
       <trans-unit id="regiser.thisLooksLikeAProffessional" datatype="html" resname="regiser.thisLooksLikeAProffessional">
@@ -18076,7 +18087,7 @@
         <target>Dies sieht nach einer beruflichen E-Mail-Adresse aus.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">382,384</context>
+          <context context-type="linenumber">386,388</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.weRecommendAdding" datatype="html" resname="register.weRecommendAdding">
@@ -18084,7 +18095,7 @@
         <target>We recommend adding an additional</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">388</context>
+          <context context-type="linenumber">392</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.personalEmail" datatype="html" resname="register.personalEmail">
@@ -18092,7 +18103,7 @@
         <target>private E-Mail-Adresse</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">390</context>
+          <context context-type="linenumber">394</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.asBackupSoYouAlways" datatype="html" resname="register.asBackupSoYouAlways">
@@ -18100,7 +18111,7 @@
         <target>als Backup hinzuzufügen, damit Sie immer Zugriff auf Ihr ORCID-Konto haben, wenn Sie Ihre Arbeit oder Position wechseln.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">392,393</context>
+          <context context-type="linenumber">396,397</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.emailPlaceholder" datatype="html" resname="register.emailPlaceholder">
@@ -18176,7 +18187,7 @@
         <target>Reaktivierung Ihres Kontos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">398</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
@@ -18192,7 +18203,7 @@
         <target>Vielen Dank für die Reaktivierung Ihres ORCID-Eintrags. Bitte schließen Sie den Vorgang ab, indem Sie die Schritte in der E-Mail befolgen, die wir Ihnen jetzt senden. Wenn Sie keine E-Mail von uns erhalten,</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">400</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
@@ -18208,7 +18219,7 @@
         <target>kontaktieren Sie den Support.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">400</context>
+          <context context-type="linenumber">401</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
