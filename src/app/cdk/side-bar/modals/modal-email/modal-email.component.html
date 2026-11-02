@@ -229,6 +229,18 @@
 
             <mat-error
               *ngIf="
+                emailsForm.hasError('disposable', [email.putCode, 'email']) &&
+                emailsForm.get(email.putCode).get('email').touched
+              "
+              i18n="@@side-bar.disposableEmailNotSupported"
+              class="orc-font-small-print"
+            >
+              ORCID does not support temporary or disposable email addresses.
+              Please try a different email address.
+            </mat-error>
+            <mat-error
+              *ngIf="
+                !emailsForm.hasError('disposable', [email.putCode, 'email']) &&
                 emailsForm.hasError('backendError', [email.putCode, 'email']) &&
                 emailsForm.get(email.putCode).get('email').touched
               "
