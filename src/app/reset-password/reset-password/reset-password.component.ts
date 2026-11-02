@@ -290,6 +290,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   successRedirect(location: string) {
     const oauthURLFromSessionManager = this._oauthURLSessionManagerService.get()
     this.form.reset()
+    this._oauthURLSessionManagerService.setPasswordJustReset()
 
     if (
       !this.isOauthAuthorizationTogglzEnable &&

@@ -6,6 +6,17 @@
     [printError]="printError"
     [badCredentials]="badCredentials"
   ></app-my-orcid-alerts>
+  <app-alert-message
+    *ngIf="passwordJustReset"
+    type="success"
+    id="cy-password-reset-success"
+    class="password-reset-success"
+    role="status"
+  >
+    <div content i18n="@@ngOrcid.signin.passwordHasBeenReset">
+      Your account password has been reset
+    </div>
+  </app-alert-message>
   <div class="input-container">
     <mat-label
       class="orc-font-small-print"

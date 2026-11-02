@@ -16,6 +16,7 @@
         <app-two-factor-enable
           *ngIf="step === 'enable'"
           [subtitle]="enableSubtitle"
+          [primaryLabel]="enableNextLabel"
           (twoFactorEnabled)="twoFactorEnabled($event)"
         >
         </app-two-factor-enable>

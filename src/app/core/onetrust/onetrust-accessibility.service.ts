@@ -1,6 +1,31 @@
 import { DOCUMENT } from '@angular/common'
 import { Injectable, NgZone, OnDestroy, inject } from '@angular/core'
 import { AnnouncerService } from '../announcer/announcer.service'
+import {
+  ConsentVendor,
+  ConsentVendorService,
+} from '../consent/consent-vendor.service'
+
+/**
+ * The consent dialogs this service manages focus for, per vendor. CookieYes's
+ * notice is deliberately absent: it is not a dialog, and CookieYes wraps Tab
+ * in it by itself when the banner is configured as a modal popup.
+ */
+const CONSENT_DIALOG_SELECTORS: Record<ConsentVendor, string[]> = {
+  onetrust: [
+    '#onetrust-pc-sdk [role="dialog"]',
+    '#onetrust-banner-sdk .ot-sdk-container[role="dialog"]',
+  ],
+  cookieyes: ['[data-cky-tag="detail"][role="dialog"]'],
+}
+
+/**
+ * How many animation frames to keep re-checking after a consent dialog's
+ * markup changes. CookieYes fades its preference centre in and out with a one
+ * second visibility transition, so the dialog is still hidden when the mutation
+ * that opens it is observed, and still visible when the one that closes it is.
+ */
+const RESYNC_FRAMES = 90
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +34,7 @@ export class OneTrustAccessibilityService implements OnDestroy {
   private _document = inject(DOCUMENT)
   private _announcerService = inject(AnnouncerService)
   private _ngZone = inject(NgZone)
+  private _consentVendor = inject(ConsentVendorService)
 
   private _observer?: MutationObserver
   private _activeDialog: HTMLElement | null = null
@@ -19,6 +45,8 @@ export class OneTrustAccessibilityService implements OnDestroy {
   private _policyLinkOriginalTabIndex: string | null | undefined = undefined
   private _expectedFocusAfterWrap: HTMLElement | null = null
   private _expectedFocusExpiresAt = 0
+  private _resyncFramesLeft = 0
+  private _pendingTrigger: HTMLElement | null = null
 
   init(): void {
     if (!this._document?.body || this._observer) {
@@ -26,7 +54,9 @@ export class OneTrustAccessibilityService implements OnDestroy {
     }
 
     this._ngZone.runOutsideAngular(() => {
-      this._observer = new MutationObserver(() => this._syncDialogState())
+      this._observer = new MutationObserver((records) =>
+        this._onMutations(records)
+      )
       this._observer.observe(this._document.body, {
         subtree: true,
         childList: true,
@@ -40,11 +70,63 @@ export class OneTrustAccessibilityService implements OnDestroy {
   ngOnDestroy(): void {
     this._observer?.disconnect()
     this._observer = undefined
+    this._resyncFramesLeft = 0
     this._removeFocusTrap()
   }
 
+  private _onMutations(records: MutationRecord[]): void {
+    const dialogs = this._findConsentDialogs()
+    const touched = dialogs.some((dialog) =>
+      records.some(
+        (record) =>
+          record.target.contains(dialog) || dialog.contains(record.target)
+      )
+    )
+    if (touched) {
+      this._rememberTrigger(dialogs)
+      this._scheduleResync()
+    }
+    this._syncDialogState()
+  }
+
+  /**
+   * Who is opening the dialog, taken before it is visible: by the time it is,
+   * the vendor may already have moved focus into it.
+   */
+  private _rememberTrigger(dialogs: HTMLElement[]): void {
+    if (this._activeDialog) {
+      return
+    }
+    const active = this._document.activeElement
+    if (
+      active instanceof HTMLElement &&
+      active !== this._document.body &&
+      !dialogs.some((dialog) => dialog.contains(active))
+    ) {
+      this._pendingTrigger = active
+    }
+  }
+
+  private _scheduleResync(): void {
+    const view = this._document.defaultView
+    const alreadyRunning = this._resyncFramesLeft > 0
+    this._resyncFramesLeft = RESYNC_FRAMES
+    if (alreadyRunning || !view?.requestAnimationFrame) {
+      return
+    }
+    const tick = () => {
+      if (!this._observer || this._resyncFramesLeft <= 0) {
+        return
+      }
+      this._resyncFramesLeft -= 1
+      this._syncDialogState()
+      view.requestAnimationFrame(tick)
+    }
+    view.requestAnimationFrame(tick)
+  }
+
   private _syncDialogState(): void {
-    const dialog = this._findVisibleOneTrustDialog()
+    const dialog = this._findVisibleConsentDialog()
 
     if (dialog) {
       this._ensurePolicyLinkTabbable(dialog)
@@ -64,32 +146,37 @@ export class OneTrustAccessibilityService implements OnDestroy {
     }
   }
 
-  private _findVisibleOneTrustDialog(): HTMLElement | null {
-    const selectors = [
-      '#onetrust-pc-sdk [role="dialog"]',
-      '#onetrust-banner-sdk .ot-sdk-container[role="dialog"]',
-    ]
+  private _findConsentDialogs(): HTMLElement[] {
+    return CONSENT_DIALOG_SELECTORS[this._consentVendor.vendor]
+      .map((selector) => this._document.querySelector(selector))
+      .filter((node): node is HTMLElement => node instanceof HTMLElement)
+  }
 
-    for (const selector of selectors) {
-      const node = this._document.querySelector(selector)
-      if (node instanceof HTMLElement && this._isVisible(node)) {
-        return node
-      }
-    }
-
-    return null
+  private _findVisibleConsentDialog(): HTMLElement | null {
+    return (
+      this._findConsentDialogs().find((node) => this._isVisible(node)) ?? null
+    )
   }
 
   private _focusDialogOnOpen(dialog: HTMLElement): void {
     const active = this._document.activeElement
-    if (active instanceof HTMLElement && !dialog.contains(active)) {
-      this._previouslyFocusedElement = active
+    const activeOutside =
+      active instanceof HTMLElement && !dialog.contains(active)
+    if (activeOutside && active !== this._document.body) {
+      this._previouslyFocusedElement = active as HTMLElement
+    } else if (this._pendingTrigger) {
+      this._previouslyFocusedElement = this._pendingTrigger
+    } else if (activeOutside) {
+      this._previouslyFocusedElement = active as HTMLElement
     }
+    this._pendingTrigger = null
 
     const tabbable = this._getTabbableElements(dialog)
     const target = tabbable[0] ?? dialog
-    if (!target.hasAttribute('tabindex')) {
-      target.setAttribute('tabindex', '-1')
+    // Only the dialog itself needs a tabindex to take focus. Setting -1 on its
+    // first control would drop that control out of the Tab order for good.
+    if (target === dialog && !dialog.hasAttribute('tabindex')) {
+      dialog.setAttribute('tabindex', '-1')
     }
     target.focus()
     this._announcerService.liveAnnounce(

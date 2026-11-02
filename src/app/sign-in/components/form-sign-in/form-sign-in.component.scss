@@ -66,6 +66,14 @@ app-alert-message {
   margin-top: 24px;
 }
 
+// PD-14612: spaced like the email-verified notice that opens the same form -
+// nothing above it, 24px before the email field.
+app-alert-message.password-reset-success {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
 // Mandatory password reset notice (PD-5692): 24px under the email field's
 // hint, 8px from the title to the body and one blank line before the action,
 // as the design draws it. Below it the field container's own padding gives

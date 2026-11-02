@@ -251,17 +251,38 @@ describe('RecoveryPhoneChallengeService', () => {
       })
     })
 
-    it('queues the record notice and tells the host once the code is accepted (R5.4)', () => {
+    it('tells the host once the code is accepted, and leaves the record notice to sign-in (PD-14597)', () => {
       const onUsed = jasmine.createSpy('onUsed')
       const handle = build().create({ onUsed })
 
       expect(verify(handle)).toBe('passed')
       expect(handle.used).toBeTrue()
-      expect(notice.markTwoFactorDisabled).toHaveBeenCalledWith(ORCID)
+      expect(notice.markTwoFactorDisabled).not.toHaveBeenCalled()
       expect(observability.recordSimpleEvent).toHaveBeenCalledWith(
         AppEventName.AuthChallengeRecoveryPhoneUsed
       )
       expect(onUsed).toHaveBeenCalled()
+    })
+
+    it('tells every listener that 2FA went off once the code is accepted (PD-14596)', () => {
+      const service = build()
+      const disabled = jasmine.createSpy('twoFactorDisabled')
+      service.twoFactorDisabled$.subscribe(disabled)
+
+      expect(verify(service.create())).toBe('passed')
+      expect(disabled).toHaveBeenCalledTimes(1)
+    })
+
+    it('tells nobody when the code is refused (PD-14596 R3.3)', () => {
+      twoFactor.verifyRecoveryPhoneChallengeCode.and.returnValue(
+        of({ success: false, invalidTwoFactorCode: true } as AuthChallenge)
+      )
+      const service = build()
+      const disabled = jasmine.createSpy('twoFactorDisabled')
+      service.twoFactorDisabled$.subscribe(disabled)
+
+      expect(verify(service.create())).toBe('invalidCode')
+      expect(disabled).not.toHaveBeenCalled()
     })
 
     it('queues nothing when the code is refused', () => {
@@ -290,7 +311,7 @@ describe('RecoveryPhoneChallengeService', () => {
       expect(notice.markTwoFactorDisabled).not.toHaveBeenCalled()
     })
 
-    it('finishes what the registry started even when nobody is listening (R5.4)', () => {
+    it('finishes what the registry started even when nobody is listening', () => {
       const response = new Subject<AuthChallenge>()
       twoFactor.verifyRecoveryPhoneChallengeCode.and.returnValue(
         response.asObservable()
@@ -304,7 +325,7 @@ describe('RecoveryPhoneChallengeService', () => {
       response.next({ success: true } as AuthChallenge)
 
       expect(handle.used).toBeTrue()
-      expect(notice.markTwoFactorDisabled).toHaveBeenCalledWith(ORCID)
+      expect(notice.markTwoFactorDisabled).not.toHaveBeenCalled()
       expect(observability.recordSimpleEvent).toHaveBeenCalledWith(
         AppEventName.AuthChallengeRecoveryPhoneUsed
       )

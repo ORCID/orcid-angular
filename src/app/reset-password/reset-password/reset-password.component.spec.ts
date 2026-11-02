@@ -1,3 +1,5 @@
+import { Router } from '@angular/router'
+import { OauthURLSessionManagerService } from '../../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import {
   ComponentFixture,
   discardPeriodicTasks,
@@ -14,7 +16,7 @@ import {
 } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { MatDialog } from '@angular/material/dialog'
-import { WINDOW_PROVIDERS } from '../../cdk/window'
+import { WINDOW, WINDOW_PROVIDERS } from '../../cdk/window'
 import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
 import { PlatformInfoService } from '../../cdk/platform-info'
 import { ErrorHandlerService } from '../../core/error-handler/error-handler.service'
@@ -87,6 +89,55 @@ describe('ResetPasswordComponent', () => {
   it('should create', async () => {
     await setupWithTokenErrors([])
     expect(component).toBeTruthy()
+  })
+
+  describe('a successful reset (PD-14612)', () => {
+    let session: OauthURLSessionManagerService
+    let leave: jasmine.Spy
+    let navigate: jasmine.Spy
+
+    beforeEach(async () => {
+      await setupWithTokenErrors([])
+      session = TestBed.inject(OauthURLSessionManagerService)
+      spyOn(session, 'setPasswordJustReset')
+      leave = jasmine.createSpy('outOfRouterNavigation')
+      ;(TestBed.inject(WINDOW) as any).outOfRouterNavigation = leave
+      navigate = spyOn(TestBed.inject(Router), 'navigate').and.resolveTo(true)
+    })
+
+    it('tells sign-in when it goes back to sign-in (R8.1)', () => {
+      spyOn(session, 'get').and.returnValue(null)
+      component.isOauthAuthorizationTogglzEnable = false
+
+      component.successRedirect('http://localhost/my-orcid')
+
+      expect(navigate).toHaveBeenCalled()
+      expect(session.setPasswordJustReset).toHaveBeenCalled()
+    })
+
+    it('tells sign-in when it leaves for the stored authorize URL (R8.2)', () => {
+      spyOn(session, 'get').and.returnValue(
+        'http://localhost/oauth/authorize?client_id=APP-1'
+      )
+      component.isOauthAuthorizationTogglzEnable = true
+
+      component.successRedirect('http://localhost/my-orcid')
+
+      expect(leave).toHaveBeenCalled()
+      expect(session.setPasswordJustReset).toHaveBeenCalled()
+    })
+
+    it('tells sign-in when it leaves for the authorize URL it was given (R8.2)', () => {
+      spyOn(session, 'get').and.returnValue(null)
+      component.isOauthAuthorizationTogglzEnable = false
+
+      component.successRedirect(
+        'http://localhost/oauth/authorize?client_id=APP-1&response_type=code'
+      )
+
+      expect(leave).toHaveBeenCalled()
+      expect(session.setPasswordJustReset).toHaveBeenCalled()
+    })
   })
 
   it('shows the reset form when the token is valid', async () => {

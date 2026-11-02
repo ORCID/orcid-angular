@@ -45,6 +45,9 @@ export class TwoFactorEnableComponent implements OnInit {
   @Input()
   subtitle = $localize`:@@account.step1AuthenticationApp:Step 1 of 2 - Authentication app`
 
+  @Input()
+  primaryLabel = $localize`:@@account.nextStepRecoveryCodes:Next step - 2FA recovery codes`
+
   @Output() twoFactorEnabled = new EventEmitter<{
     backupCodes?: string
     backupCodesClipboard?: string
