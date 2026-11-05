@@ -43,4 +43,21 @@ describe('NotificationYourRecordAmendedComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
+
+  // A notification raised by ORCID itself carries no member source, and the
+  // endpoint sends `source: null`. Rendering must not throw: an exception here
+  // aborts the change-detection pass and takes the rest of the page — the
+  // global header buttons included — down with it (PD-13322).
+  it('renders a notification whose source is null', () => {
+    component.notification = {
+      notificationType: 'AMENDED',
+      putCode: 1,
+      subject: 'Your record was amended',
+      amendedSection: 'EMPLOYMENT',
+      source: null,
+      items: { items: [] },
+    } as any
+
+    expect(() => fixture.detectChanges()).not.toThrow()
+  })
 })

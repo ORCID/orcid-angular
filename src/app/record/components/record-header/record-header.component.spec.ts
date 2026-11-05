@@ -123,6 +123,74 @@ describe('RecordHeaderComponent', () => {
     expect(component.bannerCaption).toBe('')
   })
 
+  describe('records with no publicly available information', () => {
+    function setUpEmptyRecord() {
+      const userRecord = getUserRecord()
+
+      state.setIsPublicRecord(userRecord.userInfo.REAL_USER_ORCID)
+      state.setAffiliations(0)
+      state.setDisplaySideBar(false)
+      state.setDisplayBiography(false)
+      state.setUserRecord({
+        ...userRecord,
+        names: undefined,
+        otherNames: undefined,
+        affiliations: [],
+      })
+      state.setLoadingRecordHeader(false)
+      fixture.detectChanges()
+    }
+
+    it('should offer the record summary toggle', () => {
+      setUpEmptyRecord()
+
+      expect(component.noDisplayableData).toBeTrue()
+      expect(component.canToggleRecordSummary).toBeTrue()
+      expect(summaryToggleButton()).not.toBeNull()
+      expect(summaryToggleButton().textContent).toContain('Show record summary')
+    })
+
+    it('should open the record summary when the toggle is clicked', () => {
+      setUpEmptyRecord()
+
+      let recordSummaryOpen: boolean
+      state.recordSummaryOpen$.subscribe((open) => (recordSummaryOpen = open))
+
+      summaryToggleButton().click()
+      fixture.detectChanges()
+
+      expect(recordSummaryOpen).toBeTrue()
+      expect(summaryToggleButton().textContent).toContain('Hide record summary')
+    })
+
+    it('should keep the copy iD and print actions hidden', () => {
+      setUpEmptyRecord()
+
+      expect(
+        fixture.nativeElement.querySelector('[header-banner-id-actions]')
+      ).toBeNull()
+    })
+
+    it('should not offer the toggle when the record does not exist', () => {
+      const userRecord = getUserRecord()
+
+      state.setIsPublicRecord(userRecord.userInfo.REAL_USER_ORCID)
+      state.setUserRecord({
+        ...userRecord,
+        userInfo: { ...userRecord.userInfo, USER_NOT_FOUND: true },
+      })
+      state.setLoadingRecordHeader(false)
+      fixture.detectChanges()
+
+      expect(component.canToggleRecordSummary).toBeFalse()
+      expect(summaryToggleButton()).toBeNull()
+    })
+  })
+
+  function summaryToggleButton(): HTMLElement | null {
+    return fixture.nativeElement.querySelector('.summary-actions-area button')
+  }
+
   it('should render the featured employment caption from shared state', () => {
     const userRecord = getUserRecord()
     const featuredAffiliation =

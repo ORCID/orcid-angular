@@ -30,4 +30,9 @@ export class AlertMessageComponent {
   @Input() type: AlertType = 'notice'
 }
 
-export type AlertType = 'notice' | 'info' | 'warning' | 'success'
+export type AlertType =
+  | 'notice'
+  | 'notice-important'
+  | 'info'
+  | 'warning'
+  | 'success'

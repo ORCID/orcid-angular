@@ -29,6 +29,7 @@ export class StepViewPageComponent {
     title: 'Enable two-factor authentication',
     subtitle: 'Step 1 of 2 - Authentication app',
     primaryLabel: 'Next step - 2FA recovery codes',
+    secondaryLabel: 'Cancel',
     primaryDisabled: false,
     fullWidthActions: true,
   }
