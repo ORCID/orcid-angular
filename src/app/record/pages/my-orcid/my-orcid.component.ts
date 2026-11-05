@@ -37,6 +37,9 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
+import { BackupEmailComponentDialogOutput } from 'src/app/cdk/interstitials/backup-email/interstitial-dialog-extend/backup-email-dialog.component'
+import { RecoveryPhoneComponentDialogOutput } from 'src/app/core/login-interstitials-manager/abstractions/dialog-interface'
+import { RecoveryPhoneNoticeService } from 'src/app/core/two-factor-authentication/recovery-phone-notice.service'
 import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
@@ -98,6 +101,12 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   fragment: string
   newlySharedDomains: string[] = []
   newAddedAffiliation: string
+  newAddedBackupEmail: string
+  /** The masked number the recovery phone interstitial just stored (R6.4). */
+  newAddedRecoveryPhone: string
+  /** This sign in used the recovery number, so 2FA is now off (R3.6). */
+  twoFactorDisabledByRecoveryPhone = false
+  private recoveryPhoneNoticeChecked = false
 
   featuredWorksTogglz = false
   featuredAffiliationsEnabled = false
@@ -120,7 +129,14 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _LoginMainInterstitialsManagerService: LoginMainInterstitialsManagerService,
     private _compactService: HeaderCompactService,
     private _recordHeaderState: RecordHeaderStateService,
-    private _rumEvents: RumJourneyEventService
+    private _rumEvents: RumJourneyEventService,
+    /*
+     * Optional only so the signature keeps taking eighteen arguments:
+     * my-orcid-header-loading.spec.ts builds this component positionally with
+     * `new`, and a nineteenth required parameter would stop it compiling.
+     * Angular still injects it - it is providedIn root and never absent.
+     */
+    private _recoveryPhoneNotice?: RecoveryPhoneNoticeService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -226,6 +242,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           if (!this.publicOrcid && userRecord?.userInfo) {
             this.setMyOrcidIdQueryParameter()
             this.observeSessionUpdates()
+            this.checkRecoveryPhoneNotice()
           }
 
           this._openGraph.addOpenGraphData(userRecord, { force: true })
@@ -327,20 +344,49 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   private handlesInterstitialOutput(
     interstitialDialog: Observable<
-      AffilationsComponentDialogOutput | ShareEmailsDomainsComponentDialogOutput
+      | AffilationsComponentDialogOutput
+      | ShareEmailsDomainsComponentDialogOutput
+      | BackupEmailComponentDialogOutput
+      | RecoveryPhoneComponentDialogOutput
     >
   ) {
     return interstitialDialog.pipe(
       tap((dialogOutput) => {
-        if (dialogOutput.type === 'domains-interstitial') {
+        if (dialogOutput?.type === 'domains-interstitial') {
           this.newlySharedDomains = dialogOutput.newlySharedDomains
         }
-        if (dialogOutput.type === 'affiliation-interstitial') {
+        if (dialogOutput?.type === 'affiliation-interstitial') {
           this.newAddedAffiliation =
             dialogOutput.addedAffiliation?.affiliationName?.value
         }
+        if (dialogOutput?.type === 'backup-email-interstitial') {
+          this.newAddedBackupEmail = dialogOutput.addedBackupEmail
+        }
+        if (dialogOutput?.type === 'recovery-phone-interstitial') {
+          // Only ever the masked number; the full one never leaves the registry
+          this.newAddedRecoveryPhone = dialogOutput.addedRecoveryPhone
+        }
       })
     )
+  }
+
+  /**
+   * The record is the first page after a sign in that used the recovery number,
+   * so it is where the "2FA is off now" notice is shown. Reading the flag also
+   * clears it, and the record arrives in several pieces, so this runs once:
+   * a second pass would find the flag gone and hide a notice already on screen.
+   */
+  private checkRecoveryPhoneNotice(): void {
+    if (this.recoveryPhoneNoticeChecked) {
+      return
+    }
+    const orcid = this.userInfo?.EFFECTIVE_USER_ORCID
+    if (!orcid) {
+      return
+    }
+    this.recoveryPhoneNoticeChecked = true
+    this.twoFactorDisabledByRecoveryPhone =
+      !!this._recoveryPhoneNotice?.consumeTwoFactorDisabled(orcid)
   }
 
   private observeSessionUpdates() {

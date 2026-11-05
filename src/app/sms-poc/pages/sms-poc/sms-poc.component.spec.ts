@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { MatCheckboxModule } from '@angular/material/checkbox'
@@ -9,6 +9,12 @@ import { of } from 'rxjs'
 
 import { SmsPocService } from 'src/app/core/sms-poc/sms-poc.service'
 import { SmsPocComponent } from './sms-poc.component'
+
+// The component injects LOCALE_ID and forwards it to the backend. Pin it here
+// rather than relying on the test builder's default: the webpack builder
+// defaulted to 'en-US', the esbuild builder uses the workspace sourceLocale
+// ('en'), and production's English bundle is built as 'en'.
+const TEST_LOCALE = 'en'
 
 describe('SmsPocComponent', () => {
   let component: SmsPocComponent
@@ -28,6 +34,7 @@ describe('SmsPocComponent', () => {
       declarations: [SmsPocComponent],
       providers: [
         { provide: SmsPocService, useValue: smsPocService },
+        { provide: LOCALE_ID, useValue: TEST_LOCALE },
         {
           provide: ActivatedRoute,
           useValue: { snapshot: { queryParamMap: { get: () => null } } },
@@ -73,7 +80,7 @@ describe('SmsPocComponent', () => {
     expect(smsPocService.send).toHaveBeenCalledWith({
       provider: 'aws',
       phoneNumber: '+50688888888',
-      locale: 'en-US',
+      locale: TEST_LOCALE,
     })
     expect(component.step).toBe('verify')
     expect(component.verifiedPhoneNumber).toBe('+50688888888')
@@ -90,7 +97,7 @@ describe('SmsPocComponent', () => {
     expect(smsPocService.send).toHaveBeenCalledWith({
       provider: 'twilio',
       phoneNumber: '+50688888888',
-      locale: 'en-US',
+      locale: TEST_LOCALE,
     })
   })
 

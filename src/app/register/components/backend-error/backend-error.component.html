@@ -33,4 +33,12 @@
   Additional emails cannot be duplicated
 </ng-container>
 
+<ng-container
+  *ngIf="recognizedError[errorCode] === 5"
+  i18n="@@side-bar.disposableEmailNotSupported"
+>
+  ORCID does not support temporary or disposable email addresses. Please try a
+  different email address.
+</ng-container>
+
 <ng-container *ngIf="unrecognizedError"> {{ errorCode }} </ng-container>

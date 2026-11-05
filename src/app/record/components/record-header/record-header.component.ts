@@ -101,6 +101,12 @@ export class RecordHeaderComponent implements OnInit, OnDestroy {
     )
   }
 
+  // The summary still carries the Key dates panel when there is no public
+  // information to show, so records with no displayable data keep the toggle.
+  get canToggleRecordSummary(): boolean {
+    return !this.userInfo?.USER_NOT_FOUND
+  }
+
   // Issue banner property
   get issueTitle(): string {
     if (!this.userInfo?.RECORD_WITH_ISSUES) {

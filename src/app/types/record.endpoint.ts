@@ -134,5 +134,5 @@ export interface GroupBase {
 }
 
 export interface ErrorsListResponse {
-  errors: string[]
+  errors: string[] | { [key: string]: unknown }
 }

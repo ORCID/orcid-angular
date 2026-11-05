@@ -5,13 +5,26 @@ import {
   HttpParams,
 } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { of } from 'rxjs'
-import { catchError, map, switchMap, first, take } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import {
+  catchError,
+  map,
+  switchMap,
+  first,
+  take,
+  timeout,
+} from 'rxjs/operators'
 
 import { getOrcidNumber, isValidOrcidFormat } from '../../constants'
 import { Claim } from '../../types/claim.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
-import { SignIn } from '../../types/sign-in.endpoint'
+import {
+  PasswordResetStatusResponse,
+  RecoveryPhoneSignInSendResponse,
+  RecoveryPhoneSignInStatusResponse,
+  RecoveryPhoneSignInVerifyResponse,
+  SignIn,
+} from '../../types/sign-in.endpoint'
 import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
 import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -25,6 +38,12 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { retryTransient } from '../http/retry-transient'
+
+/**
+ * How long the 2FA step waits to learn whether the account has a recovery
+ * number before showing itself anyway, with the recovery number offered (F1.4).
+ */
+export const RECOVERY_PHONE_STATUS_TIMEOUT_MS = 5000
 
 @Injectable({
   providedIn: 'root',
@@ -115,6 +134,15 @@ export class SignInService {
             }),
             switchMap((response) => {
               if (!updateUserSession) {
+                // The page is about to hand the browser to the authorization
+                // server, so there is no session to refresh here. The tab
+                // still starts a new sign in, which is what the interstitial
+                // gate counts once per: without one, the authorize page found
+                // no session id and the gate read that as already checked,
+                // so no OAuth interstitial ever ran (F2.7)
+                if (response?.success) {
+                  this._userService.createLocalUserSessionUid()
+                }
                 return of(response)
               }
               // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
@@ -128,6 +156,141 @@ export class SignInService {
           )
       })
     )
+  }
+
+  /**
+   * Whether the account the credentials belong to has a recovery number, asked
+   * the moment the sign in says 2FA is needed so the step can offer the right
+   * way out before it is shown (F1.2).
+   *
+   * Goes to the Registry for the reason given on {@link sendRecoveryPhoneCode}.
+   * Never fails: an error, a refusal or no answer inside
+   * {@link RECOVERY_PHONE_STATUS_TIMEOUT_MS} all come back as `undefined`, which
+   * the step reads as "not known" and answers by offering the recovery number,
+   * as it did before it could ask (F1.4).
+   */
+  recoveryPhoneStatus(request: {
+    username: string
+    password: string
+  }): Observable<boolean | undefined> {
+    return this._http
+      .post<RecoveryPhoneSignInStatusResponse>(
+        runtimeEnvironment.API_WEB + 'signin/recoveryPhone/status.json',
+        {
+          username: getOrcidNumber(request.username),
+          password: request.password,
+        },
+        {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        retryTransient(),
+        timeout(RECOVERY_PHONE_STATUS_TIMEOUT_MS),
+        map((response) =>
+          response?.success ? !!response.hasRecoveryPhone : undefined
+        ),
+        catchError(() => of(undefined))
+      )
+  }
+
+  /**
+   * Texts a verification code to the recovery phone number stored on the
+   * account, after the registry has checked the password itself (R3.2).
+   *
+   * This and {@link verifyRecoveryPhoneCode} always talk to the Registry
+   * (`API_WEB`), whichever way OAUTH_SIGNIN is set and whichever screen the
+   * user is on: only the Registry holds `profile_recovery_phone`, so the auth
+   * server has no number to send a code to and nothing to verify one against.
+   * The ordinary sign-in below is the only call that moves between the two.
+   *
+   * Posted as JSON rather than form-encoded because these are new endpoints,
+   * unbound by the form post the legacy sign-in has always used.
+   */
+  sendRecoveryPhoneCode(request: {
+    username: string
+    password: string
+  }): Observable<RecoveryPhoneSignInSendResponse> {
+    return this._http
+      .post<RecoveryPhoneSignInSendResponse>(
+        runtimeEnvironment.API_WEB + 'signin/recoveryPhone/sendCode.json',
+        {
+          // Same normalisation the sign-in post applies, so an iD typed with
+          // or without the https://orcid.org/ prefix reaches the same account
+          username: getOrcidNumber(request.username),
+          password: request.password,
+        },
+        {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        retryTransient(),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  /**
+   * Posts the texted code. On success the registry has already disabled 2FA,
+   * deleted the number and invalidated the unused backup codes in one
+   * transaction (R3.5); the caller then submits the ordinary sign-in with no
+   * code at all, which now succeeds.
+   *
+   * Goes to the Registry for the reason given on {@link sendRecoveryPhoneCode}.
+   */
+  verifyRecoveryPhoneCode(request: {
+    username: string
+    password: string
+    verificationCode: string
+  }): Observable<RecoveryPhoneSignInVerifyResponse> {
+    return this._http
+      .post<RecoveryPhoneSignInVerifyResponse>(
+        runtimeEnvironment.API_WEB + 'signin/recoveryPhone/verify.json',
+        {
+          username: getOrcidNumber(request.username),
+          password: request.password,
+          verificationCode: request.verificationCode,
+        },
+        {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        retryTransient(),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  /**
+   * Asks the Registry whether the record behind an email address or ORCID iD
+   * has to reset its password before it can sign in (PD-5692), so the form
+   * can say so before a password is typed.
+   *
+   * Always the Registry, like the recovery phone calls: the flag lives on the
+   * record and the lookup is not part of either sign-in implementation. A
+   * failure answers false and reports nothing: this is a hint, and the sign-in
+   * itself reports the same state once the password is right. A caller that
+   * has to tell "no reset owed" from "could not ask" passes `failOpen` false
+   * and gets the error instead.
+   */
+  getPasswordResetStatus(
+    username: string,
+    failOpen = true
+  ): Observable<PasswordResetStatusResponse> {
+    const request = this._http.post<PasswordResetStatusResponse>(
+      runtimeEnvironment.API_WEB + 'signin/password-reset-status.json',
+      { username: getOrcidNumber((username || '').trim()) },
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        withCredentials: true,
+      }
+    )
+    return failOpen
+      ? request.pipe(catchError(() => of({ passwordResetRequired: false })))
+      : request
   }
 
   /**

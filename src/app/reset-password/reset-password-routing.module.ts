@@ -20,7 +20,7 @@ export class PasswordResetTokenResolver
   resolve(route: ActivatedRouteSnapshot): Observable<ResetPasswordEmailForm> {
     const key = route.params['key']
     return this._accountRecoveryService.resetPasswordEmailValidateToken({
-      encryptedEmail: key,
+      token: key,
     })
   }
 }
