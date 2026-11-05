@@ -2,6 +2,7 @@
   class="alert-container"
   [ngClass]="{
     'alert-notice': type == 'notice',
+    'alert-notice-important': type == 'notice-important',
     'alert-info': type == 'info',
     'alert-warning': type == 'warning',
     'alert-success': type == 'success'
@@ -13,6 +14,12 @@
       class="large-material-icon"
       role="presentation"
       >info_outline</mat-icon
+    >
+    <mat-icon
+      *ngIf="type == 'notice-important'"
+      class="large-material-icon"
+      role="presentation"
+      >error_outline</mat-icon
     >
     <mat-icon
       *ngIf="type == 'info'"

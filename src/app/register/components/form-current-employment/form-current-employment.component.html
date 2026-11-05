@@ -19,23 +19,57 @@
       <div>
         <p class="main-paragraph">
           <ng-container i18n="@@register.basedOnYourEmailWeThink">
-            Based on your emails we think you are currently affiliated with
+            Based on your email address we think you are currently affiliated
+            with
           </ng-container>
           <strong> {{ autoCompleteDisplayOrganization(organization) }}.</strong>
 
-          <ng-container
-            i18n="
-              @@register.webePreselectedThisOrganizationForYouInTheFormBelow"
-          >
-            We’ve pre-selected this organization for you in the form
-            below.</ng-container
+          <em
+            ><ng-container
+              i18n="
+                @@register.webePreselectedThisOrganizationForYouInTheFormBelow"
+            >
+              We’ve pre-selected this organization for you in the form
+              below.</ng-container
+            ></em
           >
         </p>
 
         <div i18n="@@register.whenYouCompleteRegistrationAnEmployment">
-          When you complete registration an employment affiliation will be
-          automatically added to your new ORCID record.
+          When you complete registration your affiliation will be automatically
+          added to your new ORCID record.
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info" *ngIf="!rorIdHasBeenMatched" id="step-c2-not-ready-notice">
+    <mat-icon aria-hidden="true">info_outline</mat-icon>
+    <div class="content">
+      <div>
+        <h3
+          class="orc-font-body"
+          i18n="@@register.notReadyToAddYourAffiliation"
+        >
+          Not ready to add your affiliation?
+        </h3>
+      </div>
+      <div>
+        <p
+          class="main-paragraph"
+          i18n="@@register.youDontNeedToAddAnAffiliation"
+        >
+          You don’t need to add an affiliation to complete registration and get
+          your ORCID record and iD.
+        </p>
+        <p>
+          <a
+            id="step-c2-notice-skip-link"
+            (click)="skipFromNoticePanel()"
+            i18n="@@register.skipThisStepAndContinueRegistration"
+            >Skip this step and continue registration</a
+          >
+        </p>
       </div>
     </div>
   </div>
@@ -85,6 +119,7 @@
           formControlName="organization"
           [matAutocomplete]="auto"
           [attr.aria-invalid]="organizationIsInvalidAndTouched"
+          aria-describedby="organization-not-found-error organization-required-error"
           [placeholder]="organizationPlaceholder"
         />
         <mat-autocomplete
@@ -141,10 +176,19 @@
           organizationIsInvalidAndTouched &&
           displayOrganizationHint
         "
-        i18n="@@register.weCantIdentifyThisOrganization"
+        id="organization-not-found-error"
+        role="alert"
       >
-        We can’t identify this organization. Please try entering the
-        organization name again.
+        <ng-container i18n="@@register.thisOrganizationIsNotInOurDatabase"
+          >This organization is not in our database. Please try entering the
+          name again. If you cannot find your organization you can</ng-container
+        >
+        <a
+          id="step-c2-error-skip-link"
+          (click)="skipFromOrganizationError()"
+          i18n="@@register.skipThisStep"
+          >skip this step</a
+        >
       </div>
       <div
         class="selected-org orc-font-small-print error"
@@ -154,6 +198,8 @@
           organizationIsInvalidAndTouched &&
           !displayOrganizationHint
         "
+        id="organization-required-error"
+        role="alert"
         i18n="@@register.pleaseEnterAnOrganizationName"
       >
         Please enter an organization name

@@ -1,7 +1,16 @@
 name: pr
 
-# read-only repo token
-# no access to secrets
+# Nothing in this chain asks for more than a fork pull request is granted, and
+# no job in it is given a secret.
+#
+# On a `pull_request` whose head is a fork, GitHub caps the run at read-only.
+# Requesting `contents: write` on a reusable-workflow call (`uses:`) exceeds that
+# ceiling, and for `uses:` jobs GitHub validates the request when the run is
+# created rather than capping it, which can fail the whole workflow with
+# startup_failure. That would leave every required check stuck on "Expected"
+# with no red X to explain it.
+permissions:
+  contents: read
 
 on:
   pull_request:
@@ -17,10 +26,22 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Produces the required `lint / pre-commit` context. It lives here rather than
+  # in a push-triggered workflow so it also reports on pull requests from a fork,
+  # whose pushes fire in the fork and never reach this repository's check runs.
+  lint:
+    uses: ./.github/workflows/lint.yml
+
   test_yarn:
     uses: ./.github/workflows/test_yarn.yml
 
-  # NOTE: this is just to test
+  # Prettier gate, check-only: an unformatted PR fails here and its author runs
+  # `yarn format`. Must be a required status check; see
+  # .github/workflows/format.yml.
+  format:
+    uses: ./.github/workflows/format.yml
+
+  # Full production build: the only place the postbuild layout is exercised.
   bld_yarn:
     uses: ./.github/workflows/bld_yarn.yml
 #   NOTE: codeql is only available on public repos or enterprise github accounts

@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Inject,
+  inject,
   OnDestroy,
   OnInit,
   Output,
@@ -13,22 +14,18 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms'
-import { Subject, Observable, of, EMPTY } from 'rxjs'
-import { switchMap, first, takeUntil, map, tap } from 'rxjs/operators'
+import { Subject, Observable, of } from 'rxjs'
+import { switchMap, filter, first, takeUntil, tap } from 'rxjs/operators'
 
 import { WINDOW } from 'src/app/cdk/window'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { Organization, Value } from 'src/app/types/common.endpoint'
-import {
-  affiliationToOrganization,
-  MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
-} from 'src/app/constants'
+import { MAX_LENGTH_LESS_THAN_ONE_THOUSAND } from 'src/app/constants'
 import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
-import { OrganizationsService, UserService } from 'src/app/core'
-import { RegisterService } from 'src/app/core/register/register.service'
-import { AssertionVisibilityString } from 'src/app/types'
+import { UserService } from 'src/app/core'
+import { AffiliationInterstitialOrganizationService } from 'src/app/core/login-interstitials-manager/affiliation-interstitial-organization.service'
 import {
   Affiliation,
   AffiliationType,
@@ -91,14 +88,20 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
   $destroy: Subject<void> = new Subject<void>()
   organizationName: string
 
+  /**
+   * Injected here rather than through the constructor so the dialog subclass
+   * keeps its `super(...)` signature.
+   */
+  private affiliationOrganization = inject(
+    AffiliationInterstitialOrganizationService
+  )
+
   constructor(
     @Inject(WINDOW) private window: Window,
     private platformService: PlatformInfoService,
     private recordAffiliationService: RecordAffiliationService,
     private formBuilder: UntypedFormBuilder,
     private recordService: RecordService,
-    private organizationService: OrganizationsService,
-    private registerService: RegisterService,
     private user: UserService
   ) {}
 
@@ -106,34 +109,38 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
     this.platformService.get().subscribe((data) => {
       this.platform = data
     })
-    // Attempt to detect organization from user’s email domain
+    // Attempt to detect organization from user’s email domain.
+    //
+    // `getRecord()` re-emits every time another slice of the record lands, so
+    // wait for the first emission that actually carries emails and build the
+    // form once from it — rebuilding on every later emission would discard
+    // whatever the user had already typed.
+    //
+    // The resolution itself must always emit, including when the domain maps
+    // to no organization. It used to fall through to `EMPTY` in that case, so
+    // the subscribe body never ran, the form was never built and the
+    // interstitial sat on its spinner forever.
     this.recordService
       .getRecord()
       .pipe(
-        map((record) =>
-          this.sortDomainsByCreatedDate(record?.emails?.emailDomains)
-        ),
-        switchMap((domain: AssertionVisibilityString) => {
-          if (domain) {
-            this.userDomainMatched = domain.value
-            return this.registerService
-              .getEmailCategory(domain.value)
-              .pipe(map((response) => response.rorId))
-          }
-          return EMPTY
+        filter((record) => !!record?.emails),
+        first(),
+        tap((record) => {
+          this.userDomainMatched =
+            this.affiliationOrganization.mostRecentDomain(
+              record.emails.emailDomains
+            )?.value
         }),
-        switchMap((rorId: string) => {
-          if (rorId) {
-            return this.organizationService
-              .getOrgDisambiguated('ROR', rorId)
-              .pipe(first())
-          }
-          return EMPTY
-        })
+        switchMap((record) =>
+          this.affiliationOrganization.resolveFromDomains(
+            record.emails.emailDomains
+          )
+        ),
+        takeUntil(this.destroy$)
       )
       .subscribe((org) => {
         if (org) {
-          this.organizationFromDatabase = affiliationToOrganization(org)
+          this.organizationFromDatabase = org
           this.rorIdHasBeenMatched = true
           this.displayOrganizationHint = true
         }
@@ -202,23 +209,11 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
       })
   }
 
-  sortDomainsByCreatedDate(
-    domains: AssertionVisibilityString[] | undefined
-  ): AssertionVisibilityString {
-    if (!Array.isArray(domains) || domains.length === 0) return undefined
-
-    const sorted = domains.slice().sort((a, b) => {
-      const aTimestamp = a.createdDate?.timestamp ?? 0
-      const bTimestamp = b.createdDate?.timestamp ?? 0
-      return bTimestamp - aTimestamp
-    })
-
-    return sorted[0]
-  }
-
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+    this.$destroy.next()
+    this.$destroy.complete()
   }
 
   /**

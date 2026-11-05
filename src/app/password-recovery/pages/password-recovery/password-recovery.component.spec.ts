@@ -56,4 +56,35 @@ describe('PasswordRecoveryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
+
+  /** Renders the confirmation branch for the given recovery type and returns its text. */
+  function confirmationTextFor(recoveryType: string): string {
+    component.recoveryForm.get('recoveryType').setValue(recoveryType)
+    component.recoveryForm.get('email').setValue('josiah_carberry@brown.edu')
+    component.submitted = true
+    fixture.detectChanges()
+    return fixture.nativeElement.textContent
+  }
+
+  it('mentions the other verified addresses after a password reset', () => {
+    expect(confirmationTextFor('password')).toContain(
+      'and any other verified email addresses on your account'
+    )
+  })
+
+  it('does not mention other verified addresses on the forgot-iD path', () => {
+    // /forgot-id.json still emails a single address, so the fan out wording would be a lie here.
+    expect(confirmationTextFor('orcidId')).not.toContain(
+      'and any other verified email addresses on your account'
+    )
+  })
+
+  it('still shows the submitted email in both modes', () => {
+    expect(confirmationTextFor('password')).toContain(
+      'josiah_carberry@brown.edu'
+    )
+    expect(confirmationTextFor('orcidId')).toContain(
+      'josiah_carberry@brown.edu'
+    )
+  })
 })

@@ -15,6 +15,9 @@ import { UserService } from '../../../core'
 import { AccountActionsDuplicatedService } from '../../../core/account-actions-duplicated/account-actions-duplicated.service'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 describe('SettingsActionsDuplicatedComponent', () => {
   let component: SettingsActionsDuplicatedComponent
@@ -27,6 +30,9 @@ describe('SettingsActionsDuplicatedComponent', () => {
         MatDialogModule,
         RouterTestingModule,
         ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        NoopAnimationsModule,
       ],
       declarations: [SettingsActionsDuplicatedComponent],
       providers: [
