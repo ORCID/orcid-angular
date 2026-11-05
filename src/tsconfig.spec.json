@@ -4,6 +4,10 @@
     "outDir": "../out-tsc/spec",
     "types": ["jasmine", "node"]
   },
+  // polyfills.ts imports '@angular/localize/init', whose type declarations
+  // provide the global `$localize`. The root tsconfig overrides `typeRoots`,
+  // so `types: ["@angular/localize"]` cannot find it; keeping polyfills.ts in
+  // the program is what makes $localize resolve in specs and components.
   "files": ["polyfills.ts"],
   "include": ["**/*.spec.ts", "**/*.d.ts"]
 }

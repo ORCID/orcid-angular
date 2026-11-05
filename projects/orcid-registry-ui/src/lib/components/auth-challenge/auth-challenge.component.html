@@ -10,12 +10,19 @@
     [ngClass]="{ progress: !data }"
   ></mat-progress-bar>
   }
-  <div
-    class="icon self-center w-16 h-16 mb-8 content-center ml-auto mr-auto rounded-[50%] text-center"
-  >
-    <mat-icon class="material-symbols-outlined">person_check</mat-icon>
+  <div class="self-center w-16 h-16 mb-8 ml-auto mr-auto text-center">
+    <img
+      class="w-16 h-16"
+      src="./assets/vectors/orcid.logo.icon.svg"
+      alt=""
+      aria-hidden="true"
+    />
   </div>
-  <h1 class="orc-font-heading-small text-center font-normal" i18n>
+  <h1
+    [id]="headingId"
+    class="orc-font-heading-small text-center font-normal"
+    i18n
+  >
     Verify your ORCID account
   </h1>
   <p class="orc-font-body-small text-center mb-8">
@@ -37,7 +44,7 @@
       id="password-input-label"
       [ngClass]="{
         error:
-          parentForm.get(passwordControlName)?.invalid && passwordWasTouched
+          parentForm.get(passwordControlName)?.invalid && passwordMissingShows
       }"
     >
       <strong i18n="@@register.password">Password</strong>
@@ -53,16 +60,16 @@
         id="password"
         type="password"
         aria-labelledby="password-input-label"
-        [errorStateMatcher]="errorMatcher"
+        [errorStateMatcher]="passwordErrorMatcher"
         [ngClass]="{
           error:
-            parentForm.get(passwordControlName)?.invalid && passwordWasTouched
+            parentForm.get(passwordControlName)?.invalid && passwordMissingShows
         }"
       />
     </mat-form-field>
 
     @if (parentForm.get(passwordControlName)?.hasError('required') &&
-    passwordWasTouched) {
+    passwordMissingShows) {
     <mat-error
       class="w-full orc-font-small-print mt-2"
       i18n="@@account.passwordCannotBeEmpty"
@@ -75,7 +82,132 @@
     </mat-error>
     }
   </div>
-  } @if (showTwoFactorField) { @if (!showRecoveryCode) {
+  } @if (showTwoFactorField) { @if (showRecoveryPhoneCode) {
+  <!--
+    The third mode (R5.2): a code the registry has just sent by text. Accepting
+    it turns 2FA off, so it is deliberately the last option offered.
+  -->
+  <div>
+    <mat-label
+      class="orc-font-small-print font-bold! block mb-2! text-left"
+      id="recovery-phone-input-label"
+      i18n="@@account.recoveryPhoneNumberCode"
+      [ngClass]="{
+        error:
+          twoFactorRecoveryPhoneCodeWasTouched &&
+          parentForm.get(recoveryPhoneControlName)?.invalid
+      }"
+    >
+      Recovery phone number code
+    </mat-label>
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      class="no-hint w-full"
+    >
+      <input
+        id="twoFactorRecoveryPhoneCode"
+        type="text"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        aria-labelledby="recovery-phone-input-label"
+        [attr.aria-describedby]="
+          recoveryPhone?.errorCode
+            ? 'twoFactorRecoveryPhoneCode-helper twoFactorRecoveryPhoneCode-send-error'
+            : 'twoFactorRecoveryPhoneCode-helper'
+        "
+        [formControlName]="recoveryPhoneControlName"
+        #twoFactorRecoveryPhoneCodeInput
+        [errorStateMatcher]="errorMatcher"
+        matInput
+        [ngClass]="{
+          error:
+            twoFactorRecoveryPhoneCodeWasTouched &&
+            parentForm.get(recoveryPhoneControlName)?.invalid
+        }"
+      />
+    </mat-form-field>
+    <div class="flex orc-font-small-print">
+      <div id="twoFactorRecoveryPhoneCode-helper" class="mt-2 grow text-left">
+        @if (!parentForm.get(recoveryPhoneControlName)?.invalid ||
+        !twoFactorRecoveryPhoneCodeWasTouched) {
+        <mat-hint
+          class="leading-6"
+          i18n="@@account.enterSixDigitCodeSentToYourDevice"
+        >
+          Enter the 6-digit code sent to your device
+        </mat-hint>
+        } @if (parentForm.get(recoveryPhoneControlName)?.hasError('invalid')) {
+        <mat-error>
+          <ng-container i18n="@@account.badRecoveryPhoneNumberCode">
+            Invalid recovery phone number code
+          </ng-container>
+        </mat-error>
+        } @if (twoFactorRecoveryPhoneCodeWasTouched &&
+        parentForm.get(recoveryPhoneControlName)?.hasError('required')) {
+        <mat-error>
+          <ng-container i18n="@@account.recoveryPhoneNumberCodeRequired">
+            A recovery phone number code is required
+          </ng-container>
+        </mat-error>
+        } @if (twoFactorRecoveryPhoneCodeWasTouched &&
+        (parentForm.get(recoveryPhoneControlName)?.hasError('minlength') ||
+        parentForm.get(recoveryPhoneControlName)?.hasError('maxlength'))) {
+        <mat-error>
+          <ng-container i18n="@@account.recoveryPhoneNumberCodeLength">
+            Invalid recovery phone number code length
+          </ng-container>
+        </mat-error>
+        }
+      </div>
+      <mat-hint
+        [ngClass]="{
+          error:
+            twoFactorRecoveryPhoneCodeWasTouched &&
+            parentForm.get(recoveryPhoneControlName)?.invalid
+        }"
+        class="mt-2 self-center leading-6"
+      >
+        {{ parentForm.get(recoveryPhoneControlName)?.value?.length || 0 }}/6
+      </mat-hint>
+    </div>
+    @if (recoveryPhone?.errorCode === 'SEND_LIMIT_REACHED') {
+    <!--
+      A branch rather than one message with two meanings: "try again" is wrong
+      advice for a cap that only lifts tomorrow, and it is the advice a user
+      would follow first.
+    -->
+    <app-alert-message
+      id="twoFactorRecoveryPhoneCode-send-error"
+      role="alert"
+      type="warning"
+      class="recovery-phone-send-limit text-left"
+    >
+      <div
+        content
+        i18n="@@account.recoveryPhoneChallengeSendLimitReachedNotice"
+      >
+        Too many verification codes have been requested for this account today.
+        Please try again tomorrow or use your authentication app or recovery
+        codes instead.
+      </div>
+    </app-alert-message>
+    } @else if (recoveryPhone?.errorCode) {
+    <!--
+      This error belongs to the send, not to the field, so it sits outside the
+      form field and has to announce itself.
+    -->
+    <mat-error
+      id="twoFactorRecoveryPhoneCode-send-error"
+      role="alert"
+      class="w-full orc-font-small-print mt-2 leading-6"
+      i18n="@@account.recoveryPhoneChallengeCodeNotSent"
+    >
+      We could not send a code to your recovery phone number. Please try again.
+    </mat-error>
+    }
+  </div>
+  } @else if (!showRecoveryCode) {
   <div>
     <mat-label
       class="orc-font-small-print font-bold! block mb-2! text-left"
@@ -112,8 +244,8 @@
       <div class="mt-2 grow text-left">
         @if (!parentForm.get(codeControlName)?.invalid ||
         !twoFactorCodeWasTouched) {
-        <mat-hint class="leading-6" i18n="@@account.enterTheCode">
-          Enter the code from your two-factor authentication app
+        <mat-hint class="leading-6" i18n="@@account.enterTheSixDigitCode">
+          Enter the 6-digit code from your authentication app
         </mat-hint>
         } @if (parentForm.get(codeControlName)?.hasError('invalid')) {
         <mat-error>
@@ -226,7 +358,98 @@
       </mat-hint>
     </div>
   </div>
-  } @if (!showRecoveryCode) {
+  } @if (showRecoveryPhoneCode) {
+  <div class="text-center orc-font-body-small mt-6">
+    <!--
+      The one thing worth announcing, announced once. The countdown below is
+      deliberately not in here: it changes every second, and a live region
+      would read the whole sentence over a user trying to type the code. The
+      region itself is always rendered so that the message lands in it rather
+      than arriving with it.
+    -->
+    <p class="visually-hidden" aria-live="polite">
+      @if (recoveryPhone?.codeSent && recoveryPhone?.maskedNumber) {
+      <ng-container i18n="@@account.recoveryPhoneCodeSentTo"
+        >Verification code sent to</ng-container
+      >&nbsp;{{ recoveryPhone?.maskedNumber }}
+      }
+    </p>
+    <!--
+      D6: the frames put the way out of this mode above the resend row, not
+      below it (1160:12657, and the three challenge error frames), which is also
+      the order the sign-in screen already uses for the same state. Being first
+      it needs no top margin; the row below it carries one.
+    -->
+    <!--
+      D7, settled 2026-09-22 the frames' way. This row used to carry the
+      recovery-code screen's own question and link, on a screen the user reached
+      without ever mentioning recovery codes. Both ids below already exist in
+      this template for the authenticator mode, so reusing them costs
+      translators nothing.
+    -->
+    <p i18n="@@ngOrcid.signin.2fa.noDevice1" class="m-0 leading-6">
+      Don't have your device?
+    </p>
+    <button
+      type="button"
+      class="link-button"
+      data-testid="recovery-phone-back-toggle"
+      (click)="useRecoveryCode($event)"
+      (mousedown)="$event.preventDefault()"
+      i18n="@@account.useARecoveryCode"
+    >
+      Use a recovery code instead
+    </button>
+    <!--
+      "Didn't get the code? Resend" is the wrong offer once the record's daily
+      allowance is spent: the send it offers cannot succeed until tomorrow, and
+      it sits directly under a message that says so. The question that heads
+      this row has no answer either once that happens, so all three go together.
+      The way out of this mode is deliberately above them rather than inside:
+      hiding that as well left a user who reached the cap with no route back to
+      their authentication app or their recovery codes, on a screen whose only
+      input is a code that can no longer be sent.
+    -->
+    @if (recoveryPhone?.errorCode !== 'SEND_LIMIT_REACHED') {
+    <p
+      i18n="@@account.dontHaveYourDeviceOrYourRecoveryCodes"
+      class="m-0 leading-6 mt-4!"
+    >
+      Don't have your device or your recovery codes?
+    </p>
+    <p
+      i18n="@@account.didntGetTheCode"
+      class="m-0 leading-6 recovery-phone-resend-line"
+    >
+      Didn't get the code?
+    </p>
+    @if (recoveryPhone?.resendSeconds) {
+    <p class="m-0 leading-6 recovery-phone-resend-line" aria-hidden="true">
+      <ng-container i18n="@@account.youCanResendIn"
+        >You can resend in</ng-container
+      >&nbsp;<strong
+        >{{ recoveryPhone?.resendSeconds }}&nbsp;<ng-container
+          i18n="@@account.seconds"
+          >seconds</ng-container
+        ></strong
+      >
+    </p>
+    } @else {
+    <button
+      type="button"
+      id="cy-challenge-resend-recovery-phone-code"
+      class="link-button"
+      data-testid="recovery-phone-resend"
+      [disabled]="recoveryPhone?.sending"
+      (click)="resendRecoveryPhoneCode($event)"
+      (mousedown)="$event.preventDefault()"
+      i18n="@@account.resendCode"
+    >
+      Resend code
+    </button>
+    } }
+  </div>
+  } @else { @if (!showRecoveryCode) {
   <div class="text-center orc-font-body-small mt-6">
     <p i18n="@@ngOrcid.signin.2fa.noDevice1" class="m-0 leading-6">
       Don't have your device?
@@ -234,6 +457,7 @@
     <a
       href="#"
       (click)="toggleRecoveryCode($event)"
+      (mousedown)="$event.preventDefault()"
       i18n="@@account.useARecoveryCode"
       class="underline"
       data-testid="recovery-toggle"
@@ -249,6 +473,7 @@
     <a
       href="#"
       (click)="toggleRecoveryCode($event)"
+      (mousedown)="$event.preventDefault()"
       data-testid="recovery-toggle"
       i18n="@@account.useYourAuthenticationAppInstead"
       class="underline"
@@ -256,7 +481,38 @@
       Use your authentication app instead
     </a>
   </div>
-  }
+  } @if (recoveryPhoneAvailable) {
+  <!--
+    R5.1: only offered when the account can actually use it - the flag is on,
+    2FA is active and a number is stored. Otherwise the help centre link that
+    has always been here is what the user gets.
+  -->
+  <!--
+    PD-14598: the mode links keep focus where it is on press. Otherwise the
+    password field blurs, its "cannot be empty" row appears, the link moves
+    down and the release lands beside it, so the first click does nothing.
+  -->
+  <div class="text-center orc-font-body-small mt-4!">
+    <p
+      i18n="@@account.dontHaveYourDeviceOrYourRecoveryCodes"
+      class="m-0 leading-6"
+    >
+      Don't have your device or your recovery codes?
+    </p>
+    <button
+      type="button"
+      id="cy-challenge-send-recovery-phone-code"
+      class="link-button"
+      data-testid="recovery-phone-toggle"
+      [disabled]="recoveryPhone?.sending"
+      (click)="sendRecoveryPhoneCode($event)"
+      (mousedown)="$event.preventDefault()"
+      i18n="@@account.sendCodeToRecoveryPhoneNumber"
+    >
+      Send a code to your recovery phone number and disable 2FA
+    </button>
+  </div>
+  } @else {
   <div class="text-center orc-font-body-small mt-4!">
     <p i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery" class="m-0 leading-6">
       Don't have your device or recovery code?
@@ -266,16 +522,18 @@
       href="https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication"
       target="_blank"
       rel="noopener noreferrer"
+      (mousedown)="$event.preventDefault()"
       i18n="@@topBar.knowledge"
     >
       ORCID help centre
     </a>
   </div>
-  }
+  } } }
   <hr />
   <button
     mat-raised-button
     type="submit"
+    id="cy-verify-account-continue"
     class="verify-button row orc-font-body mat-elevation-z0 text-center h-10! mb-6 block w-full"
     i18n
     [disabled]="loading || parentForm.invalid || parentForm.pending"
@@ -290,7 +548,10 @@
   <button
     mat-button
     type="button"
+    id="cy-cancel-account-verification"
     (click)="onCancel()"
+    (mousedown)="$event.preventDefault()"
+    [disabled]="verifying"
     class="text-center orc-font-body-small h-10! w-full block content-center cancel font-normal!"
     i18n
   >

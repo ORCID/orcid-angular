@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
+import { ConsentVendorService } from 'src/app/core/consent/consent-vendor.service'
 
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 
@@ -34,7 +35,8 @@ export class FooterComponent implements OnInit {
 
   constructor(
     _platformInfo: PlatformInfoService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _consentVendor: ConsentVendorService
   ) {
     _platformInfo.get().subscribe((platformInfo) => {
       this.platform = platformInfo
@@ -51,6 +53,11 @@ export class FooterComponent implements OnInit {
         otBtn.innerText = $localize`:@@footer.cookieSettings:Cookie Settings`
       }
     }, 200)
+  }
+
+  /** OneTrust opens itself from the link's class; CookieYes needs a call. */
+  openCookieSettings(event: Event) {
+    this._consentVendor.openPreferences(event)
   }
 
   goTo(url) {

@@ -24,6 +24,9 @@ import { ShareEmailsDomainsDialogComponent } from './share-emails-domains/inters
 import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial-component/share-emails-domains.component'
 import { BackupEmailComponent } from './backup-email/interstitial-component/backup-email.component'
 import { BackupEmailDialogComponent } from './backup-email/interstitial-dialog-extend/backup-email-dialog.component'
+import { RecoveryPhoneInterstitialComponent } from './recovery-phone/interstitial-component/recovery-phone-interstitial.component'
+import { RecoveryPhoneInterstitialDialogComponent } from './recovery-phone/interstitial-dialog-extend/recovery-phone-interstitial-dialog.component'
+import { RecoveryPhoneFormComponent } from '../recovery-phone-form/recovery-phone-form.component'
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { BackupEmailDialogComponent } from './backup-email/interstitial-dialog-e
     AffiliationsInterstitialDialogComponent,
     BackupEmailComponent,
     BackupEmailDialogComponent,
+    RecoveryPhoneInterstitialComponent,
+    RecoveryPhoneInterstitialDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +58,9 @@ import { BackupEmailDialogComponent } from './backup-email/interstitial-dialog-e
     MatButtonModule,
     InfoPanelModule,
     A11yLinkModule,
+    // Standalone: the recovery phone interstitial renders it, and it brings its
+    // own phone field and reactive form wiring with it
+    RecoveryPhoneFormComponent,
   ],
   exports: [
     ShareEmailsDomainsComponent,
@@ -61,6 +69,8 @@ import { BackupEmailDialogComponent } from './backup-email/interstitial-dialog-e
     AffiliationsInterstitialDialogComponent,
     BackupEmailComponent,
     BackupEmailDialogComponent,
+    RecoveryPhoneInterstitialComponent,
+    RecoveryPhoneInterstitialDialogComponent,
   ],
 })
 export class InterstitialsModule {}

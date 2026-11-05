@@ -17,4 +17,10 @@ export interface UserInfo {
   USER_NOT_FOUND: boolean
   DELEGATED_BY_ADMIN: 'true' | undefined
   READY_FOR_INDEXING: string
+  /**
+   * 'true' when the record has to reset its password before it can sign in
+   * with one (PD-5692). Only sent to the record's own user while the feature
+   * is on; absent otherwise.
+   */
+  FORCE_PASSWORD_RESET?: 'true' | 'false'
 }

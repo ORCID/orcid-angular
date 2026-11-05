@@ -12,6 +12,7 @@ import { UserRecord } from 'src/app/types/record.local'
 import { LoginDomainInterstitialManagerService } from './implementations/login-domain-interstitials-manager.service'
 import { LoginAffiliationInterstitialManagerService } from './implementations/login-affiliation-interstitials-manager.service'
 import { LoginBackupEmailInterstitialManagerService } from './implementations/login-backup-email-interstitials-manager.service'
+import { LoginRecoveryPhoneInterstitialManagerService } from './implementations/login-recovery-phone-interstitials-manager.service'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { LoginBaseInterstitialManagerService } from './abstractions/login-abstract-interstitial-manager.service'
 import {
@@ -40,7 +41,8 @@ export class LoginMainInterstitialsManagerService {
     private _oauthUrlSession: OauthURLSessionManagerService,
     LoginDomainInterstitialManagerService: LoginDomainInterstitialManagerService,
     LoginAffiliationInterstitialManagerService: LoginAffiliationInterstitialManagerService,
-    LoginBackupEmailInterstitialManagerService: LoginBackupEmailInterstitialManagerService
+    LoginBackupEmailInterstitialManagerService: LoginBackupEmailInterstitialManagerService,
+    LoginRecoveryPhoneInterstitialManagerService: LoginRecoveryPhoneInterstitialManagerService
   ) {
     // Delare here all the interstitial services.
     // This are the entry points to add new interstitials.
@@ -51,6 +53,12 @@ export class LoginMainInterstitialsManagerService {
       LoginBackupEmailInterstitialManagerService,
       LoginDomainInterstitialManagerService,
       LoginAffiliationInterstitialManagerService,
+      // Last on purpose (R6.1). It is the most specific rule of the four — it
+      // only applies to a record that has already been through the domains and
+      // affiliation interstitials — so promoting it would take a slot from a
+      // less demanding one. It would also break the five end-to-end specs that
+      // dismiss the backup email interstitial by name on sign in.
+      LoginRecoveryPhoneInterstitialManagerService,
     ]
   }
 

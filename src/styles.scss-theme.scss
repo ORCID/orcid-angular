@@ -10,8 +10,15 @@
   $background: map-get($theme, background);
   /// GLOBAL APP CUSTOM STYLES
 
+  // PD-5635: every frame draws a link in brand-secondary-dark #085c77, which is
+  // step 700 of this palette. With no hue given this resolves to 500 (#2e7f9f),
+  // so a link took the lighter step everywhere except where a component asked
+  // for 700 by name - `a.underline` in orcid/_urls-theme.scss already did, which
+  // is why some links on a screen matched the frame and the ones beside them did
+  // not. Classes that set their own colour (.black-url, .white-url, .green-url)
+  // are unaffected.
   a {
-    color: mat.m2-get-color-from-palette($primary);
+    color: mat.m2-get-color-from-palette($primary, 700);
   }
   mat-form-field.read-only .mat-mdc-text-field-wrapper {
     background-color: map-get($background, 'ui-background-lightest');

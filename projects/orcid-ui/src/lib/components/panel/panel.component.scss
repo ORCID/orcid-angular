@@ -1,6 +1,6 @@
 .orcid-panel {
   border-radius: 4px;
-  border: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  border: 1px solid var(--orcid-color-border-subtle, #eeeeee);
   background-color: var(--orcid-color-surface, #ffffff);
   display: block;
 }
@@ -76,7 +76,7 @@
 
 .orcid-panel__chip-button {
   border-radius: 999px;
-  border: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  border: 1px solid var(--orcid-color-border-subtle, #eeeeee);
   padding: 0 12px;
   min-height: 28px;
   background-color: var(--orcid-color-surface, #ffffff);
