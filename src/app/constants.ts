@@ -93,6 +93,7 @@ export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
   twoFactor: '2fa-signin',
   twoFactorSetup: '2FA/setup',
+  recoveryPhone: '2FA/recovery-phone',
   institutionalLinking: 'institutional-linking',
   social: 'social-linking',
   institutional: 'institutional-signin',
@@ -112,6 +113,10 @@ export const ApplicationRoutes = {
   selfService: 'self-service',
   developerTools: 'developer-tools',
   smsPoc: 'sms-poc',
+  recordCorrections: 'record-corrections',
+  // Pre-migration URL, still linked from the info site. TitleService matches on
+  // the requested URL rather than the redirected one, so it needs its own label.
+  recordCorrectionsLegacy: 'about/trust/integrity/record-corrections',
   home: '',
 }
 
@@ -119,6 +124,7 @@ export const ApplicationRoutesLabels = {
   [ApplicationRoutes.home]: $localize`:@@share.titleOrcid:ORCID`,
   [ApplicationRoutes.twoFactor]: $localize`:@@share.twoFactorSetup:2FA - ORCID`,
   [ApplicationRoutes.twoFactorSetup]: $localize`:@@share.twoFactorSetup:2FA - ORCID`,
+  [ApplicationRoutes.recoveryPhone]: $localize`:@@share.twoFactorSetup:2FA - ORCID`,
   [ApplicationRoutes.institutionalLinking]: $localize`:@@share.institutionalLinking:Institutional linking - ORCID`,
   [ApplicationRoutes.social]: $localize`:@@share.social:Social linking - ORCID`,
   [ApplicationRoutes.institutional]: $localize`:@@share.institutional:Institutional sign in - ORCID`,
@@ -138,6 +144,8 @@ export const ApplicationRoutesLabels = {
   [ApplicationRoutes.selfService]: $localize`:@@share.selfService:Self Service - ORCID`,
   [ApplicationRoutes.developerTools]: $localize`:@@share.developerTools:Developer tools - ORCID`,
   [ApplicationRoutes.smsPoc]: 'SMS POC - ORCID',
+  [ApplicationRoutes.recordCorrections]: $localize`:@@share.recordCorrections:Record corrections - ORCID`,
+  [ApplicationRoutes.recordCorrectionsLegacy]: $localize`:@@share.recordCorrections:Record corrections - ORCID`,
 }
 
 export const ApplicationDynamicRoutesLabels = {

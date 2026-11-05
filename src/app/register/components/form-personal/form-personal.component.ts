@@ -350,7 +350,8 @@ export class FormPersonalComponent
         backendError &&
         (backendError[0] === 'orcid.frontend.verify.duplicate_email' ||
           backendError[0] === 'orcid.frontend.verify.unclaimed_email' ||
-          backendError[0] === 'orcid.frontend.verify.deactivated_email') &&
+          backendError[0] === 'orcid.frontend.verify.deactivated_email' ||
+          backendError[0] === 'disposable_email') &&
         !this.nextButtonWasClicked
       )
     }

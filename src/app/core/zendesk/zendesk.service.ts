@@ -14,27 +14,31 @@ export class ZendeskService {
   constructor(@Inject(WINDOW) private _window: Window) {}
 
   hide() {
-    this.zE = (this._window as any).zE
-    this.zE('webWidget', 'hide')
+    this.run('hide')
   }
 
   show() {
-    this.zE = (this._window as any).zE
-    this.zE('webWidget', 'show')
+    this.run('show')
   }
 
   open() {
-    this.zE('webWidget', 'open')
+    this.run('open')
   }
 
   adaptPluginToPlatform(platform: PlatformInfo) {
-    if (platform.screenDirection === 'rtl') {
-      this.zE('webWidget', 'updateSettings', {
-        webWidget: {
-          position: { horizontal: 'left', vertical: 'bottom' },
-        },
-      })
+    if (platform.screenDirection !== 'rtl') {
+      return
     }
+    const zE = this.widget()
+    if (!zE) {
+      return
+    }
+    this.zE = zE
+    zE('webWidget', 'updateSettings', {
+      webWidget: {
+        position: { horizontal: 'left', vertical: 'bottom' },
+      },
+    })
   }
 
   /**
@@ -46,13 +50,19 @@ export class ZendeskService {
    * @param errorCode error code to add more context for the support staff
    */
   autofillTicketForm(user?: UserSession, subject?: string, errorCode?: string) {
+    const zE = this.widget()
+    if (!zE) {
+      return
+    }
+    this.zE = zE
+
     let uri = ''
     const uriMatch = this._window.location.href.match(REDIRECT_URI_REGEXP)
     if (uriMatch && uriMatch[0] && uriMatch[0].indexOf('redirect_uri=') === 0) {
       uri = decodeURIComponent(uriMatch[0].split('redirect_uri=')[1])
     }
 
-    this.zE('webWidget', 'updateSettings', {
+    zE('webWidget', 'updateSettings', {
       webWidget: {
         helpCenter: {
           suppress: true,
@@ -105,5 +115,27 @@ Leave your comments above if required.
         },
       },
     })
+  }
+
+  /**
+   * Always re-read the widget from `window`.
+   *
+   * The Zendesk snippet is a third party script: it can be missing entirely
+   * (ad blocker, offline, blocked domain) and it lands after this service is
+   * constructed. Every command therefore has to tolerate its absence - a
+   * throw here would propagate into AppComponent's platformInfo subscription
+   * and tear it down for the rest of the session.
+   */
+  private widget(): ZendeskWidget | undefined {
+    return (this._window as any)?.zE
+  }
+
+  private run(command: 'hide' | 'show' | 'open'): void {
+    const zE = this.widget()
+    if (!zE) {
+      return
+    }
+    this.zE = zE
+    zE('webWidget', command)
   }
 }

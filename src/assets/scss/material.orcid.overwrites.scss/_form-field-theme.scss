@@ -5,6 +5,8 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   $warn: map-get($theme, warn);
+  $outline: mat.m2-get-color-from-palette($background, 'ui-background');
+  $error: mat.m2-get-color-from-palette($foreground, 'state-warning-darkest');
 
   .mat-form-field-appearance-outline {
     input:-webkit-autofill,
@@ -46,7 +48,26 @@
   .mdc-text-field--outlined:not(.mdc-text-field--disabled)
     .mdc-notched-outline
     .mdc-notched-outline__trailing {
-    --mat-form-field-outlined-outline-color: rgba(0, 0, 0, 0.12);
+    // PD-5635: every frame in the 2FA recovery phone set draws a field outline
+    // in ui-background. Material's own default is black at 12%, which is a
+    // different grey and belongs to no token -- so it read as a near-miss on
+    // every field of every state.
+    --mat-form-field-outlined-outline-color: #{$outline};
+  }
+
+  // PD-5635: the error state. Material carries the warn palette's 500 and 700
+  // (#f44336 on the outline, #d32f2f on the text); the frames draw both in
+  // state-warning-darkest.
+  .mat-mdc-form-field {
+    --mat-form-field-outlined-outline-color: #{$outline};
+    --mat-form-field-outlined-hover-outline-color: #{$outline};
+    --mat-form-field-outlined-error-outline-color: #{$error};
+    --mat-form-field-outlined-error-hover-outline-color: #{$error};
+    --mat-form-field-outlined-error-focus-outline-color: #{$error};
+    --mat-form-field-outlined-error-label-text-color: #{$error};
+    --mat-form-field-outlined-error-hover-label-text-color: #{$error};
+    --mat-form-field-outlined-error-focus-label-text-color: #{$error};
+    --mat-form-field-error-text-color: #{$error};
   }
 }
 

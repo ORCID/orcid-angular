@@ -197,6 +197,10 @@ nav {
             width: auto;
           }
         }
+        .header-actions {
+          flex-wrap: nowrap;
+          gap: 16px;
+        }
       }
       nav {
         .top-bar,
@@ -250,6 +254,9 @@ nav {
             flex-direction: column;
             gap: 0;
             width: 100%;
+            &.mobile-auth-menu button.top-menu-button {
+              font-weight: var(--orcid-font-weight-bold, 700);
+            }
             .col {
               flex: 0 0 auto;
               max-width: 100%;

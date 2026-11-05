@@ -165,6 +165,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   logout() {
     this.reportOauthAuthorizationLogout('user_initiated_logout')
     if (this.OAUTH_AUTHORIZATION) {
+      this.preserveOauthUrlForNextSignIn()
       this._user
         .noRedirectLogout()
         .pipe(
@@ -179,6 +180,20 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         })
     } else {
       ;(this.window as any).outOfRouterNavigation('/signout')
+    }
+  }
+
+  /**
+   * The stored OAuth URL is consumed and cleared by the first successful sign in,
+   * so by the time the authorization screen is shown it no longer exists. Signing
+   * out from here hard navigates straight to /signin, which never crosses the
+   * AuthorizeGuard that would otherwise store it again. Without this, a later
+   * institutional sign in has no OAuth URL to return to and lands on my-orcid.
+   */
+  private preserveOauthUrlForNextSignIn() {
+    const authorizeUrl = this.window?.location?.href
+    if (authorizeUrl) {
+      this._oauthURLSessionManagerService.set(authorizeUrl)
     }
   }
 

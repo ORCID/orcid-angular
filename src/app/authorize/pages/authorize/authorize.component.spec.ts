@@ -7,6 +7,8 @@ import {
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core'
+import { PortalModule } from '@angular/cdk/portal'
+import { MatCardModule } from '@angular/material/card'
 import { of, Subject, NEVER, throwError } from 'rxjs'
 
 import { WINDOW } from '../../../cdk/window'
@@ -18,13 +20,25 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { InterstitialObservabilityService } from 'src/app/core/login-interstitials-manager/interstitial-observability.service'
 
 import { AuthorizeComponent } from './authorize.component'
 
-// Dummy interstitial component used for typing purposes in tests
-@Component({ template: '', standalone: true })
+// Dummy interstitial component used for typing purposes in tests. It renders a
+// marker so tests can tell "attached to the outlet" from "the flag was set".
+@Component({
+  template: '<p class="interstitial-body">interstitial</p>',
+  standalone: true,
+})
 class DummyInterstitialComponent {
+  // Set on construction so tests that attach through a real outlet can reach
+  // the instance the portal built, rather than a hand-made stand-in.
+  static lastInstance: DummyInterstitialComponent | null = null
   finish = new Subject<void>()
+
+  constructor() {
+    DummyInterstitialComponent.lastInstance = this
+  }
 }
 
 describe('AuthorizeComponent', () => {
@@ -38,6 +52,7 @@ describe('AuthorizeComponent', () => {
   let togglzSpy: jasmine.SpyObj<TogglzService>
   let oauthUrlSessionSpy: jasmine.SpyObj<OauthURLSessionManagerService>
   let rumSpy: jasmine.SpyObj<RumJourneyEventService>
+  let interstitialObservabilitySpy: jasmine.SpyObj<InterstitialObservabilityService>
   let windowMock: any
 
   beforeEach(() => {
@@ -57,6 +72,11 @@ describe('AuthorizeComponent', () => {
     rumSpy = jasmine.createSpyObj('RumJourneyEventService', [
       'recordSimpleEvent',
     ])
+    interstitialObservabilitySpy =
+      jasmine.createSpyObj<InterstitialObservabilityService>(
+        'InterstitialObservabilityService',
+        ['shown', 'outcome', 'closed']
+      )
 
     windowMock = {
       outOfRouterNavigation: jasmine.createSpy('outOfRouterNavigation'),
@@ -77,6 +97,12 @@ describe('AuthorizeComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
+        // The real AuthorizeModule imports both. Without them cdkPortalOutlet is
+        // an unknown attribute here, the outlet ViewChild can never resolve, and
+        // no test can tell a mounted outlet from a missing one — which is how
+        // PD-8720 shipped green.
+        PortalModule,
+        MatCardModule,
         DummyInterstitialComponent,
       ],
       declarations: [AuthorizeComponent],
@@ -95,14 +121,31 @@ describe('AuthorizeComponent', () => {
           useValue: oauthUrlSessionSpy,
         },
         { provide: RumJourneyEventService, useValue: rumSpy },
+        {
+          provide: InterstitialObservabilityService,
+          useValue: interstitialObservabilitySpy,
+        },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 
   function createComponent() {
+    DummyInterstitialComponent.lastInstance = null
     fixture = TestBed.createComponent(AuthorizeComponent)
     component = fixture.componentInstance
+    fixture.detectChanges()
+  }
+
+  /**
+   * Renders the authorization card so the `#interstitialOutlet` ViewChild
+   * resolves against a real CdkPortalOutlet. Hand-assigning `component.outlet`
+   * instead is what hid PD-8720: it guarantees the one thing that was actually
+   * undefined in production.
+   */
+  function mountAuthorizationCard() {
+    component.loading = false
+    component.showAuthorizationComponent = true
     fixture.detectChanges()
   }
 
@@ -154,6 +197,12 @@ describe('AuthorizeComponent', () => {
 
     expect(loginInterstitialsSpy.isUserFullyLoaded).toHaveBeenCalled()
     expect(loginInterstitialsSpy.checkLoginInterstitials).toHaveBeenCalled()
+    // The manager only consults the post-registration OAuth flag when it is
+    // told it is on the OAuth surface, so this prefix is load bearing (PD-12904)
+    expect(loginInterstitialsSpy.checkLoginInterstitials).toHaveBeenCalledWith(
+      jasmine.anything(),
+      { returnType: 'component', togglzPrefix: 'OAUTH' }
+    )
     expect((component as any).interstitialComponent).toBe(
       DummyInterstitialComponent as any
     )
@@ -307,13 +356,7 @@ describe('AuthorizeComponent', () => {
     ;(component as any).interstitialComponent =
       DummyInterstitialComponent as any
 
-    const finish$ = new Subject<void>()
-    ;(component as any).outlet = {
-      attachComponentPortal: () => ({
-        instance: { finish: finish$.asObservable() },
-        changeDetectorRef: { detectChanges: () => {} },
-      }),
-    }
+    mountAuthorizationCard()
 
     const finishSpy = spyOn<any>(
       component as any,
@@ -323,24 +366,41 @@ describe('AuthorizeComponent', () => {
     component.handleRedirect('/x')
     expect(component.showInterstital).toBeTrue()
 
-    finish$.next()
+    DummyInterstitialComponent.lastInstance.finish.next()
 
     expect(finishSpy).toHaveBeenCalled()
+    // The dialog path closes on afterClosed(); here `finish` is the only signal
+    // the interstitial is over, so without this the journey never ends
+    expect(interstitialObservabilitySpy.closed).toHaveBeenCalled()
+  })
+
+  it('handleRedirect: keeps the card mounted so the attached interstitial survives', () => {
+    // showInterstitial() attaches the portal and then clears
+    // showAuthorizationComponent. The outlet lives inside the card, so if the
+    // card's *ngIf does not also test showInterstital the interstitial is
+    // destroyed in the same tick and the user is left on a blank page.
+    createComponent()
+    mountAuthorizationCard()
+    expect(fixture.nativeElement.querySelector('mat-card')).toBeTruthy()
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
+
+    component.handleRedirect('/x')
+    fixture.detectChanges()
+
+    expect(component.showAuthorizationComponent).toBeFalse()
+    expect(component.showInterstital).toBeTrue()
+    expect(fixture.nativeElement.querySelector('mat-card')).toBeTruthy()
+    expect(
+      fixture.nativeElement.querySelector('.interstitial-body')
+    ).toBeTruthy()
   })
 
   it('handleRedirect: with interstitial -> shows interstitial instead of redirect', () => {
     createComponent()
+    mountAuthorizationCard()
     ;(component as any).interstitialComponent =
       DummyInterstitialComponent as any
-
-    // mock outlet to avoid CDK dependency
-    const finish$ = new Subject<void>()
-    ;(component as any).outlet = {
-      attachComponentPortal: () => ({
-        instance: { finish: finish$.asObservable() },
-        changeDetectorRef: { detectChanges: () => {} },
-      }),
-    }
 
     spyOn<any>(component as any, 'finishRedirect').and.returnValue(NEVER)
 
@@ -348,6 +408,66 @@ describe('AuthorizeComponent', () => {
 
     expect(component.showInterstital).toBeTrue()
     expect(component.showAuthorizationComponent).toBeFalse()
+  })
+
+  it('ngOnInit: already authorized WITH interstitial -> renders it instead of a blank page', fakeAsync(() => {
+    // PD-8720. This path skips the authorization component, so nothing mounts
+    // the card that holds the outlet. showInterstitial() has to mount it
+    // itself; before it did, the ViewChild was undefined and attaching the
+    // portal threw, leaving no interstitial and no redirect.
+    userServiceSpy.getUserSession.and.returnValue(
+      of({
+        loggedIn: true,
+        oauthSession: { redirectUrl: '/here?code=1', responseType: 'code' },
+      } as any)
+    )
+    recordServiceSpy.getRecord.and.returnValue(of({} as any))
+    loginInterstitialsSpy.isUserFullyLoaded.and.returnValue(true)
+    loginInterstitialsSpy.checkLoginInterstitials.and.returnValue(
+      of(DummyInterstitialComponent as any)
+    )
+
+    createComponent()
+
+    // Nothing has mounted the card at this point, which is the state the bug
+    // was reported in.
+    expect(component.showAuthorizationComponent).toBeFalse()
+    expect(fixture.nativeElement.querySelector('mat-card')).toBeFalsy()
+
+    tick()
+    fixture.detectChanges()
+
+    expect(component.outlet).toBeDefined()
+    expect(component.showInterstital).toBeTrue()
+    expect(fixture.nativeElement.querySelector('mat-card')).toBeTruthy()
+    expect(
+      fixture.nativeElement.querySelector('.interstitial-body')
+    ).toBeTruthy()
+    // The flow waits on the interstitial rather than redirecting past it
+    expect(windowMock.outOfRouterNavigation).not.toHaveBeenCalled()
+  }))
+
+  it('showInterstitial: outlet that cannot be mounted redirects instead of blanking', () => {
+    createComponent()
+    // `loading` keeps <main> and the card it holds out of the DOM, so the
+    // outlet cannot resolve. The user is still owed the redirect_uri.
+    component.loading = true
+    fixture.detectChanges()
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
+
+    const finishSpy = spyOn<any>(
+      component as any,
+      'finishRedirect'
+    ).and.returnValue(of(true))
+
+    expect(() => component.handleRedirect('/x')).not.toThrow()
+
+    expect(component.outlet).toBeUndefined()
+    expect(finishSpy).toHaveBeenCalled()
+    expect(component.showInterstital).toBeFalse()
+    // The journey opened by shown() has to close, or it stays open forever
+    expect(interstitialObservabilitySpy.closed).toHaveBeenCalled()
   })
 
   it('handleRedirect: without interstitial -> calls finishRedirect', () => {

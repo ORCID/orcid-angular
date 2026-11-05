@@ -2,11 +2,18 @@ import { Injectable } from '@angular/core'
 
 const LOCALSTORAGE_KEY = 'oauthRedirectUrl'
 const LOCALSTORAGE_JUST_REGISTERED_KEY = 'oauthJustRegistered'
+const LOCALSTORAGE_PASSWORD_JUST_RESET_KEY = 'passwordJustReset'
 
 /**
  * 30 minutes expressed in milliseconds.
  */
 const EXPIRATION_MS = 30 * 60 * 1000
+
+/**
+ * Long enough to reach sign-in, short enough that a reset which never got
+ * there does not surface on a later visit (PD-14612).
+ */
+const PASSWORD_JUST_RESET_EXPIRATION_MS = 5 * 60 * 1000
 
 interface StoredRedirect {
   /** Full OAuth URL (query string and all) */
@@ -29,6 +36,14 @@ interface StoredBooleanFlag {
   providedIn: 'root',
 })
 export class OauthURLSessionManagerService {
+  /**
+   * Latches once `consumeJustRegistered()` has taken the stored flag away, so
+   * later non-destructive readers still see it. A registration always crosses a
+   * full page navigation, so this can only ever mean "this page load followed a
+   * registration".
+   */
+  private justRegisteredThisPageLoad = false
+
   /**
    * Persist the OAuth URL with a 30‑minute TTL.
    */
@@ -88,7 +103,8 @@ export class OauthURLSessionManagerService {
   }
 
   /**
-   * Remove the redirect entry from storage.
+   * Remove the redirect entry from storage. Only storage is cleared —
+   * `justRegisteredThisPageLoad` is page-load scoped on purpose.
    */
   clear(): void {
     localStorage.removeItem(LOCALSTORAGE_KEY)
@@ -96,9 +112,65 @@ export class OauthURLSessionManagerService {
   }
 
   /**
+   * Persist a one-time flag telling the next sign-in form that a signed-out
+   * password reset has just succeeded. Lives outside `clear()` because the
+   * OAuth branch of the reset clears the redirect before it leaves.
+   */
+  setPasswordJustReset(): void {
+    const payload: StoredBooleanFlag = {
+      value: true,
+      expiresAt: Date.now() + PASSWORD_JUST_RESET_EXPIRATION_MS,
+    }
+    try {
+      localStorage.setItem(
+        LOCALSTORAGE_PASSWORD_JUST_RESET_KEY,
+        JSON.stringify(payload)
+      )
+    } catch {
+      // no storage, no notice: the reset itself has already succeeded
+    }
+  }
+
+  /**
+   * Read and clear the one-time password reset flag.
+   */
+  consumePasswordJustReset(): boolean {
+    // Read by the sign-in form as it loads, so a browser that refuses storage
+    // must cost the notice and nothing else
+    try {
+      const raw = localStorage.getItem(LOCALSTORAGE_PASSWORD_JUST_RESET_KEY)
+      localStorage.removeItem(LOCALSTORAGE_PASSWORD_JUST_RESET_KEY)
+      if (!raw) {
+        return false
+      }
+      const payload = JSON.parse(raw) as StoredBooleanFlag
+      return !!payload.value && payload.expiresAt > Date.now()
+    } catch {
+      return false
+    }
+  }
+
+  /**
    * Read and clear one-time post-registration flag.
    */
   consumeJustRegistered(): boolean {
+    const value = this.readJustRegisteredFlag()
+    this.justRegisteredThisPageLoad = this.justRegisteredThisPageLoad || value
+    localStorage.removeItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
+    return value
+  }
+
+  /**
+   * Non-destructive read of the same flag, for callers that only need to know
+   * whether this page load followed a registration. Stays true for the rest of
+   * the page load even after `consumeJustRegistered()` has cleared storage, so
+   * readers never have to race each other over a one-time flag.
+   */
+  isJustRegistered(): boolean {
+    return this.justRegisteredThisPageLoad || this.readJustRegisteredFlag()
+  }
+
+  private readJustRegisteredFlag(): boolean {
     const raw = localStorage.getItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
     if (!raw) {
       return false
@@ -110,8 +182,6 @@ export class OauthURLSessionManagerService {
       }
     } catch {
       // Ignore malformed payload and return false.
-    } finally {
-      localStorage.removeItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
     }
     return false
   }
