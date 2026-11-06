@@ -112,7 +112,6 @@ export const ApplicationRoutes = {
   resetPasswordEmail: 'reset-password-email',
   selfService: 'self-service',
   developerTools: 'developer-tools',
-  smsPoc: 'sms-poc',
   recordCorrections: 'record-corrections',
   // Pre-migration URL, still linked from the info site. TitleService matches on
   // the requested URL rather than the redirected one, so it needs its own label.
@@ -143,7 +142,6 @@ export const ApplicationRoutesLabels = {
   [ApplicationRoutes.resetPasswordEmail]: $localize`:@@share.resetPasswordEmail:Reset password - ORCID`,
   [ApplicationRoutes.selfService]: $localize`:@@share.selfService:Self Service - ORCID`,
   [ApplicationRoutes.developerTools]: $localize`:@@share.developerTools:Developer tools - ORCID`,
-  [ApplicationRoutes.smsPoc]: 'SMS POC - ORCID',
   [ApplicationRoutes.recordCorrections]: $localize`:@@share.recordCorrections:Record corrections - ORCID`,
   [ApplicationRoutes.recordCorrectionsLegacy]: $localize`:@@share.recordCorrections:Record corrections - ORCID`,
 }

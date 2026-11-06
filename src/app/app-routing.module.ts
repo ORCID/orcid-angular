@@ -177,12 +177,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: ApplicationRoutes.smsPoc,
-    canActivateChild: [AuthenticatedGuard],
-    loadChildren: () =>
-      import('./sms-poc/sms-poc.module').then((m) => m.SmsPocModule),
-  },
-  {
     // Legacy URL kept alive: the reverse proxy deliberately excludes it from the
     // /about redirect to the info site.
     path: ApplicationRoutes.recordCorrectionsLegacy,
