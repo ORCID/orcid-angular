@@ -788,7 +788,7 @@ export class RecordWorksService {
     if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
       const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\/?\d{5})/g)
       const result = regex.exec(externalId)
-      url = result ? 'works/resolve/pmc/?value=' : 'works/resolve/pmid?value='
+      url = result ? 'works/resolve/pmc?value=' : 'works/resolve/pmid?value='
     }
 
     return this._http.get<Work>(runtimeEnvironment.API_WEB + url + externalId)
