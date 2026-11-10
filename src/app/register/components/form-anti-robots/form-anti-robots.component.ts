@@ -1,4 +1,11 @@
-import { Component, DoCheck, forwardRef, Input, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  DoCheck,
+  forwardRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,

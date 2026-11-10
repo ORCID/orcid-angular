@@ -12,20 +12,31 @@ describe('registration captcha session contract', () => {
         captchaProvider: 'turnstile',
         captchaRegistrationId: 'session-id',
       }
-      formGroupToEmailRegisterForm() { return {} }
-      formGroupToPasswordRegisterForm() { return {} }
+      formGroupToEmailRegisterForm() {
+        return {}
+      }
+      formGroupToPasswordRegisterForm() {
+        return {}
+      }
       formGroupToFullRegistrationForm() {
-        return { grecaptcha: { value: 'token' }, grecaptchaWidgetId: { value: '0' } }
+        return {
+          grecaptcha: { value: 'token' },
+          grecaptchaWidgetId: { value: '0' },
+        }
       }
     }
     const service = new (RegisterBackendValidatorMixin(Base))()
     const form = new UntypedFormGroup({})
-    service.backendRegisterFormValidate(form, form, form, form, form).subscribe()
-    expect(post.calls.mostRecent().args[1]).toEqual(jasmine.objectContaining({
-      captchaProvider: 'turnstile',
-      captchaRegistrationId: 'session-id',
-      grecaptcha: { value: 'token' },
-      grecaptchaWidgetId: { value: '0' },
-    }))
+    service
+      .backendRegisterFormValidate(form, form, form, form, form)
+      .subscribe()
+    expect(post.calls.mostRecent().args[1]).toEqual(
+      jasmine.objectContaining({
+        captchaProvider: 'turnstile',
+        captchaRegistrationId: 'session-id',
+        grecaptcha: { value: 'token' },
+        grecaptchaWidgetId: { value: '0' },
+      })
+    )
   })
 })

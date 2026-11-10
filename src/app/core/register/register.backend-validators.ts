@@ -173,8 +173,10 @@ export function RegisterBackendValidatorMixin<
         StepD
       )
       registerForm.isReactivation = isReactivation
-      registerForm.captchaProvider = this.backendRegistrationForm?.captchaProvider
-      registerForm.captchaRegistrationId = this.backendRegistrationForm?.captchaRegistrationId
+      registerForm.captchaProvider =
+        this.backendRegistrationForm?.captchaProvider
+      registerForm.captchaRegistrationId =
+        this.backendRegistrationForm?.captchaRegistrationId
       return this._http
         .post<RegisterForm>(
           `${runtimeEnvironment.API_WEB}register.json`,

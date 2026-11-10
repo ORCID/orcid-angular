@@ -1,6 +1,13 @@
 import {
-  Directive, ElementRef, EventEmitter, Inject, Input, NgZone, OnDestroy,
-  OnInit, Output,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Output,
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { WINDOW } from '../window'
@@ -15,10 +22,18 @@ interface TurnstileWindow extends Window {
 
 @Directive({
   selector: '[appTurnstile]',
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: TurnstileDirective, multi: true }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: TurnstileDirective,
+      multi: true,
+    },
+  ],
   standalone: false,
 })
-export class TurnstileDirective implements OnInit, OnDestroy, ControlValueAccessor {
+export class TurnstileDirective
+  implements OnInit, OnDestroy, ControlValueAccessor
+{
   @Input() siteKey: string
   @Output() captchaFail = new EventEmitter<boolean>()
   @Output() captchaLoaded = new EventEmitter<number>()
@@ -34,33 +49,39 @@ export class TurnstileDirective implements OnInit, OnDestroy, ControlValueAccess
     private zone: NgZone
   ) {}
 
-  private load = () => this.zone.run(() => {
-    if (this.destroyed) return
-    if (!this.siteKey || !this.window.turnstile) {
-      this.captchaFail.emit(true)
-      return
-    }
-    try {
-      this.widgetId = this.window.turnstile.render(this.element.nativeElement, {
-        sitekey: this.siteKey,
-        callback: (token: string) => this.zone.run(() => {
-          this.captchaFail.emit(false)
-          this.onChange(token)
-          this.onTouched()
-        }),
-        'expired-callback': () => this.zone.run(() => this.reset()),
-        'error-callback': () => this.zone.run(() => {
-          this.onChange(null)
-          this.onTouched()
-          this.captchaFail.emit(true)
-          return true
-        }),
-      })
-      this.captchaLoaded.emit(0)
-    } catch (_error) {
-      this.captchaFail.emit(true)
-    }
-  })
+  private load = () =>
+    this.zone.run(() => {
+      if (this.destroyed) return
+      if (!this.siteKey || !this.window.turnstile) {
+        this.captchaFail.emit(true)
+        return
+      }
+      try {
+        this.widgetId = this.window.turnstile.render(
+          this.element.nativeElement,
+          {
+            sitekey: this.siteKey,
+            callback: (token: string) =>
+              this.zone.run(() => {
+                this.captchaFail.emit(false)
+                this.onChange(token)
+                this.onTouched()
+              }),
+            'expired-callback': () => this.zone.run(() => this.reset()),
+            'error-callback': () =>
+              this.zone.run(() => {
+                this.onChange(null)
+                this.onTouched()
+                this.captchaFail.emit(true)
+                return true
+              }),
+          }
+        )
+        this.captchaLoaded.emit(0)
+      } catch (_error) {
+        this.captchaFail.emit(true)
+      }
+    })
 
   private fail = () => this.zone.run(() => this.captchaFail.emit(true))
 
@@ -71,7 +92,8 @@ export class TurnstileDirective implements OnInit, OnDestroy, ControlValueAccess
       this.load()
     } else {
       this.script = this.window.document.createElement('script')
-      this.script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
+      this.script.src =
+        'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
       this.script.async = true
       this.script.addEventListener('load', this.load)
       this.script.addEventListener('error', this.fail)
@@ -93,6 +115,10 @@ export class TurnstileDirective implements OnInit, OnDestroy, ControlValueAccess
   }
 
   writeValue(value: any) {}
-  registerOnChange(fn: any) { this.onChange = fn }
-  registerOnTouched(fn: any) { this.onTouched = fn }
+  registerOnChange(fn: any) {
+    this.onChange = fn
+  }
+  registerOnTouched(fn: any) {
+    this.onTouched = fn
+  }
 }

@@ -68,7 +68,9 @@
               >Visibility and terms</ng-template
             >
             <div *ngIf="validationErrors.length" role="alert">
-              <mat-error *ngFor="let error of validationErrors">{{ error }}</mat-error>
+              <mat-error *ngFor="let error of validationErrors">{{
+                error
+              }}</mat-error>
             </div>
             <app-step-d
               #stepComponentD
