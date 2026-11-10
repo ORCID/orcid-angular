@@ -22,6 +22,9 @@ export interface RegisterForm {
   valNumClient?: number
   grecaptcha?: Value
   grecaptchaWidgetId?: Value
+  captchaProvider?: 'recaptcha' | 'turnstile'
+  captchaRegistrationId?: string
+  captchaSiteKey?: string
   linkType?: string
   approved?: boolean
   persistentTokenEnabled?: boolean

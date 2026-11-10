@@ -14,6 +14,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 interface HasHttpClientAndErrorHandler {
   _http: HttpClient
   _errorHandler: ErrorHandlerService
+  backendRegistrationForm: RegisterForm
 }
 
 interface HasFormAdapters {
@@ -172,6 +173,8 @@ export function RegisterBackendValidatorMixin<
         StepD
       )
       registerForm.isReactivation = isReactivation
+      registerForm.captchaProvider = this.backendRegistrationForm?.captchaProvider
+      registerForm.captchaRegistrationId = this.backendRegistrationForm?.captchaRegistrationId
       return this._http
         .post<RegisterForm>(
           `${runtimeEnvironment.API_WEB}register.json`,

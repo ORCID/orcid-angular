@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, ViewChild } from '@angular/core'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
 import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
+import { FormAntiRobotsComponent } from '../form-anti-robots/form-anti-robots.component'
 
 @Component({
   selector: 'app-step-d',
@@ -16,6 +17,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
   standalone: false,
 })
 export class StepDComponent extends BaseStepDirective {
+  @ViewChild(FormAntiRobotsComponent) antiRobots: FormAntiRobotsComponent
   @Input() loading
   @Input() reactivation: ReactivationLocal
 

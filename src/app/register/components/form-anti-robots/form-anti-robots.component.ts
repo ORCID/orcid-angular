@@ -1,4 +1,4 @@
-import { Component, DoCheck, forwardRef, Input, OnInit } from '@angular/core'
+import { Component, DoCheck, forwardRef, Input, OnInit, ViewChild } from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -13,6 +13,7 @@ import { RegisterService } from 'src/app/core/register/register.service'
 
 import { BaseForm } from '../BaseForm'
 import { RegisterStateService } from '../../register-state.service'
+import { TurnstileDirective } from 'src/app/cdk/recaptcha/turnstile.directive'
 
 @Component({
   selector: 'app-form-anti-robots',
@@ -33,6 +34,7 @@ import { RegisterStateService } from '../../register-state.service'
   standalone: false,
 })
 export class FormAntiRobotsComponent extends BaseForm implements OnInit {
+  @ViewChild(TurnstileDirective) turnstile: TurnstileDirective
   captchaFailState = false
   captchaLoadedWithWidgetId: number
   $widgetIdUpdated = new Subject<void>()
@@ -51,7 +53,7 @@ export class FormAntiRobotsComponent extends BaseForm implements OnInit {
   }
 
   constructor(
-    private _register: RegisterService,
+    public _register: RegisterService,
     private _registerStateService: RegisterStateService
   ) {
     super()
@@ -75,6 +77,10 @@ export class FormAntiRobotsComponent extends BaseForm implements OnInit {
 
   captchaFail($event) {
     this.captchaFailState = $event
+  }
+  resetCaptcha() {
+    this.turnstile?.reset()
+    this.captchaFailState = false
   }
   captchaLoaded(widgetId: number) {
     this.captchaLoadedWithWidgetId = widgetId
