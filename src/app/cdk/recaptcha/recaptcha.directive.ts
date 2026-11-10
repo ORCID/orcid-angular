@@ -13,13 +13,11 @@ import {
   LOCALE_ID,
   Output,
   EventEmitter,
+  Input,
 } from '@angular/core'
 import { WINDOW } from '../window'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
-import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { ConfigMessageKey } from 'src/app/types/config.endpoint'
-import { take } from 'rxjs/operators'
 
 export interface ReCaptchaConfig {
   sitekey: string
@@ -49,6 +47,7 @@ interface WindowWithCaptcha extends Window {
   standalone: false,
 })
 export class RecaptchaDirective implements OnInit, ControlValueAccessor {
+  @Input() siteKey: string
   @Output() captchaFail = new EventEmitter<boolean>()
   @Output() captchaLoaded = new EventEmitter<number>()
   private onChange: (value: string | null) => void
@@ -62,8 +61,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
     @Inject(LOCALE_ID) public locale: string,
     private ngZone: NgZone,
     private element: ElementRef,
-    private _errorHandler: ErrorHandlerService,
-    private _togglzService: TogglzService
+    private _errorHandler: ErrorHandlerService
   ) {}
 
   ngOnInit() {
@@ -73,51 +71,42 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
 
   registerReCaptchaCallback() {
     this.window.orcidReCaptchaOnLoad = () => {
-      this._togglzService
-        .getConfigurationOf(ConfigMessageKey.RECAPTCHA_WEB_KEY)
-        .pipe(take(1))
-        .subscribe({
-          next: (siteKey: string) => {
-            if (!siteKey) {
-              this.ngZone.run(() => this.onCaptchaFail('missing_sitekey'))
-              return
-            }
-            if (!this.window.grecaptcha || !this.window.grecaptcha.render) {
-              this.ngZone.run(() => this.onCaptchaFail('grecaptcha_not_ready'))
-              return
-            }
+      const siteKey = this.siteKey
+      if (!siteKey) {
+        this.ngZone.run(() => this.onCaptchaFail('missing_sitekey'))
+        return
+      }
+      if (!this.window.grecaptcha || !this.window.grecaptcha.render) {
+        this.ngZone.run(() => this.onCaptchaFail('grecaptcha_not_ready'))
+        return
+      }
 
-            if (this.renderId !== null) {
-              this.window.grecaptcha.reset(this.renderId)
-              this.captchaLoaded.emit(this.renderId)
-              return
-            }
+      if (this.renderId !== null) {
+        this.window.grecaptcha.reset(this.renderId)
+        this.captchaLoaded.emit(this.renderId)
+        return
+      }
 
-            const config: ReCaptchaConfig & {
-              callback: (response: string) => void
-              'expired-callback': (response: string) => void
-              'error-callback': () => void
-            } = {
-              sitekey: siteKey,
-              callback: (response: string) => {
-                this.ngZone.run(() => this.onSuccess(response))
-              },
-              'expired-callback': (_response: string) => {
-                this.ngZone.run(() => this.onExpired())
-              },
-              'error-callback': () => {
-                this.handleRenderError('recaptcha_error_callback')
-              },
-            }
+      const config: ReCaptchaConfig & {
+        callback: (response: string) => void
+        'expired-callback': (response: string) => void
+        'error-callback': () => void
+      } = {
+        sitekey: siteKey,
+        callback: (response: string) => {
+          this.ngZone.run(() => this.onSuccess(response))
+        },
+        'expired-callback': (_response: string) => {
+          this.ngZone.run(() => this.onExpired())
+        },
+        'error-callback': () => {
+          this.handleRenderError('recaptcha_error_callback')
+        },
+      }
 
-            this.lastConfig = config
-            this.renderRetried = false
-            this.renderCaptcha(config)
-          },
-          error: () => {
-            this.ngZone.run(() => this.onCaptchaFail('config_fetch_error'))
-          },
-        })
+      this.lastConfig = config
+      this.renderRetried = false
+      this.renderCaptcha(config)
     }
   }
 

@@ -2,16 +2,57 @@
   <mat-error
     *ngIf="
       captcha.hasError('captcha') &&
-      (form.controls.captcha.touched || nextButtonWasClicked)
+      (form.controls.captcha.touched || nextButtonWasClicked) &&
+      _register.backendRegistrationForm?.captchaProvider !== 'turnstile'
     "
     i18n="@@register.recaptchaRequired"
     >Please check the recaptcha box</mat-error
   >
+  <mat-error
+    *ngIf="
+      captcha.hasError('captcha') &&
+      (captcha.touched || nextButtonWasClicked) &&
+      _register.backendRegistrationForm?.captchaProvider === 'turnstile'
+    "
+    i18n="@@register.captchaRequired"
+    >Please complete the verification challenge</mat-error
+  >
 
   <div
+    *ngIf="
+      _register.backendRegistrationForm &&
+      _register.backendRegistrationForm.captchaProvider !== 'turnstile'
+    "
     appRecaptcha
+    [siteKey]="_register.backendRegistrationForm.captchaSiteKey"
     (captchaFail)="captchaFail($event)"
     (captchaLoaded)="captchaLoaded($event)"
     formControlName="captcha"
   ></div>
+  <div
+    *ngIf="_register.backendRegistrationForm?.captchaProvider === 'turnstile'"
+    appTurnstile
+    [siteKey]="_register.backendRegistrationForm.captchaSiteKey"
+    (captchaFail)="captchaFail($event)"
+    (captchaLoaded)="captchaLoaded($event)"
+    formControlName="captcha"
+  ></div>
+  <mat-error
+    *ngIf="captchaFailState && captchaLoadedWithWidgetId !== undefined"
+    role="alert"
+    i18n="@@register.captchaChallengeFailed"
+  >
+    Verification failed. Please try again.
+  </mat-error>
+  <button
+    *ngIf="
+      captchaFailState && turnstile && captchaLoadedWithWidgetId !== undefined
+    "
+    type="button"
+    mat-button
+    (click)="resetCaptcha()"
+    i18n="@@register.retryVerification"
+  >
+    Retry verification
+  </button>
 </ng-container>
