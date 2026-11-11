@@ -803,7 +803,7 @@
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
           <x id="INTERPOLATION" equiv-text="{{ orcidToDeprecate }}"/>
-          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&#xA;      &gt;"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&#xD;&#xA;      &gt;"/>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </source>
@@ -1336,8 +1336,8 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="ount&#xA;      }}"/>
-          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
+          <x id="INTERPOLATION" equiv-text="count&#xD;&#xA;      }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;"/>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </source>
@@ -1352,8 +1352,8 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="ount&#xA;      }}"/>
-          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
+          <x id="INTERPOLATION" equiv-text="count&#xD;&#xA;      }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;"/>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </source>
@@ -18195,11 +18195,11 @@
           <context context-type="linenumber">12,14</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
+          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
           <context context-type="linenumber">18,20</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
+          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
           <context context-type="linenumber">18,20</context>
         </context-group>
         <context-group purpose="location">
@@ -18219,11 +18219,11 @@
           <context context-type="linenumber">20,22</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
+          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
           <context context-type="linenumber">26,28</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
+          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
           <context context-type="linenumber">26,28</context>
         </context-group>
         <context-group purpose="location">
@@ -18283,12 +18283,12 @@
           <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
           <context context-type="linenumber">62</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.cancelRegistration" datatype="html" resname="register.cancelRegistration">
@@ -18323,30 +18323,6 @@
           <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="register.step4.3" datatype="html" resname="register.step4.3">
-        <source>Step 4 of 5 - Visibility</source>
-        <target>Step 4 of 5 - Visibility</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
-          <context context-type="linenumber">32,34</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="shared.previousStep" datatype="html" resname="shared.previousStep">
-        <source>Previous Step</source>
-        <target>Previous Step</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
-          <context context-type="linenumber">62</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
-          <context context-type="linenumber">85</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
-          <context context-type="linenumber">75</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="register.step3.3" datatype="html" resname="register.step3.3">
         <source>Step 3 of 5 - Current employment</source>
         <target>Step 3 of 5 - Current employment</target>
@@ -18360,6 +18336,30 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
           <context context-type="linenumber">44,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared.previousStep" datatype="html" resname="shared.previousStep">
+        <source>Previous Step</source>
+        <target>Previous Step</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/step-c2/step-c2.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.step4.3" datatype="html" resname="register.step4.3">
+        <source>Step 4 of 5 - Visibility</source>
+        <target>Step 4 of 5 - Visibility</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/step-c/step-c.component.html</context>
+          <context context-type="linenumber">32,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.step5.3" datatype="html" resname="register.step5.3">
