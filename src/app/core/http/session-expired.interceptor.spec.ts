@@ -10,11 +10,21 @@ import { SessionExpiredInterceptor } from './session-expired.interceptor'
 describe('SessionExpiredInterceptor', () => {
   let http: HttpClient
   let requests: HttpTestingController
+  let originalEnvironment: any
   const assign = jasmine.createSpy('assign')
-  const statusUrl = runtimeEnvironment.API_WEB + 'userStatus.json'
-  const saveUrl = runtimeEnvironment.API_WEB + 'keywords.json'
+  const apiWeb = 'https://web.example/'
+  const authServer = 'https://auth.example/'
+  const statusUrl = apiWeb + 'userStatus.json'
+  const saveUrl = apiWeb + 'keywords.json'
 
   beforeEach(() => {
+    originalEnvironment = (window as any).runtimeEnvironment
+    ;(window as any).runtimeEnvironment = {
+      ...originalEnvironment,
+      API_WEB: apiWeb,
+      BASE_URL: apiWeb,
+      AUTH_SERVER: authServer,
+    }
     assign.calls.reset()
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -30,7 +40,13 @@ describe('SessionExpiredInterceptor', () => {
     http = TestBed.inject(HttpClient)
     requests = TestBed.inject(HttpTestingController)
   })
-  afterEach(() => requests.verify())
+  afterEach(() => {
+    try {
+      requests.verify()
+    } finally {
+      ;(window as any).runtimeEnvironment = originalEnvironment
+    }
+  })
 
   function signedIn() {
     http.get(statusUrl).subscribe()
