@@ -587,6 +587,30 @@ describe('TwoFactorAuthenticationFormComponent', () => {
           fixture.detectChanges()
         })
 
+        it('replaces the authentication field with a recovery field above the options', () => {
+          element(enterRecoveryCode).click()
+          fixture.detectChanges()
+
+          const input = fixture.nativeElement.querySelector(
+            '[formControlName="recoveryCode"]'
+          ) as HTMLElement
+          const helper = element('recovery-code-helper')
+          const option = element('cy-use-authentication-app')
+          expect(element('totp')).toBeNull()
+          expect(input).not.toBeNull()
+          expect(helper.textContent).toContain('Enter a recovery code')
+          expect(helper.textContent).toContain('0/10')
+          expect(
+            input.compareDocumentPosition(option) &
+              Node.DOCUMENT_POSITION_FOLLOWING
+          ).toBeTruthy()
+
+          component.onSubmit()
+          fixture.detectChanges()
+          expect(helper.textContent).toContain('Recovery code is required')
+          expect(helper.textContent).not.toContain('Enter a recovery code')
+        })
+
         it('offers the way back to the authentication app in recovery code mode (R6.2)', () => {
           expect(element('cy-use-authentication-app')).toBeNull()
 
