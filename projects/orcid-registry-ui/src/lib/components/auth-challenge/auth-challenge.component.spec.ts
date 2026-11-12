@@ -131,6 +131,16 @@ describe('AuthChallengeComponent', () => {
   })
 
   describe('Backend Response Handling', () => {
+    it('shows a generic challenge failure and clears it on retry', () => {
+      component.processBackendResponse({ challengeFailed: true })
+      fixture.detectChanges()
+      expect(fixture.debugElement.query(By.css('[role="alert"]')).nativeElement.textContent)
+        .toContain('could not verify your account')
+      expect(form.get('passwordControl')?.hasError('invalid')).toBeFalse()
+      component.onSubmit()
+      fixture.detectChanges()
+      expect(fixture.debugElement.query(By.css('[role="alert"]'))).toBeNull()
+    })
     it('should apply backend error to password control', () => {
       component.processBackendResponse({ invalidPassword: true })
 
