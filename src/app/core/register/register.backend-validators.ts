@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { Constructor } from 'src/app/types'
 import { RegisterForm } from 'src/app/types/register.endpoint'
+import { OrcidValidators } from 'src/app/validators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 interface HasHttpClientAndErrorHandler {
@@ -105,6 +106,38 @@ export function RegisterBackendValidatorMixin<
               return error
             }
             return null
+          })
+        )
+      }
+    }
+
+    backendAdditionalEmailValueValidate(): AsyncValidatorFn {
+      return (control: AbstractControl) => {
+        const value = control.value
+        if (!value) {
+          return of(null)
+        }
+        const normalized =
+          OrcidValidators.normalizeEmailForDuplicateCheck(value)
+        return this.validateRegisterValue('email', {
+          email: { value: normalized },
+        }).pipe(
+          map((response) => {
+            const errors = response.email?.errors || []
+            if (normalized !== value) {
+              const duplicates = errors.filter(
+                (error) =>
+                  [
+                    'orcid.frontend.verify.duplicate_email',
+                    'orcid.frontend.verify.unclaimed_email',
+                    'orcid.frontend.verify.deactivated_email',
+                  ].includes(error) || error.includes('resend-claim')
+              )
+              return duplicates.length
+                ? { backendError: duplicates }
+                : { email: true }
+            }
+            return errors.length ? { backendError: errors } : null
           })
         )
       }

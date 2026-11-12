@@ -14,6 +14,7 @@ import {
   ErrorsListResponse,
 } from 'src/app/types'
 import { UserRecordOptions } from 'src/app/types/record.local'
+import { OrcidValidators } from 'src/app/validators'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
@@ -146,17 +147,22 @@ export class RecordEmailsService {
   }
 
   backendEmailValidate(
-    emailThatAreAlreadySaveOnTheBackend?: AssertionVisibilityString[]
+    emailThatAreAlreadySaveOnTheBackend?: AssertionVisibilityString[],
+    checkHiddenCharacters = false
   ): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.value === '') {
         return of(null)
       }
-      const value: Assertion = { value: control.value }
+      const originalValue = control.value
+      const normalizedValue = checkHiddenCharacters
+        ? OrcidValidators.normalizeEmailForDuplicateCheck(originalValue)
+        : originalValue
+      const value: Assertion = { value: normalizedValue }
 
       const thisEmailIsAlreadyOnTheBackend =
         emailThatAreAlreadySaveOnTheBackend.filter(
-          (email) => email.value === value.value
+          (email) => email.value === originalValue
         )
 
       if (thisEmailIsAlreadyOnTheBackend.length) {
@@ -182,7 +188,7 @@ export class RecordEmailsService {
 
             return error
           }
-          return null
+          return normalizedValue !== originalValue ? { email: true } : null
         })
       )
     }

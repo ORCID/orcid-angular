@@ -35,6 +35,8 @@
     <mat-error
       *ngIf="
         additionalEmailsTouched &&
+        !getBackendErrorsForAdditionalEmail(additionalEmailControl.value)
+          .length &&
         (additionalEmails.hasError('email', additionalEmailControl.key) ||
           additionalEmails.hasError('pattern', additionalEmailControl.key))
       "
