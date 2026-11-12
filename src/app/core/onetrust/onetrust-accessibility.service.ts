@@ -6,11 +6,7 @@ import {
   ConsentVendorService,
 } from '../consent/consent-vendor.service'
 
-/**
- * The consent dialogs this service manages focus for, per vendor. CookieYes's
- * notice is deliberately absent: it is not a dialog, and CookieYes wraps Tab
- * in it by itself when the banner is configured as a modal popup.
- */
+/** The consent dialogs this service manages focus for, per vendor. */
 const CONSENT_DIALOG_SELECTORS: Record<ConsentVendor, string[]> = {
   onetrust: [
     '#onetrust-pc-sdk [role="dialog"]',
@@ -47,6 +43,8 @@ export class OneTrustAccessibilityService implements OnDestroy {
   private _expectedFocusExpiresAt = 0
   private _resyncFramesLeft = 0
   private _pendingTrigger: HTMLElement | null = null
+  private _noticeReleased = false
+  private _noticeClickListener?: (event: MouseEvent) => void
 
   init(): void {
     if (!this._document?.body || this._observer) {
@@ -63,6 +61,24 @@ export class OneTrustAccessibilityService implements OnDestroy {
         attributes: true,
         attributeFilter: ['class', 'style', 'aria-hidden', 'hidden'],
       })
+      this._noticeClickListener = (event: MouseEvent) => {
+        const notice = this._activeDialog
+        const target = event.target
+        if (
+          notice?.matches('.cky-consent-container') &&
+          target instanceof Element &&
+          target.closest(
+            'a, .cky-btn-close, .cky-btn-customize, .cky-btn-reject, .cky-btn-accept'
+          ) &&
+          notice.contains(target)
+        ) {
+          this._noticeReleased = true
+          this._removeFocusTrap()
+          this._activeDialog = null
+          this._previouslyFocusedElement = null
+        }
+      }
+      this._document.addEventListener('click', this._noticeClickListener, true)
       this._syncDialogState()
     })
   }
@@ -72,6 +88,14 @@ export class OneTrustAccessibilityService implements OnDestroy {
     this._observer = undefined
     this._resyncFramesLeft = 0
     this._removeFocusTrap()
+    if (this._noticeClickListener) {
+      this._document.removeEventListener(
+        'click',
+        this._noticeClickListener,
+        true
+      )
+      this._noticeClickListener = undefined
+    }
   }
 
   private _onMutations(records: MutationRecord[]): void {
@@ -147,7 +171,11 @@ export class OneTrustAccessibilityService implements OnDestroy {
   }
 
   private _findConsentDialogs(): HTMLElement[] {
-    return CONSENT_DIALOG_SELECTORS[this._consentVendor.vendor]
+    const selectors = [...CONSENT_DIALOG_SELECTORS[this._consentVendor.vendor]]
+    if (this._consentVendor.vendor === 'cookieyes' && !this._noticeReleased) {
+      selectors.push('.cky-consent-container')
+    }
+    return selectors
       .map((selector) => this._document.querySelector(selector))
       .filter((node): node is HTMLElement => node instanceof HTMLElement)
   }
