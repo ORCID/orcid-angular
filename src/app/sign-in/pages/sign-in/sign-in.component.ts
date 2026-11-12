@@ -3,11 +3,12 @@ import {
   Component,
   HostBinding,
   Inject,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core'
-import { combineLatest } from 'rxjs'
-import { first, map, take } from 'rxjs/operators'
+import { combineLatest, Subject } from 'rxjs'
+import { first, map, take, takeUntil } from 'rxjs/operators'
 import { UserSession } from 'src/app/types/session.local'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -33,7 +34,7 @@ import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-man
   preserveWhitespaces: true,
   standalone: false,
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, OnDestroy {
   @HostBinding('class.container') containerClass = true
   @ViewChild('formSignInComponent') formSignInComponent: FormSignInComponent
 
@@ -66,6 +67,7 @@ export class SignInComponent implements OnInit {
   /** The client's name, when the OAuth session carries one. */
   oauthClientName: string
   private twoFactorDisabledRedirectTriggered = false
+  private readonly destroy$ = new Subject<void>()
 
   constructor(
     private _platformInfo: PlatformInfoService,
@@ -78,6 +80,15 @@ export class SignInComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this._userInfo
+      .getUserSession()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((session) => {
+        if (session?.oauthSession?.clientName?.trim()) {
+          this.oauthClientName = session.oauthSession.clientName
+        }
+      })
+
     combineLatest([
       this._userInfo.getUserSession(),
       this._platformInfo.get(),
@@ -92,7 +103,6 @@ export class SignInComponent implements OnInit {
 
         this.isLoggedIn = session.loggedIn
         this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationTogglzEnable
-        this.oauthClientName = session.oauthSession?.clientName
         if (!isOauthAuthorizationTogglzEnable) {
           this.isForceLogin = session.oauthSession?.forceLogin
         } else {
@@ -129,6 +139,11 @@ export class SignInComponent implements OnInit {
           this.email = session.oauthSession.userId
         }
       })
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
   register() {

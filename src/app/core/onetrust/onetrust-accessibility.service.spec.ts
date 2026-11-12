@@ -53,6 +53,16 @@ describe('OneTrustAccessibilityService', () => {
       <button id="cky-save">Save my preferences</button>
       <button id="cky-close">Close</button>
     </div>`
+  const cookieYesNotice = `
+    <div class="cky-consent-container">
+      <div data-cky-tag="notice">
+        <button class="cky-btn-close">Close</button>
+        <a href="#partners" class="cky-partners">our partners</a>
+        <button class="cky-btn-customize">Customise</button>
+        <button class="cky-btn-reject">Reject All</button>
+        <button class="cky-btn-accept">Accept All</button>
+      </div>
+    </div>`
   const oneTrustPreferenceCentre = `
     <div id="onetrust-pc-sdk">
       <div role="dialog"><button id="ot-save">Confirm my choices</button></div>
@@ -74,6 +84,56 @@ describe('OneTrustAccessibilityService', () => {
 
   describe('while CookieYes is the vendor (R7)', () => {
     beforeEach(() => (vendor = 'cookieyes'))
+
+    it('focuses and traps focus in the initial notice in both directions', async () => {
+      createService()
+      const notice = addToPage(cookieYesNotice)
+      await settle()
+      const first = notice.querySelector('.cky-btn-close') as HTMLElement
+      const last = notice.querySelector('.cky-btn-accept') as HTMLElement
+      expect(document.activeElement).toBe(first)
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'Tab',
+          shiftKey: true,
+          cancelable: true,
+        })
+      )
+      expect(document.activeElement).toBe(last)
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Tab', cancelable: true })
+      )
+      expect(document.activeElement).toBe(first)
+      trigger.focus()
+      expect(document.activeElement).toBe(first)
+    })
+
+    for (const selector of [
+      '.cky-partners',
+      '.cky-btn-close',
+      '.cky-btn-customize',
+      '.cky-btn-reject',
+      '.cky-btn-accept',
+    ]) {
+      it(`releases the notice trap when ${selector} is activated`, async () => {
+        createService()
+        const notice = addToPage(cookieYesNotice)
+        await settle()
+        ;(notice.querySelector(selector) as HTMLElement).click()
+        trigger.focus()
+        expect(document.activeElement).toBe(trigger)
+      })
+    }
+
+    it('switches from the notice to the preference centre', async () => {
+      createService()
+      const notice = addToPage(cookieYesNotice)
+      await settle()
+      ;(notice.querySelector('.cky-btn-customize') as HTMLElement).click()
+      addToPage(cookieYesPreferenceCentre)
+      await settle()
+      expect(document.activeElement?.id).toBe('cky-save')
+    })
 
     it('moves focus into the preference centre and announces it', async () => {
       createService()
