@@ -2,6 +2,7 @@ import {
   ValidatorFn,
   AbstractControl,
   Validators,
+  UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms'
 import {
@@ -11,10 +12,28 @@ import {
 } from './constants'
 
 export class OrcidValidators {
+  static normalizeEmailForDuplicateCheck(value: string): string {
+    return value.replace(/[\p{Cc}\p{Cf}]/gu, '')
+  }
+
+  static additionalEmail = (control: AbstractControl) => {
+    const value = control.value
+    const normalized = value
+      ? OrcidValidators.normalizeEmailForDuplicateCheck(value)
+      : value
+    if (value && !normalized) {
+      return { email: true }
+    }
+    return OrcidValidators.email(new UntypedFormControl(normalized))
+  }
+
   static email = (control: AbstractControl) => {
     const patterErrors = Validators.pattern(EMAIL_REGEXP)
     const result = patterErrors(control)
-    if (control.value && result?.pattern) {
+    if (
+      control.value &&
+      (result?.pattern || /[\p{Cc}\p{Cf}]/u.test(control.value))
+    ) {
       return { email: true }
     } else {
       return null
