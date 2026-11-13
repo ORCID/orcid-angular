@@ -251,6 +251,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.challengeFailed = false
     this.loading = true
     this.parentForm?.markAllAsTouched()
 
@@ -489,8 +490,11 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     recoveryPhoneCodeControl?.updateValueAndValidity()
   }
 
+  challengeFailed = false
+
   processBackendResponse(value: any) {
     this.loading = false
+    this.challengeFailed = !!value.challengeFailed
 
     const codeControl = this.parentForm?.get(this.codeControlName)
     const recoveryControl = this.parentForm?.get(this.recoveryControlName)

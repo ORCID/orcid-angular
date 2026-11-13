@@ -14,6 +14,7 @@ import { HttpContentTypeHeaderInterceptor } from './core/http-content-type-heade
 import { XsrfFallbackInterceptor } from './core/xsrf/xsrf-fallback.interceptor'
 import { XsrfPreloadInterceptor } from './core/xsrf/xsrf-preload.interceptor'
 import { RetryTransientInterceptor } from './core/http/retry-transient.interceptor'
+import { SessionExpiredInterceptor } from './core/http/session-expired.interceptor'
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
@@ -47,6 +48,11 @@ import { FormsModule } from '@angular/forms'
   ],
   providers: [
     TitleService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SessionExpiredInterceptor,
+      multi: true,
+    },
     // Ensures the XSRF cookie is established before any backend call, on every
     // browser: without it the first mutating request goes out with no
     // x-xsrf-token header and gets a 403

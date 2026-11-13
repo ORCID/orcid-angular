@@ -19,10 +19,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
 import { RecoveryPhoneChallengeService } from '../../../core/two-factor-authentication/recovery-phone-challenge.service'
 import { recoveryPhoneElevationExpiry } from '../../../core/two-factor-authentication/recovery-phone-elevation'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
-import {
-  AuthChallenge,
-  AuthChallengeFormData,
-} from '../../../types/common.endpoint'
+import { AuthChallengeFormData } from '../../../types/common.endpoint'
 import { TogglzFlag } from '../../../types/config.endpoint'
 import { Status } from '../../../types/two-factor.endpoint'
 
@@ -238,12 +235,14 @@ export class RecoveryPhoneComponent implements OnInit, OnDestroy {
       .verifyRecoveryPhoneChallenge(this.challengeForm.value)
       .pipe(first())
       .subscribe({
-        next: (response: AuthChallenge) => {
+        next: (response) => {
           if (response.success) {
             dialogRef.close(true)
           } else {
             dialogRef.componentInstance.loading = false
-            dialogRef.componentInstance.processBackendResponse(response)
+            dialogRef.componentInstance.processBackendResponse({
+              challengeFailed: true,
+            })
           }
         },
         error: () => {

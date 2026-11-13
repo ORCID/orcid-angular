@@ -90,6 +90,64 @@
       </p>
     </div>
   </div>
+  <div class="input-container" *ngIf="recoveryCode">
+    <mat-label
+      class="orc-font-small-print"
+      i18n="@@ngOrcid.signin.2fa.recoveryCode"
+      [ngClass]="{ error: isRecoveryCodeInvalid }"
+      >Recovery code
+    </mat-label>
+    <mat-form-field appearance="outline" class="row no-hint">
+      <input
+        matInput
+        #inputRecoveryCode
+        formControlName="recoveryCode"
+        appTrim
+        autocomplete="one-time-code"
+        aria-describedby="recovery-code-helper"
+        [attr.aria-invalid]="isRecoveryCodeInvalid ? 'true' : null"
+        [errorStateMatcher]="errorMatcher"
+        inputmode="numeric"
+        name="totp"
+        type="text"
+      />
+    </mat-form-field>
+    <div class="code-helper orc-font-small-print" id="recovery-code-helper">
+      <div class="code-helper__message">
+        <mat-hint
+          *ngIf="!isRecoveryCodeInvalid"
+          i18n="@@ngOrcid.signin.2fa.noDevice2"
+          >Enter a recovery code</mat-hint
+        >
+        <mat-error
+          role="alert"
+          *ngIf="
+            isRecoveryCodeInvalid &&
+            recoveryCodeFormControl.hasError('required')
+          "
+          i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
+          >Recovery code is required</mat-error
+        >
+        <mat-error
+          role="alert"
+          *ngIf="
+            isRecoveryCodeInvalid &&
+            (recoveryCodeFormControl.hasError('minlength') ||
+              recoveryCodeFormControl.hasError('maxlength'))
+          "
+          i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
+          >Invalid recovery code length</mat-error
+        >
+      </div>
+      <p
+        class="code-helper__count"
+        [ngClass]="{ error: isRecoveryCodeInvalid }"
+        aria-hidden="true"
+      >
+        {{ recoveryCodeFormControl.value?.length || 0 }}/10
+      </p>
+    </div>
+  </div>
   <ng-container *ngIf="!recoveryPhoneMode">
     <!--
       D8. The frames draw these escape rows centred, one row per sentence:
@@ -228,77 +286,6 @@
       </div>
     </ng-container>
   </ng-container>
-  <div class="input-container">
-    <mat-label
-      class="orc-font-small-print"
-      i18n="@@ngOrcid.signin.2fa.recoveryCode"
-      [ngClass]="{
-        error: isRecoveryCodeInvalid
-      }"
-      *ngIf="recoveryCode"
-      >Recovery code
-    </mat-label>
-    <mat-form-field
-      appearance="outline"
-      class="row no-hint"
-      *ngIf="recoveryCode"
-    >
-      <input
-        matInput
-        #inputRecoveryCode
-        formControlName="recoveryCode"
-        appTrim
-        autocomplete="one-time-code"
-        aria-describedby="recovery-code-helper"
-        [attr.aria-invalid]="isRecoveryCodeInvalid ? 'true' : null"
-        [errorStateMatcher]="errorMatcher"
-        inputmode="numeric"
-        name="totp"
-        type="text"
-      />
-    </mat-form-field>
-    <!--
-      D9 again. No frame covers this mode - the PD-6042 set draws the
-      authenticator field and the recovery NUMBER field and nothing else - so
-      this row is the same field component in the same shape, with no hint
-      because this screen has never had one to say here.
-    -->
-    <div
-      class="code-helper orc-font-small-print"
-      id="recovery-code-helper"
-      *ngIf="recoveryCode"
-    >
-      <div class="code-helper__message">
-        <mat-error
-          role="alert"
-          *ngIf="
-            isRecoveryCodeInvalid &&
-            recoveryCodeFormControl.hasError('required')
-          "
-          i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
-          >Recovery code is required</mat-error
-        >
-        <mat-error
-          role="alert"
-          *ngIf="
-            isRecoveryCodeInvalid &&
-            (recoveryCodeFormControl.hasError('minlength') ||
-              recoveryCodeFormControl.hasError('maxlength'))
-          "
-          i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
-          >Invalid recovery code length</mat-error
-        >
-      </div>
-      <p
-        class="code-helper__count"
-        [ngClass]="{ error: isRecoveryCodeInvalid }"
-        aria-hidden="true"
-      >
-        {{ recoveryCodeFormControl.value?.length || 0 }}/10
-      </p>
-    </div>
-  </div>
-
   <ng-container *ngIf="recoveryPhoneMode">
     <div class="input-container" *ngIf="recoveryPhoneCodeSent">
       <!--
