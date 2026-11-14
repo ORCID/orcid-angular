@@ -1925,7 +1925,7 @@
       </trans-unit>
       <trans-unit id="account.twoFABackup" datatype="html" resname="account.twoFABackup">
         <source>2FA backup</source>
-        <target>Zapasowe uwierzytelnianie dwuskładnikowe</target>
+        <target>Kody zapasowe uwierzytelniania dwuskładnikowego</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">106</context>
@@ -4025,7 +4025,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeUse" datatype="html" resname="interstitials.recoveryPhoneNoticeUse">
         <source>A recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
-        <target>Numeru telefonu odzyskiwania można użyć, aby uzyskać dostęp do konta ORCID, gdy nie możesz korzystać z aplikacji uwierzytelniającej ani kodów odzyskiwania.</target>
+        <target>Numeru telefonu do odzyskiwania można użyć, aby uzyskać dostęp do konta ORCID, gdy nie masz aplikacji uwierzytelniającej ani kodów odzyskiwania.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">22,23</context>
@@ -4037,7 +4037,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeOnce" datatype="html" resname="interstitials.recoveryPhoneNoticeOnce">
         <source>Recovery phone numbers can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
-        <target>Numeru telefonu odzyskiwania można użyć tylko raz. Wykorzystanie go powoduje wyłączenie uwierzytelniania dwuskładnikowego i zresetuje opcje zapasowego uwierzytelniania dwuskładnikowego.</target>
+        <target>Numerów telefonu do odzyskiwania można użyć tylko raz. Wykorzystanie ich powoduje wyłączenie uwierzytelniania dwuskładnikowego i zresetuje opcje kodów zapasowych uwierzytelniania dwuskładnikowego.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">28,29</context>
@@ -4913,7 +4913,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneConsentFrequency" datatype="html" resname="account.recoveryPhoneConsentFrequency">
         <source>Message frequency varies. Reply HELP for help, STOP to cancel.</source>
-        <target>Częstotliwość wiadomości różni się. Opisz HELP, aby uzyskać pomoc, lub STOP, aby anulować.</target>
+        <target>Częstotliwość wiadomości różni się. Odpisz HELP, aby uzyskać pomoc, lub STOP, aby anulować.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">71</context>
@@ -15324,7 +15324,7 @@
       </trans-unit>
       <trans-unit id="topBar.passwordResetRequired.cannotSignIn" datatype="html" resname="topBar.passwordResetRequired.cannotSignIn">
         <source>You will not be able to sign in to ORCID until your password has been reset.</source>
-        <target>Nie będziesz w stanie się zalogować na swoje konto ORCID aż do zresetowania hasła.</target>
+        <target>Nie będziesz w stanie się zalogować w ORCID aż do zresetowania hasła.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">37,38</context>
@@ -20172,7 +20172,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.cannotSignIn" datatype="html" resname="ngOrcid.signin.passwordResetRequired.cannotSignIn">
         <source>You will not be able to sign in to ORCID until your password has been reset.</source>
-        <target>Nie będziesz w stanie się zalogować na swoje konto ORCID aż do zresetowania hasła.</target>
+        <target>Nie będziesz w stanie się zalogować w ORCID aż do zresetowania hasła.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">104,105</context>
@@ -20332,6 +20332,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.disabledOauthBody" datatype="html" resname="ngOrcid.signin.2fa.disabledOauthBody">
         <source>You have signed in to ORCID using your recovery phone number. Two-factor authentication has been disabled for this ORCID account and your 2FA backup options have been reset. You can re-enable 2FA when you next sign in at orcid.org</source>
+        <target>Zalogowano się w ORCID za pomocą Twojego numeru telefonu do odzyskiwania. Uwierzytelnianie dwuskładnikowe zostało wyłączone dla tego konta ORCID, a Twoje opcje kodów zapasowych uwierzytelniania dwuskładnikowego zostały zresetowane. Możesz ponownie włączyć uwierzytelnianie dwuskładnikowe, gdy zalogujesz się potem na orcid.org</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">20,25</context>
@@ -20381,7 +20382,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNoticeUse" datatype="html" resname="account.recoveryPhoneNoticeUse">
         <source>Your recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
-        <target>Można użyć Twojego numeru telefonu odzyskiwania, aby uzyskać dostęp do konta ORCID, gdy nie możesz korzystać z aplikacji uwierzytelniającej ani kodów odzyskiwania.</target>
+        <target>Można użyć Twojego numeru telefonu do odzyskiwania, aby uzyskać dostęp do konta ORCID, gdy nie masz aplikacji uwierzytelniającej ani kodów odzyskiwania.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
           <context context-type="linenumber">20,23</context>
@@ -20389,7 +20390,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNoticeOnce" datatype="html" resname="account.recoveryPhoneNoticeOnce">
         <source>Your recovery phone number can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
-        <target>Twojego numeru telefonu odzyskiwania można użyć tylko raz. Wykorzystanie go powoduje wyłączenie uwierzytelniania dwuskładnikowego i zresetuje opcje zapasowego uwierzytelniania dwuskładnikowego.</target>
+        <target>Twojego numeru telefonu do odzyskiwania można użyć tylko raz. Wykorzystanie go powoduje wyłączenie uwierzytelniania dwuskładnikowego i zresetuje opcje kodów zapasowych uwierzytelniania dwuskładnikowego.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
           <context context-type="linenumber">27,30</context>
@@ -20405,7 +20406,7 @@
       </trans-unit>
       <trans-unit id="account.manageRecoveryPhoneTitle" datatype="html" resname="account.manageRecoveryPhoneTitle">
         <source>Manage your recovery phone number</source>
-        <target>Zarządzaj swoimi numerami telefonu do odzyskiwania</target>
+        <target>Zarządzaj swoim numerem telefonu do odzyskiwania</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">107</context>
@@ -20413,6 +20414,7 @@
       </trans-unit>
       <trans-unit id="account.updateRecoveryPhoneNumber" datatype="html" resname="account.updateRecoveryPhoneNumber">
         <source>Update recovery phone number</source>
+        <target>Zaktualizuj numer telefonu do odzyskiwania</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">113</context>
@@ -20420,6 +20422,7 @@
       </trans-unit>
       <trans-unit id="account.manageRecoveryPhoneChallenge" datatype="html" resname="account.manageRecoveryPhoneChallenge">
         <source>to manage your recovery phone number</source>
+        <target>w celu zarządzania swoim numerem telefonu do odzyskiwania</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">119</context>
@@ -20427,6 +20430,7 @@
       </trans-unit>
       <trans-unit id="account.addRecoveryPhoneChallenge" datatype="html" resname="account.addRecoveryPhoneChallenge">
         <source>to add a recovery phone number</source>
+        <target>w celu dodania numeru telefonu do odzyskiwania</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">120</context>
@@ -20586,6 +20590,7 @@
       </trans-unit>
       <trans-unit id="account.skipRecoveryPhoneStep" datatype="html" resname="account.skipRecoveryPhoneStep">
         <source>Skip this step - Don&apos;t add a recovery phone number</source>
+        <target>Pomiń ten krok – nie dodawaj numeru telefonu do odzyskiwania</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.html</context>
           <context context-type="linenumber">7</context>
@@ -20593,6 +20598,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneOnboardingNotice" datatype="html" resname="account.recoveryPhoneOnboardingNotice">
         <source>We strongly recommend adding a phone number to ORCID as an emergency 2FA backup option. Your recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
+        <target>Zdecydowanie zalecamy dodanie numeru telefonu w ORCID jako awaryjnej opcji kodu zapasowego uwierzytelniania dwuskładnikowego. Można użyć Twojego numeru telefonu do odzyskiwania, aby uzyskać dostęp do konta ORCID, gdy nie możesz korzystać z aplikacji uwierzytelniającej ani kodów odzyskiwania.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.html</context>
           <context context-type="linenumber">21,26</context>
@@ -20600,6 +20606,7 @@
       </trans-unit>
       <trans-unit id="account.step2Of3RecoveryPhone" datatype="html" resname="account.step2Of3RecoveryPhone">
         <source>Step 2 of 3 - Recovery phone number</source>
+        <target>Krok 2 z 3 – numer telefonu do odzyskiwania</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.ts</context>
           <context context-type="linenumber">84</context>
@@ -20611,6 +20618,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneOnboardingSaveFailed" datatype="html" resname="account.recoveryPhoneOnboardingSaveFailed">
         <source>We could not save your recovery phone number. Please try again, or skip this step and add your number later from your account settings.</source>
+        <target>Nie udało nam się zapisać Twojego numeru telefonu do odzyskiwania. Spróbuj ponownie lub pomiń ten krok, aby dodać numer później z poziomu ustawień konta.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.ts</context>
           <context context-type="linenumber">209</context>
@@ -20618,6 +20626,7 @@
       </trans-unit>
       <trans-unit id="account.step1Of3AuthenticationApp" datatype="html" resname="account.step1Of3AuthenticationApp">
         <source>Step 1 of 3 - Authentication app</source>
+        <target>Krok 1 z 3 – aplikacja uwierzytelniająca</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
           <context context-type="linenumber">96</context>
@@ -20625,6 +20634,7 @@
       </trans-unit>
       <trans-unit id="account.step3Of3RecoveryCodes" datatype="html" resname="account.step3Of3RecoveryCodes">
         <source>Step 3 of 3 - 2FA recovery codes</source>
+        <target>Krok 3 z 3 – kody odzyskiwania uwierzytelniania dwuskładnikowego</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
           <context context-type="linenumber">97</context>
@@ -20632,6 +20642,7 @@
       </trans-unit>
       <trans-unit id="account.nextStepAddRecoveryPhone" datatype="html" resname="account.nextStepAddRecoveryPhone">
         <source>Next step - Add a recovery phone number</source>
+        <target>Kolejny krok – dodaj numer telefonu do odzyskiwania</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
           <context context-type="linenumber">98</context>
