@@ -86,6 +86,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNumberCode" datatype="html" resname="account.recoveryPhoneNumberCode">
         <source>Recovery phone number code</source>
+        <target>Código del número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">105,107</context>
@@ -93,6 +94,7 @@
       </trans-unit>
       <trans-unit id="account.enterSixDigitCodeSentToYourDevice" datatype="html" resname="account.enterSixDigitCodeSentToYourDevice">
         <source>Enter the 6-digit code sent to your device</source>
+        <target>Introduzca el código de 6 dígitos que ha recibido en su dispositivo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">142,144</context>
@@ -100,6 +102,7 @@
       </trans-unit>
       <trans-unit id="account.badRecoveryPhoneNumberCode" datatype="html" resname="account.badRecoveryPhoneNumberCode">
         <source>Invalid recovery phone number code</source>
+        <target>El código del número de teléfono de recuperación no es válido</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">147,149</context>
@@ -107,6 +110,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNumberCodeRequired" datatype="html" resname="account.recoveryPhoneNumberCodeRequired">
         <source>A recovery phone number code is required</source>
+        <target>El código del número de teléfono de recuperación es obligatorio</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">154,156</context>
@@ -114,6 +118,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNumberCodeLength" datatype="html" resname="account.recoveryPhoneNumberCodeLength">
         <source>Invalid recovery phone number code length</source>
+        <target>El código del número de teléfono de recuperación no tiene una longitud válida</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">162,164</context>
@@ -121,6 +126,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneChallengeSendLimitReachedNotice" datatype="html" resname="account.recoveryPhoneChallengeSendLimitReachedNotice">
         <source>Too many verification codes have been requested for this account today. Please try again tomorrow or use your authentication app or recovery codes instead.</source>
+        <target>Esta cuenta ha solicitado demasiados códigos de verificación durante el día de hoy. Vuelva a intentarlo mañana, o bien use su aplicación de autenticación o un código de recuperación.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">194,198</context>
@@ -128,6 +134,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneChallengeCodeNotSent" datatype="html" resname="account.recoveryPhoneChallengeCodeNotSent">
         <source>We could not send a code to your recovery phone number. Please try again.</source>
+        <target>No hemos podido enviar un código a su número de teléfono de recuperación. Vuelva a intentarlo.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">210,212</context>
@@ -151,6 +158,7 @@
       </trans-unit>
       <trans-unit id="account.enterTheSixDigitCode" datatype="html" resname="account.enterTheSixDigitCode">
         <source>Enter the 6-digit code from your authentication app</source>
+        <target>Introduzca el código de 6 dígitos de su aplicación de autenticación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">252,254</context>
@@ -302,6 +310,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneCodeSentTo" datatype="html" resname="account.recoveryPhoneCodeSentTo">
         <source>Verification code sent to</source>
+        <target>Código de verificación enviado a</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">378</context>
@@ -357,6 +366,7 @@
       </trans-unit>
       <trans-unit id="account.dontHaveYourDeviceOrYourRecoveryCodes" datatype="html" resname="account.dontHaveYourDeviceOrYourRecoveryCodes">
         <source>Don&apos;t have your device or your recovery codes?</source>
+        <target>¿No dispone de su dispositivo ni de los códigos de recuperación?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">422,424</context>
@@ -368,6 +378,7 @@
       </trans-unit>
       <trans-unit id="account.didntGetTheCode" datatype="html" resname="account.didntGetTheCode">
         <source>Didn&apos;t get the code?</source>
+        <target>¿No ha recibido el código?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">428,430</context>
@@ -379,6 +390,7 @@
       </trans-unit>
       <trans-unit id="account.youCanResendIn" datatype="html" resname="account.youCanResendIn">
         <source>You can resend in</source>
+        <target>Puede volver a enviarlo dentro de</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">434</context>
@@ -390,6 +402,7 @@
       </trans-unit>
       <trans-unit id="account.seconds" datatype="html" resname="account.seconds">
         <source>seconds</source>
+        <target>segundos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">438</context>
@@ -405,6 +418,7 @@
       </trans-unit>
       <trans-unit id="account.resendCode" datatype="html" resname="account.resendCode">
         <source>Resend code</source>
+        <target>Reenviar código</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">452,454</context>
@@ -456,6 +470,7 @@
       </trans-unit>
       <trans-unit id="account.sendCodeToRecoveryPhoneNumber" datatype="html" resname="account.sendCodeToRecoveryPhoneNumber">
         <source>Send a code to your recovery phone number and disable 2FA</source>
+        <target>Envíe un código a su número de teléfono de recuperación y deshabilite la autenticación de dos factores</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">516,518</context>
@@ -1770,6 +1785,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneAdded" datatype="html" resname="account.recoveryPhoneAdded">
         <source>Your recovery phone number has been added</source>
+        <target>Se ha añadido su número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">7</context>
@@ -1777,6 +1793,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneUpdated" datatype="html" resname="account.recoveryPhoneUpdated">
         <source>Your recovery phone number has been updated</source>
+        <target>Se ha actualizado su número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">11</context>
@@ -1784,6 +1801,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNotUpdated" datatype="html" resname="account.recoveryPhoneNotUpdated">
         <source>Your recovery phone number was not updated</source>
+        <target>Su número de teléfono de recuperación no se ha actualizado</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">18,20</context>
@@ -1891,6 +1909,7 @@
       </trans-unit>
       <trans-unit id="account.enabledDateLabel" datatype="html" resname="account.enabledDateLabel">
         <source>Enabled:</source>
+        <target>Habilitado:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">94</context>
@@ -1906,6 +1925,7 @@
       </trans-unit>
       <trans-unit id="account.twoFABackup" datatype="html" resname="account.twoFABackup">
         <source>2FA backup</source>
+        <target>Respaldo vía 2FA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">106</context>
@@ -1929,6 +1949,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNumber" datatype="html" resname="account.recoveryPhoneNumber">
         <source>Recovery phone number</source>
+        <target>Número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">132</context>
@@ -1936,6 +1957,7 @@
       </trans-unit>
       <trans-unit id="account.modifiedDateLabel" datatype="html" resname="account.modifiedDateLabel">
         <source>Modified:</source>
+        <target>Modificado:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">143</context>
@@ -1943,6 +1965,7 @@
       </trans-unit>
       <trans-unit id="account.manageRecoveryPhoneNumber" datatype="html" resname="account.manageRecoveryPhoneNumber">
         <source>Manage recovery phone number</source>
+        <target>Gestionar número de teléfono de recuperació</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">159</context>
@@ -1950,6 +1973,7 @@
       </trans-unit>
       <trans-unit id="account.addRecoveryPhoneNumber" datatype="html" resname="account.addRecoveryPhoneNumber">
         <source>Add recovery phone number</source>
+        <target>Añadir número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">163</context>
@@ -3921,7 +3945,7 @@
       </trans-unit>
       <trans-unit id="interstitial.youHaveSuccessfullyAddedTheFollowingEmail" datatype="html" resname="interstitial.youHaveSuccessfullyAddedTheFollowingEmail">
         <source>You have successfully added the following email address as your backup email.</source>
-        <target>Ha añadido correcyamente una dirección de correo electrónico de respaldo.</target>
+        <target>Ha añadido correctamente una dirección de correo electrónico de respaldo.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/backup-email/interstitial-component/backup-email.component.html</context>
           <context context-type="linenumber">175,178</context>
@@ -3985,6 +4009,7 @@
       </trans-unit>
       <trans-unit id="account.addRecoveryPhoneTitle" datatype="html" resname="account.addRecoveryPhoneTitle">
         <source>Add a recovery phone number</source>
+        <target>Añada un número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">7,9</context>
@@ -4000,6 +4025,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeUse" datatype="html" resname="interstitials.recoveryPhoneNoticeUse">
         <source>A recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
+        <target>El número de teléfono de recuperación permite acceder a la cuenta ORCID cuando no es posible utilizar la aplicación de autenticación ni los códigos de recuperación.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">22,23</context>
@@ -4011,6 +4037,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeOnce" datatype="html" resname="interstitials.recoveryPhoneNoticeOnce">
         <source>Recovery phone numbers can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
+        <target>Solo es posible usar el número de teléfono de recuperación en una sola ocasión. Al utilizarlo, se deshabilita la autenticación de dos factores y se restablecen las opciones de respaldo vía 2FA.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">28,29</context>
@@ -4022,6 +4049,7 @@
       </trans-unit>
       <trans-unit id="interstitials.continueWithoutRecoveryNumber" datatype="html" resname="interstitials.continueWithoutRecoveryNumber">
         <source>Continue without adding a recovery number</source>
+        <target>Continuar sin añadir un número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">85</context>
@@ -4033,6 +4061,7 @@
       </trans-unit>
       <trans-unit id="topBar.recoveryPhoneNumberAdded" datatype="html" resname="topBar.recoveryPhoneNumberAdded">
         <source>Recovery phone number added</source>
+        <target>Se ha añadido un número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">103</context>
@@ -4048,6 +4077,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneAddedToRecord" datatype="html" resname="interstitials.recoveryPhoneAddedToRecord">
         <source>You have successfully added a recovery phone number to your ORCID record.</source>
+        <target>Ha añadido correctamente un número de teléfono de recuperación a su registro ORCID.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">113,115</context>
@@ -4059,6 +4089,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneVisitRecord" datatype="html" resname="interstitials.recoveryPhoneVisitRecord">
         <source>Visit your ORCID record to manage your account security and recovery options.</source>
+        <target>Visite su registro ORCID para gestionar las opciones de seguridad y recuperación de su cuenta.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">135,138</context>
@@ -4858,6 +4889,7 @@
       </trans-unit>
       <trans-unit id="account.yourRecoveryPhoneNumber" datatype="html" resname="account.yourRecoveryPhoneNumber">
         <source>Your recovery phone number</source>
+        <target>Su número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">5,7</context>
@@ -4865,6 +4897,7 @@
       </trans-unit>
       <trans-unit id="account.selectCountryAndEnterNumber" datatype="html" resname="account.selectCountryAndEnterNumber">
         <source>Select a country or location and enter your phone number.</source>
+        <target>Seleccione un país o ubicación e introduzca su número de teléfono.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">12,14</context>
@@ -4872,6 +4905,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneConsent" datatype="html" resname="account.recoveryPhoneConsent">
         <source>By entering my phone number and clicking &apos;Send verification code&apos;, I consent to receive an automated one-time verification code from ORCID at the number provided. Message and data rates may apply.</source>
+        <target>Al introducir mi número de teléfono y hacer clic en &quot;Enviar código de verificación&quot;, consiento que ORCID me envíe un código de verificación automatizado de un solo uso al número que he proporcionado. Es posible que se apliquen tarifas de datos y mensajería.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">64,66</context>
@@ -4879,6 +4913,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneConsentFrequency" datatype="html" resname="account.recoveryPhoneConsentFrequency">
         <source>Message frequency varies. Reply HELP for help, STOP to cancel.</source>
+        <target>La frecuencia del mensaje varía. Conteste HELP para obtener ayuda o STOP para cancelarlo.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">71</context>
@@ -4888,6 +4923,7 @@
       </trans-unit>
       <trans-unit id="account.termsOfUse" datatype="html" resname="account.termsOfUse">
         <source>Terms of use</source>
+        <target>Términos de uso</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">80</context>
@@ -4895,6 +4931,7 @@
       </trans-unit>
       <trans-unit id="account.privacyPolicy" datatype="html" resname="account.privacyPolicy">
         <source>Privacy policy</source>
+        <target>Política de privacidad</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">88</context>
@@ -4902,6 +4939,7 @@
       </trans-unit>
       <trans-unit id="account.sendVerificationCode" datatype="html" resname="account.sendVerificationCode">
         <source>Send verification code</source>
+        <target>Enviar código de verificación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">102,104</context>
@@ -4909,6 +4947,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneResendIn" datatype="html" resname="account.recoveryPhoneResendIn">
         <source>Resend in</source>
+        <target>Volver a enviar dentro de</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">112</context>
@@ -4916,6 +4955,7 @@
       </trans-unit>
       <trans-unit id="account.verificationCode" datatype="html" resname="account.verificationCode">
         <source>Verification code</source>
+        <target>Código de verificación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">131</context>
@@ -4923,6 +4963,7 @@
       </trans-unit>
       <trans-unit id="account.enterSixDigitCodeSentToDevice" datatype="html" resname="account.enterSixDigitCodeSentToDevice">
         <source>Enter the 6-digit verification code sent to your device</source>
+        <target>Introduzca el código de verificación de 6 dígitos que ha recibido en su dispositivo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">153</context>
@@ -4934,6 +4975,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneResendTooSoon" datatype="html" resname="account.recoveryPhoneResendTooSoon">
         <source>A code was sent to this number a moment ago. Please wait before requesting another.</source>
+        <target>Se ha enviado un código a este número hace unos instantes. Espere un poco antes de solicitar uno nuevo.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">37</context>
@@ -4941,6 +4983,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneSendFailed" datatype="html" resname="account.recoveryPhoneSendFailed">
         <source>We could not send a verification code. Please try again.</source>
+        <target>No hemos podido enviar un código de recuperación. Vuelva a intentarlo.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">305</context>
@@ -4952,6 +4995,7 @@
       </trans-unit>
       <trans-unit id="account.verificationCodeRequired" datatype="html" resname="account.verificationCodeRequired">
         <source>A verification code is required</source>
+        <target>Hace falta un código de verificación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">324</context>
@@ -4959,6 +5003,7 @@
       </trans-unit>
       <trans-unit id="account.invalidVerificationCodeLength" datatype="html" resname="account.invalidVerificationCodeLength">
         <source>Invalid verification code length</source>
+        <target>El código de verificación no tiene una longitud válida</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">329</context>
@@ -4966,6 +5011,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneRequired" datatype="html" resname="account.recoveryPhoneRequired">
         <source>Phone number is required</source>
+        <target>El número de teléfono es obligatorio</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">396</context>
@@ -4973,6 +5019,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneTooShort" datatype="html" resname="account.recoveryPhoneTooShort">
         <source>Phone number is too short</source>
+        <target>El número de teléfono es demasiado corto</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">404</context>
@@ -4984,6 +5031,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneTooLong" datatype="html" resname="account.recoveryPhoneTooLong">
         <source>Phone number is too long</source>
+        <target>El número de teléfono es demasiado largo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">407</context>
@@ -4995,6 +5043,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneInvalid" datatype="html" resname="account.recoveryPhoneInvalid">
         <source>Phone number is invalid</source>
+        <target>El número de teléfono no es válido</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">409</context>
@@ -5006,6 +5055,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneMismatch" datatype="html" resname="account.recoveryPhoneMismatch">
         <source>This code was sent to a different number. Send a new code to this number.</source>
+        <target>El código se ha enviado a otro número. Envíe un nuevo código a este número.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">427</context>
@@ -5013,6 +5063,7 @@
       </trans-unit>
       <trans-unit id="account.invalidVerificationCode" datatype="html" resname="account.invalidVerificationCode">
         <source>Invalid verification code</source>
+        <target>El código de verificación no es válido</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">441</context>
@@ -5020,6 +5071,7 @@
       </trans-unit>
       <trans-unit id="account.verificationCodeExpired" datatype="html" resname="account.verificationCodeExpired">
         <source>That code is no longer valid. Send a new code.</source>
+        <target>El código ya no tiene validez. Envíe un nuevo código.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">446</context>
@@ -5031,6 +5083,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneSendLimitReached" datatype="html" resname="account.recoveryPhoneSendLimitReached">
         <source>Too many verification codes have been requested for this account today. Please try again tomorrow.</source>
+        <target>Esta cuenta ha solicitado demasiados códigos de verificación durante el día de hoy. Vuelva a intentarlo mañana.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">452</context>
@@ -5038,6 +5091,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneGenericError" datatype="html" resname="account.recoveryPhoneGenericError">
         <source>Something went wrong. Please try again.</source>
+        <target>Algo ha ido mal. Vuelva a intentarlo.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">464</context>
@@ -5309,6 +5363,7 @@
       </trans-unit>
       <trans-unit id="side-bar.disposableEmailNotSupported" datatype="html" resname="side-bar.disposableEmailNotSupported">
         <source>ORCID does not support temporary or disposable email addresses. Please try a different email address.</source>
+        <target>ORCID no admite direcciones de correo electrónico desechables ni temporales. Introduzca una dirección diferente.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
           <context context-type="linenumber">237,240</context>
@@ -6961,6 +7016,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.enterSixDigitCode" datatype="html" resname="ngOrcid.signin.2fa.enterSixDigitCode">
         <source>Enter the 6-digit code from your authentication app</source>
+        <target>Introduzca el código de 6 dígitos de su aplicación de autenticación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">58</context>
@@ -6968,6 +7024,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDeviceOrRecoveryCodes" datatype="html" resname="ngOrcid.signin.2fa.noDeviceOrRecoveryCodes">
         <source>Don&apos;t have your device or your recovery codes?</source>
+        <target>¿No dispone de su dispositivo ni de los códigos de recuperación?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">211,213</context>
@@ -6979,6 +7036,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.sendCodeToRecoveryNumber" datatype="html" resname="ngOrcid.signin.2fa.sendCodeToRecoveryNumber">
         <source>Send a code to your recovery number and disable 2FA</source>
+        <target>Envíe un código a su número de recuperación y deshabilite la autenticación de dos factores</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">221,223</context>
@@ -7002,6 +7060,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCode" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCode">
         <source>Recovery number code</source>
+        <target>Código del número de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">303,304</context>
@@ -7009,6 +7068,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCodeRequired" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCodeRequired">
         <source>A recovery number code is required</source>
+        <target>El código del número de recuperación es obligatorio</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">348</context>
@@ -7016,6 +7076,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCodeLength" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCodeLength">
         <source>Invalid recovery number code length</source>
+        <target>El código del número de recuperación no tiene una longitud válida</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">358</context>
@@ -7023,6 +7084,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.authenticateAndSignIn" datatype="html" resname="ngOrcid.signin.2fa.authenticateAndSignIn">
         <source>Authenticate and sign in</source>
+        <target>Autenticarse e iniciar sesión</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">471,473</context>
@@ -7030,6 +7092,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.badRecoveryNumberCode" datatype="html" resname="ngOrcid.signin.2fa.badRecoveryNumberCode">
         <source>Invalid recovery number code</source>
+        <target>El código del número de recuperación no es válido</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
           <context context-type="linenumber">282</context>
@@ -7037,6 +7100,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noRecoveryNumber" datatype="html" resname="ngOrcid.signin.2fa.noRecoveryNumber">
         <source>This account has no recovery phone number</source>
+        <target>Esta cuenta no tiene número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
           <context context-type="linenumber">303</context>
@@ -7044,6 +7108,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberSendLimitReached" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberSendLimitReached">
         <source>Too many codes have been sent to your recovery phone number today. Please try again tomorrow, or use your authentication app or a recovery code.</source>
+        <target>Se han enviado demasiados códigos a su número de teléfono de recuperación durante el día de hoy. Vuelva a intentarlo mañana, o bien use su aplicación de autenticación o un código de recuperación.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
           <context context-type="linenumber">307</context>
@@ -7539,6 +7604,7 @@
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByRecoveryPhone" datatype="html" resname="shared.dialogAriaLabeledByRecoveryPhone">
         <source>Add a recovery phone number dialog</source>
+        <target>Diálogo de añadir un número de teléfono de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/login-interstitials-manager/implementations/login-recovery-phone-interstitials-manager.service.ts</context>
           <context context-type="linenumber">151</context>
@@ -15242,6 +15308,7 @@
       </trans-unit>
       <trans-unit id="topBar.passwordResetRequired.title" datatype="html" resname="topBar.passwordResetRequired.title">
         <source>Your ORCID account password needs to be reset</source>
+        <target>Debe restablecer la contraseña de su cuenta ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">29</context>
@@ -15249,6 +15316,7 @@
       </trans-unit>
       <trans-unit id="topBar.passwordResetRequired.body" datatype="html" resname="topBar.passwordResetRequired.body">
         <source>To help maintain the security of your ORCID account please reset your account password.</source>
+        <target>Restablezca la contraseña de su cuenta ORCID para velar por su seguridad.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">34,35</context>
@@ -15256,6 +15324,7 @@
       </trans-unit>
       <trans-unit id="topBar.passwordResetRequired.cannotSignIn" datatype="html" resname="topBar.passwordResetRequired.cannotSignIn">
         <source>You will not be able to sign in to ORCID until your password has been reset.</source>
+        <target>No podrá iniciar sesión en ORCID a menos que restablezcla la contraseña.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">37,38</context>
@@ -15263,6 +15332,7 @@
       </trans-unit>
       <trans-unit id="topBar.passwordResetRequired.resetNow" datatype="html" resname="topBar.passwordResetRequired.resetNow">
         <source>Reset your account password now</source>
+        <target>Restablezca ya la contraseña de su cuenta</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">48</context>
@@ -15418,6 +15488,7 @@
       </trans-unit>
       <trans-unit id="topBar.twoFactorAuthentication2FAHasBeenDisabled" datatype="html" resname="topBar.twoFactorAuthentication2FAHasBeenDisabled">
         <source>Two-factor authentication (2FA) has been disabled</source>
+        <target>Se ha desactivado la autenticación de dos factores (2FA)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">184</context>
@@ -15425,6 +15496,7 @@
       </trans-unit>
       <trans-unit id="topBar.youHaveSignedInUsingYourRecoveryPhoneNumber" datatype="html" resname="topBar.youHaveSignedInUsingYourRecoveryPhoneNumber">
         <source>You have signed in using your recovery phone number. Your recovery number has been deleted and two-factor authentication has been disabled for this ORCID account. You can re-enable 2FA from your</source>
+        <target>Ha iniciado sesión con su número de teléfono de recuperación. Al hacerlo, se ha eliminado dicho número y se ha deshabilitado la autenticación de dos factores en su cuenta ORCID. Puede volver a activar la autenticación de dos factores en el menú de</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">203,205</context>
@@ -15432,6 +15504,7 @@
       </trans-unit>
       <trans-unit id="topBar.accountSettingsMidSentence" datatype="html" resname="topBar.accountSettingsMidSentence">
         <source>account settings</source>
+        <target>configuración de su cuenta</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">212</context>
@@ -15439,6 +15512,7 @@
       </trans-unit>
       <trans-unit id="topBar.asAnAccountRecoveryOption" datatype="html" resname="topBar.asAnAccountRecoveryOption">
         <source>as an account recovery option.</source>
+        <target>a modo de opción de recuperación.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">227</context>
@@ -15446,6 +15520,7 @@
       </trans-unit>
       <trans-unit id="topBar.manageYourRecoveryOptionsInAccountSettings" datatype="html" resname="topBar.manageYourRecoveryOptionsInAccountSettings">
         <source>Manage your recovery options in Account settings</source>
+        <target>Gestione sus opciones de recuperación en el menú de configuración de su cuenta</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">248</context>
@@ -16013,6 +16088,7 @@
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
         <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;RRID&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
+        <target>Solo se permiten los tipos de identificador &quot;grant number&quot;, &quot;doi&quot;, &quot;RRID&quot;, &quot;uri&quot; y &quot;proposal id&quot; al usar los identificadores &quot;funded-by&quot;</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">255,257</context>
@@ -17672,6 +17748,7 @@
       </trans-unit>
       <trans-unit id="register.passwordPreviouslyUsed" datatype="html" resname="register.passwordPreviouslyUsed">
         <source>Please enter a new password. Previous passwords cannot be reused.</source>
+        <target>Introduzca una nueva contraseña. No es posible volver a usar contraseñas anteriores.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">64,65</context>
@@ -20078,6 +20155,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.title" datatype="html" resname="ngOrcid.signin.passwordResetRequired.title">
         <source>Your ORCID account password needs to be reset</source>
+        <target>Debe restablecer la contraseña de su cuenta ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">96</context>
@@ -20085,6 +20163,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.body" datatype="html" resname="ngOrcid.signin.passwordResetRequired.body">
         <source>To help maintain the security of your ORCID account please reset your account password.</source>
+        <target>Restablezca la contraseña de su cuenta ORCID para velar por su seguridad.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">101,102</context>
@@ -20092,6 +20171,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.cannotSignIn" datatype="html" resname="ngOrcid.signin.passwordResetRequired.cannotSignIn">
         <source>You will not be able to sign in to ORCID until your password has been reset.</source>
+        <target>No podrá iniciar sesión en ORCID a menos que restablezcla la contraseña.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">104,105</context>
@@ -20238,6 +20318,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.disabledTitle" datatype="html" resname="ngOrcid.signin.2fa.disabledTitle">
         <source>Two-factor authentication (2FA) has been disabled</source>
+        <target>Se ha desactivado la autenticación de dos factores (2FA)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -20380,7 +20461,7 @@
       </trans-unit>
       <trans-unit id="account.enterVerificationCodeFromAuthApp" datatype="html" resname="account.enterVerificationCodeFromAuthApp">
         <source>Enter the 6-digit verification code from your authentication app</source>
-        <target>Introduzca el código de verificación de seis dígitos de su aplicación autenticación</target>
+        <target>Introduzca el código de verificación de 6 dígitos de su aplicación de autenticación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">62,64</context>

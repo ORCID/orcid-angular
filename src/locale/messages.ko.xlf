@@ -4009,6 +4009,7 @@
       </trans-unit>
       <trans-unit id="account.addRecoveryPhoneTitle" datatype="html" resname="account.addRecoveryPhoneTitle">
         <source>Add a recovery phone number</source>
+        <target>복구 전화번호 추가</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">7,9</context>
@@ -4024,6 +4025,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeUse" datatype="html" resname="interstitials.recoveryPhoneNoticeUse">
         <source>A recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
+        <target>인증기 앱이나 복구 코드가 없는 경우, 복구 전화번호를 사용해 ORCID 계정에 액세스할 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">22,23</context>
@@ -4035,6 +4037,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeOnce" datatype="html" resname="interstitials.recoveryPhoneNoticeOnce">
         <source>Recovery phone numbers can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
+        <target>복구 전화번호는 한 번만 사용할 수 있습니다. 이것을 사용하면 2단계 인증이 비활성화되고 2FA 백업 옵션이 초기화됩니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">28,29</context>
@@ -4046,6 +4049,7 @@
       </trans-unit>
       <trans-unit id="interstitials.continueWithoutRecoveryNumber" datatype="html" resname="interstitials.continueWithoutRecoveryNumber">
         <source>Continue without adding a recovery number</source>
+        <target>복구 번호 추가 없이 계속</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">85</context>
@@ -4057,6 +4061,7 @@
       </trans-unit>
       <trans-unit id="topBar.recoveryPhoneNumberAdded" datatype="html" resname="topBar.recoveryPhoneNumberAdded">
         <source>Recovery phone number added</source>
+        <target>복구 전화번호 추가됨</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">103</context>
@@ -4072,6 +4077,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneAddedToRecord" datatype="html" resname="interstitials.recoveryPhoneAddedToRecord">
         <source>You have successfully added a recovery phone number to your ORCID record.</source>
+        <target>복구 전화번호가 귀하의 ORCID 레코드에 성공적으로 추가되었습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">113,115</context>
@@ -4083,6 +4089,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneVisitRecord" datatype="html" resname="interstitials.recoveryPhoneVisitRecord">
         <source>Visit your ORCID record to manage your account security and recovery options.</source>
+        <target>계정 보안 및 복구 옵션을 관리하려면 귀하의 ORCID 레코드를 방문하시기 바랍니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">135,138</context>
@@ -4882,6 +4889,7 @@
       </trans-unit>
       <trans-unit id="account.yourRecoveryPhoneNumber" datatype="html" resname="account.yourRecoveryPhoneNumber">
         <source>Your recovery phone number</source>
+        <target>귀하의 복구 전화번호</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">5,7</context>
@@ -4889,6 +4897,7 @@
       </trans-unit>
       <trans-unit id="account.selectCountryAndEnterNumber" datatype="html" resname="account.selectCountryAndEnterNumber">
         <source>Select a country or location and enter your phone number.</source>
+        <target>국가 또는 위치를 선택하고 귀하의 전화번호를 입력하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">12,14</context>
@@ -4896,6 +4905,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneConsent" datatype="html" resname="account.recoveryPhoneConsent">
         <source>By entering my phone number and clicking &apos;Send verification code&apos;, I consent to receive an automated one-time verification code from ORCID at the number provided. Message and data rates may apply.</source>
+        <target>내 전화번호를 입력하고 &apos;확인 코드 보내기&apos;를 클릭함으로써, 제공된 번호로 자동화된 일회용 확인 코드를 ORCID로부터 수신하는 데 동의합니다. 메시지 및 데이터 요금이 부과될 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">64,66</context>
@@ -4903,6 +4913,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneConsentFrequency" datatype="html" resname="account.recoveryPhoneConsentFrequency">
         <source>Message frequency varies. Reply HELP for help, STOP to cancel.</source>
+        <target>메시지 빈도는 다양합니다. 도움이 필요하면 HELP를, 취소하려면 STOP으로 답장하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">71</context>
@@ -4912,6 +4923,7 @@
       </trans-unit>
       <trans-unit id="account.termsOfUse" datatype="html" resname="account.termsOfUse">
         <source>Terms of use</source>
+        <target>이용 약관</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">80</context>
@@ -4919,6 +4931,7 @@
       </trans-unit>
       <trans-unit id="account.privacyPolicy" datatype="html" resname="account.privacyPolicy">
         <source>Privacy policy</source>
+        <target>개인정보보호 정책</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">88</context>
@@ -4926,6 +4939,7 @@
       </trans-unit>
       <trans-unit id="account.sendVerificationCode" datatype="html" resname="account.sendVerificationCode">
         <source>Send verification code</source>
+        <target>확인 코드 보내기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">102,104</context>
@@ -4933,6 +4947,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneResendIn" datatype="html" resname="account.recoveryPhoneResendIn">
         <source>Resend in</source>
+        <target>다음 시간 이후 다시 보내기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">112</context>
@@ -4940,6 +4955,7 @@
       </trans-unit>
       <trans-unit id="account.verificationCode" datatype="html" resname="account.verificationCode">
         <source>Verification code</source>
+        <target>확인 코드</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">131</context>
@@ -4947,6 +4963,7 @@
       </trans-unit>
       <trans-unit id="account.enterSixDigitCodeSentToDevice" datatype="html" resname="account.enterSixDigitCodeSentToDevice">
         <source>Enter the 6-digit verification code sent to your device</source>
+        <target>기기로 전송된 6자리 확인 코드 입력</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">153</context>
@@ -4958,6 +4975,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneResendTooSoon" datatype="html" resname="account.recoveryPhoneResendTooSoon">
         <source>A code was sent to this number a moment ago. Please wait before requesting another.</source>
+        <target>조금 전 이 번호로 코드가 전송되었습니다. 새로 요청하려면 잠시 기다려주세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">37</context>
@@ -4965,6 +4983,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneSendFailed" datatype="html" resname="account.recoveryPhoneSendFailed">
         <source>We could not send a verification code. Please try again.</source>
+        <target>확인 코드를 전송하지 못했습니다. 다시 시도하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">305</context>
@@ -4976,6 +4995,7 @@
       </trans-unit>
       <trans-unit id="account.verificationCodeRequired" datatype="html" resname="account.verificationCodeRequired">
         <source>A verification code is required</source>
+        <target>확인 코드는 필수</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">324</context>
@@ -4983,6 +5003,7 @@
       </trans-unit>
       <trans-unit id="account.invalidVerificationCodeLength" datatype="html" resname="account.invalidVerificationCodeLength">
         <source>Invalid verification code length</source>
+        <target>유효하지 않은 확인 코드 길이</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">329</context>
@@ -4990,6 +5011,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneRequired" datatype="html" resname="account.recoveryPhoneRequired">
         <source>Phone number is required</source>
+        <target>전화번호는 필수</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">396</context>
@@ -4997,6 +5019,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneTooShort" datatype="html" resname="account.recoveryPhoneTooShort">
         <source>Phone number is too short</source>
+        <target>전화번호가 너무 짧음</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">404</context>
@@ -5008,6 +5031,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneTooLong" datatype="html" resname="account.recoveryPhoneTooLong">
         <source>Phone number is too long</source>
+        <target>전화번호가 너무 긺</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">407</context>
@@ -5019,6 +5043,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneInvalid" datatype="html" resname="account.recoveryPhoneInvalid">
         <source>Phone number is invalid</source>
+        <target>전화번호가 유효하지 않음</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">409</context>
@@ -5030,6 +5055,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneMismatch" datatype="html" resname="account.recoveryPhoneMismatch">
         <source>This code was sent to a different number. Send a new code to this number.</source>
+        <target>이 코드는 다른 번호로 전송되었습니다. 이 번호로 새 코드를 전송하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">427</context>
@@ -5037,6 +5063,7 @@
       </trans-unit>
       <trans-unit id="account.invalidVerificationCode" datatype="html" resname="account.invalidVerificationCode">
         <source>Invalid verification code</source>
+        <target>유효하지 않은 확인 코드</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">441</context>
@@ -5044,6 +5071,7 @@
       </trans-unit>
       <trans-unit id="account.verificationCodeExpired" datatype="html" resname="account.verificationCodeExpired">
         <source>That code is no longer valid. Send a new code.</source>
+        <target>이 코드는 더 이상 유효하지 않습니다. 새 코드를 전송하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">446</context>
@@ -5055,6 +5083,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneSendLimitReached" datatype="html" resname="account.recoveryPhoneSendLimitReached">
         <source>Too many verification codes have been requested for this account today. Please try again tomorrow.</source>
+        <target>오늘 이 계정에 너무 많은 확인 코드가 요청되었습니다. 내일 다시 시도하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">452</context>
@@ -5062,6 +5091,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneGenericError" datatype="html" resname="account.recoveryPhoneGenericError">
         <source>Something went wrong. Please try again.</source>
+        <target>문제가 발생했습니다. 다시 시도하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
           <context context-type="linenumber">464</context>
@@ -5333,6 +5363,7 @@
       </trans-unit>
       <trans-unit id="side-bar.disposableEmailNotSupported" datatype="html" resname="side-bar.disposableEmailNotSupported">
         <source>ORCID does not support temporary or disposable email addresses. Please try a different email address.</source>
+        <target>ORCID는 임시 또는 일회용 이메일 주소를 지원하지 않습니다. 다른 이메일 주소를 입력하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
           <context context-type="linenumber">237,240</context>
@@ -7005,6 +7036,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.sendCodeToRecoveryNumber" datatype="html" resname="ngOrcid.signin.2fa.sendCodeToRecoveryNumber">
         <source>Send a code to your recovery number and disable 2FA</source>
+        <target>복구 번호로 코드를 전송하고 2FA 비활성화</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">221,223</context>
@@ -7028,6 +7060,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCode" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCode">
         <source>Recovery number code</source>
+        <target>복구 번호 코드</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">303,304</context>
@@ -7035,6 +7068,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCodeRequired" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCodeRequired">
         <source>A recovery number code is required</source>
+        <target>복구 번호 코드는 필수</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">348</context>
@@ -7042,6 +7076,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCodeLength" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCodeLength">
         <source>Invalid recovery number code length</source>
+        <target>유효하지 않은 복구 번호 코드 길이</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">358</context>
@@ -7049,6 +7084,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.authenticateAndSignIn" datatype="html" resname="ngOrcid.signin.2fa.authenticateAndSignIn">
         <source>Authenticate and sign in</source>
+        <target>인증하고 로그인</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">471,473</context>
@@ -7056,6 +7092,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.badRecoveryNumberCode" datatype="html" resname="ngOrcid.signin.2fa.badRecoveryNumberCode">
         <source>Invalid recovery number code</source>
+        <target>유효하지 않은 복구 번호 코드</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
           <context context-type="linenumber">282</context>
@@ -7063,6 +7100,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noRecoveryNumber" datatype="html" resname="ngOrcid.signin.2fa.noRecoveryNumber">
         <source>This account has no recovery phone number</source>
+        <target>이 계정에 복구 전화번호 없음</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
           <context context-type="linenumber">303</context>
@@ -7070,6 +7108,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberSendLimitReached" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberSendLimitReached">
         <source>Too many codes have been sent to your recovery phone number today. Please try again tomorrow, or use your authentication app or a recovery code.</source>
+        <target>오늘 너무 많은 코드가 귀하의 복구 전화번호로 전송되었습니다. 내일 다시 시도하거나 인증기 앱 또는 복구 코드를 사용하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
           <context context-type="linenumber">307</context>
@@ -7565,6 +7604,7 @@
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByRecoveryPhone" datatype="html" resname="shared.dialogAriaLabeledByRecoveryPhone">
         <source>Add a recovery phone number dialog</source>
+        <target>복구 전화번호 추가 대화상자</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/login-interstitials-manager/implementations/login-recovery-phone-interstitials-manager.service.ts</context>
           <context context-type="linenumber">151</context>
@@ -15268,6 +15308,7 @@
       </trans-unit>
       <trans-unit id="topBar.passwordResetRequired.title" datatype="html" resname="topBar.passwordResetRequired.title">
         <source>Your ORCID account password needs to be reset</source>
+        <target>ORCID 계정 비밀번호 초기화 필요</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">29</context>
@@ -15275,6 +15316,7 @@
       </trans-unit>
       <trans-unit id="topBar.passwordResetRequired.body" datatype="html" resname="topBar.passwordResetRequired.body">
         <source>To help maintain the security of your ORCID account please reset your account password.</source>
+        <target>ORCID 계정 보안을 유지할 수 있도록 귀하의 계정 비밀번호를 초기화하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">34,35</context>
@@ -15282,6 +15324,7 @@
       </trans-unit>
       <trans-unit id="topBar.passwordResetRequired.cannotSignIn" datatype="html" resname="topBar.passwordResetRequired.cannotSignIn">
         <source>You will not be able to sign in to ORCID until your password has been reset.</source>
+        <target>비밀번호가 초기화되지 않으면 ORCID에 로그인하실 수 없습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">37,38</context>
@@ -15289,6 +15332,7 @@
       </trans-unit>
       <trans-unit id="topBar.passwordResetRequired.resetNow" datatype="html" resname="topBar.passwordResetRequired.resetNow">
         <source>Reset your account password now</source>
+        <target>지금 계정 비밀번호 초기화</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">48</context>
@@ -15444,6 +15488,7 @@
       </trans-unit>
       <trans-unit id="topBar.twoFactorAuthentication2FAHasBeenDisabled" datatype="html" resname="topBar.twoFactorAuthentication2FAHasBeenDisabled">
         <source>Two-factor authentication (2FA) has been disabled</source>
+        <target>2단계 인증(2FA) 비활성화됨</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">184</context>
@@ -15451,6 +15496,7 @@
       </trans-unit>
       <trans-unit id="topBar.youHaveSignedInUsingYourRecoveryPhoneNumber" datatype="html" resname="topBar.youHaveSignedInUsingYourRecoveryPhoneNumber">
         <source>You have signed in using your recovery phone number. Your recovery number has been deleted and two-factor authentication has been disabled for this ORCID account. You can re-enable 2FA from your</source>
+        <target>복구 전화번호를 사용하여 로그인하셨습니다. 이 ORCID 계정에 복구 번호가 삭제되고 2단계 인증이 비활성화되었습니다. 계정 복구 옵션으로 2FA를 재활성화하려면</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">203,205</context>
@@ -15458,6 +15504,7 @@
       </trans-unit>
       <trans-unit id="topBar.accountSettingsMidSentence" datatype="html" resname="topBar.accountSettingsMidSentence">
         <source>account settings</source>
+        <target>계정 설정</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">212</context>
@@ -15465,6 +15512,7 @@
       </trans-unit>
       <trans-unit id="topBar.asAnAccountRecoveryOption" datatype="html" resname="topBar.asAnAccountRecoveryOption">
         <source>as an account recovery option.</source>
+        <target>으로 이동하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">227</context>
@@ -15472,6 +15520,7 @@
       </trans-unit>
       <trans-unit id="topBar.manageYourRecoveryOptionsInAccountSettings" datatype="html" resname="topBar.manageYourRecoveryOptionsInAccountSettings">
         <source>Manage your recovery options in Account settings</source>
+        <target>계정 설정에서 복구 옵션 관리</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">248</context>
@@ -16039,6 +16088,7 @@
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
         <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;RRID&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
+        <target>&quot;funded-by&quot; 식별자를 사용할 때는 식별자 유형으로  &quot;grant number&quot;, &quot;doi&quot;, &quot;RRID&quot;, &quot;uri&quot; 또는 &quot;proposal id&quot;만 허용됨</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">255,257</context>
@@ -17698,6 +17748,7 @@
       </trans-unit>
       <trans-unit id="register.passwordPreviouslyUsed" datatype="html" resname="register.passwordPreviouslyUsed">
         <source>Please enter a new password. Previous passwords cannot be reused.</source>
+        <target>새 비밀번호를 입력하세요. 이전 비밀번호는 재사용할 수 없습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">64,65</context>
@@ -20057,6 +20108,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordHasBeenReset" datatype="html" resname="ngOrcid.signin.passwordHasBeenReset">
         <source>Your account password has been reset</source>
+        <target>계정 비밀번호가 초기화됨</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -20104,6 +20156,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.title" datatype="html" resname="ngOrcid.signin.passwordResetRequired.title">
         <source>Your ORCID account password needs to be reset</source>
+        <target>ORCID 계정 비밀번호 초기화 필요</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">96</context>
@@ -20111,6 +20164,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.body" datatype="html" resname="ngOrcid.signin.passwordResetRequired.body">
         <source>To help maintain the security of your ORCID account please reset your account password.</source>
+        <target>ORCID 계정 보안을 유지할 수 있도록 귀하의 계정 비밀번호를 초기화하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">101,102</context>
@@ -20118,6 +20172,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.cannotSignIn" datatype="html" resname="ngOrcid.signin.passwordResetRequired.cannotSignIn">
         <source>You will not be able to sign in to ORCID until your password has been reset.</source>
+        <target>비밀번호가 초기화되지 않으면 ORCID에 로그인하실 수 없습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">104,105</context>
@@ -20125,6 +20180,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.sendEmail" datatype="html" resname="ngOrcid.signin.passwordResetRequired.sendEmail">
         <source>Send password reset email</source>
+        <target>비밀번호 초기화 이메일 보내기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">115</context>
@@ -20132,6 +20188,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentTo" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentTo">
         <source>We have sent a password reset email to</source>
+        <target>비밀번호 초기화 이메일이</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">122</context>
@@ -20139,6 +20196,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentToOthers" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentToOthers">
         <source>and any other verified email addresses on your account.</source>
+        <target>및 귀하의 계정상에 있는 다른 확인된 이메일 주소로 전송되었습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">127</context>
@@ -20146,6 +20204,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentToRecord" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentToRecord">
         <source>We have sent a password reset email to the email addresses on your ORCID record.</source>
+        <target>비밀번호 초기화 이메일이 귀하의 ORCID 레코드상의 이메일 주소로 전송되었습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">132,133</context>
@@ -20153,6 +20212,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.checkSpam" datatype="html" resname="ngOrcid.signin.passwordResetRequired.checkSpam">
         <source>If you do not receive it within 10 minutes please check your spam folder.</source>
+        <target>10분 이내에 수신되지 않으면, 스팸 폴더를 확인하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">136,137</context>
@@ -20264,6 +20324,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.disabledTitle" datatype="html" resname="ngOrcid.signin.2fa.disabledTitle">
         <source>Two-factor authentication (2FA) has been disabled</source>
+        <target>2단계 인증(2FA) 비활성화됨</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -20271,6 +20332,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.disabledOauthBody" datatype="html" resname="ngOrcid.signin.2fa.disabledOauthBody">
         <source>You have signed in to ORCID using your recovery phone number. Two-factor authentication has been disabled for this ORCID account and your 2FA backup options have been reset. You can re-enable 2FA when you next sign in at orcid.org</source>
+        <target>복구 전화번호를 사용하여 ORCID에 로그인하셨습니다. 이 ORCID 계정에 2단계 인증이 비활성화되고 2FA 백업 옵션이 초기화되었습니다. 다음 번에 orcid.org에 로그인할 때 2FA를 재활성화할 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">20,25</context>
@@ -20281,6 +20343,10 @@
           Continue to 
           <x id="INTERPOLATION" equiv-text="{{ clientName }}"/>
         </source>
+        <target>
+          다음으로 계속 
+          <x id="INTERPOLATION" equiv-text="{{ clientName }}"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">38</context>
@@ -20316,6 +20382,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNoticeUse" datatype="html" resname="account.recoveryPhoneNoticeUse">
         <source>Your recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
+        <target>인증기 앱이나 복구 코드가 없는 경우, 귀하의 복구 전화번호를 사용해 ORCID 계정에 액세스할 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
           <context context-type="linenumber">20,23</context>
@@ -20323,6 +20390,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNoticeOnce" datatype="html" resname="account.recoveryPhoneNoticeOnce">
         <source>Your recovery phone number can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
+        <target>복구 전화번호는 한 번만 사용할 수 있습니다. 이것을 사용하면 2단계 인증이 비활성화되고 2FA 백업 옵션이 초기화됩니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
           <context context-type="linenumber">27,30</context>
@@ -20338,6 +20406,7 @@
       </trans-unit>
       <trans-unit id="account.manageRecoveryPhoneTitle" datatype="html" resname="account.manageRecoveryPhoneTitle">
         <source>Manage your recovery phone number</source>
+        <target>복구 전화번호 관리</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">107</context>
@@ -20345,6 +20414,7 @@
       </trans-unit>
       <trans-unit id="account.updateRecoveryPhoneNumber" datatype="html" resname="account.updateRecoveryPhoneNumber">
         <source>Update recovery phone number</source>
+        <target>복구 전화번호 업데이트</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">113</context>
@@ -20352,6 +20422,7 @@
       </trans-unit>
       <trans-unit id="account.manageRecoveryPhoneChallenge" datatype="html" resname="account.manageRecoveryPhoneChallenge">
         <source>to manage your recovery phone number</source>
+        <target>- 복구 전화번호 관리</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">119</context>
@@ -20359,6 +20430,7 @@
       </trans-unit>
       <trans-unit id="account.addRecoveryPhoneChallenge" datatype="html" resname="account.addRecoveryPhoneChallenge">
         <source>to add a recovery phone number</source>
+        <target>- 복구 전화번호 추가</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">120</context>
@@ -20518,6 +20590,7 @@
       </trans-unit>
       <trans-unit id="account.skipRecoveryPhoneStep" datatype="html" resname="account.skipRecoveryPhoneStep">
         <source>Skip this step - Don&apos;t add a recovery phone number</source>
+        <target>이 단계 건너뛰기 - 복구 전화번호를 추가하지 않음</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.html</context>
           <context context-type="linenumber">7</context>
@@ -20525,6 +20598,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneOnboardingNotice" datatype="html" resname="account.recoveryPhoneOnboardingNotice">
         <source>We strongly recommend adding a phone number to ORCID as an emergency 2FA backup option. Your recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
+        <target>긴급 2FA 백업 옵션으로 ORCID에 전화번호를 추가할 것을 강력히 권장합니다. 인증기 앱이나 복구 코드가 없는 경우, 귀하의 복구 전화번호를 사용해 ORCID 계정에 액세스할 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.html</context>
           <context context-type="linenumber">21,26</context>
@@ -20532,6 +20606,7 @@
       </trans-unit>
       <trans-unit id="account.step2Of3RecoveryPhone" datatype="html" resname="account.step2Of3RecoveryPhone">
         <source>Step 2 of 3 - Recovery phone number</source>
+        <target>2/3단계 - 복구 전화번호</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.ts</context>
           <context context-type="linenumber">84</context>
@@ -20543,6 +20618,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneOnboardingSaveFailed" datatype="html" resname="account.recoveryPhoneOnboardingSaveFailed">
         <source>We could not save your recovery phone number. Please try again, or skip this step and add your number later from your account settings.</source>
+        <target>복구 전화번호를 저장하지 못했습니다. 다시 시도하거나 이 단계를 건너뛴 다음, 나중에 계정 설정에서 번호를 추가하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.ts</context>
           <context context-type="linenumber">209</context>
@@ -20550,6 +20626,7 @@
       </trans-unit>
       <trans-unit id="account.step1Of3AuthenticationApp" datatype="html" resname="account.step1Of3AuthenticationApp">
         <source>Step 1 of 3 - Authentication app</source>
+        <target>1/3단계 - 인증기 앱</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
           <context context-type="linenumber">96</context>
@@ -20557,6 +20634,7 @@
       </trans-unit>
       <trans-unit id="account.step3Of3RecoveryCodes" datatype="html" resname="account.step3Of3RecoveryCodes">
         <source>Step 3 of 3 - 2FA recovery codes</source>
+        <target>3/3단계 - 2FA 복구 코드</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
           <context context-type="linenumber">97</context>
@@ -20564,6 +20642,7 @@
       </trans-unit>
       <trans-unit id="account.nextStepAddRecoveryPhone" datatype="html" resname="account.nextStepAddRecoveryPhone">
         <source>Next step - Add a recovery phone number</source>
+        <target>다음 단계 - 복구 전화번호 추가</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
           <context context-type="linenumber">98</context>
