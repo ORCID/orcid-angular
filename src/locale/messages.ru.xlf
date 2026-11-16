@@ -20422,7 +20422,7 @@
       </trans-unit>
       <trans-unit id="account.manageRecoveryPhoneChallenge" datatype="html" resname="account.manageRecoveryPhoneChallenge">
         <source>to manage your recovery phone number</source>
-        <target>чтобы управлять резервным номером телефона</target>
+        <target>для управления резервным номером телефона</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">119</context>
@@ -20430,7 +20430,7 @@
       </trans-unit>
       <trans-unit id="account.addRecoveryPhoneChallenge" datatype="html" resname="account.addRecoveryPhoneChallenge">
         <source>to add a recovery phone number</source>
-        <target>чтобы добавить резервный номер телефона</target>
+        <target>для добавления резервного номера телефона</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">120</context>

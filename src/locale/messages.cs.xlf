@@ -134,7 +134,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneChallengeCodeNotSent" datatype="html" resname="account.recoveryPhoneChallengeCodeNotSent">
         <source>We could not send a code to your recovery phone number. Please try again.</source>
-        <target>Kód se nepodařilo odeslat na vaše telefonní číslo pro obnovení. Zkuste to prosím znovu.</target>
+        <target>Na vaše telefonní číslo pro obnovení se kód nepodařilo odeslat. Zkuste to prosím znovu.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">210,212</context>
@@ -4025,7 +4025,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeUse" datatype="html" resname="interstitials.recoveryPhoneNoticeUse">
         <source>A recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
-        <target>Telefonní číslo pro obnovení lze použít k přístupu k vašemu účtu ORCID, pokud nemáte k dispozici ověřovací aplikaci ani kódy pro obnovení.</target>
+        <target>Telefonní číslo pro obnovení lze použít pro přístup k vašemu účtu ORCID, pokud nemáte k dispozici ověřovací aplikaci ani kódy pro obnovení.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">22,23</context>
@@ -4037,7 +4037,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeOnce" datatype="html" resname="interstitials.recoveryPhoneNoticeOnce">
         <source>Recovery phone numbers can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
-        <target>Telefonní čísla pro obnovení lze použít jen jednou. Jejich použitím se vypne dvoufázové ověření a resetují se vaše možnosti zálohy 2FA.</target>
+        <target>Telefonní čísla pro obnovení lze použít jen jednou. Jejich použitím se vypne dvoufaktorové ověření a resetují se vaše možnosti zálohy 2FA.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">28,29</context>
@@ -4905,7 +4905,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneConsent" datatype="html" resname="account.recoveryPhoneConsent">
         <source>By entering my phone number and clicking &apos;Send verification code&apos;, I consent to receive an automated one-time verification code from ORCID at the number provided. Message and data rates may apply.</source>
-        <target>Zadáním svého telefonního čísla a kliknutím na tlačítko „Odeslat ověřovací kód“ souhlasím s tím, že mi na uvedené číslo bude zaslán automatický jednorázový ověřovací kód od ORCID. Mohou být účtovány poplatky za zprávy a přenos dat.</target>
+        <target>Zadáním svého telefonního čísla a kliknutím na tlačítko „Odeslat ověřovací kód“ souhlasím s tím, že mi  ORCID na uvedené číslo zašle automatický jednorázový ověřovací kód. Mohou být účtovány poplatky za zprávy a přenos dat.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.html</context>
           <context context-type="linenumber">64,66</context>
@@ -7060,7 +7060,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCode" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCode">
         <source>Recovery number code</source>
-        <target>Kód z čísla pro obnovení</target>
+        <target>Číselný kód pro obnovení</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">303,304</context>
@@ -7068,7 +7068,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCodeRequired" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCodeRequired">
         <source>A recovery number code is required</source>
-        <target>Kód z čísla pro obnovení je povinný</target>
+        <target>Číselný kód pro obnovení je povinný</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">348</context>
@@ -7076,7 +7076,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryNumberCodeLength" datatype="html" resname="ngOrcid.signin.2fa.recoveryNumberCodeLength">
         <source>Invalid recovery number code length</source>
-        <target>Neplatná délka kódu z čísla pro obnovení</target>
+        <target>Neplatná délka číselného kódu pro obnovení</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">358</context>
@@ -7084,7 +7084,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.authenticateAndSignIn" datatype="html" resname="ngOrcid.signin.2fa.authenticateAndSignIn">
         <source>Authenticate and sign in</source>
-        <target>Ověřit a přihlásit se</target>
+        <target>Provést ověření a přihlásit se</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.html</context>
           <context context-type="linenumber">471,473</context>
@@ -7092,7 +7092,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.badRecoveryNumberCode" datatype="html" resname="ngOrcid.signin.2fa.badRecoveryNumberCode">
         <source>Invalid recovery number code</source>
-        <target>Neplatný kód z čísla pro obnovení</target>
+        <target>Neplatný číselný kód pro obnovení</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
           <context context-type="linenumber">282</context>
@@ -15488,7 +15488,7 @@
       </trans-unit>
       <trans-unit id="topBar.twoFactorAuthentication2FAHasBeenDisabled" datatype="html" resname="topBar.twoFactorAuthentication2FAHasBeenDisabled">
         <source>Two-factor authentication (2FA) has been disabled</source>
-        <target>Dvoufázové ověření (2FA) bylo vypnuto</target>
+        <target>Dvoufaktorové ověření (2FA) bylo vypnuto</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">184</context>
@@ -15496,7 +15496,7 @@
       </trans-unit>
       <trans-unit id="topBar.youHaveSignedInUsingYourRecoveryPhoneNumber" datatype="html" resname="topBar.youHaveSignedInUsingYourRecoveryPhoneNumber">
         <source>You have signed in using your recovery phone number. Your recovery number has been deleted and two-factor authentication has been disabled for this ORCID account. You can re-enable 2FA from your</source>
-        <target>Přihlásili jste se pomocí svého telefonního čísla pro obnovení. Vaše číslo pro obnovení bylo smazáno a dvoufázové ověření pro tento účet ORCID bylo vypnuto. Jako možnost obnovení účtu</target>
+        <target>Přihlásili jste se pomocí svého telefonního čísla pro obnovení. Vaše číslo pro obnovení bylo smazáno a dvoufaktorové ověření pro tento účet ORCID bylo vypnuto. Jako možnost obnovení účtu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">203,205</context>
@@ -15504,7 +15504,7 @@
       </trans-unit>
       <trans-unit id="topBar.accountSettingsMidSentence" datatype="html" resname="topBar.accountSettingsMidSentence">
         <source>account settings</source>
-        <target>můžete 2FA znovu zapnout</target>
+        <target>můžete 2FA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">212</context>
@@ -15512,7 +15512,7 @@
       </trans-unit>
       <trans-unit id="topBar.asAnAccountRecoveryOption" datatype="html" resname="topBar.asAnAccountRecoveryOption">
         <source>as an account recovery option.</source>
-        <target>ve vašem nastavení účtu.</target>
+        <target>v nastavení vašeho účtu znovu zapnout.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">227</context>
@@ -20324,7 +20324,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.disabledTitle" datatype="html" resname="ngOrcid.signin.2fa.disabledTitle">
         <source>Two-factor authentication (2FA) has been disabled</source>
-        <target>Dvoufázové ověření (2FA) bylo vypnuto</target>
+        <target>Dvoufaktorové ověření (2FA) bylo vypnuto</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -20332,7 +20332,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.disabledOauthBody" datatype="html" resname="ngOrcid.signin.2fa.disabledOauthBody">
         <source>You have signed in to ORCID using your recovery phone number. Two-factor authentication has been disabled for this ORCID account and your 2FA backup options have been reset. You can re-enable 2FA when you next sign in at orcid.org</source>
-        <target>Přihlásili jste se do systému ORCID pomocí svého telefonního čísla pro obnovení. Dvoufázové ověření bylo pro tento účet ORCID vypnuto a vaše možnosti zálohy 2FA byly resetovány. 2FA můžete znovu zapnout při vašem příštím přihlášení na webu orcid.org.</target>
+        <target>Přihlásili jste se do systému ORCID pomocí svého telefonního čísla pro obnovení. Dvoufaktorové ověření bylo pro tento účet ORCID vypnuto a vaše možnosti zálohy 2FA byly resetovány. 2FA můžete znovu zapnout při vašem příštím přihlášení na webu orcid.org.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">20,25</context>
@@ -20382,7 +20382,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNoticeUse" datatype="html" resname="account.recoveryPhoneNoticeUse">
         <source>Your recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
-        <target>Vaše telefonní číslo pro obnovení lze použít k přístupu k vašemu účtu ORCID, pokud nemáte k dispozici ověřovací aplikaci nebo kódy pro obnovení.</target>
+        <target>Vaše telefonní číslo pro obnovení lze použít pro přístup k vašemu účtu ORCID, pokud nemáte k dispozici ověřovací aplikaci nebo kódy pro obnovení.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
           <context context-type="linenumber">20,23</context>
@@ -20390,7 +20390,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNoticeOnce" datatype="html" resname="account.recoveryPhoneNoticeOnce">
         <source>Your recovery phone number can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
-        <target>Vaše telefonní číslo pro obnovení lze použít pouze jednou. Jeho použitím se vypne dvoufázové ověření a resetují se vaše možnosti zálohy 2FA.</target>
+        <target>Vaše telefonní číslo pro obnovení lze použít pouze jednou. Jeho použitím se vypne dvoufaktorové ověření a resetují se vaše možnosti zálohy 2FA.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
           <context context-type="linenumber">27,30</context>
@@ -20598,7 +20598,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneOnboardingNotice" datatype="html" resname="account.recoveryPhoneOnboardingNotice">
         <source>We strongly recommend adding a phone number to ORCID as an emergency 2FA backup option. Your recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
-        <target>Důrazně doporučujeme přidat do ORCID telefonní číslo jako nouzovou záložní možnost pro 2FA. Vaše telefonní číslo pro obnovení lze použít k přístupu k vašemu účtu ORCID, pokud nemáte k dispozici ověřovací aplikaci nebo kódy pro obnovení.</target>
+        <target>Důrazně doporučujeme přidat do ORCID telefonní číslo jako nouzovou záložní možnost pro 2FA. Vaše telefonní číslo pro obnovení lze použít pro přístup k vašemu účtu ORCID, pokud nemáte k dispozici ověřovací aplikaci nebo kódy pro obnovení.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.html</context>
           <context context-type="linenumber">21,26</context>
