@@ -1925,7 +1925,7 @@
       </trans-unit>
       <trans-unit id="account.twoFABackup" datatype="html" resname="account.twoFABackup">
         <source>2FA backup</source>
-        <target>2FA 備份</target>
+        <target>2FA 備用</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">106</context>
@@ -4037,7 +4037,7 @@
       </trans-unit>
       <trans-unit id="interstitials.recoveryPhoneNoticeOnce" datatype="html" resname="interstitials.recoveryPhoneNoticeOnce">
         <source>Recovery phone numbers can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
-        <target>復原電話號碼僅限使用一次。使用後，系統將停用雙重驗證，並重設您的 2FA 備份選項。</target>
+        <target>復原電話號碼僅限使用一次。使用後，系統將停用雙重驗證，並重設您的 2FA 備用選項。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/recovery-phone/interstitial-component/recovery-phone-interstitial.component.html</context>
           <context context-type="linenumber">28,29</context>
@@ -16088,6 +16088,7 @@
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
         <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;RRID&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
+        <target>使用「funded-by」識別碼時，只允許使用「grant number」、「doi」、「RRID」、「uri」或「proposal id」識別碼類型</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">255,257</context>
@@ -20187,6 +20188,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentTo" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentTo">
         <source>We have sent a password reset email to</source>
+        <target>已傳送密碼重設電子郵件至</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">122</context>
@@ -20194,6 +20196,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentToOthers" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentToOthers">
         <source>and any other verified email addresses on your account.</source>
+        <target>及您帳戶上其他完成驗證的電子郵件地址。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">127</context>
@@ -20201,6 +20204,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.emailSentToRecord" datatype="html" resname="ngOrcid.signin.passwordResetRequired.emailSentToRecord">
         <source>We have sent a password reset email to the email addresses on your ORCID record.</source>
+        <target>已傳送密碼重設電子郵件至您的 ORCID 記錄中的電子郵件地址。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">132,133</context>
@@ -20208,6 +20212,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.passwordResetRequired.checkSpam" datatype="html" resname="ngOrcid.signin.passwordResetRequired.checkSpam">
         <source>If you do not receive it within 10 minutes please check your spam folder.</source>
+        <target>若您未於 10 分鐘內收到，請檢查您的垃圾郵件文件夾。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
           <context context-type="linenumber">136,137</context>
@@ -20327,6 +20332,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.disabledOauthBody" datatype="html" resname="ngOrcid.signin.2fa.disabledOauthBody">
         <source>You have signed in to ORCID using your recovery phone number. Two-factor authentication has been disabled for this ORCID account and your 2FA backup options have been reset. You can re-enable 2FA when you next sign in at orcid.org</source>
+        <target>您已透過復原電話號碼登入 ORCID。系統已停用此 ORCID 帳戶的雙重驗證，並重設您的 2FA 備用選項。您可以在下次登入 orcid.org 時，重新啟用 2FA。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">20,25</context>
@@ -20337,6 +20343,10 @@
           Continue to 
           <x id="INTERPOLATION" equiv-text="{{ clientName }}"/>
         </source>
+        <target>
+繼續前往
+<x id="INTERPOLATION" equiv-text="{{ clientName }}"/>
+</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/two-factor-disabled/two-factor-disabled.component.html</context>
           <context context-type="linenumber">38</context>
@@ -20372,6 +20382,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNoticeUse" datatype="html" resname="account.recoveryPhoneNoticeUse">
         <source>Your recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
+        <target>若您沒有驗證應用程式或復原代碼，可使用復原電話號碼來存取您的 ORCID 帳戶。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
           <context context-type="linenumber">20,23</context>
@@ -20379,6 +20390,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneNoticeOnce" datatype="html" resname="account.recoveryPhoneNoticeOnce">
         <source>Your recovery phone number can only be used once. Using it will disable two-factor authentication and reset your 2FA backup options.</source>
+        <target>復原電話號碼僅限使用一次。使用後，系統將停用雙重驗證，並重設您的 2FA 備用選項。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.html</context>
           <context context-type="linenumber">27,30</context>
@@ -20410,6 +20422,7 @@
       </trans-unit>
       <trans-unit id="account.manageRecoveryPhoneChallenge" datatype="html" resname="account.manageRecoveryPhoneChallenge">
         <source>to manage your recovery phone number</source>
+        <target>管理您的復原電話號碼</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">119</context>
@@ -20417,6 +20430,7 @@
       </trans-unit>
       <trans-unit id="account.addRecoveryPhoneChallenge" datatype="html" resname="account.addRecoveryPhoneChallenge">
         <source>to add a recovery phone number</source>
+        <target>新增一個復原電話號碼</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-recovery-phone/pages/recovery-phone/recovery-phone.component.ts</context>
           <context context-type="linenumber">120</context>
@@ -20576,6 +20590,7 @@
       </trans-unit>
       <trans-unit id="account.skipRecoveryPhoneStep" datatype="html" resname="account.skipRecoveryPhoneStep">
         <source>Skip this step - Don&apos;t add a recovery phone number</source>
+        <target>跳過此步驟 - 不新增復原電話號碼</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.html</context>
           <context context-type="linenumber">7</context>
@@ -20583,6 +20598,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneOnboardingNotice" datatype="html" resname="account.recoveryPhoneOnboardingNotice">
         <source>We strongly recommend adding a phone number to ORCID as an emergency 2FA backup option. Your recovery phone number can be used to access your ORCID account if you don&apos;t have your authentication app or recovery codes.</source>
+        <target>我們強烈建議您在 ORCID 帳戶中新增電話號碼，作為緊急 2FA 備用選項。若您沒有驗證應用程式 或復原代碼，可以使用復原電話號碼來存取您的 ORCID 帳戶。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.html</context>
           <context context-type="linenumber">21,26</context>
@@ -20590,6 +20606,7 @@
       </trans-unit>
       <trans-unit id="account.step2Of3RecoveryPhone" datatype="html" resname="account.step2Of3RecoveryPhone">
         <source>Step 2 of 3 - Recovery phone number</source>
+        <target>第 2 步 (共 3 步) - 復原電話號碼</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.ts</context>
           <context context-type="linenumber">84</context>
@@ -20601,6 +20618,7 @@
       </trans-unit>
       <trans-unit id="account.recoveryPhoneOnboardingSaveFailed" datatype="html" resname="account.recoveryPhoneOnboardingSaveFailed">
         <source>We could not save your recovery phone number. Please try again, or skip this step and add your number later from your account settings.</source>
+        <target>無法儲存您的復原電話號碼。請再試一次，或跳過此步驟，並於稍後在您的帳戶設定中加入號碼。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-phone/two-factor-recovery-phone.component.ts</context>
           <context context-type="linenumber">209</context>
@@ -20608,6 +20626,7 @@
       </trans-unit>
       <trans-unit id="account.step1Of3AuthenticationApp" datatype="html" resname="account.step1Of3AuthenticationApp">
         <source>Step 1 of 3 - Authentication app</source>
+        <target>第 1 步 (共 3 步) - 驗證應用程式</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
           <context context-type="linenumber">96</context>
@@ -20615,6 +20634,7 @@
       </trans-unit>
       <trans-unit id="account.step3Of3RecoveryCodes" datatype="html" resname="account.step3Of3RecoveryCodes">
         <source>Step 3 of 3 - 2FA recovery codes</source>
+        <target>第 3 步 (共 3 步) - 2FA 復原代碼</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
           <context context-type="linenumber">97</context>
@@ -20622,6 +20642,7 @@
       </trans-unit>
       <trans-unit id="account.nextStepAddRecoveryPhone" datatype="html" resname="account.nextStepAddRecoveryPhone">
         <source>Next step - Add a recovery phone number</source>
+        <target>下一步 - 新增復原電話號碼</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/pages/two-factor/two-factor-setup.component.ts</context>
           <context context-type="linenumber">98</context>
