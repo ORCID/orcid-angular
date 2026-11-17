@@ -88,7 +88,8 @@ describe('SignInComponent', () => {
         })
       )
       expect(
-        fixture.nativeElement.querySelector('app-two-factor-disabled').clientName
+        fixture.nativeElement.querySelector('app-two-factor-disabled')
+          .clientName
       ).toBe('Test Client')
     })
 
@@ -105,7 +106,8 @@ describe('SignInComponent', () => {
       fixture.detectChanges()
 
       expect(
-        fixture.nativeElement.querySelector('app-two-factor-disabled').clientName
+        fixture.nativeElement.querySelector('app-two-factor-disabled')
+          .clientName
       ).toBeUndefined()
     })
     it('updates the panel when the OAuth client name arrives after initialization', () => {
