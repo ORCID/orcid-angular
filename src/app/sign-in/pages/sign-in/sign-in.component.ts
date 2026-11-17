@@ -1,4 +1,4 @@
-import { HttpParams } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import {
   Component,
   HostBinding,
@@ -76,6 +76,7 @@ export class SignInComponent implements OnInit, OnDestroy {
     private _userInfo: UserService,
     private _togglzService: TogglzService,
     private _oauthUrlSessionManager: OauthURLSessionManagerService,
+    private _http: HttpClient,
     @Inject(WINDOW) private window: Window
   ) {}
 
@@ -171,6 +172,41 @@ export class SignInComponent implements OnInit, OnDestroy {
     this.twoFactorDisabledByRecoveryPhone = true
     this.show2FA = false
     this.loading = false
+    if (this.isOauthAuthorizationTogglzEnable && !this.oauthClientName) {
+      const redirect = this._oauthUrlSessionManager.get() || $event?.url
+      let params: URLSearchParams
+      try {
+        params = new URL(redirect, this.window.location.href).searchParams
+      } catch {
+        return
+      }
+      const clientId =
+        params.get('client_id') || this.platform?.queryParameters?.client_id
+      if (!clientId) {
+        return
+      }
+      this._http
+        .get<{ clientName?: string }>(
+          runtimeEnvironment.AUTH_SERVER + 'generateAuthorizationInfo',
+          {
+            params: {
+              client_id: clientId,
+              scope: params.get('scope') || '',
+              state: params.get('state') || '',
+            },
+            withCredentials: true,
+          }
+        )
+        .pipe(take(1), takeUntil(this.destroy$))
+        .subscribe({
+          next: (info) => {
+            if (info?.clientName?.trim()) {
+              this.oauthClientName = info.clientName
+            }
+          },
+          error: () => {},
+        })
+    }
   }
 
   /**
