@@ -16,6 +16,8 @@ import { AppModule } from 'src/app/app.module'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { Router } from '@angular/router'
 import { OauthURLSessionManagerService } from '../../../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { ReplaySubject } from 'rxjs'
+import { UserSession } from '../../../types/session.local'
 
 describe('SignInComponent', () => {
   let component: SignInComponent
@@ -65,6 +67,34 @@ describe('SignInComponent', () => {
   })
 
   describe('after a sign-in with the recovery phone number', () => {
+    it('updates the panel when the OAuth client name arrives after initialization', () => {
+      const sessions = new ReplaySubject<UserSession>(1)
+      spyOn(TestBed.inject(UserService), 'getUserSession').and.returnValue(
+        sessions
+      )
+      component.ngOnInit()
+      sessions.next({ oauthSession: undefined } as UserSession)
+      component.onTwoFactorDisabledByRecoveryPhone({
+        url: 'https://example.org',
+      })
+      sessions.next({
+        oauthSession: { clientName: 'Test Client' },
+      } as UserSession)
+      sessions.next({ oauthSession: undefined } as UserSession)
+      fixture.detectChanges()
+
+      expect(component.oauthClientName).toBe('Test Client')
+      expect(
+        fixture.nativeElement.querySelector('app-two-factor-disabled')
+          .clientName
+      ).toBe('Test Client')
+      fixture.destroy()
+      sessions.next({
+        oauthSession: { clientName: 'Another Client' },
+      } as UserSession)
+      expect(component.oauthClientName).toBe('Test Client')
+      sessions.complete()
+    })
     it('puts the panel in place of the sign-in card (R4.2)', () => {
       component.onTwoFactorDisabledByRecoveryPhone({
         url: 'https://qa.orcid.org/oauth/authorize',
