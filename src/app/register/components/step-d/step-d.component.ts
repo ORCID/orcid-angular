@@ -1,4 +1,10 @@
-import { Component, Input, ViewChild } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
@@ -20,6 +26,8 @@ export class StepDComponent extends BaseStepDirective {
   @ViewChild(FormAntiRobotsComponent) antiRobots: FormAntiRobotsComponent
   @Input() loading
   @Input() reactivation: ReactivationLocal
+  @Input() captchaErrors: string[] = []
+  @Output() captchaErrorsCleared = new EventEmitter<void>()
 
   constructor(
     private _registrationStateService: RegisterStateService,

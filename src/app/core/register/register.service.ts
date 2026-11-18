@@ -129,7 +129,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
             Object.assign(
               this.backendRegistrationForm,
               registerFormWithTypeContext
-            )
+            ),
+            { withCredentials: true }
           )
           .pipe(
             catchError((error) =>

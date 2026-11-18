@@ -1,9 +1,11 @@
 import {
   Component,
   DoCheck,
+  EventEmitter,
   forwardRef,
   Input,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core'
 import {
@@ -42,6 +44,8 @@ import { TurnstileDirective } from 'src/app/cdk/recaptcha/turnstile.directive'
 })
 export class FormAntiRobotsComponent extends BaseForm implements OnInit {
   @ViewChild(TurnstileDirective) turnstile: TurnstileDirective
+  @Input() backendErrors: string[] = []
+  @Output() backendErrorsCleared = new EventEmitter<void>()
   captchaFailState = false
   captchaLoadedWithWidgetId: number
   $widgetIdUpdated = new Subject<void>()
@@ -53,6 +57,9 @@ export class FormAntiRobotsComponent extends BaseForm implements OnInit {
   ngOnInit(): void {
     this.form = new UntypedFormGroup({
       captcha: this.captcha,
+    })
+    this.captcha.valueChanges.subscribe((value) => {
+      if (value) this.backendErrorsCleared.emit()
     })
     this._registerStateService.getNextButtonClickFor('d').subscribe(() => {
       this.nextButtonWasClicked = true

@@ -38,5 +38,6 @@ describe('registration captcha session contract', () => {
         grecaptchaWidgetId: { value: '0' },
       })
     )
+    expect(post.calls.mostRecent().args[2]).toEqual({ withCredentials: true })
   })
 })

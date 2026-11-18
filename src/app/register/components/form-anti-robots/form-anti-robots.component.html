@@ -37,6 +37,9 @@
     (captchaLoaded)="captchaLoaded($event)"
     formControlName="captcha"
   ></div>
+  <mat-error *ngFor="let error of backendErrors" role="alert">{{
+    error
+  }}</mat-error>
   <mat-error
     *ngIf="captchaFailState && captchaLoadedWithWidgetId !== undefined"
     role="alert"

@@ -69,6 +69,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   isLinear = true
   loading = false
   validationErrors: string[] = []
+  captchaErrors: string[] = []
   requestInfoForm: RequestInfoForm | null
   thirdPartyAuthData: ThirdPartyAuthData
   reactivation = {
@@ -187,6 +188,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   register() {
     this.loading = true
     this.validationErrors = []
+    this.captchaErrors = []
     if (!this._register.backendRegistrationForm) {
       this.loading = false
       return
@@ -217,8 +219,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             )
             if (validator.errors.length > 0) {
               this.loading = false
-              this.validationErrors = validator.errors
-              this.stepD?.antiRobots?.resetCaptcha()
+              this.captchaErrors = validator.grecaptcha?.errors || []
+              this.validationErrors = validator.errors.filter(
+                (error) => !this.captchaErrors.includes(error)
+              )
+              if (this.captchaErrors.length) {
+                this.stepD?.antiRobots?.resetCaptcha()
+              }
               // At this point any backend error is unexpected
               this._errorHandler.handleError(
                 new Error('registerUnexpectedValidateFail'),
@@ -288,7 +295,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           },
           error: (error) => {
             this.loading = false
-            this.stepD?.antiRobots?.resetCaptcha()
             this._registerObservabilityService.reportRegisterEvent(
               AppEventName.RegisterPipelineError,
               {

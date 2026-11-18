@@ -180,7 +180,8 @@ export function RegisterBackendValidatorMixin<
       return this._http
         .post<RegisterForm>(
           `${runtimeEnvironment.API_WEB}register.json`,
-          registerForm
+          registerForm,
+          { withCredentials: true }
         )
         .pipe(catchError((error) => this._errorHandler.handleError(error)))
     }

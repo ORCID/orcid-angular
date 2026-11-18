@@ -78,6 +78,8 @@
               (submit)="register()"
               [loading]="loading"
               [reactivation]="reactivation"
+              [captchaErrors]="captchaErrors"
+              (captchaErrorsCleared)="captchaErrors = []"
             ></app-step-d>
           </mat-step>
         </mat-horizontal-stepper>
