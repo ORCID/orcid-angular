@@ -50,6 +50,7 @@ export type RecoveryPhoneErrorCode =
   | 'BAD_CREDENTIALS'
   | 'NO_RECOVERY_PHONE'
   | 'NOT_ACCOUNT_OWNER'
+  | 'COUNTRY_NOT_ENABLED'
 
 /**
  * Which flow asked for the number. The registry reads it to decide what it
