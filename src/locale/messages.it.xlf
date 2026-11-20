@@ -5089,12 +5089,26 @@
           <context context-type="linenumber">452</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="account.recoveryPhoneCountryNotEnabled.interstitial" datatype="html" resname="account.recoveryPhoneCountryNotEnabled.interstitial">
+        <source>We are currently unable to send SMS to the selected country. Please try a different phone number or &lt;a [disabled]=&quot;saving&quot; (click)=&quot;declineRecoveryPhone()&quot;&gt;&lt;span&gt;continue without adding a recovery number&lt;/span&gt;&lt;/a&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
+          <context context-type="linenumber">465</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.recoveryPhoneCountryNotEnabled" datatype="html" resname="account.recoveryPhoneCountryNotEnabled">
+        <source>We are currently unable to send SMS to the selected country. Please try a different phone number.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
+          <context context-type="linenumber">467</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="account.recoveryPhoneGenericError" datatype="html" resname="account.recoveryPhoneGenericError">
         <source>Something went wrong. Please try again.</source>
         <target>Si è verificato un errore. Riprova.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">464</context>
+          <context context-type="linenumber">471</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
