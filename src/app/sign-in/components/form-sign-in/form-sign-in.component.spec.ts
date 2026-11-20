@@ -344,11 +344,15 @@ describe('FormSignInComponent', () => {
         (component as any)._recoveryPhoneNotice,
         'markTwoFactorDisabled'
       )
-      spyOn(component, 'navigateTo')
+      const navigateSpy = spyOn(component, 'navigateTo')
+      const panelSpy = jasmine.createSpy('recoveryPanel')
+      component.twoFactorDisabledByRecoveryPhone.subscribe(panelSpy)
 
       component.authenticate({ recoveryPhoneCode: '123456' })
 
       expect(order).toEqual(['verify', 'signIn'])
+      expect(panelSpy).not.toHaveBeenCalled()
+      expect(navigateSpy).toHaveBeenCalledWith('https://qa.orcid.org/my-orcid')
       // The record page shows the notice once, under the iD it happened to
       expect(noticeSpy).toHaveBeenCalledWith('0000-0001-2345-6789')
       // 2FA is off now, so the sign-in that follows carries no code at all

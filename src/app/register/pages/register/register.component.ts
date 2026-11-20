@@ -11,7 +11,7 @@ import {
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { MatStep, MatStepper } from '@angular/material/stepper'
 import { ActivatedRoute, Params, Router } from '@angular/router'
-import { Observable, combineLatest, forkJoin } from 'rxjs'
+import { EMPTY, Observable, combineLatest, forkJoin } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -36,6 +36,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { AppEventName } from 'src/app/rum/app-event-names'
+import { StepDComponent } from '../../components/step-d/step-d.component'
 
 @Component({
   selector: 'app-register',
@@ -56,6 +57,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('stepComponentC2', { read: ElementRef })
   stepComponentC2: ElementRef
   @ViewChild('stepComponentD', { read: ElementRef }) stepComponentD: ElementRef
+  @ViewChild('stepComponentD') stepD: StepDComponent
 
   platform: PlatformInfo
   FormGroupStepA: UntypedFormGroup
@@ -66,6 +68,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   isLinear = true
   loading = false
+  validationErrors: string[] = []
+  captchaErrors: string[] = []
   requestInfoForm: RequestInfoForm | null
   thirdPartyAuthData: ThirdPartyAuthData
   reactivation = {
@@ -107,6 +111,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     })
   }
   ngOnInit() {
+    this._register.backendRegistrationForm = null
     this._register.getRegisterForm().subscribe()
 
     this.FormGroupStepA = this._formBuilder.group({
@@ -182,6 +187,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   register() {
     this.loading = true
+    this.validationErrors = []
+    this.captchaErrors = []
+    if (!this._register.backendRegistrationForm) {
+      this.loading = false
+      return
+    }
     this.lastStep.interacted = true
     if (
       this.FormGroupStepA.valid &&
@@ -207,6 +218,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               }
             )
             if (validator.errors.length > 0) {
+              this.loading = false
+              this.captchaErrors = validator.grecaptcha?.errors || []
+              this.validationErrors = validator.errors.filter(
+                (error) => !this.captchaErrors.includes(error)
+              )
+              if (this.captchaErrors.length) {
+                this.stepD?.antiRobots?.resetCaptcha()
+              }
               // At this point any backend error is unexpected
               this._errorHandler.handleError(
                 new Error('registerUnexpectedValidateFail'),
@@ -218,6 +237,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                   errors: validator.errors,
                 }
               )
+              return EMPTY
             }
             return this._register.register(
               this.FormGroupStepA,

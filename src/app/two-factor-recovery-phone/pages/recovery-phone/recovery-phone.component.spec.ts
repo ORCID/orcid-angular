@@ -185,12 +185,14 @@ describe('RecoveryPhoneComponent', () => {
   it('reports a failed challenge back into the dialog', () => {
     build()
     twoFactorService.verifyRecoveryPhoneChallenge.and.returnValue(
-      of({ success: false, invalidPassword: true } as any)
+      of({ success: false })
     )
 
     submitAttempt.emit()
 
-    expect(dialogInstance.processBackendResponse).toHaveBeenCalled()
+    expect(dialogInstance.processBackendResponse).toHaveBeenCalledWith({
+      challengeFailed: true,
+    })
     expect(dialogRef.close).not.toHaveBeenCalledWith(true)
   })
 

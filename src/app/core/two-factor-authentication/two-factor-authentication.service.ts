@@ -67,8 +67,10 @@ export class TwoFactorAuthenticationService {
    * window, since confirming the number by text takes longer than a 2FA code
    * stays valid.
    */
-  verifyRecoveryPhoneChallenge(data: AuthChallenge): Observable<AuthChallenge> {
-    return this._http.post<AuthChallenge>(
+  verifyRecoveryPhoneChallenge(
+    data: AuthChallenge
+  ): Observable<{ success: boolean }> {
+    return this._http.post<{ success: boolean }>(
       runtimeEnvironment.BASE_URL +
         '2FA/recoveryPhone/verifyAuthChallenge.json',
       data,
