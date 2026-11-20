@@ -23,6 +23,7 @@ import { EmailCategoryEndpoint } from 'src/app/types/register.email-category'
 // Mixing boiler plate
 
 class RegisterServiceBase {
+  backendRegistrationForm: RegisterForm
   constructor(
     public _http: HttpClient,
     public _errorHandler: ErrorHandlerService
@@ -36,8 +37,6 @@ const _RegisterServiceMixingBase = RegisterBackendValidatorMixin(
   providedIn: 'root',
 })
 export class RegisterService extends _RegisterServiceMixingBase {
-  backendRegistrationForm: RegisterForm
-
   constructor(
     _http: HttpClient,
     _errorHandler: ErrorHandlerService,
@@ -130,7 +129,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
             Object.assign(
               this.backendRegistrationForm,
               registerFormWithTypeContext
-            )
+            ),
+            { withCredentials: true }
           )
           .pipe(
             catchError((error) =>
