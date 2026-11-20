@@ -460,6 +460,13 @@ export class RecoveryPhoneFormComponent implements OnInit, OnDestroy {
       case 'FEATURE_DISABLED':
         this.failed.emit(errorCode)
         break
+      case 'COUNTRY_NOT_ENABLED':
+        if (this.context === 'INTERSTITIAL') {
+          this.generalErrorMessage = $localize`:@@account.recoveryPhoneCountryNotEnabled.interstitial:We are currently unable to send SMS to the selected country. Please try a different phone number or <a [disabled]="saving" (click)="declineRecoveryPhone()"><span>continue without adding a recovery number</span></a>`
+        } else {
+          this.generalErrorMessage = $localize`:@@account.recoveryPhoneCountryNotEnabled:We are currently unable to send SMS to the selected country. Please try a different phone number.`
+        }
+        break
       default:
         this.generalErrorMessage = $localize`:@@account.recoveryPhoneGenericError:Something went wrong. Please try again.`
     }
