@@ -22,6 +22,7 @@ import { TogglzService } from '../togglz/togglz.service'
 import { of, ReplaySubject } from 'rxjs'
 import { UserService } from '..'
 import { Config } from 'src/app/types/config.endpoint'
+import { EXTERNAL_ID_TYPE_WORK } from '../../constants'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
@@ -63,6 +64,26 @@ describe('RecordWorksService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy()
+  })
+
+  describe('loadExternalId', () => {
+    const cases = [
+      { type: EXTERNAL_ID_TYPE_WORK.doi, id: '10.1234/example', path: 'doi' },
+      { type: EXTERNAL_ID_TYPE_WORK.pubMed, id: '12345678', path: 'pmid' },
+      { type: EXTERNAL_ID_TYPE_WORK.pubMed, id: 'PMC12345', path: 'pmc' },
+    ]
+
+    cases.forEach(({ type, id, path }) => {
+      it(`looks up ${path} identifiers without a trailing slash`, () => {
+        service.loadExternalId(id, type).subscribe()
+
+        const req = httpTestingController.expectOne(
+          runtimeEnvironment.API_WEB + `works/resolve/${path}?value=${id}`
+        )
+        expect(req.request.method).toEqual('GET')
+        req.flush({})
+      })
+    })
   })
 
   // Changing visibility is a state change. Over GET it needs no CSRF token, so a link or an

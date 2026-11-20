@@ -47,4 +47,15 @@ describe('FormAntiRobotsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
+
+  it('displays backend errors beside the challenge and clears them on a new token', () => {
+    component.backendErrors = ['Verification failed']
+    const cleared = spyOn(component.backendErrorsCleared, 'emit')
+    fixture.detectChanges()
+    expect(fixture.nativeElement.textContent).toContain('Verification failed')
+    component.captcha.setValue(null)
+    expect(cleared).not.toHaveBeenCalled()
+    component.captcha.setValue('new-token')
+    expect(cleared).toHaveBeenCalled()
+  })
 })

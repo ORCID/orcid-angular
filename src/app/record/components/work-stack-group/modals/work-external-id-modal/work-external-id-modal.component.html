@@ -92,19 +92,28 @@
   <form [formGroup]="externalIdentifierForm" *ngIf="!work">
     <div class="row">
       <div class="orc-font-small-print">
-        <p>
-          <ng-container
-            i18n="@@works.youCanUseFullDOI"
-            *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
-          >
-            You can use the full DOI URL or just the identifier value.
-          </ng-container>
-          <ng-container
-            i18n="@@works.typeOrPastePubMed"
-            *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
-          >
-            Type or paste the full PubMed URL or just the identifier value
-          </ng-container>
+        <ng-container *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi">
+          <p i18n="@@works.retrieveDetailsFrom">
+            You can retrieve work details from:
+          </p>
+          <ul>
+            <li i18n="@@works.fullDoiUrlExample">
+              <strong>A full DOI URL</strong> - https://doi.org/10.1000/182
+            </li>
+            <li i18n="@@works.doiIdentifierExample">
+              <strong>The DOI identifier value</strong> - 10.1000/182
+            </li>
+            <li i18n="@@works.publisherUrlExample">
+              <strong>A publisher URL</strong> -
+              https://www.publisher.com/doi/10.1000/182
+            </li>
+          </ul>
+        </ng-container>
+        <p
+          i18n="@@works.typeOrPastePubMed"
+          *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
+        >
+          Type or paste the full PubMed URL or just the identifier value
         </p>
       </div>
     </div>
@@ -112,10 +121,10 @@
       <label for="external-id-input" class="mat-caption">
         <strong>
           <ng-container
-            i18n="@@works.doiIdentifier"
+            i18n="@@works.doiOrPublisherUrl"
             *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
           >
-            DOI identifier value or full URL
+            DOI or publisher URL
           </ng-container>
           <ng-container
             i18n="@@works.pubMedIdentifier"

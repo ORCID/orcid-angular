@@ -16,6 +16,9 @@ import { AppModule } from 'src/app/app.module'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { Router } from '@angular/router'
 import { OauthURLSessionManagerService } from '../../../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { of, ReplaySubject, throwError } from 'rxjs'
+import { UserSession } from '../../../types/session.local'
+import { HttpClient } from '@angular/common/http'
 
 describe('SignInComponent', () => {
   let component: SignInComponent
@@ -65,6 +68,76 @@ describe('SignInComponent', () => {
   })
 
   describe('after a sign-in with the recovery phone number', () => {
+    it('looks up the OAuth client after recovery sign-in when the session lacks it', () => {
+      component.isOauthAuthorizationTogglzEnable = true
+      oauthUrlSessionManager.get.and.returnValue(
+        'https://example.org/oauth2/authorize?client_id=APP-1&scope=openid&state=abc'
+      )
+      const get = spyOn(TestBed.inject(HttpClient), 'get').and.returnValue(
+        of({ clientName: 'Test Client' })
+      )
+
+      component.onTwoFactorDisabledByRecoveryPhone({ url: '/oauth/authorize' })
+      fixture.detectChanges()
+
+      expect(get).toHaveBeenCalledWith(
+        runtimeEnvironment.AUTH_SERVER + 'generateAuthorizationInfo',
+        jasmine.objectContaining({
+          params: { client_id: 'APP-1', scope: 'openid', state: 'abc' },
+          withCredentials: true,
+        })
+      )
+      expect(
+        fixture.nativeElement.querySelector('app-two-factor-disabled')
+          .clientName
+      ).toBe('Test Client')
+    })
+
+    it('keeps the generic label when the client lookup fails', () => {
+      component.isOauthAuthorizationTogglzEnable = true
+      oauthUrlSessionManager.get.and.returnValue(
+        'https://example.org/oauth2/authorize?client_id=APP-1'
+      )
+      spyOn(TestBed.inject(HttpClient), 'get').and.returnValue(
+        throwError(() => new Error('unavailable'))
+      )
+
+      component.onTwoFactorDisabledByRecoveryPhone({ url: '/oauth/authorize' })
+      fixture.detectChanges()
+
+      expect(
+        fixture.nativeElement.querySelector('app-two-factor-disabled')
+          .clientName
+      ).toBeUndefined()
+    })
+    it('updates the panel when the OAuth client name arrives after initialization', () => {
+      const sessions = new ReplaySubject<UserSession>(1)
+      spyOn(TestBed.inject(UserService), 'getUserSession').and.returnValue(
+        sessions
+      )
+      component.ngOnInit()
+      sessions.next({ oauthSession: undefined } as UserSession)
+      component.onTwoFactorDisabledByRecoveryPhone({
+        url: 'https://example.org',
+      })
+      sessions.next({
+        oauthSession: { clientName: 'Test Client' },
+      } as UserSession)
+      sessions.next({ oauthSession: undefined } as UserSession)
+      fixture.detectChanges()
+
+      expect(component.oauthClientName).toBe('Test Client')
+      expect(
+        fixture.nativeElement.querySelector('app-two-factor-disabled')
+          .clientName
+      ).toBe('Test Client')
+      fixture.destroy()
+      sessions.next({
+        oauthSession: { clientName: 'Another Client' },
+      } as UserSession)
+      expect(component.oauthClientName).toBe('Test Client')
+      sessions.complete()
+    })
     it('puts the panel in place of the sign-in card (R4.2)', () => {
       component.onTwoFactorDisabledByRecoveryPhone({
         url: 'https://qa.orcid.org/oauth/authorize',

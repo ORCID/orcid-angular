@@ -67,12 +67,19 @@
             <ng-template matStepLabel i18n="@@register.visibilityAndTerm"
               >Visibility and terms</ng-template
             >
+            <div *ngIf="validationErrors.length" role="alert">
+              <mat-error *ngFor="let error of validationErrors">{{
+                error
+              }}</mat-error>
+            </div>
             <app-step-d
               #stepComponentD
               [(formGroup)]="FormGroupStepD"
               (submit)="register()"
               [loading]="loading"
               [reactivation]="reactivation"
+              [captchaErrors]="captchaErrors"
+              (captchaErrorsCleared)="captchaErrors = []"
             ></app-step-d>
           </mat-step>
         </mat-horizontal-stepper>
