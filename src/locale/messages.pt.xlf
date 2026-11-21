@@ -5089,12 +5089,26 @@
           <context context-type="linenumber">452</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="account.recoveryPhoneCountryNotEnabled.interstitial" datatype="html" resname="account.recoveryPhoneCountryNotEnabled.interstitial">
+        <source>We are currently unable to send SMS to the selected country. Please try a different phone number or &lt;a [disabled]=&quot;saving&quot; (click)=&quot;declineRecoveryPhone()&quot;&gt;&lt;span&gt;continue without adding a recovery number&lt;/span&gt;&lt;/a&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
+          <context context-type="linenumber">465</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.recoveryPhoneCountryNotEnabled" datatype="html" resname="account.recoveryPhoneCountryNotEnabled">
+        <source>We are currently unable to send SMS to the selected country. Please try a different phone number.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
+          <context context-type="linenumber">467</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="account.recoveryPhoneGenericError" datatype="html" resname="account.recoveryPhoneGenericError">
         <source>Something went wrong. Please try again.</source>
         <target>Ocorreu um erro. Tente novamente.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">464</context>
+          <context context-type="linenumber">471</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
@@ -16003,7 +16017,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">147,149</context>
+          <context context-type="linenumber">156,158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
@@ -17062,12 +17076,44 @@
           <context context-type="linenumber">79,81</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="works.youCanUseFullDOI" datatype="html" resname="works.youCanUseFullDOI">
-        <source>You can use the full DOI URL or just the identifier value.</source>
-        <target>Pode utilizar o URL do DOI completo ou apenas o valor do identificador.</target>
+      <trans-unit id="works.retrieveDetailsFrom" datatype="html" resname="works.retrieveDetailsFrom">
+        <source>You can retrieve work details from:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">99,101</context>
+          <context context-type="linenumber">96,98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.fullDoiUrlExample" datatype="html" resname="works.fullDoiUrlExample">
+        <source>
+          A full DOI URL - https://doi.org/10.1000/182 
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
+          <context context-type="linenumber">101,102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.doiIdentifierExample" datatype="html" resname="works.doiIdentifierExample">
+        <source>
+          The DOI identifier value - 10.1000/182 
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
+          <context context-type="linenumber">104,105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.publisherUrlExample" datatype="html" resname="works.publisherUrlExample">
+        <source>
+          A publisher URL - https://www.publisher.com/doi/10.1000/182 
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
+          <context context-type="linenumber">107,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.typeOrPastePubMed" datatype="html" resname="works.typeOrPastePubMed">
@@ -17075,15 +17121,14 @@
         <target>Digite ou cole o URL do pubMed completo ou apenas o valor do identificador</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">105,107</context>
+          <context context-type="linenumber">115,117</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="works.doiIdentifier" datatype="html" resname="works.doiIdentifier">
-        <source>DOI identifier value or full URL</source>
-        <target>Valor do identificador DOI ou URL completo</target>
+      <trans-unit id="works.doiOrPublisherUrl" datatype="html" resname="works.doiOrPublisherUrl">
+        <source>DOI or publisher URL</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">117,119</context>
+          <context context-type="linenumber">126,128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.pubMedIdentifier" datatype="html" resname="works.pubMedIdentifier">
@@ -17091,7 +17136,7 @@
         <target>Valor do identificador puMed ou URL completo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">123,125</context>
+          <context context-type="linenumber">132,134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.unableToImport" datatype="html" resname="works.unableToImport">
@@ -17099,7 +17144,7 @@
         <target>Não é possível importar com este identificador. Adicione trabalho através de outra opção.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">150,153</context>
+          <context context-type="linenumber">159,162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.retrieveWorkDOI" datatype="html" resname="works.retrieveWorkDOI">
@@ -17107,7 +17152,7 @@
         <target>Recuperar informações sobre o projeto do DOI</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">167,169</context>
+          <context context-type="linenumber">176,178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.retrieveWorkPubMed" datatype="html" resname="works.retrieveWorkPubMed">
@@ -17115,7 +17160,7 @@
         <target>Extrair informações da obra do pubMed</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">173,175</context>
+          <context context-type="linenumber">182,184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.linkWorks" datatype="html" resname="works.linkWorks">
@@ -17595,7 +17640,28 @@
         <target>Por favor marque a caixa recaptcha</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-anti-robots/form-anti-robots.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.captchaRequired" datatype="html" resname="register.captchaRequired">
+        <source>Please complete the verification challenge</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-anti-robots/form-anti-robots.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.captchaChallengeFailed" datatype="html" resname="register.captchaChallengeFailed">
+        <source>Verification failed. Please try again.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-anti-robots/form-anti-robots.component.html</context>
+          <context context-type="linenumber">47,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.retryVerification" datatype="html" resname="register.retryVerification">
+        <source>Retry verification</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-anti-robots/form-anti-robots.component.html</context>
+          <context context-type="linenumber">58,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.currentEmployment" datatype="html" resname="register.currentEmployment">
@@ -18619,7 +18685,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.step3.3" datatype="html" resname="register.step3.3">
@@ -18651,7 +18717,7 @@
         <target>Registo concluído</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
-          <context context-type="linenumber">57,59</context>
+          <context context-type="linenumber">61,63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.reactivateMyOrcidAccount" datatype="html" resname="register.reactivateMyOrcidAccount">
@@ -18659,7 +18725,7 @@
         <target>Reativar a minha conta ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">67,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.personalData" datatype="html" resname="register.personalData">
