@@ -52,7 +52,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     errorGroup: string
   ): string[] {
     return (
-      control?.parent?.parent?.errors?.[errorGroup]?.['additionalEmails'][
+      control?.parent?.parent?.errors?.[errorGroup]?.['additionalEmails']?.[
         control.value
       ] || []
     )
@@ -63,12 +63,12 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     control: AbstractControl | null
   ): string[] {
     if (!control || !control.parent?.parent?.errors) {
-      return []
+      return control?.errors?.['backendError'] || []
     }
 
     const backendErrors = control.parent.parent.errors['backendErrors']
     if (!backendErrors?.['additionalEmails']) {
-      return []
+      return control.errors?.['backendError'] || []
     }
 
     // Try to match by email value (trim whitespace)
@@ -76,8 +76,13 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     const errors = backendErrors['additionalEmails'][emailValue]
 
     // If not found, try without trimming
-    if (!errors) {
-      return backendErrors['additionalEmails'][control.value] || []
+    if (!errors?.length) {
+      return (
+        (backendErrors['additionalEmails'][control.value]?.length &&
+          backendErrors['additionalEmails'][control.value]) ||
+        control.errors?.['backendError'] ||
+        []
+      )
     }
 
     return errors || []

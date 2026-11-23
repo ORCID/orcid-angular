@@ -134,8 +134,8 @@ export class FormPersonalComponent
   emails: UntypedFormGroup = new UntypedFormGroup({})
   additionalEmails: UntypedFormGroup = new UntypedFormGroup({
     '0': new UntypedFormControl('', {
-      validators: [OrcidValidators.email],
-      asyncValidators: this._register.backendValueValidate('email'),
+      validators: [OrcidValidators.additionalEmail],
+      asyncValidators: this._register.backendAdditionalEmailValueValidate(),
     }),
   })
 
@@ -255,7 +255,12 @@ export class FormPersonalComponent
         const additionalEmailsErrors = error.backendErrors.additionalEmails
         if (
           registerForm.email &&
-          additionalEmail.value === registerForm.email.value
+          OrcidValidators.normalizeEmailForDuplicateCheck(
+            additionalEmail.value
+          ).toLowerCase() ===
+            OrcidValidators.normalizeEmailForDuplicateCheck(
+              registerForm.email.value
+            ).toLowerCase()
         ) {
           hasError = true
           additionalEmailsErrors[additionalEmail.value] = [
@@ -265,7 +270,15 @@ export class FormPersonalComponent
           Object.keys(registerForm.emailsAdditional).forEach(
             (elementKey, i2) => {
               const element = registerForm.emailsAdditional[elementKey]
-              if (i !== i2 && additionalEmail.value === element.value) {
+              if (
+                i !== i2 &&
+                OrcidValidators.normalizeEmailForDuplicateCheck(
+                  additionalEmail.value
+                ).toLowerCase() ===
+                  OrcidValidators.normalizeEmailForDuplicateCheck(
+                    element.value
+                  ).toLowerCase()
+              ) {
                 hasError = true
                 additionalEmailsErrors[additionalEmail.value] = [
                   'duplicatedAdditionalEmail',
