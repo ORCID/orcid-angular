@@ -51,6 +51,7 @@
       i18n="@@shared.saveChanges"
       id="save-work-button"
       [attr.aria-label]="saveAndClose"
+      [disabled]="workFormComponent?.workForm?.pending"
     >
       Save changes
     </button>
