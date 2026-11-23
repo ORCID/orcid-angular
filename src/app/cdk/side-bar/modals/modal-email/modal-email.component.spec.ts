@@ -18,6 +18,8 @@ import { AlertMessageComponent } from '@orcid/ui'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
+import { of } from 'rxjs'
+import { AssertionVisibilityString } from 'src/app/types'
 
 describe('ModalEmailComponent', () => {
   let component: ModalEmailComponent
@@ -55,5 +57,41 @@ describe('ModalEmailComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('shows duplicate feedback for a hidden-character match in the modal', () => {
+    component.originalEmailsBackendCopy = []
+    component.addEmail({
+      value: 'user@example.org',
+    } as AssertionVisibilityString)
+    component.addEmail({ value: '' } as AssertionVisibilityString)
+    const control = component.emailsForm.get('emailInput-1.email')
+    control.setValue('USER\u200b@example.org')
+    expect(control.hasError('duplicated')).toBeTrue()
+    control.setValue('other@example.org')
+    expect(control.hasError('duplicated')).toBeFalse()
+  })
+
+  it('checks normalized hidden-character input with the account validator', () => {
+    component.originalEmailsBackendCopy = []
+    const validate = spyOn(
+      component._recordEmails,
+      'validateRegisterValue'
+    ).and.returnValue(
+      of({ value: 'user@example.org', errors: ['duplicate'] } as any)
+    )
+    component.addEmail({ value: '' } as AssertionVisibilityString)
+    const control = component.emailsForm.get('emailInput-0.email')
+    control.setValue('user\u200b@example.org')
+    expect(validate).toHaveBeenCalledWith({ value: 'user@example.org' })
+    expect(control.hasError('backendError')).toBeTrue()
+    expect(control.value).toBe('user\u200b@example.org')
+    validate.and.returnValue(
+      of({ value: 'other@example.org', errors: [] } as any)
+    )
+    control.setValue('other\u200b@example.org')
+    expect(control.hasError('email')).toBeTrue()
+    control.setValue('other@example.org')
+    expect(control.valid).toBeTrue()
   })
 })

@@ -81,6 +81,51 @@ describe('FormSignInComponent', () => {
     expect(component).toBeTruthy()
   })
 
+  it('cleans hidden characters from an email before sign in without changing the password', () => {
+    const signIn = spyOn((component as any)._signIn, 'signIn').and.returnValue(
+      of({ success: false } as any)
+    )
+    component.authorizationForm.patchValue({
+      username: ' \u200bTest\u200c@Example\u200d.\u200eorg\u{e0001}\ufeff ',
+      password: ' pass\u200bword ',
+    })
+
+    component.onSubmit()
+
+    expect(signIn).toHaveBeenCalled()
+    expect(component.signInLocal.data.username).toBe('Test@Example.org')
+    expect(component.signInLocal.data.password).toBe(' pass\u200bword ')
+  })
+
+  it('cleans an email before checking password reset status on blur', () => {
+    const status = spyOn(
+      (component as any)._signIn,
+      'getPasswordResetStatus'
+    ).and.returnValue(of({ passwordResetRequired: false }))
+    component.authorizationForm.patchValue({
+      username: '\u200bTest@example.org\u200b',
+    })
+
+    component.checkPasswordResetStatus()
+
+    expect(status).toHaveBeenCalledOnceWith('test@example.org')
+    expect(component.usernameForm.value).toBe('Test@example.org')
+  })
+
+  it('does not remove visible spaces inside an email or change an ORCID iD', () => {
+    const signIn = spyOn((component as any)._signIn, 'signIn').and.returnValue(
+      of({ success: false } as any)
+    )
+    component.authorizationForm.patchValue({ username: 'a b@example.org' })
+    component.onSubmit()
+    expect(component.signInLocal.data.username).toBe('a b@example.org')
+
+    component.authorizationForm.patchValue({ username: '0000-0001-2345-6789' })
+    component.onSubmit()
+    expect(signIn).toHaveBeenCalledTimes(2)
+    expect(component.signInLocal.data.username).toBe('0000-0001-2345-6789')
+  })
+
   describe('after a signed-out password reset (PD-14612)', () => {
     const notice = (): HTMLElement | null =>
       fixture.nativeElement.querySelector('#cy-password-reset-success')

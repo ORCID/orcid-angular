@@ -329,6 +329,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   onSubmit() {
     // the reset is old news once the user signs in, or fails to
     this.passwordJustReset = false
+    this.cleanEmailIdentifier()
     this.addUsernameValidation()
 
     if (this.authorizationForm.valid) {
@@ -690,6 +691,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
    * (PD-5692). Only a well formed email address or ORCID iD is asked about.
    */
   checkPasswordResetStatus(): void {
+    this.cleanEmailIdentifier()
     const control = this.authorizationForm?.get('username')
     const username = this.normalisedUsername()
     if (
@@ -812,6 +814,17 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         // Could not ask: stay silent rather than guess
         error: () => {},
       })
+  }
+
+  private cleanEmailIdentifier(): void {
+    const control = this.authorizationForm?.get('username')
+    const value = control?.value
+    if (typeof value === 'string' && value.includes('@')) {
+      const cleaned = value.replace(/\p{Cf}/gu, '').trim()
+      if (cleaned !== value) {
+        control.setValue(cleaned)
+      }
+    }
   }
 
   /**
