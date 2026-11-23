@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing'
 import { AccountTrustedIndividualsService } from './account-trusted-individuals.service'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { PlatformInfoService } from '../../cdk/platform-info'
@@ -33,5 +36,56 @@ describe('AccountTrustedIndividualsService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy()
+  })
+
+  it('uses the invitation endpoints and request bodies', () => {
+    const http = TestBed.inject(HttpTestingController)
+    const request = {
+      lookupType: 'EMAIL' as const,
+      value: 'person@example.org',
+    }
+    service
+      .searchInvitation(request)
+      .subscribe((result) => expect(result.status).toBe('FOUND'))
+    const search = http.expectOne(
+      runtimeEnvironment.API_WEB + 'account/delegate-invitations/search.json'
+    )
+    expect(search.request.method).toBe('POST')
+    expect(search.request.body).toEqual(request)
+    search.flush({ status: 'FOUND' })
+    service
+      .sendInvitation(request)
+      .subscribe((result) => expect(result.status).toBe('SENT'))
+    const send = http.expectOne(
+      runtimeEnvironment.API_WEB + 'account/delegate-invitations/send.json'
+    )
+    expect(send.request.body).toEqual(request)
+    send.flush({ status: 'SENT' })
+    service
+      .getInvitationNotices()
+      .subscribe((notices) => expect(notices.length).toBe(1))
+    const notices = http.expectOne(
+      runtimeEnvironment.API_WEB + 'account/delegate-invitations/notices.json'
+    )
+    expect(notices.request.method).toBe('GET')
+    notices.flush([
+      {
+        invitationToken: 'token',
+        status: 'ACCEPTED',
+        lookupType: 'EMAIL',
+        enteredEmail: 'person@example.org',
+        respondedAt: null,
+      },
+    ])
+    service
+      .acknowledgeInvitationNotice('token')
+      .subscribe((result) => expect(result.status).toBe('ACKNOWLEDGED'))
+    const acknowledge = http.expectOne(
+      runtimeEnvironment.API_WEB +
+        'account/delegate-invitations/notices/acknowledge.json'
+    )
+    expect(acknowledge.request.body).toEqual({ invitationToken: 'token' })
+    acknowledge.flush({ status: 'ACKNOWLEDGED' })
+    http.verify()
   })
 })

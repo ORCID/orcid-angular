@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { Observable, of, Subject } from 'rxjs'
+import { ActivatedRoute, Router } from '@angular/router'
+import { merge, Observable, of, Subject } from 'rxjs'
 import { startWith, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
@@ -19,6 +20,10 @@ import { DialogRevokeTrustedIndividualsComponent } from '../dialog-revoke-truste
 })
 export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   $trustedIndividuals: Observable<AccountTrustedIndividual[]>
+  notices: { invitationToken: string; status: string; lookupType: string; enteredEmail?: string }[] = []
+  responseStatus: string
+  noticeLoadError = false
+  private refreshRequested = new Subject<void>()
   displayedColumns = ['trustedIndividuals', 'orcid', 'granted', 'actions']
   platformSubs = new Subject<void>()
   isMobile: boolean
@@ -27,15 +32,29 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   constructor(
     private _trustedIndividualsService: AccountTrustedIndividualsService,
     private dialog: MatDialog,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
   ngOnDestroy(): void {
     this.platformSubs.next()
     this.platformSubs.complete()
+    this.refreshRequested.complete()
   }
 
   ngOnInit(): void {
     this.setupTrustedIndividualsObs()
+    this.loadNotices()
+    const response = this.route.snapshot.queryParamMap.get('invitationResponse')
+    if (response) {
+      this.responseStatus = response
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { invitationResponse: null },
+        queryParamsHandling: 'merge',
+        replaceUrl: true,
+      })
+    }
     this._platform
       .get()
       .pipe(takeUntil(this.platformSubs))
@@ -46,10 +65,38 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
 
   private setupTrustedIndividualsObs() {
     this.$trustedIndividuals =
-      this._trustedIndividualsService.updateTrustedIndividualsSuccess.pipe(
+      merge(this._trustedIndividualsService.updateTrustedIndividualsSuccess, this.refreshRequested).pipe(
         startWith(() => undefined),
         switchMap(() => this._trustedIndividualsService.get())
       )
+  }
+
+  refresh(): void {
+    this.refreshRequested.next()
+    this.loadNotices()
+  }
+
+  private loadNotices(): void {
+    this._trustedIndividualsService.getInvitationNotices().pipe(takeUntil(this.platformSubs)).subscribe({
+      next: (notices) => {
+        this.notices = notices
+        this.noticeLoadError = false
+      },
+      error: () => (this.noticeLoadError = true),
+    })
+  }
+
+  acknowledgeNotice(token: string): void {
+    this._trustedIndividualsService.acknowledgeInvitationNotice(token).pipe(takeUntil(this.platformSubs)).subscribe({
+      next: (result) => {
+        if (result.status === 'ACKNOWLEDGED') {
+          this.notices = this.notices.filter((notice) => notice.invitationToken !== token)
+        } else {
+          this.noticeLoadError = true
+        }
+      },
+      error: () => (this.noticeLoadError = true),
+    })
   }
 
   revokeAccess(accountTrustedOrganization: AccountTrustedIndividual) {

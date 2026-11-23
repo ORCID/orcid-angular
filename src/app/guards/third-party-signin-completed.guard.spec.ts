@@ -15,6 +15,7 @@ import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../core'
 import { OauthURLSessionManagerService } from '../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzService } from '../core/togglz/togglz.service'
+import { DelegateInvitationActionService } from '../core/delegate-invitation-action/delegate-invitation-action.service'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
@@ -25,6 +26,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
   let router: jasmine.SpyObj<Router>
   let mockWindow: any
   let togglzService: jasmine.SpyObj<TogglzService>
+  let invitationAction: jasmine.SpyObj<DelegateInvitationActionService>
 
   beforeEach(() => {
     const userServiceSpy = jasmine.createSpyObj('UserService', [
@@ -34,8 +36,9 @@ describe('ThirdPartySigninCompletedGuard', () => {
       'OauthURLSessionManagerService',
       ['get', 'clear']
     )
-    const routerSpy = jasmine.createSpyObj('Router', ['parseUrl'])
+    const routerSpy = jasmine.createSpyObj('Router', ['parseUrl', 'createUrlTree'])
     const togglzSpy = jasmine.createSpyObj('TogglzService', ['getStateOf'])
+    const invitationActionSpy = jasmine.createSpyObj('DelegateInvitationActionService', ['get'])
 
     mockWindow = {
       outOfRouterNavigation: jasmine.createSpy('outOfRouterNavigation'),
@@ -58,6 +61,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
         },
         { provide: Router, useValue: routerSpy },
         { provide: TogglzService, useValue: togglzSpy },
+        { provide: DelegateInvitationActionService, useValue: invitationActionSpy },
         { provide: WINDOW, useValue: mockWindow },
       ],
     })
@@ -71,6 +75,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
     togglzService = TestBed.inject(
       TogglzService
     ) as jasmine.SpyObj<TogglzService>
+    invitationAction = TestBed.inject(DelegateInvitationActionService) as jasmine.SpyObj<DelegateInvitationActionService>
   })
 
   it('should be created', () => {
@@ -83,6 +88,21 @@ describe('ThirdPartySigninCompletedGuard', () => {
 
     beforeEach(() => {
       userService.getUserSession.and.returnValue(of({} as any))
+    })
+
+    it('resumes a pending invitation after a successful social sign-in', (done) => {
+      userService.getUserSession.and.returnValue(of({ loggedIn: true } as any))
+      togglzService.getStateOf.and.returnValue(of(false))
+      const action = { token: '7e7d2ab1-0cf9-4c65-99ed-1809af5d5e75', decision: 'ACCEPT' as const }
+      invitationAction.get.and.returnValue(action)
+      const tree = {} as any
+      router.createUrlTree.and.returnValue(tree)
+
+      ;(guard.canActivateChild(mockRoute, mockState) as any).subscribe((result) => {
+        expect(router.createUrlTree).toHaveBeenCalledWith(['/delegate-invitation'], { queryParams: action })
+        expect(result).toBe(tree)
+        done()
+      })
     })
 
     it('should redirect to OAuth URL when one is stored and OAUTH_AUTHORIZATION is true', (done) => {
