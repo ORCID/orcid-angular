@@ -181,7 +181,9 @@ describe('WorkFormComponent', () => {
     expect(
       editor.nativeElement.querySelector('[role="status"]')?.textContent
     ).toContain('Checking identifier')
-    expect(editor.nativeElement.querySelector('mat-progress-bar')).not.toBeNull()
+    expect(
+      editor.nativeElement.querySelector('mat-progress-bar')
+    ).not.toBeNull()
     expect(component.workForm.pending).toBeTrue()
     component.saveEvent()
     expect(snackbar).not.toHaveBeenCalled()
