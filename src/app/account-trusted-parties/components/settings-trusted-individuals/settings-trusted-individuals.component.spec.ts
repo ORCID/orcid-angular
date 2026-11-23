@@ -53,8 +53,18 @@ describe('SettingsTrustedIndividualsComponent', () => {
   })
 
   it('only removes an outcome notice after successful acknowledgement', () => {
-    component.notices = [{ invitationToken: 'token', status: 'DECLINED', lookupType: 'EMAIL', enteredEmail: 'delegate@example.org' }]
-    const acknowledge = spyOn(service, 'acknowledgeInvitationNotice').and.returnValue(throwError(() => new Error('unavailable')))
+    component.notices = [
+      {
+        invitationToken: 'token',
+        status: 'DECLINED',
+        lookupType: 'EMAIL',
+        enteredEmail: 'delegate@example.org',
+      },
+    ]
+    const acknowledge = spyOn(
+      service,
+      'acknowledgeInvitationNotice'
+    ).and.returnValue(throwError(() => new Error('unavailable')))
     component.acknowledgeNotice('token')
     expect(component.notices.length).toBe(1)
     expect(component.noticeLoadError).toBeTrue()

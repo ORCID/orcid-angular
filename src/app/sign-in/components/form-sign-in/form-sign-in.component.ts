@@ -407,7 +407,8 @@ export class FormSignInComponent implements OnInit, OnDestroy {
             isOauth: !!isOauth,
             signInType: this.signInLocal.type || 'regular',
           })
-          const delegateAction = !isOauth && this._delegateInvitationAction.get()
+          const delegateAction =
+            !isOauth && this._delegateInvitationAction.get()
           if (delegateAction) {
             this._router.navigate(['/delegate-invitation'], {
               queryParams: delegateAction,

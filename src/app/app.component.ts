@@ -88,7 +88,9 @@ export class AppComponent {
         this.currentRoute = event.url
       }
       if (event instanceof NavigationEnd) {
-        const duration = finishPerformanceMeasurement(this.analyticsUrl(event.url))
+        const duration = finishPerformanceMeasurement(
+          this.analyticsUrl(event.url)
+        )
         _googleTagManagerService
           .addGtmToDom()
           .pipe(

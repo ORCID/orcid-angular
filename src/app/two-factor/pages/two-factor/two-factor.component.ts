@@ -86,7 +86,10 @@ export class TwoFactorComponent implements OnInit {
             } else if (res.redirectUrl) {
               const action = this.delegateInvitationAction.get()
               if (action) {
-                this.router.navigate(['/delegate-invitation'], { queryParams: action, replaceUrl: true })
+                this.router.navigate(['/delegate-invitation'], {
+                  queryParams: action,
+                  replaceUrl: true,
+                })
               } else {
                 this.navigateTo(res.redirectUrl)
               }

@@ -1,18 +1,77 @@
 <div *ngIf="responseStatus" role="status" class="alert-message">
-  <span *ngIf="responseStatus === 'ACCEPTED'" i18n="@@delegateInvitation.responseAccepted">You accepted the delegate invitation.</span>
-  <span *ngIf="responseStatus === 'DECLINED'" i18n="@@delegateInvitation.responseDeclined">You declined the delegate invitation.</span>
-  <span *ngIf="responseStatus === 'EXPIRED'" i18n="@@delegateInvitation.responseExpired">This delegate invitation has expired.</span>
-  <span *ngIf="responseStatus === 'ALREADY_RESPONDED'" i18n="@@delegateInvitation.responseAlreadyHandled">This delegate invitation is no longer active.</span>
-  <span *ngIf="responseStatus !== 'ACCEPTED' && responseStatus !== 'DECLINED' && responseStatus !== 'EXPIRED' && responseStatus !== 'ALREADY_RESPONDED'" i18n="@@delegateInvitation.responseError">The delegate invitation could not be processed. Check that you are signed in to the invited account.</span>
+  <span
+    *ngIf="responseStatus === 'ACCEPTED'"
+    i18n="@@delegateInvitation.responseAccepted"
+    >You accepted the delegate invitation.</span
+  >
+  <span
+    *ngIf="responseStatus === 'DECLINED'"
+    i18n="@@delegateInvitation.responseDeclined"
+    >You declined the delegate invitation.</span
+  >
+  <span
+    *ngIf="responseStatus === 'EXPIRED'"
+    i18n="@@delegateInvitation.responseExpired"
+    >This delegate invitation has expired.</span
+  >
+  <span
+    *ngIf="responseStatus === 'ALREADY_RESPONDED'"
+    i18n="@@delegateInvitation.responseAlreadyHandled"
+    >This delegate invitation is no longer active.</span
+  >
+  <span
+    *ngIf="
+      responseStatus !== 'ACCEPTED' &&
+      responseStatus !== 'DECLINED' &&
+      responseStatus !== 'EXPIRED' &&
+      responseStatus !== 'ALREADY_RESPONDED'
+    "
+    i18n="@@delegateInvitation.responseError"
+    >The delegate invitation could not be processed. Check that you are signed
+    in to the invited account.</span
+  >
 </div>
-<div *ngIf="noticeLoadError" role="alert" i18n="@@delegateInvitation.noticeError">Unable to load or dismiss invitation notices. Please try again.</div>
+<div
+  *ngIf="noticeLoadError"
+  role="alert"
+  i18n="@@delegateInvitation.noticeError"
+>
+  Unable to load or dismiss invitation notices. Please try again.
+</div>
 <div *ngFor="let notice of notices" role="status" class="alert-message">
-  <span *ngIf="notice.status === 'ACCEPTED'" i18n="@@delegateInvitation.noticeAccepted">Your delegate invitation was accepted.</span>
-  <span *ngIf="notice.status === 'DECLINED' && notice.lookupType === 'EMAIL'" i18n="@@delegateInvitation.noticeDeclinedEmail">Your delegate invitation to {{ notice.enteredEmail }} was declined.</span>
-  <span *ngIf="notice.status === 'DECLINED' && notice.lookupType !== 'EMAIL'" i18n="@@delegateInvitation.noticeDeclinedOrcid">Your delegate invitation sent to an ORCID iD was declined.</span>
-  <span *ngIf="notice.status === 'EXPIRED' && notice.lookupType === 'EMAIL'" i18n="@@delegateInvitation.noticeExpiredEmail">Your delegate invitation to {{ notice.enteredEmail }} expired.</span>
-  <span *ngIf="notice.status === 'EXPIRED' && notice.lookupType !== 'EMAIL'" i18n="@@delegateInvitation.noticeExpiredOrcid">Your delegate invitation sent to an ORCID iD expired.</span>
-  <button type="button" mat-button (click)="acknowledgeNotice(notice.invitationToken)" i18n="@@delegateInvitation.dismissNotice">Dismiss</button>
+  <span
+    *ngIf="notice.status === 'ACCEPTED'"
+    i18n="@@delegateInvitation.noticeAccepted"
+    >Your delegate invitation was accepted.</span
+  >
+  <span
+    *ngIf="notice.status === 'DECLINED' && notice.lookupType === 'EMAIL'"
+    i18n="@@delegateInvitation.noticeDeclinedEmail"
+    >Your delegate invitation to {{ notice.enteredEmail }} was declined.</span
+  >
+  <span
+    *ngIf="notice.status === 'DECLINED' && notice.lookupType !== 'EMAIL'"
+    i18n="@@delegateInvitation.noticeDeclinedOrcid"
+    >Your delegate invitation sent to an ORCID iD was declined.</span
+  >
+  <span
+    *ngIf="notice.status === 'EXPIRED' && notice.lookupType === 'EMAIL'"
+    i18n="@@delegateInvitation.noticeExpiredEmail"
+    >Your delegate invitation to {{ notice.enteredEmail }} expired.</span
+  >
+  <span
+    *ngIf="notice.status === 'EXPIRED' && notice.lookupType !== 'EMAIL'"
+    i18n="@@delegateInvitation.noticeExpiredOrcid"
+    >Your delegate invitation sent to an ORCID iD expired.</span
+  >
+  <button
+    type="button"
+    mat-button
+    (click)="acknowledgeNotice(notice.invitationToken)"
+    i18n="@@delegateInvitation.dismissNotice"
+  >
+    Dismiss
+  </button>
 </div>
 <ng-container *ngIf="$trustedIndividuals | async as trustedIndividuals">
   <h2

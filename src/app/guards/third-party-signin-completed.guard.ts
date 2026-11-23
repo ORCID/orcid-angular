@@ -53,9 +53,12 @@ export class ThirdPartySigninCompletedGuard {
           }
         }
 
-        const delegateAction = session.loggedIn && this._delegateInvitationAction.get()
+        const delegateAction =
+          session.loggedIn && this._delegateInvitationAction.get()
         if (delegateAction) {
-          return this._router.createUrlTree(['/delegate-invitation'], { queryParams: delegateAction })
+          return this._router.createUrlTree(['/delegate-invitation'], {
+            queryParams: delegateAction,
+          })
         }
 
         return this._router.parseUrl(

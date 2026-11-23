@@ -20,7 +20,12 @@ import { DialogRevokeTrustedIndividualsComponent } from '../dialog-revoke-truste
 })
 export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   $trustedIndividuals: Observable<AccountTrustedIndividual[]>
-  notices: { invitationToken: string; status: string; lookupType: string; enteredEmail?: string }[] = []
+  notices: {
+    invitationToken: string
+    status: string
+    lookupType: string
+    enteredEmail?: string
+  }[] = []
   responseStatus: string
   noticeLoadError = false
   private refreshRequested = new Subject<void>()
@@ -64,11 +69,13 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   }
 
   private setupTrustedIndividualsObs() {
-    this.$trustedIndividuals =
-      merge(this._trustedIndividualsService.updateTrustedIndividualsSuccess, this.refreshRequested).pipe(
-        startWith(() => undefined),
-        switchMap(() => this._trustedIndividualsService.get())
-      )
+    this.$trustedIndividuals = merge(
+      this._trustedIndividualsService.updateTrustedIndividualsSuccess,
+      this.refreshRequested
+    ).pipe(
+      startWith(() => undefined),
+      switchMap(() => this._trustedIndividualsService.get())
+    )
   }
 
   refresh(): void {
@@ -77,26 +84,34 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   }
 
   private loadNotices(): void {
-    this._trustedIndividualsService.getInvitationNotices().pipe(takeUntil(this.platformSubs)).subscribe({
-      next: (notices) => {
-        this.notices = notices
-        this.noticeLoadError = false
-      },
-      error: () => (this.noticeLoadError = true),
-    })
+    this._trustedIndividualsService
+      .getInvitationNotices()
+      .pipe(takeUntil(this.platformSubs))
+      .subscribe({
+        next: (notices) => {
+          this.notices = notices
+          this.noticeLoadError = false
+        },
+        error: () => (this.noticeLoadError = true),
+      })
   }
 
   acknowledgeNotice(token: string): void {
-    this._trustedIndividualsService.acknowledgeInvitationNotice(token).pipe(takeUntil(this.platformSubs)).subscribe({
-      next: (result) => {
-        if (result.status === 'ACKNOWLEDGED') {
-          this.notices = this.notices.filter((notice) => notice.invitationToken !== token)
-        } else {
-          this.noticeLoadError = true
-        }
-      },
-      error: () => (this.noticeLoadError = true),
-    })
+    this._trustedIndividualsService
+      .acknowledgeInvitationNotice(token)
+      .pipe(takeUntil(this.platformSubs))
+      .subscribe({
+        next: (result) => {
+          if (result.status === 'ACKNOWLEDGED') {
+            this.notices = this.notices.filter(
+              (notice) => notice.invitationToken !== token
+            )
+          } else {
+            this.noticeLoadError = true
+          }
+        },
+        error: () => (this.noticeLoadError = true),
+      })
   }
 
   revokeAccess(accountTrustedOrganization: AccountTrustedIndividual) {

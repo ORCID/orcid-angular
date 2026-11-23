@@ -14,7 +14,9 @@ export class DelegateInvitationActionService {
 
   valid(token: string, decision: string): decision is 'ACCEPT' | 'DECLINE' {
     return (
-      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(token || '') &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+        token || ''
+      ) &&
       (decision === 'ACCEPT' || decision === 'DECLINE')
     )
   }
@@ -25,7 +27,9 @@ export class DelegateInvitationActionService {
 
   get(): DelegateInvitationAction | null {
     try {
-      const action = JSON.parse(this.window.sessionStorage.getItem(this.storageKey) || 'null')
+      const action = JSON.parse(
+        this.window.sessionStorage.getItem(this.storageKey) || 'null'
+      )
       return action && this.valid(action.token, action.decision) ? action : null
     } catch {
       return null

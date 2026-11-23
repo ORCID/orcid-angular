@@ -37,7 +37,9 @@ describe('DelegateInvitationComponent', () => {
     component({ token, decision: 'ACCEPT' }).ngOnInit()
 
     expect(actions.get()).toEqual({ token, decision: 'ACCEPT' })
-    expect(router.navigate).toHaveBeenCalledWith(['/signin'], { replaceUrl: true })
+    expect(router.navigate).toHaveBeenCalledWith(['/signin'], {
+      replaceUrl: true,
+    })
     expect(http.post).not.toHaveBeenCalled()
   })
 
@@ -49,10 +51,13 @@ describe('DelegateInvitationComponent', () => {
     expect(http.post).not.toHaveBeenCalled()
     session.next({ loggedIn: true })
 
-    expect(http.post).toHaveBeenCalledWith(runtimeEnvironment.API_WEB + 'account/delegate-invitations/respond.json', {
-      invitationToken: token,
-      decision: 'DECLINE',
-    })
+    expect(http.post).toHaveBeenCalledWith(
+      runtimeEnvironment.API_WEB + 'account/delegate-invitations/respond.json',
+      {
+        invitationToken: token,
+        decision: 'DECLINE',
+      }
+    )
     expect(router.navigate).toHaveBeenCalledWith(['/trusted-parties'], {
       queryParams: { invitationResponse: 'DECLINED' },
       replaceUrl: true,
