@@ -15,7 +15,6 @@ import { debug } from 'console'
   providedIn: 'root',
 })
 export class SearchService {
-
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
@@ -24,12 +23,9 @@ export class SearchService {
   search(queryParam: SearchParameters): Observable<SearchResults> {
     let searchUrl = this.buildSearchUrl(queryParam)
     return this._http
-      .get<SearchResults>(
-        searchUrl,
-        {
-          headers: { Accept: 'application/json' },
-        }
-      )
+      .get<SearchResults>(searchUrl, {
+        headers: { Accept: 'application/json' },
+      })
       .pipe(
         catchError((error) => this._errorHandler.handleError(error)),
         map((x) => {
@@ -62,12 +58,15 @@ export class SearchService {
       this.extractOrcidId(escapedParams.searchQuery)
     if (escapedParams && orcidId) {
       // When there is an Orcid id on the `Advance search Orcid iD` or `Quick search input`: only search the orcid ID
-      return basicSearchUrl + this.encodeUrlWithPagination(`orcid:${orcidId}`, queryParam)
+      return (
+        basicSearchUrl +
+        this.encodeUrlWithPagination(`orcid:${orcidId}`, queryParam)
+      )
     } else if (escapedParams && escapedParams.searchQuery) {
       // When there is a `searchQuery` parameter with no Orcid iD:  do a quick search
-      return basicSearchUrl + this.encodeUrlWithPagination(
-        escapedParams.searchQuery,
-        queryParam
+      return (
+        basicSearchUrl +
+        this.encodeUrlWithPagination(escapedParams.searchQuery, queryParam)
       )
     } else if (escapedParams) {
       // otherwise do an advanced search
@@ -105,9 +104,12 @@ export class SearchService {
           )
         }
       }
-      return expandedSearchUrl + this.setEdismaxAndEncodedUrlWithPagination(
-        searchParameters.join(' AND '),
-        queryParam
+      return (
+        expandedSearchUrl +
+        this.setEdismaxAndEncodedUrlWithPagination(
+          searchParameters.join(' AND '),
+          queryParam
+        )
       )
     }
   }
