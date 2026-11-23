@@ -13,6 +13,7 @@ import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { SearchService } from 'src/app/core/search/search.service'
 import { Location } from '@angular/common'
 import { ApplicationRoutes } from '../../constants'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Component({
   selector: 'app-search',
@@ -25,6 +26,7 @@ export class SearchComponent implements OnInit {
   form: UntypedFormGroup
   platform: PlatformInfo
   signinRegisterButton = true
+  disableUiSearch$ = this._togglz.getStateOf(TogglzFlag.DISABLE_UI_SEARCH)
   whereToSearch = [
     this.firstLetterUppercase(
       $localize`:@@layout.public-layout.registry:registry`
