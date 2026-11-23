@@ -10,7 +10,7 @@
   role="search"
   class="row h-end search-box middle"
   (submit)="search(whereToSearchSelected, whatToSearch)"
-  *ngIf="!hideForm"
+  *ngIf="!hideForm && (disableUiSearch$ | async) === false"
 >
   <label
     i18n
