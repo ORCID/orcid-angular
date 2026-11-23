@@ -1,13 +1,14 @@
-import { HttpParams } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import {
   Component,
   HostBinding,
   Inject,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core'
-import { combineLatest } from 'rxjs'
-import { first, map, take } from 'rxjs/operators'
+import { combineLatest, Subject } from 'rxjs'
+import { first, map, take, takeUntil } from 'rxjs/operators'
 import { UserSession } from 'src/app/types/session.local'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -33,7 +34,7 @@ import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-man
   preserveWhitespaces: true,
   standalone: false,
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, OnDestroy {
   @HostBinding('class.container') containerClass = true
   @ViewChild('formSignInComponent') formSignInComponent: FormSignInComponent
 
@@ -66,6 +67,7 @@ export class SignInComponent implements OnInit {
   /** The client's name, when the OAuth session carries one. */
   oauthClientName: string
   private twoFactorDisabledRedirectTriggered = false
+  private readonly destroy$ = new Subject<void>()
 
   constructor(
     private _platformInfo: PlatformInfoService,
@@ -74,10 +76,20 @@ export class SignInComponent implements OnInit {
     private _userInfo: UserService,
     private _togglzService: TogglzService,
     private _oauthUrlSessionManager: OauthURLSessionManagerService,
+    private _http: HttpClient,
     @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit() {
+    this._userInfo
+      .getUserSession()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((session) => {
+        if (session?.oauthSession?.clientName?.trim()) {
+          this.oauthClientName = session.oauthSession.clientName
+        }
+      })
+
     combineLatest([
       this._userInfo.getUserSession(),
       this._platformInfo.get(),
@@ -92,7 +104,6 @@ export class SignInComponent implements OnInit {
 
         this.isLoggedIn = session.loggedIn
         this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationTogglzEnable
-        this.oauthClientName = session.oauthSession?.clientName
         if (!isOauthAuthorizationTogglzEnable) {
           this.isForceLogin = session.oauthSession?.forceLogin
         } else {
@@ -131,6 +142,11 @@ export class SignInComponent implements OnInit {
       })
   }
 
+  ngOnDestroy() {
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
   register() {
     this._platformInfo
       .get()
@@ -156,6 +172,41 @@ export class SignInComponent implements OnInit {
     this.twoFactorDisabledByRecoveryPhone = true
     this.show2FA = false
     this.loading = false
+    if (this.isOauthAuthorizationTogglzEnable && !this.oauthClientName) {
+      const redirect = this._oauthUrlSessionManager.get() || $event?.url
+      let params: URLSearchParams
+      try {
+        params = new URL(redirect, this.window.location.href).searchParams
+      } catch {
+        return
+      }
+      const clientId =
+        params.get('client_id') || this.platform?.queryParameters?.client_id
+      if (!clientId) {
+        return
+      }
+      this._http
+        .get<{ clientName?: string }>(
+          runtimeEnvironment.AUTH_SERVER + 'generateAuthorizationInfo',
+          {
+            params: {
+              client_id: clientId,
+              scope: params.get('scope') || '',
+              state: params.get('state') || '',
+            },
+            withCredentials: true,
+          }
+        )
+        .pipe(take(1), takeUntil(this.destroy$))
+        .subscribe({
+          next: (info) => {
+            if (info?.clientName?.trim()) {
+              this.oauthClientName = info.clientName
+            }
+          },
+          error: () => {},
+        })
+    }
   }
 
   /**
