@@ -10,6 +10,7 @@ import { FormPersonalAdditionalEmailsComponent } from 'src/app/register/componen
 class Base {
   _http: any
   _errorHandler: any
+  backendRegistrationForm: any
   formGroupToEmailRegisterForm: any
   formGroupToPasswordRegisterForm: any
   formGroupToFullRegistrationForm: any
