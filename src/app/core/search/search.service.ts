@@ -15,25 +15,17 @@ import { debug } from 'console'
   providedIn: 'root',
 })
 export class SearchService {
-  quickSearchEDisMax =
-    // tslint:disable-next-line: max-line-length
-    '{!edismax qf="given-and-family-names^50.0 family-name^10.0 given-names^10.0 credit-name^10.0 other-names^5.0 text^1.0" pf="given-and-family-names^50.0" bq="current-institution-affiliation-name:[* TO *]^100.0 past-institution-affiliation-name:[* TO *]^70" mm=1}'
-
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  search(querryParam: SearchParameters): Observable<SearchResults> {
+  search(queryParam: SearchParameters): Observable<SearchResults> {
+    let searchUrl = this.buildSearchUrl(queryParam)
     return this._http
-      .get<SearchResults>(
-        `${runtimeEnvironment.API_PUB}/expanded-search/${this.buildSearchUrl(
-          querryParam
-        )}`,
-        {
-          headers: { Accept: 'application/json' },
-        }
-      )
+      .get<SearchResults>(searchUrl, {
+        headers: { Accept: 'application/json' },
+      })
       .pipe(
         catchError((error) => this._errorHandler.handleError(error)),
         map((x) => {
@@ -51,26 +43,30 @@ export class SearchService {
       )
   }
 
-  private buildSearchUrl(querryParam: SearchParameters): string {
+  private buildSearchUrl(queryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
-    Object.keys(querryParam).map((key) => {
-      if (typeof querryParam[key] === 'string') {
-        escapedParams[key] = this.escapeReservedChar(querryParam[key])
+    const basicSearchUrl = `${runtimeEnvironment.API_PUB}/basic-search/`
+    const expandedSearchUrl = `${runtimeEnvironment.API_PUB}/expanded-search/`
+    Object.keys(queryParam).map((key) => {
+      if (typeof queryParam[key] === 'string') {
+        escapedParams[key] = this.escapeReservedChar(queryParam[key])
       }
     })
 
     const orcidId =
       this.extractOrcidId(escapedParams.orcid) ||
       this.extractOrcidId(escapedParams.searchQuery)
-
     if (escapedParams && orcidId) {
       // When there is an Orcid id on the `Advance search Orcid iD` or `Quick search input`: only search the orcid ID
-      return this.encodeUrlWithPagination(`orcid:${orcidId}`, querryParam)
+      return (
+        basicSearchUrl +
+        this.encodeUrlWithPagination(`orcid:${orcidId}`, queryParam)
+      )
     } else if (escapedParams && escapedParams.searchQuery) {
       // When there is a `searchQuery` parameter with no Orcid iD:  do a quick search
-      return this.encodeUrlWithPagination(
-        this.quickSearchEDisMax + escapedParams.searchQuery,
-        querryParam
+      return (
+        basicSearchUrl +
+        this.encodeUrlWithPagination(escapedParams.searchQuery, queryParam)
       )
     } else if (escapedParams) {
       // otherwise do an advanced search
@@ -108,9 +104,12 @@ export class SearchService {
           )
         }
       }
-      return this.setEdismaxAndEncodedUrlWithPagination(
-        searchParameters.join(' AND '),
-        querryParam
+      return (
+        expandedSearchUrl +
+        this.setEdismaxAndEncodedUrlWithPagination(
+          searchParameters.join(' AND '),
+          queryParam
+        )
       )
     }
   }

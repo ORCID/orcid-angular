@@ -248,12 +248,13 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
             {
               validators: [
                 Validators.required,
-                OrcidValidators.email,
+                OrcidValidators.additionalEmail,
                 this.allEmailsAreUnique(newPutCode),
               ],
               asyncValidators: [
                 this._recordEmails.backendEmailValidate(
-                  this.originalEmailsBackendCopy
+                  this.originalEmailsBackendCopy,
+                  true
                 ),
               ],
 
@@ -415,13 +416,21 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     Object.keys(formGroup.controls).forEach((keyX) => {
       let emailControlX: string = (formGroup.controls[keyX] as UntypedFormGroup)
         .controls['email']?.value
-      emailControlX = emailControlX?.toLowerCase().trim()
+      emailControlX =
+        emailControlX &&
+        OrcidValidators.normalizeEmailForDuplicateCheck(emailControlX)
+          .toLowerCase()
+          .trim()
 
       Object.keys(formGroup.controls).forEach((keyY) => {
         let emailControlY: string = (
           formGroup.controls[keyY] as UntypedFormGroup
         ).controls['email']?.value
-        emailControlY = emailControlY?.toLowerCase().trim()
+        emailControlY =
+          emailControlY &&
+          OrcidValidators.normalizeEmailForDuplicateCheck(emailControlY)
+            .toLowerCase()
+            .trim()
 
         // Only if both controls are not empty
         if (emailControlX && emailControlY) {

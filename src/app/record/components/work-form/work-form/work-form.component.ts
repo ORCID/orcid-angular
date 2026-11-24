@@ -247,9 +247,17 @@ export class WorkFormComponent implements OnInit {
 
   private externalIdentifierTypeAsyncValidator(
     formGroup: UntypedFormGroup,
-    externalIdentifierType: string
+    externalIdentifierType: string,
+    importedIdentifier?: { type: string; value: string }
   ): AsyncValidatorFn {
     return (control: AbstractControl) => {
+      if (
+        importedIdentifier &&
+        importedIdentifier.type === externalIdentifierType &&
+        importedIdentifier.value === control.value
+      ) {
+        return of(null)
+      }
       //try first the ISBN validation locally
       if (externalIdentifierType === 'isbn') {
         if (!isValidISBN(control.value)) {
@@ -321,7 +329,8 @@ export class WorkFormComponent implements OnInit {
 
   private checkWorkIdentifiersChanges(
     index: number,
-    workIdentifiersArray: UntypedFormArray
+    workIdentifiersArray: UntypedFormArray,
+    importedIdentifier?: { type: string; value: string }
   ) {
     const formGroup = this.workIdentifiersFormArray.controls[
       index
@@ -336,10 +345,20 @@ export class WorkFormComponent implements OnInit {
         map((x) => formGroup.controls.externalIdentifierType.value)
       )
       .subscribe((externalIdentifierType) => {
-        this.manageWorkIdentifierTypeUpdates(externalIdentifierType, formGroup)
+        this.manageWorkIdentifierTypeUpdates(
+          externalIdentifierType,
+          formGroup,
+          importedIdentifier
+        )
       })
 
+    let previousIdentifier = formGroup.controls.externalIdentifierId.value
     formGroup.controls.externalIdentifierId.valueChanges.subscribe((id) => {
+      if (id !== previousIdentifier) {
+        previousIdentifier = id
+        formGroup.controls.externalIdentifierUrl.setValue('')
+        formGroup.controls.externalIdentifierUrlWasBackendGenerated.setValue('')
+      }
       this.manageWorkIdentifierIdUpdates(id, formGroup)
     })
 
@@ -357,14 +376,16 @@ export class WorkFormComponent implements OnInit {
 
   private manageWorkIdentifierTypeUpdates(
     externalIdentifierType: any,
-    formGroup: UntypedFormGroup
+    formGroup: UntypedFormGroup,
+    importedIdentifier?: { type: string; value: string }
   ) {
     if (externalIdentifierType !== '') {
       formGroup.controls.externalIdentifierId.addValidators(Validators.required)
       formGroup.controls.externalIdentifierId.setAsyncValidators(
         this.externalIdentifierTypeAsyncValidator(
           formGroup,
-          externalIdentifierType
+          externalIdentifierType,
+          importedIdentifier
         )
       )
       formGroup.controls.externalIdentifierId.updateValueAndValidity()
@@ -437,9 +458,19 @@ export class WorkFormComponent implements OnInit {
       formGroup.controls.externalIdentifierType.addValidators(
         Validators.required
       )
-      formGroup.controls.externalIdentifierType.updateValueAndValidity()
-      formGroup.controls.externalIdentifierId.addValidators(Validators.required)
-      formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      formGroup.controls.externalIdentifierType.updateValueAndValidity({
+        emitEvent: false,
+      })
+      if (
+        !formGroup.controls.externalIdentifierId.hasValidator(
+          Validators.required
+        )
+      ) {
+        formGroup.controls.externalIdentifierId.addValidators(
+          Validators.required
+        )
+        formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      }
     } else {
       if (
         !formGroup.controls.externalIdentifierType.value &&
@@ -448,11 +479,19 @@ export class WorkFormComponent implements OnInit {
         formGroup.controls.externalIdentifierType.removeValidators(
           Validators.required
         )
-        formGroup.controls.externalIdentifierType.updateValueAndValidity()
-        formGroup.controls.externalIdentifierId.removeValidators(
-          Validators.required
-        )
-        formGroup.controls.externalIdentifierId.updateValueAndValidity()
+        formGroup.controls.externalIdentifierType.updateValueAndValidity({
+          emitEvent: false,
+        })
+        if (
+          formGroup.controls.externalIdentifierId.hasValidator(
+            Validators.required
+          )
+        ) {
+          formGroup.controls.externalIdentifierId.removeValidators(
+            Validators.required
+          )
+          formGroup.controls.externalIdentifierId.updateValueAndValidity()
+        }
       }
     }
   }
@@ -501,7 +540,13 @@ export class WorkFormComponent implements OnInit {
 
     this.checkWorkIdentifiersChanges(
       this.workIdentifiersFormArray.controls.length - 1,
-      this.workIdentifiersFormArray
+      this.workIdentifiersFormArray,
+      this.externalIdentifier && existingExternalId
+        ? {
+            type: existingExternalId.externalIdentifierType?.value,
+            value: existingExternalId.externalIdentifierId?.value,
+          }
+        : undefined
     )
   }
 
@@ -511,6 +556,9 @@ export class WorkFormComponent implements OnInit {
   }
 
   saveEvent() {
+    if (this.workForm.pending) {
+      return
+    }
     this.workForm.markAllAsTouched()
     const formErrors = GetFormErrors(this.workForm)
     const allowInvalidForm = this.formHasOnlyAllowError(formErrors)

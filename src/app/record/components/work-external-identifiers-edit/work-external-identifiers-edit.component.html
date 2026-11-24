@@ -163,6 +163,20 @@
         >Please enter an external ID</mat-error
       >
     </mat-form-field>
+    <div
+      *ngIf="externalIdForm.get('externalIdentifierId').pending"
+      class="input-container"
+      role="status"
+      aria-live="polite"
+    >
+      <span class="mat-caption" i18n="@@works.resolvingIdentifier">
+        Checking identifier…
+      </span>
+      <mat-progress-bar
+        mode="indeterminate"
+        aria-hidden="true"
+      ></mat-progress-bar>
+    </div>
   </div>
   <!-- Work identifier url value -->
 
