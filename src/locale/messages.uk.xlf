@@ -619,7 +619,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-modal/work-modal.component.html</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">65,67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.html</context>
@@ -907,7 +907,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/trusted-individuals/trusted-individuals.service.ts</context>
@@ -1671,7 +1671,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-modal/work-modal.component.html</context>
-          <context context-type="linenumber">54,56</context>
+          <context context-type="linenumber">55,57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.html</context>
@@ -5561,7 +5561,7 @@
         <target>Please review and fix the issue</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">282</context>
+          <context context-type="linenumber">283</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
@@ -5573,7 +5573,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">603</context>
+          <context context-type="linenumber">651</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.ts</context>
@@ -11836,7 +11836,7 @@
         <target>Search the ORCID registry</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11848,15 +11848,15 @@
         <target>registry</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11868,7 +11868,7 @@
         <target>website</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -15814,12 +15814,19 @@
           <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="works.resolvingIdentifier" datatype="html" resname="works.resolvingIdentifier">
+        <source>Checking identifier…</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
+          <context context-type="linenumber">172,174</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="works.identifierUrl" datatype="html" resname="works.identifierUrl">
         <source>Identifier URL</source>
         <target>Identifier URL</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">180,181</context>
+          <context context-type="linenumber">194,195</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.urlIdentifierHint" datatype="html" resname="works.urlIdentifierHint">
@@ -15827,7 +15834,7 @@
         <target>The URL that the identifier resolves to, for example https://doi.org/10.23640/07243.c.4232246</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">194,197</context>
+          <context context-type="linenumber">208,211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.invalidUrl" datatype="html" resname="works.invalidUrl">
@@ -15835,7 +15842,7 @@
         <target>Invalid url</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">201,203</context>
+          <context context-type="linenumber">215,217</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-view-only/work-external-identifiers-view-only.component.html</context>
@@ -15851,14 +15858,14 @@
         <target>Relationship</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">220</context>
+          <context context-type="linenumber">234</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
         <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;RRID&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">255,257</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
@@ -15866,7 +15873,7 @@
         <target>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">264,266</context>
+          <context context-type="linenumber">278,280</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.setRelationShipAriaLabel" datatype="html" resname="shared.setRelationShipAriaLabel">
@@ -16806,8 +16813,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.addFromDOI" datatype="html" resname="works.addFromDOI">
-        <source>Works - Add work from DOI</source>
-        <target>Works - Add work from DOI</target>
+        <source>Works - Add work with a DOI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
           <context context-type="linenumber">6,8</context>
@@ -17701,7 +17707,7 @@
         <target>Please enter a valid email address, for example joe@institution.edu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">44,46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
@@ -18061,7 +18067,7 @@
         <target>Your emails match</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">334</context>
+          <context context-type="linenumber">347</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.emailAreNotValid" datatype="html" resname="register.emailAreNotValid">
@@ -18069,7 +18075,7 @@
         <target>Your emails do not match</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">339</context>
+          <context context-type="linenumber">352</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.reactivating" datatype="html" resname="register.reactivating">
@@ -18077,11 +18083,11 @@
         <target>Reactivating your account</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">398</context>
+          <context context-type="linenumber">411</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">990</context>
+          <context context-type="linenumber">1003</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -18093,7 +18099,7 @@
         <target>Thank you for reactivating your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">400</context>
+          <context context-type="linenumber">413</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
@@ -18101,7 +18107,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">992</context>
+          <context context-type="linenumber">1005</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.contactSupport" datatype="html" resname="shared.contactSupport">
@@ -18109,15 +18115,15 @@
         <target>contact support.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">414</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">993</context>
+          <context context-type="linenumber">1006</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1014</context>
+          <context context-type="linenumber">1027</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -20038,7 +20044,7 @@
         <target>Claiming your account</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1011</context>
+          <context context-type="linenumber">1024</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.verify.claimSent" datatype="html" resname="ngOrcid.signin.verify.claimSent">
@@ -20046,7 +20052,7 @@
         <target>Thank you for claiming your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1013</context>
+          <context context-type="linenumber">1026</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.currentlySign" datatype="html" resname="ngOrcid.signin.currentlySign">

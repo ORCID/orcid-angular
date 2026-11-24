@@ -641,7 +641,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-modal/work-modal.component.html</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">65,67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.html</context>
@@ -964,7 +964,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/trusted-individuals/trusted-individuals.service.ts</context>
@@ -1760,7 +1760,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-modal/work-modal.component.html</context>
-          <context context-type="linenumber">54,56</context>
+          <context context-type="linenumber">55,57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.html</context>
@@ -5728,7 +5728,7 @@
         <target>問題を確認して修正してください</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">282</context>
+          <context context-type="linenumber">283</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
@@ -5740,7 +5740,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">603</context>
+          <context context-type="linenumber">651</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.ts</context>
@@ -12029,7 +12029,7 @@
         <target>ORCIDレジストリを検索</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -12041,15 +12041,15 @@
         <target>レジストリ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -12061,7 +12061,7 @@
         <target>Web サイト</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -16060,12 +16060,19 @@
           <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="works.resolvingIdentifier" datatype="html" resname="works.resolvingIdentifier">
+        <source>Checking identifier…</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
+          <context context-type="linenumber">172,174</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="works.identifierUrl" datatype="html" resname="works.identifierUrl">
         <source>Identifier URL</source>
         <target>識別子 URL</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">180,181</context>
+          <context context-type="linenumber">194,195</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.urlIdentifierHint" datatype="html" resname="works.urlIdentifierHint">
@@ -16073,7 +16080,7 @@
         <target>識別子が解決するURL（例：https://doi.org/10.23640/07243.c.4232246）</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">194,197</context>
+          <context context-type="linenumber">208,211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.invalidUrl" datatype="html" resname="works.invalidUrl">
@@ -16081,7 +16088,7 @@
         <target>無効なURL</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">201,203</context>
+          <context context-type="linenumber">215,217</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-view-only/work-external-identifiers-view-only.component.html</context>
@@ -16097,7 +16104,7 @@
         <target>関係</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">220</context>
+          <context context-type="linenumber">234</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
@@ -16105,7 +16112,7 @@
         <target>「資金提供者」の識別子を使用する場合は、識別子タイプ「許可番号」、「doi」、「RRID」、「uri」、または「プロポーザルID」のみが許可されます。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">255,257</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
@@ -16113,7 +16120,7 @@
         <target>「バージョン」の識別子を使用する場合は、少なくとも1つの「自分」の識別子が必要です。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">264,266</context>
+          <context context-type="linenumber">278,280</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.setRelationShipAriaLabel" datatype="html" resname="shared.setRelationShipAriaLabel">
@@ -17053,8 +17060,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.addFromDOI" datatype="html" resname="works.addFromDOI">
-        <source>Works - Add work from DOI</source>
-        <target>作品 - DOIから作品を追加する</target>
+        <source>Works - Add work with a DOI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
           <context context-type="linenumber">6,8</context>
@@ -17965,7 +17971,7 @@
         <target>有効なメールアドレスを入力してください。例：joe@institution.edu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">44,46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
@@ -18325,7 +18331,7 @@
         <target>メールアドレスが一致しています</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">334</context>
+          <context context-type="linenumber">347</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.emailAreNotValid" datatype="html" resname="register.emailAreNotValid">
@@ -18333,7 +18339,7 @@
         <target>メールアドレスが一致しません</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">339</context>
+          <context context-type="linenumber">352</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.reactivating" datatype="html" resname="register.reactivating">
@@ -18341,11 +18347,11 @@
         <target>アカウントを再度アクティブにしています</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">398</context>
+          <context context-type="linenumber">411</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">990</context>
+          <context context-type="linenumber">1003</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -18357,7 +18363,7 @@
         <target>ORCIDレコードを再アクティベートしていただきありがとうございます。今からお送りするメールの手順に従って処理を完了してください。弊社からのメールが届かない場合は、次の事を行ってください。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">400</context>
+          <context context-type="linenumber">413</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
@@ -18365,7 +18371,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">992</context>
+          <context context-type="linenumber">1005</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.contactSupport" datatype="html" resname="shared.contactSupport">
@@ -18373,15 +18379,15 @@
         <target>サポートに連絡してください。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">414</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">993</context>
+          <context context-type="linenumber">1006</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1014</context>
+          <context context-type="linenumber">1027</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -20321,7 +20327,7 @@
         <target>アカウントの申請</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1011</context>
+          <context context-type="linenumber">1024</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.verify.claimSent" datatype="html" resname="ngOrcid.signin.verify.claimSent">
@@ -20329,7 +20335,7 @@
         <target>ORCIDレコードを申請いただきありがとうございます。今からお送りするメールの手順に従って処理を完了してください。メールが届かない場合は、</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1013</context>
+          <context context-type="linenumber">1026</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.currentlySign" datatype="html" resname="ngOrcid.signin.currentlySign">
