@@ -4,7 +4,7 @@ import { DelegateInvitationActionService } from '../core/delegate-invitation-act
 import { DelegateInvitationComponent } from './delegate-invitation.component'
 
 describe('DelegateInvitationComponent', () => {
-  const token = '7e7d2ab1-0cf9-4c65-99ed-1809af5d5e75'
+  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDAwMDIifQ.FbJ7npRBfD1MVrxm8vrccC30W6QeZvhKPiaLd0YAzEg'
   let router: any
   let http: any
   let user: any

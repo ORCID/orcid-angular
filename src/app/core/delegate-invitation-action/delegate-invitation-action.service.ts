@@ -14,9 +14,7 @@ export class DelegateInvitationActionService {
 
   valid(token: string, decision: string): decision is 'ACCEPT' | 'DECLINE' {
     return (
-      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-        token || ''
-      ) &&
+      /^[A-Za-z0-9_-]{1,2000}(\.[A-Za-z0-9_-]{1,2000}){2}$/.test(token || '') &&
       (decision === 'ACCEPT' || decision === 'DECLINE')
     )
   }

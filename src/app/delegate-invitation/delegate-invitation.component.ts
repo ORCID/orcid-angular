@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { take } from 'rxjs/operators'
 import { UserService } from '../core'
 import { DelegateInvitationActionService } from '../core/delegate-invitation-action/delegate-invitation-action.service'
@@ -8,9 +9,8 @@ import { DelegateInvitationActionService } from '../core/delegate-invitation-act
 @Component({
   selector: 'app-delegate-invitation',
   standalone: true,
-  template: `<p i18n="@@delegateInvitation.processing">
-    Processing delegate invitation...
-  </p>`,
+  imports: [MatProgressBarModule],
+  template: `<mat-progress-bar mode="indeterminate"></mat-progress-bar>`,
 })
 export class DelegateInvitationComponent implements OnInit {
   constructor(
@@ -44,7 +44,11 @@ export class DelegateInvitationComponent implements OnInit {
         }
 
         this.http
-          .post<{ status: string }>(
+          .post<{
+            status: string
+            senderName?: string
+            senderOrcid?: string
+          }>(
             runtimeEnvironment.API_WEB +
               'account/delegate-invitations/respond.json',
             {
@@ -54,16 +58,25 @@ export class DelegateInvitationComponent implements OnInit {
           )
           .pipe(take(1))
           .subscribe({
-            next: (result) => this.finish(result.status),
+            next: (result) =>
+              this.finish(result.status, result.senderName, result.senderOrcid),
             error: () => this.finish('ERROR'),
           })
       })
   }
 
-  private finish(status: string): void {
+  private finish(
+    status: string,
+    senderName?: string,
+    senderOrcid?: string
+  ): void {
     this.actions.clear()
     this.router.navigate(['/trusted-parties'], {
-      queryParams: { invitationResponse: status },
+      queryParams: {
+        invitationResponse: status,
+        senderName: senderName || null,
+        senderOrcid: senderOrcid || null,
+      },
       replaceUrl: true,
     })
   }

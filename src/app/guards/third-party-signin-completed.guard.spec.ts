@@ -105,7 +105,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
       userService.getUserSession.and.returnValue(of({ loggedIn: true } as any))
       togglzService.getStateOf.and.returnValue(of(false))
       const action = {
-        token: '7e7d2ab1-0cf9-4c65-99ed-1809af5d5e75',
+        token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDAwMDIifQ.FbJ7npRBfD1MVrxm8vrccC30W6QeZvhKPiaLd0YAzEg',
         decision: 'ACCEPT' as const,
       }
       invitationAction.get.and.returnValue(action)

@@ -27,6 +27,8 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
     enteredEmail?: string
   }[] = []
   responseStatus: string
+  responseSenderName: string
+  responseSenderOrcid: string
   noticeLoadError = false
   private refreshRequested = new Subject<void>()
   displayedColumns = ['trustedIndividuals', 'orcid', 'granted', 'actions']
@@ -53,9 +55,17 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
     const response = this.route.snapshot.queryParamMap.get('invitationResponse')
     if (response) {
       this.responseStatus = response
+      this.responseSenderName =
+        this.route.snapshot.queryParamMap.get('senderName')
+      this.responseSenderOrcid =
+        this.route.snapshot.queryParamMap.get('senderOrcid')
       this.router.navigate([], {
         relativeTo: this.route,
-        queryParams: { invitationResponse: null },
+        queryParams: {
+          invitationResponse: null,
+          senderName: null,
+          senderOrcid: null,
+        },
         queryParamsHandling: 'merge',
         replaceUrl: true,
       })

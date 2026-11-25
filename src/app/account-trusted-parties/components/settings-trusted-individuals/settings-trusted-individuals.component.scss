@@ -43,3 +43,20 @@ table {
     margin-inline-start: 4px;
   }
 }
+
+.delegate-response {
+  display: block;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border: 1px solid;
+}
+
+.delegate-response-success {
+  background: #f7fae8;
+  border-color: #84a117;
+}
+
+.delegate-response-error {
+  background: #fdf3f3;
+  border-color: #b91c1c;
+}
