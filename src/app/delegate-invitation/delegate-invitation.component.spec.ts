@@ -60,7 +60,11 @@ describe('DelegateInvitationComponent', () => {
       }
     )
     expect(router.navigate).toHaveBeenCalledWith(['/trusted-parties'], {
-      queryParams: { invitationResponse: 'DECLINED' },
+      queryParams: {
+        invitationResponse: 'DECLINED',
+        senderName: null,
+        senderOrcid: null,
+      },
       replaceUrl: true,
     })
     expect(storage.getItem('delegateInvitationAction')).toBeNull()
@@ -81,7 +85,11 @@ describe('DelegateInvitationComponent', () => {
     http.post.and.returnValue(throwError(() => new Error('unavailable')))
     component({ token, decision: 'ACCEPT' }).ngOnInit()
     expect(router.navigate).toHaveBeenCalledWith(['/trusted-parties'], {
-      queryParams: { invitationResponse: 'ERROR' },
+      queryParams: {
+        invitationResponse: 'ERROR',
+        senderName: null,
+        senderOrcid: null,
+      },
       replaceUrl: true,
     })
   })
