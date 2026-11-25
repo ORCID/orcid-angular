@@ -33,6 +33,7 @@ export class SettingsTrustedIndividualsSearchComponent
   loading = false
   error = ''
   success = false
+  sentTo = ''
   result: DelegateInvitationSearchResult | null = null
   request: DelegateInvitationSearchRequest | null = null
 
@@ -108,6 +109,7 @@ export class SettingsTrustedIndividualsSearchComponent
         next: (response) => {
           this.loading = false
           if (response.status === 'SENT') {
+            this.sentTo = this.request.value
             this.result = null
             this.request = null
             this.success = true

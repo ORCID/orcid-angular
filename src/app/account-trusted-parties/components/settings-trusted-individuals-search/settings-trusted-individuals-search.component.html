@@ -1,18 +1,21 @@
 <strong
   class="orc-font-body-small search-title"
   i18n="@@account.invitationSearchTitle"
-  >Invite a trusted individual</strong
+  >Add an account delegate</strong
 >
+<p class="orc-font-body" i18n="@@account.invitationSearchDescription">
+  Enter an email address or ORCID iD to find an ORCID user to add as an
+  account delegate
+</p>
 <div class="search-container">
   <mat-form-field
     appearance="outline"
     class="mat-form-field-min"
     [ngClass]="{ mobile: isMobile, desktop: !isMobile }"
   >
-    <mat-label i18n="@@account.invitationSearchLabel"
-      >ORCID iD or email address</mat-label
-    >
     <input
+      i18n-aria-label="@@account.invitationSearchLabel"
+      aria-label="ORCID iD or email address"
       matInput
       [(ngModel)]="searchValue"
       (ngModelChange)="inputChanged()"
@@ -21,31 +24,52 @@
       [attr.aria-invalid]="!!error"
       aria-describedby="invitation-error"
     />
+    <button
+      matSuffix
+      mat-icon-button
+      type="button"
+      id="cy-search-orcid-for-trusted-individuals"
+      (click)="search(searchValue)"
+      [disabled]="loading"
+      i18n-aria-label="@@account.invitationSearchButton"
+      aria-label="Search"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
   </mat-form-field>
-  <button
-    mat-raised-button
-    id="cy-search-orcid-for-trusted-individuals"
-    (click)="search(searchValue)"
-    [disabled]="loading"
-    color="primary"
-    class="search-button"
-    [ngClass]="{ desktop: !isMobile, mobile: isMobile }"
-    i18n="@@account.invitationSearchButton"
-  >
-    Search
-  </button>
 </div>
 <div class="row h-baseline">
   <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 </div>
-<p id="invitation-error" *ngIf="error" role="alert">{{ error }}</p>
-<p *ngIf="success" role="status" i18n="@@account.invitationSent">
-  Invitation sent.
-</p>
-<div *ngIf="result && request">
+<app-alert-message
+  id="invitation-error"
+  *ngIf="error"
+  type="warning"
+  role="alert"
+  class="invitation-alert"
+>
+  <div content>{{ error }}</div>
+</app-alert-message>
+<app-alert-message
+  *ngIf="success"
+  type="success"
+  role="status"
+  class="invitation-alert"
+>
+  <div content>
+    <ng-container i18n="@@account.invitationSentTo"
+      >An account delegate invitation has been sent to</ng-container
+    >
+    <strong>{{ sentTo }}</strong>
+  </div>
+</app-alert-message>
+<div *ngIf="result && request" class="result-row">
+  <div class="result-info">
   <ng-container *ngIf="request.lookupType === 'ORCID'; else emailResult">
-    <p *ngIf="result.publicName">{{ result.publicName }}</p>
-    <p *ngIf="result.highlightedAffiliation">
+    <strong class="orc-font-body" *ngIf="result.publicName">{{
+      result.publicName
+    }}</strong>
+    <p class="orc-font-body" *ngIf="result.highlightedAffiliation">
       {{ result.highlightedAffiliation }}
     </p>
     <a
@@ -58,17 +82,18 @@
     >
   </ng-container>
   <ng-template #emailResult
-    ><p>{{ request.value }}</p></ng-template
+    ><p class="orc-font-body">{{ request.value }}</p></ng-template
   >
-  <div class="topBottomMargin">
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="send()"
-      [disabled]="loading"
-      i18n="@@account.invitationSend"
-    >
-      Send invitation
-    </button>
   </div>
+  <button
+    mat-stroked-button
+    class="invite-button"
+    (click)="send()"
+    [disabled]="loading"
+  >
+    <mat-icon>person_add_alt</mat-icon>
+    <ng-container i18n="@@account.invitationSend"
+      >Invite as delegate</ng-container
+    >
+  </button>
 </div>

@@ -1,64 +1,41 @@
-<div
-  *ngIf="responseStatus"
+<ng-container *ngIf="$trustedIndividuals | async as trustedIndividuals">
+  <h2
+    class="orc-font-body-large"
+    i18n="@@account.trustedIndividuals"
+    id="cy-individuals"
+  >
+    Trusted individuals
+  </h2>
+
+  <div>
+    <p i18n="@@account.trustedIndvidualstionsAreThose">
+      Trusted individuals, also known as Account Delegates, are other ORCID iD
+      holders to whom you have granted permission to update your ORCID record.
+      You decide whether to grant access to them and can revoke this access at
+      any time.
+    </p>
+  </div>
+  <p>
+    <a
+      class="underline"
+      i18n="@@account.learnMoreAboutTrustedInd"
+      href="https://support.orcid.org/hc/en-us/articles/360006973613"
+      rel="noopener noreferrer"
+      target="_blank"
+      >Learn more about trusted individuals</a
+    >
+  </p>
+<app-alert-message *ngIf="noticeLoadError" type="warning" role="alert">
+  <div content i18n="@@delegateInvitation.noticeError">
+    Unable to load or dismiss invitation notices. Please try again.
+  </div>
+</app-alert-message>
+<app-alert-message
+  *ngFor="let notice of notices"
   role="status"
-  [class.alert-message]="
-    responseStatus !== 'ACCEPTED' && responseStatus !== 'DECLINED'
-  "
+  [type]="notice.status === 'ACCEPTED' ? 'success' : 'warning'"
 >
-  <span
-    *ngIf="responseStatus === 'ACCEPTED'"
-    class="delegate-response delegate-response-success"
-  >
-    <ng-container i18n="@@delegateInvitation.responseAcceptedFor"
-      >You are now an account delegate for</ng-container
-    >
-    <strong *ngIf="responseSenderName">{{ responseSenderName }}</strong>
-    <ng-container *ngIf="responseSenderOrcid"
-      >({{ responseSenderOrcid }})</ng-container
-    >
-  </span>
-  <span
-    *ngIf="responseStatus === 'DECLINED'"
-    class="delegate-response delegate-response-error"
-  >
-    <ng-container i18n="@@delegateInvitation.responseDeclinedFrom"
-      >You have declined an account delegate invitation from</ng-container
-    >
-    <strong *ngIf="responseSenderName">{{ responseSenderName }}</strong>
-    <ng-container *ngIf="responseSenderOrcid"
-      >({{ responseSenderOrcid }})</ng-container
-    >
-  </span>
-  <span
-    *ngIf="responseStatus === 'EXPIRED'"
-    i18n="@@delegateInvitation.responseExpired"
-    >This delegate invitation has expired.</span
-  >
-  <span
-    *ngIf="responseStatus === 'ALREADY_RESPONDED'"
-    i18n="@@delegateInvitation.responseAlreadyHandled"
-    >This delegate invitation is no longer active.</span
-  >
-  <span
-    *ngIf="
-      responseStatus !== 'ACCEPTED' &&
-      responseStatus !== 'DECLINED' &&
-      responseStatus !== 'EXPIRED' &&
-      responseStatus !== 'ALREADY_RESPONDED'
-    "
-    i18n="@@delegateInvitation.responseError"
-    >The delegate invitation could not be processed. Check that you are signed
-    in to the invited account.</span
-  >
-</div>
-<div
-  *ngIf="noticeLoadError"
-  role="alert"
-  i18n="@@delegateInvitation.noticeError"
->
-  Unable to load or dismiss invitation notices. Please try again.
-</div>
-<div *ngFor="let notice of notices" role="status" class="alert-message">
+  <div content class="notice-content">
   <span
     *ngIf="notice.status === 'ACCEPTED'"
     i18n="@@delegateInvitation.noticeAccepted"
@@ -92,34 +69,8 @@
   >
     Dismiss
   </button>
-</div>
-<ng-container *ngIf="$trustedIndividuals | async as trustedIndividuals">
-  <h2
-    class="orc-font-body-large"
-    i18n="@@account.trustedIndividuals"
-    id="cy-individuals"
-  >
-    Trusted individuals
-  </h2>
-
-  <div>
-    <p i18n="@@account.trustedIndvidualstionsAreThose">
-      Trusted individuals, also known as Account Delegates, are other ORCID iD
-      holders to whom you have granted permission to update your ORCID record.
-      You decide whether to grant access to them and can revoke this access at
-      any time.
-    </p>
   </div>
-  <p>
-    <a
-      class="underline"
-      i18n="@@account.learnMoreAboutTrustedInd"
-      href="https://support.orcid.org/hc/en-us/articles/360006973613"
-      rel="noopener noreferrer"
-      target="_blank"
-      >Learn more about trusted individuals</a
-    >
-  </p>
+</app-alert-message>
 
   <ng-container *ngIf="trustedIndividuals.length && this.isMobile">
     <mat-divider></mat-divider>

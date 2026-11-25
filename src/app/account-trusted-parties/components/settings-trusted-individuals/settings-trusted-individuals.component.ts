@@ -26,9 +26,6 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
     lookupType: string
     enteredEmail?: string
   }[] = []
-  responseStatus: string
-  responseSenderName: string
-  responseSenderOrcid: string
   noticeLoadError = false
   private refreshRequested = new Subject<void>()
   displayedColumns = ['trustedIndividuals', 'orcid', 'granted', 'actions']
@@ -52,24 +49,6 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setupTrustedIndividualsObs()
     this.loadNotices()
-    const response = this.route.snapshot.queryParamMap.get('invitationResponse')
-    if (response) {
-      this.responseStatus = response
-      this.responseSenderName =
-        this.route.snapshot.queryParamMap.get('senderName')
-      this.responseSenderOrcid =
-        this.route.snapshot.queryParamMap.get('senderOrcid')
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: {
-          invitationResponse: null,
-          senderName: null,
-          senderOrcid: null,
-        },
-        queryParamsHandling: 'merge',
-        replaceUrl: true,
-      })
-    }
     this._platform
       .get()
       .pipe(takeUntil(this.platformSubs))

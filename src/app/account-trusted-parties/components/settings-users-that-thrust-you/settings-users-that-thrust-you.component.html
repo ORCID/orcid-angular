@@ -13,6 +13,55 @@
     </p>
   </div>
 
+  <app-alert-message
+    *ngIf="responseStatus"
+    role="status"
+    class="delegate-response"
+    [type]="responseStatus === 'ACCEPTED' ? 'success' : 'warning'"
+  >
+    <div content>
+      <ng-container *ngIf="responseStatus === 'ACCEPTED'">
+        <ng-container i18n="@@delegateInvitation.responseAcceptedFor"
+          >You are now an account delegate for</ng-container
+        >
+        <strong *ngIf="responseSenderName">{{ responseSenderName }}</strong>
+        <ng-container *ngIf="responseSenderOrcid"
+          >({{ responseSenderOrcid }})</ng-container
+        >
+      </ng-container>
+      <ng-container *ngIf="responseStatus === 'DECLINED'">
+        <ng-container i18n="@@delegateInvitation.responseDeclinedFrom"
+          >You have declined an account delegate invitation from</ng-container
+        >
+        <strong *ngIf="responseSenderName">{{ responseSenderName }}</strong>
+        <ng-container *ngIf="responseSenderOrcid"
+          >({{ responseSenderOrcid }})</ng-container
+        >
+      </ng-container>
+      <span
+        *ngIf="responseStatus === 'EXPIRED'"
+        i18n="@@delegateInvitation.responseExpired"
+        >This delegate invitation has expired.</span
+      >
+      <span
+        *ngIf="responseStatus === 'ALREADY_RESPONDED'"
+        i18n="@@delegateInvitation.responseAlreadyHandled"
+        >This delegate invitation is no longer active.</span
+      >
+      <span
+        *ngIf="
+          responseStatus !== 'ACCEPTED' &&
+          responseStatus !== 'DECLINED' &&
+          responseStatus !== 'EXPIRED' &&
+          responseStatus !== 'ALREADY_RESPONDED'
+        "
+        i18n="@@delegateInvitation.responseError"
+        >The delegate invitation could not be processed. Check that you are
+        signed in to the invited account.</span
+      >
+    </div>
+  </app-alert-message>
+
   <ng-container *ngIf="usersThatThrustYou.delegators?.length && this.isMobile">
     <mat-divider></mat-divider>
     <div *ngFor="let userThatThrustYou of usersThatThrustYou.delegators">
