@@ -32,6 +32,7 @@ export class SettingsTrustedIndividualsSearchComponent
   searchValue = ''
   loading = false
   error = ''
+  errorValue = ''
   success = false
   sentTo = ''
   result: DelegateInvitationSearchResult | null = null
@@ -55,6 +56,7 @@ export class SettingsTrustedIndividualsSearchComponent
     this.result = null
     this.request = null
     this.error = ''
+    this.errorValue = ''
     this.success = false
   }
 
@@ -89,6 +91,7 @@ export class SettingsTrustedIndividualsSearchComponent
             this.result = result
           } else {
             this.error = this.statusMessage(result.status)
+            this.errorValue = this.valueFor(result.status, request.value)
           }
         },
         error: () => {
@@ -115,6 +118,10 @@ export class SettingsTrustedIndividualsSearchComponent
             this.success = true
             this.invitationSent.emit()
           } else {
+            this.errorValue = this.valueFor(
+              response.status,
+              this.request.value
+            )
             this.result = null
             this.request = null
             this.error = this.statusMessage(response.status)
@@ -136,6 +143,12 @@ export class SettingsTrustedIndividualsSearchComponent
     return digits[15] === (check === 10 ? 'X' : String(check))
   }
 
+  private valueFor(status: string, value: string): string {
+    return status === 'ACTIVE_INVITATION' || status === 'ALREADY_DELEGATE'
+      ? value
+      : ''
+  }
+
   private statusMessage(status: string): string {
     switch (status) {
       case 'INVALID':
@@ -145,9 +158,9 @@ export class SettingsTrustedIndividualsSearchComponent
       case 'SELF':
         return $localize`:@@account.invitationSelf:You cannot invite yourself.`
       case 'ACTIVE_INVITATION':
-        return $localize`:@@account.invitationPending:An invitation is already pending for this individual.`
+        return $localize`:@@account.invitationPending:An invitation is already pending for`
       case 'ALREADY_DELEGATE':
-        return $localize`:@@account.invitationAlreadyDelegate:This individual is already trusted.`
+        return $localize`:@@account.invitationAlreadyDelegate:An account delegate already exists for`
       default:
         return $localize`:@@account.invitationError:Something went wrong. Please try again.`
     }

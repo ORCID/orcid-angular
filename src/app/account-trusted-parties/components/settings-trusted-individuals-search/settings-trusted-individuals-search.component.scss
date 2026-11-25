@@ -84,6 +84,16 @@ button.mobile {
   }
 }
 
+.result-info {
+  strong,
+  a {
+    display: block;
+  }
+  strong {
+    margin-bottom: 4px;
+  }
+}
+
 .invite-button mat-icon {
   margin-inline-end: 8px;
 }

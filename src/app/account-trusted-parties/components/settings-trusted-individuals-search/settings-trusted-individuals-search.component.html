@@ -48,7 +48,12 @@
   role="alert"
   class="invitation-alert"
 >
-  <div content>{{ error }}</div>
+  <div content>
+    {{ error }}<ng-container *ngIf="errorValue"
+      >&nbsp;<strong>{{ errorValue }}</strong
+      >.</ng-container
+    >
+  </div>
 </app-alert-message>
 <app-alert-message
   *ngIf="success"
@@ -59,8 +64,7 @@
   <div content>
     <ng-container i18n="@@account.invitationSentTo"
       >An account delegate invitation has been sent to</ng-container
-    >
-    <strong>{{ sentTo }}</strong>
+    >&nbsp;<strong>{{ sentTo }}</strong>
   </div>
 </app-alert-message>
 <div *ngIf="result && request" class="result-row">
