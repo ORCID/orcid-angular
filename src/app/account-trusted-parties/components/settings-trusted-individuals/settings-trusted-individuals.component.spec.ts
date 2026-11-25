@@ -55,7 +55,7 @@ describe('SettingsTrustedIndividualsComponent', () => {
   it('only removes an outcome notice after successful acknowledgement', () => {
     component.notices = [
       {
-        invitationToken: 'token',
+        invitationId: 42,
         status: 'DECLINED',
         lookupType: 'EMAIL',
         enteredEmail: 'delegate@example.org',
@@ -65,12 +65,12 @@ describe('SettingsTrustedIndividualsComponent', () => {
       service,
       'acknowledgeInvitationNotice'
     ).and.returnValue(throwError(() => new Error('unavailable')))
-    component.acknowledgeNotice('token')
+    component.acknowledgeNotice(42)
     expect(component.notices.length).toBe(1)
     expect(component.noticeLoadError).toBeTrue()
 
     acknowledge.and.returnValue(of({ status: 'ACKNOWLEDGED' }))
-    component.acknowledgeNotice('token')
+    component.acknowledgeNotice(42)
     expect(component.notices.length).toBe(0)
   })
 

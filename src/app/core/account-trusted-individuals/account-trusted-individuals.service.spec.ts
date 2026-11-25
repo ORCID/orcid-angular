@@ -70,21 +70,21 @@ describe('AccountTrustedIndividualsService', () => {
     expect(notices.request.method).toBe('GET')
     notices.flush([
       {
-        invitationToken: 'token',
+        invitationId: 42,
         status: 'ACCEPTED',
         lookupType: 'EMAIL',
         enteredEmail: 'person@example.org',
-        respondedAt: null,
+        lastModified: null,
       },
     ])
     service
-      .acknowledgeInvitationNotice('token')
+      .acknowledgeInvitationNotice(42)
       .subscribe((result) => expect(result.status).toBe('ACKNOWLEDGED'))
     const acknowledge = http.expectOne(
       runtimeEnvironment.API_WEB +
         'account/delegate-invitations/notices/acknowledge.json'
     )
-    expect(acknowledge.request.body).toEqual({ invitationToken: 'token' })
+    expect(acknowledge.request.body).toEqual({ invitationId: 42 })
     acknowledge.flush({ status: 'ACKNOWLEDGED' })
     http.verify()
   })

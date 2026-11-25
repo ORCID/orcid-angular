@@ -21,7 +21,7 @@ import { DialogRevokeTrustedIndividualsComponent } from '../dialog-revoke-truste
 export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   $trustedIndividuals: Observable<AccountTrustedIndividual[]>
   notices: {
-    invitationToken: string
+    invitationId: number
     status: string
     lookupType: string
     enteredEmail?: string
@@ -96,15 +96,15 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
       })
   }
 
-  acknowledgeNotice(token: string): void {
+  acknowledgeNotice(invitationId: number): void {
     this._trustedIndividualsService
-      .acknowledgeInvitationNotice(token)
+      .acknowledgeInvitationNotice(invitationId)
       .pipe(takeUntil(this.platformSubs))
       .subscribe({
         next: (result) => {
           if (result.status === 'ACKNOWLEDGED') {
             this.notices = this.notices.filter(
-              (notice) => notice.invitationToken !== token
+              (notice) => notice.invitationId !== invitationId
             )
           } else {
             this.noticeLoadError = true

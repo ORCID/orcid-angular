@@ -31,11 +31,11 @@ export interface DelegateInvitationSearchResult {
 }
 
 export interface DelegateInvitationNotice {
-  invitationToken: string
+  invitationId: number
   status: string
   lookupType: DelegateInvitationLookupType
   enteredEmail: string | null
-  respondedAt: string | number | null
+  lastModified: string | number | null
 }
 
 export interface DelegateInvitationActionResult {
@@ -84,12 +84,12 @@ export class AccountTrustedIndividualsService {
   }
 
   acknowledgeInvitationNotice(
-    token: string
+    invitationId: number
   ): Observable<DelegateInvitationActionResult> {
     return this._http.post<DelegateInvitationActionResult>(
       runtimeEnvironment.API_WEB +
         'account/delegate-invitations/notices/acknowledge.json',
-      { invitationToken: token },
+      { invitationId },
       { headers: this.headers }
     )
   }
