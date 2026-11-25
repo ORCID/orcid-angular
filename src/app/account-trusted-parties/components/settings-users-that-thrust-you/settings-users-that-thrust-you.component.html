@@ -23,7 +23,9 @@
       <ng-container *ngIf="responseStatus === 'ACCEPTED'">
         <ng-container i18n="@@delegateInvitation.responseAcceptedFor"
           >You are now an account delegate for</ng-container
-        >&nbsp;<strong *ngIf="responseSenderName">{{ responseSenderName }}</strong
+        >&nbsp;<strong *ngIf="responseSenderName">{{
+          responseSenderName
+        }}</strong
         ><ng-container *ngIf="responseSenderName && responseSenderOrcid"
           >&nbsp;</ng-container
         ><ng-container *ngIf="responseSenderOrcid"
@@ -33,7 +35,9 @@
       <ng-container *ngIf="responseStatus === 'DECLINED'">
         <ng-container i18n="@@delegateInvitation.responseDeclinedFrom"
           >You have declined an account delegate invitation from</ng-container
-        >&nbsp;<strong *ngIf="responseSenderName">{{ responseSenderName }}</strong
+        >&nbsp;<strong *ngIf="responseSenderName">{{
+          responseSenderName
+        }}</strong
         ><ng-container *ngIf="responseSenderName && responseSenderOrcid"
           >&nbsp;</ng-container
         ><ng-container *ngIf="responseSenderOrcid"

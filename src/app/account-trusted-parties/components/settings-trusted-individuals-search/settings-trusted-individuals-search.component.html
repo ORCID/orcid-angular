@@ -4,8 +4,8 @@
   >Add an account delegate</strong
 >
 <p class="orc-font-body" i18n="@@account.invitationSearchDescription">
-  Enter an email address or ORCID iD to find an ORCID user to add as an
-  account delegate
+  Enter an email address or ORCID iD to find an ORCID user to add as an account
+  delegate
 </p>
 <div class="search-container">
   <mat-form-field
@@ -49,7 +49,8 @@
   class="invitation-alert"
 >
   <div content>
-    {{ error }}<ng-container *ngIf="errorValue"
+    {{ error
+    }}<ng-container *ngIf="errorValue"
       >&nbsp;<strong>{{ errorValue }}</strong
       >.</ng-container
     >
@@ -69,25 +70,25 @@
 </app-alert-message>
 <div *ngIf="result && request" class="result-row">
   <div class="result-info">
-  <ng-container *ngIf="request.lookupType === 'ORCID'; else emailResult">
-    <strong class="orc-font-body" *ngIf="result.publicName">{{
-      result.publicName
-    }}</strong>
-    <p class="orc-font-body" *ngIf="result.highlightedAffiliation">
-      {{ result.highlightedAffiliation }}
-    </p>
-    <a
-      *ngIf="result.publicRecordUrl"
-      [href]="result.publicRecordUrl"
-      target="_blank"
-      rel="noreferrer noopener"
-      class="underline"
-      >{{ result.orcid }}</a
+    <ng-container *ngIf="request.lookupType === 'ORCID'; else emailResult">
+      <strong class="orc-font-body" *ngIf="result.publicName">{{
+        result.publicName
+      }}</strong>
+      <p class="orc-font-body" *ngIf="result.highlightedAffiliation">
+        {{ result.highlightedAffiliation }}
+      </p>
+      <a
+        *ngIf="result.publicRecordUrl"
+        [href]="result.publicRecordUrl"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="underline"
+        >{{ result.orcid }}</a
+      >
+    </ng-container>
+    <ng-template #emailResult
+      ><p class="orc-font-body">{{ request.value }}</p></ng-template
     >
-  </ng-container>
-  <ng-template #emailResult
-    ><p class="orc-font-body">{{ request.value }}</p></ng-template
-  >
   </div>
   <button
     mat-stroked-button

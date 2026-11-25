@@ -118,10 +118,7 @@ export class SettingsTrustedIndividualsSearchComponent
             this.success = true
             this.invitationSent.emit()
           } else {
-            this.errorValue = this.valueFor(
-              response.status,
-              this.request.value
-            )
+            this.errorValue = this.valueFor(response.status, this.request.value)
             this.result = null
             this.request = null
             this.error = this.statusMessage(response.status)
