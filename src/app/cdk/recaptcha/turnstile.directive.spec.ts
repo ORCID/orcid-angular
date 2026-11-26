@@ -6,8 +6,22 @@ describe('TurnstileDirective', () => {
   let options: any
   let api: any
   let change: jasmine.Spy
+  let originalEnvironment: any
 
   beforeEach(() => {
+    originalEnvironment = (globalThis as any).runtimeEnvironment
+    ;(globalThis as any).runtimeEnvironment = {
+      ...originalEnvironment,
+      LANGUAGE_MENU_OPTIONS: {
+        en: 'English',
+        ar: 'Arabic',
+        ru: 'Russian',
+        zh_CN: 'Simplified Chinese',
+        'zh-TW': 'Traditional Chinese',
+        pt: 'Portuguese',
+      },
+    }
+    options = undefined
     api = {
       render: jasmine.createSpy('render').and.callFake((_element, config) => {
         options = config
@@ -26,6 +40,10 @@ describe('TurnstileDirective', () => {
     change = jasmine.createSpy('change')
     directive.registerOnChange(change)
     directive.registerOnTouched(() => {})
+  })
+
+  afterEach(() => {
+    ;(globalThis as any).runtimeEnvironment = originalEnvironment
   })
 
   it('renders the session key and forwards a token and loaded marker', () => {
