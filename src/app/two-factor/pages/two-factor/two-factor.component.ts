@@ -5,6 +5,8 @@ import { WINDOW } from '../../../cdk/window'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { first } from 'rxjs/operators'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
+import { Router } from '@angular/router'
+import { DelegateInvitationActionService } from '../../../core/delegate-invitation-action/delegate-invitation-action.service'
 
 @Component({
   selector: 'app-two-factor-module',
@@ -23,7 +25,9 @@ export class TwoFactorComponent implements OnInit {
   constructor(
     @Inject(WINDOW) private window: Window,
     private _twoFactorAuthenticationService: TwoFactorAuthenticationService,
-    private _platformInfo: PlatformInfoService
+    private _platformInfo: PlatformInfoService,
+    private router: Router,
+    private delegateInvitationAction: DelegateInvitationActionService
   ) {}
 
   ngOnInit(): void {
@@ -80,7 +84,15 @@ export class TwoFactorComponent implements OnInit {
                 this.showBadRecoveryCode = true
               }
             } else if (res.redirectUrl) {
-              this.navigateTo(res.redirectUrl)
+              const action = this.delegateInvitationAction.get()
+              if (action) {
+                this.router.navigate(['/delegate-invitation'], {
+                  queryParams: action,
+                  replaceUrl: true,
+                })
+              } else {
+                this.navigateTo(res.redirectUrl)
+              }
             }
           })
       })

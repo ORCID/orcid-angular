@@ -13,6 +13,37 @@ import {
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
+export type DelegateInvitationLookupType = 'ORCID' | 'EMAIL'
+
+export interface DelegateInvitationSearchRequest {
+  lookupType: DelegateInvitationLookupType
+  value: string
+}
+
+export interface DelegateInvitationSearchResult {
+  status: string
+  lookupType?: DelegateInvitationLookupType
+  emailAddress?: string
+  orcid?: string
+  publicName?: string
+  highlightedAffiliation?: string
+  publicRecordUrl?: string
+}
+
+export interface DelegateInvitationNotice {
+  invitationId: number
+  status: string
+  lookupType: DelegateInvitationLookupType
+  enteredEmail: string | null
+  lastModified: string | number | null
+  recipientOrcid?: string | null
+  recipientName?: string | null
+}
+
+export interface DelegateInvitationActionResult {
+  status: string
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -26,6 +57,44 @@ export class AccountTrustedIndividualsService {
     private _errorHandler: ErrorHandlerService,
     private _http: HttpClient
   ) {}
+
+  searchInvitation(
+    request: DelegateInvitationSearchRequest
+  ): Observable<DelegateInvitationSearchResult> {
+    return this._http.post<DelegateInvitationSearchResult>(
+      runtimeEnvironment.API_WEB + 'account/delegate-invitations/search.json',
+      request,
+      { headers: this.headers }
+    )
+  }
+
+  sendInvitation(
+    request: DelegateInvitationSearchRequest
+  ): Observable<DelegateInvitationActionResult> {
+    return this._http.post<DelegateInvitationActionResult>(
+      runtimeEnvironment.API_WEB + 'account/delegate-invitations/send.json',
+      request,
+      { headers: this.headers }
+    )
+  }
+
+  getInvitationNotices(): Observable<DelegateInvitationNotice[]> {
+    return this._http.get<DelegateInvitationNotice[]>(
+      runtimeEnvironment.API_WEB + 'account/delegate-invitations/notices.json',
+      { headers: this.headers }
+    )
+  }
+
+  acknowledgeInvitationNotice(
+    invitationId: number
+  ): Observable<DelegateInvitationActionResult> {
+    return this._http.post<DelegateInvitationActionResult>(
+      runtimeEnvironment.API_WEB +
+        'account/delegate-invitations/notices/acknowledge.json',
+      { invitationId },
+      { headers: this.headers }
+    )
+  }
 
   get(): Observable<AccountTrustedIndividual[]> {
     return this._http

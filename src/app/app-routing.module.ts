@@ -112,6 +112,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'delegate-invitation',
+    loadComponent: () =>
+      import('./delegate-invitation/delegate-invitation.component').then(
+        (m) => m.DelegateInvitationComponent
+      ),
+  },
+  {
     path: ApplicationRoutes.trustedParties,
     canActivateChild: [AuthenticatedGuard],
     loadChildren: () =>

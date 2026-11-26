@@ -84,11 +84,13 @@ export class AppComponent {
 
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        reportNavigationStart(event.url)
+        reportNavigationStart(this.analyticsUrl(event.url))
         this.currentRoute = event.url
       }
       if (event instanceof NavigationEnd) {
-        const duration = finishPerformanceMeasurement(event.url)
+        const duration = finishPerformanceMeasurement(
+          this.analyticsUrl(event.url)
+        )
         _googleTagManagerService
           .addGtmToDom()
           .pipe(
@@ -102,10 +104,10 @@ export class AppComponent {
           .subscribe((response) => {
             if (response) {
               _googleTagManagerService
-                .reportNavigationEnd(event.url, duration)
+                .reportNavigationEnd(this.analyticsUrl(event.url), duration)
                 .subscribe(() => {
                   _googleTagManagerService.reportPageView(
-                    event.urlAfterRedirects
+                    this.analyticsUrl(event.urlAfterRedirects)
                   )
                 })
             }
@@ -113,6 +115,12 @@ export class AppComponent {
         this.addSpacing()
       }
     })
+  }
+
+  private analyticsUrl(url: string): string {
+    return url.split('?')[0] === '/delegate-invitation'
+      ? '/delegate-invitation'
+      : url
   }
 
   /**
