@@ -23,23 +23,59 @@ interface TurnstileWindow extends Window {
 
 // Cloudflare's supported language codes, independent of the site's language menu.
 const turnstileLanguages = new Set([
-  'ar', 'bg', 'zh', 'zh-cn', 'zh-tw', 'hr', 'cs', 'da', 'nl', 'en', 'fa',
-  'fi', 'fr', 'de', 'el', 'he', 'hi', 'hu', 'id', 'it', 'ja', 'tlh', 'ko',
-  'lt', 'ms', 'nb', 'pl', 'pt', 'ro', 'ru', 'sr', 'sk', 'sl', 'es', 'sv',
-  'tl', 'th', 'tr', 'uk', 'vi',
+  'ar',
+  'bg',
+  'zh',
+  'zh-cn',
+  'zh-tw',
+  'hr',
+  'cs',
+  'da',
+  'nl',
+  'en',
+  'fa',
+  'fi',
+  'fr',
+  'de',
+  'el',
+  'he',
+  'hi',
+  'hu',
+  'id',
+  'it',
+  'ja',
+  'tlh',
+  'ko',
+  'lt',
+  'ms',
+  'nb',
+  'pl',
+  'pt',
+  'ro',
+  'ru',
+  'sr',
+  'sk',
+  'sl',
+  'es',
+  'sv',
+  'tl',
+  'th',
+  'tr',
+  'uk',
+  'vi',
 ])
 
 function turnstileLanguage(locale: string): string {
   const normalized = (locale || '').toLowerCase().replace(/_/g, '-')
   const language = normalized.split('-')[0]
-  const menuLanguages = Object.keys(runtimeEnvironment.LANGUAGE_MENU_OPTIONS).map(
-    (key) => key.toLowerCase().replace(/_/g, '-')
-  )
+  const menuLanguages = Object.keys(
+    runtimeEnvironment.LANGUAGE_MENU_OPTIONS
+  ).map((key) => key.toLowerCase().replace(/_/g, '-'))
   const menuLanguage = menuLanguages.includes(normalized)
     ? normalized
     : menuLanguages.includes(language)
-      ? language
-      : ''
+    ? language
+    : ''
   if (turnstileLanguages.has(menuLanguage)) return menuLanguage
   if (menuLanguage && turnstileLanguages.has(language)) return language
   return 'en'
