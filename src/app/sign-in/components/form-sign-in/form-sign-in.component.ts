@@ -31,6 +31,7 @@ import {
   isRedirectToTheAuthorizationPage,
 } from 'src/app/constants'
 import { UserService } from 'src/app/core'
+import { DelegateInvitationActionService } from 'src/app/core/delegate-invitation-action/delegate-invitation-action.service'
 import { OauthParameters } from 'src/app/types'
 import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 
@@ -227,6 +228,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
     private _snackBar: SnackbarService,
     private _togglzService: TogglzService,
     private _oauthUrlSessionManager: OauthURLSessionManagerService,
+    private _delegateInvitationAction: DelegateInvitationActionService,
     private _observability: RumJourneyEventService,
     private _recoveryPhoneNotice: RecoveryPhoneNoticeService,
     private _passwordRecovery: PasswordRecoveryService
@@ -406,6 +408,15 @@ export class FormSignInComponent implements OnInit, OnDestroy {
             isOauth: !!isOauth,
             signInType: this.signInLocal.type || 'regular',
           })
+          const delegateAction =
+            !isOauth && this._delegateInvitationAction.get()
+          if (delegateAction) {
+            this._router.navigate(['/delegate-invitation'], {
+              queryParams: delegateAction,
+              replaceUrl: true,
+            })
+            return
+          }
           // The OAuth half of the recovery number flow stops here: the user is
           // told 2FA is off before they are handed back to the client (R4.2).
           // This form has more than one host - link-account hosts it too - and

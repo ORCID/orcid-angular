@@ -25,6 +25,62 @@
       >Learn more about trusted individuals</a
     >
   </p>
+  <app-alert-message *ngIf="noticeLoadError" type="warning" role="alert">
+    <div content i18n="@@delegateInvitation.noticeError">
+      Unable to load or dismiss invitation notices. Please try again.
+    </div>
+  </app-alert-message>
+  <app-alert-message
+    *ngFor="let notice of notices"
+    role="status"
+    [type]="notice.status === 'ACCEPTED' ? 'success' : 'warning'"
+  >
+    <div content class="notice-content">
+      <span *ngIf="notice.status === 'ACCEPTED'">
+        <strong *ngIf="notice.recipientName">{{ notice.recipientName }}</strong
+        ><ng-container *ngIf="notice.recipientName && notice.recipientOrcid"
+          >&nbsp;</ng-container
+        ><ng-container *ngIf="notice.recipientOrcid"
+          >({{ notice.recipientOrcid }})</ng-container
+        >&nbsp;<ng-container i18n="@@delegateInvitation.noticeAddedAsDelegate"
+          >has been added as an account delegate</ng-container
+        >
+      </span>
+      <span
+        *ngIf="notice.status === 'DECLINED' && notice.lookupType === 'EMAIL'"
+        i18n="@@delegateInvitation.noticeDeclinedEmail"
+        >Your delegate invitation to {{ notice.enteredEmail }} was
+        declined.</span
+      >
+      <span
+        *ngIf="notice.status === 'DECLINED' && notice.lookupType !== 'EMAIL'"
+      >
+        <ng-container i18n="@@delegateInvitation.noticeDeclinedOrcidPrefix"
+          >Your delegate invitation to</ng-container
+        >&nbsp;<strong *ngIf="notice.recipientName">{{
+          notice.recipientName
+        }}</strong
+        ><ng-container *ngIf="notice.recipientName && notice.recipientOrcid"
+          >&nbsp;</ng-container
+        ><ng-container *ngIf="notice.recipientOrcid"
+          >({{ notice.recipientOrcid }})</ng-container
+        >&nbsp;<ng-container
+          i18n="@@delegateInvitation.noticeDeclinedOrcidSuffix"
+          >was declined.</ng-container
+        >
+      </span>
+      <span
+        *ngIf="notice.status === 'EXPIRED' && notice.lookupType === 'EMAIL'"
+        i18n="@@delegateInvitation.noticeExpiredEmail"
+        >Your delegate invitation to {{ notice.enteredEmail }} expired.</span
+      >
+      <span
+        *ngIf="notice.status === 'EXPIRED' && notice.lookupType !== 'EMAIL'"
+        i18n="@@delegateInvitation.noticeExpiredOrcid"
+        >Your delegate invitation sent to an ORCID iD expired.</span
+      >
+    </div>
+  </app-alert-message>
 
   <ng-container *ngIf="trustedIndividuals.length && this.isMobile">
     <mat-divider></mat-divider>

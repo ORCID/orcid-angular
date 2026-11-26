@@ -69,3 +69,37 @@ button.mobile {
   mat-icon.mat-icon.mat-mdc-tooltip-trigger.pointer.material-icons.mat-icon-no-color {
   cursor: default;
 }
+
+.result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  p {
+    margin: 8px 0;
+  }
+}
+
+.result-info {
+  strong,
+  a {
+    display: block;
+  }
+  strong {
+    margin-bottom: 4px;
+  }
+}
+
+.invite-button mat-icon {
+  margin-inline-end: 8px;
+}
+
+.invitation-alert {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}

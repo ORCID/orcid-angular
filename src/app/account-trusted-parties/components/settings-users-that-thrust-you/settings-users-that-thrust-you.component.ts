@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Observable, of, Subject } from 'rxjs'
 import { startWith, switchMap, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -26,13 +27,36 @@ export class SettingsUsersThatThrustYouComponent implements OnInit {
   isMobile: boolean
   baseUrl = runtimeEnvironment.BASE_URL
   trustedPartiesUrl = '/trusted-parties'
+  responseStatus: string
+  responseSenderName: string
+  responseSenderOrcid: string
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private _trustedIndividualsService: TrustedIndividualsService,
     private dialog: MatDialog,
     private _platform: PlatformInfoService
   ) {}
 
   ngOnInit(): void {
+    const response = this.route.snapshot.queryParamMap.get('invitationResponse')
+    if (response) {
+      this.responseStatus = response
+      this.responseSenderName =
+        this.route.snapshot.queryParamMap.get('senderName')
+      this.responseSenderOrcid =
+        this.route.snapshot.queryParamMap.get('senderOrcid')
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {
+          invitationResponse: null,
+          senderName: null,
+          senderOrcid: null,
+        },
+        queryParamsHandling: 'merge',
+        replaceUrl: true,
+      })
+    }
     this.setupTrustedIndividualsObs()
     this._platform
       .get()

@@ -43,3 +43,14 @@ table {
     margin-inline-start: 4px;
   }
 }
+app-alert-message {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.notice-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
