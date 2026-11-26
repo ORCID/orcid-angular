@@ -19,7 +19,8 @@ describe('TurnstileDirective', () => {
     directive = new TurnstileDirective(
       { turnstile: api } as any,
       new ElementRef({}),
-      { run: (fn: any) => fn() } as NgZone
+      { run: (fn: any) => fn() } as NgZone,
+      'en'
     )
     directive.siteKey = 'session-key'
     change = jasmine.createSpy('change')
@@ -35,6 +36,47 @@ describe('TurnstileDirective', () => {
     expect(loaded).toHaveBeenCalledWith(0)
     options.callback('token')
     expect(change).toHaveBeenCalledWith('token')
+  })
+
+  it('renders with the mapped site language and falls back for unsupported locales', () => {
+    const locales = [
+      ['ar', 'ar'],
+      ['ru', 'ru'],
+      ['zh_CN', 'zh-cn'],
+      ['zh-TW', 'zh-tw'],
+      ['pt_BR', 'pt'],
+      ['ca', 'en'],
+      ['', 'en'],
+    ]
+    locales.forEach(([locale, expected]) => {
+      ;(directive as any).locale = locale
+      directive.ngOnInit()
+      expect(options.language).withContext(locale).toBe(expected)
+    })
+  })
+
+  it('uses the header language options while respecting Turnstile support', () => {
+    const original = runtimeEnvironment.LANGUAGE_MENU_OPTIONS
+    runtimeEnvironment.LANGUAGE_MENU_OPTIONS = {
+      en: 'English',
+      uk: 'Ukrainian',
+      ca: 'Catalan',
+      'zh-TW': 'Traditional Chinese',
+    }
+    try {
+      for (const [locale, expected] of [
+        ['uk', 'uk'],
+        ['ca', 'en'],
+        ['de', 'en'],
+        ['zh_TW', 'zh-tw'],
+      ]) {
+        ;(directive as any).locale = locale
+        directive.ngOnInit()
+        expect(options.language).withContext(locale).toBe(expected)
+      }
+    } finally {
+      runtimeEnvironment.LANGUAGE_MENU_OPTIONS = original
+    }
   })
 
   it('clears expired and failed tokens and permits reset', () => {
