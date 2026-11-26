@@ -52,6 +52,29 @@ describe('SettingsTrustedIndividualsComponent', () => {
     expect(component).toBeTruthy()
   })
 
+  it('shows the public name and ORCID for a declined ORCID invitation', () => {
+    component.$trustedIndividuals = of([])
+    component.notices = [
+      {
+        invitationId: 42,
+        status: 'DECLINED',
+        lookupType: 'ORCID',
+        recipientName: 'Public Person',
+        recipientOrcid: '0000-0002-1825-0097',
+      },
+    ]
+    fixture.detectChanges()
+    const notice = fixture.nativeElement.querySelector('.notice-content')
+    expect(notice.textContent).toContain('Public Person')
+    expect(notice.textContent).toContain('(0000-0002-1825-0097)')
+    expect(notice.querySelector('strong').textContent).toBe('Public Person')
+
+    component.notices[0].recipientName = undefined
+    fixture.detectChanges()
+    expect(notice.textContent).toContain('(0000-0002-1825-0097)')
+    expect(notice.querySelector('strong')).toBeNull()
+  })
+
   it('only removes an outcome notice after successful acknowledgement', () => {
     component.notices = [
       {

@@ -54,9 +54,21 @@
       >
       <span
         *ngIf="notice.status === 'DECLINED' && notice.lookupType !== 'EMAIL'"
-        i18n="@@delegateInvitation.noticeDeclinedOrcid"
-        >Your delegate invitation sent to an ORCID iD was declined.</span
       >
+        <ng-container i18n="@@delegateInvitation.noticeDeclinedOrcidPrefix"
+          >Your delegate invitation to</ng-container
+        >&nbsp;<strong *ngIf="notice.recipientName">{{
+          notice.recipientName
+        }}</strong
+        ><ng-container *ngIf="notice.recipientName && notice.recipientOrcid"
+          >&nbsp;</ng-container
+        ><ng-container *ngIf="notice.recipientOrcid"
+          >({{ notice.recipientOrcid }})</ng-container
+        >&nbsp;<ng-container
+          i18n="@@delegateInvitation.noticeDeclinedOrcidSuffix"
+          >was declined.</ng-container
+        >
+      </span>
       <span
         *ngIf="notice.status === 'EXPIRED' && notice.lookupType === 'EMAIL'"
         i18n="@@delegateInvitation.noticeExpiredEmail"
