@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Inject,
   Input,
+  LOCALE_ID,
   NgZone,
   OnDestroy,
   OnInit,
@@ -18,6 +19,66 @@ interface TurnstileWindow extends Window {
     reset: (id: string) => void
     remove: (id: string) => void
   }
+}
+
+// Cloudflare's supported language codes, independent of the site's language menu.
+const turnstileLanguages = new Set([
+  'ar',
+  'bg',
+  'zh',
+  'zh-cn',
+  'zh-tw',
+  'hr',
+  'cs',
+  'da',
+  'nl',
+  'en',
+  'fa',
+  'fi',
+  'fr',
+  'de',
+  'el',
+  'he',
+  'hi',
+  'hu',
+  'id',
+  'it',
+  'ja',
+  'tlh',
+  'ko',
+  'lt',
+  'ms',
+  'nb',
+  'pl',
+  'pt',
+  'ro',
+  'ru',
+  'sr',
+  'sk',
+  'sl',
+  'es',
+  'sv',
+  'tl',
+  'th',
+  'tr',
+  'uk',
+  'vi',
+])
+
+function turnstileLanguage(locale: string): string {
+  const normalized = (locale || '').toLowerCase().replace(/_/g, '-')
+  const language = normalized.split('-')[0]
+  const menuLanguages = Object.keys(
+    runtimeEnvironment.LANGUAGE_MENU_OPTIONS
+  ).map((key) => key.toLowerCase().replace(/_/g, '-'))
+  const menuLanguage = menuLanguages.includes(normalized)
+    ? normalized
+    : menuLanguages.includes(language)
+    ? language
+    : ''
+  if (turnstileLanguages.has(menuLanguage)) return menuLanguage
+  if (menuLanguage && turnstileLanguages.has(language)) return language
+  return 'en'
 }
 
 @Directive({
@@ -46,7 +107,8 @@ export class TurnstileDirective
   constructor(
     @Inject(WINDOW) private window: TurnstileWindow,
     private element: ElementRef,
-    private zone: NgZone
+    private zone: NgZone,
+    @Inject(LOCALE_ID) private locale: string
   ) {}
 
   private load = () =>
@@ -61,6 +123,7 @@ export class TurnstileDirective
           this.element.nativeElement,
           {
             sitekey: this.siteKey,
+            language: turnstileLanguage(this.locale),
             callback: (token: string) =>
               this.zone.run(() => {
                 this.captchaFail.emit(false)
