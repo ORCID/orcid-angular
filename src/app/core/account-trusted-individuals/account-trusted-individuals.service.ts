@@ -36,6 +36,8 @@ export interface DelegateInvitationNotice {
   lookupType: DelegateInvitationLookupType
   enteredEmail: string | null
   lastModified: string | number | null
+  recipientOrcid?: string | null
+  recipientName?: string | null
 }
 
 export interface DelegateInvitationActionResult {

@@ -25,6 +25,8 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
     status: string
     lookupType: string
     enteredEmail?: string
+    recipientOrcid?: string
+    recipientName?: string
   }[] = []
   noticeLoadError = false
   private refreshRequested = new Subject<void>()
@@ -80,6 +82,13 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
         next: (notices) => {
           this.notices = notices
           this.noticeLoadError = false
+          // Notices are shown once: mark them as seen so they are gone on reload
+          notices.forEach((notice) =>
+            this._trustedIndividualsService
+              .acknowledgeInvitationNotice(notice.invitationId)
+              .pipe(takeUntil(this.platformSubs))
+              .subscribe({ error: () => undefined })
+          )
         },
         error: () => (this.noticeLoadError = true),
       })
