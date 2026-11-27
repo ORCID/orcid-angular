@@ -641,7 +641,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-modal/work-modal.component.html</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">65,67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.html</context>
@@ -960,11 +960,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/account-trusted-individuals/account-trusted-individuals.service.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">111</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/trusted-individuals/trusted-individuals.service.ts</context>
@@ -1512,19 +1512,19 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">102</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
-          <context context-type="linenumber">106,108</context>
+          <context context-type="linenumber">162,164</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
-          <context context-type="linenumber">94,96</context>
+          <context context-type="linenumber">149,151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHaventAdded" datatype="html" resname="account.youHaventAdded">
@@ -1760,7 +1760,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-modal/work-modal.component.html</context>
-          <context context-type="linenumber">54,56</context>
+          <context context-type="linenumber">55,57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.html</context>
@@ -2296,7 +2296,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.addAccessTrustedIndividuals" datatype="html" resname="account.addAccessTrustedIndividuals">
@@ -2358,14 +2358,6 @@
           <context context-type="sourcefile">src/app/account-trusted-parties/components/dialog-add-trusted-individuals/dialog-add-trusted-individuals.component.html</context>
           <context context-type="linenumber">38,40</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
-          <context context-type="linenumber">82,83</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
-          <context context-type="linenumber">142,143</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="account.revokeAccessTrustedIndividuals" datatype="html" resname="account.revokeAccessTrustedIndividuals">
         <source>Revoke access - Trusted individual</source>
@@ -2396,19 +2388,19 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
-          <context context-type="linenumber">66,67</context>
+          <context context-type="linenumber">122,123</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
-          <context context-type="linenumber">126,127</context>
+          <context context-type="linenumber">182,183</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
-          <context context-type="linenumber">54,55</context>
+          <context context-type="linenumber">109,110</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
-          <context context-type="linenumber">114,115</context>
+          <context context-type="linenumber">169,170</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
@@ -2487,121 +2479,109 @@
           <context context-type="linenumber">22,25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.searchForOrcidUser" datatype="html" resname="account.searchForOrcidUser">
-        <source>Search for ORCID users to add as trusted individuals</source>
-        <target>Buscar usuarios de ORCID para añadir como personas de confianza</target>
+      <trans-unit id="account.invitationSearchTitle" datatype="html" resname="account.invitationSearchTitle">
+        <source>Add an account delegate</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.searchOrcidTrusted" datatype="html" resname="account.searchOrcidTrusted">
-        <source>Search ORCID for trusted individuals</source>
-        <target>Buscar personas de confianza de ORCID</target>
+      <trans-unit id="account.invitationSearchDescription" datatype="html" resname="account.invitationSearchDescription">
+        <source>Enter an email address or ORCID iD to find an ORCID user to add as an account delegate</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
-          <context context-type="linenumber">27,29</context>
+          <context context-type="linenumber">6,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.name" datatype="html" resname="account.name">
-        <source>Name</source>
-        <target>Nombre</target>
+      <trans-unit id="account.invitationSearchLabel" datatype="html" resname="account.invitationSearchLabel">
+        <source>ORCID iD or email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
-          <context context-type="linenumber">100</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
-          <context context-type="linenumber">84</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.orcidId" datatype="html" resname="account.orcidId">
-        <source>ORCID iD</source>
-        <target>ORCID iD</target>
+      <trans-unit id="account.invitationSearchButton" datatype="html" resname="account.invitationSearchButton">
+        <source>Search</source>
+        <target>Buscar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
-          <context context-type="linenumber">108,110</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
-          <context context-type="linenumber">36</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
-          <context context-type="linenumber">91,93</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
-          <context context-type="linenumber">79,81</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.noResultFoundTrustedInd" datatype="html" resname="account.noResultFoundTrustedInd">
-        <source>No results found. Please edit your search terms.</source>
-        <target>No se encontraron resultados. Por favor edite sus términos de búsqueda.</target>
+      <trans-unit id="account.invitationSentTo" datatype="html" resname="account.invitationSentTo">
+        <source>An account delegate invitation has been sent to</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
-          <context context-type="linenumber">170,172</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="search.paginator" datatype="html" resname="search.paginator">
-        <source>paginator</source>
-        <target>paginador</target>
+      <trans-unit id="account.invitationSend" datatype="html" resname="account.invitationSend">
+        <source>Invite as delegate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.invitationInvalidEmail" datatype="html" resname="account.invitationInvalidEmail">
+        <source>Enter a valid email address.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.ts</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/search/pages/search/search.component.ts</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">221</context>
+          <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.searchIndividualsPlaceHolder" datatype="html" resname="account.searchIndividualsPlaceHolder">
-        <source>ORCID iD, email address, or names</source>
-        <target>ORCID iD, dirección de correo electrónico o nombres</target>
+      <trans-unit id="account.invitationInvalidOrcid" datatype="html" resname="account.invitationInvalidOrcid">
+        <source>Enter a valid ORCID iD or email address.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.alreadyAdded" datatype="html" resname="account.alreadyAdded">
-        <source>You already added this user</source>
-        <target>Ya ha añadido a este usuario</target>
+      <trans-unit id="account.invitationInvalid" datatype="html" resname="account.invitationInvalid">
+        <source>Enter a valid ORCID iD or email address.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.invitationNotFound" datatype="html" resname="account.invitationNotFound">
+        <source>No matching ORCID record was found.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.ts</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.invitationSelf" datatype="html" resname="account.invitationSelf">
+        <source>You cannot invite yourself.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.ts</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.invitationPending" datatype="html" resname="account.invitationPending">
+        <source>An invitation is already pending for</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.ts</context>
+          <context context-type="linenumber">158</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.invitationAlreadyDelegate" datatype="html" resname="account.invitationAlreadyDelegate">
+        <source>An account delegate already exists for</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.ts</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.invitationError" datatype="html" resname="account.invitationError">
+        <source>Something went wrong. Please try again.</source>
+        <target>Algo ha ido mal. Vuelva a intentarlo.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.ts</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.trustedIndividuals" datatype="html" resname="account.trustedIndividuals">
         <source>Trusted individuals</source>
         <target>Personas de confianza</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.ts</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
           <context context-type="linenumber">6,8</context>
@@ -2623,12 +2603,103 @@
           <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="delegateInvitation.noticeError" datatype="html" resname="delegateInvitation.noticeError">
+        <source>Unable to load or dismiss invitation notices. Please try again.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">29,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.noticeAddedAsDelegate" datatype="html" resname="delegateInvitation.noticeAddedAsDelegate">
+        <source>has been added as an account delegate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.noticeDeclinedEmail" datatype="html" resname="delegateInvitation.noticeDeclinedEmail">
+        <source>
+          Your delegate invitation to  was declined.
+          <x id="INTERPOLATION" equiv-text="{{ notice.enteredEmail }}"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.noticeDeclinedOrcidPrefix" datatype="html" resname="delegateInvitation.noticeDeclinedOrcidPrefix">
+        <source>Your delegate invitation to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.noticeDeclinedOrcidSuffix" datatype="html" resname="delegateInvitation.noticeDeclinedOrcidSuffix">
+        <source>was declined.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.noticeExpiredEmail" datatype="html" resname="delegateInvitation.noticeExpiredEmail">
+        <source>
+          Your delegate invitation to  expired.
+          <x id="INTERPOLATION" equiv-text="{{ notice.enteredEmail }}"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.noticeExpiredOrcid" datatype="html" resname="delegateInvitation.noticeExpiredOrcid">
+        <source>Your delegate invitation sent to an ORCID iD expired.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="account.trustedIndividual" datatype="html" resname="account.trustedIndividual">
         <source>Trusted individual</source>
         <target>Persona de confianza</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.orcidId" datatype="html" resname="account.orcidId">
+        <source>ORCID iD</source>
+        <target>ORCID iD</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">147,149</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
+          <context context-type="linenumber">134,136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.name" datatype="html" resname="account.name">
+        <source>Name</source>
+        <target>Nombre</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHavenAddAnyTrusted" datatype="html" resname="account.youHavenAddAnyTrusted">
@@ -2636,7 +2707,7 @@
         <target>Todavía no ha añadido a ninguna persona de confianza.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
-          <context context-type="linenumber">139,141</context>
+          <context context-type="linenumber">195,197</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.accessType" datatype="html" resname="account.accessType">
@@ -2707,12 +2778,47 @@
           <context context-type="linenumber">11,13</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="delegateInvitation.responseAcceptedFor" datatype="html" resname="delegateInvitation.responseAcceptedFor">
+        <source>You are now an account delegate for</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.responseDeclinedFrom" datatype="html" resname="delegateInvitation.responseDeclinedFrom">
+        <source>You have declined an account delegate invitation from</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.responseExpired" datatype="html" resname="delegateInvitation.responseExpired">
+        <source>This delegate invitation has expired.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.responseAlreadyHandled" datatype="html" resname="delegateInvitation.responseAlreadyHandled">
+        <source>This delegate invitation is no longer active.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delegateInvitation.responseError" datatype="html" resname="delegateInvitation.responseError">
+        <source>The delegate invitation could not be processed. Check that you are signed in to the invited account.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
+          <context context-type="linenumber">65,66</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="account.youHavenBeenAddAsTrusted" datatype="html" resname="account.youHavenBeenAddAsTrusted">
         <source>You haven&apos;t been added as a trusted individual yet.</source>
         <target>Todavía no ha añadido a ninguna persona de confianza.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
-          <context context-type="linenumber">127,129</context>
+          <context context-type="linenumber">182,184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.authorize" datatype="html" resname="authorize.authorize">
@@ -5089,12 +5195,26 @@
           <context context-type="linenumber">452</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="account.recoveryPhoneCountryNotEnabled.interstitial" datatype="html" resname="account.recoveryPhoneCountryNotEnabled.interstitial">
+        <source>We are currently unable to send SMS to the selected country. Please try a different phone number or &lt;a [disabled]=&quot;saving&quot; (click)=&quot;declineRecoveryPhone()&quot;&gt;&lt;span&gt;continue without adding a recovery number&lt;/span&gt;&lt;/a&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
+          <context context-type="linenumber">465</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account.recoveryPhoneCountryNotEnabled" datatype="html" resname="account.recoveryPhoneCountryNotEnabled">
+        <source>We are currently unable to send SMS to the selected country. Please try a different phone number.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
+          <context context-type="linenumber">467</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="account.recoveryPhoneGenericError" datatype="html" resname="account.recoveryPhoneGenericError">
         <source>Something went wrong. Please try again.</source>
         <target>Algo ha ido mal. Vuelva a intentarlo.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/recovery-phone-form/recovery-phone-form.component.ts</context>
-          <context context-type="linenumber">464</context>
+          <context context-type="linenumber">471</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/two-factor-authentication-form/two-factor/two-factor-authentication-form.component.ts</context>
@@ -5714,7 +5834,7 @@
         <target>Revise y solucione el problema</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">282</context>
+          <context context-type="linenumber">283</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
@@ -5726,7 +5846,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">603</context>
+          <context context-type="linenumber">651</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.ts</context>
@@ -12015,7 +12135,7 @@
         <target>Buscar en el registro ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -12027,15 +12147,15 @@
         <target>registro</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -12047,7 +12167,7 @@
         <target>sitio web</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -16003,7 +16123,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">147,149</context>
+          <context context-type="linenumber">156,158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
@@ -16046,12 +16166,19 @@
           <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="works.resolvingIdentifier" datatype="html" resname="works.resolvingIdentifier">
+        <source>Checking identifier…</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
+          <context context-type="linenumber">172,174</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="works.identifierUrl" datatype="html" resname="works.identifierUrl">
         <source>Identifier URL</source>
         <target>URL de identificador</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">180,181</context>
+          <context context-type="linenumber">194,195</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.urlIdentifierHint" datatype="html" resname="works.urlIdentifierHint">
@@ -16059,7 +16186,7 @@
         <target>La URL en la que se resuelve el identificador; por ejemplo https://doi.org/10.23640/07243.c.4232246</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">194,197</context>
+          <context context-type="linenumber">208,211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.invalidUrl" datatype="html" resname="works.invalidUrl">
@@ -16067,7 +16194,7 @@
         <target>URL no valida</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">201,203</context>
+          <context context-type="linenumber">215,217</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-view-only/work-external-identifiers-view-only.component.html</context>
@@ -16083,7 +16210,7 @@
         <target>Relación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">220</context>
+          <context context-type="linenumber">234</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
@@ -16091,7 +16218,7 @@
         <target>Solo se permiten los tipos de identificador &quot;grant number&quot;, &quot;doi&quot;, &quot;RRID&quot;, &quot;uri&quot; y &quot;proposal id&quot; al usar los identificadores &quot;funded-by&quot;</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">255,257</context>
+          <context context-type="linenumber">269,271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
@@ -16099,7 +16226,7 @@
         <target>Se requiere al menos un identificador &quot;propio&quot; cuando se utilizan identificadores de &quot;versión de&quot;</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
-          <context context-type="linenumber">264,266</context>
+          <context context-type="linenumber">278,280</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.setRelationShipAriaLabel" datatype="html" resname="shared.setRelationShipAriaLabel">
@@ -17039,8 +17166,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.addFromDOI" datatype="html" resname="works.addFromDOI">
-        <source>Works - Add work from DOI</source>
-        <target>Obras - Añadir obra a partir de un DOI</target>
+        <source>Works - Add work with a DOI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
           <context context-type="linenumber">6,8</context>
@@ -17062,12 +17188,44 @@
           <context context-type="linenumber">79,81</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="works.youCanUseFullDOI" datatype="html" resname="works.youCanUseFullDOI">
-        <source>You can use the full DOI URL or just the identifier value.</source>
-        <target>Inserte la URL completa del DOI o solo el valor del identificador</target>
+      <trans-unit id="works.retrieveDetailsFrom" datatype="html" resname="works.retrieveDetailsFrom">
+        <source>You can retrieve work details from:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">99,101</context>
+          <context context-type="linenumber">96,98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.fullDoiUrlExample" datatype="html" resname="works.fullDoiUrlExample">
+        <source>
+          A full DOI URL - https://doi.org/10.1000/182 
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
+          <context context-type="linenumber">101,102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.doiIdentifierExample" datatype="html" resname="works.doiIdentifierExample">
+        <source>
+          The DOI identifier value - 10.1000/182 
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
+          <context context-type="linenumber">104,105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.publisherUrlExample" datatype="html" resname="works.publisherUrlExample">
+        <source>
+          A publisher URL - https://www.publisher.com/doi/10.1000/182 
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
+          <context context-type="linenumber">107,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.typeOrPastePubMed" datatype="html" resname="works.typeOrPastePubMed">
@@ -17075,15 +17233,14 @@
         <target>Inserte la URL completa de pubMed o solo el valor del identificador</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">105,107</context>
+          <context context-type="linenumber">115,117</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="works.doiIdentifier" datatype="html" resname="works.doiIdentifier">
-        <source>DOI identifier value or full URL</source>
-        <target>Valor del identificador DOI o URL completa</target>
+      <trans-unit id="works.doiOrPublisherUrl" datatype="html" resname="works.doiOrPublisherUrl">
+        <source>DOI or publisher URL</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">117,119</context>
+          <context context-type="linenumber">126,128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.pubMedIdentifier" datatype="html" resname="works.pubMedIdentifier">
@@ -17091,7 +17248,7 @@
         <target>Valor del identificador de pubMed o URL completa</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">123,125</context>
+          <context context-type="linenumber">132,134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.unableToImport" datatype="html" resname="works.unableToImport">
@@ -17099,7 +17256,7 @@
         <target>No es posible importar la obra con este identificador. Por favor, utilice otra opción para añadir la obra.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">150,153</context>
+          <context context-type="linenumber">159,162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.retrieveWorkDOI" datatype="html" resname="works.retrieveWorkDOI">
@@ -17107,7 +17264,7 @@
         <target>Obtener datos de la obra desde DOI</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">167,169</context>
+          <context context-type="linenumber">176,178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.retrieveWorkPubMed" datatype="html" resname="works.retrieveWorkPubMed">
@@ -17115,7 +17272,7 @@
         <target>Obtener datos de la obra desde pubMed</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
-          <context context-type="linenumber">173,175</context>
+          <context context-type="linenumber">182,184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.linkWorks" datatype="html" resname="works.linkWorks">
@@ -17595,7 +17752,28 @@
         <target>Verifique la casilla de reconocimiento de texto</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-anti-robots/form-anti-robots.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.captchaRequired" datatype="html" resname="register.captchaRequired">
+        <source>Please complete the verification challenge</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-anti-robots/form-anti-robots.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.captchaChallengeFailed" datatype="html" resname="register.captchaChallengeFailed">
+        <source>Verification failed. Please try again.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-anti-robots/form-anti-robots.component.html</context>
+          <context context-type="linenumber">47,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.retryVerification" datatype="html" resname="register.retryVerification">
+        <source>Retry verification</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-anti-robots/form-anti-robots.component.html</context>
+          <context context-type="linenumber">58,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.currentEmployment" datatype="html" resname="register.currentEmployment">
@@ -17899,7 +18077,7 @@
         <target>Introduzca una dirección de correo electrónico válida. Ejemplo: juan@institucion.edu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">44,46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
@@ -18259,7 +18437,7 @@
         <target>Sus correos electrónicos coinciden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">334</context>
+          <context context-type="linenumber">347</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.emailAreNotValid" datatype="html" resname="register.emailAreNotValid">
@@ -18267,7 +18445,7 @@
         <target>Sus correos electrónicos no coinciden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">339</context>
+          <context context-type="linenumber">352</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.reactivating" datatype="html" resname="register.reactivating">
@@ -18275,11 +18453,11 @@
         <target>Reactivando su cuenta</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">398</context>
+          <context context-type="linenumber">411</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">990</context>
+          <context context-type="linenumber">1014</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -18291,7 +18469,7 @@
         <target>Gracias por reactivar su registro ORCID. Por favor, complete el proceso siguiendo los pasos en el correo electrónico que le vamos a enviar ahora. Si no recibe un correo electrónico nuestro, por favor</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">400</context>
+          <context context-type="linenumber">413</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
@@ -18299,7 +18477,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">992</context>
+          <context context-type="linenumber">1016</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.contactSupport" datatype="html" resname="shared.contactSupport">
@@ -18307,15 +18485,15 @@
         <target>póngase en contacto con el servicio de asistencia.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">414</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">993</context>
+          <context context-type="linenumber">1017</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1014</context>
+          <context context-type="linenumber">1038</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -18619,7 +18797,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.step3.3" datatype="html" resname="register.step3.3">
@@ -18651,7 +18829,7 @@
         <target>Completar registro</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
-          <context context-type="linenumber">57,59</context>
+          <context context-type="linenumber">61,63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.reactivateMyOrcidAccount" datatype="html" resname="register.reactivateMyOrcidAccount">
@@ -18659,7 +18837,7 @@
         <target>Reactivar mi cuenta de ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-d/step-d.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">67,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.personalData" datatype="html" resname="register.personalData">
@@ -18952,6 +19130,18 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search/pages/search/search.component.html</context>
           <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="search.paginator" datatype="html" resname="search.paginator">
+        <source>paginator</source>
+        <target>paginador</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/search/pages/search/search.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
+          <context context-type="linenumber">221</context>
         </context-group>
       </trans-unit>
       <trans-unit id="search.bottomPaginator" datatype="html" resname="search.bottomPaginator">
@@ -20247,7 +20437,7 @@
         <target>Correo electrónico u ORCID iD de 16 dígitos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.claiming" datatype="html" resname="ngOrcid.signin.claiming">
@@ -20255,7 +20445,7 @@
         <target>Reclamando su cuenta</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1011</context>
+          <context context-type="linenumber">1035</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.verify.claimSent" datatype="html" resname="ngOrcid.signin.verify.claimSent">
@@ -20263,7 +20453,7 @@
         <target>Gracias por reclamar su registro ORCID. Complete el proceso siguiendo los pasos del correo electrónico que le vamos a enviar. Si no recibe un mensaje nuestro,</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">1013</context>
+          <context context-type="linenumber">1037</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.currentlySign" datatype="html" resname="ngOrcid.signin.currentlySign">
@@ -20677,7 +20867,7 @@
         <target>información sobre autenticación de dos factores</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor/pages/two-factor/two-factor.component.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
